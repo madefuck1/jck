@@ -2,6 +2,7 @@ package com.soufang.base.dto.user;
 
 import com.soufang.base.dto.account.AccountDto;
 import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.utils.DateUtils;
 
 import java.util.Date;
@@ -28,6 +29,8 @@ public class UserDto {
     private Integer oauthType;
     private Long oauthId;
     private CompanyDto companyDto;
+
+    private ShopDto shopDto;
 
     private AccountDto accountDto;
 
@@ -207,5 +210,13 @@ public class UserDto {
 
     public void setFixedPhone(String fixedPhone) {
         this.fixedPhone = fixedPhone;
+    }
+
+    public ShopDto getShopDto() {
+        return shopDto;
+    }
+
+    public void setShopDto(ShopDto shopDto) {
+        this.shopDto = shopDto;
     }
 }

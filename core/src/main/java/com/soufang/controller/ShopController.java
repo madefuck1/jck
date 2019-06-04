@@ -3,10 +3,15 @@ package com.soufang.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.soufang.base.Result;
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.UserLevelEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.base.search.user.UserSo;
+import com.soufang.base.utils.DateUtils;
+import com.soufang.service.CompanyService;
 import com.soufang.service.ShopService;
 import com.soufang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,74 @@ public class ShopController {
     ShopService shopService;
     @Autowired
     UserService userService;
+    @Autowired
+    CompanyService companyService;
+
+
+    @RequestMapping(value = "admin/createShop")
+    public Result adminCreateShop(@RequestBody UserDto userDto){
+        Result result = new Result();
+        if(checkPhone(userDto.getPhone())){
+            result.setMessage("手机号已存在");
+            result.setSuccess(false);
+            return result;
+        }
+        if(checkCompany(userDto.getCompanyDto().getCompName())){
+            result.setMessage("公司名已存在");
+            result.setSuccess(false);
+            return result;
+        }
+        if(checkSHop(userDto.getShopDto().getShopName())){
+            result.setMessage("店铺名已存在");
+            result.setSuccess(false);
+            return result;
+        }
+        userDto.setCreateTime(DateUtils.getToday());
+        userDto.setUserStatus(1);
+        userDto.setUserLevel(UserLevelEnum.one.getValue());
+        Long userId = userService.addUser(userDto);
+        CompanyDto companyDto = userDto.getCompanyDto();
+        companyDto.setUserId(userId);
+        companyDto.setCreateTime(DateUtils.getToday());
+        companyService.addCompany(companyDto);
+        ShopDto shopDto = userDto.getShopDto();
+        shopDto.setCreateTime(DateUtils.getToday());
+        shopDto.setUserId(userId);
+        shopService.addShop(shopDto);
+        result.setSuccess(true);
+        return result;
+    }
+
+    private boolean checkPhone(String phone){
+        UserSo userSo = new UserSo();
+        userSo.setPhone(phone);
+        List<UserDto> list = userService.getList(userSo);
+        if(list != null && list.size() > 0){
+            return true;
+        }else {
+            return false ;
+        }
+    }
+
+    private boolean checkCompany(String companyName){
+        CompanyDto companyDto = companyService.selectByCompanyName(companyName);
+        if(companyDto !=null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean checkSHop(String shopName){
+        ShopSo shopSo = new ShopSo();
+        shopSo.setShopName(shopName);
+        List<ShopDto> list = shopService.getList(shopSo);
+        if(list != null && list.size()>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public PageHelp<ShopDto> getList(@RequestBody ShopSo shopSo){

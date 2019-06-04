@@ -15,4 +15,6 @@ public interface CompanyService {
 
     //修改公司信息ByUserId
     int updateCompany(CompanyDto companyDto);
+
+    CompanyDto selectByCompanyName(String companyName);
 }

@@ -221,24 +221,7 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
-  <select id="getList" parameterType="com.soufang.model.Company" resultMap="BaseResultMap">
-    select * from t_dictionary where 1=1
-    <if test="dictKDescription != null and dictKDescription != ''">
-      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
-    </if>
-    <if test="dictVDescription != null and dictVDescription = ''">
-      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
-    </if>
-    order by company_name desc
-  </select>
-
-  <select id="getCount" parameterType="com.soufang.model.Company" resultType="java.lang.Integer">
-    select count(1) from t_dictionary where 1=1
-    <if test="dictKDescription != null and dictKDescription != ''">
-      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
-    </if>
-    <if test="dictVDescription != null and dictVDescription = ''">
-      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
-    </if>
+  <select id="selectByCompanyName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from t_company where company_name = #{compName,jdbcType=VARCHAR}
   </select>
 </mapper>
