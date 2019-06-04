@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -102,11 +103,16 @@ public class AppPurchaseController extends AppBaseController{
     @ResponseBody
     @RequestMapping(value = "purchase",method = RequestMethod.POST)
     public AcceptPurchaseVo purchase(@RequestBody addPurchaseVo addPurchaseVo, HttpServletRequest request){
+        //获取用户信息
         UserDto userDto=this.getUserInfo(request);
-        addPurchaseVo.setUserId(userDto.getUserId());
         AcceptPurchaseVo acceptPurchaseVo= new AcceptPurchaseVo();
         PurchaseDto purchaseDto = new PurchaseDto();
-        BeanUtils.copyProperties(addPurchaseVo,purchaseDto);
+        //参数整理
+        purchaseDto.setEnquiryNumber(Long.parseLong(addPurchaseVo.getEnquiryNumber()));
+        purchaseDto.setRemark(addPurchaseVo.getRemark());
+        purchaseDto.setUnitPrice(new BigDecimal(addPurchaseVo.getUnitPrice()));
+        purchaseDto.setUserId(userDto.getUserId());
+        //调用报价方法
         int i =appPurchaseFeign.purchase(purchaseDto);
         if(i>0){
             acceptPurchaseVo.setMessage("提交审核");

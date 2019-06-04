@@ -32,6 +32,8 @@ public class PurchaseDto {
 
     private ShopDto shopDto;
 
+    private String remark;
+
     public ShopDto getShopDto() {
         return shopDto;
     }
@@ -138,5 +140,13 @@ public class PurchaseDto {
 
     public void setEnquiryNumber(Long enquiryNumber) {
         this.enquiryNumber = enquiryNumber;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -27,13 +27,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class addPurchaseVo extends AppVo {
-    private Long userId;
-    private long shopId;
     private String enquiryNumber;
-    private String purchaseNumber;
     private int unitPrice;
     private String remark;
-    private Date offerTime;
-    private long enquiryProductId;
 
 }
