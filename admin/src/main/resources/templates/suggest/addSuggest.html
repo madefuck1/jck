@@ -1,0 +1,69 @@
+<@override name="title">
+新增//没有作用的标题真正起作用的在发起请求页面已经被设置
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<h5>用户反馈</h5>
+<form>
+<div class="layui-form" >
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-inline">
+                    <input type="tel" name="sugContent" id="sugContent" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn site-demo-layedit" lay-submit data-type="content" type="button" onclick="submitForm()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+</form>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('table', function(){
+        var table = layui.table;})
+
+    function submitForm(){
+        var data = '{"userId":"'+0+'","sugContent":"'+$('#sugContent').val()+'"}' ;
+        $.ajax({
+            url: "addSuggest",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = 'toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

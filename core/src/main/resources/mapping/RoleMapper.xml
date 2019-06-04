@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Role" >
+    <id column="role_Id" property="roleId" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_intro" property="roleIntro" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_Id, role_name, role_intro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where role_Id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_role
+    where role_Id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Role" >
+    insert into t_role (role_Id, role_name, role_intro
+      )
+    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleIntro,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Role" >
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_Id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleIntro != null" >
+        role_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIntro != null" >
+        #{roleIntro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Role" >
+    update t_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIntro != null" >
+        role_intro = #{roleIntro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_Id = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Role" >
+    update t_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_intro = #{roleIntro,jdbcType=VARCHAR}
+    where role_Id = #{roleId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getRoleList" resultMap="BaseResultMap">
+      select * from t_role
+  </select>
+
+  <select id="getRoleDetail" parameterType="java.lang.Long" resultType="com.soufang.base.dto.roleModule.RoleModuleDto">
+    select * from t_role join r_role_module on r_role.role_id = r_role_module.role_id
+    join  r_module on r_module.module_id = r_role_module.module_id
+     where role_id = #{roleId}
+  </select>
+</mapper>

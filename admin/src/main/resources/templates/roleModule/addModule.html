@@ -1,0 +1,152 @@
+<@override name="title">
+新增菜单
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form">
+    <input hidden id="roleId" value="${dto.roleId}">
+    <div class="layui-row">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名</label>
+            <div class="layui-input-inline">
+                <input readonly name="roleName" id="roleName" value="${dto.roleName}" lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">角色介绍</label>
+            <div class="layui-input-inline">
+                <input readonly name="roleIntro" id="roleIntro" value="${dto.roleIntro}" lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <table id="tab_module" class="layui-table" lay-filter="tab_module"></table>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script>
+
+    var table;
+    layui.use('table', function () {
+        table = layui.table;
+        table.render({
+            elem: '#tab_module'
+            , id: "tab_module"
+            , url: '/admin/roleModule/getModuleListByRole/' +${dto.roleId}
+            , title: '菜单列表'
+            //,method: 'post' //如果无需自定义HTTP类型，可不加该参数
+            //,request: {} //如果无需自定义请求参数，可不加该参数
+            , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 1 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页
+            }
+            , cols: [[
+                {type: 'numbers'},
+                {field: 'moduleName', title: '名称'},
+                {field: 'moduleId', title: 'ID'},
+                {field: 'parentId', title: '上级ID'},
+                {field: 'moduleLink', title: '链接'},
+                {field: 'moduleSort', title: '排序'}
+                , {
+                    field: 'button', title: '操作',
+                    templet: function (e) {
+                        var html;
+                        if (e.isExist == 0) {
+                            html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="addModule(' + e.moduleId + ')">添加</a>';
+                        } else {
+                            html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="deleteRole(' + e.roleModuleId + ')">删除</a >';
+                        }
+                        return html;
+                    }
+                }
+            ]]
+        });
+
+        //重载表格
+        var $ = layui.$, active = {
+            reload: function () {
+                //执行重载
+                table.reload('tab_role', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        roleId: $('#roleId').val()
+                    }
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    function addModule(id) {
+        $.ajax({
+            url: "/admin/roleModule/addRoleModuleByModuleKey",
+            type: "get",
+            data: {'moduleId': id, 'roleId': ${dto.roleId}},
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    table.reload('tab_module', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            roleId: $('#roleId').val()
+                        }
+                    });
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        })
+    }
+
+    function deleteRole(id) {
+        $.ajax({
+            url: "/admin/roleModule/deleteRoleModuleByModuleKey",
+            type: "get",
+            data: {'roleModuleId': id},
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    table.reload('tab_module', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            roleId: $('#roleId').val()
+                        }
+                    });
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        })
+    }
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

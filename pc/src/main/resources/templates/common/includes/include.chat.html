@@ -1,0 +1,76 @@
+
+<div class="theme-popover-mask"></div>
+<div class="theme-popover">
+    <div class="box">
+                <div class="wechat">
+                    <!--聊天列表-->
+                    <!--<div class="middle on">-->
+                        <!--<div class="wx_search">-->
+                            <!--<input type="text" placeholder="搜索"/>-->
+                            <!--<button>+</button>-->
+                        <!--</div>-->
+                        <!--<div class="office_text">-->
+                            <!--<ul class="user_list">-->
+                                <!--<li class="user_active">-->
+                                    <!--<div class="user_head"><img src="images/head/15.jpg"/></div>-->
+                                    <!--<div class="user_text">-->
+                                        <!--<p class="user_name">早安无恙</p>-->
+                                        <!--<p class="user_message">我是傻逼！，金少凯牛逼！</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="user_time">下午 2：54</div>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<div class="user_head"><img src="images/head/2.jpg"/></div>-->
+                                    <!--<div class="user_text">-->
+                                        <!--<p class="user_name">夏继涛</p>-->
+                                        <!--<p class="user_message">[小程序]</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="user_time">上午 11：03</div>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<div class="user_head"><img src="images/head/3.jpg"/></div>-->
+                                    <!--<div class="user_text">-->
+                                        <!--<p class="user_name">十里老街秋名山车神车队</p>-->
+                                        <!--<p class="user_message">乞讨两块交个话费</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="user_time">昨天</div>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--聊天窗口-->
+                    <div class="talk_window">
+                        <div class="windows_top">
+                            <div class="windows_top_box">
+                                <span>早安无恙</span>
+                                <ul class="window_icon">
+                                    <li><a onclick="closeChat()"><img src="${contextPath}/images/chat/icon8.png"/></a></li>
+                                    <li><a onclick="closeChat()"><img src="${contextPath}/images/chat/icon10.png"/></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--聊天内容-->
+                        <div class="windows_body">
+                            <div class="office_text" style="height: 100%;">
+                                <ul class="content" id="chatbox">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="windows_input" id="talkbox">
+                            <div class="input_icon">
+                                <a href="javascript:;" onclick="uploadImage()"></a>
+                                <input type="file" id="chatImage" style="display:none;" onchange="showRealPath()"/>
+                            </div>
+                            <div class="input_box">
+                                <textarea name="" rows="" cols="" id="input_box"></textarea>
+                                <button id="send">发送（S）</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+

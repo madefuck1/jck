@@ -1,0 +1,131 @@
+<@override name="title">
+修改分类
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form" >
+    <div class="layui-form-item">
+        <input type="hidden" value="${dto.assortId}" id="assortId">
+        <div class="layui-inline">
+            <label class="layui-form-label">分类名称</label>
+            <div class="layui-input-inline">
+                <input name="assortName" value="${dto.assortName}" id="assortName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">父级</label>
+            <div class="layui-input-inline">
+                <select name="parentId" lay-verify="required" lay-search="" id="parentId">
+                    <option value="0">顶级</option>
+                    <#list list as assort>
+                    <option value="${assort.assortId}" <#if assort.assortId == dto.parentId> selected</#if> >
+                        ${assort.assortName}
+                    </option>
+                </#list>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="sort" value="${dto.sort}" id="sort" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字1</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="key1" id="key1" value="${dto.key1!}"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字2</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="key2" id="key2" value="${dto.key2!}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字3</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="key3" id="key3" value="${dto.key3!}"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字4</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="key4" id="key4" value="${dto.key4!}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字5</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="key5" id="key5" value="${dto.key5!}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    function submitForm(){
+        var data = '{"assortName":"'+$("#assortName").val()+'","parentId":"'+$('#parentId').val()+'","sort":"'+$('#sort').val()+
+            '","key1":"'+$('#key1').val()+'","key2":"'+$('#key2').val()+ '","key3":"'+$('#key3').val()+'","key4":"'+$('#key4').val()+
+            '","assortId":"'+$('#assortId').val()+'","key5":"'+$('#key5').val()+'"}' ;
+        $.ajax({
+            url: "updateAssort",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = '/admin/assort/toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

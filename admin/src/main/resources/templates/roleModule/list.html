@@ -1,0 +1,122 @@
+<@override name="title">
+菜单栏管理
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<body>
+<div class="layui-form">
+
+<h5>菜单栏管理</h5>
+    <div class="">
+        <div class="layui-btn-group">
+            <button class="layui-btn" onclick="newAssort()">新增</button>
+            <button class="layui-btn" id="btn-expand">全部展开</button>
+            <button class="layui-btn" id="btn-fold">全部折叠</button>
+        </div>
+        <table id="table1" class="layui-table" lay-filter="table1"></table>
+
+    </div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    /*使用模块加载的方式 加载文件*/
+    layui.config({
+        base: '${contextPath}/layui/module/'
+    }).extend({
+        treetable: 'treetable-lay/treetable'
+    }).use(['treetable'], function () {
+        var treetable = layui.treetable;
+    });
+
+    layui.use(['treetable'], function () {
+        var treetable = layui.treetable;
+
+        // 渲染表格
+        treetable.render({
+            treeColIndex: 1,
+            treeSpid: 0,
+            treeIdName: 'moduleId',
+            treePidName: 'parentId',
+            treeDefaultClose: true,
+            treeLinkage: true,
+            elem: '#table1',
+            url: 'getList',
+            cols: [[
+                {type: 'numbers'},
+                {field: 'moduleName', title: '名称'},
+                {field: 'moduleId', title: 'ID'},
+                {field: 'parentId', title: '上级ID'},
+                {field: 'moduleLink', title:   '链接'},
+                {field: 'moduleSort', title: '排序'}
+                ]]
+        });
+
+        $('#btn-expand').click(function () {
+            treetable.expandAll('#table1');
+        });
+
+        $('#btn-fold').click(function () {
+            treetable.foldAll('#table1');
+        });
+    });
+
+    function newAssort(){
+        layer.open({
+            type:2,
+            area:["50%","60%"],
+            title:"新增菜单",
+            shadeClose:true,
+            content:"newModule"
+        });
+    }
+
+    function updateAssort(id) {
+        layer.open({
+            type:2,
+            area:["50%","60%"],
+            title:"修改菜单",
+            shadeClose:true,
+            content:"update/"+id
+        });
+    }
+
+    function deleteAssort(id){
+        $.ajax({
+            url: "delete/"+id,
+            type: "get",
+            dataType:"json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.location.href = 'toList' ;
+                        }
+                    });
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

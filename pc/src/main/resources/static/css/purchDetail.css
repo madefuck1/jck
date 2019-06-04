@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background: #fff !important;
+}
+#purchaseDetail{
+	width: 1190px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 20px;
+	
+}
+.detail-left{
+	width: 400px;
+	height: 400px;
+	float: left;
+}
+.clearfixRight{
+	float: right;
+	width: 770px;
+}
+.sear .sousuo{
+	background: #fff!important;
+}
+
+.tog{
+	background: #fff!important;
+}
+
+.cloum1 span:nth-of-type(1){
+	text-align: right!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

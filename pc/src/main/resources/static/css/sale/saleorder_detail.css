@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* CSS Document */
+a:hover{
+	color:#40ADFB; 
+}
+.order-top{
+	background: #F0F0F0;
+}
+.th-item, .td-item{
+	width: 40%;
+}
+.th-price, .td-price,.th-number, .td-number,.th-amount, .th-status, .th-change,.td-operation{
+	width:  20%;
+}
+.td-operation{
+	margin-top: 23px;
+}
+
+.modify{
+	width: 200px;
+	height: 76px;
+	border:1px solid #e6e6e6;
+	margin-top: 2px;
+	
+	padding: 2px;
+	background: #fff;
+	margin-left: -40px;
+	display: none;
+}
+
+.td-operation:focus .modify{
+	display: block;
+}
+.modify span{
+	line-height: 30px;
+	font-weight: bold;
+	color: #40ADFB;
+}
+.modify input{
+	width: 100px;
+	height: 30px;
+	border: 1px solid #e6e6e6;
+		
+}
+
+
+.item-inner{
+	font-weight: 400;
+}
+
+.th-price, .td-price,.th-number, .td-number,.th-amount, .th-status, .th-change,.td-operation .order_pay,.td-operation{
+	margin-top: 0px;
+	
+	
+}
+.item-pic{
+	margin-top: 0px;
+}
+.item-basic-info{
+	padding-top: 0px;
+}
+.order_pay a:hover{
+	color:  #40ADFB;
+}
+
+.sale_aside .order_pay a,.sale_aside .order-info a{
+	font-size: 14px;
+}
+
+.order-left{
+	padding: 15px 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

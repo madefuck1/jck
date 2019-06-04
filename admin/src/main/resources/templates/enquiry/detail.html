@@ -1,0 +1,101 @@
+<@override name="title">
+询盘详情
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">询盘号:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.enquiryNumber}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">发布人姓名:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${userDto.realName}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">询盘主题:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.enquiryTitle}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">询盘状态: </label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.strEnquiryStatus}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">询盘发布日期:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.strCreateTime}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">价日期: </label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.strTakeDate}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">收货人地址:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.takeAddress}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">收货人姓名: </label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.takeName}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">收货人电话:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.takePhone}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">截止日期: </label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enquiryDto.strEndTime}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">询盘备注: </label>
+    <div class="layui-input-block" readonly >
+        <textarea  class="layui-textarea">${enquiryDto.enquiryRemark}</textarea>
+    </div>
+</div>
+<div class="layui-input-block" >
+    <button class="layui-btn" lay-submit type="button" onclick="viewProduct(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">查看商品信息</button>
+    <button class="layui-btn" lay-submit type="button" onclick="returnBack()">返回上一页</button>
+
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
+    });
+    function viewProduct(obj) {
+        var enqNum = $(obj).find("input:hidden").val();
+        window.location.href = "viewProduct/"+enqNum
+    }
+
+    function returnBack() {
+        window.location.href = "javascript:history.go(-1)";
+    }
+</script>
+
+</@override>
+<@extends name="/common/layout/base.html"/>

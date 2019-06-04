@@ -1,0 +1,198 @@
+@charset "utf-8";
+/* CSS Document */
+#nav{
+	width: 100%;
+	height: 30px;
+	background: #F4F4F4;
+	letter-spacing: 1px;
+	font-size: 14px;
+}
+.nav_in{
+	width: 1200px;
+	height: 30px;
+	margin: 0 auto;
+	
+}
+.nav_in .left{
+	float: left;
+	line-height: 36px;
+	color: #999;
+}
+.nav_in .right{
+	height: 30px;
+	float: right;
+	line-height: 30px;
+	color: #999;
+
+}
+.right a{
+	color:  #999;
+
+}
+
+.nav_in .right .service,.order,.seller,.shopping{
+	float: left;
+}
+.order{
+	
+}
+.nav_in .right div span{
+	width: 10px;
+	height: 4px;
+	display: inline-block;
+	
+}
+.nav_in .right div{
+	margin-left: 20px;
+}
+.icon{
+	background-image:url(../images/sprites.png);
+	background-repeat: no-repeat;
+}
+.icon1{
+	background-position: 0px -240px;
+}
+
+#search{
+	width: 100%;
+	height: 120px;
+	overflow: hidden;
+	background: #fff;
+	
+}
+.search_in{
+	width: 1200px;
+	height: 120px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.logo{
+	width: 20%;
+	height: auto;
+	background: #F58022;
+	float: left;
+	
+}
+.sear{
+	float: right;
+	overflow: hidden;
+	height: 120px;
+	width: 80%;
+	
+	
+}
+
+.sear .sousuo{
+	
+	height:40px;
+	float: left;
+	
+	border-left: 0px;
+	font-size: 14px;
+	line-height: 40px;
+	padding-left: 84px;
+	
+}
+.sear .cont{
+	width:140px;
+	height:40px;
+	background:#F58022;
+	margin-top: 30px;
+	
+	
+	
+	
+}
+
+.sear .cont a{
+	color: #fff;
+	font-size: 16px;
+	line-height: 40px;
+}
+
+.tog{
+	width: 500px;
+	height: 40px;
+	float: left;
+	border-right:0px;
+	
+	margin: 30px 0px 0px 40px;
+	line-height: 32px;
+	text-align:center;
+	color: #999;
+	font-size: 14px;
+	overflow: hidden;
+	border: 2px solid #F58022;
+	
+	
+}
+.tog_in{
+	height: 40px;
+	line-height: 36px;
+	font-size: 14px;
+	color: #333;
+	float: left;
+	border-right: none;
+	padding-left: 12px;
+	width: 80px;
+	border: none;           
+	outline: none;
+	position: absolute;
+}
+
+
+
+.tog_in ul{
+	width: 80px;
+	height: 90px;
+	line-height: 30px;
+	border:  2px solid #F58022;
+	position: absolute;
+	left: -2px;
+	top: 36px;
+	background: #fff;
+	display: none;
+}
+
+.tog_in ul li{
+	text-align: left;
+	padding-left:18px;
+	margin-top: 10px;
+	
+}
+
+.tog_in:hover ul{
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

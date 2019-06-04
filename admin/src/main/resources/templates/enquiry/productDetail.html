@@ -1,0 +1,49 @@
+<@override name="title">
+商品信息
+</@override>
+
+<@override name="css">
+</@override>
+<@override name="body">
+    <h3>商品列表</h3>
+<#list enqProDtoList as enqProduct>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">商品名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.productName}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">商品类别：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.assortName}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">商品数量：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.productNumber}${enqProduct.productUnit}" class="layui-input" readonly>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 50px">
+            <button class="layui-btn" lay-submit type="button" onclick="checkvalue(${enqProduct.enquiryProductId})">查看商家报价</button>
+        </div>
+    </div>
+</div>
+
+</#list>
+
+<div class="layui-input-block" >
+    <button class="layui-btn" lay-submit type="button" onclick="returnBack()">返回上一页</button>
+</div>
+
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    function returnBack() {
+        window.location.href = "javascript:history.go(-1)";
+    }
+
+    function checkvalue(id) {
+        window.location.href = "checkvalue/"+id;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

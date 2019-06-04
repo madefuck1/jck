@@ -1,0 +1,20 @@
+
+spring:
+  profiles:
+    active: pro
+
+mybatis:
+   mapper-locations: classpath:mapping/*.xml
+   type-aliases-package: com.soufang.model
+
+#pagehelper
+pagehelper:
+   helperDialect: mysql
+   reasonable: true
+   supportMethodsArguments: true
+   params: count=countSql
+
+#logger
+Logger:
+   level:
+       com.soufang.mapper: info

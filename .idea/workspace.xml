@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list id="9eb1183a-ba84-43a0-a3c0-b59173fc47b9" name="no" comment="no" />
+    <list default="true" id="f7c5d05f-860e-42fd-88e8-bcd9f9d289c1" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/pc/target/" />
+    <ignored path="$PROJECT_DIR$/core/target/" />
+    <ignored path="$PROJECT_DIR$/base/target/" />
+    <ignored path="$PROJECT_DIR$/admin/target/" />
+    <ignored path="$PROJECT_DIR$/app/target/" />
+    <ignored path="$PROJECT_DIR$/eureka/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="PersonalCenterController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15744">
+              <caret line="719" column="59" selection-start-line="719" selection-start-column="59" selection-end-line="719" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PcUserFeign.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/PcUserFeign.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="628">
+              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suggest.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/suggest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>defaultAddr</find>
+      <find>chatImage</find>
+      <find>uploadImage</find>
+      <find>payOrder</find>
+      <find>judge</find>
+      <find>getEnquiryList</find>
+      <find>limit</find>
+      <find>GET</find>
+      <find>getuserinfo</find>
+      <find>swit</find>
+      <find>getAssortByParentId</find>
+      <find>getAssortAByParentId</find>
+      <find>attr-cloum4</find>
+      <find>240</find>
+      <find>attr</find>
+      <find>base1</find>
+      <find>toPurchaseHtml</find>
+      <find>toEnquiryManage</find>
+      <find>addEnquiry</find>
+      <find>uploadUrl</find>
+      <find>enquiryTitle</find>
+      <find>title</find>
+      <find>doc-form-file</find>
+      <find>file</find>
+      <find>specName</find>
+      <find>Master-pic2</find>
+      <find>ajax</find>
+      <find>getList</find>
+      <find>insert</find>
+      <find>box</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>D:\git_place\code\java</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Desktop/eureka-master" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/core/src/main/resources/mapping/OrderShopMapper.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/model/Favorite.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/favorite/FavoriteDto.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/vo/favorite/FavoriteAddVo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppFavoriteController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppOrderController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ShopCarController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/OrderController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/OrderController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/common/seller.menu.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/SellerController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/purchase.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/releaseProduct.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/CommonPullDownFeign.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/common/layout/base.sellerCenter.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/js/createProcut.js" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppSellerController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/createEnquiry.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/EnquiryPurchaseController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.search.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/common/layout/base.personalCenter.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.contain.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/css/sale/sale-Release-on.css" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/js/jquery.form.js" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/application-pro.yml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ProductManageController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/createProduct.html" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/ProductManageService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/ProductManageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/ProductFeign.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/js/createProduct.js" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ProductController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/EnquiryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/enquiry/EnquiryDto.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/jiguang/JMessageDto.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/IndexController.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/jiguang/JMessageUtils.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/js/wechat.js" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.chat.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/static/css/main.css" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/footPrint.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/common/include.menu.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/information.html" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/PcUserFeign.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/suggest.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="D:\maven\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="10" />
+    <option name="y" value="15" />
+    <option name="width" value="1940" />
+    <option name="height" value="1060" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="soufang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="soufang" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="soufang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="soufang" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="soufang" type="462c0819:PsiDirectoryNode" />
+              <item name="feign" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="personalCenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="personalCenter" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="sellerCenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SearchEverywhereHistoryKey" value="ordershop&#9;PSI&#9;JAVA://com.soufang.model.OrderShop&#10;indexc&#9;FILE&#9;file://D:/git_place/code/java/pc/src/main/java/com/soufang/controller/IndexController.java&#10;index&#9;FILE&#9;file://D:/git_place/code/java/pc/src/main/java/com/soufang/controller/IndexController.java&#10;productst&#9;PSI&#9;JAVA://com.soufang.model.ProductStatistics&#10;product&#9;PSI&#9;JAVA://com.soufang.model.Product&#10;shop&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/shop/ShopDto.java&#10;app&#9;FILE&#9;file://D:/git_place/code/java/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java&#10;purchase&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/enquiryProduct/EnquiryProductDto.java&#10;enq&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/enums/EnquiryStatusEnum.java&#10;enquiryd&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/enquiry/EnquiryDto.java&#10;enquirypro&#9;PSI&#9;JAVA://com.soufang.base.dto.enquiryProduct.EnquiryProductDto&#10;enqu&#9;PSI&#9;JAVA://com.soufang.model.Enquiry&#10;appenq&#9;FILE&#9;file://D:/git_place/code/java/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java&#10;enquiry&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/enquiry/EnquiryDto.java&#10;shopd&#9;PSI&#9;JAVA://com.soufang.base.dto.shop.ShopDto&#10;purc&#9;PSI&#9;JAVA://com.soufang.base.dto.purchase.PurchaseDto&#10;conf&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/resources/conf.properties&#10;per&#9;FILE&#9;file://D:/git_place/code/java/pc/src/main/java/com/soufang/controller/PersonalCenterController.java&#10;productc&#9;FILE&#9;file://D:/git_place/code/java/pc/src/main/java/com/soufang/controller/ProductController.java&#10;purch&#9;PSI&#9;JAVA://com.soufang.model.Purchase&#10;compa&#9;PSI&#9;JAVA://com.soufang.base.dto.company.CompanyDto&#10;orderstatus&#9;PSI&#9;JAVA://com.soufang.base.enums.OrderStatusEnum&#10;assort&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/assort/AssortDto.java&#10;ass&#9;FILE&#9;file://D:/git_place/code/java/core/src/main/java/com/soufang/controller/AssortController.java&#10;user&#9;PSI&#9;JAVA://com.soufang.base.dto.user.UserDto&#10;basec&#9;PSI&#9;JAVA://com.soufang.controller.BaseController&#10;productcon&#9;PSI&#9;JAVA://com.soufang.controller.ProductManageController&#10;fa&#9;FILE&#9;file://D:/git_place/code/java/app/src/main/java/com/soufang/app/vo/favorite/FavoriteAddVo.java&#10;orderc&#9;FILE&#9;file://D:/git_place/code/java/core/src/main/java/com/soufang/controller/OrderController.java&#10;shopcar&#9;PSI&#9;JAVA://com.soufang.controller.ShopCarController&#10;fav&#9;PSI&#9;JAVA://com.soufang.model.Favorite&#10;favorited&#9;PSI&#9;JAVA://com.soufang.base.dto.favorite.FavoriteDto&#10;favor&#9;PSI&#9;JAVA://com.soufang.controller.FavoriteController&#10;appf&#9;FILE&#9;file://D:/git_place/code/java/app/src/main/java/com/soufang/app/controller/AppFavoriteController.java&#10;apporder&#9;FILE&#9;file://D:/git_place/code/java/app/src/main/java/com/soufang/app/controller/AppOrderController.java&#10;ordershopmap&#9;FILE&#9;file://D:/git_place/code/java/core/src/main/resources/mapping/OrderShopMapper.xml&#10;ordershopd&#9;PSI&#9;JAVA://com.soufang.base.dto.order.OrderShopDto&#10;pageorder&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/enums/PageOrderStatusEnum.java&#10;order&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/enums/OrderStatusEnum.java&#10;ordersta&#9;PSI&#9;JAVA://com.soufang.base.enums.OrderStatusEnum&#10;orderC&#9;PSI&#9;JAVA://com.soufang.controller.OrderController&#10;pay&#9;PSI&#9;JAVA://com.soufang.model.Pay&#10;userdt&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/user/UserDto.java&#10;orderso&#9;PSI&#9;JAVA://com.soufang.base.search.order.OrderSo&#10;orderd&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/dto/order/OrderDto.java&#10;ordertypee&#9;FILE&#9;file://D:/git_place/code/java/base/src/main/java/com.soufang.base/enums/OrderTypeEnum.java&#10;foot&#9;PSI&#9;JAVA://com.soufang.base.dto.footprint.FootPrintDto&#10;products&#9;PSI&#9;JAVA://com.soufang.model.ProductStatistics&#10;shopD&#9;PSI&#9;JAVA://com.soufang.model.Shop&#10;userdto&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\git_place\code\java\pc\src\main\resources\static\css" />
+      <recent name="D:\git_place\code\java\pc\src\main\resources\templates\ali" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.soufang.base" />
+      <recent name="com.soufang.app.vo.shopCar" />
+      <recent name="com.soufang.vo.shopCar" />
+      <recent name="com.soufang.controller" />
+      <recent name="com.soufang.base.utils" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\git_place\code\java\pc\src\main\resources\static\images\sale" />
+      <recent name="D:\git_place\code\java\pc\src\main\resources\static\css\sale" />
+      <recent name="D:\git_place\code\java\pc\src\main\resources\static" />
+      <recent name="D:\git_place\code\java\pc\src\main\resources\static\css" />
+      <recent name="D:\git_place\code\java\数据库设计" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.PcApplication">
+    <configuration name="JMessageUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.soufang.base.jiguang.JMessageUtils" />
+      <module name="base" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soufang.base.jiguang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="AppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soufang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soufang.AppApplication" />
+    </configuration>
+    <configuration name="CoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soufang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soufang.CoreApplication" />
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="eureka" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soufang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soufang.EurekaServerApplication" />
+    </configuration>
+    <configuration name="PcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="pc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soufang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soufang.PcApplication" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+      <item itemvalue="Spring Boot.CoreApplication" />
+      <item itemvalue="Spring Boot.PcApplication" />
+      <item itemvalue="Spring Boot.AppApplication" />
+      <item itemvalue="Application.JMessageUtils" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.PcApplication" />
+        <item itemvalue="Application.JMessageUtils" />
+        <item itemvalue="Spring Boot.CoreApplication" />
+        <item itemvalue="Spring Boot.EurekaServerApplication" />
+        <item itemvalue="Spring Boot.AppApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7c5d05f-860e-42fd-88e8-bcd9f9d289c1" name="Default" comment="" />
+      <changelist id="9eb1183a-ba84-43a0-a3c0-b59173fc47b9" name="no" comment="" />
+      <created>1557046944597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1557046944597</updated>
+      <workItem from="1557046948119" duration="118169000" />
+      <workItem from="1557706562285" duration="77665000" />
+      <workItem from="1557965589767" duration="1620000" />
+      <workItem from="1557967582760" duration="25881000" />
+      <workItem from="1558052277740" duration="26191000" />
+      <workItem from="1558311547873" duration="16182000" />
+      <workItem from="1558397516059" duration="18913000" />
+      <workItem from="1558426751203" duration="1451000" />
+      <workItem from="1558484836569" duration="24815000" />
+      <workItem from="1558570725038" duration="23023000" />
+      <workItem from="1558657538778" duration="18288000" />
+      <workItem from="1558743570544" duration="13251000" />
+      <workItem from="1558774591601" duration="101000" />
+      <workItem from="1558774736411" duration="1313000" />
+      <workItem from="1558916960224" duration="19942000" />
+      <workItem from="1559002750561" duration="23529000" />
+      <workItem from="1559089103485" duration="15038000" />
+      <workItem from="1559262023966" duration="25555000" />
+      <workItem from="1559348362804" duration="22686000" />
+      <workItem from="1559520650269" duration="22670000" />
+      <workItem from="1559607949224" duration="472000" />
+    </task>
+    <task id="LOCAL-00004" summary="配置文件优化">
+      <created>1557209083966</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557209083966</updated>
+    </task>
+    <task id="LOCAL-00005" summary="聊天">
+      <created>1557298567411</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557298567411</updated>
+    </task>
+    <task id="LOCAL-00006" summary="chat">
+      <created>1557539610581</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557539610581</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chat">
+      <created>1557544155574</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1557544155574</updated>
+    </task>
+    <task id="LOCAL-00008" summary="chat">
+      <created>1557547603222</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1557547603222</updated>
+    </task>
+    <task id="LOCAL-00009" summary="首页">
+      <created>1557731738653</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1557731738654</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Merge branch 'master' of 192.168.32.222:code&#10;&#10;# Conflicts:&#10;#&#9;java/pc/src/main/java/com/soufang/config/interceptor/MemberInterceptor.java">
+      <created>1557731937246</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1557731937246</updated>
+    </task>
+    <task id="LOCAL-00011" summary="购物车">
+      <created>1557795067331</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1557795067331</updated>
+    </task>
+    <task id="LOCAL-00012" summary="购物车">
+      <created>1557795435997</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1557795435997</updated>
+    </task>
+    <task id="LOCAL-00013" summary="购物车">
+      <created>1557813423025</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1557813423025</updated>
+    </task>
+    <task id="LOCAL-00014" summary="购物车">
+      <created>1557883504560</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1557883504561</updated>
+    </task>
+    <task id="LOCAL-00015" summary="配置文件修改">
+      <created>1557905197245</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1557905197245</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1">
+      <created>1557912456262</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1557912456262</updated>
+    </task>
+    <task id="LOCAL-00017" summary="封装spec">
+      <created>1557972641898</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1557972641898</updated>
+    </task>
+    <task id="LOCAL-00018" summary="购物车列表">
+      <created>1557989734268</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1557989734268</updated>
+    </task>
+    <task id="LOCAL-00019" summary="购物车列表">
+      <created>1558054132317</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1558054132317</updated>
+    </task>
+    <task id="LOCAL-00020" summary="提交订单">
+      <created>1558076702717</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1558076702717</updated>
+    </task>
+    <task id="LOCAL-00021" summary="提交订单">
+      <created>1558076857052</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1558076857052</updated>
+    </task>
+    <task id="LOCAL-00022" summary="ftp账号">
+      <created>1558336171817</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1558336171818</updated>
+    </task>
+    <task id="LOCAL-00023" summary="订单列表 详情 支付">
+      <created>1558339069047</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1558339069047</updated>
+    </task>
+    <task id="LOCAL-00024" summary="1">
+      <created>1558406750220</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1558406750220</updated>
+    </task>
+    <task id="LOCAL-00025" summary="app 订单">
+      <created>1558420940564</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1558420940564</updated>
+    </task>
+    <task id="LOCAL-00026" summary="配置修改">
+      <created>1558488208577</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1558488208577</updated>
+    </task>
+    <task id="LOCAL-00027" summary="配置修改">
+      <created>1558488237546</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1558488237546</updated>
+    </task>
+    <task id="LOCAL-00028" summary="订单提交">
+      <created>1558506499172</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1558506499172</updated>
+    </task>
+    <task id="LOCAL-00029" summary="支付成功接口">
+      <created>1558508468043</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1558508468043</updated>
+    </task>
+    <task id="LOCAL-00030" summary="线上 线下订单状态修改">
+      <created>1558508608328</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1558508608328</updated>
+    </task>
+    <task id="LOCAL-00031" summary="线上 线下订单状态修改">
+      <created>1558508672536</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1558508672536</updated>
+    </task>
+    <task id="LOCAL-00032" summary="1">
+      <created>1558512594570</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1558512594570</updated>
+    </task>
+    <task id="LOCAL-00033" summary="APP 修正订单提交">
+      <created>1558515388404</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1558515388404</updated>
+    </task>
+    <task id="LOCAL-00034" summary="上传下载合同">
+      <created>1558592289981</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1558592289981</updated>
+    </task>
+    <task id="LOCAL-00035" summary="合同下载上传">
+      <created>1558592381475</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1558592381475</updated>
+    </task>
+    <task id="LOCAL-00036" summary="合同下载上传">
+      <created>1558592639330</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1558592639330</updated>
+    </task>
+    <task id="LOCAL-00037" summary="页面状态">
+      <created>1558601852955</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1558601852955</updated>
+    </task>
+    <task id="LOCAL-00038" summary="页面状态">
+      <created>1558658921188</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1558658921188</updated>
+    </task>
+    <task id="LOCAL-00039" summary="页面状态">
+      <created>1558660295336</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1558660295336</updated>
+    </task>
+    <task id="LOCAL-00040" summary="页面订单状态  接口更新">
+      <created>1558679982028</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1558679982028</updated>
+    </task>
+    <task id="LOCAL-00041" summary="get 改post">
+      <created>1558680684866</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1558680684866</updated>
+    </task>
+    <task id="LOCAL-00042" summary="1">
+      <created>1558745051720</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1558745051720</updated>
+    </task>
+    <task id="LOCAL-00043" summary="1">
+      <created>1558750698880</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1558750698880</updated>
+    </task>
+    <task id="LOCAL-00044" summary="1">
+      <created>1558751387738</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1558751387738</updated>
+    </task>
+    <task id="LOCAL-00045" summary="1">
+      <created>1558754807007</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1558754807007</updated>
+    </task>
+    <task id="LOCAL-00046" summary="1">
+      <created>1558920101344</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1558920101344</updated>
+    </task>
+    <task id="LOCAL-00047" summary="1">
+      <created>1559004104112</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1559004104112</updated>
+    </task>
+    <task id="LOCAL-00048" summary="数据库密码">
+      <created>1559004343906</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1559004343907</updated>
+    </task>
+    <task id="LOCAL-00049" summary="新增产品">
+      <created>1559091305185</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1559091305186</updated>
+    </task>
+    <task id="LOCAL-00050" summary="新增产品">
+      <created>1559356594528</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1559356594529</updated>
+    </task>
+    <task id="LOCAL-00051" summary="订单详情 聊天">
+      <created>1559544507696</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1559544507697</updated>
+    </task>
+    <task id="LOCAL-00052" summary="意见反馈">
+      <created>1559549313813</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1559549313814</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="496755000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50053304" side_tool="true" weight="0.3549832" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.15191898" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info id="Structure" order="1" sideWeight="0.5016949" side_tool="true" weight="0.22014925" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.28331468" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32922733" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.40425533" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.28219485" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.3293944" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32922733" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49830508" visible="true" weight="0.21215352" />
+      <window_info anchor="right" id="Bean Validation" order="3" weight="0.32995737" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3449048" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32922733" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.36842105" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.3293944" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32922733" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32922733" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.3549832" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3449048" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32922733" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.40425533" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.15191898" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49830508" visible="true" weight="0.20788912" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info id="Structure" order="1" sideWeight="0.5016949" side_tool="true" weight="0.22014925" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" visible="true" weight="0.30235162" />
+      <window_info anchor="right" id="Bean Validation" order="9" weight="0.32995737" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="首页" />
+    <MESSAGE value="Merge branch 'master' of 192.168.32.222:code&#10;&#10;# Conflicts:&#10;#&#9;java/pc/src/main/java/com/soufang/config/interceptor/MemberInterceptor.java" />
+    <MESSAGE value="购物车" />
+    <MESSAGE value="配置文件修改" />
+    <MESSAGE value="封装spec" />
+    <MESSAGE value="购物车列表" />
+    <MESSAGE value="提交订单" />
+    <MESSAGE value="ftp账号" />
+    <MESSAGE value="订单列表 详情 支付" />
+    <MESSAGE value="app 订单" />
+    <MESSAGE value="配置修改" />
+    <MESSAGE value="订单提交" />
+    <MESSAGE value="支付成功接口" />
+    <MESSAGE value="线上 线下订单状态修改" />
+    <MESSAGE value="APP 修正订单提交" />
+    <MESSAGE value="上传下载合同" />
+    <MESSAGE value="合同下载上传" />
+    <MESSAGE value="页面状态" />
+    <MESSAGE value="页面订单状态  接口更新" />
+    <MESSAGE value="get 改post" />
+    <MESSAGE value="1" />
+    <MESSAGE value="数据库密码" />
+    <MESSAGE value="新增产品" />
+    <MESSAGE value="订单详情 聊天" />
+    <MESSAGE value="意见反馈" />
+    <option name="LAST_COMMIT_MESSAGE" value="意见反馈" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="244" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ProductManageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3120">
+          <caret line="148" column="34" selection-start-line="148" selection-start-column="34" selection-end-line="148" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/soldProduct.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="56" column="29" lean-forward="true" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/SellerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="139" column="43" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/application-pro.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/EnquiryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/EnquiryMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2376" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/Enquiry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/enquiryProduct/EnquiryProductDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/EnquiryStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/enquiry/EnquiryDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3072">
+          <caret line="160" column="28" selection-start-line="160" selection-start-column="28" selection-end-line="160" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/purchase/PurchaseDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/product/introduction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/shop/ShopDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/ProductStatistics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-168">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="49" selection-start-line="5" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/OrderShop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/config/interceptor/MemberInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="204" selection-start-line="204" selection-end-line="204" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/seastyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/optstyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="13" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/shopCar/toPay.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12696">
+          <caret line="529" column="11" lean-forward="true" selection-start-line="529" selection-start-column="11" selection-end-line="529" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/jsstyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="159" column="1" selection-start-line="159" selection-start-column="1" selection-end-line="159" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/jiguang/JMessageUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="249" column="5" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/js/wechat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/jiguang/JMessageDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.chat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="68" column="39" lean-forward="true" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/footPrint.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="36" column="12" lean-forward="true" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ShopCarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/collection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/common/include.menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/address.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/information.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="77" selection-start-line="77" selection-end-line="83" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/product/search.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/product/submitOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9360" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/js/createProduct.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="295" column="28" selection-start-line="295" selection-start-column="24" selection-end-line="295" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/createProduct.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="256" column="41" lean-forward="true" selection-start-line="256" selection-end-line="257" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/suggest/SuggestDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/SuggestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15744">
+          <caret line="719" column="59" selection-start-line="719" selection-start-column="59" selection-end-line="719" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/suggest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/PcUserFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>admin:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>core</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

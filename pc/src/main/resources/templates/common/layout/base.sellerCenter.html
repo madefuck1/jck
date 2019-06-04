@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/includes/header.html"/>
+        <title><@block name="title"/></title>
+        <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+        <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+        <link rel="stylesheet" href="${contextPath}/css/sale/sale_index.css">
+        <link rel="stylesheet" href="${contextPath}/css/sale/sale_header.css">
+        <link rel="stylesheet" href="${contextPath}/css/sale/sale_aside.css">
+        <style>
+            .sale_menu li a{
+                padding-left: 24px;
+            }
+            .sale_menu ul li ul a{
+                margin-left: 28px;
+            }
+
+        </style>
+        <@block name="css"/>
+    </head>
+    <body>
+        <#include "/common/includes/seller.top.html"/>
+        <#include "/common/includes/seller.search.html"/>
+        <@block name="body"/>
+    </body>
+    <#include "/common/includes/include.script.html"/>
+
+    <@block name="js"/>
+    <script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+</html>

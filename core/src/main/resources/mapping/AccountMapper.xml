@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Account" >
+    <id column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL" />
+    <result column="cash_out_money" property="cashOutMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_id, user_id, total_money, freeze_money, cash_out_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Account" >
+    insert into t_account (account_id, user_id, total_money, 
+      freeze_money, cash_out_money)
+    values (#{accountId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalMoney,jdbcType=DECIMAL}, 
+      #{freezeMoney,jdbcType=DECIMAL}, #{cashOutMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Account" >
+    insert into t_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money,
+      </if>
+      <if test="cashOutMoney != null" >
+        cash_out_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeMoney != null" >
+        #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashOutMoney != null" >
+        #{cashOutMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Account" >
+    update t_account
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeMoney != null" >
+        freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashOutMoney != null" >
+        cash_out_money = #{cashOutMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Account" >
+    update t_account
+    set user_id = #{userId,jdbcType=BIGINT},
+      total_money = #{totalMoney,jdbcType=DECIMAL},
+      freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+      cash_out_money = #{cashOutMoney,jdbcType=DECIMAL}
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+</mapper>

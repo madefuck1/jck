@@ -1,0 +1,199 @@
+<@override name="title">
+订单管理
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<div class="layui-form">
+    <h5>搜索条件</h5>
+    <div class="demoTable" style="padding-top: 20px">
+        <label class="layui-inline">订单号</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="orderNumber" id="orderNumber" autocomplete="off">
+        </div>
+        <label class="layui-inline">店铺</label>
+        <div class="layui-inline">
+            <select name="shopId" id="shopId">
+                <option value=""></option>
+            </select>
+        </div>
+        <label class="layui-inline">订单状态</label>
+        <div class="layui-inline">
+            <select name="orderStatus" id="orderStatus">
+                <option value="">请选择</option>
+                <#list orderStatusMap?keys as key>
+                <option value="${key}">${orderStatusMap[key]}</option>
+            </#list>
+            </select>
+        </div>
+        <label class="layui-inline">订单类型</label>
+        <div class="layui-inline">
+            <select name="orderType" id="orderType">
+                <option value="">请选择</option>
+                <#list orderTypeMap?keys as key>
+                <option value="${key}">${orderTypeMap[key]}</option>
+                </#list>
+            </select>
+        </div>
+    </div>
+    <div class="demoTable" style="padding-top: 20px">
+        <label class="layui-inline">下单时间从</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="beginDate" id="beginDate" placeholder="">
+        </div>
+        <label class="layui-inline">到</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="endDate" id="endDate" placeholder="">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</div>
+<h5>订单管理</h5>
+<table class="layui-hide" id="list" lay-filter="list"></table>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+    function initSelect(form){
+        $.ajax({
+            url: '/admin/commonPullDown/getShopIdAndName',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $("#shopId").append(new Option(item.shopName, item.shopId));// 下拉菜单里添加元素
+                });
+                form.render("select");
+            }
+        });
+    }
+
+    layui.use(['table','laydate','table'], function() {
+
+        var laydate = layui.laydate;
+        //常规用法
+        laydate.render({
+            elem: '#beginDate'
+        });
+        laydate.render({
+            elem: '#endDate'
+        });
+
+        var form = layui.form ;
+        initSelect(form);
+
+        var table = layui.table;
+
+        table.set({
+            headers: {
+                "Authorization": getCookie("token")
+            }
+        });
+
+        table.render({
+            elem: '#list'
+            , id: "list"
+            , url: 'getList'
+            , title: '订单记录表'
+            //,method: 'post' //如果无需自定义HTTP类型，可不加该参数
+            //,request: {} //如果无需自定义请求参数，可不加该参数
+            , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 1 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页
+            }
+            , cols: [[
+                {type: 'numbers'}
+                , {field: 'orderNumber', title: '订单号'}
+                , {field: 'loginName', title: '用户名'}
+                , {field: 'shopName', title: '店铺名称'}
+                , {field: 'sumPrice', title: '订单金额'}
+                , {field: 'actualPrice', title: '实际金额'}
+                , {field: 'frontPrice', title: '定金'}
+                , {field: 'orderShopStatus', title: '订单状态'}
+                , {field: 'createTimeString', title: '订单时间'}
+                , {
+                    field: 'button', title: '操作',
+                    templet: function (e) {
+                        var html = '<a class="layui-btn layui-btn-container layui-btn-xs" lay-event="addRowTable">+</a>';
+                        html += '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="update(' + e.orderShopId + ')">修改</a >';
+                        return html;
+                    }
+                }
+            ]]
+        });
+
+        //重载表格
+        var $ = layui.$, active = {
+            reload: function () {
+                //执行重载
+                table.reload('list', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        orderNumber: $('#orderNumber').val()
+                        , orderStatus: $('#orderStatus').val()
+                        , orderType: $('#orderType').val()
+                        , shopId: $('#shopId').val()
+                        , beginDate: $('#beginDate').val()
+                        , endDate: $('#endDate').val()
+                    }
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        table.on('tool(list)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            var $this = $(this);
+            var tr = $this.parents('tr');
+            var trIndex = tr.data('index');
+            if (layEvent == "addRowTable") {
+                $(this).attr('lay-event', 'fold').html('-');
+                var tableId = 'tableOut_tableIn_' + trIndex;
+                var _html = [
+                    '<tr class="table-item">',
+                    '<td colspan="' + tr.find('td').length + '" style="padding: 6px 12px;">',
+                    '<table id="' + tableId + '"></table>',
+                    '</td>',
+                    '</tr>'
+                ];
+                tr.after(_html.join('\n'));
+                // 渲染table
+                table.render({
+                    elem: '#' + tableId,
+                    data: data.orderProducts || [],
+                    cols: [[
+                        {field: 'productName', title: '商品名称'},
+                        {field: 'productNumber', title: '商品数量'},
+                        {field: 'productUnit', title: '商品单位'},
+                        {field: 'productPrice', title: '商品价格'},
+                        {field: 'productSpec', title: '商品规格'},
+                        {field: 'productColor', title: '商品颜色'}
+                    ]]
+                })
+            }else if (layEvent === 'fold') {
+                $(this).attr('lay-event', 'addRowTable').html('+');
+                tr.next().remove();
+            }
+        })
+    })
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ShopMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.Shop">
+        <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+        <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+        <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+        <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+        <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+        <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+        <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+  <resultMap id="AppResultMap" type="com.soufang.base.dto.shop.ShopDto">
+    <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+    <result column="user_id" property="userId" jdbcType="BIGINT"/>
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+    <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+    <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+    <result column="shop_avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
+    <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+    <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+    <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+    <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+    <collection property="productDtoList" ofType="com.soufang.base.dto.product.ProductDto">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+
+
+
+
+    <select id="getShopIdAndNameOption" resultType="java.util.Map">
+        select shop_id as shopId, shop_name as shopName from t_shop
+    </select>
+
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select * from t_shop
+    where shop_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select * from t_shop
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <select id="getList" parameterType="com.soufang.model.Shop" resultMap="BaseResultMap">
+    select * from t_shop where 1=1
+    <if test="shopName != null and shopName != ''">
+      and shop_name like concat(concat('%',#{shopName}),'%')
+    </if>
+    <if test="mainProducts != null and mainProducts != ''">
+      and main_products like concat(concat('%',#{mainProducts}),'%')
+    </if>
+    order by create_time desc
+  </select>
+
+  <select id="getCount" parameterType="com.soufang.model.Shop" resultType="java.lang.Integer">
+    select count(1) from t_shop where 1=1
+    <if test="shopName != null and shopName != ''">
+      and shop_name like concat(concat('%',#{shopName}),'%')
+    </if>
+    <if test="mainProducts != null and mainProducts != ''">
+      and main_products like concat(concat('%',#{mainProducts}),'%')
+    </if>
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from t_shop
+    where shop_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="addShop" parameterType="com.soufang.model.Shop" >
+    insert into t_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopLevel != null" >
+        shop_level,
+      </if>
+      <if test="shopIntroduce != null" >
+        shop_introduce,
+      </if>
+      <if test="avatarUrl != null" >
+        shop_avatar_url,
+      </if>
+      <if test="businessScope != null" >
+        business_scope,
+      </if>
+      <if test="mainProducts != null" >
+        main_products,
+      </if>
+      <if test="shopStatus != null" >
+        shop_status,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevel != null" >
+        #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="shopIntroduce != null" >
+        #{shopIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null" >
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null" >
+        #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProducts != null" >
+        #{mainProducts,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null" >
+        #{shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="reviewYes" parameterType="java.lang.Long">
+    update t_shop set shop_status = 1,refuse_reason = null
+    where shop_id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="reviewNo" parameterType="com.soufang.model.Shop">
+    update t_shop set shop_status = 0,refuse_reason = #{refuseReason,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="appGetList" parameterType="com.soufang.base.search.shop.ShopSo" resultMap="AppResultMap">
+    select * from (select * from t_shop LIMIT #{page},#{limit})t_shop
+    left join (
+	    select P.*, getAssortNameById (P.assort_id) as assortName,
+            concat(P.key1, '：', P.key1_value) as kv1,
+            concat(P.key2, '：', P.key2_value) as kv2,
+            concat(P.key3, '：', P.key3_value) as kv3,
+            concat(P.key4, '：', P.key4_value) as kv4,
+            concat(P.key5, '：', P.key5_value) as kv5,
+            GetMinPriceByProductId(P.product_id) from t_product P
+    )t_product on t_shop.shop_id = t_product.shop_id
+    where 1=1
+    <if test="shopName!=null and shopName!=''">
+      and  t_shop.shop_name like concat(concat('%',#{shopName}),'%')
+    </if>
+  </select>
+
+</mapper>

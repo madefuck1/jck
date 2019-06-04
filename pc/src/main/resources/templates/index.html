@@ -1,0 +1,26 @@
+<@override name="title">
+首页
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/home.css">
+<link rel="stylesheet" href="${contextPath}/css/header.index.css">
+</@override>
+
+<@override name="body">
+
+<#include "/common/includes/include.contain2.html"/>
+<#include "/common/includes/include.banner.html"/>
+
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain2.js"></script>
+
+<script type="text/javascript">
+    $('.am-slider').flexslider();
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

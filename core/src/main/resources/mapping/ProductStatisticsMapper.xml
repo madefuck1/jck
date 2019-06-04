@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ProductStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.ProductStatistics" >
+    <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="collection_number" property="collectionNumber" jdbcType="BIGINT" />
+    <result column="browse_number" property="browseNumber" jdbcType="BIGINT" />
+    <result column="deal_number" property="dealNumber" jdbcType="BIGINT" />
+    <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+    <result column="product_stock" property="productStock" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_statistics_id, product_id, collection_number, browse_number, deal_number, 
+    product_price, product_stock
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_product_statistics
+    where product_statistics_id = #{productStatisticsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_product_statistics
+    where product_statistics_id = #{productStatisticsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.ProductStatistics" keyColumn="product_statistics_id"
+            keyProperty="productStatisticsId" useGeneratedKeys="true">
+    insert into t_product_statistics (product_statistics_id, product_id, collection_number, 
+      browse_number, deal_number, product_price, 
+      product_stock)
+    values (#{productStatisticsId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{collectionNumber,jdbcType=BIGINT}, 
+      #{browseNumber,jdbcType=BIGINT}, #{dealNumber,jdbcType=BIGINT}, #{productPrice,jdbcType=VARCHAR}, 
+      #{productStock,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.ProductStatistics" >
+    insert into t_product_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productStatisticsId != null" >
+        product_statistics_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="collectionNumber != null" >
+        collection_number,
+      </if>
+      <if test="browseNumber != null" >
+        browse_number,
+      </if>
+      <if test="dealNumber != null" >
+        deal_number,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productStock != null" >
+        product_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productStatisticsId != null" >
+        #{productStatisticsId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionNumber != null" >
+        #{collectionNumber,jdbcType=BIGINT},
+      </if>
+      <if test="browseNumber != null" >
+        #{browseNumber,jdbcType=BIGINT},
+      </if>
+      <if test="dealNumber != null" >
+        #{dealNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null" >
+        #{productStock,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.ProductStatistics" >
+    update t_product_statistics
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionNumber != null" >
+        collection_number = #{collectionNumber,jdbcType=BIGINT},
+      </if>
+      <if test="browseNumber != null" >
+        browse_number = #{browseNumber,jdbcType=BIGINT},
+      </if>
+      <if test="dealNumber != null" >
+        deal_number = #{dealNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null" >
+        product_stock = #{productStock,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_statistics_id = #{productStatisticsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.ProductStatistics" >
+    update t_product_statistics
+    set product_id = #{productId,jdbcType=BIGINT},
+      collection_number = #{collectionNumber,jdbcType=BIGINT},
+      browse_number = #{browseNumber,jdbcType=BIGINT},
+      deal_number = #{dealNumber,jdbcType=BIGINT},
+      product_price = #{productPrice,jdbcType=VARCHAR},
+      product_stock = #{productStock,jdbcType=VARCHAR}
+    where product_statistics_id = #{productStatisticsId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByProductId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_product_statistics where product_id = #{productId,jdbcType=BIGINT}
+  </select>
+
+</mapper>

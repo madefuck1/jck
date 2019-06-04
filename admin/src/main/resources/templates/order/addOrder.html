@@ -1,0 +1,321 @@
+<@override name="title">
+广交会订单录入
+</@override>
+
+<@override name="css">
+<style>
+    .selectDemo {
+        width: 100%;
+        height: 100%;
+        border: 1px;
+    }
+</style>
+</@override>
+<@override name="body">
+<div style="padding:15px;">
+    <form class="layui-form" id="fromId" action="#">
+        <fieldset class="layui-elem-field">
+            <div style="padding-top:25px;" class="layui-field-box">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">买家姓名</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <input type="text" id="buyer" name="buyer" placeholder="请输入" class="layui-input"
+                               lay-verify="required">
+                        <input hidden id="buyerId" name="buyerId" value="99999999">
+                    </div>
+
+                    <label class="layui-form-label">收货人</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <input type="text" id="takeName" name="takeName" placeholder="请输入" class="layui-input"
+                               lay-verify="required">
+                    </div>
+
+                    <label class="layui-form-label">收货地址</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <input type="text" id="takeAddress" name="takeAddress" placeholder="请输入" class="layui-input"
+                               lay-verify="required">
+                    </div>
+
+                    <label class="layui-form-label">收货人联系方式</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <input type="text" id="takePhone" name="takePhone" placeholder="请输入" class="layui-input"
+                               lay-verify="required">
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">订单状态</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <select id="orderStatus" name="orderStatus" class="layui-select">
+                            <#list orderStatusMap?keys as key>
+                            <option value="${key}">${orderStatusMap[key]}</option>
+                        </#list>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label">订单类型</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <select id="orderType" name="orderType" class="layui-select">
+                            <option value="1">广交会订单</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label">订金</label>
+                    <div class="layui-input-inline" style="width:13%">
+                        <input type="text" id="paidMoney" name="paidMoney" placeholder="请输入" class="layui-input">
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="toolbarDemo">
+            <div align="left" class="layui-btn-container">
+                <button id="addTable" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加行</button>
+            </div>
+        </script>
+        <script type="text/html" id="bar">
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="addProducts">添加产品</a>
+        </script>
+
+        <script type="text/html" id="selectShopName">
+            <select lay-filter="selDome" class="selectDemo" name="selectShopN" lay-ignore onchange="selectShop(this)">
+                <option value="">请选择</option>
+            </select>
+        </script>
+
+        <table id="demo" lay-filter="tableFilter"></table>
+
+        <input hidden id="callBackData">
+    </form>
+
+
+    <div class="layui-form-item" style="margin-top: 30px;text-align: center;">
+        <button id="saveOrder" name="saveOrder" class="layui-btn layui-btn-sm ">保存</button>
+    </div>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    var demoData;
+    var orderProducts;
+    var table;
+    var form;
+
+    function selectShop(obj) {
+        demoData = table.cache["demo"];
+        var dataindex = $(obj).parents("tr").attr("data-index")
+        // $.each($(obj).parents("tr").find("td"), function () {
+        //     if ($(this).attr("data-field") == "shopId") {
+        //         $(this).find("div").text(($(obj).val()));
+        demoData[dataindex]['shopId'] = $(obj).val();
+        demoData[dataindex]['shopName'] = $(obj).find("option:selected").text();
+        //     }
+        // })
+
+    }
+
+    layui.use(['laydate', 'table', 'jquery'], function () {
+        table = layui.table,
+            form = layui.form,
+            $ = layui.jquery;
+
+        table.render({
+            elem: '#demo'
+            , toolbar: '#toolbarDemo'
+            , limit: 100
+            , cols: [[ //表头
+                {field: 'shopId', title: '店铺', hide: true}
+                , {field: 'shopName', title: '店铺', hide: true}
+                , {field: 'shopIdAndName', title: '店铺名称', templet: "#selectShopName"}
+                , {field: 'sendName', title: '发货人', edit: 'text'}
+                , {field: 'sendAddress', title: '发货地址', edit: 'text'}
+                , {field: 'sendPhone', title: '发货人联系方式', edit: 'text'}
+                // , {field: 'orderShopStatus', title: '状态', edit: 'text'}
+                , {field: 'orderProducts', title: '订单产品', hide: true}
+                , {title: '操作', toolbar: '#bar', width: 180}
+            ]]
+            , data: [{
+                'shopId': ''
+                , 'shopName': ''
+                , 'shopIdAndName': ''
+                , 'sendName': ''
+                , 'sendAddress': ''
+                , 'sendPhone': ''
+                // , 'orderShopStatus': ''
+                , 'orderProducts': ''
+            }]
+        });
+
+        $.ajax({
+            url: "/admin/commonPullDown/getShopIdAndName",
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                var option = "<option value=''>请选择</option>";
+                $.each(data, function (index, item) {
+                    option += ("<option value='" + item.shopId + "'>" + item.shopName + "</option>");// 下拉菜单里添加元素
+                });
+                $('[name = selectShopN]').empty();
+                $('[name = selectShopN]').append(option);
+
+            }
+        });
+
+        //监听工具条
+        table.on('tool(tableFilter)', function (obj) {
+
+            if (obj.event === 'del') {
+                obj.del();
+            } else if (obj.event === 'addProducts') {
+                // 跳新页面
+                layer.open({
+                    type: 2,
+                    area: ["80%", "60%"],
+                    title: "产品添加",
+                    shadeClose: true,
+                    content: "openAddProduct",
+                    btn: ['确定'],
+                    success: function (layero, index) {
+                        // var iframe = window['layui-layer-iframe' + index];
+                        // iframe.child(orderProducts)
+                    },
+                    // 这里yes:function为设置的第一个按钮的function，后面设置的按钮默认点击关闭
+                    yes: function (index, layero) {
+                        //需要回显的值
+                        //layero为当前的DOM对象，去找打开的iframe转成DOM对象调用子页面其中的function (callbackdata)
+                        var res = $(layero).find("iframe")[0].contentWindow;
+
+                        //把回显的值赋给需要显示的地方
+                        orderProducts = res.callbackdata();
+                        $('#callBackData').val(orderProducts);
+                        obj.update({
+                            orderProducts: orderProducts
+                        })
+                        //关闭子页面
+                        layer.close(index)
+                    }
+                })
+            }
+        });
+
+        var tabledata;
+        //头工具栏事件
+        table.on('toolbar(tableFilter)', function (obj) {
+            if (obj.event === 'add') {
+                tabledata = table.cache["demo"];
+                tabledata.push({
+                    'shopId': ''
+                    , 'shopName': ''
+                    , 'shopIdAndName': ''
+                    , 'sendName': ''
+                    , 'sendAddress': ''
+                    , 'sendPhone': ''
+                    // , 'orderShopStatus': ''
+                    , 'orderProducts': ''
+                });
+
+                table.reload('demo', {
+                    data: tabledata
+                });
+                $.ajax({
+                    url: "/admin/commonPullDown/getShopIdAndName",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (data) {
+                        var option = "<option value=''>请选择</option>";
+                        $.each(data, function (index, item) {
+                            option += ("<option value='" + item.shopId + "'>" + item.shopName + "</option>");// 下拉菜单里添加元素
+                        });
+                        $('[name = selectShopN]').empty();
+                        $('[name = selectShopN]').append(option);
+
+                        $('table tr').each(function () {
+                            var trJq = $(this);
+                            var dataIndex = trJq.attr("data-index");
+                            trJq.find("td").each(function () {
+                                var tdJq = $(this);
+                                //更新select数据
+                                var selectJq = tdJq.find("select");
+                                if (selectJq.length == 1) {
+                                    if (demoData != undefined) {
+                                        selectJq.eq(0).val(demoData[dataIndex]['shopId'])
+                                    }
+                                }
+                            });
+
+                        });
+
+                    }
+                });
+
+            }
+        });
+
+    });
+    $('[name=saveOrder]').on('click', function () {
+        var data = demoData;
+        if (data != undefined) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    var orderProduct = data[i].orderProducts;
+                    if (orderProduct != "" && orderProduct != undefined) {
+                        var orderProducts
+                        if (typeof orderProduct == 'string') {
+                            orderProducts = JSON.parse(orderProduct).product;
+                        } else {
+                            orderProducts = orderProduct
+                        }
+                        for (var j = 0; j < orderProducts.length; j++) {
+                            if (orderProducts[j].length == 0) {
+                                orderProducts.splice(j, 1);
+                            }
+                        }
+                        data[i].orderProducts = orderProducts
+                    } else {
+                        data[i].orderProducts = undefined
+                    }
+                }
+            }
+        }
+
+        var param = {
+            buyerId: $('#buyerId').val(),
+            buyer: $('#buyer').val(),
+            takeName: $('#takeName').val(),
+            takeAddress: $('#takeAddress').val(),
+            takePhone: $('#takePhone').val(),
+            orderStatus: $('#orderStatus').val(),
+            paidMoney: $('#paidMoney').val(),
+            orderShop: data,
+        };
+        $.ajax({
+            url: "saveOrderProduct",
+            async: true,
+            type: "post",
+            data: JSON.stringify(param),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.success) {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    window.parent.layui.table.reload('list');
+                } else {
+                    layer.msg(data.message);
+                }
+            }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                this;
+            }
+        })
+        ;
+
+    });
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

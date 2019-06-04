@@ -1,0 +1,46 @@
+<@override name="title">
+首页
+
+</@override>
+
+<@override name="css">
+<style xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
+</style>
+</@override>
+
+<@override name="body">
+<h5>图片管理</h5>
+<table class="layui-hide" id="dictList" lay-filter="dictList"></table>
+
+<div class="layui-carousel" id="test1" lay-filter="">
+    <div carousel-item="">
+        <div><img src="http://${bannerDto1.bannerImage}"></div>
+        <div><img src="http://${bannerDto2.bannerImage}"></div>
+        <div><img src="http://${bannerDto3.bannerImage}"></div>
+        <div><img src="http://${bannerDto4.bannerImage}"></div>
+        <div><img src="http://${bannerDto5.bannerImage}"></div>
+    </div>
+</div>
+
+</@override>
+
+<@override name="js">
+
+<script type="text/javascript">
+    layui.use(['carousel', 'form'], function() {
+        var carousel = layui.carousel
+            , form = layui.form;
+
+        //常规轮播
+        carousel.render({
+            elem: '#test1'
+            ,arrow: 'always'
+        });
+    })
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

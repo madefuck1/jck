@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.InvoiceMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Invoice" >
+    <id column="invoice_id" property="invoiceId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="invoice_head" property="invoiceHead" jdbcType="VARCHAR" />
+    <result column="tax_number" property="taxNumber" jdbcType="VARCHAR" />
+    <result column="invoice_address" property="invoiceAddress" jdbcType="VARCHAR" />
+    <result column="invoice_phone" property="invoicePhone" jdbcType="VARCHAR" />
+    <result column="invoice_bank" property="invoiceBank" jdbcType="VARCHAR" />
+    <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR" />
+    <result column="invoice_default" property="invoiceDefault" jdbcType="INTEGER" />
+    <result column="invoice_type" property="invoiceType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoice_id, user_id, invoice_head, tax_number, invoice_address, invoice_phone, invoice_bank, 
+    invoice_number, invoice_default, invoice_type, create_time
+  </sql>
+
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_invoice
+    where user_id = #{userId,jdbcType=BIGINT} order by invoice_default desc
+  </select>
+
+  <select id="selectDefaultInvoice" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_invoice where invoice_default = 1 and
+    user_id = (select user_id from t_invoice where invoice_id = #{userId,jdbcType=BIGINT})
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_invoice
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_invoice
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Invoice" >
+    insert into t_invoice (invoice_id, user_id, invoice_head, 
+      tax_number, invoice_address, invoice_phone, 
+      invoice_bank, invoice_number, invoice_default, 
+      invoice_type, create_time)
+    values (#{invoiceId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{invoiceHead,jdbcType=VARCHAR}, 
+      #{taxNumber,jdbcType=VARCHAR}, #{invoiceAddress,jdbcType=VARCHAR}, #{invoicePhone,jdbcType=VARCHAR}, 
+      #{invoiceBank,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR}, #{invoiceDefault,jdbcType=INTEGER}, 
+      #{invoiceType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Invoice" >
+    insert into t_invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceId != null" >
+        invoice_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="invoiceHead != null" >
+        invoice_head,
+      </if>
+      <if test="taxNumber != null" >
+        tax_number,
+      </if>
+      <if test="invoiceAddress != null" >
+        invoice_address,
+      </if>
+      <if test="invoicePhone != null" >
+        invoice_phone,
+      </if>
+      <if test="invoiceBank != null" >
+        invoice_bank,
+      </if>
+      <if test="invoiceNumber != null" >
+        invoice_number,
+      </if>
+      <if test="invoiceDefault != null" >
+        invoice_default,
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceId != null" >
+        #{invoiceId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="invoiceHead != null" >
+        #{invoiceHead,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        #{taxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceAddress != null" >
+        #{invoiceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicePhone != null" >
+        #{invoicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceBank != null" >
+        #{invoiceBank,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null" >
+        #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDefault != null" >
+        #{invoiceDefault,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceType != null" >
+        #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Invoice" >
+    update t_invoice
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="invoiceHead != null" >
+        invoice_head = #{invoiceHead,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        tax_number = #{taxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceAddress != null" >
+        invoice_address = #{invoiceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicePhone != null" >
+        invoice_phone = #{invoicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceBank != null" >
+        invoice_bank = #{invoiceBank,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceNumber != null" >
+        invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDefault != null" >
+        invoice_default = #{invoiceDefault,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type = #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateNoDefaultByUserId" parameterType="java.lang.Long" >
+    update t_invoice set invoice_default = 0
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="setDefault" parameterType="java.lang.Long" >
+    update t_invoice set invoice_default = 1
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </update>
+
+  <update id="setNoDefaultByInvoice" parameterType="com.soufang.model.Invoice" >
+    update t_invoice set invoice_default = 0
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Invoice" >
+    update t_invoice
+    set user_id = #{userId,jdbcType=BIGINT},
+      invoice_head = #{invoiceHead,jdbcType=VARCHAR},
+      tax_number = #{taxNumber,jdbcType=VARCHAR},
+      invoice_address = #{invoiceAddress,jdbcType=VARCHAR},
+      invoice_phone = #{invoicePhone,jdbcType=VARCHAR},
+      invoice_bank = #{invoiceBank,jdbcType=VARCHAR},
+      invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      invoice_default = #{invoiceDefault,jdbcType=INTEGER},
+      invoice_type = #{invoiceType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where invoice_id = #{invoiceId,jdbcType=BIGINT}
+  </update>
+</mapper>

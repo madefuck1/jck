@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.RoleModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.RoleModule" >
+    <id column="role_module_id" property="roleModuleId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="module_id" property="moduleId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_module_id, role_id, module_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_module
+    where role_module_id = #{roleModuleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_role_module
+    where role_module_id = #{roleModuleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.RoleModule" >
+    insert into t_role_module (role_module_id, role_id, module_id
+      )
+    values (#{roleModuleId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{moduleId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.RoleModule" >
+    insert into t_role_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleModuleId != null" >
+        role_module_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleModuleId != null" >
+        #{roleModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.RoleModule" >
+    update t_role_module
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleId != null" >
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where role_module_id = #{roleModuleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.RoleModule" >
+    update t_role_module
+    set role_id = #{roleId,jdbcType=BIGINT},
+      module_id = #{moduleId,jdbcType=BIGINT}
+    where role_module_id = #{roleModuleId,jdbcType=BIGINT}
+  </update>
+</mapper>

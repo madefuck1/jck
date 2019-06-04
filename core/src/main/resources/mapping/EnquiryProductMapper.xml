@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.EnquiryProductMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.EnquiryProduct" >
+    <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+    <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+    <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+    <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+    <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    enquiry_product_id, enquiry_number, product_name, product_assort, product_number, 
+    product_unit, product_image
+  </sql>
+
+
+  <select id="getByEnquiryNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_enquiry_product
+    where enquiry_number = #{enquiryNumber,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_enquiry_product
+    where enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_enquiry_product
+    where enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT}
+  </delete>
+  <delete id="delByEnquiryNum" parameterType="java.lang.String">
+    DELETE  FROM t_enquiry_product
+    where enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="delEnProImgUrl" parameterType="java.lang.Long">
+    UPDATE t_enquiry_product SET product_image="" WHERE enquiry_product_id=#{enquiryProductId}
+  </update>
+
+  <insert id="insert" parameterType="com.soufang.model.EnquiryProduct" >
+    insert into t_enquiry_product (enquiry_product_id, enquiry_number, product_name, 
+      product_assort, product_number, product_unit, 
+      product_image)
+    values (#{enquiryProductId,jdbcType=BIGINT}, #{enquiryNumber,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productAssort,jdbcType=BIGINT}, #{productNumber,jdbcType=BIGINT}, #{productUnit,jdbcType=VARCHAR}, 
+      #{productImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.EnquiryProduct" >
+    insert into t_enquiry_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enquiryProductId != null" >
+        enquiry_product_id,
+      </if>
+      <if test="enquiryNumber != null" >
+        enquiry_number,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productAssort != null" >
+        product_assort,
+      </if>
+      <if test="productNumber != null" >
+        product_number,
+      </if>
+      <if test="productUnit != null" >
+        product_unit,
+      </if>
+      <if test="productImage != null" >
+        product_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enquiryProductId != null" >
+        #{enquiryProductId,jdbcType=BIGINT},
+      </if>
+      <if test="enquiryNumber != null" >
+        #{enquiryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productAssort != null" >
+        #{productAssort,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null" >
+        #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productUnit != null" >
+        #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        #{productImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.EnquiryProduct" >
+    update t_enquiry_product
+    <set >
+      <if test="enquiryNumber != null" >
+        enquiry_number = #{enquiryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productAssort != null" >
+        product_assort = #{productAssort,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null" >
+        product_number = #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productUnit != null" >
+        product_unit = #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        product_image = #{productImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.EnquiryProduct" >
+    update t_enquiry_product
+    set enquiry_number = #{enquiryNumber,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_assort = #{productAssort,jdbcType=BIGINT},
+      product_number = #{productNumber,jdbcType=BIGINT},
+      product_unit = #{productUnit,jdbcType=VARCHAR},
+      product_image = #{productImage,jdbcType=VARCHAR}
+    where enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT}
+  </update>
+</mapper>

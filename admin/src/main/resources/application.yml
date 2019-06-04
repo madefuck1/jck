@@ -1,0 +1,29 @@
+server:
+   port: 9083
+
+spring:
+   application:
+       name: admin
+   freemarker:
+       template-loader-path: classpath:/templates/
+       prefix:
+       suffix: .html
+       ##是否允许使用request
+       allow-request-override: true
+       request-context-attribute: request
+       cache: false
+       check-template-location: true
+       charset: UTF-8
+       content-type: text/html;charset=UTF-8
+       expose-request-attributes: false
+       expose-session-attributes: false
+       expose-spring-macro-helpers: false
+
+eureka:
+   instance:
+       hostname: localhost
+   client:
+       serviceUrl:
+           defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+
+

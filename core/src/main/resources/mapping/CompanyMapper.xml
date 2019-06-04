@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Company" >
+    <id column="company_id" property="compId" jdbcType="BIGINT" />
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="company_name" property="compName" jdbcType="VARCHAR" />
+    <result column="company_address" property="compAddress" jdbcType="VARCHAR" />
+    <result column="company_linker" property="compLinker" jdbcType="VARCHAR" />
+    <result column="company_phone" property="compPhone" jdbcType="VARCHAR" />
+    <result column="company_urls" property="compUrls" jdbcType="VARCHAR" />
+    <result column="company_corporate" property="compCorporate" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="company_info" property="companyInfo" jdbcType="VARCHAR" />
+    <result column="bank_number" property="bankNumber" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="getByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select *
+    from t_company
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByComId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select *
+    from t_company
+    where company_id = #{compId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from t_company
+    where company_id = #{compId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="addCompany" parameterType="com.soufang.model.Company" >
+    insert into t_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="compId != null" >
+        company_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="compName != null" >
+        company_name,
+      </if>
+      <if test="compAddress != null" >
+        company_address,
+      </if>
+      <if test="compLinker != null" >
+        company_linker,
+      </if>
+      <if test="compPhone != null" >
+        company_phone,
+      </if>
+      <if test="compUrls != null" >
+        company_urls,
+      </if>
+      <if test="compCorporate != null" >
+        company_corporate,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="companyInfo != null" >
+        company_info,
+      </if>
+      <if test="bankNumber != null" >
+        bank_number,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="compId != null" >
+        #{compId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="compName != null" >
+        #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="compAddress != null" >
+        #{compAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="compLinker != null" >
+        #{compLinker,jdbcType=VARCHAR},
+      </if>
+      <if test="compPhone != null" >
+        #{compPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="compUrls != null" >
+        #{compUrls,jdbcType=VARCHAR},
+      </if>
+      <if test="compCorporate != null" >
+        #{compCorporate,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInfo != null" >
+        #{companyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateCompany" parameterType="com.soufang.model.Company">
+  update t_company
+  <set >
+    <if test="compId != null" >
+      company_id = #{compId,jdbcType=BIGINT},
+    </if>
+    <if test="userId != null" >
+      user_id = #{userId,jdbcType=BIGINT},
+    </if>
+    <if test="compName != null" >
+      company_name = #{compName,jdbcType=VARCHAR},
+    </if>
+    <if test="compAddress != null" >
+      company_address = #{compAddress,jdbcType=VARCHAR},
+    </if>
+    <if test="compLinker != null" >
+      company_linker = #{compLinker,jdbcType=VARCHAR},
+    </if>
+    <if test="compPhone != null" >
+      company_phone = #{compPhone,jdbcType=VARCHAR},
+    </if>
+    <if test="compUrls != null" >
+      company_urls = #{compUrls,jdbcType=VARCHAR},
+    </if>
+    <if test="compCorporate != null" >
+      company_corporate = #{compCorporate,jdbcType=VARCHAR},
+    </if>
+    <if test="bank != null" >
+      bank = #{bank,jdbcType=VARCHAR},
+    </if>
+    <if test="companyInfo != null" >
+      company_info = #{companyInfo,jdbcType=VARCHAR},
+    </if>
+    <if test="bankNumber != null" >
+      bank_number = #{bankNumber,jdbcType=VARCHAR},
+    </if>
+    <if test="longitude != null" >
+      longitude = #{longitude,jdbcType=VARCHAR},
+    </if>
+    <if test="latitude != null" >
+      latitude = #{latitude,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null" >
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+    </if>
+  </set>
+  where company_id = #{compId,jdbcType=BIGINT}
+</update>
+
+  <update id="updateCompanyByUserId" parameterType="com.soufang.model.Company">
+    update t_company
+    <set >
+      <if test="compId != null" >
+        company_id = #{compId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="compName != null" >
+        company_name = #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="compAddress != null" >
+        company_address = #{compAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="compLinker != null" >
+        company_linker = #{compLinker,jdbcType=VARCHAR},
+      </if>
+      <if test="compPhone != null" >
+        company_phone = #{compPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="compUrls != null" >
+        company_urls = #{compUrls,jdbcType=VARCHAR},
+      </if>
+      <if test="compCorporate != null" >
+        company_corporate = #{compCorporate,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInfo != null" >
+        company_info = #{companyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNumber != null" >
+        bank_number = #{bankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getList" parameterType="com.soufang.model.Company" resultMap="BaseResultMap">
+    select * from t_dictionary where 1=1
+    <if test="dictKDescription != null and dictKDescription != ''">
+      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
+    </if>
+    <if test="dictVDescription != null and dictVDescription = ''">
+      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
+    </if>
+    order by company_name desc
+  </select>
+
+  <select id="getCount" parameterType="com.soufang.model.Company" resultType="java.lang.Integer">
+    select count(1) from t_dictionary where 1=1
+    <if test="dictKDescription != null and dictKDescription != ''">
+      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
+    </if>
+    <if test="dictVDescription != null and dictVDescription = ''">
+      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
+    </if>
+  </select>
+</mapper>

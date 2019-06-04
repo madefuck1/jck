@@ -1,0 +1,97 @@
+<@override name="title">
+订单详情
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/jsstyle.css" rel="stylesheet" type="text/css">
+<style>
+    .pay{
+
+    }
+    .pay img{
+        width: 95px;
+        height: auto;
+        margin: 0px 32px;
+    }
+    .pay-list li{
+        border: 1px solid #E6E6E6;
+    }
+    .logistics{
+        width: 100%;
+        margin: 20px 10px;
+        height: 80px;
+    }
+    .pay_position{
+        position: relative;
+        bottom: 21px;
+        left: 21px;
+    }
+    .pay-list{
+        width: 100%;
+        height: auto;
+    }
+    .payment p,.payment a{
+        margin-left: 20px;
+        font-weight: bold;
+
+    }
+    .payment p span{
+        color: #F58022;
+        font-size: 16px;
+
+    }
+    .center{
+        margin-top: 0px;
+    }
+    .col-main{
+        padding-top: 0px;
+    }
+    .am-padding{
+        padding-top: 0px;
+        margin: 0px;
+    }
+</style>
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="user-orderinfo payment" style="height: 600px;">
+
+            <!--标题 -->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg" style="font-size: 16px;font-weight: bold;">选择支付方式</strong> </div>
+            </div>
+
+            <div class="logistics">
+
+                <ul class="pay-list">
+
+                    <li class="pay qq">
+                        <input type="radio" name="doc-radio-1" value="option1" class="pay_position">
+                        <img src="${contextPath}/images/weizhifu.jpg" />
+
+                    </li>
+                    <li class="pay taobao">
+                        <input type="radio" name="doc-radio-1" value="option1" class="pay_position">
+                        <img src="${contextPath}/images/zhifubao.jpg" />
+
+                    </li>
+                </ul>
+            </div>
+            <p>需付款 :<span>￥2113.00</span></p>
+            <a href="../home/05 success.html"><button type="button" class="am-btn am-btn-warning"  style="margin-top: 20px;">立即付款</button></a>
+            <!--底部-->
+    <#include "/common/includes/include.footer.html"/>
+    </div>
+
+</div>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

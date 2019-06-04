@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ShopCarProductMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.ShopCarProduct" >
+    <id column="shop_car_product_id" property="shopCarProductId" jdbcType="BIGINT" />
+    <result column="shop_car_id" property="shopCarId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+    <result column="product_number" property="productNumber" jdbcType="DECIMAL" />
+    <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+    <result column="product_spec" property="productSpec" jdbcType="VARCHAR" />
+    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+    <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+    <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_car_product_id, shop_car_id, product_id, product_number, product_unit, product_spec, 
+    product_color
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" /> ,GetProductNameById(product_id) as product_name,
+    GetProductImageById(product_id) as product_image
+    ,GetProductPriceById(product_id,product_spec,product_number) as product_price
+    from t_shop_car_product
+    where shop_car_product_id = #{shopCarProductId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_shop_car_product
+    where shop_car_product_id = #{shopCarProductId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.ShopCarProduct" >
+    insert into t_shop_car_product (shop_car_product_id, shop_car_id, product_id, 
+      product_number, product_unit, product_spec, 
+      product_color)
+    values (#{shopCarProductId,jdbcType=BIGINT}, #{shopCarId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{productNumber,jdbcType=DECIMAL}, #{productUnit,jdbcType=VARCHAR}, #{productSpec,jdbcType=VARCHAR}, 
+      #{productColor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.ShopCarProduct" >
+    insert into t_shop_car_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopCarProductId != null" >
+        shop_car_product_id,
+      </if>
+      <if test="shopCarId != null" >
+        shop_car_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productNumber != null" >
+        product_number,
+      </if>
+      <if test="productUnit != null" >
+        product_unit,
+      </if>
+      <if test="productSpec != null" >
+        product_spec,
+      </if>
+      <if test="productColor != null" >
+        product_color,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopCarProductId != null" >
+        #{shopCarProductId,jdbcType=BIGINT},
+      </if>
+      <if test="shopCarId != null" >
+        #{shopCarId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null" >
+        #{productNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="productUnit != null" >
+        #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpec != null" >
+        #{productSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null" >
+        #{productColor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.ShopCarProduct" >
+    update t_shop_car_product
+    <set >
+      <if test="shopCarId != null" >
+        shop_car_id = #{shopCarId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null" >
+        product_number = #{productNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="productUnit != null" >
+        product_unit = #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpec != null" >
+        product_spec = #{productSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null" >
+        product_color = #{productColor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_car_product_id = #{shopCarProductId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.ShopCarProduct" >
+    update t_shop_car_product
+    set shop_car_id = #{shopCarId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_number = #{productNumber,jdbcType=DECIMAL},
+      product_unit = #{productUnit,jdbcType=VARCHAR},
+      product_spec = #{productSpec,jdbcType=VARCHAR},
+      product_color = #{productColor,jdbcType=VARCHAR}
+    where shop_car_product_id = #{shopCarProductId,jdbcType=BIGINT}
+  </update>
+
+  <select id="isExistProduct" parameterType="com.soufang.base.dto.shopCar.ShopCarProductDto" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from t_shop_car_product
+    where shop_car_id = #{shopCarId} and product_id =#{productId}
+      and product_spec =#{productSpec} and product_color = #{productColor}
+  </select>
+
+
+</mapper>

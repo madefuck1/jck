@@ -1,0 +1,135 @@
+<@override name="title">
+个人资料
+</@override>
+
+<@override name="css">
+
+<link href="../css/infstyle.css" rel="stylesheet" type="text/css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-info">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong>
+                    </div>
+                </div>
+                <hr/>
+                <!--头像 -->
+                <div class="user-infoPic">
+
+                    <div class="filePic">
+                        <input type="file" class="inputPic" id="doc-form-file" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
+                        <#if userInfo.userAvatar??>
+                        <img class="am-circle am-img-thumbnail" src="${userInfo.userAvatar}" alt=""/>
+                        <#else>
+                        <img class="am-circle am-img-thumbnail" src="${contextPath}/images/getAvatar.do.jpg" alt=""/>
+                        </#if>
+                    </div>
+                    <p class="am-form-help">头像</p>
+                    <div class="info-m">
+                        <div><b>用户名：<i>${userInfo.userName}</i></b></div>
+                        <div class="vip">
+                            <span></span><a href="#">会员专享</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--个人信息 -->
+                <div class="info-main">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label for="user-name2" class="am-form-label">昵称</label>
+                            <div class="am-form-content">
+                                <input type="text" id="user-name2" placeholder="nickname" value="${userInfo.userName}">
+                                <small>昵称长度不能超过40个汉字</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-form-label">姓名</label>
+                            <div class="am-form-content">
+                                <input type="text" id="user-name" placeholder="name" value="${userInfo.realName}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-form-label">电话</label>
+                            <div class="am-form-content">
+                                <input id="user-phone" value="${userInfo.phone}" placeholder="telephonenumber" type="tel">
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-form-label">电子邮件</label>
+                            <div class="am-form-content">
+                                <input id="user-email" value="${userInfo.email}" placeholder="Email" type="email">
+                            </div>
+                        </div>
+                        <div class="info-btn">
+                            <div class="am-btn am-btn-warning" onclick="updateInformation()">保存修改</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--底部-->
+        <#include "/common/includes/include.footer.html"/>
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+
+    var formData;
+    var file;
+    //上传图片
+    $('#doc-form-file').on('change', function () {
+        file = this.files[0];
+        var fileName = file.name;
+        var fileType = fileName.substr(fileName.length - 4, fileName.length);
+        if (fileType == '.gif' || fileType == '.jpeg' || fileType == '.jpg' || fileType == '.png' || fileType == '.bmp') {
+            formData = new FormData()
+            formData.append("file", file);
+        } else {
+            alert('文件类型不正确');
+        }
+    });
+
+    //保存修改信息
+    function updateInformation() {
+        //上传图片
+        formData = new FormData()
+        formData.append("file", file);
+        formData.append("userName", $("#user-name2").val());
+        formData.append("realName", $("#user-name").val());
+        formData.append("phone", $("#user-phone").val());
+        formData.append("email", $("#user-email").val());
+        $.ajax({
+            url: 'updateInformation',
+            type: 'post',
+            cache: false,
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                //上传成功的处理
+                if (data.success) {
+                    alert(data.message)
+                    window.location.href = "/personalCenter/toInformation";
+                } else {
+                    alert("编辑失败:" + data.message)
+                }
+            },
+        });
+    }
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

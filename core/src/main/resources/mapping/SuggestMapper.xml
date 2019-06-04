@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.SuggestMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Suggest" >
+    <id column="suggest_id" property="sugId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="suggest_content" property="sugContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="renturn_content" property="renContent" jdbcType="VARCHAR" />
+    <result column="return_time" property="returnTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="SuggestDtoMap" type="com.soufang.base.dto.suggest.SuggestDto" >
+    <id column="suggest_id" property="sugId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="suggest_content" property="sugContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="renturn_content" property="renContent" jdbcType="VARCHAR" />
+    <result column="return_time" property="returnTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="getList" resultMap="SuggestDtoMap" ><!--parameterType="com.soufang.model.Suggest"-->
+    select * from t_suggest where 1=1
+    order by create_time desc
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" > <!-- parameterType="com.soufang.model.News"-->
+    select count(1) from t_suggest where 1=1
+  </select>
+
+  <select id="getSuggest" resultMap="SuggestDtoMap" parameterType="java.lang.Long" >
+    select * from t_suggest where suggest_id = #{id}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from t_suggest
+    where suggest_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="addSuggest" parameterType="com.soufang.model.Suggest" >
+    insert into t_suggest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sugId != null" >
+        suggest_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sugContent != null" >
+        suggest_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="renContent != null" >
+        renturn_content,
+      </if>
+      <if test="returnTime != null" >
+        return_time
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sugId != null " >
+        #{sugId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sugContent != null" >
+        #{sugContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="renContent != null" >
+        #{renContent,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </insert>
+
+  <update id="addReturn" parameterType="com.soufang.model.Suggest" >
+    update t_suggest
+    <set >
+      <if test="renContent != null" >
+        renturn_content =  #{renContent,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        return_time = #{returnTime,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where suggest_id = #{sugId,jdbcType=BIGINT}
+  </update>
+
+</mapper>

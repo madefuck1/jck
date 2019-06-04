@@ -1,0 +1,66 @@
+<@override name="title">
+新增菜单
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form" >
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名</label>
+            <div class="layui-input-inline">
+                <input name="roleName" id="roleName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">角色介绍</label>
+            <div class="layui-input-inline">
+                <input name="roleIntro" id="roleIntro" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+        </div>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    function submitForm(){
+        var data = '{"roleName":"'+$("#roleName").val()+'","roleIntro":"'+$('#roleIntro').val()+'"}' ;
+        $.ajax({
+            url: "/admin/roleModule/addRole",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.msg(data.msg,{},function () {
+                        window.parent.location.href = '/admin/roleModule/toRoleList' ;
+                    })
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

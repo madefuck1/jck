@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ContractMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Contract" >
+    <id column="contract_id" property="contractId" jdbcType="BIGINT" />
+    <result column="contract_down_url" property="contractDownUrl" jdbcType="VARCHAR" />
+    <result column="contract_upload_url" property="contractUploadUrl" jdbcType="VARCHAR" />
+    <result column="contract_status" property="contractStatus" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="order_shop_id" property="orderShopId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="contract_reason" property="contractReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contract_id, contract_down_url, contract_upload_url, contract_status, order_number, 
+    order_shop_id, create_time, confirm_time, contract_reason
+  </sql>
+
+  <select id="selectByOrderNumberAndOrderShopId" parameterType="com.soufang.model.Contract" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_contract
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+    and  order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_contract
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_contract
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Contract" >
+    insert into t_contract (contract_id, contract_down_url, contract_upload_url, 
+      contract_status, order_number, order_shop_id, 
+      create_time, confirm_time, contract_reason
+      )
+    values (#{contractId,jdbcType=BIGINT}, #{contractDownUrl,jdbcType=VARCHAR}, #{contractUploadUrl,jdbcType=VARCHAR}, 
+      #{contractStatus,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderShopId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, #{contractReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Contract" >
+    insert into t_contract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="contractDownUrl != null" >
+        contract_down_url,
+      </if>
+      <if test="contractUploadUrl != null" >
+        contract_upload_url,
+      </if>
+      <if test="contractStatus != null" >
+        contract_status,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderShopId != null" >
+        order_shop_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time,
+      </if>
+      <if test="contractReason != null" >
+        contract_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="contractDownUrl != null" >
+        #{contractDownUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractUploadUrl != null" >
+        #{contractUploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStatus != null" >
+        #{contractStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderShopId != null" >
+        #{orderShopId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractReason != null" >
+        #{contractReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Contract" >
+    update t_contract
+    <set >
+      <if test="contractDownUrl != null" >
+        contract_down_url = #{contractDownUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractUploadUrl != null" >
+        contract_upload_url = #{contractUploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStatus != null" >
+        contract_status = #{contractStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderShopId != null" >
+        order_shop_id = #{orderShopId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractReason != null" >
+        contract_reason = #{contractReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Contract" >
+    update t_contract
+    set contract_down_url = #{contractDownUrl,jdbcType=VARCHAR},
+      contract_upload_url = #{contractUploadUrl,jdbcType=VARCHAR},
+      contract_status = #{contractStatus,jdbcType=INTEGER},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      order_shop_id = #{orderShopId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      contract_reason = #{contractReason,jdbcType=VARCHAR}
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </update>
+</mapper>

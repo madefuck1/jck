@@ -1,0 +1,323 @@
+<@override name="title">
+新增字段
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<form class="layui-form" id="fromId" action="#">
+    <input class="" type="hidden" value="2" id="userId"></input>
+    <div class="layui-form" >
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">询盘标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="enquiryTitle" id="enquiryTitle" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">采购日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="strTakeDate" id="strTakeDate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <!--<div class="layui-form-item">
+            <div class="layui-inline" type="hidden">
+                <label class="layui-form-label">发布人ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="userId" id="userId" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>-->
+        <!--<script type="text/html" id="toolbarDemo">
+            <div align="left" class="layui-btn-container">
+                <button id="addTable" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加行</button>
+            </div>
+        </script>-->
+        <script type="text/html" id="bar">
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="add">添加商品</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+
+        <script type="text/html" id="proAssort">
+            <select lay-filter="selDome" class="selectDemo" name="selectAssortName" lay-ignore onchange="selectAssort(this)">
+                <option value="">请选择</option>
+            </select>
+        </script>
+        <table id="productTable" lay-filter="tableFilter"></table>
+
+        <script type="text/html" id="uploadImgTable">
+            <div class="layui-upload">
+            <button type="button" class="layui-btn" id="uploadImg" lay-event="uploadImg">上传图片</button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="de">
+                <p id="demoText"></p>
+            </div>
+            </div>
+        </script>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">询盘类型</label>
+            <div class="layui-input-inline">
+                <select name="strEnquiryType" id="strEnquiryType" lay-filter="strEnquiryType">
+                    <option value="0"selected="">类型1</option>
+                    <option value="1" >类型2</option>
+                    <option value="2">类型3</option>
+                </select>
+            </div>
+            <label class="layui-form-label">询盘状态</label>
+            <div class="layui-input-inline">
+                <select name="strEnquiryStatus" id="strEnquiryStatus" lay-filter="strEnquiryStatus">
+                    <option value="0"selected="">已发布状态</option>
+                    <option value="1" >禁止报价状态</option>
+                    <option value="2">状态3</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">收货人地址</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="takeAddress" id="takeAddress" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">收货人姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="takeName" id="takeName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">收货人电话</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="takePhone" id="takePhone" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截至日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="strEndTime" id="strEndTime" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">询盘备注: </label>
+            <div class="layui-input-block">
+                <textarea  class="layui-textarea" id="enquiryRemark" ></textarea>
+            </div>
+        </div>
+        <!--<div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>-->
+        <div class="layui-form-item" style="margin-top: 30px;text-align: center;">
+            <button class="layui-btn" lay-submit="" lay-filter="*">保存</button>
+            <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary">返回</a>
+        </div>
+    </div>
+</form>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    var tabledata;
+    var demoData;
+    var table;
+    function selectAssort(obj) {
+        demoData = table.cache["productTable"];
+        var dataindex = $(obj).parents("tr").attr("data-index")
+
+        demoData[dataindex]['assortId'] = $(obj).val();
+        demoData[dataindex]['assortName'] = $(obj).find("option:selected").text();
+
+    }
+    layui.use(['form', 'layedit', 'upload','table','laydate'], function() {
+        table = layui.table;
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            ,upload = layui.upload;
+
+        //日期
+        laydate.render({
+            elem: '#strTakeDate'
+        });
+        laydate.render({
+            elem: '#strEndTime'
+        });
+
+        table.render({
+            elem: '#productTable'
+            , toolbar: '#toolbarDemo'
+            , defaultToolbar: []
+            , limit: 100
+            , cols: [[ //表头
+                {field: 'productName', title: '商品名称', edit: 'text'}
+                ,{field: 'assortId', title: '类别id', hide: true}
+                , {field: 'assortName', title: '类别名', templet:'#proAssort',align:'center'}
+                , {field: 'productNumber', title: '购买数量', edit: 'text'}
+                , {field: 'productUnit', title: '单位', edit: 'text'}
+                , {field: 'productImg', title: '图片上传',toolbar: '#uploadImgTable',align:'center'}
+                , {title: '操作', align: 'center', toolbar: '#bar'}
+            ]]
+            , data: [{
+                'productName': ''
+                ,'assortId':''
+                , 'assortName': ''
+                , 'productNumber': ''
+                , 'productUnit': ''
+                , 'productImg': ''
+            }]
+        });
+        $.ajax({
+            url: "/admin/enquiry/getAssortIdName",
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                var option = "<option value=''>请选择</option>";
+                $.each(data, function (index, item) {
+                    option += ("<option value='" + item.assortId + "'>" + item.assortName + "</option>");// 下拉菜单里添加元素
+                });
+                $('[name = selectAssortName]').empty();
+                $('[name = selectAssortName]').append(option);
+            }
+        });
+
+
+        //监听工具条
+        table.on('tool(tableFilter)', function (obj) {
+            if (obj.event === 'del') {
+                obj.del();
+            }else if(obj.event === 'add'){
+                tabledata = table.cache["productTable"];
+                tabledata.push({
+                    'productName': ''
+                    ,'assortId':''
+                    , 'assortName': ''
+                    , 'productNumber': ''
+                    , 'productUnit': ''
+                    , 'productImg': ''
+                });
+                table.reload('productTable', {
+                    data: tabledata
+                });
+                $.ajax({
+                    url: "/admin/enquiry/getAssortIdName",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (data) {
+                        var option = "<option value=''>请选择</option>";
+                        $.each(data, function (index, item) {
+                            option += ("<option value='" + item.assortId + "'>" + item.assortName + "</option>");// 下拉菜单里添加元素
+                        });
+                        $('[name = selectAssortName]').empty();
+                        $('[name = selectAssortName]').append(option);
+
+                    }
+                });
+                $('[layer-id=demo] tr').each(function () {
+                    var trJq = $(this);
+                    var dataIndex = trJq.attr("data-index");
+                    trJq.find("td").each(function () {
+                        var tdJq = $(this);
+                        //更新select数据
+                        var selectJq = tdJq.find("select");
+                        if (selectJq.length == 1) {
+                            selectJq.eq(0).val(demoData[dataIndex]['assortId'])
+                        }
+                    });
+                });
+            }
+            else if(obj.event === 'uploadImg'){
+                //图片上传
+                var uploadInst = upload.render({
+                    elem: '#uploadImg'
+                    , url: '/admin/'
+                    , before: function (obj) {
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function (index, file, result) {
+                            $('#de').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    , done: function (res) {
+                        //如果上传失败
+                        if (res.code > 0) {
+                            return layer.msg('上传失败');
+                        }else if(res.code == 0){
+                            return layer.msg('上传成功');
+                        }
+
+                    }
+                    , error: function () {
+                        //失败状态，并实现重传
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                        demoText.find('.demo-reload').on('click', function () {
+                            uploadInst.upload();
+                        });
+                    }
+                });
+            }
+        })
+
+        form.on('submit(*)', function (data) {
+            demoData = table.cache["productTable"];
+            // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+            // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            //  console.log(tabledata) //当前容器的全部表单字段，名值对形式：{name: value}
+            console.log(demoData);
+            var param={
+                userId:$("#userId").val(),
+                enquiryTitle:$("#enquiryTitle").val(),
+                strTakeDate:$('#strTakeDate').val(),
+                strEnquiryType:$('#strEnquiryType').val(),
+                strEnquiryStatus:$('#strEnquiryStatus').val(),
+                takeAddress:$('#takeAddress').val(),
+                takeName:$('#takeName').val(),
+                takePhone:$('#takePhone').val(),
+                strEndTime:$('#strEndTime').val(),
+                enquiryRemark:$('#enquiryRemark').val(),
+                table:demoData
+            }
+            // var enquiry = '{"enquiryTitle":"'+$("#enquiryTitle").val()+'","strTakeDate":"'+$('#strTakeDate').val()
+            //     +'","strEnquiryType":"'+$('#strEnquiryType').val()+'","strEnquiryStatus":"'+$('#strEnquiryStatus').val()
+            //     +'","takeAddress":"'+$('#takeAddress').val()+'","takeName":"'+$('#takeName').val()+'","takePhone":"'+$('#takePhone').val()
+            //     +'","strEndTime":"'+$('#strEndTime').val()+'","enquiryRemark":"'+$('#enquiryRemark').val()+ '","table":"'+JSON.stringify(demoData)+'"}' ;
+            console.log(param);
+            $.ajax({
+                url: "addEnquiry",
+                async: true,
+                type: "post",
+                data: JSON.stringify(param) ,
+                //data: enquiry + 'tableData=' + JSON.stringify(demoData),
+                contentType:'application/json',
+                success: function (data) {
+                    if (typeof (data) == 'string') {
+                        data = JSON.parse(data)
+                    }
+                    if (data.code == 0) {
+                        layer.msg(data.msg);
+                        window.parent.location.href = "toList";
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+    });
+</script>
+
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

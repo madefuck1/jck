@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin: 0;padding: 0;list-style: none;border: none;}
+body{
+	font-size: 14px;
+}
+a{
+	
+	color: #999;
+	text-decoration: none;
+}
+a:hover{
+	
+	color: #F58022;
+}
+
+#nav_seller{
+	width: 100%;
+	height: 30px;
+	margin: 0 auto;
+	line-height: 30px;
+	background: #F5F5F5;
+}
+.nav_in{
+	width: 1190px;
+	height: 30px;
+	margin: 0 auto;
+}
+
+.nav_in .left{
+	float: left;
+}
+
+.nav_in .right{
+	float: right;
+}
+
+.nav_in .right div{
+	float: left;
+	margin-right: 20px;
+}
+
+.right a{
+	display: inline-block;
+	float: left;
+}
+.icon{
+	width: 12px;
+	height:4px;
+	background: url(../../images/sprites.png) no-repeat;
+	display: inline-block;
+}
+.icon1{
+	background-position: 6px -240px;
+}
+.left p{
+	color: #999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

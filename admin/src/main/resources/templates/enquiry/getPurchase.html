@@ -1,0 +1,59 @@
+<@override name="title">
+商品信息
+</@override>
+
+<@override name="css">
+</@override>
+<@override name="body">
+<h3>商家报价信息列表</h3>
+<#list purchaseDtoList as purchaseDto>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">报价单号：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.purchaseNumber}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">店铺名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.shopName}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">商品单价：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.unitPrice}" class="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">商品总价：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.sumPrice}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">能否提供：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.strOfferStatus}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${purchaseDto.strOfferTime}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+</#list>
+
+<div class="layui-input-block" >
+    <button class="layui-btn" lay-submit type="button" onclick="returnBack()">返回上一页</button>
+</div>
+
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    function returnBack() {
+        window.location.href = "javascript:history.go(-1)";
+    }
+
+    function checkvalue(id) {
+        window.location.href = "checkvalue/"+id;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

@@ -1,0 +1,121 @@
+<@override name="title">
+修改新闻
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<form>
+<div class="layui-form" >
+    <input type="hidden" id="newsId" value="${newsDto.id}">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-inline">
+                <input type="text" name="news_title" id="news_title" value="${newsDto.title}" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">作者</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="news_author" id="news_author" value="${newsDto.author}" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div >
+            <label class="layui-form-label">内容</label>
+        </div>
+        <div class="layui-input-block">
+            <textarea  id="newsContent" name="newsContent" style="display: none;">${newsDto.content}</textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">来源</label>
+            <div class="layui-input-inline">
+                <input type="text" name="news_origin" id="news_origin" value="${newsDto.origin}" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+</form>
+</@override>
+
+<@override name="js">
+<script>
+    var indexs;
+    //建立编辑器
+    var layedit;
+    layui.use('layedit', function(){
+        layedit = layui.layedit
+            ,$ = layui.jquery
+        layedit.set({
+            uploadImage:{
+                url: ''
+                ,type:'post'
+            }
+        })
+        //设置自定义工具栏
+        indexs = layedit.build('newsContent',
+            {
+                height: 180 ,//设置文本域高度
+                tool: ['left', 'center', 'right', '|', 'face','image','strong','italic','del','help'],//设置文本工具
+            });
+        /*indexs = layedit.build('sugContent');//建立编辑器*/
+
+        layedit.sync(indexs);
+
+    });
+
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    function submitForm(){
+        var myContent = layedit.getContent(indexs);
+        myContent = myContent.replace(/\"/g,"'");
+
+        var data = '{"title":"'+$('#news_title').val()+'","author":"'+$('#news_author').val()+'","content":"'+myContent+'","origin":"'+$('#news_origin').val()+'","id":'+$('#newsId').val()+'}' ;
+        $.ajax({
+            url: "updateNews",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = '/admin/news/toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

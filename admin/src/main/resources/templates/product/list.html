@@ -1,0 +1,196 @@
+<@override name="title">
+订单管理
+</@override>
+
+<@override name="css">
+</@override>
+<@override name="body">
+<body>
+<div class="layui-form">
+    <h3>搜索条件</h3>
+    <div class="demoTable" style="padding-top: 10px;padding-left: 10px">
+        <label class="layui-inline" style="padding-left: 20px">店铺名称</label>
+        <div class="layui-inline">
+            <select name="shopId" id="shopId" lay-verify="" lay-search>
+                <option value="">请选择</option>
+            </select>
+        </div>
+        <label class="layui-inline" style="padding-left: 20px">产品名称</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+        </div>
+        <label class="layui-inline" style="padding-left: 20px">所属分类</label>
+        <div class="layui-inline">
+            <input type="text" id="assortId" lay-filter="tree" class="layui-input">
+        </div>
+        <label class="layui-inline" style="padding-left: 20px">是否上架</label>
+        <div class="layui-inline">
+            <select name="isUpper" id="isUpper">
+                <option value="">请选择</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload" style="padding-left: 10px">搜索</button>
+    </div>
+</div>
+<div class="demoTable" style="padding-top: 10px">
+    <h3>订单管理</h3>
+    <div class="demoTable" style="padding-top: 10px;padding-left: 5px">
+        <table class="layui-hide" id="list" lay-filter="list"></table>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    layui.config({
+        base: '${contextPath}/layui/lay/modules/'
+    }).extend({
+        treeSelect: 'treeSelect'
+    });
+
+    layui.use(['table','form','treeSelect'], function () {
+        var table = layui.table;
+        var form = layui.form ;
+        var treeSelect= layui.treeSelect;
+        initSelect(form);
+
+
+        treeSelect.render({
+            // 选择器
+            elem: '#assortId',
+            // 数据
+            data: '/admin/commonPullDown/getAssortIdAndName',
+            // 异步加载方式：get/post，默认get
+            type: 'get',
+            // 占位符
+            placeholder: '请选择',
+            search: false,
+            style:{
+                folder:{enable: false},
+                line:{enable: true}
+            },
+            // 点击回调
+            click: function(d){
+                $('#assortId').val(d.current.id);
+            },
+            // 加载完成后的回调函数
+            success: function (d) {
+                //选中节点，根据id筛选
+                //treeSelect.checkNode('tree', 3);
+            }
+        });
+
+        table.render({
+            elem: '#list'
+            , id: "list"
+            , url: 'productList'
+            , title: '产品列表信息'
+            //,method: 'post' //如果无需自定义HTTP类型，可不加该参数
+            //,request: {} //如果无需自定义请求参数，可不加该参数
+            , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 1 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页
+            }
+            , cols: [[
+                {field: 'shopName', title: '店铺名称'}
+                , {field: 'productName', title: '产品名称'}
+                , {
+                    field: 'isUpper', title: '是否上架',
+                    templet: function (e) {
+                        switch (e.isUpper) {
+                            case 0:
+                                return "否";
+                            case 1:
+                                return "是";
+                            default:
+                                break;
+                        }
+                    }
+                }
+                , {field: 'assortName', title: '所属分类'}
+                , {field: 'kv1', title: '主要属性1'}
+                , {field: 'kv2', title: '主要属性2'}
+                , {field: 'kv3', title: '主要属性3'}
+                , {field: 'kv4', title: '主要属性4'}
+                , {field: 'kv5', title: '主要属性5'}
+                , {
+                    field: 'button', title: '操作',
+                    templet: function (e) {
+                        var html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="open_detail(' + e.productId + ')">详情</a>';
+                        html += '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="update(' + e.productId + ')">禁用</a >';
+                        return html;
+                    }
+                }
+            ]]
+        });
+
+        //重载表格
+        var $ = layui.$, active = {
+            reload: function () {
+                //执行重载
+                table.reload('list', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        shopId: $('#shopId').val()
+                        , productName: $('#productName').val()
+                        , shopId: $('#shopId').val()
+                        , assortId: $('#assortId').val()
+                        , isUpper: $('#isUpper').val()
+                    }
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    })
+
+    function initSelect(form){
+        $.ajax({
+            url: '/admin/commonPullDown/getShopIdAndName',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $("#shopId").append(new Option(item.shopName, item.shopId));// 下拉菜单里添加元素
+                });
+                form.render("select");
+            }
+        });
+    }
+
+    function open_detail(id) {
+        window.location.href = "openDetail/" + id ;
+    }
+
+    // 禁用产品
+    function update(id) {
+        $.ajax({
+            url: "updateById/" + id,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg, {}, function () {
+                        window.location.href = 'productList';
+                    })
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

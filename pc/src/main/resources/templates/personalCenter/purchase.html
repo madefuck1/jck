@@ -1,0 +1,328 @@
+<@override name="title">
+发布求购-新增/编辑
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/purch.css">
+<link rel="stylesheet" href="../../../resources/static/css/infstyle.css">
+</@override>
+<@override name="body">
+		<!--头 -->
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-info">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg" id="titleName"></strong> <small>Publish&nbsp;Purchase</small></div>
+						</div>
+						<hr/>
+
+						<!--头像 -->
+					
+
+						<!--个人信息 --> 
+
+
+						<div class="info-main">
+							<form class="am-form am-form-horizontal" id="form" method="post">
+
+								<div class="am-form-group">
+									<label for="user-name2" class="am-form-label">求购标题</label>
+									<div class="am-form-content">
+										<input type="text" id="enquiryTitle" name="enquiryTitle" placeholder="求购标题">
+                                          <small>昵称长度不能超过40个汉字</small>
+									</div>
+								</div>
+
+								<div class="am-form-group pur_height">
+									<label for="user-name" class="am-form-label">编号</label>
+									<div class="am-form-content">
+										<p>
+											<input type="text" id="enquiryNumber" name="enquiryNumber" readonly="readonly">
+										</p>
+                                         
+									</div>
+								</div>
+								<div class="am-form-group pur_height">
+									<label for="user-name" class="am-form-label">发布时间</label>
+									<div class="am-form-content">
+										<p id="createTime" name="createTime"></p>
+									</div>
+								</div>
+						
+								<div class="am-form-group pur_height">
+									<label for="user-name" class="am-form-label">交付时间</label>
+									<div class="am-form-content birth-select2">
+										<input type="text" id="takeDate" name="takeDate" class="am-form-field am-selected" placeholder="日历组件" data-am-datepicker readonly required />
+									</div>
+								</div>
+								<div class="am-form-group pur_height">
+									<label for="user-name" class="am-form-label">求购状态</label>
+									<div class="am-form-content">
+										<p id="enquiryStatus" name="enquiryStatus" value="求购中"></p>
+                                         
+									</div>
+								</div>
+								<div class="am-form-group am-form-group-height">
+									<label for="user-name" class="am-form-label">求购图片</label>
+									<div class="am-form-content">
+										<p class="cardpic" id="productImage" name="productImage" value="productImage"></p>
+									</div>
+								</div>
+								<div class="am-form-group pur_height">
+											<label for="user-address" class="am-form-label">求购量</label>
+											<div class="am-form-content address">
+												<input type="text" class="pur_m" id="productNumber" name="productNumber" placeholder="请填写数量">
+												<select data-am-selected id="productUnit" name="productUnit">
+													<option value="a">米</option>
+													<option value="b" selected>公斤</option>
+												</select>
+												
+											</div>
+										</div>
+								<div class="am-form-group pur_height">
+											<label for="user-address" class="am-form-label">交货地点</label>
+											<div class="am-form-content address">
+												<select data-am-selected name="province" id="province">
+													<option value="a">浙江省</option>
+													<option value="b" selected>湖北省</option>
+												</select>
+												<select data-am-selected name="city" id="city">
+													<option value="a">温州市</option>
+													<option value="b" selected>武汉市</option>
+												</select>
+												<select data-am-selected name="county" id="county">
+													<option value="a">瑞安区</option>
+													<option value="b" selected>洪山区</option>
+												</select>
+											</div>
+										</div>
+								
+								<div class="am-form-group pur_height">
+									<label for="user-email" class="am-form-label">详细地址</label>
+									<div class="am-form-content">
+										<input  placeholder="如街道，门牌号等" type="text" name="detailStreet" id="detailStreet">
+									</div>
+								</div>
+								<div class="am-form-group pur_height">
+									<label for="user-email" class="am-form-label">描述</label>
+									<div class="am-form-content">
+										<textarea class="disp" rows="5" id="doc-ta-1" name="enquiryRemark" placeholder="如格型、循环尺寸、成分、克重、门幅、色牢度、环保标准等等"></textarea>
+
+									</div>
+								</div>
+								<div class="am-form-group address">
+									<label for="user-address" class="am-form-label">详细地址</label>
+									<div class="am-form-content address">
+										<a href="address.html">
+											<p class="new-mu_l2cw">
+												<span class="province">湖北</span>省
+												<span class="city">武汉</span>市
+												<span class="dist">洪山</span>区
+												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+												<span class="am-icon-angle-right"></span>
+											</p>
+										</a>
+
+									</div>
+								</div>
+								<div class="am-form-group safety">
+									<label for="user-safety" class="am-form-label">账号安全</label>
+									<div class="am-form-content safety">
+										<a href="safety.html">
+
+											<span class="am-icon-angle-right"></span>
+
+										</a>
+
+									</div>
+								</div>
+								<div class="info-btn">
+									<div class="am-btn am-btn-warning">
+										<button type="button" id="save">保存修改</button>
+									</div>
+								</div>
+
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+				<!--底部-->
+				<#include "/common/includes/include.footer.html"/>
+			</div>
+			<!--左边菜单-->
+			<#include "/personalCenter/common/include.menu.html"/>
+		</div>
+
+</@override>
+<@override name="js">
+<!--<script>
+    var formData;
+    var file;
+    //上传图片
+    $('#productImage').on('change', function () {
+        file = this.files[0];
+        var fileName = file.name;
+        var fileType = fileName.substr(fileName.length - 4, fileName.length);
+        if (fileType == '.gif' || fileType == '.jpeg' || fileType == '.jpg' || fileType == '.png' || fileType == '.bmp') {
+            formData = new FormData()
+            formData.append("file", file);
+        } else {
+            alert('文件类型不正确');
+        }
+    });
+
+
+    //获取单号 var enquiryNum = "${enquiryNumber}";
+    var enquiryNum=123456;
+    console.log(enquiryNum);
+	//默认加载
+    $(function() {
+        if (enquiryNum != "") {
+            //- 修改
+            $("#titleName").val("修改求购");
+            //查询详情信息回显
+            details(enquiryNum);
+        } else {
+            // 新增
+            $("#titleName").val("发布求购");
+            $("#enquiryNumber").val(enquiryNum);
+        }
+    });
+
+    $("#save").click(function (){
+        var enquiryTitle = $("#enquiryTitle").val();
+        var createTime = $("#createTime").val();
+        var takeDate = $("#takeDate").val();
+        var productNumber = $("#productNumber").val();
+        var detailStreet=$("#detailStreet").val();
+
+        var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
+        if(enquiryTitle==null|enquiryTitle==""){
+            alert("请输入求购标题");
+            return ;
+        }else if(len>80){
+            alert("求购标题不得超过40个汉字");
+			return;
+		}
+
+		if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
+           	alert("交付时间必须大于发起求购时间");
+            return;
+		}
+        var re = /^[1-9]+[0-9]*]*$/;
+        if(!re.test(productNumber)){
+			alert("求购数量只能输入数字");
+			return;
+		}
+		if (detailStreet==null || detailStreet==""){
+            alert("请输入详细地址细心");
+            return;
+		}
+		if(enquiryNum!=null||enquiryNum!=""){
+            //更新提交
+            updateSubmit();
+		}else{
+            //新增提交
+            addSubmit();
+		}
+    });
+
+    //修改
+    function updateSubmit(){
+        formData = new FormData()
+        formData=appendForm();
+        console.log("============================");
+		console.log(formData);
+		$.ajax({
+			url: "${pageContext.request.contextPath}/updateEnquiryAndProduct",
+			type: "post",
+			data: formData,
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				//需要弹框操作失败与否
+
+				//需要返回列表页面
+			}
+		});
+	}
+
+	//新增
+    function addSubmit() {
+        formData = new FormData()
+        formData=appendForm();
+		$.ajax({
+				url: "${pageContext.request.contextPath}/addEnquiry",
+				type: "post",
+				data: formData,
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					//需要弹框操作失败与否
+
+					//需要重载页面
+
+				}
+		});
+    }
+
+    //查询详情信息并-赋值表单
+    function details(enquiryNumber){
+        var str={enquiryNumber:enquiryNumber};
+        $.ajax({
+            url : "selEnquiryByNumber",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                console.log(data);
+                $("#enquiryTitle").val(data.enquiryTitle);
+                $("#enquiryNumber").val(data.enquiryNumber);
+                $("#createTime").val(data.createTime);
+                $("#takeDate").val(data.takeDate);
+                $("#enquiryStatus").val(data.enquiryStatus);
+                $.each(data.enquiryProductDto, function (i, v) {
+                    //需要循环插入产品
+                    var whatever = liContent(v);
+
+
+                    $("#productImage").val(v.productImage);
+                    $("#enquiryTitle").val(v.productNumber);
+                    $("#productUnit").val(v.productUnit);
+                });
+
+                //地址需要分拆
+
+                $("#enquiryRemark").val(data.enquiryRemark);
+
+            }
+        });
+	}
+
+	function appendForm(){
+        //上传图片
+        formData = new FormData()
+        formData.append("file", file);
+        formData.append("enquiryTitle", $("#enquiryTitle").val());
+        formData.append("enquiryNumber", $("enquiryNumber").val());
+        formData.append("createTime", $("#createTime").val());
+        formData.append("takeDate", $("#takeDate").val());
+        formData.append("enquiryStatus", $("#enquiryStatus").val());
+        formData.append("productUnit", $("#productUnit").val());
+        formData.append("province", $("#province").val());
+        formData.append("city", $("#city").val());
+        formData.append("county", $("#county").val());
+        formData.append("detailStreet", $("#detailStreet").val());
+        formData.append("enquiryRemark", $(".enquiryRemark").val());
+        return formData;
+	}
+</script>-->
+
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

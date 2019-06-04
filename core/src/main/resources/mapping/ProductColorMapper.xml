@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ProductColorMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.ProductColor" >
+    <id column="product_color_id" property="productColorId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="is_spot" property="isSpot" jdbcType="INTEGER" />
+    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+    <result column="spock" property="spock" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="color_image" property="colorImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="DtoResultMap" type="com.soufang.base.dto.product.ProductColorDto" >
+    <id column="product_color_id" property="productColorId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="is_spot" property="isSpot" jdbcType="INTEGER" />
+    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+    <result column="spock" property="spock" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="color_image" property="colorImage" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    product_color_id, product_id, is_spot, product_color, spock, create_time, color_image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_product_color
+    where product_color_id = #{productColorId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_product_color
+    where product_color_id = #{productColorId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.ProductColor" >
+    insert into t_product_color (product_color_id, product_id, is_spot, 
+      product_color, spock, create_time, 
+      color_image)
+    values (#{productColorId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{isSpot,jdbcType=INTEGER}, 
+      #{productColor,jdbcType=VARCHAR}, #{spock,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{colorImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.ProductColor" >
+    insert into t_product_color
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productColorId != null" >
+        product_color_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="isSpot != null" >
+        is_spot,
+      </if>
+      <if test="productColor != null" >
+        product_color,
+      </if>
+      <if test="spock != null" >
+        spock,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="colorImage != null" >
+        color_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productColorId != null" >
+        #{productColorId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="isSpot != null" >
+        #{isSpot,jdbcType=INTEGER},
+      </if>
+      <if test="productColor != null" >
+        #{productColor,jdbcType=VARCHAR},
+      </if>
+      <if test="spock != null" >
+        #{spock,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="colorImage != null" >
+        #{colorImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.ProductColor" >
+    update t_product_color
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="isSpot != null" >
+        is_spot = #{isSpot,jdbcType=INTEGER},
+      </if>
+      <if test="productColor != null" >
+        product_color = #{productColor,jdbcType=VARCHAR},
+      </if>
+      <if test="spock != null" >
+        spock = #{spock,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="colorImage != null" >
+        color_image = #{colorImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_color_id = #{productColorId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.ProductColor" >
+    update t_product_color
+    set product_id = #{productId,jdbcType=BIGINT},
+      is_spot = #{isSpot,jdbcType=INTEGER},
+      product_color = #{productColor,jdbcType=VARCHAR},
+      spock = #{spock,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      color_image = #{colorImage,jdbcType=VARCHAR}
+    where product_color_id = #{productColorId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getDetail" parameterType="com.soufang.base.dto.product.ProductColorDto" resultMap="DtoResultMap">
+    select <include refid="Base_Column_List"></include>
+    from t_product_color where product_id = #{productId} and product_color=#{productColor}
+  </select>
+</mapper>

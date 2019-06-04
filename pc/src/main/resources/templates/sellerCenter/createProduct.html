@@ -1,0 +1,260 @@
+
+<@override name="title">
+发布产品
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale-Release-on.css">
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale-center">
+        <ol class="am-breadcrumb">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">分类</a></li>
+            <li class="am-active">内容</li>
+        </ol>
+        <form action="/product/create" method="post" id="createForm">
+            <div class="base">
+                <h4>基础信息</h4>
+                <div class="base-on">
+                    <span class="base-cloum1">
+                        <span class="am-u-sm-2">
+                            <span style="color: red">*</span>
+                            <span>当前类目：</span>
+                        </span>
+                        <span class="am-u-sm-10">
+                            <span class="base-on-con">${assortOne.assortName} > ${assortTwo.assortName}  > ${assortThree.assortName} </span>
+                        </span>
+                    </span>
+                    <span class="base-cloum1">
+                        <span class="am-u-sm-2">
+                            <span style="color: red">*</span>
+                            <span>产品标题：</span>
+                        </span>
+                        <span class="am-u-sm-10 am-form">
+                             <input type="text" required name="productName" class="" placeholder="请输入">
+                             <input type="hidden" name="assortId" value="${assortThree.assortId?c}">
+                        </span>
+                    </span>
+                    <div class="base-cloum1 base-cloum3">
+                        <span class="am-u-sm-2">
+                            <span style="color: red">*</span>
+                            <span>产品属性：</span>
+                        </span>
+                        <span class="am-u-sm-10 am-form">
+                            <p class="base-on-con">错误填写产品属性，可能会引起产品下架或搜索流量减少，影响您的正常销售，请认真准确填写！</p>
+                            <div class="attr">
+                                <div class="attr-cloum1">
+                                    <div class="attr-row1 am-u-sm-2">
+                                        <span class="">
+                                            <span style="color: red">*</span>
+                                            <span>${assortThree.key1}：</span>
+                                        </span>
+                                    </div>
+                                    <div class="attr-row2 am-u-sm-4">
+                                        <span class="am-form-horizontal">
+                                            <input name="key1Value" required  type="text" class="" placeholder="请输入">
+                                        </span>
+                                    </div>
+                                    <div class="attr-row1 am-u-sm-2">
+                                        <span class="">
+                                            <span style="color: red">*</span>
+                                            <span>${assortThree.key2}：</span>
+                                        </span>
+                                    </div>
+                                    <div class="attr-row2 am-u-sm-4">
+                                        <span class="am-form-horizontal">
+                                            <input name="key2Value" required type="text" class="" placeholder="请输入">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="attr-cloum1">
+                                    <div class="attr-row1 am-u-sm-2">
+                                        <span class="">
+                                            <span style="color: red">*</span>
+                                            <span>${assortThree.key3}：</span>
+                                        </span>
+                                    </div>
+                                    <div class="attr-row2 am-u-sm-4">
+                                        <span class="am-form-horizontal">
+                                            <input name="key3Value" required type="text" class="" placeholder="请输入">
+                                        </span>
+                                    </div>
+                                    <div class="attr-row1 am-u-sm-2">
+                                        <span class="">
+                                            <span style="color: red">*</span>
+                                            <span>${assortThree.key4}：</span>
+                                        </span>
+                                    </div>
+                                    <div class="attr-row2 am-u-sm-4">
+                                        <span class="am-form-horizontal">
+                                            <input name="key4Value" required type="text" class="" placeholder="请输入">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="attr-cloum1">
+                                    <div class="attr-row1 am-u-sm-2">
+                                        <span class="">
+                                            <span style="color: red">*</span>
+                                            <span>${assortThree.key5}：</span>
+                                        </span>
+                                    </div>
+                                    <div class="attr-row2 am-u-sm-4">
+                                        <span class="am-form-horizontal">
+                                            <input name="key5Value" required type="text" class="" placeholder="请输入">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a style="color: #40ADFB; cursor: pointer" onclick="addParamHtml()">+自定义属性</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="specList">
+                <div id="spec0" class="base1">
+                    <h4>产品规格1</h4>
+                    <div class="base1-on">
+                        <div class="base-cloum1">
+                                    <span class="am-u-sm-2  attr-row1">
+                                        <span style="color: red">*</span>
+                                        <span>计量单位：</span>
+                                    </span>
+                            <span class="am-u-sm-10 am-form">
+                                <input type="text" class="" name="productUnit" placeholder="请输入">
+                            </span>
+                        </div>
+                        <span class="base-cloum1">
+                            <span class="am-u-sm-2">
+                                <span>规格：</span>
+                            </span>
+                            <span class="am-u-sm-10 am-form">
+                                 <input type="text" class="specName" placeholder="请输入">
+                            </span>
+                        </span>
+                        <div class="colorList">
+                            <span class="base-cloum1">
+                                <span class="am-u-sm-2">
+                                    <span>子规格：</span>
+                                </span>
+                                <span class="am-u-sm-10 am-form">
+                                     <input type="text" class="productColor" name="productColorDtoList[0].productColor" placeholder="请输入子规格">
+                                </span>
+                            </span>
+                        </div>
+                        <a style="color: #40ADFB;padding-left: 45px; cursor: pointer" onclick="addColorHtml(this)">+添加子规格</a>
+
+                        <div class="attr-cloum1">
+                            <div class="attr-row1 am-u-sm-2">
+                                    <span class="">
+                                        <span>价格：</span>
+                                    </span>
+                            </div>
+                            <div class="attr-row2 am-u-sm-4 am-form-group">
+                                <div class="attr1">
+                                    <div class="priceInput attr1-on am-u-sm-6">
+                                        <div class="attr1-cloum1">
+                                            <span class="am-u-sm-6">购买数量（米）</span>
+                                            <span class="am-u-sm-6">产品单价（元）</span>
+                                        </div>
+                                        <div class="attr1-cloum2">
+                                            <div class="am-u-sm-6">
+                                                <input type="number" class="minNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].minNumber" placeholder="1">
+                                                <input type="hidden"  class="maxNumber"  name="productSpecDtoList[0].maxNumber">
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <input type="number" class="specNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].specNumber" placeholder=" 10">
+                                                <span class="attr1-pic"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="attr1-on am-u-sm-1 attr-price">
+                                        价格预览
+                                    </div>
+                                    <div class="priceShow attr1-on am-u-sm-5">
+                                        <div class="attr1-cloum1">
+                                            <span class="am-u-sm-6">购买数量（米）</span>
+                                            <span class="am-u-sm-6">产品单价（元）</span>
+                                        </div>
+                                        <div class="attr1-cloum2 attr1-right">
+                                            <div class="am-u-sm-6">
+                                                <p class="numberSection"></p>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <p>￥<span class="numberPrice" style="color:#F58022 "></span>/米</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a onclick="addPriceHtml(this)" style="color: #40ADFB; margin-top: 20px;  cursor: pointer ;display: inline-block;">+添加价格区间</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="base2">
+                <h4><span style="color:#40ADFB ; cursor: pointer " onclick="addSpecHtml()">+增加</span> 产品规格</h4>
+            </div>
+            <div class="base3">
+                <h4>图文详情</h4>
+                <div class="base3-pic">
+                    <div class="base-title">
+                        <span class="am-u-sm-2">
+                            <span style="color: red">*</span>
+                            <span>产品主图：</span>
+                        </span>
+                        <span class="am-u-sm-10">
+                            <p>    宝贝主图大小不能超过3MB；800*800 以上图片上传后宝贝详情页自动提供放大镜功能。
+                            </p>
+                            <div class="Master-pic">
+                                <div class="mpic-1">
+                                    <img src="${contextPath}/images/sale/01.png" alt="" width="90px">
+                                    <input type="file" name="" style="display: none"/>
+                                </div>
+                                <div class="mpic-1">
+                                    <img src="${contextPath}/images/sale/01.png" alt="" width="90px">
+                                    <input type="file" style="display: none"/>
+                                </div>
+                                <div class="mpic-1">
+                                    <img src="${contextPath}/images/sale/01.png" alt="" width="90px">
+                                    <input type="file" style="display: none"/>
+                                </div>
+                                <div class="mpic-1">
+                                    <img src="${contextPath}/images/sale/01.png" alt="" width="90px">
+                                    <input type="file" style="display: none"/>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="base3-pic">
+                    <div class="base-title">
+                        <span class="am-u-sm-2">
+                            <span style="color: red">*</span>
+                            <span>详情：</span>
+                        </span>
+                        <span class="am-u-sm-10">
+                            <p>    图片还可以上传10240KB。这是总容量，随着图片上传而减少。
+                            </p>
+                            <div class="Master-pic1 Master-pic2">
+                                <p class="imageDetail" style="cursor: pointer">上传图片</p>
+                                <input type="file" onchange="imageDetail(this)" style="display: none">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="base-footer">
+                    <button type="button" onclick="createForm()" class="am-btn am-btn-secondary am-radius">提交</button>
+                 </div>
+            </div>
+        </form>
+    </div>
+</div>
+</@override>
+<@override name="js">
+<script src="${contextPath}/js/createProduct.js"></script>
+<script src="${contextPath}/js/jquery.form.js"></script>
+
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

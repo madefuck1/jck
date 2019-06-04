@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.AssortParamMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.AssortParam" >
+    <id column="param_id" property="paramId" jdbcType="BIGINT" />
+    <result column="assort_id" property="assortId" jdbcType="BIGINT" />
+    <result column="param_key" property="paramKey" jdbcType="VARCHAR" />
+    <result column="param_value" property="paramValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    param_id, assort_id, param_key, param_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_assort_param
+    where param_id = #{paramId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_assort_param
+    where param_id = #{paramId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.AssortParam" >
+    insert into t_assort_param (param_id, assort_id, param_key, 
+      param_value)
+    values (#{paramId,jdbcType=BIGINT}, #{assortId,jdbcType=BIGINT}, #{paramKey,jdbcType=VARCHAR}, 
+      #{paramValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.AssortParam" >
+    insert into t_assort_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        param_id,
+      </if>
+      <if test="assortId != null" >
+        assort_id,
+      </if>
+      <if test="paramKey != null" >
+        param_key,
+      </if>
+      <if test="paramValue != null" >
+        param_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        #{paramId,jdbcType=BIGINT},
+      </if>
+      <if test="assortId != null" >
+        #{assortId,jdbcType=BIGINT},
+      </if>
+      <if test="paramKey != null" >
+        #{paramKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.AssortParam" >
+    update t_assort_param
+    <set >
+      <if test="assortId != null" >
+        assort_id = #{assortId,jdbcType=BIGINT},
+      </if>
+      <if test="paramKey != null" >
+        param_key = #{paramKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        param_value = #{paramValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where param_id = #{paramId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.AssortParam" >
+    update t_assort_param
+    set assort_id = #{assortId,jdbcType=BIGINT},
+      param_key = #{paramKey,jdbcType=VARCHAR},
+      param_value = #{paramValue,jdbcType=VARCHAR}
+    where param_id = #{paramId,jdbcType=BIGINT}
+  </update>
+</mapper>

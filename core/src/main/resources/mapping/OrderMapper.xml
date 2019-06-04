@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.Order">
+        <id column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="buyer_name" property="buyerName" jdbcType="VARCHAR"/>
+        <result column="take_name" property="takeName" jdbcType="VARCHAR"/>
+        <result column="take_address" property="takeAddress" jdbcType="VARCHAR"/>
+        <result column="take_phone" property="takePhone" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="order_status" property="orderStatus" jdbcType="INTEGER"/>
+        <result column="order_type" property="orderType" jdbcType="INTEGER"/>
+        <result column="total_money" property="totalMoney" jdbcType="DECIMAL"/>
+        <result column="paid_money" property="paidMoney" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="order_remark" property="orderRemark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    order_number, user_id, buyer_name, take_name, take_address, take_phone, send_time, 
+    order_status, order_type, total_money, paid_money, create_time, order_remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order
+        where order_number = #{orderNumber,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_order
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.Order">
+    insert into t_order (order_number, user_id, buyer_name, 
+      take_name, take_address, take_phone, 
+      send_time, order_status, order_type, 
+      total_money, paid_money, create_time, 
+      order_remark)
+    values (#{orderNumber,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{buyerName,jdbcType=VARCHAR}, 
+      #{takeName,jdbcType=VARCHAR}, #{takeAddress,jdbcType=VARCHAR}, #{takePhone,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=DECIMAL}, #{paidMoney,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{orderRemark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.Order">
+        insert into t_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="buyerName != null">
+                buyer_name,
+            </if>
+            <if test="takeName != null">
+                take_name,
+            </if>
+            <if test="takeAddress != null">
+                take_address,
+            </if>
+            <if test="takePhone != null">
+                take_phone,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="totalMoney != null">
+                total_money,
+            </if>
+            <if test="paidMoney != null">
+                paid_money,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="orderRemark != null">
+                order_remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNumber != null">
+                #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="buyerName != null">
+                #{buyerName,jdbcType=VARCHAR},
+            </if>
+            <if test="takeName != null">
+                #{takeName,jdbcType=VARCHAR},
+            </if>
+            <if test="takeAddress != null">
+                #{takeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="takePhone != null">
+                #{takePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                #{totalMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="paidMoney != null">
+                #{paidMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderRemark != null">
+                #{orderRemark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Order">
+        update t_order
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="buyerName != null">
+                buyer_name = #{buyerName,jdbcType=VARCHAR},
+            </if>
+            <if test="takeName != null">
+                take_name = #{takeName,jdbcType=VARCHAR},
+            </if>
+            <if test="takeAddress != null">
+                take_address = #{takeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="takePhone != null">
+                take_phone = #{takePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="paidMoney != null">
+                paid_money = #{paidMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderRemark != null">
+                order_remark = #{orderRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_number = #{orderNumber,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.Order">
+    update t_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      buyer_name = #{buyerName,jdbcType=VARCHAR},
+      take_name = #{takeName,jdbcType=VARCHAR},
+      take_address = #{takeAddress,jdbcType=VARCHAR},
+      take_phone = #{takePhone,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_type = #{orderType,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DECIMAL},
+      paid_money = #{paidMoney,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_remark = #{orderRemark,jdbcType=VARCHAR}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+
+
+
+    <update id="updateTotalMoney" parameterType="com.soufang.model.Order">
+    update t_order set  total_money = #{totalMoney,jdbcType=DECIMAL}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+    <update id="delOrder" parameterType="com.soufang.model.Order">
+        update t_order set order_status=#{orderStatus} where order_number = #{orderNumber}
+    </update>
+
+
+</mapper>

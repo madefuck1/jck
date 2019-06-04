@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#assign contextPath=request.contextPath+"/static" />
+        <#include "/common/includes/header.html"/>
+        <title><@block name="title"/></title>
+        <link rel="stylesheet" href="${contextPath}/layui/css/layui.css">
+        <@block name="css"/>
+    </head>
+
+    <@block name="body"/>
+
+<#include "/common/includes/include.script.html"/>
+<@block name="js"/>
+</html>

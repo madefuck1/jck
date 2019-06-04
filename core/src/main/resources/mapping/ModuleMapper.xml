@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ModuleMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.Module">
+        <id column="module_id" property="moduleId" jdbcType="BIGINT"/>
+        <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="module_link" property="moduleLink" jdbcType="VARCHAR"/>
+        <result column="module_sort" property="moduleSort" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    module_id, module_name, parent_id, module_link, module_sort
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_module
+        where module_id = #{moduleId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_module
+    where module_id = #{moduleId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.Module">
+    insert into t_module (module_id, module_name, parent_id, 
+      module_link, module_sort)
+    values (#{moduleId,jdbcType=BIGINT}, #{moduleName,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{moduleLink,jdbcType=VARCHAR}, #{moduleSort,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.Module">
+        insert into t_module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                module_id,
+            </if>
+            <if test="moduleName != null">
+                module_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="moduleLink != null">
+                module_link,
+            </if>
+            <if test="moduleSort != null">
+                module_sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                #{moduleId,jdbcType=BIGINT},
+            </if>
+            <if test="moduleName != null">
+                #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="moduleLink != null">
+                #{moduleLink,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleSort != null">
+                #{moduleSort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Module">
+        update t_module
+        <set>
+            <if test="moduleName != null">
+                module_name = #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="moduleLink != null">
+                module_link = #{moduleLink,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleSort != null">
+                module_sort = #{moduleSort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where module_id = #{moduleId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.Module">
+    update t_module
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      module_link = #{moduleLink,jdbcType=VARCHAR},
+      module_sort = #{moduleSort,jdbcType=INTEGER}
+    where module_id = #{moduleId,jdbcType=BIGINT}
+  </update>
+
+    <select id="getModuleList" resultMap="BaseResultMap">
+    select * from t_module
+    order by module_sort
+  </select>
+
+
+    <select id="getModuleListByRole" resultType="com.soufang.base.dto.roleModule.ModuleDto"
+            parameterType="com.soufang.model.RoleModule">
+        SELECT
+            t_module.module_id moduleId,
+            t_module.module_name moduleName,
+            t_module.parent_id parentId,
+            t_module.module_link moduleLink,
+            t_module.module_sort moduleSort,
+            CASE
+        WHEN ISNULL(
+            t_role_module.role_module_id
+        ) THEN
+            0
+        ELSE
+            1
+        END AS isExist,
+            t_role_module.role_module_id roleModuleId
+        FROM
+            t_module
+        LEFT JOIN t_role_module ON t_module.module_id = t_role_module.module_id
+        AND t_role_module.role_id = #{roleId}
+        order by t_module.module_id
+    </select>
+
+
+</mapper>

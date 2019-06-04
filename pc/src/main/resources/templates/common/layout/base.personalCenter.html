@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/includes/header.html"/>
+        <title><@block name="title"/></title>
+        <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+        <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+        <link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+        <link rel="stylesheet" href="${contextPath}/css/header.css">
+        <@block name="css"/>
+    </head>
+    <body>
+        <#include "/common/includes/include.top.html"/>
+        <#include "/common/includes/include.search.html"/>
+        <#include "/common/includes/include.contain.html"/>
+        <b class="line"></b>
+        <@block name="body"/>
+
+    </body>
+    <#include "/common/includes/include.script.html"/>
+
+    <@block name="js"/>
+
+</html>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.OrderProductMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.OrderProduct" >
+    <id column="order_product_id" property="orderProductId" jdbcType="BIGINT" />
+    <result column="order_shop_id" property="orderShopId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_number" property="productNumber" jdbcType="DECIMAL" />
+    <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="product_spec" property="productSpec" jdbcType="VARCHAR" />
+    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_product_id, order_shop_id, product_id, product_name, product_number, product_unit, 
+    product_price, product_spec, product_color
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_product
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </select>
+
+  <select id="getOPByOSId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order_product
+    where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order_product
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.OrderProduct" useGeneratedKeys="true" keyColumn="order_product_id" keyProperty="orderProductId">
+    insert into t_order_product (order_product_id, order_shop_id, product_id,
+      product_name, product_number, product_unit, 
+      product_price, product_spec, product_color
+      )
+    values (#{orderProductId,jdbcType=BIGINT}, #{orderShopId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT},
+      #{productName,jdbcType=VARCHAR}, #{productNumber,jdbcType=DECIMAL}, #{productUnit,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DECIMAL}, #{productSpec,jdbcType=VARCHAR}, #{productColor,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.OrderProduct" >
+    insert into t_order_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderProductId != null" >
+        order_product_id,
+      </if>
+      <if test="orderShopId != null" >
+        order_shop_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productNumber != null" >
+        product_number,
+      </if>
+      <if test="productUnit != null" >
+        product_unit,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productSpec != null" >
+        product_spec,
+      </if>
+      <if test="productColor != null" >
+        product_color,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderProductId != null" >
+        #{orderProductId,jdbcType=BIGINT},
+      </if>
+      <if test="orderShopId != null" >
+        #{orderShopId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNumber != null" >
+        #{productNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="productUnit != null" >
+        #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productSpec != null" >
+        #{productSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null" >
+        #{productColor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.OrderProduct" >
+    update t_order_product
+    <set >
+      <if test="orderShopId != null" >
+        order_shop_id = #{orderShopId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNumber != null" >
+        product_number = #{productNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="productUnit != null" >
+        product_unit = #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productSpec != null" >
+        product_spec = #{productSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="productColor != null" >
+        product_color = #{productColor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.OrderProduct" >
+    update t_order_product
+    set order_shop_id = #{orderShopId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_number = #{productNumber,jdbcType=DECIMAL},
+      product_unit = #{productUnit,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      product_spec = #{productSpec,jdbcType=VARCHAR},
+      product_color = #{productColor,jdbcType=VARCHAR}
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </update>
+</mapper>

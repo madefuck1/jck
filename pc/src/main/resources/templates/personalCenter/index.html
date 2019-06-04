@@ -1,0 +1,249 @@
+<@override name="title">
+个人中心
+</@override>
+
+<@override name="css">
+
+<link href="${contextPath}/css/vipstyle.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/index1.css" rel="stylesheet" type="text/css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="wrap-left">
+                <div class="wrap-list">
+                    <div class="m-user">
+                        <!--个人信息 -->
+                        <div class="m-userinfo">
+                            <a>
+                                <div class="tipsBox"><i class="am-icon-envelope"></i></div>
+                            </a>
+                            <div class="m-baseinfo">
+                                <a class="m-pic" href="/personalCenter/toInformation">
+                                    <img src="${userInfo.avatar}">
+                                </a>
+                                <div class="m-info">
+                                    <em class="s-name">${userInfo.userName}</em>
+                                    <div class="vip1"><a href="#"><span></span><em>会员专享</em></a></div>
+                                    <div class="safeText" style="text-align: center">
+                                    </div>
+                                    <div class="m-address">
+                                        <a href="/personalCenter/toAddress" class="i-trigger">收货地址<i
+                                                class="am-icon-angle-right"
+                                                style="padding-left:5px ;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-right">
+                                <div class="m-new">
+                                    <a href="/personalCenter/toNew">
+                                        <i class="am-icon-dropbox  am-icon-md" style="padding-right:5px ;"></i>
+                                        消息盒子
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--个人资产-->
+                        <div class="m-userproperty">
+                            <div class="s-bar">
+                                <i class="s-icon"></i>个人资产
+                            </div>
+                            <p class="m-wallet">
+                                <a href="/personalCenter/toWallet">
+                                    <em class="m-num">${userInfo.totalMoney}</em>
+                                    <span class="m-title">账户余额</span>
+                                </a>
+                            </p>
+                        </div>
+                        <!--我的求购-->
+                        <div class="wallet">
+                            <div class="s-bar">
+                                <i class="s-icon"></i>我的求购
+                            </div>
+                            <p class="m-big squareS">
+                                <a href="#">
+                                    <i><img src="../images/purchasing.png"/></i>
+                                    <span class="m-title">发布求购</span>
+                                </a>
+                            </p>
+                            <p class="m-big squareL">
+                                <a href="#">
+                                    <i><img src="../images/myPurchase.png" width="50"/></i>
+                                    <span class="m-title">我的求购</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box-container-bottom"></div>
+                </div>
+            </div>
+            <div class="wrap-right">
+                <div id="calendar">
+                    <div class="calendar_title">我的日历</div>
+                    <div class="data"></div>
+                    <div class="week"></div>
+                    <div class="yearMon"></div>
+                </div>
+<!--                &lt;!&ndash;新品 &ndash;&gt;-->
+<!--                <div class="new-goods">-->
+<!--                    <div class="s-bar">-->
+<!--                        <i class="s-icon"></i>今日新品-->
+<!--                        <a class="i-load-more-item-shadow">15款新品</a>-->
+<!--                    </div>-->
+<!--                    <div class="new-goods-info">-->
+<!--                        <a class="shop-info" href="#">-->
+<!--                            <div class="face-img-panel">-->
+<!--                                <img src="../images/getAvatar.do.jpg" alt="">-->
+<!--                            </div>-->
+<!--                            <span class="new-goods-num ">4</span>-->
+<!--                            <span class="shop-title">剥壳松子</span>-->
+<!--                        </a>-->
+<!--                        <a class="follow">收藏</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;热卖推荐 &ndash;&gt;-->
+            </div>
+            <div class="clear"></div>
+            <!--订单 -->
+            <div data-am-widget="tabs" class="am-tabs collection am-tabs_margin">
+                <div class="m-order">
+                    <div class="s-bar">
+                        <i class="s-icon"></i>我的订单
+                        <a class="i-load-more-item-shadow more-order" href="/orderManager/toOrderManager"
+                           target="_blank">更多</a>
+                    </div>
+                    <#list orderList as item>
+                    <div class="orderContentBox">
+                        <div class="orderContent">
+                            <div class="orderContentpic" style="position: relative">
+                                <div class="imgBox">
+                                    <a href="javascript:void(0);"
+                                       onclick="javascript:window.open('/orderManager/toDetail/'+ ${item.orderShopId},'_blank');">
+                                        <#list item.orderProducts as temp>
+                                        <#if temp_index == 0>
+                                        <img src="${temp.productImage}"/>
+                                        </#if>
+                                        </#list>
+                                    </a>
+                                </div>
+                                <#if (item.orderProducts?size > 1)>
+                                <span class="goods-num ">${item.orderProducts?size}件</span>
+                                </#if>
+                            </div>
+                            <div class="detailContent">
+                                <div class="orderID">
+                                    <span class="time">${item.createTimeString}</span>
+                                </div>
+                            </div>
+                            <div class="state">
+                                <a class="delivery">${item.orderShopStatusString}</a>
+                            </div>
+                            <div class="price"><span class="sym">¥</span>${item.actualPrice?string("0.00")}</div>
+                        </div>
+                        <a href="javascript:void(0);"
+                           onclick="javascript:window.open('/product/toDetail?productId='+ ${item.orderProducts[0].productId},'_blank');"
+                           class="btnPay">再次购买</a>
+                    </div>
+                    </#list>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <!--收藏和足迹-->
+            <div data-am-widget="tabs" class="am-tabs collection am-tabs_margin">
+                <ul class="am-tabs-nav am-cf">
+                    <li class="am-active"><a href="[data-tab-panel-0]"><i class="am-icon-heart"></i>商品收藏</a></li>
+                    <li class=""><a href="[data-tab-panel-1]"><i class="am-icon-paw"></i>购物足迹</a></li>
+                </ul>
+                <div class="am-tabs-bd">
+                    <div data-tab-panel-0 class="am-tab-panel am-active">
+                        <div class="am-slider am-slider-default am-slider-carousel"
+                             data-am-flexslider="{itemWidth:155,slideshow: false}">
+                            <ul class="am-slides">
+                                <#if favoriteList?? && (favoriteList?size > 0) >
+                                <#list favoriteList as item>
+                                <li>
+                                    <div style="height: 105px;width: 150px">
+                                    <a herf="javascript:void(0);" onclick="javascript:window.open('/product/toDetail?productId='+ ${item.productDto.productId},'_blank');">
+                                        <img class="am-thumbnail" src="${item.productDto.productUrl}"/>
+                                    </a>
+                                    </div>
+                                    <strong class="price">¥${item.productStatisticsDto.productPrice}</strong>
+                                </li>
+                                </#list>
+                                <#else>
+                                还没有收藏的产品
+                                </#if>
+                            </ul>
+                        </div>
+                    </div>
+                    <div data-tab-panel-1 class="am-tab-panel ">
+                        <div class="am-slider am-slider-default am-slider-carousel"
+                             data-am-flexslider="{itemWidth:155, slideshow: false}">
+                            <ul class="am-slides">
+                                <#if footPrintList?? && (footPrintList?size > 0) >
+                                <#list footPrintList as item>
+                                <li>
+                                    <div style="height: 105px;width: 150px">
+                                        <a herf="javascript:void(0);" onclick="javascript:window.open('/product/toDetail?productId='+ ${item.productDto.productId},'_blank');">
+                                            <img class="am-thumbnail" src="${item.productDto.productUrl}"/>
+                                        </a>
+                                    </div>
+                                    <strong class="price" >¥${item.productStatisticsDto.productPrice}</strong>
+                                </li>
+                                </#list>
+                                <#else>
+                                亲，还没有浏览过产品哦
+                                </#if>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--底部-->
+        <#include "/common/includes/include.footer.html"/>
+</div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript" src="/static/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+
+
+
+<script type="text/javascript">
+    // 初始化
+    $(function () {
+        // 日期
+        initDate();
+    });
+    var initDate = function () {
+        //获取时间
+        var nowData = new Date();
+        var year = nowData.getFullYear();
+        var month = nowData.getMonth() + 1 < 10 ? "0" + (nowData.getMonth() + 1) : nowData.getMonth() + 1;
+        var data = nowData.getDate() < 10 ? "0" + nowData.getDate() : nowData.getDate();
+        var week = "星期" + "日一二三四五六".split(/(?!\b)/)[nowData.getDay()];
+        //添加到div
+        $(".yearMon").text(year + "年" + month + "月");
+        $(".data").text(data);
+        $(".week").text(week);
+    }
+
+    function openOrderInfo(id) {
+        alert("打开订单信息");
+        // todo 直接跳转页面
+        window.location.href = "/pc/personalCenter/toOrder?orderShopId=" + id
+    }
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

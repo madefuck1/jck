@@ -1,0 +1,395 @@
+<@override name="title">
+我的求购
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
+
+</@override>
+<@override name="body">
+		<div class="center">
+						<div class="col-main">
+									<div class="main-wrap">
+
+										<div class="user-order">
+
+						<!--标题 -->
+											<div class="am-cf am-padding">
+												<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的求购</strong> / <small>MyPurchase</small></div>
+											</div>
+											<hr/>
+
+												<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+													<ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs">
+														<li class="am-active"><a href="javascript:void(0)"onclick="getPurchaseList('')" >全部求购</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1)">求购中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(2)">已求购</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(3)">已报价</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(4)">采购成功</a></li>
+													</ul>
+
+													<div class="am-tabs-bd">
+														<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">求购信息</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">数量
+																	</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">单位</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">发布/交付时间</td>
+																</div>
+																<!--<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>-->
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list1">
+																</div>
+															</div>
+														</div>
+														<div class="am-tab-panel am-fade" id="tab2">
+
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">商品</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">单价</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">数量</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">商品操作</td>
+																</div>
+																<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list2">
+																</div>
+															</div>
+														</div>
+														<div class="am-tab-panel am-fade" id="tab3">
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">商品</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">单价</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">数量</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">商品操作</td>
+																</div>
+																<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list3">
+																</div>
+															</div>
+														</div>
+														<div class="am-tab-panel am-fade" id="tab4">
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">商品</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">单价</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">数量</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">商品操作</td>
+																</div>
+																<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list4">
+																</div>
+															</div>
+														</div>
+
+														<div class="am-tab-panel am-fade" id="tab5">
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">商品</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">单价</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">数量</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">商品操作</td>
+																</div>
+																<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list5">
+																	<!--不同状态的订单	-->
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+										</div>
+				<!--底部-->			</div>
+				<#include "/common/includes/include.footer.html"/>
+			</div>
+			<!--左边菜单-->
+			<#include "/personalCenter/common/include.menu.html"/>
+		</div>
+
+
+</@override>
+<@override name="js">
+<script>
+<!--默认加载-->
+$(function(){
+	getPurchaseList("");
+});
+<!--获取求购数据列表-->
+function getPurchaseList(enquiryStatus){
+    	var enquiryStatus=enquiryStatus;
+		if(enquiryStatus==""){
+            $("#order-list1").html("");
+		}else if(enquiryStatus==1){
+			$("#order-list2").html("");
+		}else if (enquiryStatus=2){
+			$("#order-list3").html("");
+		}else if (enquiryStatus==3){
+			$("#order-list4").html("");
+		}else if (enquiryStatus==4){
+			$("#order-list5").html("");
+		}
+
+		<!--求购状态-->
+		var str={enquiryStatus:enquiryStatus,
+                page:1,
+                limit:10
+		};
+		$.ajax({
+				url : "getEnquiryList",
+				type : "post",
+				data:JSON.stringify(str),
+				contentType: 'application/json; charset=UTF-8',
+				dataType : "json",
+				success : function(data) {
+                    var whatever="";
+					$.each(data.data, function (i, v) {
+                         whatever = liContent(v);
+                    if(enquiryStatus==""){
+                        $("#order-list1").append(whatever);
+                    }else if(enquiryStatus==1){
+                        $("#order-list2").append(whatever);
+                    }else if (enquiryStatus=2){
+                        $("#order-list3").append(whatever);
+                    }else if (enquiryStatus==3){
+                        $("#order-list4").append(whatever);
+                    }else if (enquiryStatus==4){
+                        $("#order-list5").append(whatever);
+                    }
+                    });
+				}
+		});
+
+}
+
+
+function liContent(v) {
+		var enquiryNumber=v.enquiryNumber;
+		var enquiryTitle=v.enquiryTitle;
+		var takeDate=v.strTakeDate;
+		var createTime=v.strCreateTime;
+		var endTime=v.strEndTime;
+		var enquiryStatus=v.enquiryStatus;
+		var statusMessage=v.statusMessage;
+		var content = "";
+	var listProductDto=v.enquiryProductDto;
+    var proList="";
+   for(var i = 0 ; i<listProductDto.length; i++){
+       var productNumber=listProductDto[i].productNumber;
+       var productUnit=listProductDto[i].productUnit;
+       var productName=listProductDto[i].productName;
+       var productImage=listProductDto[i].productImage;
+       var enquiryProductId=listProductDto[i].enquiryProductId;
+       proList+="<ul class='item-list'>"
+           +"<li class='td td-item'>"
+           +"<div class='item-pic'>"
+           +"<a href='#' class='J_MakePoint'>"
+           +"<img src='"+productImage+"' class='itempic J_ItemImg'>"
+           +"</a>"
+           +"</div>"
+           +"<div class='item-info'>"
+           +"<div class='item-basic-info'>"
+           +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"'>"
+           +"<p>"+productName+"</p>"
+           +"<p class='info-little'>颜色：12#川南玛瑙"
+           +"<br/>包装：裸装 </p>"
+           +"</a>"
+           +"</div>"
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-price'>"
+           +"<div class='item-price'>"
+           +productNumber
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-number'>"
+           +"<div class='item-number'>"
+           +"<span>"+productUnit+"</span>"
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-operation'>"
+           +"<div class='item-operation'>"
+           +createTime
+           +"<p>"+takeDate+"</p>"
+           +"</div>"
+           +"</li>"
+           +"</ul>"
+   }
+
+				var li= $("<div class ='order-status5'>"
+						+"<div class='order-title'>"
+							+"<div class='dd-num'>订单编号：<a href='javascript:;'>"+enquiryNumber+"</a></div>"
+							+"<span>成交时间："+takeDate+"</span>"
+						+"</div>"
+						+"<div class='order-content'>"
+								+"<div class='order-left'>"
+										+proList
+								+"</div>"
+							+"<div class='order-right'>"
+									+"<li class='td td-amount'>"
+										+"<div class='item-amount'>"
+											+statusMessage
+										+"</div>"
+									+"</li>"
+									+"<div class='move-right'>"
+										+"<li class='td td-status'>"
+											+"<div class='item-status'>"
+												+"<p class='Mystatus'><a href='javascript:void(0);' id='updateEnquiry' onclick='updateEnquiry(\""+enquiryNumber+"\",\""+1+"\")'>编辑</a></p>"
+												+"<p class='order-info'><a href='javascript:void(0);' onclick='delEnquiry(\""+enquiryNumber+"\")'>删除</a></p>"
+											+"</div>"
+										+"</li>"
+									+"</div>"
+							+"</div>"
+						+"</div>"
+				+"</div>"
+		);
+	<!--只有审核不通过后才能编辑-->
+/*	if(enquiryStatus==1){
+	    console.log("编辑按钮判断");
+		$('#updateEnquiry').style.display="block";
+		 <!--style='display:none;'-->
+	}*/
+	return li;
+}
+
+/*编辑/-带着编号跳转到修改页面 -将编号存入redis -  页面回显信息*/
+function updateEnquiry(enquiryNumber,isUpdate){
+    //var str={enquiryNumber:enquiryNumber};
+
+   /* $.ajax({
+        url : "toAddPurchase",
+        type : "post",
+        data:JSON.stringify(str),
+        contentType: 'application/json; charset=UTF-8',
+        dataType : "json",
+        success : function(data) {
+            console.log(data.enquiryNumber);*/
+            window.location.href="/enquiry/create?enquiryNumber="+enquiryNumber+"&isUpdate="+isUpdate;
+     //   }
+    //});
+}
+<!--删除-->
+function delEnquiry(enquiryNumber){
+    var str={enquiryNumber:enquiryNumber}
+	$.ajax({
+			url : "delEnquiry",
+			type : "post",
+			data:JSON.stringify(str),
+			contentType: 'application/json; charset=UTF-8',
+			dataType : "json",
+			success : function(data) {
+				alert(data.message);
+				//需要弹框提示操作成功与否
+                window.location.href="/personalCenter/toEnquiryManage";
+            }
+		});
+}
+</script>
+<!--<script>
+    function addEnquiry() {
+        $.ajax({
+            url : "addEnquiry",
+            type : "post",
+            data:{},
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+            }
+        });
+    }
+
+    function dateFormat_2(longTypeDate){
+        var longTypeDate=new Date(longTypeDate);
+        longTypeDate=longTypeDate.getFullYear()+longTypeDate.getDate()+longTypeDate.getDay();
+        return longTypeDate;
+    }
+</script>-->
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

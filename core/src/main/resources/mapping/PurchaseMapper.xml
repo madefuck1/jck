@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.PurchaseMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Purchase" >
+    <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+    <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <resultMap id="ResultMap" type="com.soufang.model.Purchase" >
+    <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+    <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+    <collection property="enquiry" ofType="com.soufang.model.Enquiry">
+    <id column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="enquiry_title" property="enquiryTitle" jdbcType="VARCHAR" />
+    <result column="enquiry_type" property="enquiryType" jdbcType="INTEGER" />
+    <result column="enquiry_status" property="enquiryStatus" jdbcType="INTEGER" />
+    <result column="take_date" property="takeDate" jdbcType="TIMESTAMP" />
+    <result column="take_address" property="takeAddress" jdbcType="VARCHAR" />
+    <result column="take_name" property="takeName" jdbcType="VARCHAR" />
+    <result column="take_phone" property="takePhone" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enquiry_remark" property="enquiryRemark" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="enquiryProducts" ofType="com.soufang.model.EnquiryProduct">
+    <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+    <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+    <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+    <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+    <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="shop" ofType="com.soufang.model.Shop">
+      <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+      <result column="user_id" property="userId" jdbcType="BIGINT"/>
+      <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+      <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+      <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+      <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+      <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+      <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+      <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+      <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+
+    purchase_number, shop_id, enquiry_product_id, unit_price, sum_price, offer_status, 
+    offer_time
+  </sql>
+
+  <select id="getPurchaseListByEnqunum" parameterType="java.lang.String" resultMap="ResultMap">
+    select * from t_purchase tp
+      LEFT JOIN t_enquiry_product tep on tep.enquiry_product_id=tp.enquiry_product_id
+      LEFT JOIN t_enquiry te on te.enquiry_number= tep.enquiry_number
+      LEFT JOIN t_shop ts on ts.shop_id= tp.shop_id
+      where te.enquiry_number = #{enquiryNumber};
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+    	select count(1) from t_purchase tp
+	  LEFT JOIN t_enquiry_product tep on tep.enquiry_product_id=tp.enquiry_product_id
+	  LEFT JOIN t_enquiry te on te.enquiry_number= tep.enquiry_number
+      WHERE te.user_id =#{userId} AND te.enquiry_status !=0
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_purchase
+    where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
+  </select>
+  <!--<select id="selPurchaseByenquiryNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select tep.*,tph.*,ts.*
+    from t_enquiry_product tep
+   inner join t_enquiry teq on tep.enquiry_number=teq.enquiry_number
+	left JOIN t_purchase tph on tep.enquiry_product_id=tph.enquiry_product_id
+    left JOIN t_shop ts on ts.shop_id=tph.shop_id
+    where teq.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+  </select>-->
+<update id="" parameterType="com.soufang.model.Purchase">
+    UPDATE t_purchase SET off_status=${offStatus} purchase_number=${purchaseNumber}
+</update>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_purchase
+    where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Purchase" >
+    insert into t_purchase (purchase_number, shop_id, enquiry_product_id,
+      unit_price, sum_price, offer_status, 
+      offer_time)
+    values (#{purchaseNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{enquiryProductId,jdbcType=BIGINT}, 
+      #{unitPrice,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, #{offerStatus,jdbcType=INTEGER}, 
+      #{offerTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Purchase" >
+    insert into t_purchase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseNumber != null" >
+        purchase_number,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="enquiryProductId != null" >
+        enquiry_product_id,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="sumPrice != null" >
+        sum_price,
+      </if>
+      <if test="offerStatus != null" >
+        offer_status,
+      </if>
+      <if test="offerTime != null" >
+        offer_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseNumber != null" >
+        #{purchaseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="enquiryProductId != null" >
+        #{enquiryProductId,jdbcType=BIGINT},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="offerStatus != null" >
+        #{offerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="offerTime != null" >
+        #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Purchase" >
+    update t_purchase
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="enquiryProductId != null" >
+        enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null" >
+        sum_price = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="offerStatus != null" >
+        offer_status = #{offerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="offerTime != null" >
+        offer_time = #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Purchase" >
+    update t_purchase
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      sum_price = #{sumPrice,jdbcType=DECIMAL},
+      offer_status = #{offerStatus,jdbcType=INTEGER},
+      offer_time = #{offerTime,jdbcType=TIMESTAMP}
+    where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
+  </update>
+
+  <!--根据询盘信息查到产品ID去更改询价状态-->
+  <update id="delPurchaseByEnquiryNumber" parameterType="java.lang.String">
+    UPDATE t_purchase
+      SET offer_status='0'
+      where enquiry_product_id in ( SELECT enquiry_product_id from t_enquiry_product
+      where enquiry_number = #{enquiry_number});
+  </update>
+
+
+</mapper>

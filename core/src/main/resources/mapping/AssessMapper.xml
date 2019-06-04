@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.AssessMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Assess" >
+    <id column="assess_id" property="assessId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="assess_type" property="assessType" jdbcType="INTEGER" />
+    <result column="assess_content" property="assessContent" jdbcType="VARCHAR" />
+    <result column="assess_user_id" property="assessUserId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.soufang.base.dto.assess.AssessDto">
+    <id column="assess_id" jdbcType="BIGINT" property="assessId" />
+    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
+    <result column="assess_type" jdbcType="INTEGER" property="assessType" />
+    <result column="assess_content" jdbcType="VARCHAR" property="assessContent" />
+    <result column="assess_user_id" jdbcType="BIGINT" property="assessUserId" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    assess_id, shop_id, product_id, order_number, assess_type, assess_content, assess_user_id, 
+    create_time
+  </sql>
+  <sql id="return_Column_List" >
+    assess_id, shop_id, product_id, order_number, assess_type, assess_content, assess_user_id,
+    create_time,
+    GetLoginNameByUserId(assess_user_id) as loginName,GetProductNameById(product_id) as product_name
+  </sql>
+  <select id="getList" resultMap="ResultMap" parameterType="com.soufang.base.search.assess.AssessSo" >
+    select
+    <include refid="return_Column_List" />
+    from t_assess
+    where shop_id = #{shopId,jdbcType=BIGINT}
+    <if test="type != null ">
+      and assess_type = #{type}
+    </if>
+    ORDER BY assess_type DESC
+    <if test="page != null and limit != null">
+      LIMIT #{page},#{limit}
+    </if>
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.assess.AssessSo" >
+    select
+    COUNT(*)
+    from t_assess
+    where shop_id = #{shopId,jdbcType=BIGINT}
+    <if test="type != null ">
+      and assess_type = #{type}
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_assess
+    where assess_id = #{assessId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_assess
+    where assess_id = #{assessId,jdbcType=BIGINT}
+
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Assess" >
+    insert into t_assess (assess_id, shop_id, product_id, 
+      order_number, assess_type, assess_content, 
+      assess_user_id, create_time)
+    values (#{assessId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{orderNumber,jdbcType=VARCHAR}, #{assessType,jdbcType=INTEGER}, #{assessContent,jdbcType=VARCHAR}, 
+      #{assessUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Assess" >
+    insert into t_assess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="assessId != null" >
+        assess_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="assessType != null" >
+        assess_type,
+      </if>
+      <if test="assessContent != null" >
+        assess_content,
+      </if>
+      <if test="assessUserId != null" >
+        assess_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="assessId != null" >
+        #{assessId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assessType != null" >
+        #{assessType,jdbcType=INTEGER},
+      </if>
+      <if test="assessContent != null" >
+        #{assessContent,jdbcType=VARCHAR},
+      </if>
+      <if test="assessUserId != null" >
+        #{assessUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Assess" >
+    update t_assess
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assessType != null" >
+        assess_type = #{assessType,jdbcType=INTEGER},
+      </if>
+      <if test="assessContent != null" >
+        assess_content = #{assessContent,jdbcType=VARCHAR},
+      </if>
+      <if test="assessUserId != null" >
+        assess_user_id = #{assessUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where assess_id = #{assessId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Assess" >
+    update t_assess
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      assess_type = #{assessType,jdbcType=INTEGER},
+      assess_content = #{assessContent,jdbcType=VARCHAR},
+      assess_user_id = #{assessUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where assess_id = #{assessId,jdbcType=BIGINT}
+  </update>
+</mapper>

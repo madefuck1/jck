@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+.th-price, .td-price{
+	width: 10%;
+}
+.th-item, .td-item{
+	width: 50%
+}
+.th-amount, .th-status, .th-change{
+	width: 20%;
+}
+.td-amount{
+	width: 20%;
+}
+.order-left{
+	padding: 20px 5px;
+}
+.td-price, .td-number, .td-amount{
+	margin-top: 0px
+}
+.item-basic-info{
+	padding-top: 0px;
+}
+.item-pic2{
+	margin-top: 10px;
+	width: 60px;
+	height: 18px;
+	background: url(../../images/sale/CustomerService.png) no-repeat 38px 0px
+}
+
+.item-pic3{
+	width: 60px;
+	height: 18px;
+	background: url(../../images/sale/praise.png) no-repeat 28px 0px
+	/*好评*/
+}
+
+.order-main{
+	margin-bottom: 10px
+}
+
+.item-pic4{
+	width: 60px;
+	height: 18px;
+	background: url(../../images/sale/average.png) no-repeat 28px 0px
+	/*中评*/
+}
+
+.item-pic5{
+	width: 60px;
+	height: 18px;
+	background: url(../../images/sale/badreview.png) no-repeat 28px 0px
+	/*差评*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

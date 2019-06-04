@@ -1,0 +1,66 @@
+<@override name="title">
+公司详情
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form" >
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="compName" id="compName" value="${companyDto.compName}" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">电话</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="compPhone" id="compPhone" value="${companyDto.compPhone}"  class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="compAddress" id="compAddress" value="${companyDto.compAddress}" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">官网</label>
+            <div class="layui-input-inline">
+                <input type="text" name="compUrls" id="compUrls" value="${companyDto.compUrls}" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="compLinker" id="compLinker" value="${companyDto.compLinker}" lclass="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">注册时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="strCreateTime" id="strCreateTime" value="${companyDto.strCreateTime}" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+</div>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

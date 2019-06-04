@@ -1,0 +1,84 @@
+<div id="contain">
+    <div class="white"></div>
+    <div class="list">
+        <div class="list_in">
+            <div class="list_up">
+                <div class="title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
+                <div class="header">
+                    <ul>
+                        <li class="cur"><a href="/index">首页</a></li>
+                        <li><a href="">求购信息</a></li>
+                        <li><a href="">纺织咨询</a></li>
+                        <li><a href="">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list_down">
+                <div class="list_left">
+                    <#list assortList as assort>
+                        <div class="meu">
+                            <input type="hidden" value="${assort.assortId}">
+                            <div class="list_liftIn">
+                                <div class="list_cloum1">
+                                    <i class="iconfont"></i>
+                                    <span class="span1" onclick="clickAssortName('A${assort.assortId}','${assort.assortName}');">${assort.assortName}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </#list>
+                </div>
+                <div class="list_right" style="display: none">
+                    <div class="list_con">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="down">
+            <div class="singer_in">
+                <div class="information">
+                    <div class="left">
+                        <div class="pic"></div>
+                        <p class="load">您好！请<a href="javascript">登陆/注册</a></p>
+                    </div>
+                    <div class="center">
+                        <div class="center1">
+                            <div class="pic1"></div>
+                            <p class="p1">发布求购</p>
+                        </div>
+                        <div class="center2">
+                            <div class="pic2"></div>
+                            <p class="p1">开通商铺</p>
+                        </div>
+                        <div class="center3">
+                            <div class="pic3"></div>
+                            <p class="p1">发布信息</p>
+                        </div>
+                        <div class="center4">
+                            <div class="pic4"></div>
+                            <p class="p1">新手上路</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="row_1">
+                            <div class="row row1">
+                                <a href="javascript">采购管理</a>
+                            </div>
+                            <div class="row row2">
+                                <a href="javascript">我的采购订单</a>
+                            </div>
+                        </div>
+                        <div class="row_1">
+                            <div class="row row2">
+                                <a href="javascript">管理产品</a>
+                            </div>
+                            <div class="row row2">
+                                <a href="javascript">我的销售订单</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

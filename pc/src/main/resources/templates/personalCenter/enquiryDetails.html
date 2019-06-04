@@ -1,0 +1,204 @@
+<@override name="title">
+求购详情
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/sale/sale_detail.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/purchDetail.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
+</@override>
+
+<@override name="body">
+		<div id="purchaseDetail">
+			<div class="detail-left">
+				<img src="../images/product_mid.jpg" alt="" width="400">
+			</div>
+			<div class="clearfixRight">
+				<div class="tb-detail-hd">
+					<h3 style="font-size: 16px; font-weight: bold" ><span id="enquiryTitle"></span></h3>
+				</div>
+				<div class="clear-down">
+					<div class="cloum1">
+						<span class="am-u-sm-2">发布人：</span>
+						<span class="am-u-sm-10">
+							<span>昵称&nbsp;&nbsp;</span>
+							<span class=" cloum1-pic"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">编号：</span>
+						<span class="am-u-sm-10">
+							<span>BY0000803774</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">发布时间：</span>
+						<span class="am-u-sm-10">
+							<span>2019-03-09</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">交付时间：</span>
+						<span class="am-u-sm-10">
+							<span>2019-05-02</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">求购状态：</span>
+						<span class="am-u-sm-10">
+							<span>求购中</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">求购数量：</span>
+						<span class="am-u-sm-10">
+							<span>1000米</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">交货地址：</span>
+						<span class="am-u-sm-10">
+							<span>中国 浙江省 绍兴市 越城区 曲屯路联合大厦14楼</span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">描述：</span>
+						<span class="am-u-sm-10" style="line-height: 24px">
+							<span>采购窗帘面料 要不带遮光，天蓝色的布料 具体风格请看图片 （请有供货能力者与我们联系， 以上参数仅供参考，一切以电话联系为准，谢谢！）采购窗帘面料 要不带遮光，天蓝色的布料 具体风格请看图片 （请有供货能力者与我们联系， 以上参数仅供参考，一切以电话联系为准，谢谢！）</span>
+						</span>
+
+					</div>
+
+
+				</div>
+			</div>
+			<div class="clear"></div>
+	
+		</div>
+	
+		<div class="clear_form">
+		<h4 style="margin-bottom: 10px">订单报价信息</h4>
+		<table class="am-table am-table-bordered" id="purchaseTables">
+			<thead style="background: #e6e6e6;">
+				<tr>
+					<th>报价日期</th>
+					<th>报价公司</th>
+					<th>报价</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+	</table>
+	</div>
+
+
+</@override>
+<@override name="js">
+<script>
+	//获取详情询盘ID
+    var enquiryProductId = "${enquiryProductId}";
+    $(function(){
+        var str={enquiryProductId:enquiryProductId};
+        $.ajax({
+            url : "selectProductById",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                console.log(data);
+                $("#enquiryTitle").val(data.enquiryTitle);
+                $("#userID").val(data.userID);
+                $("#enquiryNumber").val(data.enquiryNumber);
+                $("#createTime").val(longFormatDate(data.createTime));
+                $("#takeDate").val(longFormatDate(data.takeDate));
+                $("#detailStreet").val(data.takeAddress);
+                $("#enquiryRemark").val(data.enquiryRemark);
+                $("#enquiryStatus").val(data.statusMessage);
+                $.each(data.enquiryProductDto, function (i, v) {
+                    //需要循环插入报价信息
+                    var whatever = liContent(v);
+                    $("#purchaseTables").append(whatever)
+                });
+            }
+        });
+	});
+        function liContent(v){
+            var purchases=v.purchases;
+            console.log(purchases);
+            var li;
+			for(var i = 0 ;i< purchases.length ; i++) {
+                var offerTime = purchases[i].strOfferTime;
+                //var shopName=v.shopDto.shopName;
+                var shopName = "88888";
+                var unitPrice = purchases[i].unitPrice;
+                var productUnit = v.productUnit;
+                var remark = purchases[i].remark;
+                var purchaseNumber = purchases[i].purchaseNumber;
+                li +=
+                    "<td>" + offerTime + "</td>"
+                    + "<td>" + shopName + "</td>"
+                    + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
+                    + "<td>" + remark + "</td>"
+                    + "<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",1" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",0" + ")'>拒绝</a></td>"
+            }
+				var tables=$("<tbody><tr>"
+						+li
+                    +"</tr>"
+                    +"</tbody>"
+				);
+                return tables;
+        }
+    function isUseRejused(purchaseNumber,offStatus){
+		var str ={purchaseNumber:purchaseNumber,offStatus:offStatus};
+        $.ajax({
+            url: "selectProductById",
+            type: "post",
+            data: JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType: "json",
+            success: function (data) {
+				console.log(data);
+				console.log("需要弹出是否成功！");
+            }
+        });
+    }
+
+    function longFormatDate(longTypeDate) {
+        var datetimeType = "";
+        var date = new Date();
+        date.setTime(longTypeDate);
+        datetimeType+= date.getFullYear();   //年  
+        datetimeType+= "-" + getMonth(date); //月   
+        datetimeType+= "-" + getDay(date);   //日  
+        return datetimeType;
+    }
+    //返回月   
+    function getMonth(date){
+        var month = "";
+        month = date.getMonth() + 1;
+        if(month<10){
+            month = "0" + month;
+        }
+        return month;
+    }
+    //返回日 
+    function getDay(date){
+        var day = "";
+        day = date.getDate();
+        if(day<10){
+            day = "0" + day;
+        }
+        return day;
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

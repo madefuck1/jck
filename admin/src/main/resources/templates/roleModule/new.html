@@ -1,0 +1,97 @@
+<@override name="title">
+新增菜单
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<div class="layui-form" >
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-inline">
+                <input name="moduleName" id="moduleName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">父级</label>
+            <div class="layui-input-inline">
+                <select name="parentId" lay-verify="required" lay-search="" id="parentId">
+                    <option value="0" selected="selected">顶级</option>
+                    <#list list as module>
+                        <option value="${module.moduleId}">${module.moduleName}</option>
+                    </#list>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="moduleLink" id="moduleLink" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="moduleSort" id="moduleSort" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    function submitForm(){
+        var data = '{"moduleName":"'+$("#moduleName").val()+'","parentId":"'+$('#parentId').val()+'","moduleSort":"'+$('#moduleSort').val()+
+            '","moduleLink":"'+$('#moduleLink').val()+'"}' ;
+        $.ajax({
+            url: "addModule",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = 'toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

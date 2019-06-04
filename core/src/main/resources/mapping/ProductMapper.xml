@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.Product">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="DtoResultMap" type="com.soufang.base.dto.product.ProductDto">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assortName" property="assortName" jdbcType="VARCHAR"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="kv1" property="kv1" jdbcType="VARCHAR"/>
+        <result column="kv2" property="kv2" jdbcType="VARCHAR"/>
+        <result column="kv3" property="kv3" jdbcType="VARCHAR"/>
+        <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
+        <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
+        <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
+
+        <collection property="productColorDtoList" ofType="com.soufang.base.dto.product.ProductColorDto">
+            <id column="product_color_id" property="productColorId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="is_spot" property="isSpot" jdbcType="INTEGER"/>
+            <result column="product_color" property="productColor" jdbcType="VARCHAR"/>
+            <result column="spock" property="spock" jdbcType="DECIMAL"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="color_image" property="colorImage" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="productSpecDtoList" ofType="com.soufang.base.dto.product.ProductSpecDto">
+            <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+            <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+            <result column="min" property="min" jdbcType="BIGINT"/>
+            <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+            <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+            <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        </collection>
+        <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
+            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT"/>
+            <result column="browse_number" property="browseNumber" jdbcType="BIGINT"/>
+            <result column="deal_number" property="dealNumber" jdbcType="BIGINT"/>
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+            <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="ProductAndSpecDto" type="com.soufang.base.dto.product.ProductDto">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assortName" property="assortName" jdbcType="VARCHAR"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="kv1" property="kv1" jdbcType="VARCHAR"/>
+        <result column="kv2" property="kv2" jdbcType="VARCHAR"/>
+        <result column="kv3" property="kv3" jdbcType="VARCHAR"/>
+        <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
+        <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
+        <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
+
+        <collection property="productSpecDto" ofType="com.soufang.base.dto.product.ProductSpecDto">
+            <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+            <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+            <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+            <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+            <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+
+
+
+    <sql id="Base_Column_List">
+    product_id, shop_id, shop_name, product_name, is_upper, assort_id, product_json, 
+    product_unit, product_detail, product_image, product_level, product_send_country,
+    product_send_province, product_send_city,create_time, key1, key1_value,
+    key2, key2_value, key3, key3_value, key4, key4_value, key5, key5_value
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_product
+        where product_id = #{productId,jdbcType=BIGINT}
+    </select>
+    <select id="getAllProduct" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_product
+    </select>
+
+    <update id="getDown" parameterType="list" keyProperty="id" useGeneratedKeys="true">
+        <foreach collection="list" index="index" item="productId" >
+            update t_product
+            <set>
+                is_upper = 0
+            </set>
+            WHERE product_id = #{productId};
+        </foreach>
+    </update>
+    <update id="putUp" parameterType="list" keyProperty="id" useGeneratedKeys="true">
+        <foreach collection="list" index="index" item="productId" >
+            update t_product
+            <set>
+                is_upper = 1
+            </set>
+            WHERE product_id = #{productId};
+        </foreach>
+    </update>
+    <update id="deleteProduct" parameterType="list" keyProperty="id" useGeneratedKeys="true" >
+        <foreach collection="list" index="index" item="productId" >
+            update t_product
+            <set>
+                is_upper = -1
+            </set>
+            WHERE product_id = #{productId};
+        </foreach>
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_product
+    where product_id = #{productId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.Product" useGeneratedKeys="true" keyProperty="productId"
+            keyColumn="product_id">
+    insert into t_product (product_id, shop_id, shop_name, 
+      product_name, is_upper, assort_id, 
+      product_json, product_unit, product_detail, 
+      product_image, product_level, create_time,
+      product_send_country,product_send_province,product_send_city,
+      key1, key1_value, key2,
+      key2_value, key3, key3_value, 
+      key4, key4_value, key5, 
+      key5_value)
+    values (#{productId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{shopName,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{isUpper,jdbcType=INTEGER}, #{assortId,jdbcType=BIGINT}, 
+      #{productJson,jdbcType=VARCHAR}, #{productUnit,jdbcType=VARCHAR}, #{productDetail,jdbcType=VARCHAR}, 
+      #{productImage,jdbcType=VARCHAR}, #{productLevel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{productSendCountry,jdbcType=VARCHAR},#{productSendProvince,jdbcType=VARCHAR},#{productSendCity,jdbcType=VARCHAR},
+      #{key1,jdbcType=VARCHAR}, #{key1Value,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, 
+      #{key2Value,jdbcType=VARCHAR}, #{key3,jdbcType=VARCHAR}, #{key3Value,jdbcType=VARCHAR}, 
+      #{key4,jdbcType=VARCHAR}, #{key4Value,jdbcType=VARCHAR}, #{key5,jdbcType=VARCHAR}, 
+      #{key5Value,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.Product">
+        insert into t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="shopName != null">
+                shop_name,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="isUpper != null">
+                is_upper,
+            </if>
+            <if test="assortId != null">
+                assort_id,
+            </if>
+            <if test="productJson != null">
+                product_json,
+            </if>
+            <if test="productUnit != null">
+                product_unit,
+            </if>
+            <if test="productDetail != null">
+                product_detail,
+            </if>
+            <if test="productImage != null">
+                product_image,
+            </if>
+            <if test="productLevel != null">
+                product_level,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="productSendCountry != null">
+                product_send_country,
+            </if>
+            <if test="productSendProvince != null">
+                product_send_province,
+            </if>
+            <if test="productSendCity != null">
+                product_send_city,
+            </if>
+            <if test="key1 != null">
+                key1,
+            </if>
+            <if test="key1Value != null">
+                key1_value,
+            </if>
+            <if test="key2 != null">
+                key2,
+            </if>
+            <if test="key2Value != null">
+                key2_value,
+            </if>
+            <if test="key3 != null">
+                key3,
+            </if>
+            <if test="key3Value != null">
+                key3_value,
+            </if>
+            <if test="key4 != null">
+                key4,
+            </if>
+            <if test="key4Value != null">
+                key4_value,
+            </if>
+            <if test="key5 != null">
+                key5,
+            </if>
+            <if test="key5Value != null">
+                key5_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="shopName != null">
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="isUpper != null">
+                #{isUpper,jdbcType=INTEGER},
+            </if>
+            <if test="assortId != null">
+                #{assortId,jdbcType=BIGINT},
+            </if>
+            <if test="productJson != null">
+                #{productJson,jdbcType=VARCHAR},
+            </if>
+            <if test="productUnit != null">
+                #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="productDetail != null">
+                #{productDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="productImage != null">
+                #{productImage,jdbcType=VARCHAR},
+            </if>
+            <if test="productLevel != null">
+                #{productLevel,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productSendCountry != null">
+                #{productSendCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="productSendProvince != null">
+                #{productSendProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="productSendCity != null">
+                #{productSendCity,jdbcType=VARCHAR},
+            </if>
+            <if test="key1 != null">
+                #{key1,jdbcType=VARCHAR},
+            </if>
+            <if test="key1Value != null">
+                #{key1Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key2 != null">
+                #{key2,jdbcType=VARCHAR},
+            </if>
+            <if test="key2Value != null">
+                #{key2Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key3 != null">
+                #{key3,jdbcType=VARCHAR},
+            </if>
+            <if test="key3Value != null">
+                #{key3Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key4 != null">
+                #{key4,jdbcType=VARCHAR},
+            </if>
+            <if test="key4Value != null">
+                #{key4Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key5 != null">
+                #{key5,jdbcType=VARCHAR},
+            </if>
+            <if test="key5Value != null">
+                #{key5Value,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Product">
+        update t_product
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="isUpper != null">
+                is_upper = #{isUpper,jdbcType=INTEGER},
+            </if>
+            <if test="assortId != null">
+                assort_id = #{assortId,jdbcType=BIGINT},
+            </if>
+            <if test="productJson != null">
+                product_json = #{productJson,jdbcType=VARCHAR},
+            </if>
+            <if test="productUnit != null">
+                product_unit = #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="productDetail != null">
+                product_detail = #{productDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="productImage != null">
+                product_image = #{productImage,jdbcType=VARCHAR},
+            </if>
+            <if test="productLevel != null">
+                product_level = #{productLevel,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productSendCountry != null">
+                product_send_country = #{productSendCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="productSendProvince != null">
+                product_send_province = #{productSendProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="productSendCity != null">
+                product_send_city = #{productSendCity,jdbcType=VARCHAR},
+            </if>
+            <if test="key1 != null">
+                key1 = #{key1,jdbcType=VARCHAR},
+            </if>
+            <if test="key1Value != null">
+                key1_value = #{key1Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key2 != null">
+                key2 = #{key2,jdbcType=VARCHAR},
+            </if>
+            <if test="key2Value != null">
+                key2_value = #{key2Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key3 != null">
+                key3 = #{key3,jdbcType=VARCHAR},
+            </if>
+            <if test="key3Value != null">
+                key3_value = #{key3Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key4 != null">
+                key4 = #{key4,jdbcType=VARCHAR},
+            </if>
+            <if test="key4Value != null">
+                key4_value = #{key4Value,jdbcType=VARCHAR},
+            </if>
+            <if test="key5 != null">
+                key5 = #{key5,jdbcType=VARCHAR},
+            </if>
+            <if test="key5Value != null">
+                key5_value = #{key5Value,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.Product">
+    update t_product
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      is_upper = #{isUpper,jdbcType=INTEGER},
+      assort_id = #{assortId,jdbcType=BIGINT},
+      product_json = #{productJson,jdbcType=VARCHAR},
+      product_unit = #{productUnit,jdbcType=VARCHAR},
+      product_detail = #{productDetail,jdbcType=VARCHAR},
+      product_image = #{productImage,jdbcType=VARCHAR},
+      product_level = #{productLevel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_send_country = #{productSendCountry,jdbcType=VARCHAR},
+      product_send_province = #{productSendProvince,jdbcType=VARCHAR},
+      product_send_city = #{productSendCity,jdbcType=VARCHAR},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key1_value = #{key1Value,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key2_value = #{key2Value,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR},
+      key3_value = #{key3Value,jdbcType=VARCHAR},
+      key4 = #{key4,jdbcType=VARCHAR},
+      key4_value = #{key4Value,jdbcType=VARCHAR},
+      key5 = #{key5,jdbcType=VARCHAR},
+      key5_value = #{key5Value,jdbcType=VARCHAR}
+    where product_id = #{productId,jdbcType=BIGINT}
+  </update>
+
+    <select id="getList" parameterType="com.soufang.base.dto.product.ProductDto"
+            resultMap="DtoResultMap">
+        select
+        P.*, S.*, C.*, St.*, getAssortNameById (P.assort_id) as assortName,
+        concat(P.key1, '：', P.key1_value) as kv1,
+        concat(P.key2, '：', P.key2_value) as kv2,
+        concat(P.key3, '：', P.key3_value) as kv3,
+        concat(P.key4, '：', P.key4_value) as kv4,
+        concat(P.key5, '：', P.key5_value) as kv5,
+        <choose>
+            <when test="userId!=0 and userId!=null">
+                case when ISNULL(FP.footprint_id ) then 0 else 1 end as is_scan
+            </when>
+            <otherwise>
+                0 as is_scan
+            </otherwise>
+        </choose>
+        from ( select * from t_product limit #{page},#{limit}) as P
+        join t_product_color C on P.product_id = C.product_id
+        join t_product_spec S on P.product_id = S.product_id
+        join t_product_statistics St on P.product_id = St.product_id
+        <if test="userId!=0 and userId!=null">
+            left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
+        </if>
+        where 1 = 1
+        <if test="shopId != null">
+            and P.shop_id = #{shopId}
+        </if>
+        <if test="productName != null and productName != '' ">
+            and P.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="isUpper != null">
+            and P.is_upper = #{isUpper}
+        </if>
+        <if test="assortId != null and assortId != 0">
+            and FIND_IN_SET(P.assort_id,#{assortId})
+        </if>
+        <if test="assortIds != null and assortIds != ''">
+            and FIND_IN_SET(P.assort_id,#{assortIds})
+        </if>
+        <if test="shopName != null and shopName != '' ">
+            and P.shop_Name like concat(concat('%',#{shopName}),'%')
+        </if>
+        <if test="productSendCity != null and productSendCity != ''">
+            and P.product_send_city like concat(concat('%',#{productSendCity}),'%')
+        </if>
+
+        <choose>
+            <when test="sortType == 1 ">
+                <choose>
+                    <when test="sort != 0">
+                        order by
+                        St.deal_number desc
+                    </when>
+                    <otherwise>
+                        order by
+                        St.deal_number
+                    </otherwise>
+                </choose>
+            </when>
+            <when test="sortType == 2 ">
+                <choose>
+                    <when test="sort != 0">
+                        order by
+                        St.browseNumber desc
+                    </when>
+                    <otherwise>
+                        order by
+                        St.browseNumber
+                    </otherwise>
+                </choose>
+            </when>
+            <when test="sortType == 3 ">
+                <choose>
+                    <when test="sort != 0">
+                        order by
+                        St.productPrice desc
+                    </when>
+                    <otherwise>
+                        order by
+                        St.product_price
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <select id="getCount" parameterType="com.soufang.base.dto.product.ProductDto"
+            resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM t_product
+        WHERE 1 = 1
+        <if test="shopId != null">
+            and shop_id = #{shopId}
+        </if>
+        <if test="productName != null">
+            and product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="isUpper != null">
+            and is_upper = #{isUpper}
+        </if>
+        <if test="assortId != null">
+            and FIND_IN_SET(assort_id,#{assortId})
+        </if>
+        <if test="assortIds != null and assortIds != ''">
+            and FIND_IN_SET(assort_id,#{assortIds})
+        </if>
+        <if test="shopName != null">
+            and shopName like concat(concat('%',#{shopName}),'%')
+        </if>
+        <if test="assortName != null">
+            and assortName like concat(concat('%',#{assortName}),'%')
+        </if>
+    </select>
+
+    <select id="getDetail" parameterType="com.soufang.base.dto.product.ProductDto" resultMap="DtoResultMap">
+        select
+        P.*, S.*,C.*, St.*, getAssortNameById (P.assort_id) as assortName,
+        concat(P.key1, '：', P.key1_value) as kv1,
+        concat(P.key2, '：', P.key2_value) as kv2,
+        concat(P.key3, '：', P.key3_value) as kv3,
+        concat(P.key4, '：', P.key4_value) as kv4,
+        concat(P.key5, '：', P.key5_value) as kv5,
+        GetMinNumberBySpecName(S.spec_name) as min,
+        <choose>
+            <when test="userId!=0 and userId!=null">
+                case when ISNULL(FP.footprint_id ) then 0 else 1 end as is_scan
+            </when>
+            <otherwise>
+                0 as is_scan
+            </otherwise>
+        </choose>
+        from t_product P
+        join t_product_color C on P.product_id = C.product_id
+        join t_product_spec S on P.product_id = S.product_id
+        join t_product_statistics St on P.product_id = St.product_id
+        <if test="userId!=0 and userId!=null">
+            left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
+        </if>
+        WHERE P.product_id = #{productId}
+
+
+    </select>
+
+
+    <select id="getHotList" resultMap="DtoResultMap">
+        select
+        P.*, S.*, St.*, getAssortNameById (P.assort_id) as assortName,
+        concat(P.key1, '：', P.key1_value) as kv1,
+        concat(P.key2, '：', P.key2_value) as kv2,
+        concat(P.key3, '：', P.key3_value) as kv3,
+        concat(P.key4, '：', P.key4_value) as kv4,
+        concat(P.key5, '：', P.key5_value) as kv5
+        from ( select * from t_product order by product_level limit 10) as P
+        join t_product_color C on P.product_id = C.product_id
+        join t_product_spec S on P.product_id = S.product_id
+        join t_product_statistics St on P.product_id = St.product_id
+    </select>
+
+    <select id="getFootPrintList" parameterType="com.soufang.base.dto.product.ProductDto" resultMap="DtoResultMap">
+        select P.*,PS.* from t_footprint FP
+        join t_product P on FP.product_id=P.product_id
+        join t_product_statistics PS on PS.product_id = P.product_id
+        where FP.user_id =#{userId}
+        order by FP.create_time
+    </select>
+
+    <select id="getProductDetailBySpec_Number" resultMap="ProductAndSpecDto" parameterType="com.soufang.base.dto.product.ProductDto">
+
+        select * from (SELECT * from t_product where product_id= #{productId} ) product
+        left join t_product_spec spec ON spec.product_id = product.product_id and spec.spec_name = #{productSpec}
+        and spec.min_number &lt;= #{productNumber} and spec.max_number &gt;= #{productNumber}
+
+    </select>
+
+    <select id="getShopProductList" parameterType="com.soufang.base.search.product.ProductManageSo"
+            resultMap="DtoResultMap">
+        select tp.*,tps.*
+        from t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id
+        where 1 = 1
+        <if test="shopId != null">
+            and tp.shop_id = #{shopId}
+        </if>
+        <if test="productName != null and productName != '' ">
+            and tp.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="isUpper != null">
+            and tp.is_upper = #{isUpper}
+        </if>
+        <choose>
+            <when test="startDate != null and endDate != null and startDate != '' and endDate != ''  ">
+                and tp.create_time between #{startDate} and #{endDate}
+            </when>
+            <when test="startDate != null  and startDate != '' ">
+                <![CDATA[
+                    and tp.create_time > #{startDate}
+                   ]]>
+            </when>
+            <when test="endDate != null and endDate != ''  ">
+                <![CDATA[
+                    and tp.create_time < #{endDate}
+                   ]]>
+            </when>
+        </choose>
+        order by tp.create_time LIMIT #{page},#{limit}
+    </select>
+
+    <select id="getShopProductCount" parameterType="com.soufang.base.search.product.ProductManageSo" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id WHERE 1=1
+        <if test="shopId != null">
+            and tp.shop_id = #{shopId}
+        </if>
+        <if test="productName != null and productName != '' ">
+            and tp.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="isUpper != null">
+            and tp.is_upper = #{isUpper}
+        </if>
+        <choose>
+            <when test="startDate != null and endDate != null and startDate != '' and endDate != ''  ">
+                and tp.create_time between #{startDate} and #{endDate}
+            </when>
+            <when test="startDate != null  and startDate != '' ">
+                <![CDATA[
+                    and tp.create_time > #{startDate}
+                   ]]>
+            </when>
+            <when test="endDate != null and endDate != ''  ">
+                <![CDATA[
+                    and tp.create_time < #{endDate}
+                   ]]>
+            </when>
+        </choose>
+    </select>
+
+</mapper>

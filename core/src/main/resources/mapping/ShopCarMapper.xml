@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ShopCarMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.ShopCar">
+        <id column="shop_car_id" property="shopCarId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="DtoResultMap" type="com.soufang.base.dto.shopCar.ShopCarDto">
+        <id column="shop_car_id" property="shopCarId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <collection property="shopCarProductDtoList" ofType="com.soufang.base.dto.shopCar.ShopCarProductDto">
+            <id column="shop_car_product_id" property="shopCarProductId" jdbcType="BIGINT"/>
+            <result column="shop_car_id" property="shopCarId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="product_number" property="productNumber" jdbcType="DECIMAL"/>
+            <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+            <result column="product_spec" property="productSpec" jdbcType="VARCHAR"/>
+            <result column="product_color" property="productColor" jdbcType="VARCHAR"/>
+            <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+            <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+            <result column="min" property="min" jdbcType="BIGINT" />
+            <result column="max" property="max" jdbcType="BIGINT" />
+            <result column="spock" property="spock" jdbcType="BIGINT" />
+            <collection property="productSpecDtoList" ofType="com.soufang.base.dto.product.ProductSpecDto">
+                <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+                <result column="product_id" property="productId" jdbcType="BIGINT"/>
+                <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+                <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+                <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+                <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+                <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+                <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    shop_car_id, user_id, shop_id, create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/> , GetShopNameByUserId(shop_id) as shop_name
+        from t_shop_car
+        where shop_car_id = #{shopCarId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_shop_car
+    where shop_car_id = #{shopCarId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.ShopCar" useGeneratedKeys="true" keyColumn="shop_car_id"
+            keyProperty="shopCarId">
+    insert into t_shop_car (shop_car_id, user_id, shop_id, 
+      create_time)
+    values (#{shopCarId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.ShopCar">
+        insert into t_shop_car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shopCarId != null">
+                shop_car_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shopCarId != null">
+                #{shopCarId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.ShopCar">
+        update t_shop_car
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where shop_car_id = #{shopCarId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.ShopCar">
+    update t_shop_car
+    set user_id = #{userId,jdbcType=BIGINT},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where shop_car_id = #{shopCarId,jdbcType=BIGINT}
+  </update>
+
+    <select id="isExistByShop" parameterType="com.soufang.base.dto.shopCar.ShopCarDto" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from t_shop_car where
+        user_id = #{userId} and shop_id = #{shopId}
+    </select>
+
+    <select id="selectShopCarWithProductIsNotExist" parameterType="java.lang.Long"
+            resultType="com.soufang.base.dto.shopCar.ShopCarDto">
+        select
+            shopCar.shop_car_id AS shopCarId, shopCar.user_id as userId,
+            shopCar.shop_id as shopId, shopCar.create_time as createTime
+        from
+            t_shop_car shopCar
+        left join t_shop_car_product shopCarProduct on shopCar.shop_car_id = shopCarProduct.shop_car_id
+        where
+            shopCar.user_id = #{userId} and isnull(	shopCarProduct.shop_car_product_id)
+    </select>
+
+    <select id="getShopCarList" resultMap="DtoResultMap" parameterType="java.lang.Long">
+        select
+			SC.*,SCP.*,PC.*,GetProductNameById(SCP.product_id) as product_name
+			,GetShopNameByUserId(SC.shop_id) as shop_name
+			,GetProductImageById(SCP.product_id) as product_image
+            ,GetProductPriceById(SCP.product_id,SCP.product_spec,SCP.product_number) as product_price
+            ,GetMinNumber(SCP.product_id,SCP.product_spec,SCP.product_number) as min
+            ,GetMaxNumber(SCP.product_id,SCP.product_spec,SCP.product_number) as max
+            ,GetProductSpockByColor(SCP.product_id,SCP.product_color) as spock
+        from
+            t_shop_car SC
+        join t_shop_car_product SCP on SC.shop_car_id = SCP.shop_car_id
+        join t_product_spec PC on PC.product_id = SCP.product_id
+        where SC.user_id = #{userId}
+    </select>
+
+    <select id="getShopCarListCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select
+			count(1)
+        from
+                t_shop_car SC
+        join t_shop_car_product SCP on SC.shop_car_id = SCP.shop_car_id
+        join t_product_spec PC on PC.product_id = SCP.product_id
+        where SC.user_id = #{userId}
+    </select>
+
+    <select id="getShopCarCountByUserId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select
+            count(1)
+        from
+            t_shop_car SC
+        join t_shop_car_product SCP on SC.shop_car_id = SCP.shop_car_id
+        where SC.user_id = #{userId}
+    </select>
+
+    <select id="getShopCarDto" parameterType="java.lang.Long" resultMap="DtoResultMap">
+         select
+			SC.*,SCP.*,PC.*,GetProductNameById(SCP.product_id) as product_name
+			,GetShopNameByUserId(SC.shop_id) as shop_name
+			,GetProductImageById(SCP.product_id) as product_image
+            ,GetProductPriceById(SCP.product_id,SCP.product_spec,SCP.product_number) as product_price
+            ,GetMinNumber(SCP.product_id,SCP.product_spec,SCP.product_number) as min
+            ,GetMaxNumber(SCP.product_id,SCP.product_spec,SCP.product_number) as max
+        from
+            t_shop_car SC
+        join t_shop_car_product SCP on SC.shop_car_id = SCP.shop_car_id
+        join t_product_spec PC on PC.product_id = SCP.product_id
+        where SC.shop_car_id = #{shopCarId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<@override name="title">
+首页
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+
+<@override name="body">
+<h3>test</h3>
+
+</@override>
+
+<@override name="js">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        if(getCookie("token") ==null || getCookie("token") == "undefined"){
+            window.location.href = "toLogin";
+        }
+    })
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

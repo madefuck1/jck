@@ -1,0 +1,397 @@
+<@override name="title">
+发票管理
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/addstyle.css" rel="stylesheet" type="text/css">
+
+<style>
+    .am-thumbnails{
+        margin: 10px 20px;
+        margin-bottom: 0px;
+    }
+    .new-txt,.new-txt-rd2,.user-address li.user-addresslist,.user-address li.user-addresslist.defaultAddr{
+        background: none;
+    }
+    .user-address li.user-addresslist{
+        width: 48%;
+        height: 240px;
+        border: 1px solid #e6e6e6;
+    }
+    .new-tit{
+        height: 30px;
+
+    }
+    .new-tit span:nth-of-type(1){
+        text-align: right;
+    }
+    .new-txt-rd2{
+        padding-top: 0px;
+        padding-left: 30px;
+    }
+    .new-addr-btn{
+        margin-top: 16px;
+    }
+    .user-addresslist.defaultAddr .new-option-r{
+        background: #F58022;
+    }
+    .user-addresslist .new-option-r{
+        background: #F58022;
+    }
+    .am-form-label{
+        width: 106px;
+    }
+    .am-form select, .am-form textarea, .am-form input[type="text"], .am-form input[type="password"], .am-form input[type="datetime"], .am-form input[type="datetime-local"], .am-form input[type="date"], .am-form input[type="month"], .am-form input[type="time"], .am-form input[type="week"], .am-form input[type="number"], .am-form input[type="email"], .am-form input[type="url"], .am-form input[type="search"], .am-form input[type="tel"], .am-form input[type="color"], .am-form-field{
+        width: 99%;
+    }
+</style>
+</@override>
+
+<@override name="body">
+
+<!--头 -->
+
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+
+            <div class="user-address">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发票管理</strong></div>
+                </div>
+                <hr/>
+                <ul class="am-thumbnails" id="InvoiceList">
+
+                </ul>
+                <div class="clear"></div>
+
+                <!--例子-->
+                <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+                    <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新发票</a>
+                    <div class="add-dress">
+                        <input type="hidden" id="invoiceId" />
+                        <div class="am-cf am-padding">
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增发票信息</strong></div>
+                        </div>
+                        <hr/>
+                        <div class="am-u-md-12 am-u-lg-8" style="margin: 20px;">
+                            <form class="am-form am-form-horizontal">
+
+                                <div class="am-form-group">
+                                    <label class="am-form-label"><span style="color: #FA4D46">*</span>名称：</label>
+                                    <div class="am-form-content">
+                                        <input type="text" id="invoiceHead" placeholder="请输入名称">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label"><span style="color: #FA4D46">*</span>纳税人识别号：</label>
+                                    <div class="am-form-content">
+                                        <input id="taxNumber" placeholder="纳税人识别号" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-form-label">地址：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceAddress" placeholder="请输入地址" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">电话：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoicePhone" placeholder="请输入电话" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">开户行：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceBank" placeholder="请输入开户银行" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">开户账号：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceNumber" placeholder="请输入开户账号" type="email">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <a class="am-btn am-btn-danger" onclick="addInvoice()">保存</a>
+                                        <a href="javascript: void(0)" onclick="resetMyForm(this)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--底部-->
+        <#include "/common/includes/include.footer.html"/>
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+</@override>
+
+
+<@override name="js">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".new-option-r").click(function() {
+                $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+            });
+
+            var $ww = $(window).width();
+            if($ww>640) {
+                $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+            }
+
+        })
+
+        //表单数据重置
+        function resetMyForm(obj) {
+            var form = $(obj).parents("form");
+            $(form)[0].reset();
+        }
+
+        function addInvoice() {
+            var data = {
+                invoiceHead:$("#invoiceHead").val(),
+                taxNumber:$("#taxNumber").val(),
+                invoiceAddress:$("#invoiceAddress").val(),
+                invoicePhone:$("#invoicePhone").val(),
+                invoiceBank:$("#invoiceBank").val(),
+                invoiceNumber:$("#invoiceNumber").val(),
+            };
+            $.ajax({
+                url:"saveInvoice",
+                type:"post",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                success:function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }else {
+                        alert(data.message);
+                    }
+                }
+            });
+            return false;
+        }
+        function setDefault(id){
+            $.ajax({
+                url:'/personalCenter/defaultInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }
+                },
+                error:function () {
+                    alert("发送请求发生错误！！！")
+                }
+            });
+        }
+
+        function deleteInvoice(id){
+            $.ajax({
+                url:'/personalCenter/deleteInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }
+                },
+                error:function () {
+                    alert("发送请求发生错误！！！")
+                }
+            });
+        }
+
+        function getInvoice(id){
+            $.ajax({
+                url:'/personalCenter/getInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                        $("#doc-modal-1").empty();
+
+                    var invoice = '<a class="new-abtn-type" data-am-modal="{target: \'#doc-modal-1\', closeViaDimmer: 0}">编辑个人发票</a>\n' +
+                        '                    <div class="add-dress">\n' +
+                        '                        <input type="hidden" id ="InvoiceId" value='+data.invoiceId+' />\n' +
+                        '                        <div class="am-cf am-padding">\n' +
+                        '                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">编辑个人发票</strong></div>\n' +
+                        '                        </div>\n' +
+                        '                        <hr/>\n' +
+                        '                        <div class="am-u-md-12 am-u-lg-8" style="margin: 20px;">\n' +
+                        '                            <form class="am-form am-form-horizontal">\n' +
+                        '\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-name" class="am-form-label"><span style="color: #FA4D46">*</span>'+"名称："+'</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input type="text" id="invoiceHead" value='+data.invoiceHead+' placeholder="公司名称">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label"><span style="color: #FA4D46">*</span>纳税人识别号：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="taxNumber" placeholder="纳税人识别号" value='+data.taxNumber+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">地址：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceAddress" placeholder="请输入地址" value='+data.invoiceAddress+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">电话：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoicePhone" placeholder="请输入电话" value='+data.invoicePhone+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">开户行：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceBank" placeholder="请输入开户银行" value='+data.invoiceBank+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">开户账号：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceNumber" placeholder="请输入开户账号" value='+data.invoiceNumber+'  type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <div class="am-u-sm-9 am-u-sm-push-3">\n' +
+                        '                                        <a class="am-btn am-btn-danger" onclick="updateInvoice('+data.invoiceId+')">保存</a>\n' +
+                        '                                        <a href="javascript: void(0)" onclick="addInvoice()" class="am-close am-btn am-btn-danger" data-am-modal-close>新增</a>\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                            </form>\n' +
+                        '                        </div>\n' +
+                        '                    </div>'
+                    $("#doc-modal-1").append(invoice);
+
+                },
+                error:function () {
+                    alert("发送请求发生错误！！！")
+                }
+            });
+
+        }
+        //修改发票信息
+        function updateInvoice(id){
+            var data = {
+                invoiceId:id,
+                invoiceHead:$("#invoiceHead").val(),
+                taxNumber:$("#taxNumber").val(),
+                invoiceAddress:$("#invoiceAddress").val(),
+                invoicePhone:$("#invoicePhone").val(),
+                invoiceBank:$("#invoiceBank").val(),
+                invoiceNumber:$("#invoiceNumber").val(),
+            };
+            $.ajax({
+                url:"updateInvoice",
+                type:"post",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                success:function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }else {
+                        alert(data.message);
+                    }
+                }
+            });
+
+            return false;
+        }
+
+
+        $(function () {
+            initData();
+        });
+        //初始化页面发票信息
+        function initData(){
+            $.ajax({
+                url:'/personalCenter/getInvoiceList',
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        /*alert(data.message);*/
+                        $("#InvoiceList").empty();
+                        for(i = 0; i< data.data.length;i++){
+                            var defaultInvoice;
+                            var invoiceId = data.data[i].invoiceId;
+                            var invoiceHead = data.data[i].invoiceHead;
+                            var taxNumber = data.data[i].taxNumber;
+                            var invoiceAddress = data.data[i].invoiceAddress;
+                            var invoicePhone = data.data[i].invoicePhone;
+                            var invoiceBank = data.data[i].invoiceBank;
+                            var invoiceNumber = data.data[i].invoiceNumber;
+                            if(data.data[i].invoiceDefault == 1){
+                                defaultInvoice = '<li class="user-addresslist defaultAddr" ><span class="new-option-r"><i class="am-icon-check-circle"></i>'+"默认发票"+'</span>';
+                            }else {
+                                defaultInvoice = '<li class="user-addresslist" ><span class="new-option-r" onclick="setDefault('+invoiceId+')"><i class="am-icon-check-circle"></i>'+"设为默认发票"+'</span>';
+                            }
+                            defaultInvoice += '<p class="new-tit new-p-re">\n' +
+                                '                   <span class="new-txt am-u-sm-4">'+"名称:"+'</span>\n' +
+                                '                   <span class="new-txt-rd2 am-u-sm-8">'+invoiceHead+'</span>\n' +
+                                '               </p> ' +
+                                '               <p class="new-tit new-p-re">\n' +
+                                '                    <span class="new-txt am-u-sm-4">'+"纳税人识别号:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+taxNumber+'</span>\n' +
+                                '               </p>\n' +
+                                '                    <p class="new-tit new-p-re">\n' +
+                                '                    <span class="new-txt am-u-sm-4">'+"地址:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+invoiceAddress+'</span>\n' +
+                                '                </p>\n' +
+                                '                    <p class="new-tit new-p-re">\n' +
+                                '                <span class="new-txt am-u-sm-4">'+"电话:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+invoicePhone+'</span>\n' +
+                                '                </p>\n' +
+                                '                <p class="new-tit new-p-re">\n' +
+                                '                     <span class="new-txt am-u-sm-4">'+"开户行:"+'</span>\n' +
+                                '                      <span class="new-txt-rd2 am-u-sm-8">'+invoiceBank+'</span>\n' +
+                                '                 </p>\n' +
+                                '                 <p class="new-tit new-p-re">\n' +
+                                '                      <span class="new-txt am-u-sm-4">'+"开户账号:"+'</span>\n' +
+                                '                      <span class="new-txt-rd2 am-u-sm-8">'+invoiceNumber+'</span>\n' +
+                                '                 </p>\n' +
+                                '                 <div class="new-addr-btn">\n' +
+                                '                        <a href="javascript:void(0);" onclick="getInvoice('+invoiceId+');"><i class="am-icon-edit"  ></i>编辑</a>\n' +
+                                '                        <span class="new-addr-bar">|</span>\n' +
+                                '                         <a href="javascript:void(0);" onclick="deleteInvoice('+invoiceId+');"><i class="am-icon-trash"></i>删除</a>\n' +
+                                '                  </div>\n' +
+                                '                   </li>'
+
+                            $("#InvoiceList").append(defaultInvoice);
+                        }
+
+                    }else {
+                     alert(data.message);
+                    }
+                },
+                error: function (data) {
+                    alert("您没有相关发票信息")
+                }
+            });
+
+        }
+
+</script>
+
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

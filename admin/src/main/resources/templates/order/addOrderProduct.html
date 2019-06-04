@@ -1,0 +1,143 @@
+<@override name="title">
+新增字段
+</@override>
+
+<@override name="css">
+<style>
+    .selectDemo {
+        height: 30px;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+    }
+</style>
+</@override>
+<@override name="body">
+
+<script type="text/html" id="productToolbar">
+    <div align="left" class="layui-btn-container">
+        <button id="addTable" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加行</button>
+    </div>
+</script>
+<script type="text/html" id="productBar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<div style="padding-left: 15px;padding-right: 15px">
+    <table class="layui-hide" id="product" lay-filter="tableFilter"></table>
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+    var tableData;
+    var table;
+    var data;
+    layui.use("table", function () {
+
+        // var data = eval('(' + parent.$('#callBackData').val() + ')');
+        if (parent.$('#callBackData').val() != "" && parent.$('#callBackData').val() != undefined) {
+            data = JSON.parse(parent.$('#callBackData').val());
+            data = data.product;
+        } else {
+            data = [{
+                "productId": ""
+                , "productName": ""
+                , "productNumber": ""
+                , "productUnit": ""
+                , "productPrice": ""
+                , "productSpec": ""
+                , "productColor": ""
+            }]
+        }
+
+        table = layui.table;
+        var tableIns = table.render({
+            elem: '#product'
+            , id: "product"
+            , toolbar: '#productToolbar'
+            , limit: 100
+            , cols: [[ //表头
+                {field: 'productName', title: '商品名称', edit: 'text'}
+                , {field: 'productNumber', title: '商品数量', edit: 'text'}
+                , {field: 'productUnit', title: '数量单位', edit: 'text'}
+                , {field: 'productPrice', title: '商品价格', edit: 'text'}
+                , {field: 'productSpec', title: '商品规格', edit: 'text'}
+                , {field: 'productColor', title: '商品颜色', edit: 'text'}
+                , {title: '操作', toolbar: '#productBar'}
+            ]]
+            , data: data
+        });
+
+        table.on('edit(tableFilter)', function (obj) {
+
+            var that = this;
+            var tdElem = $(that).closest('td');
+
+
+            var field = obj.field;
+            var value = obj.value;
+            console.log(data)
+            if (field == 'productPrice' || field == 'productNumber') {
+                if (isNaN(Number(value))) {
+                    setTimeout(function () {
+                        // 不是数字回滚再次获得焦点打开
+                        switch (field) {
+                            case 'productPrice':
+                                obj.update({productPrice: 0});
+                                break;
+                            case 'productNumber':
+                                obj.update({productNumber: 0});
+                                break;
+                        }
+
+                        layer.msg("请输入数字！");
+                        console.log(table.cache)
+                        tdElem.click();
+                    }, 100);
+
+                }
+            }
+        });
+
+        //监听工具条
+        table.on('tool(tableFilter)', function (obj) {
+            if (obj.event === 'del') {
+                obj.del();
+            }
+        });
+
+        var tabledata;
+        //头工具栏事件
+        table.on('toolbar(tableFilter)', function (obj) {
+            if (obj.event === 'add') {
+                tabledata = table.cache["product"];
+                tabledata.push({
+                    "productId": ""
+                    , "productName": ""
+                    , "productNumber": ""
+                    , "productUnit": ""
+                    , "productPrice": ""
+                    , "productSpec": ""
+                    , "productColor": ""
+                });
+
+                table.reload('product', {
+                    data: tabledata
+                });
+
+            }
+            ;
+        });
+    });
+
+    function callbackdata() {
+        tableData = table.cache;
+        return JSON.stringify(tableData);
+    }
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

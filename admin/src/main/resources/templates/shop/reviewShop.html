@@ -1,0 +1,144 @@
+<@override name="title">
+新闻详情
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<input type="hidden" id="shopId" value="${shopDto.shopId}">
+<fieldset class="layui-elem-field">
+    <legend>入驻负责人姓名</legend>
+    <div class="layui-field-box">
+        ${userDto.realName}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>店铺名</legend>
+    <div class="layui-field-box">
+        ${shopDto.shopName}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>店铺介绍</legend>
+    <div class="layui-field-box">
+        ${shopDto.shopIntroduce}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>业务范围</legend>
+    <div class="layui-field-box">
+        ${shopDto.businessScope}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>主营产品</legend>
+    <div class="layui-field-box">
+        ${shopDto.mainProducts}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>店铺等级</legend>
+    <div class="layui-field-box">
+        ${shopDto.shopLevel}
+    </div>
+</fieldset>
+<fieldset class="layui-elem-field">
+    <legend>入驻时间</legend>
+    <div class="layui-field-box">
+        ${shopDto.strCreateTime}
+    </div>
+</fieldset>
+
+<div class="layui-input-block">
+    <button class="layui-btn" lay-submit type="button" onclick="reviewYes(${shopDto.shopId})">审核通过</button>
+</div>
+
+<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">拒绝理由</label>
+    <div class="layui-input-block">
+        <textarea placeholder="请输入拒绝理由" class="layui-textarea" id="refuseReason"></textarea>
+    </div>
+</div>
+<div class="layui-input-block">
+    <button class="layui-btn" lay-submit type="button" onclick="reviewNo()">审核不通过</button>
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+
+    function reviewYes(id){
+        $.ajax({
+            url: "reviewYes/"+id,
+            type: "get",
+            dataType:"json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href= '/admin/shop/toList' ;
+                        }
+                    });
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+
+    function reviewNo(){
+        var data = '{"refuseReason":"'+$('#refuseReason').val()+'","id":'+$('#shopId').val()+'}' ;
+        $.ajax({
+            url: "reviewNo",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = '/admin/shop/toList';
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+
+        });
+        return false ;
+    }
+
+</script>
+
+</@override>
+<@extends name="/common/layout/base.new.html"/>

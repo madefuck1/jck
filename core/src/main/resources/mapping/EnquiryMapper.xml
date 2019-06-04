@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.EnquiryMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Enquiry" >
+    <id column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="enquiry_title" property="enquiryTitle" jdbcType="VARCHAR" />
+    <result column="enquiry_type" property="enquiryType" jdbcType="INTEGER" />
+    <result column="enquiry_status" property="enquiryStatus" jdbcType="INTEGER" />
+    <result column="take_date" property="takeDate" jdbcType="TIMESTAMP" />
+    <result column="take_address" property="takeAddress" jdbcType="VARCHAR" />
+    <result column="take_name" property="takeName" jdbcType="VARCHAR" />
+    <result column="take_phone" property="takePhone" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enquiry_remark" property="enquiryRemark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.soufang.model.Enquiry" >
+    <id column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="enquiry_title" property="enquiryTitle" jdbcType="VARCHAR" />
+    <result column="enquiry_type" property="enquiryType" jdbcType="INTEGER" />
+    <result column="enquiry_status" property="enquiryStatus" jdbcType="INTEGER" />
+    <result column="take_date" property="takeDate" jdbcType="TIMESTAMP" />
+    <result column="take_address" property="takeAddress" jdbcType="VARCHAR" />
+    <result column="take_name" property="takeName" jdbcType="VARCHAR" />
+    <result column="take_phone" property="takePhone" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enquiry_remark" property="enquiryRemark" jdbcType="VARCHAR" />
+    <collection property="enquiryProducts" ofType="com.soufang.model.EnquiryProduct">
+      <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+      <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+      <result column="product_name" property="productName" jdbcType="VARCHAR" />
+      <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+      <result column="assort_name" property="assortName" jdbcType="VARCHAR" />
+      <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+      <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+      <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+      <collection property="purchases" ofType="com.soufang.model.Purchase">
+        <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+        <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+        <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+        <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+      </collection>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    enquiry_number, user_id, enquiry_title, enquiry_type, enquiry_status, take_date, 
+    take_address, take_name, take_phone, end_time, create_time, enquiry_remark
+  </sql>
+  <select id="getByEnqNum" resultMap="ResultMap" parameterType="java.lang.String" >
+    select * from t_enquiry te
+    left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
+    LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
+    where te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectProductById" resultMap="ResultMap" parameterType="java.lang.String">
+       select * from t_enquiry te
+      left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
+      LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
+      left join t_user tu on tu.user_id=te.user_id
+      LEFT JOIN t_shop ts on ts.shop_id=tp.shop_id
+    where tep.enquiry_product_id=#{enquiryProductId}
+  </select>
+
+
+  <select id="getMyPurchaseList" parameterType="com.soufang.base.search.purchase.PurchaseSo" resultMap="ResultMap">
+    select * from t_enquiry te
+    LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
+    LEFT JOIN t_purchase tp on tp.enquiry_product_id=tep.enquiry_product_id
+    where te.user_id =#{userId}  AND te.enquiry_status !=0
+    and end_time > (select now())
+    order by te.create_time LIMIT #{page},#{limit};
+  </select>
+
+  <!--查询询盘列表数据-->
+  <select id="getList" resultMap="ResultMap"  parameterType="com.soufang.base.search.enquiry.EnquirySo">
+    select
+      *
+    from t_enquiry te
+      LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
+      LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
+      RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+    where
+      te.enquiry_status!=0 and end_time > (select now())
+    <if test="userId != null and userId !=''">
+      AND  te.user_id =#{userId}
+    </if>
+    <if test="shopId != null and shopId != 0 ">
+      and tp.shop_id = #{shopId}
+    </if>
+    <if test="enquiryStatus != null and enquiryStatus != ''">
+      and enquiry_status = #{enquiryStatus}
+    </if>
+    order by  te.create_time DESC LIMIT #{page},#{limit};
+  </select>
+
+  <select id="getMyQuoteCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+    select count(1)
+    from t_enquiry te LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
+    left JOIN t_purchase tp on tp.enquiry_product_id=tep.enquiry_product_id
+    RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+    where te.enquiry_status!=0
+    <if test="userId != null and userId != 0 ">
+      and te.user_id =#{userId}
+    </if>
+    <if test="enquiryStatus != null and enquiryStatus != ''">
+      and enquiry_status = #{enquiryStatus}
+    </if>
+    <if test="shopId != null and shopId != 0 ">
+      and tp.shop_id = #{shopId}
+    </if>
+    and end_time > (select now())
+  </select>
+
+  <select id="getQuoteDetail" resultMap="ResultMap" parameterType="java.lang.Long">
+    select
+      tep.*,te.enquiry_title,te.create_time,te.enquiry_status,te.take_address,tp.*,tu.login_name
+      from t_enquiry_product tep LEFT JOIN t_enquiry te on tep.enquiry_number=te.enquiry_number
+      left JOIN t_purchase tp on tep.enquiry_product_id=tp.enquiry_product_id LEFT  JOIN t_user tu on te.user_id=tu.user_id
+      where tep.enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selDetailEnquiryAndProAndPur" resultMap="ResultMap" parameterType="java.lang.String">
+   select * from t_enquiry te
+    left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
+    LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
+    where te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+    select count(1)
+    from t_enquiry where 1=1 AND user_id =#{userId}
+    <if test="enquiryStatus != null and enquiryStatus != ''">
+      and enquiry_status like concat(concat('%',#{enquiryStatus}),'%')
+    </if>
+    and end_time > (select now())
+  </select>
+
+  <update id="banQuote" parameterType="java.lang.String">
+    update t_enquiry set enquiry_status = -1 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+
+  <update id="regainQuote" parameterType="java.lang.String">
+    update t_enquiry set enquiry_status = 0 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+
+  <update id="delEnquiry" parameterType="java.lang.String">
+    UPDATE t_enquiry SET enquiry_status = 0 where enquiry_number = #{enquiryNumber}
+  </update>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_enquiry
+    where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Enquiry" >
+    insert into t_enquiry (enquiry_number, user_id, enquiry_title, 
+      enquiry_type, enquiry_status, take_date, 
+      take_address, take_name, take_phone, 
+      end_time, create_time, enquiry_remark
+      )
+    values (#{enquiryNumber}, #{userId}, #{enquiryTitle},
+      #{enquiryType}, #{enquiryStatus}, #{takeDate},
+      #{takeAddress}, #{takeName}, #{takePhone},
+      #{endTime}, #{createTime}, #{enquiryRemark}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Enquiry" >
+    insert into t_enquiry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enquiryNumber != null" >
+        enquiry_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="enquiryTitle != null" >
+        enquiry_title,
+      </if>
+      <if test="enquiryType != null" >
+        enquiry_type,
+      </if>
+      <if test="enquiryStatus != null" >
+        enquiry_status,
+      </if>
+      <if test="takeDate != null" >
+        take_date,
+      </if>
+      <if test="takeAddress != null" >
+        take_address,
+      </if>
+      <if test="takeName != null" >
+        take_name,
+      </if>
+      <if test="takePhone != null" >
+        take_phone,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="enquiryRemark != null" >
+        enquiry_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enquiryNumber != null" >
+        #{enquiryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="enquiryTitle != null" >
+        #{enquiryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="enquiryType != null" >
+        #{enquiryType,jdbcType=INTEGER},
+      </if>
+      <if test="enquiryStatus != null" >
+        #{enquiryStatus,jdbcType=INTEGER},
+      </if>
+      <if test="takeDate != null" >
+        #{takeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeAddress != null" >
+        #{takeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="takeName != null" >
+        #{takeName,jdbcType=VARCHAR},
+      </if>
+      <if test="takePhone != null" >
+        #{takePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enquiryRemark != null" >
+        #{enquiryRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Enquiry" >
+    update t_enquiry
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="enquiryTitle != null" >
+        enquiry_title = #{enquiryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="enquiryType != null" >
+        enquiry_type = #{enquiryType,jdbcType=INTEGER},
+      </if>
+      <if test="enquiryStatus != null" >
+        enquiry_status = #{enquiryStatus,jdbcType=INTEGER},
+      </if>
+      <if test="takeDate != null" >
+        take_date = #{takeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeAddress != null" >
+        take_address = #{takeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="takeName != null" >
+        take_name = #{takeName,jdbcType=VARCHAR},
+      </if>
+      <if test="takePhone != null" >
+        take_phone = #{takePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enquiryRemark != null" >
+        enquiry_remark = #{enquiryRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Enquiry" >
+    update t_enquiry
+    set user_id = #{userId,jdbcType=BIGINT},
+      enquiry_title = #{enquiryTitle,jdbcType=VARCHAR},
+      enquiry_type = #{enquiryType,jdbcType=INTEGER},
+      enquiry_status = #{enquiryStatus,jdbcType=INTEGER},
+      take_date = #{takeDate,jdbcType=TIMESTAMP},
+      take_address = #{takeAddress,jdbcType=VARCHAR},
+      take_name = #{takeName,jdbcType=VARCHAR},
+      take_phone = #{takePhone,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enquiry_remark = #{enquiryRemark,jdbcType=VARCHAR}
+    where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

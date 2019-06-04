@@ -1,0 +1,100 @@
+<@override name="title">
+修改字段
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<form>
+<div class="layui-form" >
+    <input type="hidden" id="dictId" value="${dto.dictId}">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">字典</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="dictKey" id="dictKey" value="${dto.dictKey}" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">字典描述</label>
+            <div class="layui-input-inline">
+                <input type="text" name="dictKDescription" value="${dto.dictKDescription}" id="dictKDescription" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">字典值</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="dictValue" value="${dto.dictValue}" id="dictValue" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">字典值描述</label>
+            <div class="layui-input-inline">
+                <input type="text" name="dictVDescription" value="${dto.dictVDescription}" id="dictVDescription" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="dictSort" value="${dto.dictSort?c}" id="dictSort" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</div>
+</form>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    function submitForm(){
+        var data = '{"dictKey":"'+$("#dictKey").val()+'","dictKDescription":"'+$('#dictKDescription').val()+'","dictValue":"'+$('#dictValue').val()+'","dictVDescription":"'+$('#dictVDescription').val()+'","dictSort":"'+$('#dictSort').val()+'","dictId":'+$('#dictId').val()+'}' ;
+        $.ajax({
+            url: "updateDict",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = '/admin/dictionary/toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

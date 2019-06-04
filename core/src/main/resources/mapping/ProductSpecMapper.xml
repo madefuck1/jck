@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ProductSpecMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.ProductSpec">
+        <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+        <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+        <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+        <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+        <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="DtoResultMap" type="com.soufang.model.ProductSpec">
+        <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+        <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+        <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+        <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+        <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    product_spec_id, product_id, spec_name, price_secret, min_number, max_number, spec_number, 
+    create_time
+  </sql>
+
+  <select id="selectPrice" parameterType="com.soufang.model.ShopCarProduct" resultType="java.math.BigDecimal">
+      select spec_number from t_product_spec
+      where product_id = #{productId} and spec_name = #{productSpec}
+      and max_number &gt; #{productNumber} and min_number &lt;= #{productNumber}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_product_spec
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_product_spec
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.ProductSpec">
+    insert into t_product_spec (product_spec_id, product_id, spec_name, 
+      price_secret, min_number, max_number, 
+      spec_number, create_time)
+    values (#{productSpecId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR}, 
+      #{priceSecret,jdbcType=INTEGER}, #{minNumber,jdbcType=BIGINT}, #{maxNumber,jdbcType=BIGINT}, 
+      #{specNumber,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.ProductSpec">
+        insert into t_product_spec
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productSpecId != null">
+                product_spec_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="specName != null">
+                spec_name,
+            </if>
+            <if test="priceSecret != null">
+                price_secret,
+            </if>
+            <if test="minNumber != null">
+                min_number,
+            </if>
+            <if test="maxNumber != null">
+                max_number,
+            </if>
+            <if test="specNumber != null">
+                spec_number,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productSpecId != null">
+                #{productSpecId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="specName != null">
+                #{specName,jdbcType=VARCHAR},
+            </if>
+            <if test="priceSecret != null">
+                #{priceSecret,jdbcType=INTEGER},
+            </if>
+            <if test="minNumber != null">
+                #{minNumber,jdbcType=BIGINT},
+            </if>
+            <if test="maxNumber != null">
+                #{maxNumber,jdbcType=BIGINT},
+            </if>
+            <if test="specNumber != null">
+                #{specNumber,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.ProductSpec">
+        update t_product_spec
+        <set>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="specName != null">
+                spec_name = #{specName,jdbcType=VARCHAR},
+            </if>
+            <if test="priceSecret != null">
+                price_secret = #{priceSecret,jdbcType=INTEGER},
+            </if>
+            <if test="minNumber != null">
+                min_number = #{minNumber,jdbcType=BIGINT},
+            </if>
+            <if test="maxNumber != null">
+                max_number = #{maxNumber,jdbcType=BIGINT},
+            </if>
+            <if test="specNumber != null">
+                spec_number = #{specNumber,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.ProductSpec">
+    update t_product_spec
+    set product_id = #{productId,jdbcType=BIGINT},
+      spec_name = #{specName,jdbcType=VARCHAR},
+      price_secret = #{priceSecret,jdbcType=INTEGER},
+      min_number = #{minNumber,jdbcType=BIGINT},
+      max_number = #{maxNumber,jdbcType=BIGINT},
+      spec_number = #{specNumber,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="getProductSpecList" parameterType="com.soufang.base.dto.product.ProductSpecDto"
+            resultMap="DtoResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_product_spec where product_id =#{productId} and spec_name = #{specName}
+
+    </select>
+
+</mapper>

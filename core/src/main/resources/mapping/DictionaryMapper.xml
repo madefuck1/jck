@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Dictionary" >
+    <id column="dict_id" property="dictId" jdbcType="BIGINT" />
+    <result column="dict_key" property="dictKey" jdbcType="VARCHAR" />
+    <result column="dict_k_description" property="dictKDescription" jdbcType="VARCHAR" />
+    <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+    <result column="dict_v_description" property="dictVDescription" jdbcType="VARCHAR" />
+    <result column="dict_sort" property="dictSort" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    dict_id, dict_key, dict_k_description, dict_value, dict_v_description, dict_sort, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dictionary
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByDictKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_dictionary
+    where dict_key = #{dictKey,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_dictionary
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Dictionary" >
+    insert into t_dictionary (dict_id, dict_key, dict_k_description, 
+      dict_value, dict_v_description, dict_sort, 
+      create_time)
+    values (#{dictId,jdbcType=BIGINT}, #{dictKey,jdbcType=VARCHAR}, #{dictKDescription,jdbcType=VARCHAR}, 
+      #{dictValue,jdbcType=VARCHAR}, #{dictVDescription,jdbcType=VARCHAR}, #{dictSort,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Dictionary" >
+    insert into t_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        dict_id,
+      </if>
+      <if test="dictKey != null" >
+        dict_key,
+      </if>
+      <if test="dictKDescription != null" >
+        dict_k_description,
+      </if>
+      <if test="dictValue != null" >
+        dict_value,
+      </if>
+      <if test="dictVDescription != null" >
+        dict_v_description,
+      </if>
+      <if test="dictSort != null" >
+        dict_sort,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        #{dictId,jdbcType=BIGINT},
+      </if>
+      <if test="dictKey != null" >
+        #{dictKey,jdbcType=VARCHAR},
+      </if>
+      <if test="dictKDescription != null" >
+        #{dictKDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictVDescription != null" >
+        #{dictVDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSort != null" >
+        #{dictSort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Dictionary">
+    update t_dictionary
+    <set >
+      <if test="dictKey != null" >
+        dict_key = #{dictKey,jdbcType=VARCHAR},
+      </if>
+      <if test="dictKDescription != null" >
+        dict_k_description = #{dictKDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        dict_value = #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictVDescription != null" >
+        dict_v_description = #{dictVDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSort != null" >
+        dict_sort = #{dictSort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Dictionary" >
+    update t_dictionary
+    set dict_key = #{dictKey,jdbcType=VARCHAR},
+      dict_k_description = #{dictKDescription,jdbcType=VARCHAR},
+      dict_value = #{dictValue,jdbcType=VARCHAR},
+      dict_v_description = #{dictVDescription,jdbcType=VARCHAR},
+      dict_sort = #{dictSort,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getList" parameterType="com.soufang.base.search.dictionary.DictionarySo" resultMap="BaseResultMap">
+    select * from t_dictionary where 1=1
+    <if test="dictKDescription != null and dictKDescription != ''">
+      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
+    </if>
+    <if test="dictVDescription != null and dictVDescription = ''">
+      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
+    </if>
+    order by dict_key,dict_sort
+  </select>
+
+  <select id="getCount" parameterType="com.soufang.base.search.dictionary.DictionarySo" resultType="java.lang.Integer">
+    select count(1) from t_dictionary where 1=1
+    <if test="dictKDescription != null and dictKDescription != ''">
+      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
+    </if>
+    <if test="dictVDescription != null and dictVDescription = ''">
+      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
+    </if>
+  </select>
+
+  <select id="getByKeyAndValue" parameterType="com.soufang.model.Dictionary" resultMap="BaseResultMap">
+    select * from t_dictionary where 1=1
+    <if test="dictKey != null">
+      and dict_key = #{dictKey}
+    </if>
+    <if test="dictValue != null">
+      and dict_value = #{dictValue}
+    </if>
+  </select>
+</mapper>

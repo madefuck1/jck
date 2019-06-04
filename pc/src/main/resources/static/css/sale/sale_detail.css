@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	color: #333;
+	font-size: 16px;
+	
+}
+.tb-detail-hd{
+	padding: 0px;
+	line-height: 40px;
+}
+.cloum1{
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	margin-left: -14px;
+}
+.cloum1 span:nth-of-type(1){
+	text-align: left;
+}
+.cloum1-pic{
+	width: 18px;
+	height: 26px;
+	background: url(../../images/sale/CustomerService.png) no-repeat 0px 10px;
+	display: inline-block;
+}
+h4{
+	margin: 0px;
+	line-height: 30px;
+	margin-bottom: 20px;
+}	
+#up{
+	width: 1190px;
+	min-height: 540px;
+	margin: 0 auto;
+		
+}
+#up span{
+	font-size: 14px;
+}
+.clear_form	{
+	width: 1190px;
+	margin: 20px auto;
+}
+.clear_form tr th,.clear_form tr td{
+	text-align: center;
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

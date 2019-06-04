@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.PayMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Pay" >
+    <id column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="pay_number" property="payNumber" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="unit_pay_number" property="unitPayNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="pay_money" property="payMoney" jdbcType="DECIMAL" />
+    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pay_id, pay_number, order_number, order_type, unit_pay_number, user_id, pay_money, 
+    pay_status, pay_type, create_time, pay_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_pay
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Pay" >
+    insert into t_pay (pay_id, pay_number, order_number, 
+      order_type, unit_pay_number, user_id, 
+      pay_money, pay_status, pay_type, 
+      create_time, pay_time)
+    values (#{payId,jdbcType=BIGINT}, #{payNumber,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=INTEGER}, #{unitPayNumber,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{payMoney,jdbcType=DECIMAL}, #{payStatus,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Pay" >
+    insert into t_pay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="payNumber != null" >
+        pay_number,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="unitPayNumber != null" >
+        unit_pay_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+      <if test="payStatus != null" >
+        pay_status,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="payNumber != null" >
+        #{payNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="unitPayNumber != null" >
+        #{unitPayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Pay" >
+    update t_pay
+    <set >
+      <if test="payNumber != null" >
+        pay_number = #{payNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="unitPayNumber != null" >
+        unit_pay_number = #{unitPayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Pay" >
+    update t_pay
+    set pay_number = #{payNumber,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      unit_pay_number = #{unitPayNumber,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      pay_money = #{payMoney,jdbcType=DECIMAL},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByOrderNumberAndStatus" parameterType="com.soufang.model.Pay" resultMap="BaseResultMap">
+    select * from t_pay
+    where  order_number = #{orderNumber,jdbcType=VARCHAR}
+    and  pay_status = #{payStatus,jdbcType=INTEGER}
+  </select>
+</mapper>

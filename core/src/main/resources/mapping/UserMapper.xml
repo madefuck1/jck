@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.User" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="login_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="phone" jdbcType="VARCHAR" />
+    <result column="user_password" property="passWord" jdbcType="VARCHAR" />
+    <result column="user_email" property="email" jdbcType="VARCHAR" />
+    <result column="user_avatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="user_idCard" property="idCard" jdbcType="VARCHAR" />
+    <result column="user_idCard_url" property="idCardUrl" jdbcType="VARCHAR" />
+    <result column="user_level" property="userLevel" jdbcType="INTEGER"/>
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="recommend_id" property="recommendId" jdbcType="BIGINT" />
+    <result column="oauth_type" property="oauthType" jdbcType="INTEGER" />
+    <result column="oauth_id" property="oauthId" jdbcType="BIGINT" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.soufang.base.dto.user.UserDto" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="login_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="phone" jdbcType="VARCHAR" />
+    <result column="user_password" property="passWord" jdbcType="VARCHAR" />
+    <result column="user_email" property="email" jdbcType="VARCHAR" />
+    <result column="user_avatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="user_idCard" property="idCard" jdbcType="VARCHAR" />
+    <result column="user_idCard_url" property="idCardUrl" jdbcType="VARCHAR" />
+    <result column="user_level" property="userLevel" jdbcType="INTEGER"/>
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="recommend_id" property="recommendId" jdbcType="BIGINT" />
+    <result column="oauth_type" property="oauthType" jdbcType="INTEGER" />
+    <result column="oauth_id" property="oauthId" jdbcType="BIGINT" />
+    <collection property="accountDto" ofType="com.soufang.base.dto.account.AccountDto">
+      <id column="account_id" property="accountId" jdbcType="BIGINT" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+      <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL" />
+      <result column="cash_out_money" property="cashOutMoney" jdbcType="DECIMAL" />
+    </collection>
+  </resultMap>
+
+  <select id="getById" resultMap="ResultMap" parameterType="java.lang.Long" >
+    select * from t_user left join t_account on t_user.user_id = t_account.user_id
+    where t_user.user_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getList" parameterType="com.soufang.model.User" resultMap="BaseResultMap">
+    select * from t_user where 1=1
+    <if test="realName != null and realName != ''">
+      and real_name like concat(concat('%',#{realName}),'%')
+    </if>
+    <if test="userName != null and userName != ''">
+      and login_name like concat(concat('%',#{userName}),'%')
+    </if>
+    <if test="phone != null and phone != ''">
+      and user_phone like concat(concat('%',#{phone}),'%')
+    </if>
+    <if test="email != null and email != ''">
+      and user_email like concat(concat('%',#{email}),'%')
+    </if>
+    order by create_time desc
+  </select>
+
+  <select id="getCount" parameterType="com.soufang.model.User" resultType="java.lang.Integer">
+    select count(1) from t_user where 1=1
+    <if test="realName != null and userName != ''">
+      and real_name like concat(concat('%',#{realName}),'%')
+    </if>
+    <if test="userName != null and userName != ''">
+      and login_name like concat(concat('%',#{userName}),'%')
+    </if>
+    <if test="phone != null and phone != ''">
+      and user_phone like concat(concat('%',#{phone}),'%')
+    </if>
+    <if test="email != null and email != ''">
+      and user_email like concat(concat('%',#{email}),'%')
+    </if>
+  </select>
+
+  <select id="loginByPhone" parameterType="com.soufang.model.User" resultMap="BaseResultMap">
+    select * from t_user where 1=1
+    <if test="phone != null and phone != ''">
+      and user_phone = #{phone,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="loginByEmail" parameterType="com.soufang.model.User" resultMap="BaseResultMap">
+    select * from t_user where 1=1
+    <if test="email != null and email != ''">
+      and user_email = #{email,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="loginByUserName" parameterType="com.soufang.model.User" resultMap="BaseResultMap">
+    select * from t_user where 1=1
+    <if test="userName != null and userName != ''">
+      and login_name = #{userName,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from t_user
+    where user_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.soufang.model.User" >
+    insert into t_user (user_id, real_name,login_name, user_phone, user_password,user_email,
+      user_avatar, user_idCard, user_idCard_url, user_level,user_status,
+      create_time,recommend_id,oauth_type,oauth_id)
+    values (#{userId,jdbcType=BIGINT},#{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{userAvatar,jdbcType=VARCHAR},#{idCard,jdbcType=VARCHAR}, #{idCardUrl,jdbcType=VARCHAR},
+       #{userLevel,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{recommendId,jdbcType=BIGINT},
+     #{oauthType,jdbcType=INTEGER},#{oauthId,jdbcType=BIGINT},)
+  </insert>
+
+  <insert id="addUser" parameterType="com.soufang.model.User" useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="userName != null" >
+        login_name,
+      </if>
+      <if test="phone != null" >
+        user_phone,
+      </if>
+      <if test="passWord != null" >
+        user_password,
+      </if>
+      <if test="email != null" >
+        user_email,
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar,
+      </if>
+      <if test="idCard != null" >
+        user_idCard,
+      </if>
+      <if test="idCardUrl != null" >
+        user_idCard_url,
+      </if>
+      <if test="userLevel != null" >
+        user_level,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="recommendId != null" >
+        recommend_id,
+      </if>
+      <if test="oauthType != null" >
+        oauth_type,
+      </if>
+      <if test="oauthId != null" >
+        oauth_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvatar != null" >
+        #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardUrl != null" >
+        #{idCardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendId != null" >
+        #{recommendId,jdbcType=BIGINT},
+      </if>
+      <if test="oauthType != null" >
+        #{oauthType,jdbcType=INTEGER},
+      </if>
+      <if test="oauthId != null" >
+        #{oauthId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="ableUser" parameterType="java.lang.Long">
+    update t_user set user_status = 0
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="disAbleUser" parameterType="java.lang.Long">
+    update t_user set user_status = 1
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="resetPass" parameterType="java.lang.Long">
+    update t_user set user_password = "111111"
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateUser" parameterType="com.soufang.model.User">
+    update t_user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        login_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        user_phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        user_password = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        user_email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        user_idCard = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardUrl != null" >
+        user_idCard_url = #{idCardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendId != null" >
+        recommend_id = #{recommendId,jdbcType=BIGINT},
+      </if>
+      <if test="oauthType != null" >
+        oauth_type = #{oauthType,jdbcType=INTEGER},
+      </if>
+      <if test="oauthId != null" >
+        oauth_id = #{oauthId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updatePasswordByPhone" parameterType="com.soufang.model.User">
+    update t_user
+    <set >
+      <if test="passWord != null" >
+        user_password = #{passWord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_phone = #{phone,jdbcType=VARCHAR}
+  </update>
+  <update id="updatePasswordByEmail" parameterType="com.soufang.model.User">
+    update t_user
+    <set >
+      <if test="passWord != null" >
+        user_password = #{passWord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_email = #{email,jdbcType=BIGINT}
+  </update>
+  <select id="getByShopId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select * from t_user
+    where user_id = (select user_id from t_shop where shop_id = #{id,jdbcType=BIGINT})
+  </select>
+  <select id="getByEnquiryNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from t_user
+    where user_id = (select user_id from t_enquiry where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR})
+  </select>
+
+</mapper>

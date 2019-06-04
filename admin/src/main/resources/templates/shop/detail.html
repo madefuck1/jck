@@ -1,0 +1,61 @@
+<@override name="title">
+新闻详情
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">入驻负责人姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="realName" id="realName" value="${userDto.realName}" lclass="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">店铺名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="shopName" id="shopName" value="${shopDto.shopName}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">店铺介绍</label>
+        <div class="layui-input-inline">
+            <input type="text" name="shopIntroduce" id="shopIntroduce" value="${shopDto.shopIntroduce}" lclass="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">业务范围</label>
+        <div class="layui-input-inline">
+            <input type="text" name="businessScope" id="businessScope" value="${shopDto.businessScope}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">主营产品</label>
+        <div class="layui-input-inline">
+            <input type="text" name="mainProducts" id="mainProducts" value="${shopDto.mainProducts}" lclass="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">店铺等级</label>
+        <div class="layui-input-inline">
+            <input type="text" name="shopLevel" id="shopLevel" value="${shopDto.shopLevel}" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+
+</@override>
+<@override name="js">
+<script>
+
+</script>
+
+</@override>
+<@extends name="/common/layout/base.new.html"/>

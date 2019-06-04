@@ -1,0 +1,414 @@
+<@override name="title">
+产品列表
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/product-list.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_order.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_personal.css">
+<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+
+
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="/sellerCenter/toIndex">卖家工作台</a></li>
+                <li><a href="/sellerCenter/toProductList">产品列表</a></li>
+            </ol>
+            <div class="sale_down">
+                <!--全部的订单-->
+                <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+                    <!--头部-->
+                    <ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a onclick="changeData(1,null)">全部产品</a></li>
+                        <li><a onclick="changeData(1,1)" >出售中的产品</a></li>
+                        <li><a onclick="changeData(1,0)" >仓库中的产品</a></li>
+
+                    </ul>
+                    <div class="cloum1" >
+                        <form class="am-form am-form-horizontal am-u-sm-6">
+                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">产品名称：</label>
+                            <div class="am-form-group am-u-sm-9">
+                                <input type="text" id="doc-ipt-3" placeholder="请输入产品名称">
+                            </div>
+                        </form>
+                        <form class="am-form am-form-horizontal am-u-sm-6">
+                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">更新时间：</label>
+                            <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
+                                        <span class="am-input-group-btn am-datepicker-add-on">
+                                            <input type="text"id="doc-ipt-4" class="am-form-field"  placeholder="请选择起始时间" style="position: absolute;width: 130px;">
+                                        </span>
+                            </div>
+                            <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
+                                        <span class="am-input-group-btn am-datepicker-add-on">
+                                            <input type="text" id="doc-ipt-5"class="am-form-field" placeholder="请选择结束时间" style="width: 130px;margin-left: 140px;">
+                                        </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="cloum1" >
+                        <button type="button" class="am-btn am-btn-secondary" style="width:140px" onclick="changeData(1,null)">搜&nbsp;&nbsp;&nbsp;索</button>
+                    </div>
+                    <div class="am-tab-panel am-active">
+                        <!--全部产品-->
+                        <div class="am-tab-panel am-fade am-in am-active" >
+                            <div class="am-tab-up" id="smallMenu">
+                            </div>
+                            <div class="order-top" id="listTop">
+                                <div class="th th-number">
+                                    <label>
+                                        <input type="checkbox" id="quanxuan">
+                                    </label>
+                                    <td class="td-inner" >全选</td>
+                                </div>
+                                <div class="th th-item">
+                                    <td class="td-inner">产品信息</td>
+                                </div>
+                                <div class="th th-price">
+                                    <td class="td-inner">单价</td>
+                                </div>
+                                <div class="th th-amount">
+                                    <td class="td-inner">库存</td>
+                                </div>
+                                <div class="th th-amount">
+                                    <td class="td-inner">销量</td>
+                                </div>
+                                <div class="th th-price">
+                                    <td class="td-inner">创建时间</td>
+                                </div>
+                                <div class="th th-operation">
+                                    <td class="td-inner">操作</td>
+                                </div>
+                            </div>
+                            <div class="order-main" >
+                                <div class="order-list">
+                                    <div class="order-status1">
+                                       <div class="order-content">
+                                          <div class="order-left" id="productList">
+
+                                          </div>
+                                           <div id="pageManage">
+                                               <div id="pagination" style="text-align: center"></div>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+<script type="text/javascript">
+    $(".item-operation").click(function(){
+        $(".modify").toggle();
+    });
+
+    // pagination 分页插件
+    function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+        changeData(index+1,isUp);
+    }
+
+    $("#quanxuan").click(function(){//给全选按钮加上点击事件
+        var xz = $(this).prop("checked");//判断全选按钮的选中状态
+        var ck = $(".qx").prop("checked",xz);  //让class名为qx的选项的选中状态和全选按钮的选中状态一致。
+    });
+
+    //初始化
+    $(function () {
+        //初始化页面
+        changeData(1,null);
+
+    });
+    var count;//总的数目
+    var allPage;//总页数
+    var pageData = 5;//每页显示的条数
+    var isUp;//当前产品是否上架   1上架    0 下架
+    function changeData(page,productIsUp) {
+        var data = {
+            page: page,//页码
+            isUpper: productIsUp,//产品是否上架
+            productName:$("#doc-ipt-3").val(),//产品名
+            startDate:$("#doc-ipt-4").val(),//起始日期
+            endDate:$("#doc-ipt-5").val(),//截至日期
+        };
+        $.ajax({
+            url: '/sellerCenter/getProductList',
+            type: 'post',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (data) {
+                count = data.count;
+                allPage = (data.count%pageData ==0)?(data.count/pageData):((parseInt(data.count/pageData))+1);
+                if(allPage == 0){
+                    allPage =1;
+                }
+                pageNo = page;
+                isUp = productIsUp;
+                $("#smallMenu").empty();
+                var smallMenu = '';
+                if(productIsUp == null){
+                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">上架</button>\n' +
+                        '                    <button type="button" onclick="getDown(pageNo,isUp)">下架</button>\n' +
+                        '                    <button type="button" onclick="getValue(pageNo,isUp)">发布</button>\n' +
+                        '                    <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>';
+                }else if(productIsUp == 1){
+                    smallMenu += '<button type="button" onclick="getDown(pageNo,isUp)">下架</button>\n' +
+                        '                             <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>';
+                }else {
+                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">上架</button>\n' +
+                        '                         <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>\n';
+                }
+                $("#smallMenu").append(smallMenu);
+
+                $("#productList").empty();
+                var productList = '';
+                for(var i = 0; i < data.data.length; i++){
+                    productList += '<ul class="item-list" >\n' +
+                    '                     <li class="td td-number">\n' +
+    '                                      <div class="item-number item-number-margin">\n' +
+    '                                           <label>\n' +
+    '                                               <input type="checkbox" name="checkedProduct" class="qx" value='+data.data[i].productId+'>\n' +
+    '                                            </label>\n' +
+    '                                      </div>\n' +
+    '                                   </li>\n' +
+    '                                   <li class="td td-item">\n' +
+    '                                        <div class="item-pic">\n' +
+    '                                             <a href="#" class="J_MakePoint">\n' +
+    '                                                 <img src='+data.data[i].productImage+' class="itempic J_ItemImg">\n' +
+    '                                             </a>\n' +
+    '                                         </div>\n' +
+    '                                         <div class="item-info">\n' +
+    '                                         <div class="item-basic-info">\n' +
+    '                                               <a href="#">\n' +
+    '                                                  <p>'+data.data[i].productName+'</p>\n' +
+    '                                                </a>\n' +
+    '                                          </div>\n' +
+    '                                           </div>\n' +
+    '                                     </li>\n' +
+    '                                     <li class="td td-price">\n' +
+    '                                          <div class="item-price">\n' +
+    '                                               <p>'+data.data[i].productUnit+'</p>\n' +
+    '                                          </div>\n' +
+    '                                     </li>\n' +
+    '                                     <li class="td td-amount">\n' +
+    '                                           <div class="item-inner">\n' +
+    '                                               '+data.data[i].productStatisticsDto.productStock+'\n' +
+    '                                            </div>\n' +
+    '                                     </li>\n' +
+    '                                     <li class="td td-amount">\n' +
+    '                                         <div class="item-inner">\n' +
+    '                                              '+data.data[i].productStatisticsDto.dealNumber+'\n' +
+    '                                         </div>\n' +
+    '                                      </li>';
+                    if(data.data[i].isUpper == 1){
+                        productList += '<li class="td td-price">\n' +
+'                                           <div class="item-price">\n' +
+'                                           <p>'+data.data[i].createTimeString+'</p>\n' +
+'                                           <p style="color:#40ADFB;line-height: 30px; ">出售中</p>\n' +
+'                                           </div>\n' +
+'                                       </li>\n' +
+'                                       <li class="td td-operation">\n' +
+'                                            <div class="item-operation">\n' +
+'                                                 <p>编辑产品</p>\n' +
+'                                                 <p style="line-height: 30px;" onclick="getDownNow('+data.data[i].productId+',pageNo,isUp)">立即下架</p>\n' +
+'                                            </div>\n' +
+'                                        </li>';
+                    }else {
+                        productList += '<li class="td td-price">\n' +
+'                                           <div class="item-price">\n' +
+'                                                <p>'+data.data[i].createTimeString+'</p>\n' +
+'                                                <p style="color:#40ADFB;line-height: 30px; ">仓库中</p>\n' +
+'                                           </div>\n' +
+'                                        </li>\n' +
+'                                        <li class="td td-operation">\n' +
+'                                            <div class="item-operation">\n' +
+'                                                 <p>编辑产品</p>\n' +
+'                                                 <p style="line-height: 30px;"onclick="putUpNow('+data.data[i].productId+',pageNo,isUp)">立即上架</p>\n' +
+'                                            </div>\n' +
+'                                        </li>';
+                    }
+                    productList += '</ul>';
+                }
+                $("#productList").append(productList);
+
+                $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                    current_page:page-1,                  //当前页码
+                    callback: PageCallback,
+                    prev_text: '上一页',
+                    next_text: '下一页',
+                    items_per_page: 5,             //每页显示最大条数
+                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                });
+
+            },
+            error:function () {
+                alert("请求发送失败");
+            }
+        })
+    };
+    //立即下架
+    function getDownNow(id,pageNo,isUp) {
+
+        var check_val = [];
+        check_val.push(id);
+        $.ajax({
+            async : false,
+            cache : false,
+            traditional: true,
+            type : 'POST',
+            data : {
+                ids:check_val,
+            },
+            url : '/sellerCenter/getDown',
+            success : function(data) {
+                if (data.success) {
+                    alert(data.message)
+                    changeData(pageNo,isUp);
+                }else {
+                    alert(data.message)
+                }
+            },
+            error : function() {
+                alert("请求发送失败")
+            },
+        });
+    };
+    //立即上架
+    function putUpNow(id,pageNo,isUp) {
+        var check_val = [];
+        check_val.push(id);
+        $.ajax({
+            async : false,
+            cache : false,
+            traditional: true,
+            type : 'POST',
+            data : {
+                ids:check_val,
+            },
+            url : '/sellerCenter/putUp',
+            success : function(data) {
+                if (data.success) {
+                    alert(data.message);
+                    changeData(pageNo,isUp);
+                }else {
+                    alert(data.message)
+                }
+            },
+            error : function() {
+                alert("请求发送失败")
+            },
+        });
+    };
+
+    //下架
+    function getDown(pageNo,isUp) {
+        var obj = document.getElementsByName("checkedProduct");
+        var check_val = [];
+        for(k in obj){
+            if(obj[k].checked){
+                check_val.push(obj[k].value)
+            }
+        }
+        $.ajax({
+            async : false,
+            cache : false,
+            traditional: true,
+            type : 'POST',
+            data : {
+                ids:check_val,
+            },
+            url : '/sellerCenter/getDown',
+            success : function(data) {
+                if (data.success) {
+                    alert(data.message)
+                    changeData(pageNo,isUp);
+                }else {
+                    alert(data.message)
+                }
+            },
+            error : function() {
+                alert("请求发送失败")
+            },
+        });
+    };
+    //上架
+    function putUp(pageNo,isUp) {
+        var obj = document.getElementsByName("checkedProduct");
+        var check_val = [];
+        for(k in obj){
+            if(obj[k].checked){
+                check_val.push(obj[k].value)
+            }
+        }
+        $.ajax({
+            async : false,
+            cache : false,
+            traditional: true,
+            type : 'POST',
+            data : {
+                ids:check_val,
+            },
+            url : '/sellerCenter/putUp',
+            success : function(data) {
+                if (data.success) {
+                    alert(data.message);
+                    changeData(pageNo,isUp);
+                }else {
+                    alert(data.message)
+                }
+            },
+            error : function() {
+                alert("请求发送失败")
+            },
+        });
+    };
+
+    //删除
+    function deleteProduct(pageNo,isUp) {
+        var obj = document.getElementsByName("checkedProduct");
+        var check_val = [];
+        for(k in obj){
+            if(obj[k].checked){
+                check_val.push(obj[k].value)
+            }
+        }
+        $.ajax({
+            async : false,
+            cache : false,
+            traditional: true,
+            type : 'POST',
+            data : {
+                ids:check_val,
+            },
+            url : '/sellerCenter/deleteProduct',
+            success : function(data) {
+                if (data.success) {
+                    alert(data.message);
+                    changeData(pageNo,isUp);
+                }else {
+                    alert(data.message)
+                }
+            },
+            error : function() {
+                alert("请求发送失败")
+            },
+        });
+    };
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

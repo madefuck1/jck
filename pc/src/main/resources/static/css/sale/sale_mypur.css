@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+.th-item, .td-item{
+	width: 45%;
+}
+.th-price, .td-price{
+	width: 11%;
+}
+.order-main{
+	margin-bottom: 10px;
+}
+.sale_con a:hover{
+	color:#40ADFB; 
+}

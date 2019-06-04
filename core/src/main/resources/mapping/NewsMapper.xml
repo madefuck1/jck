@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.News" >
+    <id column="news_id" property="id" jdbcType="BIGINT" />
+    <result column="news_title" property="title" jdbcType="VARCHAR" />
+    <result column="news_author" property="author" jdbcType="VARCHAR" />
+    <result column="news_content" property="content" jdbcType="VARCHAR" />
+    <result column="news_origin" property="origin" jdbcType="VARCHAR" />
+    <result column="news_picture" property="picture" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="NewsDtoMap" type="com.soufang.base.dto.news.NewsDto" >
+    <id column="news_id" property="id" jdbcType="BIGINT" />
+    <result column="news_title" property="title" jdbcType="VARCHAR" />
+    <result column="news_author" property="author" jdbcType="VARCHAR" />
+    <result column="news_content" property="content" jdbcType="VARCHAR" />
+    <result column="news_origin" property="origin" jdbcType="VARCHAR" />
+    <result column="news_picture" property="picture" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    news_id, news_title, news_author, news_content, news_origin, news_picture, create_time
+  </sql>
+
+  <select id="getNews" resultMap="NewsDtoMap" parameterType="com.soufang.model.News" >
+    select * from t_news where 1=1
+    <if test="author != null">
+      and news_author like concat(concat('%',#{author}),'%')
+    </if>
+    <if test="content != null">
+      and news_content like concat(concat('%',#{content}),'%')
+    </if>
+    <if test="title != null">
+      and news_title like concat(concat('%',#{title}),'%')
+    </if>
+    <if test="origin != null">
+      and news_origin like concat(concat('%',#{origin}),'%')
+    </if>
+    order by create_time desc
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.model.News" >
+    select count(1) from t_news where 1=1
+    <if test="author != null">
+      and news_author like concat(concat('%',#{author}),'%')
+    </if>
+    <if test="content != null">
+      and news_content like concat(concat('%',#{content}),'%')
+    </if>
+    <if test="title != null">
+      and news_title like concat(concat('%',#{title}),'%')
+    </if>
+    <if test="origin != null">
+      and news_origin like concat(concat('%',#{origin}),'%')
+    </if>
+    order by create_time desc
+  </select>
+
+  <select id="getNewsById" resultMap="NewsDtoMap" parameterType="java.lang.Long" >
+    select * from t_news where news_id = #{id}
+  </select>
+
+  <delete id="delNewsById" parameterType="java.lang.Long" >
+    delete from t_news
+    where news_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertNews" parameterType="com.soufang.model.News" >
+    insert into t_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null " >
+        news_id,
+      </if>
+      <if test="title != null" >
+        news_title,
+      </if>
+      <if test="author != null" >
+        news_author,
+      </if>
+      <if test="content != null" >
+        news_content,
+      </if>
+      <if test="origin != null" >
+        news_origin,
+      </if>
+      <if test="picture != null" >
+        news_picture,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null " >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateNews" parameterType="com.soufang.model.News" >
+    update t_news
+    <set >
+      <if test="title != null" >
+        news_title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        news_author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        news_content =  #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        news_origin =  #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        news_picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where news_id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Dictionary" >
+    update t_news
+    set  dict_key = #{dictKey,jdbcType=VARCHAR},
+      dict_k_description = #{Description,jdbcType=VARCHAR},
+      dict_value =  #{dictValue,jdbcType=VARCHAR},
+      dict_v_description =  #{dictDescription,jdbcType=VARCHAR},
+      dict_sort = #{dictSort,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+</mapper>

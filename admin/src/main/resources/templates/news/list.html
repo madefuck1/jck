@@ -1,0 +1,182 @@
+<@override name="title">
+新闻资讯
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+<body>
+<div class="layui-form">
+    <h5>搜索条件</h5>
+    <div class="demoTable">
+        <label class="layui-inline">作者姓名</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="news_author" id="news_author" autocomplete="off">
+        </div>
+        <label class="layui-inline">标题</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="news_title" id="news_title" autocomplete="off">
+        </div>
+        <label class="layui-inline">来源</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="news_origin" id="news_origin" autocomplete="off">
+        </div>
+        <label class="layui-inline">内容</label>
+        <div class="layui-inline">
+            <input class="layui-input" name="news_content" id="news_content" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</div>
+<h5>新闻资讯</h5>
+<table class="layui-hide" id="newsList" lay-filter="newsList"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addNews">新增</button>
+    </div>
+</script>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        // table.set({
+        //     headers: {
+        //         "Authorization": getCookie("token")
+        //     }
+        // });
+
+        table.render({
+            elem: '#newsList'
+            ,id:"newsList"
+            ,url: 'getNewsList'
+            ,toolbar: '#toolbarDemo'
+            ,title: '新闻记录表'
+            //,method: 'post' //如果无需自定义HTTP类型，可不加该参数
+            //,request: {} //如果无需自定义请求参数，可不加该参数
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                ,groups: 1 //只显示 1 个连续页码
+                ,first: false //不显示首页
+                ,last: false //不显示尾页
+
+            }
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'title',  title: '标题'}
+                ,{field:'content',  title: '内容'}
+                ,{field:'author', title: '作者' }
+                ,{field:'origin', title: '来源' }
+                ,{field:'strCreateTime',  title: '时间'}
+                , {field: 'button', title: '操作',
+                    templet: function (e) {
+                        var html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="newDetails('+e.id+')">新闻详情</a >';
+                        html += '<a class="layui-btn layui-btn-container layui-btn-xs layui-btn-danger" onclick="updateNews('+e.id+')">更新</a >';
+                        html += '<a class="layui-btn layui-btn-container layui-btn-xs layui-btn-danger" onclick="deleteNewsById('+e.id+')">删除</a >';
+                        return html;
+                    }}
+            ]]
+        });
+
+        //重载表格
+        var $ = layui.$, active = {
+            reload: function(){
+                //执行重载
+                table.reload('newsList', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        author: $('#news_author').val()
+                        ,title:$('#news_title').val()
+                        ,origin:$('#news_origin').val()
+                        ,content:$('#news_content').val()
+                    }
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //头工具栏事件
+        table.on('toolbar(newsList)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'addNews':
+                    layer.open({
+                        type:2,
+                        area:["50%","60%"],
+                        title:"新增新闻",
+                        shadeClose:true,
+                        content:"toAddNews"
+                    });
+                    break;
+            };
+        });
+    });
+
+    function newDetails(id) {
+        layer.open({
+            type:2,
+            area:["50%","60%"],
+            title:"新闻详情",
+            shadeClose:true,
+            content:"details/"+id
+        });
+    }
+
+    function updateNews(id) {
+        layer.open({
+            type:2,
+            area:["50%","60%"],
+            title:"修改新闻",
+            shadeClose:true,
+            content:"update/"+id
+        });
+    }
+
+
+    function deleteNewsById(id){
+        $.ajax({
+            url: "delNewsById/"+id,
+            type: "get",
+            dataType:"json",
+            // beforeSend: function (XMLHttpRequest) {
+            //     XMLHttpRequest.setRequestHeader("Authorization", getCookie("token"));
+            // },
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.location.href = 'toList' ;
+                        }
+                    });
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

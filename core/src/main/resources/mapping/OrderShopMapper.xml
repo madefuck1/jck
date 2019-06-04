@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.OrderShopMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.OrderShop" >
+    <id column="order_shop_id" property="orderShopId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="send_name" property="sendName" jdbcType="VARCHAR" />
+    <result column="send_address" property="sendAddress" jdbcType="VARCHAR" />
+    <result column="send_phone" property="sendPhone" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="INTEGER" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="front_price" property="frontPrice" jdbcType="DECIMAL" />
+    <result column="order_shop_status" property="orderShopStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="send_type" property="sendType" jdbcType="VARCHAR" />
+    <result column="send_number" property="sendNumber" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.soufang.model.OrderShop" >
+    <result column="order_shop_id" property="orderShopId" jdbcType="BIGINT" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="userAvatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="send_name" property="sendName" jdbcType="VARCHAR" />
+    <result column="send_address" property="sendAddress" jdbcType="VARCHAR" />
+    <result column="send_phone" property="sendPhone" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="INTEGER" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="front_price" property="frontPrice" jdbcType="DECIMAL" />
+    <result column="order_shop_status" property="orderShopStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <collection property="orderProducts" ofType="com.soufang.model.OrderProduct">
+      <id column="order_product_id" property="orderProductId" jdbcType="BIGINT" />
+      <result column="order_shop_id_temp" property="orderShopId" jdbcType="BIGINT" />
+      <result column="product_id" property="productId" jdbcType="BIGINT" />
+      <result column="product_name" property="productName" jdbcType="VARCHAR" />
+      <result column="product_number" property="productNumber" jdbcType="DECIMAL" />
+      <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+      <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+      <result column="product_spec" property="productSpec" jdbcType="VARCHAR" />
+      <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+      <result column="image" property="image" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <resultMap id="DtoResultMap" type="com.soufang.base.dto.order.OrderShopDto" >
+    <result column="order_shop_id" property="orderShopId" jdbcType="BIGINT" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="userAvatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="send_name" property="sendName" jdbcType="VARCHAR" />
+    <result column="send_address" property="sendAddress" jdbcType="VARCHAR" />
+    <result column="send_phone" property="sendPhone" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="INTEGER" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="front_price" property="frontPrice" jdbcType="DECIMAL" />
+    <result column="order_shop_status" property="orderShopStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <collection property="orderProducts" ofType="com.soufang.base.dto.order.OrderProductDto">
+      <id column="order_product_id" property="orderProductId" jdbcType="BIGINT" />
+      <result column="order_shop_id_temp" property="orderShopId" jdbcType="BIGINT" />
+      <result column="product_id" property="productId" jdbcType="BIGINT" />
+      <result column="product_name" property="productName" jdbcType="VARCHAR" />
+      <result column="product_number" property="productNumber" jdbcType="DECIMAL" />
+      <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+      <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+      <result column="product_spec" property="productSpec" jdbcType="VARCHAR" />
+      <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+      <result column="image" property="image" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    order_shop_id, user_id, order_number, shop_id, shop_name, send_name, send_address,
+    send_phone, invoice, sum_price, actual_price,front_price, order_shop_status, create_time,send_type,send_number
+  </sql>
+
+  <sql id="Return_column_list">
+        t_order_shop.order_shop_id, t_order_shop.user_id , t_order_shop.order_number,
+        t_order_shop.shop_id, t_order_shop.shop_name, t_order_shop.send_name, t_order_shop.send_address,
+        t_order_shop.send_phone, t_order_shop.invoice, t_order_shop.sum_price, t_order_shop.actual_price,t_order_shop.front_price,
+        t_order_shop.order_shop_status, t_order_shop.create_time ,t_order_shop.send_type,t_order_shop.send_number,
+        GetLoginNameByUserId(user_id) as loginName,GetUserNameByUserId(user_id) as userName,
+        GetUserAvatarByUserId(user_id) as userAvatar,
+        t_order_product.order_product_id, t_order_product.order_shop_id as order_shop_id_temp, t_order_product.product_id,
+        t_order_product.product_name, t_order_product.product_number, t_order_product.product_unit,
+        t_order_product.product_price, t_order_product.product_spec, t_order_product.product_color,
+        GetProductImage(t_order_product.product_id) as image
+</sql>
+
+  <select id="getDetail" parameterType="java.lang.Long" resultMap="DtoResultMap">
+    select
+    <include refid="Return_column_list" />
+    from t_order_shop join t_order_product
+    on t_order_shop.order_shop_id = t_order_product.order_shop_id
+    where t_order_shop.order_shop_id = #{orderShopId}
+
+  </select>
+
+  <select id="getList" parameterType="com.soufang.base.search.order.OrderSo" resultMap="ResultMap">
+    select
+    <include refid="Return_column_list" />
+    from (select * from t_order_shop where order_shop_status != -1
+    <if test="userId != null and userId != 0">
+    and t_order_shop.user_id = #{userId}
+  </if>
+    <if test="orderType != null and orderType != 0">
+      and GetOrderTypeByOrderNumber(t_order_shop.order_number) = #{orderType}
+    </if>
+    <if test="orderStatus != null and orderStatus != 0 ">
+      and t_order_shop.order_shop_status = #{orderStatus}
+    </if>
+    <if test="orderNumber != null">
+      and t_order_shop.order_number like concat(concat('%',#{orderNumber}),'%')
+    </if>
+    <if test="orderStatusList != null">
+      and FIND_IN_SET(t_order_shop.order_shop_status,#{orderStatusList})
+    </if>
+    <if test="shopId != null and shopId != 0">
+      and t_order_shop.shop_id = #{shopId}
+    </if>
+    <if test="beginDate != null">
+      <![CDATA[
+                      and t_order_shop.create_time > #{beginDate,jdbcType=TIMESTAMP}
+                  ]]>
+    </if>
+    <if test="endDate != null">
+      <![CDATA[
+                    and t_order_shop.create_time < #{endDate,jdbcType=TIMESTAMP}
+                   ]]>
+    </if>
+    order by t_order_shop.order_number desc
+    limit #{page},#{limit} ) t_order_shop
+    join t_order_product on t_order_shop.order_shop_id = t_order_product.order_shop_id
+    order by t_order_shop.order_number desc
+  </select>
+
+  <select id="getCount" parameterType="com.soufang.base.search.order.OrderSo" resultType="java.lang.Integer">
+    select count(1) from t_order_shop
+    where order_shop_status != -1
+    <if test="orderType != null ">
+      and GetOrderTypeByOrderNumber(t_order_shop.order_number) = #{orderType}
+    </if>
+    <if test="orderNumber != null">
+      and t_order_shop.order_number like concat(concat('%',#{orderNumber}),'%')
+    </if>
+    <if test="orderStatus != null">
+      and t_order_shop.order_shop_status = #{orderStatus}
+    </if>
+    <if test="shopId != null">
+      and t_order_shop.shop_id = #{shopId}
+    </if>
+    <if test="userId !=null and userId != 0">
+      and t_order_shop.user_id = #{userId}
+    </if>
+    <if test="beginDate != null">
+      <![CDATA[
+                      and t_order_shop.create_time > #{beginDate,jdbcType=TIMESTAMP}
+                  ]]>
+    </if>
+    <if test="endDate != null">
+      <![CDATA[
+                    and t_order_shop.create_time < #{endDate,jdbcType=TIMESTAMP}
+                   ]]>
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order_shop
+    where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </select>
+
+  <select id="getUserOrderShopList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order_shop
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order_shop
+    where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.OrderShop"  useGeneratedKeys="true" keyColumn="order_shop_id" keyProperty="orderShopId">
+    insert into t_order_shop (order_shop_id, user_id, order_number,
+      shop_id, shop_name, send_name, 
+      send_address, send_phone, invoice, 
+      sum_price, actual_price, order_shop_status, 
+      create_time,send_type,send_number)
+    values (#{orderShopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNumber,jdbcType=VARCHAR},
+      #{shopId,jdbcType=BIGINT}, #{shopName,jdbcType=VARCHAR}, #{sendName,jdbcType=VARCHAR}, 
+      #{sendAddress,jdbcType=VARCHAR}, #{sendPhone,jdbcType=VARCHAR}, #{invoice,jdbcType=INTEGER}, 
+      #{sumPrice,jdbcType=DECIMAL}, #{actualPrice,jdbcType=DECIMAL}, #{orderShopStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{sendType,jdbcType=VARCHAR}, #{sendNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.OrderShop" >
+    insert into t_order_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderShopId != null" >
+        order_shop_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="sendName != null" >
+        send_name,
+      </if>
+      <if test="sendAddress != null" >
+        send_address,
+      </if>
+      <if test="sendPhone != null" >
+        send_phone,
+      </if>
+      <if test="invoice != null" >
+        invoice,
+      </if>
+      <if test="sumPrice != null" >
+        sum_price,
+      </if>
+      <if test="actualPrice != null" >
+        actual_price,
+      </if>
+      <if test="frontPrice != null" >
+        front_price,
+      </if>
+      <if test="orderShopStatus != null" >
+        order_shop_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="sendType != null" >
+        send_type,
+      </if>
+      <if test="sendNumber != null" >
+        send_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderShopId != null" >
+        #{orderShopId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendName != null" >
+        #{sendName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null" >
+        #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="frontPrice != null" >
+        #{frontPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderShopStatus != null" >
+        #{orderShopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendType != null" >
+        #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="sendNumber != null" >
+        #{sendNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.OrderShop" >
+    update t_order_shop
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendName != null" >
+        send_name = #{sendName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null" >
+        send_address = #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        send_phone = #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        invoice = #{invoice,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null" >
+        sum_price = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null" >
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderShopStatus != null" >
+        order_shop_status = #{orderShopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendType != null" >
+        send_type = #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="sendNumber != null" >
+        send_number = #{sendNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.OrderShop" >
+    update t_order_shop
+    set user_id = #{userId,jdbcType=BIGINT},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      send_name = #{sendName,jdbcType=VARCHAR},
+      send_address = #{sendAddress,jdbcType=VARCHAR},
+      send_phone = #{sendPhone,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=INTEGER},
+      sum_price = #{sumPrice,jdbcType=DECIMAL},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      order_shop_status = #{orderShopStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      send_type = #{sendType,jdbcType=VARCHAR},
+      send_number = #{sendNumber,jdbcType=VARCHAR}
+      where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateActualPrice" parameterType="com.soufang.model.OrderShop" >
+      update t_order_shop set
+      actual_price = #{actualPrice,jdbcType=DECIMAL}
+      where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+
+  <update id="sendProduct" parameterType="com.soufang.model.OrderShop" >
+      update t_order_shop set
+      order_shop_status = #{orderShopStatus,jdbcType=INTEGER},
+      send_type = #{sendType,jdbcType=VARCHAR},
+      send_number = #{sendNumber,jdbcType=VARCHAR}
+      where order_shop_id = #{orderShopId,jdbcType=BIGINT}
+  </update>
+</mapper>

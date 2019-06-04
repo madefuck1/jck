@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.FavoriteMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.Favorite">
+        <id column="favorite_id" property="favoriteId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="favorite_target_id" property="favoriteTargetId" jdbcType="BIGINT"/>
+        <result column="favorite_target_name" property="favoriteTargetName" jdbcType="VARCHAR"/>
+        <result column="favorite_target_type" property="favoriteTargetType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="DtoResultMap" type="com.soufang.base.dto.favorite.FavoriteDto">
+        <id column="favorite_id" property="favoriteId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="favorite_target_id" property="favoriteTargetId" jdbcType="BIGINT"/>
+        <result column="favorite_target_name" property="favoriteTargetName" jdbcType="VARCHAR"/>
+        <result column="favorite_target_type" property="favoriteTargetType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <collection property="productDto" ofType="com.soufang.base.dto.product.ProductDto">
+            <id column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+            <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+            <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+            <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+            <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+            <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+            <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+            <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+            <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+            <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+            <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+            <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="key1" property="key1" jdbcType="VARCHAR"/>
+            <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+            <result column="key2" property="key2" jdbcType="VARCHAR"/>
+            <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+            <result column="key3" property="key3" jdbcType="VARCHAR"/>
+            <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+            <result column="key4" property="key4" jdbcType="VARCHAR"/>
+            <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+            <result column="key5" property="key5" jdbcType="VARCHAR"/>
+            <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+
+        </collection>
+        <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
+            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT" />
+            <result column="product_id" property="productId" jdbcType="BIGINT" />
+            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT" />
+            <result column="browse_number" property="browseNumber" jdbcType="BIGINT" />
+            <result column="deal_number" property="dealNumber" jdbcType="BIGINT" />
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+            <result column="product_stock" property="productStock" jdbcType="VARCHAR" />
+        </collection>
+        <collection property="productSpecDto" ofType="com.soufang.base.dto.product.ProductSpecDto">
+            <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
+            <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
+            <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
+            <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
+            <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+    favorite_id, user_id, favorite_target_id, favorite_target_name, favorite_target_type, 
+    create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_favorite
+        where favorite_id = #{favoriteId,jdbcType=BIGINT}
+    </select>
+    <!--收藏列表查询-->
+    <select id="getFavoriteList" parameterType="com.soufang.base.search.favorite.FavoriteSo" resultMap="DtoResultMap" >
+        select
+          *
+        from t_favorite tf
+        left join t_product tp on tf.favorite_target_id=tp.product_id
+        inner join t_product_statistics tps on tps.product_id=tp.product_id
+        INNER JOIN t_product_spec tpsp on tpsp.product_id = tp.product_id
+        where 1=1
+        and tf.user_id =#{userId}
+        and tf.favorite_target_type=#{favoriteTargetType}
+        ORDER BY tf.create_time LIMIT #{page},#{limit};
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_favorite
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.Favorite">
+    insert into t_favorite (favorite_id, user_id, favorite_target_id, 
+      favorite_target_name, favorite_target_type, 
+      create_time)
+    values (#{favoriteId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{favoriteTargetId,jdbcType=BIGINT}, 
+      #{favoriteTargetName,jdbcType=VARCHAR}, #{favoriteTargetType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.Favorite">
+        insert into t_favorite
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="favoriteId != null">
+                favorite_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="favoriteTargetId != null">
+                favorite_target_id,
+            </if>
+            <if test="favoriteTargetName != null">
+                favorite_target_name,
+            </if>
+            <if test="favoriteTargetType != null">
+                favorite_target_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="favoriteId != null">
+                #{favoriteId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="favoriteTargetId != null">
+                #{favoriteTargetId,jdbcType=BIGINT},
+            </if>
+            <if test="favoriteTargetName != null">
+                #{favoriteTargetName,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteTargetType != null">
+                #{favoriteTargetType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Favorite">
+        update t_favorite
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="favoriteTargetId != null">
+                favorite_target_id = #{favoriteTargetId,jdbcType=BIGINT},
+            </if>
+            <if test="favoriteTargetName != null">
+                favorite_target_name = #{favoriteTargetName,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteTargetType != null">
+                favorite_target_type = #{favoriteTargetType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where favorite_id = #{favoriteId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.Favorite">
+    update t_favorite
+    set user_id = #{userId,jdbcType=BIGINT},
+      favorite_target_id = #{favoriteTargetId,jdbcType=BIGINT},
+      favorite_target_name = #{favoriteTargetName,jdbcType=VARCHAR},
+      favorite_target_type = #{favoriteTargetType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </update>
+
+    <select id="getFavoriteCount" parameterType="com.soufang.base.search.favorite.FavoriteSo"
+            resultType="java.lang.Integer">
+        select count(1) from t_favorite where user_id =#{userId} and favorite_target_type = #{favoriteTargetType}
+    </select>
+
+   <!-- <select id="getFavoriteList" parameterType="com.soufang.base.dto.favorite.FavoriteDto"
+            resultMap="DtoResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_favorite where user_id =#{userId} and favorite_target_type = #{favoriteTargetType}
+        <if test="favoriteTargetName != null and favoriteTargetName != '' ">
+            and favoriteTargetName like concat(concat('%',#{favoriteTargetName}),'%')
+        </if>
+    </select>-->
+
+    <select id="isFavorite" parameterType="com.soufang.base.dto.favorite.FavoriteDto" resultType="java.lang.Integer">
+        select count(1) from t_favorite where favorite_target_id = #{favoriteTargetId}
+        and favorite_target_type = #{favoriteTargetType}
+    </select>
+
+    <select id="iSExistFavoriteId" parameterType="com.soufang.model.FootPrint"  resultType="java.lang.Long">
+        select favoriteId from t_favorite
+        where user_id=#{userId}
+        and favorite_target_id= #{favoriteTargetId}
+        and favorite_target_name=#{favoriteTargetName}
+        and favorite_target_type=#{favoriteTargetType}
+
+    </select>
+
+</mapper>
