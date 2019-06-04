@@ -11,7 +11,7 @@ public class PurchaseDto {
 
     private String purchaseNumber;
 
-    private Long enquiryNumber;
+    private String enquiryNumber;
 
     private Long shopId;
     private Long userId;
@@ -134,11 +134,11 @@ public class PurchaseDto {
         this.userId = userId;
     }
 
-    public Long getEnquiryNumber() {
+    public String getEnquiryNumber() {
         return enquiryNumber;
     }
 
-    public void setEnquiryNumber(Long enquiryNumber) {
+    public void setEnquiryNumber(String enquiryNumber) {
         this.enquiryNumber = enquiryNumber;
     }
 

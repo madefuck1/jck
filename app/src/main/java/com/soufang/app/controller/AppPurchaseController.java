@@ -108,7 +108,7 @@ public class AppPurchaseController extends AppBaseController{
         AcceptPurchaseVo acceptPurchaseVo= new AcceptPurchaseVo();
         PurchaseDto purchaseDto = new PurchaseDto();
         //参数整理
-        purchaseDto.setEnquiryNumber(Long.parseLong(addPurchaseVo.getEnquiryNumber()));
+        purchaseDto.setEnquiryNumber(addPurchaseVo.getEnquiryNumber());
         purchaseDto.setRemark(addPurchaseVo.getRemark());
         purchaseDto.setUnitPrice(new BigDecimal(addPurchaseVo.getUnitPrice()));
         purchaseDto.setUserId(userDto.getUserId());
