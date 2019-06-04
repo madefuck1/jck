@@ -22,7 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/store")
 public class StoreConstructionController extends BaseController {
-    @Value("${upload.uploadLogoPic}")
+    @Value("${upload.logoPic}")
     private String uploadUrl;//店铺装修logo照片上传地址
 
     @RequestMapping(value = "logoPicUpload", method = RequestMethod.POST)
