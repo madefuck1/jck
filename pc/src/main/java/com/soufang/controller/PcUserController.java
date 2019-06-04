@@ -12,10 +12,12 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.User.LoginReqVo;
 import com.soufang.vo.User.RegisterReqVo;
+import com.soufang.vo.User.SettleVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -204,4 +206,26 @@ public class PcUserController extends BaseController{
         return baseVo;
     }
 
+
+    @MemberAccess
+    @RequestMapping(value = "toSettle",method = RequestMethod.GET)
+    public String toSettle(ModelMap map , HttpServletRequest request){
+        map.put("userInfo",getUserInfo(request));
+        return "sellerCenter/settle/first";
+    }
+
+    @MemberAccess
+    @RequestMapping(value = "settle" , method = RequestMethod.POST)
+    public String toSettleSecond(@ModelAttribute SettleVo settleVo , HttpServletRequest request){
+        UserDto userDto = getUserInfo(request);
+        userDto.setRealName(settleVo.getRealName());
+        userDto.setFaxNumber(settleVo.getFaxCountry()+"-"+settleVo.getFaxCity()+"-"+settleVo.getFaxNumber());
+        userDto.setFixedPhone(settleVo.getFixedCity()+"-"+settleVo.getFixedCity()+"-"+settleVo.getFixedNumber());
+        Result result = pcUserFeign.updateUserInfo(userDto);
+        if(result.isSuccess()){
+            return  "sellerCenter/settle/second";
+        }else {
+            return "404" ;
+        }
+    }
 }

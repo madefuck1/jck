@@ -189,4 +189,17 @@ public class UserServiceImpl implements UserService {
            throw new BusinessException("更新用户失败");
        }
     }
+
+    @Override
+    @Transactional(rollbackFor = BusinessException.class)
+    public void updateUserInfo(UserDto userDto) {
+        try {
+            User user = new User();
+            BeanUtils.copyProperties(userDto, user);
+            userMapper.updateUser(user);
+        }catch (Exception e){
+            logger.info("更新用户信息报错"+e.getMessage());
+            throw new BusinessException("更新用户出错");
+        }
+    }
 }

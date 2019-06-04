@@ -42,11 +42,10 @@ input{
 	margin: 10px 46%;
 }
 .sale_cloum1{
-	 width: 100%;
-	 overflow: hidden;
-
- }
-
+	width: 100%;
+	overflow: hidden;
+	
+}
 
 .sale_down .row2{
 	float: left;
@@ -80,8 +79,7 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/IdCard／positive.png);
-	/*身份证正面照*/
+	background: url(../../images/sale/身份证／正面.png);
 	margin-right: 10px;
 	cursor: pointer;
 }
@@ -90,8 +88,7 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/IdCard／negative.png);
-	/*身份证反面照*/
+	background: url(../../images/sale/身份证／反面.png);
 	margin-right: 10px;
 	cursor: pointer;
 }
@@ -101,22 +98,46 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/businessLicense.png);
+	background: url(../../images/sale/营业执照.png);
 	margin-right: 10px;
 	cursor: pointer;
 }
 
+#sale_center{
+	width: 100%;
+	min-height:  900px;
+	margin: 0 auto;
+	overflow: hidden;
+}
 
+.sale_aside{
+	width: 1190px;
+	
+	margin: 0 auto;
+	
+}
 
+.sale_con{
+	float: right;
+	background: #fff;
+	width: 85%;
+	min-height:  900px;
+	overflow: hidden;
+	padding: 0 8px;
+}
 
+.am-tabs-bd{
+	border: none;
+}
 
+.am-breadcrumb{
+	padding: 10px;
+	margin: 0px;
+}
 
-
-
-
-
-
-
+.am-tabs-d2 .am-tabs-nav{
+	background: #fff;
+}
 
 
 

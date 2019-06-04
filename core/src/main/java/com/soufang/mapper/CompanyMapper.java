@@ -26,4 +26,6 @@ public interface CompanyMapper {
     int updateCompany (Company company);
 
     int updateCompanyByUserId(Company company);
+
+    Company selectByCompanyName(String companyName);
 }

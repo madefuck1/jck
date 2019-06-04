@@ -1,6 +1,7 @@
 package com.soufang.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.soufang.base.BusinessException;
 import com.soufang.base.Result;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
@@ -132,6 +133,18 @@ public class UserController {
         }else {
             result.setMessage("更新失败");
             result.setSuccess(false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
+    Result updateUserInfo(@RequestBody UserDto userDto){
+        Result result = new Result();
+        try{
+            userService.updateUserInfo(userDto);
+        }catch (BusinessException e){
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
         }
         return result;
     }

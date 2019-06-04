@@ -62,4 +62,16 @@ public class CompanyServiceImpl implements CompanyService {
         BeanUtils.copyProperties(companyDto,company);
         return companyMapper.updateCompanyByUserId(company);
     }
+
+    @Override
+    public CompanyDto selectByCompanyName(String companyName) {
+        Company company = companyMapper.selectByCompanyName(companyName);
+        if(company == null){
+            return  null ;
+        }else {
+            CompanyDto companyDto = new CompanyDto();
+            BeanUtils.copyProperties(company,companyDto);
+            return companyDto;
+        }
+    }
 }

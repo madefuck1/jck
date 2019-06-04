@@ -5,6 +5,7 @@
     <id column="company_id" property="compId" jdbcType="BIGINT" />
     <id column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="company_name" property="compName" jdbcType="VARCHAR" />
+    <result column="company_type" property="compType" jdbcType="INTEGER" />
     <result column="company_address" property="compAddress" jdbcType="VARCHAR" />
     <result column="company_linker" property="compLinker" jdbcType="VARCHAR" />
     <result column="company_phone" property="compPhone" jdbcType="VARCHAR" />
@@ -43,6 +44,9 @@
       </if>
       <if test="compName != null" >
         company_name,
+      </if>
+      <if test="compType != null" >
+        company_type,
       </if>
       <if test="compAddress != null" >
         company_address,
@@ -87,6 +91,9 @@
       </if>
       <if test="compName != null" >
         #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="compType != null" >
+        #{compType,jdbcType=VARCHAR},
       </if>
       <if test="compAddress != null" >
         #{compAddress,jdbcType=VARCHAR},
@@ -221,24 +228,7 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
-  <select id="getList" parameterType="com.soufang.model.Company" resultMap="BaseResultMap">
-    select * from t_dictionary where 1=1
-    <if test="dictKDescription != null and dictKDescription != ''">
-      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
-    </if>
-    <if test="dictVDescription != null and dictVDescription = ''">
-      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
-    </if>
-    order by company_name desc
-  </select>
-
-  <select id="getCount" parameterType="com.soufang.model.Company" resultType="java.lang.Integer">
-    select count(1) from t_dictionary where 1=1
-    <if test="dictKDescription != null and dictKDescription != ''">
-      and dict_k_description like concat(concat('%',#{dictKDescription}),'%')
-    </if>
-    <if test="dictVDescription != null and dictVDescription = ''">
-      and dict_v_description like concat(concat('%',#{dictVDescription}),'%')
-    </if>
+  <select id="selectByCompanyName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from t_company where company_name = #{compName,jdbcType=VARCHAR}
   </select>
 </mapper>
