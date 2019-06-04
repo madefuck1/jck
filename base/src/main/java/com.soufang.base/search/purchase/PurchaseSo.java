@@ -27,7 +27,10 @@ public class PurchaseSo {
     private Integer page ;
     private Integer limit ;
     private Long userId;
+    private long shopId;
     private String enquiryNumber;
     private String purchaseNumber;
+    private int unitPrice;
+    private String remark;
 
 }

@@ -15,11 +15,13 @@ import com.soufang.app.feign.AppPurchaseFeign;
 import com.soufang.app.vo.purchase.AcceptPurchaseVo;
 import com.soufang.app.vo.purchase.PurchaseListVo;
 import com.soufang.app.vo.purchase.PurchaseVo;
+import com.soufang.app.vo.purchase.addPurchaseVo;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.purchase.PurchaseSo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +94,27 @@ public class AppPurchaseController extends AppBaseController{
         acceptPurchaseVo.setStatusMessage(enquiryDto.getStatusMessage());
         acceptPurchaseVo.setMessage("提交审核");
         acceptPurchaseVo.setSuccess(true);
+        return acceptPurchaseVo;
+    }
+
+    //6.9报价
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "purchase",method = RequestMethod.POST)
+    public AcceptPurchaseVo purchase(@RequestBody addPurchaseVo addPurchaseVo, HttpServletRequest request){
+        UserDto userDto=this.getUserInfo(request);
+        addPurchaseVo.setUserId(userDto.getUserId());
+        AcceptPurchaseVo acceptPurchaseVo= new AcceptPurchaseVo();
+        PurchaseDto purchaseDto = new PurchaseDto();
+        BeanUtils.copyProperties(addPurchaseVo,purchaseDto);
+        int i =appPurchaseFeign.purchase(purchaseDto);
+        if(i>0){
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(true);
+        }else{
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(false);
+        }
         return acceptPurchaseVo;
     }
 

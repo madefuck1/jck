@@ -7,9 +7,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PurchaseDto {
+
+
     private String purchaseNumber;
 
+    private Long enquiryNumber;
+
     private Long shopId;
+    private Long userId;
 
     private String shopName;
 
@@ -117,5 +122,21 @@ public class PurchaseDto {
 
     public String getShopName() {
         return shopName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getEnquiryNumber() {
+        return enquiryNumber;
+    }
+
+    public void setEnquiryNumber(Long enquiryNumber) {
+        this.enquiryNumber = enquiryNumber;
     }
 }

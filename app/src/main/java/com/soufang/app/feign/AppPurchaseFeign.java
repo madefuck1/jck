@@ -1,5 +1,6 @@
 package com.soufang.app.feign;
 
+import com.soufang.app.vo.purchase.addPurchaseVo;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
@@ -25,5 +26,9 @@ public interface AppPurchaseFeign {
     //接收报价
     @RequestMapping(value = "/core/purchase/acceptPurchase",method = RequestMethod.POST)
     public EnquiryDto acceptPurchase(@RequestBody PurchaseSo purchaseSo);
+
+    //报价
+    @RequestMapping(value = "/core/purchase/purchase",method = RequestMethod.POST)
+    public int purchase(@RequestBody PurchaseDto purchaseDto);
 
 }

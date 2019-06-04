@@ -100,7 +100,8 @@
     delete from t_purchase
     where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.soufang.model.Purchase" >
+  <!--新增报价-->
+  <insert id="purchase" parameterType="com.soufang.model.Purchase" >
     insert into t_purchase (purchase_number, shop_id, enquiry_product_id,
       unit_price, sum_price, offer_status, 
       offer_time)
