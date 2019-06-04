@@ -14,6 +14,8 @@ public class User {
     private String idCardUrl;
     private Integer userLevel;
     private Integer userStatus;
+    private String fixedPhone;
+    private String faxNumber;
     private Date createTime;
     private Long recommendId;
     private Integer oauthType;
@@ -147,5 +149,21 @@ public class User {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getFaxNumber() {
+        return faxNumber;
+    }
+
+    public void setFaxNumber(String faxNumber) {
+        this.faxNumber = faxNumber;
+    }
+
+    public String getFixedPhone() {
+        return fixedPhone;
+    }
+
+    public void setFixedPhone(String fixedPhone) {
+        this.fixedPhone = fixedPhone;
     }
 }

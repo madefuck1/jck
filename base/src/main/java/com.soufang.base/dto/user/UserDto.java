@@ -20,6 +20,8 @@ public class UserDto {
     private Integer userLevel;
     private Integer userStatus;
     private String strStatus;
+    private String fixedPhone;
+    private String faxNumber;
     private Date createTime;
     private String strCreateTime;
     private Long recommendId;
@@ -61,6 +63,14 @@ public class UserDto {
         }else {
             return "不可用";
         }
+    }
+
+    public String getFaxNumber() {
+        return faxNumber;
+    }
+
+    public void setFaxNumber(String faxNumber) {
+        this.faxNumber = faxNumber;
     }
 
     public Long getUserId() {
@@ -189,5 +199,13 @@ public class UserDto {
 
     public void setAccountDto(AccountDto accountDto) {
         this.accountDto = accountDto;
+    }
+
+    public String getFixedPhone() {
+        return fixedPhone;
+    }
+
+    public void setFixedPhone(String fixedPhone) {
+        this.fixedPhone = fixedPhone;
     }
 }
