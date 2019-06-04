@@ -8,6 +8,8 @@ public class Purchase {
 
     private Long shopId;
 
+    private  Long userId;
+
     private Long enquiryProductId;
 
     private BigDecimal unitPrice;
@@ -82,5 +84,13 @@ public class Purchase {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

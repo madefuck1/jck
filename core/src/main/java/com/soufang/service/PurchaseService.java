@@ -4,6 +4,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.search.purchase.PurchaseSo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -38,4 +39,6 @@ public interface PurchaseService {
     int getCount( PurchaseSo purchaseSo);
 
     Result isUseRefused(PurchaseDto purchaseDto);
+
+    int purchase(PurchaseDto purchaseDto);
 }

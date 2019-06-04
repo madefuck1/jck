@@ -79,5 +79,14 @@ public class PurchaseController {
         return purchaseService.isUseRefused(purchaseDto);
     }
 
+    /**
+     * 报价
+     * @param purchaseSo
+     * @return
+     */
+    @RequestMapping(value = "purchase",method = RequestMethod.POST)
+    public int purchase(@RequestBody PurchaseDto purchaseDto){
+       return purchaseService.purchase(purchaseDto);
+    }
 
 }

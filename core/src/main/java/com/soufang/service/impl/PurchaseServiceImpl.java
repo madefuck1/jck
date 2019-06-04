@@ -7,7 +7,9 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.mapper.EnquiryMapper;
+import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
+import com.soufang.mapper.ShopMapper;
 import com.soufang.model.Enquiry;
 import com.soufang.model.EnquiryProduct;
 import com.soufang.model.Purchase;
@@ -30,6 +32,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Autowired
     EnquiryMapper enquiryMapper;
+
+    @Autowired
+    EnquiryProductMapper enquiryProductMapper;
+
+    @Autowired
+    ShopMapper shopMapper;
 
     @Override
     public List<PurchaseDto> getByProId(Long id) {
@@ -150,6 +158,21 @@ public class PurchaseServiceImpl implements PurchaseService {
             result.setMessage("操作失败");
         }
         return  result;
+    }
+
+    public int purchase(PurchaseDto purchaseDto){
+        Result result = new Result();
+        //查询SHOP信息通过用户ID
+        Shop shop =shopMapper.getByUserId(purchaseDto.getUserId());
+        //加入SHOPID
+        purchaseDto.setShopId(shop.getShopId());
+        //查询产品ID根据询盘编号
+        List<EnquiryProduct> enquiryProducts =enquiryProductMapper.getByEnquiryNumber(purchaseDto.getEnquiryNumber());
+        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
+        Purchase purchase=new Purchase();
+        BeanUtils.copyProperties(purchase,purchaseDto);
+       return purchaseMapper.purchase(purchase);
+
     }
 
 }
