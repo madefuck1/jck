@@ -1,0 +1,39 @@
+<@override name="title">
+评价商品
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/appstyle.css" rel="stylesheet" type="text/css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-comment">
+        <!--底部-->
+        <#include "/common/includes/include.footer.html"/>
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".comment-list .item-opinion li").click(function() {
+            $(this).prevAll().children('i').removeClass("active");
+            $(this).nextAll().children('i').removeClass("active");
+            $(this).children('i').addClass("active");
+
+        });
+    })
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

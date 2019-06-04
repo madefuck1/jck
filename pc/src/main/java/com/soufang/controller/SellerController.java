@@ -131,11 +131,6 @@ public class SellerController extends BaseController {
         }
         return vo;
     }
-    /*@MemberAccess //检验AmazeUI弹窗
-    @RequestMapping(value = "tohh", method = RequestMethod.GET)
-    public String tohh() {
-        return "sellerCenter/hhhh";
-    }*/
 
     //卖家查看已卖出的产品  两个接口一个页面一起用
     @MemberAccess
@@ -210,7 +205,9 @@ public class SellerController extends BaseController {
         AssessVo vo = new AssessVo();
         ShopDto shopInfo = this.getShopInfo(request);
         assessSo.setShopId(shopInfo.getShopId());
-        assessSo.setLimit(5);
+        if(assessSo.getLimit() == null){
+            assessSo.setLimit(5);
+        }
         PageHelp<AssessDto> pageHelp = assessFeign.getList(assessSo);
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());

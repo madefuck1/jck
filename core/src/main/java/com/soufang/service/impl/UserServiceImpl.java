@@ -2,6 +2,7 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.UserLevelEnum;
 import com.soufang.base.search.user.UserSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.MD5Utils;
@@ -85,9 +86,9 @@ public class UserServiceImpl implements UserService {
     public Long addUser(UserDto userDto) {
         try {
             User user = new User();
-            userDto.setCreateTime(DateUtils.getToday());
-            userDto.setUserLevel(1);
             userDto.setUserStatus(0);
+            userDto.setCreateTime(DateUtils.getToday());
+            userDto.setUserLevel(UserLevelEnum.one.getValue());
             BeanUtils.copyProperties(userDto,user);
             user.setPassWord(MD5Utils.md5(userDto.getPassWord()));
             userMapper.addUser(user);

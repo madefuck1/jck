@@ -5,34 +5,36 @@
     <id column="assess_id" property="assessId" jdbcType="BIGINT" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="assess_type" property="assessType" jdbcType="INTEGER" />
     <result column="assess_content" property="assessContent" jdbcType="VARCHAR" />
     <result column="assess_user_id" property="assessUserId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
-
   <resultMap id="ResultMap" type="com.soufang.base.dto.assess.AssessDto">
     <id column="assess_id" jdbcType="BIGINT" property="assessId" />
     <result column="shop_id" jdbcType="BIGINT" property="shopId" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_color" jdbcType="VARCHAR" property="productColor" />
     <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
     <result column="assess_type" jdbcType="INTEGER" property="assessType" />
     <result column="assess_content" jdbcType="VARCHAR" property="assessContent" />
     <result column="assess_user_id" jdbcType="BIGINT" property="assessUserId" />
     <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="userAvatar" jdbcType="VARCHAR" property="userAvatar" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    assess_id, shop_id, product_id, order_number, assess_type, assess_content, assess_user_id, 
-    create_time
+    assess_id, shop_id, product_id, product_color, order_number, assess_type, assess_content,
+    assess_user_id, create_time
   </sql>
   <sql id="return_Column_List" >
-    assess_id, shop_id, product_id, order_number, assess_type, assess_content, assess_user_id,
+    assess_id, shop_id, product_id,product_color, order_number, assess_type, assess_content, assess_user_id,
     create_time,
-    GetLoginNameByUserId(assess_user_id) as loginName,GetProductNameById(product_id) as product_name
+    GetLoginNameByUserId(assess_user_id) as loginName,GetUserAvatarByUserId(assess_user_id) as userAvatar ,GetProductNameById(product_id) as product_name
   </sql>
   <select id="getList" resultMap="ResultMap" parameterType="com.soufang.base.search.assess.AssessSo" >
     select
@@ -41,6 +43,12 @@
     where shop_id = #{shopId,jdbcType=BIGINT}
     <if test="type != null ">
       and assess_type = #{type}
+    </if>
+    <if test="orderNumber != null and orderNumber != '' ">
+      and order_number = #{orderNumber}
+    </if>
+    <if test="productId != 0 and productId != null ">
+      and product_id = #{productId}
     </if>
     ORDER BY assess_type DESC
     <if test="page != null and limit != null">
@@ -52,12 +60,20 @@
     select
     COUNT(*)
     from t_assess
-    where shop_id = #{shopId,jdbcType=BIGINT}
+    where 1=1
+    <if test="shopId != null ">
+      and shop_id = #{shopId,jdbcType=BIGINT}
+    </if>
     <if test="type != null ">
       and assess_type = #{type}
     </if>
+    <if test="orderNumber != null and orderNumber != '' ">
+      and order_number = #{orderNumber}
+    </if>
+    <if test="productId != 0 and productId != null ">
+      and product_id = #{productId}
+    </if>
   </select>
-
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -68,15 +84,16 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_assess
     where assess_id = #{assessId,jdbcType=BIGINT}
-
   </delete>
   <insert id="insert" parameterType="com.soufang.model.Assess" >
     insert into t_assess (assess_id, shop_id, product_id, 
-      order_number, assess_type, assess_content, 
-      assess_user_id, create_time)
+      product_color, order_number, assess_type, 
+      assess_content, assess_user_id, create_time
+      )
     values (#{assessId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
-      #{orderNumber,jdbcType=VARCHAR}, #{assessType,jdbcType=INTEGER}, #{assessContent,jdbcType=VARCHAR}, 
-      #{assessUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{productColor,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{assessType,jdbcType=INTEGER}, 
+      #{assessContent,jdbcType=VARCHAR}, #{assessUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.soufang.model.Assess" >
     insert into t_assess
@@ -89,6 +106,9 @@
       </if>
       <if test="productId != null" >
         product_id,
+      </if>
+      <if test="productColor != null" >
+        product_color,
       </if>
       <if test="orderNumber != null" >
         order_number,
@@ -116,6 +136,9 @@
       <if test="productId != null" >
         #{productId,jdbcType=BIGINT},
       </if>
+      <if test="productColor != null" >
+        #{productColor,jdbcType=VARCHAR},
+      </if>
       <if test="orderNumber != null" >
         #{orderNumber,jdbcType=VARCHAR},
       </if>
@@ -142,6 +165,9 @@
       <if test="productId != null" >
         product_id = #{productId,jdbcType=BIGINT},
       </if>
+      <if test="productColor != null" >
+        product_color = #{productColor,jdbcType=VARCHAR},
+      </if>
       <if test="orderNumber != null" >
         order_number = #{orderNumber,jdbcType=VARCHAR},
       </if>
@@ -164,6 +190,7 @@
     update t_assess
     set shop_id = #{shopId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
+      product_color = #{productColor,jdbcType=VARCHAR},
       order_number = #{orderNumber,jdbcType=VARCHAR},
       assess_type = #{assessType,jdbcType=INTEGER},
       assess_content = #{assessContent,jdbcType=VARCHAR},

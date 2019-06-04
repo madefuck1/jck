@@ -52,9 +52,7 @@ public class ShopController {
             result.setSuccess(false);
             return result;
         }
-        userDto.setCreateTime(DateUtils.getToday());
-        userDto.setUserStatus(1);
-        userDto.setUserLevel(UserLevelEnum.one.getValue());
+        userDto.setPassWord("123456");//初始密码
         Long userId = userService.addUser(userDto);
         CompanyDto companyDto = userDto.getCompanyDto();
         companyDto.setUserId(userId);
@@ -63,6 +61,8 @@ public class ShopController {
         ShopDto shopDto = userDto.getShopDto();
         shopDto.setCreateTime(DateUtils.getToday());
         shopDto.setUserId(userId);
+        shopDto.setShopLevel(1);
+        shopDto.setShopStatus(0);
         shopService.addShop(shopDto);
         result.setSuccess(true);
         return result;

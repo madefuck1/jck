@@ -9,6 +9,8 @@ public class Assess {
 
     private Long productId;
 
+    private String productColor;
+
     private String orderNumber;
 
     private Integer assessType;
@@ -41,6 +43,14 @@ public class Assess {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public String getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(String productColor) {
+        this.productColor = productColor == null ? null : productColor.trim();
     }
 
     public String getOrderNumber() {

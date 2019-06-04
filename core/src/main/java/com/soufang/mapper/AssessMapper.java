@@ -22,4 +22,5 @@ public interface AssessMapper {
     List<AssessDto> getList(AssessSo assessSo);
 
     int getCount(AssessSo assessSo);
+
 }

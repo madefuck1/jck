@@ -1,0 +1,204 @@
+<@override name="title">
+新增字段
+</@override>
+
+<@override name="css">
+<style>
+
+</style>
+</@override>
+<@override name="body">
+
+<form>
+    <div class="layui-form" >
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">店铺名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="shopName" id="shopName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">店铺经营范围</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="businessScope" id="businessScope" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">店铺介绍</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="shopIntroduce" id="shopIntroduce" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">店铺主营产品</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="mainProduct" id="mainProduct" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人真实姓名</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="realName" id="realName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人电话</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="userPhone" id="userPhone" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="userEmail" id="userEmail" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人固话</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="fixed_phone" id="fixed_phone" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人传真</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="faxNumber" id="faxNumber" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人公司名称</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="companyName" id="companyName" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">公司法人姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="companyCorporate" id="companyCorporate" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">公司介绍</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="companyInfo" id="companyInfo" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">公司地址</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="companyAddress" id="companyAddress" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">公司负责人姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="companyLinker" id="companyLinker" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">公司联系电话</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="companyPhone" id="companyPhone" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">负责人银行卡号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="bankNumber" id="bankNumber" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">银行名称</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="bank" id="bank" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit type="button" onclick="submitForm()">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+</@override>
+
+<@override name="js">
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+
+    function submitForm(){
+        var data = {
+            realName:$("#realName").val(), // 联系人真实姓名
+            phone:$("#userPhone").val(),
+            email:$("#userEmail").val(),
+            fixedPhone:$("#fixed_phone").val(),
+            faxNumber:$("#faxNumber").val(),
+            companyDto:{
+                compName:$("#companyName").val(),
+                companyInfo:$("#companyInfo").val(),
+                compAddress:$("#companyAddress").val(),
+                compLinker:$("#companyLinker").val(),
+                compPhone:$("#companyPhone").val(),
+                compCorporate:$("#companyCorporate").val(),
+                bank:$("#bank").val(),
+                bankNumber:$("#bankNumber").val(),
+            },
+            shopDto:{
+                shopName:$("#shopName").val(),
+                shopIntroduce:$("#shopIntroduce").val(),//店铺介绍
+                businessScope:$("#businessScope").val(), //店铺经营范围
+                mainProducts:$("#mainProduct").val(),
+            },
+        };
+        $.ajax({
+            url: '/admin/shop/addShop',
+            type: 'post',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","35%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = 'toList' ;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.new.html"/>

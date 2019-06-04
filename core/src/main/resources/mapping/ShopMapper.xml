@@ -22,7 +22,7 @@
     <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
     <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
     <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
-    <result column="shop_avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
+    <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
     <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
     <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
     <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
@@ -96,7 +96,7 @@
     where shop_id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addShop" parameterType="com.soufang.model.Shop" >
+  <insert id="addShop"  parameterType="com.soufang.model.Shop">
     insert into t_shop
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -111,7 +111,7 @@
       <if test="shopIntroduce != null" >
         shop_introduce,
       </if>
-      <if test="avatarUrl != null" >
+      <if test="shopAvatarUrl != null" >
         shop_avatar_url,
       </if>
       <if test="businessScope != null" >
@@ -143,8 +143,8 @@
       <if test="shopIntroduce != null" >
         #{shopIntroduce,jdbcType=VARCHAR},
       </if>
-      <if test="avatarUrl != null" >
-        #{avatarUrl,jdbcType=VARCHAR},
+      <if test="shopAvatarUrl != null" >
+        #{shopAvatarUrl,jdbcType=VARCHAR},
       </if>
       <if test="businessScope != null" >
         #{businessScope,jdbcType=VARCHAR},
@@ -159,7 +159,7 @@
         #{refuseReason,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        create_time,
+          #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>

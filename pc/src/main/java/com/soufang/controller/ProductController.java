@@ -9,10 +9,12 @@ import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.assess.AssessSo;
 import com.soufang.base.search.assort.AssortSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
+import com.soufang.feign.AssessFeign;
 import com.soufang.feign.CommonPullDownFeign;
 import com.soufang.feign.ProductFeign;
 import com.soufang.vo.product.ListSpecReqVo;
@@ -36,6 +38,9 @@ public class ProductController extends BaseController {
 
     @Autowired
     CommonPullDownFeign commonPullDownFeign;
+
+    @Autowired
+    AssessFeign assessFeign;
 
     @Value("${upload.product}")
     private String productUrl;
@@ -422,6 +427,10 @@ public class ProductController extends BaseController {
             map.put("leftList", hotProductList.getData());
         }
         //获取各种评价的总数量
+        AssessSo assessSo = new AssessSo();
+        assessSo.setProductId(productId);
+        Map<String,Integer> allCount = assessFeign.getCount(assessSo);
+        map.put("allCount",allCount);
         return "product/introduction";
     }
 
