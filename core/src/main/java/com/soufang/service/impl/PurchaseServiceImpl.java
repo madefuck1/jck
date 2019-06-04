@@ -168,7 +168,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDto.setShopId(shop.getShopId());
         //查询产品ID根据询盘编号
         List<EnquiryProduct> enquiryProducts =enquiryProductMapper.getByEnquiryNumber(purchaseDto.getEnquiryNumber());
-        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
+        //多个产品
+       /* for(int i = 0; i < enquiryProducts.size();i++){
+            purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
+        }*/
+       //单个产品
+        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         Purchase purchase=new Purchase();
         BeanUtils.copyProperties(purchase,purchaseDto);
        return purchaseMapper.purchase(purchase);
