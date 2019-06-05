@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,8 +170,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         //查询产品ID根据询盘编号
         List<EnquiryProduct> enquiryProducts =enquiryProductMapper.getByEnquiryNumber(purchaseDto.getEnquiryNumber());
         purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
+        //计算总价multiply
+        purchaseDto.setSumPrice(purchaseDto.getUnitPrice().multiply(new BigDecimal(enquiryProducts.get(0).getProductNumber())));
         Purchase purchase=new Purchase();
-        BeanUtils.copyProperties(purchase,purchaseDto);
+        BeanUtils.copyProperties(purchaseDto,purchase);
        return purchaseMapper.purchase(purchase);
 
     }
