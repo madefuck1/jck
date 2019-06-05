@@ -3,11 +3,13 @@ package com.soufang.controller;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.address.AddressDto;
+import com.soufang.base.dto.assess.AssessDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.footprint.FootPrintDto;
 import com.soufang.base.dto.invoice.InvoiceDto;
+import com.soufang.base.dto.order.OrderProductDto;
 import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
@@ -27,6 +29,8 @@ import com.soufang.vo.Enquiry.EnquiryVo;
 import com.soufang.vo.address.AddressAddVo;
 import com.soufang.vo.address.AddressVo;
 import com.soufang.vo.address.UpdateAddressVo;
+import com.soufang.vo.assess.AddAssessDetailVo;
+import com.soufang.vo.assess.AddAssessVo;
 import com.soufang.vo.favorite.FavoeiteVo;
 import com.soufang.vo.favorite.FavoriteAddVo;
 import com.soufang.vo.footPrint.FootPrintAddVo;
@@ -74,6 +78,9 @@ public class PersonalCenterController extends BaseController {
     @Autowired
     PcUserFeign pcUserFeign;
 
+    @Autowired
+    AssessFeign assessFeign;
+
     @Value("${upload.user}")
     private String uploadUrl;//用户头像上传地址
     @Value("${ftp.host}")
@@ -81,10 +88,37 @@ public class PersonalCenterController extends BaseController {
 
 
     @MemberAccess
-    @RequestMapping(value = "/toPutAssess", method = RequestMethod.GET)
-    public String toPutAssess(){
-
+    @RequestMapping(value = "/toPutAssess/{orderNumber}", method = RequestMethod.GET)
+    public String toPutAssess(@PathVariable String orderNumber,ModelMap modelMap){
+        OrderShopDto orderShopDto = assessFeign.getOrderProduct(orderNumber);
+        modelMap.put("orderShop",orderShopDto);
         return "personalCenter/commentList";
+    }
+    @MemberAccess
+    @RequestMapping(value = "/putAssess", method = RequestMethod.POST)
+    public String toPutAssess(@ModelAttribute AddAssessVo addAssessVo,ModelMap model,HttpServletRequest request){
+        BaseVo vo = new BaseVo();
+        UserDto userInfo = this.getUserInfo(request);
+        List<AssessDto> assessDtos = new ArrayList<>();
+        for (AddAssessDetailVo a: addAssessVo.getList()) {
+            AssessDto assessDto = new AssessDto();
+            assessDto.setAssessUserId(userInfo.getUserId());
+            assessDto.setOrderNumber(addAssessVo.getOrderNumber());
+            assessDto.setShopId(addAssessVo.getShopId());
+            assessDto.setProductId(a.getProductId());
+            assessDto.setAssessType(a.getAssessType());
+            assessDto.setAssessContent(a.getAssessContent());
+            assessDto.setProductColor(a.getProductColor().substring(3));
+            assessDtos.add(assessDto);
+        }
+        Long orderShopId = assessFeign.putAssess(assessDtos);
+        OrderShopDto orderShopDto = orderFeign.getDetail(orderShopId);
+        for (OrderProductDto orderProductDto : orderShopDto.getOrderProducts()) {
+            orderProductDto.setProductImage(orderProductDto.getProductImage());
+        }
+        model.put("order", orderShopDto);
+        model.put("user", getUserInfo(request));
+        return "personalCenter/orderDetail";
     }
 
 

@@ -103,13 +103,24 @@
         GetProductImage(t_order_product.product_id) as image
 </sql>
 
+  <select id="getOrderProduct" parameterType="java.lang.String" resultMap="DtoResultMap">
+    select
+      t_order_shop.user_id , t_order_shop.order_number,
+      t_order_shop.shop_id, t_order_shop.shop_name,t_order_product.product_id,
+      t_order_product.product_name,t_order_product.product_unit,
+      t_order_product.product_price, t_order_product.product_spec, t_order_product.product_color,
+      GetProductImage(t_order_product.product_id) as image
+    from t_order_shop join t_order_product
+    on t_order_shop.order_shop_id = t_order_product.order_shop_id
+    where t_order_shop.order_number = #{orderNumber}
+  </select>
+
   <select id="getDetail" parameterType="java.lang.Long" resultMap="DtoResultMap">
     select
     <include refid="Return_column_list" />
     from t_order_shop join t_order_product
     on t_order_shop.order_shop_id = t_order_product.order_shop_id
     where t_order_shop.order_shop_id = #{orderShopId}
-
   </select>
 
   <select id="getList" parameterType="com.soufang.base.search.order.OrderSo" resultMap="ResultMap">
@@ -394,4 +405,16 @@
       send_number = #{sendNumber,jdbcType=VARCHAR}
       where order_shop_id = #{orderShopId,jdbcType=BIGINT}
   </update>
+
+  <update id="updateOrderShopStatus" parameterType="java.lang.String">
+      update t_order_shop set
+      order_shop_status = 9
+      where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  <select id="getOrderShopId" resultType="java.lang.Long" parameterType="java.lang.String" >
+    select
+    order_shop_id
+    from t_order_shop
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </select>
 </mapper>

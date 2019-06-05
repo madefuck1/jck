@@ -95,7 +95,7 @@
       #{assessContent,jdbcType=VARCHAR}, #{assessUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.soufang.model.Assess" >
+  <insert id="insertSelective" parameterType="com.soufang.base.dto.assess.AssessDto" >
     insert into t_assess
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="assessId != null" >

@@ -20,4 +20,6 @@ public interface OrderMapper {
     void delOrder(Order order);
 
     int updateTotalMoney(Order order);
+
+    int updateOrderStatus(String orderNumber);
 }
