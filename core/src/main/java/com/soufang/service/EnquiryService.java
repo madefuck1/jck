@@ -2,6 +2,8 @@ package com.soufang.service;
 
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
+import com.soufang.model.Enquiry;
 
 import java.util.List;
 
@@ -22,6 +24,10 @@ public interface EnquiryService {
      * @return
      */
     List<EnquiryDto> getList(EnquirySo enquirySo);
+
+    List<EnquiryDto> enquiryTableMessage(EnquirySo enquirySo);
+
+    int  enquiryTableCount(EnquirySo EnquirySo);
 
     /**
      * 按条件查询询盘的数量

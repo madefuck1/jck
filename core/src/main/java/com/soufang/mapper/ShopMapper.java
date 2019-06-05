@@ -82,4 +82,8 @@ public interface ShopMapper {
      * @return
      */
     List<ShopDto> appGetList(ShopSo shopSo);
+
+    int updateByPrimaryKeySelective(Shop record);
+
+    int updateByPrimaryKey(Shop record);
 }

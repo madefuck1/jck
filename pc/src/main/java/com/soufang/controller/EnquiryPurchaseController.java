@@ -3,16 +3,21 @@ package com.soufang.controller;
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.EnquiryFeign;
 import com.soufang.feign.EnquiryProductFeign;
 import com.soufang.feign.PurchaseFeign;
+import com.soufang.vo.Enquiry.EnquiryAddVo;
 import com.soufang.vo.Enquiry.EnquiryUpdateVo;
 import com.soufang.vo.Enquiry.EnquiryVo;
 import com.soufang.vo.enquiryProduct.EnquiryProductUpdateVo;
+import com.soufang.vo.favorite.FavoriteAddVo;
 import com.soufang.vo.purchase.PurchseUseRefusedVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -209,6 +214,9 @@ public class EnquiryPurchaseController extends BaseController{
      * @param purchseUseRefusedVo
      * @return
      */
+    @ResponseBody
+    @MemberAccess
+    @RequestMapping(value = "isUseRefused",method = RequestMethod.POST)
     public Result isUseRefused(@RequestBody PurchseUseRefusedVo purchseUseRefusedVo){
         Result result = purchaseFeign.isUseRefused(purchseUseRefusedVo);
         return result;
@@ -216,7 +224,7 @@ public class EnquiryPurchaseController extends BaseController{
 
     /**
      *  跳转求购详情页面
-     * @param enquiryNumber
+     * @param enquiryProductId
      * @param modelMap
      * @return
      */
@@ -226,6 +234,38 @@ public class EnquiryPurchaseController extends BaseController{
         return "personalCenter/enquiryDetails";
     }
 
+    //求购列表
+    @RequestMapping(value = "toEnquiryList", method = RequestMethod.GET)
+    public String toEnquiryList() {
+        return "enquiry/enquityList";
+    }
+
+    /**
+     * 求购列表
+     * @param request
+     * @param enquiryAddVo
+     * @return
+     */
+    @ResponseBody
+    @MemberAccess
+    @RequestMapping(value = "enquiryTableMessage",method = RequestMethod.POST)
+    public PageHelp<FavoriteDto> enquiryTableMessage(HttpServletRequest request, @RequestBody EnquiryAddVo enquiryAddVo){
+        EnquirySo enquirySo= new EnquirySo();
+        //查询参数整理
+        enquirySo.setLimit(enquiryAddVo.getLimit());
+        enquirySo.setPage(enquiryAddVo.getPage());
+        enquirySo.setAssortId(enquiryAddVo.getAssortId());
+        //获得返回结果
+        PageHelp<FavoriteDto> pageHelp=enquiryFeign.enquiryTableMessage(enquirySo);
+        return pageHelp;
+    }
+
+
+    //求购详情-报价
+    @RequestMapping(value = "toPurchaseDetail", method = RequestMethod.GET)
+    public String toPurchaseDetail() {
+        return "enquiry/purchaseDetails";
+    }
 
 
     //返回参数设置

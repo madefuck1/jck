@@ -2,17 +2,19 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
+import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.mapper.EnquiryMapper;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
-import com.soufang.model.Enquiry;
-import com.soufang.model.EnquiryProduct;
-import com.soufang.model.Purchase;
+import com.soufang.model.*;
 import com.soufang.service.EnquiryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,6 +127,62 @@ public class EnquiryServiceImpl implements EnquiryService {
         return  listDto;
     }
 
+    /**
+     * 查询求购信息
+     * @param enquirySo
+     * @return
+     */
+    @Override
+    public List<EnquiryDto> enquiryTableMessage(EnquirySo enquirySo){
+        enquirySo.setPage((enquirySo.getPage() - 1) * 5);
+        List<Enquiry> lists= enquiryMapper.enquiryTableMessage(enquirySo);
+        List<EnquiryDto> listDtos = new ArrayList<>();
+        //询盘
+        for (int i = 0; i < lists.size(); i++) {
+            Enquiry enquiry = lists.get(i);
+            EnquiryDto enquiryDto = new EnquiryDto();
+            //状态-获取对应枚举
+            enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
+            // 格式化时间
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy MM dd");
+            Date date = new Date();
+            enquiry.setStrCreateTime(sdf1.format(enquiry.getCreateTime()));
+            BeanUtils.copyProperties(enquiry, enquiryDto);
+            ShopDto shopDto=new ShopDto();
+            Shop shop = enquiry.getShop();
+            BeanUtils.copyProperties(shop,shopDto);
+            //加入个人商铺信息
+            enquiryDto.setShopDto(shopDto);
+            List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
+            for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
+                EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
+                BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
+                List<PurchaseDto> purchaseDtos = new ArrayList<>();
+                AssortDto assortDto =new AssortDto();
+                Assort assort = enquiryProduct.getAssort();
+                BeanUtils.copyProperties(assort,assortDto);
+                //产品中加上分类信息
+                enquiryProductDto.setAssortDtos(assortDto);
+                enquiryProductDtos.add(enquiryProductDto);
+            }
+            //加入产品信息
+            enquiryDto.setEnquiryProductDto(enquiryProductDtos);
+            //将询盘信息装入
+            listDtos.add(enquiryDto);
+        }
+        return listDtos;
+    }
+
+    /**
+     * 求购列表总数
+     * @param EnquirySo
+     * @return
+     */
+    @Override
+    public  int  enquiryTableCount(EnquirySo EnquirySo){
+        return enquiryMapper.enquiryTableCount(EnquirySo);
+    }
+
     @Override
     public int getMyQuoteCount(EnquirySo enquirySo) {
         return enquiryMapper.getMyQuoteCount(enquirySo);
@@ -181,7 +239,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             for (EnquiryProductDto dto : listDto) {
                 EnquiryProduct enPro = new EnquiryProduct();
                 BeanUtils.copyProperties(dto, enPro);
-                enquiryProductMapper.insertSelective(enPro);
+                enquiryProductMapper.insert(enPro);
             }
             //插入询盘信息
             int i =enquiryMapper.insert(enquiry);

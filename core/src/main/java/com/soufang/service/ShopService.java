@@ -62,4 +62,6 @@ public interface ShopService {
     ShopDto getByUserId(Long userId);
 
     List<ShopDto> appGetList(ShopSo shopSo);
+
+    void updateShop(ShopDto shopDto);
 }

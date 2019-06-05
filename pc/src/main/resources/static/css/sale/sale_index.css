@@ -79,7 +79,7 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/身份证／正面.png);
+	background: url(../../images/sale/IdCard／positive.png);
 	margin-right: 10px;
 	cursor: pointer;
 }
@@ -88,7 +88,7 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/身份证／反面.png);
+	background: url(../../images/sale/IdCard／negative.png);
 	margin-right: 10px;
 	cursor: pointer;
 }
@@ -98,7 +98,7 @@ input{
 	display: inline-block;
 	width: 190px;
 	height: 90px;
-	background: url(../../images/sale/营业执照.png);
+	background: url(../../images/sale/businessLicense.png);
 	margin-right: 10px;
 	cursor: pointer;
 }

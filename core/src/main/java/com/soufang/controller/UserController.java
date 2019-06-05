@@ -3,12 +3,16 @@ package com.soufang.controller;
 import com.github.pagehelper.PageHelper;
 import com.soufang.base.BusinessException;
 import com.soufang.base.Result;
+import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.user.UserSo;
+import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.MD5Utils;
 import com.soufang.model.User;
 import com.soufang.service.CompanyService;
+import com.soufang.service.ShopService;
 import com.soufang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +30,28 @@ public class UserController {
     UserService userService;
     @Autowired
     CompanyService companyService;
+    @Autowired
+    ShopService shopService;
+
+    @RequestMapping(value = "settle" , method = RequestMethod.POST)
+    public Result settleShop(@RequestBody UserDto userDto){
+        userService.updateUserInfo(userDto);
+        CompanyDto companyDto = userDto.getCompanyDto();
+        if(companyDto.getCompId() == null){
+            companyDto.setCreateTime(DateUtils.getToday());
+            companyService.addCompany(companyDto);
+        }else {
+            companyService.updateCompany(companyDto);
+        }
+        ShopDto shopDto = userDto.getShopDto();
+        if(shopDto.getShopId() == null){
+            shopDto.setCreateTime(DateUtils.getToday());
+            shopService.addShop(shopDto);
+        }else {
+            shopService.updateShop(shopDto);
+        }
+        return new Result();
+    }
 
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public PageHelp<UserDto> getList(@RequestBody UserSo userSo) {

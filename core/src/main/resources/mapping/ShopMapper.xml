@@ -194,4 +194,54 @@
     </if>
   </select>
 
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Shop">
+        update t_shop
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopLevel != null">
+                shop_level = #{shopLevel,jdbcType=INTEGER},
+            </if>
+            <if test="shopIntroduce != null">
+                shop_introduce = #{shopIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="shopAvatarUrl != null">
+                shop_avatar_url = #{shopAvatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null">
+                business_scope = #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="mainProducts != null">
+                main_products = #{mainProducts,jdbcType=VARCHAR},
+            </if>
+            <if test="shopStatus != null">
+                shop_status = #{shopStatus,jdbcType=INTEGER},
+            </if>
+            <if test="refuseReason != null">
+                refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where shop_id = #{shopId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.Shop">
+    update t_shop
+    set user_id = #{userId,jdbcType=BIGINT},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_level = #{shopLevel,jdbcType=INTEGER},
+      shop_introduce = #{shopIntroduce,jdbcType=VARCHAR},
+      shop_avatar_url = #{shopAvatarUrl,jdbcType=VARCHAR},
+      business_scope = #{businessScope,jdbcType=VARCHAR},
+      main_products = #{mainProducts,jdbcType=VARCHAR},
+      shop_status = #{shopStatus,jdbcType=INTEGER},
+      refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </update>
 </mapper>

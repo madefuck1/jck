@@ -6,7 +6,6 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.UserLevelEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.search.user.UserSo;
@@ -33,7 +32,7 @@ public class ShopController {
     @Autowired
     CompanyService companyService;
 
-
+    // 后台创建店铺
     @RequestMapping(value = "admin/createShop")
     public Result adminCreateShop(@RequestBody UserDto userDto){
         Result result = new Result();
@@ -160,4 +159,10 @@ public class ShopController {
         return list;
     }
 
+    @RequestMapping(value = "updateShop",method = RequestMethod.POST)
+    public Result updateShop(@RequestBody ShopDto shopDto){
+        Result result = new Result();
+        shopService.updateShop(shopDto);
+        return result;
+    }
 }

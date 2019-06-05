@@ -1,6 +1,7 @@
 package com.soufang.base.dto.enquiry;
 
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
@@ -64,6 +65,15 @@ public class EnquiryDto {
     private Integer page;
 
     private Integer limit;
+    private ShopDto shopDto;
+
+    public ShopDto getShopDto() {
+        return shopDto;
+    }
+
+    public void setShopDto(ShopDto shopDto) {
+        this.shopDto = shopDto;
+    }
 
     public Integer getPage() {
         return page;

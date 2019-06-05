@@ -28,6 +28,8 @@ public class EnquiryAddVo {
     //询价用户
     private Long userId;
 
+    private long assortId;
+
     //询价标题
     private String enquiryTitle;
 
@@ -175,5 +177,13 @@ public class EnquiryAddVo {
 
     public void setEnquiryRemark(String enquiryRemark) {
         this.enquiryRemark = enquiryRemark == null ? null : enquiryRemark.trim();
+    }
+
+    public long getAssortId() {
+        return assortId;
+    }
+
+    public void setAssortId(long assortId) {
+        this.assortId = assortId;
     }
 }

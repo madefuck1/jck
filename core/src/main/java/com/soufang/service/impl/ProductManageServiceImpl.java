@@ -45,7 +45,7 @@ public class ProductManageServiceImpl implements ProductManageService {
 
         // 设置页面其实数量
         int page = dto.getPage();
-        page = page * dto.getLimit();
+        page = (page-1) * dto.getLimit();
         dto.setPage(page);
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();

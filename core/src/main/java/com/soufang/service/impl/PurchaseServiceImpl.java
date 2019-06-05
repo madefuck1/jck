@@ -5,7 +5,9 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.enums.PurchaseStatusEnum;
 import com.soufang.base.search.purchase.PurchaseSo;
+import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.EnquiryMapper;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,14 +171,20 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDto.setShopId(shop.getShopId());
         //查询产品ID根据询盘编号
         List<EnquiryProduct> enquiryProducts =enquiryProductMapper.getByEnquiryNumber(purchaseDto.getEnquiryNumber());
+        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
+        //计算总价multiply
+        purchaseDto.setSumPrice(purchaseDto.getUnitPrice().multiply(new BigDecimal(enquiryProducts.get(0).getProductNumber())));
         //多个产品
        /* for(int i = 0; i < enquiryProducts.size();i++){
             purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         }*/
        //单个产品
+        purchaseDto.setOfferTime(DateUtils.getToday());
+        purchaseDto.setOfferStatus(PurchaseStatusEnum.already_offer.getValue());
+        purchaseDto.setEnquiryProductId(enquiryProducts.get(0).getEnquiryProductId());
         purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         Purchase purchase=new Purchase();
-        BeanUtils.copyProperties(purchase,purchaseDto);
+        BeanUtils.copyProperties(purchaseDto,purchase);
        return purchaseMapper.purchase(purchase);
 
     }

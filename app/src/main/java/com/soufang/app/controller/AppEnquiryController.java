@@ -34,6 +34,7 @@ import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +50,8 @@ public class AppEnquiryController extends  AppBaseController{
 
     @Autowired
     AppEnquiryFeign appEnquiryFeign;
+
+    @Value("${upload.enquiry}")
     private String uploadUrl;
 
     /**
@@ -134,12 +137,14 @@ public class AppEnquiryController extends  AppBaseController{
         //对数据捕捉异常
         try {
             //询盘信息
-            enquiryDto.setStrEnquiryType("0");
+            //3为求购数据
+            enquiryDto.setStrEnquiryType("3");
             enquiryDto.setEnquiryNumber(request.getParameter("enquiryNumber"));
             enquiryDto.setUserId(userInfo.getUserId());
             enquiryDto.setEnquiryTitle(request.getParameter("enquiryTitle"));
             enquiryDto.setCreateTime(DateUtils.string2Date(request.getParameter("createTime"),DateUtils.format1));
             enquiryDto.setTakeDate(DateUtils.string2Date(request.getParameter("takeDate"),DateUtils.format1));
+            enquiryDto.setEndTime(DateUtils.string2Date(request.getParameter("endTime"),DateUtils.format1));
             enquiryDto.setTakeName(request.getParameter("takeName"));
             enquiryDto.setTakePhone(request.getParameter("takePhone"));
             enquiryDto.setEnquiryRemark(request.getParameter("enquiryRemark"));
@@ -162,6 +167,7 @@ public class AppEnquiryController extends  AppBaseController{
                     } else {
                         result.setSuccess(false);
                         result.setMessage("图片上传失败");
+                        //需要提示页面
                     }
                 }
             }

@@ -55,4 +55,7 @@ public interface AppUserFeign {
 
     @RequestMapping(value = "/core/user/getList",method = RequestMethod.POST)
     PageHelp<UserDto> getList(@RequestBody UserSo userSo);
+
+    @RequestMapping(value = "/core/company/updateCompany",method = RequestMethod.POST)
+    Result updateCompany(@RequestBody CompanyDto companyDto);
 }

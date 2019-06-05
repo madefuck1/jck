@@ -1,5 +1,6 @@
 package com.soufang.app.feign;
 
+import com.soufang.base.Result;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.search.shop.ShopSo;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -21,4 +22,7 @@ public interface AppShopFeign {
 
     @RequestMapping(value = "/core/shop/getDetail", method = RequestMethod.POST)
     ShopDto getShopDetail(Long shopId);
+
+    @RequestMapping(value = "/core/shop/updateShop",method = RequestMethod.POST)
+    Result updateShop(@RequestBody ShopDto shopDto);
 }

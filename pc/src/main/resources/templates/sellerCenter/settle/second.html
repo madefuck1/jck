@@ -1,0 +1,231 @@
+<@override name="title">
+商家入驻
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_index.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/openShop.css">
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <div class="sale_con">
+            <div class="openUp">
+                <p class="p1">开通商铺</p>
+                <div class="turn">
+                    <span class="blueCircle">√</span>
+                    <span>联系人信息</span>
+                    <span class="turnBlue">————</span>
+                    <span class="blueCircle">2</span>
+                    <span>公司信息</span>
+                    <span class="turnBlue">————</span>
+                    <span class="grayCircle">3</span>
+                    <span class="fzcolor">完成</span>
+                </div>
+            </div>
+            <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+                <div class="am-tabs-bd">
+                    <div data-tab-panel-1 class="am-tab-panel ">
+                        <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+                            <div class="am-tabs-bd">
+                                <div data-tab-panel-0 class="am-tab-panel am-active sale_down">
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">单位性质：</span>
+                                        <div class="am-u-sm-10 sale_fz">
+                                            <label class="am-radio-inline">
+                                                <input type="radio"  value="1" name="companyType"> 企业
+                                            </label>
+                                            <label class="am-radio-inline">
+                                                <input type="radio" value="2" name="companyType"> 个体工商户
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">公司名称：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <input type="text" name="compName" value="${companyInfo.compName!}" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">公司简介：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style=" float: left;">
+                                            <textarea name="compInfo" class="" rows="1" id="doc-ta-1" style="border: 1px solid #E6E6E6; width: 58%"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">详细地址：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <input type="text" name="compAddress" value="${companyInfo.compAddress!}" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">经营范围：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <input type="text" name="businessScope" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">主营产品：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <input type="text" name="mainProducts" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">银行卡号：</span>
+                                        <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <input type="text" name="bankNumber" value="${companyInfo.bankNumber!}" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <span class="am-u-sm-2 row1">开户银行：</span>
+                                        <div class="am-u-sm-10 row2" style=" float: left;">
+                                            <input type="text" name="bank" value="${companyInfo.bank!}" class="am-form-field" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">身份证照片：</span>
+                                        <div class="idCard am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <img class="sale_pic1" onclick="idCard(this,1)">
+                                            <img class="sale_pic2" onclick="idCard(this,2)">
+                                            <input type="file" style="display:none;" onchange="showIdCard(this,1)">
+                                            <input type="file" style="display:none;" onchange="showIdCard(this,2)">
+                                        </div>
+                                    </div>
+                                    <div class="sale_cloum1">
+                                        <span class="am-u-sm-2 row1">营业执照：</span>
+                                        <div class="company am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                            <img class="sale_pic3" onclick="company(this)">
+                                            <input type="file" style="display: none" onchange="showCompany(this)">
+                                        </div>
+                                    </div>
+                                    <a><button type="button" onclick="submitSettle()" class="am-btn am-btn-secondary am-btn-lg button-size">立即提交</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+
+    function checkForm(){
+        if($("input[name=companyType]").val() == ''){
+            return "公司类型未选择";
+        }
+        if($("input[name=compName]").val() == ''){
+            return "公司名称未填写";
+        }
+        if($("textarea[name=compInfo]").val() == ''){
+            return "公司介绍未填写";
+        }
+        if($("input[name=compAddress]").val() == ''){
+            return "公司地址未填写";
+        }
+        if($("input[name=businessScope]").val() == ''){
+            return "经营范围未填写";
+        }
+        if($("input[name=mainProducts]").val() == ''){
+            return "主营产品未填写";
+        }
+        if($("input[name=bankNumber]").val() == ''){
+            return "卡号未填写";
+        }
+        if($("input[name=bank]").val() == ''){
+            return "开户行未填写";
+        }
+        return null ;
+    }
+
+    function submitSettle(){
+        var message = checkForm();
+        if(message != null){
+            alert(message);
+        }else {
+            var formData = new FormData();
+            formData.append("compType",$("input[name=companyType]").val());
+            formData.append("compName",$("input[name=compName]").val());
+            formData.append("compInfo",$("textarea[name=compInfo]").val());
+            formData.append("compAddress",$("input[name=compAddress]").val());
+            formData.append("businessScope",$("input[name=businessScope]").val());
+            formData.append("mainProducts",$("input[name=mainProducts]").val());
+            formData.append("bankNumber",$("input[name=bankNumber]").val());
+            formData.append("bank",$("input[name=bank]").val());
+            formData.append("idCardFile",$(".idCard input[type=file]").first()[0].files[0]);
+            formData.append("idCardFile",$(".idCard input[type=file]").last()[0].files[0]);
+            formData.append("companyFile",$(".company input[type=file]")[0].files[0]);
+            $.ajax({
+                url: '/user/settleInfo',
+                type: 'post',
+                cache: false,
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message)
+                        window.location.href = "/user/settleFinal";
+                    } else {
+                        alert("编辑失败:" + data.message)
+                    }
+                }
+            });
+        }
+    }
+
+    function idCard(obj,number){
+        if(number ==1){
+            $(obj).parent().find("input").first().click();
+        }else {
+            $(obj).parent().find("input").last().click();
+        }
+    }
+
+    function company(obj){
+        $(obj).parent().find("input[type=file]").click();
+    }
+
+    function showCompany(obj){
+        var reads= new FileReader();
+        var file=obj.files[0];
+        reads.readAsDataURL(file);
+        reads.onload = function (e) {
+            $(obj).parent().find("img").first().attr("src",this.result);
+        };
+    }
+
+    function showIdCard(obj,number){
+        var reads= new FileReader();
+        var file=obj.files[0];
+        reads.readAsDataURL(file);
+        reads.onload = function (e) {
+            if(number ==1){
+                $(obj).parent().find("img").first().attr("src",this.result);
+            }else {
+                $(obj).parent().find("img").last().attr("src",this.result);
+            }
+        };
+    }
+
+    $(function () {
+        $("input[name=companyInfo]").html("${companyInfo.companyInfo!}");
+        var idCard = "${userInfo.idCardUrl}".split(";");
+        if(idCard[0].indexOf("upload") > 0){
+            $(".idCard .sale_pic1").attr("src",idCard[0]);
+        }
+        if(idCard.indexOf("upload")>0){
+            $(".idCard .sale_pic2").attr("src",idCard[1]);
+        }
+        if("${companyInfo.compUrls!}".indexOf("upload")>0){
+            $(".company .sale_pic3").attr("src","${companyInfo.compUrls!}");
+        }
+    })
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>
+

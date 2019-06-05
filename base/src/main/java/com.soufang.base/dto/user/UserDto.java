@@ -17,7 +17,6 @@ public class UserDto {
     private String userAvatar;
     private String idCard;
     private String idCardUrl;
-    private String rIdCardUrl;
     private Integer userLevel;
     private Integer userStatus;
     private String strStatus;
@@ -48,14 +47,6 @@ public class UserDto {
         }else {
             return DateUtils.date2String(createTime, DateUtils.format1);
         }
-    }
-
-    public String getrIdCardUrl() {
-        return rIdCardUrl;
-    }
-
-    public void setrIdCardUrl(String rIdCardUrl) {
-        this.rIdCardUrl = rIdCardUrl;
     }
 
     public String getStrStatus() {

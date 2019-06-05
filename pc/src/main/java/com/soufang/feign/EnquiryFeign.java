@@ -2,13 +2,17 @@ package com.soufang.feign;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.vo.Enquiry.EnquiryAddVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 @FeignClient("core")
 public interface EnquiryFeign {
@@ -46,4 +50,8 @@ public interface EnquiryFeign {
 
     @RequestMapping(value = "/core/purchase/updateUnitPrice",method = RequestMethod.POST)
     Result updateUnitPrice(@RequestBody PurchaseDto purchaseDto);
+
+    //求购列表信息
+    @RequestMapping(value = "core/enquiry/enquiryTableMessage",method = RequestMethod.POST)
+    PageHelp<FavoriteDto> enquiryTableMessage(@RequestBody EnquirySo enquirySo);
 }

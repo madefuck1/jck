@@ -1,5 +1,6 @@
 package com.soufang.base.dto.enquiryProduct;
 
+import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 public class EnquiryProductDto {
 
     private List<PurchaseDto> purchaseDtos;
+    private AssortDto assortDtos;
+
     private Long enquiryProductId;
 
     private String enquiryNumber;
@@ -102,5 +105,13 @@ public class EnquiryProductDto {
 
     public void setAssortName(String assortName) {
         this.assortName = assortName;
+    }
+
+    public AssortDto getAssortDtos() {
+        return assortDtos;
+    }
+
+    public void setAssortDtos(AssortDto assortDtos) {
+        this.assortDtos = assortDtos;
     }
 }

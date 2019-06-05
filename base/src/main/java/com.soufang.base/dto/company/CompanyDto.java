@@ -8,6 +8,7 @@ public class CompanyDto {
     private Long compId;
     private Long userId;
     private String compName;
+    private Integer compType;
     private String companyInfo;
     private String compAddress;
     private String compLinker;
@@ -159,5 +160,14 @@ public class CompanyDto {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+
+    public Integer getCompType() {
+        return compType;
+    }
+
+    public void setCompType(Integer compType) {
+        this.compType = compType;
     }
 }
