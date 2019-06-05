@@ -29,7 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
             BeanUtils.copyProperties(company,companyDto);
             return companyDto;
         }else {
-            companyDto.setCompName("未填写");
             return companyDto;
         }
     }
@@ -61,5 +60,17 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = new Company();
         BeanUtils.copyProperties(companyDto,company);
         return companyMapper.updateCompanyByUserId(company);
+    }
+
+    @Override
+    public CompanyDto selectByCompanyName(String companyName) {
+        Company company = companyMapper.selectByCompanyName(companyName);
+        if(company == null){
+            return  null ;
+        }else {
+            CompanyDto companyDto = new CompanyDto();
+            BeanUtils.copyProperties(company,companyDto);
+            return companyDto;
+        }
     }
 }

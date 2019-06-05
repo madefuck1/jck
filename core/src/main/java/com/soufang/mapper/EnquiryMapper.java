@@ -80,4 +80,9 @@ public interface EnquiryMapper {
 
     //查询我的报价
     List<Enquiry> getMyPurchaseList(PurchaseSo purchaseSo);
+
+    //求购列表信息
+    List<Enquiry> enquiryTableMessage(EnquirySo EnquirySo);
+
+    int  enquiryTableCount(EnquirySo EnquirySo);
 }

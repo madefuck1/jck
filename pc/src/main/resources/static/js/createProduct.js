@@ -159,21 +159,28 @@ $(".Master-pic .mpic-1 input").bind("change",function () {
     var reads= new FileReader();
     var file=this.files[0];
 
-    var img = URL.createObjectURL(file);
-    var image = new Image();
-    image.src = img ;
-    image.onload = function (ev) {
-        if(image.width != 400){
-            $(obj).parent().find("input").val("");
-            alert("图片大小不符合标准");
-        }else {
-            reads.readAsDataURL(file);
-            reads.onload=function (e) {
-                $(obj).parent().find("img").attr("src",this.result);
-            };
-            $(this).parent().append("<p onclick='deleteImage(this)'>删除</p>")
+    var size = file.size;
+    if(checkFileSize(size)){
+        var img = URL.createObjectURL(file);
+        var image = new Image();
+        image.src = img ;
+        image.onload = function (ev) {
+            if(image.width != 400){
+                $(obj).parent().find("input").val("");
+                alert("图片大小不符合标准");
+            }else {
+                reads.readAsDataURL(file);
+                reads.onload=function (e) {
+                    $(obj).parent().find("img").attr("src",this.result);
+                };
+                $(this).parent().append("<p onclick='deleteImage(this)'>删除</p>")
+            }
         }
+    }else {
+        alert("文件大小超过限制");
     }
+
+
 })
 
 function deleteImage(obj) {
@@ -191,22 +198,26 @@ $(".imageDetail").bind("click",function () {
 function imageDetail(obj){
     var reads= new FileReader();
     var file=obj.files[0];
-
-    var img = URL.createObjectURL(file);
-    var image = new Image();
-    image.src = img ;
-    image.onload = function (ev) {
-        if (image.width != 750) {
-            $(obj).val("");
-            alert("图片大小不符合标准");
-        } else {
-            reads.readAsDataURL(file);
-            reads.onload=function (e) {
-                $(obj).parent().append('<img src="'+this.result+'">');
-            };
-            $(obj).parent().find("input[type=file]").removeAttr("onchange");
-            $(obj).parent().append('<input type="file" onchange="imageDetail(this)" style="display: none">');
+    var size = file.size;
+    if(checkFileSize(size)) {
+        var img = URL.createObjectURL(file);
+        var image = new Image();
+        image.src = img;
+        image.onload = function (ev) {
+            if (image.width != 750) {
+                $(obj).val("");
+                alert("图片大小不符合标准");
+            } else {
+                reads.readAsDataURL(file);
+                reads.onload = function (e) {
+                    $(obj).parent().append('<img src="' + this.result + '">');
+                };
+                $(obj).parent().find("input[type=file]").removeAttr("onchange");
+                $(obj).parent().append('<input type="file" onchange="imageDetail(this)" style="display: none">');
+            }
         }
+    }else {
+        alert("文件大小超出限制");
     }
 }
 

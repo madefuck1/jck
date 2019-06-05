@@ -10,6 +10,15 @@ public class EnquirySo {
     private Integer enquiryStatus;
     private Integer enquiryType;
     private String enquiryNumber;
+    private long assortId;
+
+    public long getAssortId() {
+        return assortId;
+    }
+
+    public void setAssortId(long assortId) {
+        this.assortId = assortId;
+    }
 
     public String getEnquiryNumber() {
         return enquiryNumber;

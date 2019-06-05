@@ -1,6 +1,7 @@
 package com.soufang.mapper;
 
 import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.model.Purchase;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,7 @@ public interface PurchaseMapper {
 
     int deleteByPrimaryKey(String purchaseNumber);
 
-    int insert(Purchase record);
+    int purchase(Purchase record);
 
     //新增报价单
     int insertSelective(Purchase record);
@@ -29,10 +30,11 @@ public interface PurchaseMapper {
 
     int delPurchaseByEnquiryNumber(String enquiryNumber);
 
-    public List<Purchase> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo);
+    public List<Purchase> getMyPurchaseList(PurchaseSo purchaseSo);
 
     List<Purchase> getPurchaseListByEnqunum( String enquiryNumber);
 
     int isUseRefused(Purchase purchase);
+
 
 }

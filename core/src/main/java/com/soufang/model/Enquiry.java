@@ -9,6 +9,8 @@ public class Enquiry {
 
     //询价用户
     private Long userId;
+
+    private Shop shop;
     private String loginName;
 
     //询价标题
@@ -183,5 +185,13 @@ public class Enquiry {
 
     public void setEnquiryRemark(String enquiryRemark) {
         this.enquiryRemark = enquiryRemark == null ? null : enquiryRemark.trim();
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

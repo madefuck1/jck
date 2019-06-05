@@ -2,6 +2,7 @@ package com.soufang.base.dto.user;
 
 import com.soufang.base.dto.account.AccountDto;
 import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.utils.DateUtils;
 
 import java.util.Date;
@@ -16,16 +17,19 @@ public class UserDto {
     private String userAvatar;
     private String idCard;
     private String idCardUrl;
-    private String rIdCardUrl;
     private Integer userLevel;
     private Integer userStatus;
     private String strStatus;
+    private String fixedPhone;
+    private String faxNumber;
     private Date createTime;
     private String strCreateTime;
     private Long recommendId;
     private Integer oauthType;
     private Long oauthId;
     private CompanyDto companyDto;
+
+    private ShopDto shopDto;
 
     private AccountDto accountDto;
 
@@ -45,14 +49,6 @@ public class UserDto {
         }
     }
 
-    public String getrIdCardUrl() {
-        return rIdCardUrl;
-    }
-
-    public void setrIdCardUrl(String rIdCardUrl) {
-        this.rIdCardUrl = rIdCardUrl;
-    }
-
     public String getStrStatus() {
         if(userStatus == null){
             return null;
@@ -61,6 +57,14 @@ public class UserDto {
         }else {
             return "不可用";
         }
+    }
+
+    public String getFaxNumber() {
+        return faxNumber;
+    }
+
+    public void setFaxNumber(String faxNumber) {
+        this.faxNumber = faxNumber;
     }
 
     public Long getUserId() {
@@ -189,5 +193,21 @@ public class UserDto {
 
     public void setAccountDto(AccountDto accountDto) {
         this.accountDto = accountDto;
+    }
+
+    public String getFixedPhone() {
+        return fixedPhone;
+    }
+
+    public void setFixedPhone(String fixedPhone) {
+        this.fixedPhone = fixedPhone;
+    }
+
+    public ShopDto getShopDto() {
+        return shopDto;
+    }
+
+    public void setShopDto(ShopDto shopDto) {
+        this.shopDto = shopDto;
     }
 }

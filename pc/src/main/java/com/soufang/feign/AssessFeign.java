@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Map;
+
 
 @FeignClient("core")
 public interface AssessFeign {
 
     @RequestMapping(value = "/core/assess/getList",method = RequestMethod.POST)
     PageHelp<AssessDto> getList(@RequestBody AssessSo assessSo);
+
+    @RequestMapping(value = "/core/assess/getCount",method = RequestMethod.POST)
+    Map<String,Integer> getCount(@RequestBody AssessSo assessSo);
+
 }

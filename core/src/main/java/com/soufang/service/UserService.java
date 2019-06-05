@@ -96,4 +96,6 @@ public interface UserService {
      * @return
      */
     int update(UserDto userDto);
+
+    void updateUserInfo(UserDto userDto);
 }

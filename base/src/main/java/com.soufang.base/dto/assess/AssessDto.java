@@ -11,6 +11,7 @@ public class AssessDto {
 
     private Long productId;
     private String productName;
+    private String productColor;
 
     private String orderNumber;
 
@@ -20,7 +21,7 @@ public class AssessDto {
 
     private Long assessUserId;
     private String loginName;
-    private String userAvater;
+    private String userAvatar;
 
     private Date createTime;
     private String strCreateTime;
@@ -65,6 +66,14 @@ public class AssessDto {
         this.shopId = shopId;
     }
 
+    public String getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
+    }
+
     public Integer getAssessType() {
         return assessType;
     }
@@ -79,6 +88,14 @@ public class AssessDto {
 
     public void setAssessContent(String assessContent) {
         this.assessContent = assessContent == null ? null : assessContent.trim();
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
     }
 
     public Long getAssessUserId() {

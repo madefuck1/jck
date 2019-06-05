@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/core/assess")
@@ -23,5 +24,10 @@ public class AssessController {
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public PageHelp<AssessDto> getList(@RequestBody AssessSo assessSo){
         return assessService.getList(assessSo);
+    }
+
+    @RequestMapping(value = "getCount",method = RequestMethod.POST)
+    Map<String,Integer> getCount(@RequestBody AssessSo assessSo){
+        return assessService.getCount(assessSo);
     }
 }

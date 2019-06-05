@@ -15,16 +15,19 @@ import com.soufang.app.feign.AppPurchaseFeign;
 import com.soufang.app.vo.purchase.AcceptPurchaseVo;
 import com.soufang.app.vo.purchase.PurchaseListVo;
 import com.soufang.app.vo.purchase.PurchaseVo;
+import com.soufang.app.vo.purchase.addPurchaseVo;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.purchase.PurchaseSo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -92,6 +95,32 @@ public class AppPurchaseController extends AppBaseController{
         acceptPurchaseVo.setStatusMessage(enquiryDto.getStatusMessage());
         acceptPurchaseVo.setMessage("提交审核");
         acceptPurchaseVo.setSuccess(true);
+        return acceptPurchaseVo;
+    }
+
+    //6.9报价
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "purchase",method = RequestMethod.POST)
+    public AcceptPurchaseVo purchase(@RequestBody addPurchaseVo addPurchaseVo, HttpServletRequest request){
+        //获取用户信息
+        UserDto userDto=this.getUserInfo(request);
+        AcceptPurchaseVo acceptPurchaseVo= new AcceptPurchaseVo();
+        PurchaseDto purchaseDto = new PurchaseDto();
+        //参数整理
+        purchaseDto.setEnquiryNumber(addPurchaseVo.getEnquiryNumber());
+        purchaseDto.setRemark(addPurchaseVo.getRemark());
+        purchaseDto.setUnitPrice(new BigDecimal(addPurchaseVo.getUnitPrice()));
+        purchaseDto.setUserId(userDto.getUserId());
+        //调用报价方法
+        int i =appPurchaseFeign.purchase(purchaseDto);
+        if(i>0){
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(true);
+        }else{
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(false);
+        }
         return acceptPurchaseVo;
     }
 

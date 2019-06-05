@@ -1,10 +1,13 @@
 package com.soufang.controller;
 
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
 import com.soufang.config.interceptor.MemberAccess;
@@ -12,10 +15,12 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.User.LoginReqVo;
 import com.soufang.vo.User.RegisterReqVo;
+import com.soufang.vo.User.SettleVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +38,9 @@ import java.util.Map;
 public class PcUserController extends BaseController{
     @Value("${upload.company}")
     private String uploadUrl;//公司营业照片上传地址
+    @Value("${upload.user}")
+    private String userUrl ;
+
     private static int code_time = 60*3 ;//验证码有效时间
 
     @Autowired
@@ -204,4 +212,83 @@ public class PcUserController extends BaseController{
         return baseVo;
     }
 
+
+    @MemberAccess
+    @RequestMapping(value = "toSettle",method = RequestMethod.GET)
+    public String toSettle(ModelMap map , HttpServletRequest request){
+        map.put("userInfo",getUserInfo(request));
+        if(getShopInfo(request) == null){
+            //已经是商家，不能再入驻
+            return "404";
+        }else {
+            return "sellerCenter/settle/first";
+        }
+    }
+
+    @MemberAccess
+    @RequestMapping(value = "settle" , method = RequestMethod.POST)
+    public String toSettleSecond(@ModelAttribute SettleVo settleVo , HttpServletRequest request,ModelMap map){
+        UserDto userDto = getUserInfo(request);
+        userDto.setRealName(settleVo.getRealName());
+        userDto.setFaxNumber(settleVo.getFaxCountry()+"-"+settleVo.getFaxCity()+"-"+settleVo.getFaxNumber());
+        userDto.setFixedPhone(settleVo.getFixedCity()+"-"+settleVo.getFixedCity()+"-"+settleVo.getFixedNumber());
+        Result result = pcUserFeign.updateUserInfo(userDto);
+        CompanyDto companyDto = pcUserFeign.getCompany(userDto.getUserId());
+        companyDto.setCompUrls(PropertiesParam.file_pre+companyDto.getCompUrls());
+        map.put("companyInfo",companyDto);
+        String[] idCards = userDto.getIdCardUrl().split(";");
+        String idCardList = "";
+        for (int i = 0; i < idCards.length; i++) {
+            idCardList += PropertiesParam.file_pre + idCards[i]+ ";";
+        }
+        userDto.setIdCardUrl(idCardList);
+        map.put("userInfo",userDto);
+        if(result.isSuccess()){
+            return  "sellerCenter/settle/second";
+        }else {
+            return "404" ;
+        }
+    }
+
+
+    @MemberAccess
+    @RequestMapping(value = "settleInfo" , method = RequestMethod.POST)
+    public BaseVo settleInfo(HttpServletRequest request ,
+                             MultipartFile companyFile , MultipartFile[] idCardFile){
+        BaseVo baseVo = new BaseVo();
+        UserDto userDto = getUserInfo(request);
+        CompanyDto companyDto = pcUserFeign.getCompany(getUserInfo(request).getUserId());
+        companyDto.setCompLinker(userDto.getRealName());
+        companyDto.setCompPhone(userDto.getPhone());
+        companyDto.setCompName(request.getParameter("compName"));
+        companyDto.setCompType(Integer.valueOf(request.getParameter("compType")));
+        companyDto.setCompanyInfo(request.getParameter("compInfo"));
+        companyDto.setCompAddress(request.getParameter("compAddress"));
+        companyDto.setBank(request.getParameter("bank"));
+        companyDto.setBankNumber(request.getParameter("banKNumber"));
+        Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
+        if((boolean)companyResult.get("success")){
+            companyDto.setCompUrls(companyResult.get("uploadName").toString());
+        }else {
+            baseVo.setSuccess(false);
+            baseVo.setMessage("图片上传失败");
+            return baseVo;
+        }
+        userDto.setCompanyDto(companyDto);
+        ShopDto shopDto = shopFeign.getByUserId(userDto.getUserId());
+        shopDto.setMainProducts(request.getParameter("mainProducts"));
+        shopDto.setBusinessScope(request.getParameter("businessScope"));
+        shopDto.setShopStatus(ShopStatusEnum.ing.getValue());
+        shopDto.setShopName(companyDto.getCompName());
+        shopDto.setShopIntroduce(companyDto.getCompanyInfo());
+        userDto.setShopDto(shopDto);
+        pcUserFeign.settleShop(userDto);
+        return baseVo;
+    }
+
+    @MemberAccess
+    @RequestMapping(value = "settleFinal",method = RequestMethod.GET)
+    public String settleFinal(){
+        return "sellerCenter/settle/final";
+    }
 }

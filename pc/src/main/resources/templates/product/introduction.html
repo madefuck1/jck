@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/css/iconfont.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/sale.css">
+    <link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
 
 
     <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
@@ -28,7 +29,7 @@
 
     <link rel="stylesheet" href="/static/css/messageStyle.css">
     <script type="text/javascript" src="/static/js/messageScript.js"></script>
-
+    <script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
 </head>
 <body>
 <div style="background: #fff">
@@ -330,28 +331,28 @@
                             <li class="tb-taglist-li tb-taglist-li-current">
                                 <div class="comment-info">
                                     <span>全部评价</span>
-                                    <span class="tb-tbcr-num">(32)</span>
+                                    <span class="tb-tbcr-num">${allCount.allCount}</span>
                                 </div>
                             </li>
 
                             <li class="tb-taglist-li tb-taglist-li-1">
                                 <div class="comment-info">
                                     <span>好评</span>
-                                    <span class="tb-tbcr-num">(32)</span>
+                                    <span class="tb-tbcr-num">${allCount.good}</span>
                                 </div>
                             </li>
 
                             <li class="tb-taglist-li tb-taglist-li-0">
                                 <div class="comment-info">
                                     <span>中评</span>
-                                    <span class="tb-tbcr-num">(32)</span>
+                                    <span class="tb-tbcr-num">${allCount.general}</span>
                                 </div>
                             </li>
 
                             <li class="tb-taglist-li tb-taglist-li--1">
                                 <div class="comment-info">
                                     <span>差评</span>
-                                    <span class="tb-tbcr-num">(32)</span>
+                                    <span class="tb-tbcr-num">${allCount.bad}</span>
                                 </div>
                             </li>
                         </ul>
@@ -382,7 +383,7 @@
                                             摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
                                         </div>
                                         <div class="tb-r-act-bar">
-                                            颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
+                                            颜色分类：柠檬黄&nbsp;&nbsp;
                                         </div>
                                     </div>
                                 </div>
@@ -392,7 +393,10 @@
                     </ul>
                     <div class="clear"></div>
                     <!--分页 -->
-                    <ul class="am-pagination am-pagination-right">
+                    <div id="pageManage" >
+                        <div id="pagination" style="text-align: center"></div>
+                    </div>
+                    <!--<ul class="am-pagination am-pagination-right">
                         <li class="am-disabled"><a href="#">&laquo;</a></li>
                         <li class="am-active"><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -400,7 +404,7 @@
                         <li><a href="#">4</a></li>
                         <li><a href="#">5</a></li>
                         <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    </ul>-->
                     <div class="clear"></div>
                     <div class="tb-reviewsft">
                         <div class="tb-rate-alert type-attention">
@@ -476,16 +480,23 @@
     });
 
     $(function () {
-        getAssess();
+        var productId = ${detail.productId};
+        getAssess(1,${detail.productId});
     });
+
+    // pagination 分页插件
+    function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+        getAssess(index+1,${detail.productId});
+    }
     var count;//总的数目
     var allPage;//总页数
     var pageData = 5;//每页显示的条数
-    var assessType;//当前评价类型  1差评 2 中评  3好评
-    function getAssess(page,type) {
+    var currentProductId;//当前评价类型  1差评 2 中评  3好评
+    function getAssess(page,productId) {
         var data = {
             page: page,//页码
-            type:type,//评价类型
+            productId:productId,//评价类型
+            limit:3,
         };
         $.ajax({
             url: '/sellerCenter/getAssess',
@@ -499,36 +510,48 @@
                     allPage = 1;
                 }
                 pageNo = page;
-                assessType = type;
+                currentProductId = productId;
                 $("#assessList").empty();
                 var assessList = '';
-                for(var i = 0; i < data.data[i].length; i++){
+                for(var i = 0; i < data.data.length; i++){
                     assessList += '<li class="am-comment">\n' +
-        '                            <a href="">\n' +
-        '                                <img class="am-comment-avatar" src="../images/hwbn40x40.jpg"/>\n' +
+        '                            <a href="#">\n' +
+        '                                <img class="am-comment-avatar" src='+data.data[i].userAvatar+'>\n' +
         '                            </a>\n' +
         '                            <div class="am-comment-main">\n' +
         '                                <header class="am-comment-hd">\n' +
         '                                    <div class="am-comment-meta">\n' +
-        '                                        <a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>\n' +
+        '                                        <a href="#link-to-user" class="am-comment-author">'+data.data[i].loginName+'</a>\n' +
         '                                        评论于\n' +
-        '                                        <time datetime="">2015年11月02日 17:46</time>\n' +
+        '                                        <time datetime="">'+data.data[i].strCreateTime+'</time>\n' +
         '                                    </div>\n' +
         '                                </header>\n' +
         '                                <div class="am-comment-bd">\n' +
         '                                    <div class="tb-rev-item " data-id="255776406962">\n' +
         '                                        <div class="J_TbcRate_ReviewContent tb-tbcr-content ">\n' +
-        '                                            衣服还接到诈电话的！\n' +
+        '                                            '+data.data[i].assessContent+'\n' +
         '                                        </div>\n' +
         '                                        <div class="tb-r-act-bar">\n' +
-        '                                            颜色分类：柠檬黄&nbsp;&nbsp;尺码：S\n' +
+        '                                            颜色分类：'+data.data[i].productColor+'&nbsp;&nbsp;尺码：S\n' +
         '                                        </div>\n' +
         '                                    </div>\n' +
         '                                </div>\n' +
         '                            </div>\n' +
         '                        </li>';
                 }
-
+                $("#assessList").append(assessList);
+                $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                    current_page:page-1,                  //当前页码
+                    callback: PageCallback,
+                    prev_text: '&laquo;',
+                    next_text: '&raquo;',
+                    items_per_page: 3,             //每页显示最大条数
+                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                });
+            },
+            error:function () {
+                alert("请求发送失败");
             }
         });
 

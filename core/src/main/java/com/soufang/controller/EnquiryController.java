@@ -173,10 +173,27 @@ public class EnquiryController {
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public PageHelp<EnquiryDto> getList(@RequestBody EnquirySo enquirySo) {
         PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
-        List<EnquiryDto> list = enquiryService.getList(enquirySo);
+        List<EnquiryDto> lists = enquiryService.getList(enquirySo);
         int count = enquiryService.getCount(enquirySo);
-        pageHelp.setData(list);
+        pageHelp.setData(lists);
         pageHelp.setCount(count);
+        return pageHelp;
+    }
+
+    /**
+     * 求购列表信息
+     * @param enquirySo
+     * @return
+     */
+    @RequestMapping(value = "enquiryTableMessage",method = RequestMethod.POST)
+    public PageHelp<EnquiryDto> enquiryTableMessage(@RequestBody EnquirySo enquirySo){
+        PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
+        //获取列表
+        List<EnquiryDto> lists = enquiryService.enquiryTableMessage(enquirySo);
+        // 获取总数-根据分类
+        int tableCount=enquiryService.enquiryTableCount(enquirySo);
+        pageHelp.setData(lists);
+        pageHelp.setCount(tableCount);
         return pageHelp;
     }
 

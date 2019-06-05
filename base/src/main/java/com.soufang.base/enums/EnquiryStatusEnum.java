@@ -9,10 +9,20 @@ import java.util.Map;
  */
 
 public enum EnquiryStatusEnum {
+    //新增完
     to_auditing(1,"审核中"),
+    //审核失败
     audit_failed(2,"审核失败"),
-    already_offer(3,"已报价"),
-    purchasing_success(4,"采购成功"),
+    //审核成功
+    audit_succes (3,"求购中"),
+    //报价
+    already_offer(4,"已报价"),
+    //采用报价
+    purchasing_success(5,"采购成功"),
+    //交易完成
+    order_end(6,"交易完成"),
+    //交易关闭
+    order_close(7,"交易关闭"),
     del(0,"删除");
 
 

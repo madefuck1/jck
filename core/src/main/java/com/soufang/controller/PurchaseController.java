@@ -6,6 +6,7 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.service.PurchaseService;
+import com.soufang.service.SysParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class PurchaseController {
 
     @Autowired
     PurchaseService purchaseService;
+    @Autowired
+    SysParamService sysParamService;
 
     /**
      * 查询所有报价
@@ -79,5 +82,16 @@ public class PurchaseController {
         return purchaseService.isUseRefused(purchaseDto);
     }
 
+    /**
+     * 报价
+     * @param purchaseDto
+     * @return
+     */
+    @RequestMapping(value = "purchase",method = RequestMethod.POST)
+    public int purchase(@RequestBody PurchaseDto purchaseDto){
+        //存入报价编号
+        purchaseDto.setPurchaseNumber("PCH"+sysParamService.getPurchaseNumber());
+        return purchaseService.purchase(purchaseDto);
+    }
 
 }

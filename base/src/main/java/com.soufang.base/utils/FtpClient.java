@@ -73,8 +73,8 @@ public class FtpClient {
      */
     public static Map<String, Object> uploadImage(MultipartFile multipartFile, String url) {
         Map<String, Object> map = new HashMap<>();
+        FTPClient ftpClient = getInstance();
         try {
-            FTPClient ftpClient = getInstance();
             boolean success;
             int reply = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {
@@ -92,20 +92,29 @@ public class FtpClient {
             uploadName = UUID.randomUUID().toString().replace("-", "") + "." + suffix;
             success = ftpClient.storeFile(uploadName, local);
             local.close();
+            ftpClient.logout();
             map.put("uploadName", url + "/" + uploadName);
             map.put("success", success);
             return map;
         } catch (Exception e) {
             map.put("success", false);
             return map;
+        }finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     //上传合同
     public static Map<String, Object> uploadInvoice(InputStream inputStream, String url) {
         Map<String, Object> map = new HashMap<>();
+        FTPClient ftpClient = getInstance();
         try {
-            FTPClient ftpClient = getInstance();
             boolean success;
             int reply = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {
@@ -126,6 +135,14 @@ public class FtpClient {
         } catch (Exception e) {
             map.put("success", false);
             return map;
+        }finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
