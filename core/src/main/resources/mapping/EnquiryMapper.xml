@@ -48,7 +48,7 @@
         <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
         <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
       </collection>
-      <collection property="BaseResultMap" ofType="com.soufang.model.Assort">
+      <collection property="assort" ofType="com.soufang.model.Assort">
         <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
         <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
