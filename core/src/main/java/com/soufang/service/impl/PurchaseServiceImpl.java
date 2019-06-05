@@ -5,7 +5,9 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.enums.PurchaseStatusEnum;
 import com.soufang.base.search.purchase.PurchaseSo;
+import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.EnquiryMapper;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
@@ -177,6 +179,9 @@ public class PurchaseServiceImpl implements PurchaseService {
             purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         }*/
        //单个产品
+        purchaseDto.setOfferTime(DateUtils.getToday());
+        purchaseDto.setOfferStatus(PurchaseStatusEnum.already_offer.getValue());
+        purchaseDto.setEnquiryProductId(enquiryProducts.get(0).getEnquiryProductId());
         purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         Purchase purchase=new Purchase();
         BeanUtils.copyProperties(purchaseDto,purchase);
