@@ -50,6 +50,7 @@ public class AppEnquiryController extends  AppBaseController{
 
     @Autowired
     AppEnquiryFeign appEnquiryFeign;
+
     @Value("${upload.enquiry}")
     private String uploadUrl;
 
