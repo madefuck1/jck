@@ -21,6 +21,8 @@ public class EnquiryProduct {
 
     private List<Purchase> purchases ;
 
+    private Assort assort;
+
     public List<Purchase> getPurchases() {
         return purchases;
     }
@@ -91,5 +93,13 @@ public class EnquiryProduct {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage == null ? null : productImage.trim();
+    }
+
+    public Assort getAssort() {
+        return assort;
+    }
+
+    public void setAssort(Assort assort) {
+        this.assort = assort;
     }
 }

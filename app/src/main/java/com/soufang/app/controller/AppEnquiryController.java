@@ -167,6 +167,7 @@ public class AppEnquiryController extends  AppBaseController{
                     } else {
                         result.setSuccess(false);
                         result.setMessage("图片上传失败");
+                        //需要提示页面
                     }
                 }
             }
