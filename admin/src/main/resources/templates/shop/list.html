@@ -26,11 +26,11 @@
 <h5>店铺列表</h5>
 <table class="layui-hide" id="shopList" lay-filter="shopList"></table>
 </body>
-<!--<script type="text/html" id="toolbarDemo">
+<script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addNews">新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addShop">新增</button>
     </div>
-</script>-->
+</script>
 </@override>
 
 <@override name="js">
@@ -103,13 +103,13 @@
         table.on('toolbar(shopList)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
-                case 'addNews':
+                case 'addShop':
                     layer.open({
                         type:2,
                         area:["50%","60%"],
-                        title:"新增新闻",
+                        title:"新增店铺",
                         shadeClose:true,
-                        content:"toAddNews"
+                        content:"toAddShop"
                     });
                     break;
             };

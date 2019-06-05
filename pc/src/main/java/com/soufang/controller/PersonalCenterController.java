@@ -79,6 +79,15 @@ public class PersonalCenterController extends BaseController {
     @Value("${ftp.host}")
     private String port;//图片上传端口号
 
+
+    @MemberAccess
+    @RequestMapping(value = "/toPutAssess", method = RequestMethod.GET)
+    public String toPutAssess(){
+
+        return "personalCenter/commentList";
+    }
+
+
     /**
      * 个人中心首页
      *

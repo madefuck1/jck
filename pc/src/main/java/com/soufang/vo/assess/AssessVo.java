@@ -8,8 +8,7 @@ import java.util.List;
 public class AssessVo extends BaseVo {
     private List<AssessDto> data;
     private Integer count;
-    private Integer page;
-    private Integer type;
+
 
     public List<AssessDto> getData() {
         return data;
@@ -27,19 +26,5 @@ public class AssessVo extends BaseVo {
         this.count = count;
     }
 
-    public Integer getPage() {
-        return page;
-    }
 
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 }

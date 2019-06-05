@@ -25,7 +25,7 @@
                         <li><a onclick="toList('?page=1&orderStatus=3&number=2')" data-param="number=2">待付款</a></li>
                         <li><a onclick="toList('?page=1&orderStatus=6&number=3')" data-param="number=3">待发货</a></li>
                         <li><a onclick="toList('?page=1&orderStatus=7&number=4')" data-param="number=4">待收货</a></li>
-                        <li><a onclick="toList('?page=1&orderStatus=9&number=5')" data-param="number=5">待评价</a></li>
+                        <li><a onclick="toList('?page=1&orderStatus=8&number=5')" data-param="number=5">待评价</a></li>
                         <li><a onclick="toList('?page=1&orderType=3&number=6')" data-param="number=6">线下订单</a></li>
                     </ul>
                     <div class="am-tabs-bd">
@@ -125,6 +125,9 @@
                                                         <#if orderShop.orderShopStatus ==0 || orderShop.orderShopStatus ==9>
                                                         <div class="am-btn am-btn-danger" onclick="delOrder(${orderShop.orderShopId?c});">删除</div>
                                                         </#if>
+                                                        <#if orderShop.orderShopStatus ==8 >
+                                                        <div class="am-btn am-btn-danger" onclick="putAssess(${orderShop.orderShopId?c});">去评价</div>
+                                                        </#if>
                                                     </li>
                                                 </div>
                                             </div>
@@ -154,6 +157,7 @@
 
 <script type="text/javascript">
 
+
     $(function () {
         var urlParameters = location.search
         if (urlParameters != "/") {
@@ -164,7 +168,6 @@
                 }
             })
         }
-
         // pagination 分页插件
         $("#pagination").pagination(${orderCount!0}, {   //total(一共多少条记录)不能少
             callback: PageCallback,
@@ -181,9 +184,11 @@
         orderStatus = ${orderStatus!};
         orderType = ${orderType};
 
-    })
+    });
 
+    function putAssess(orderShopId) {
 
+    };
 
     function toList(param) {
         window.location.href = "/orderManager/toOrderManager"+param ;

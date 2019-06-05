@@ -83,4 +83,17 @@ public class ShopController {
         AdminVo adminVo = new AdminVo(result);
         return adminVo;
     }
+
+    @RequestMapping(value = "toAddShop", method = RequestMethod.GET)
+    public String toAddNews(){
+        return "/shop/addShop";
+    }
+
+    @RequestMapping(value = "addShop", method = RequestMethod.POST)
+    public AdminVo addShop(@RequestBody UserDto userDto){
+        AdminVo vo = new AdminVo();
+        adminShopFeign.adminCreateShop(userDto);
+        return vo;
+    }
+
 }

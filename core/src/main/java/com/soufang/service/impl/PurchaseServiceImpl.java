@@ -172,6 +172,12 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
         //计算总价multiply
         purchaseDto.setSumPrice(purchaseDto.getUnitPrice().multiply(new BigDecimal(enquiryProducts.get(0).getProductNumber())));
+        //多个产品
+       /* for(int i = 0; i < enquiryProducts.size();i++){
+            purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
+        }*/
+       //单个产品
+        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         Purchase purchase=new Purchase();
         BeanUtils.copyProperties(purchaseDto,purchase);
        return purchaseMapper.purchase(purchase);

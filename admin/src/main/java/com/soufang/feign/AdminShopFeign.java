@@ -28,4 +28,7 @@ public interface AdminShopFeign {
 
     @RequestMapping(value = "/core/shop/reviewNo",method = RequestMethod.POST)
     Result reviewNo(@RequestBody ShopDto shopDto);
+
+    @RequestMapping(value ="/core/shop/admin/createShop")
+    Result adminCreateShop(@RequestBody UserDto userDto);
 }

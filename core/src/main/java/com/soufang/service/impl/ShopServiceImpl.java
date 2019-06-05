@@ -66,6 +66,7 @@ public class ShopServiceImpl implements ShopService {
         try {
             Shop shop = new Shop();
             BeanUtils.copyProperties(shopDto, shop);
+            shop.setShopAvatarUrl(shopDto.getAvatarUrl());
             return shopMapper.addShop(shop);
         } catch (Exception e) {
             logger.info("添加店铺失败：" + e.toString());
