@@ -48,6 +48,18 @@
         <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
         <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
       </collection>
+      <collection property="BaseResultMap" ofType="com.soufang.model.Assort">
+        <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="assort_level" property="assortLevel" jdbcType="INTEGER"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+      </collection>
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -87,9 +99,9 @@
     from t_enquiry te
       LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
-      left JOIN t_assort ta on tep.product_assort=ta.assort_id
+      RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
     where
-      te.enquiry_status!=0 and te.end_time > (select now())
+      te.enquiry_status!=3 and end_time > (select now())
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
@@ -100,6 +112,19 @@
       and enquiry_status = #{enquiryStatus}
     </if>
     order by  te.create_time DESC LIMIT #{page},#{limit};
+  </select>
+
+  <!--求购列表信息-->
+  <select id="enquiryTableMessage" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+      SELECT * FROM t_enquiry te
+       left JOIN t_enquiry_product tep on tep.enquiry_number=tep.enquiry_number
+        LEFT JOIN t_user tu on te.user_id=tu.user_id
+        RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+        where te.enquiry_status=3
+        <if test="assortId != null and assortId != ''">
+            and ta.assort_id=#{assortId}
+        </if>
+        order by  te.create_time DESC LIMIT #{page},#{limit};
   </select>
 
   <select id="getMyQuoteCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
@@ -137,11 +162,23 @@
 
   <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
     select count(1)
-    from t_enquiry where 1=1 AND user_id =#{userId}
+    from t_enquiry where 1=1 AND user_id =#{userId} AND enquiry_status!=0
     <if test="enquiryStatus != null and enquiryStatus != ''">
       and enquiry_status like concat(concat('%',#{enquiryStatus}),'%')
     </if>
     and end_time > (select now())
+  </select>
+
+  <!--求购总数-->
+  <select id="enquiryTableCount" parameterType="com.soufang.base.search.enquiry.EnquirySo" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_enquiry te
+    left JOIN t_enquiry_product tep on tep.enquiry_number=tep.enquiry_number
+    LEFT JOIN t_user tu on te.user_id=tu.user_id
+    RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+    where te.enquiry_status=3
+    <if test="assortId != null and assortId != ''">
+      and ta.assort_id=#{assortId}
+    </if>
   </select>
 
   <update id="banQuote" parameterType="java.lang.String">
