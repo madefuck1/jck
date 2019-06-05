@@ -46,4 +46,7 @@ public interface PcUserFeign {
 
     @RequestMapping(value = "/core/user/updateUserInfo",method = RequestMethod.POST)
     Result updateUserInfo(@RequestBody UserDto userDto);
+
+    @RequestMapping(value = "/core/user/settle" , method = RequestMethod.POST)
+    Result settleShop(@RequestBody UserDto userDto);
 }

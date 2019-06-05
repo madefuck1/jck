@@ -1,5 +1,5 @@
 <@override name="title">
-基本信息
+商家入驻
 </@override>
 
 <@override name="css">
@@ -84,8 +84,14 @@
 <@override name="js">
 <script type="text/javascript">
     $(function () {
-        var faxNumber = "${userInfo.faxNumber}";
-        var        fax = faxNumber.split("-");
+        var fax = "${userInfo.faxNumber!}".split("-");
+        $("input[name=faxCountry]").val(fax[0]);
+        $("input[name=faxCity]").val(fax[1]);
+        $("input[name=faxNumber]").val(fax[2]);
+        var fixedPhone = "${userInfo.fixedPhone!}".split("-");
+        $("input[name=fixedCountry]").val(fixedPhone[0]);
+        $("input[name=fixedCity]").val(fixedPhone[1]);
+        $("input[name=fixedNumber]").val(fixedPhone[2]);
     })
 </script>
 </@override>

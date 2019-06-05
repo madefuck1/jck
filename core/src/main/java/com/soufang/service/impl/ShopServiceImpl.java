@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -103,5 +104,12 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<ShopDto> appGetList(ShopSo shopSo) {
         return shopMapper.appGetList(shopSo);
+    }
+
+    @Override
+    public void updateShop(ShopDto shopDto) {
+        Shop shop = new Shop();
+        BeanUtils.copyProperties(shopDto,shop);
+        shopMapper.updateByPrimaryKeySelective(shop);
     }
 }

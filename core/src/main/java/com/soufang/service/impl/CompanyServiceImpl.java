@@ -29,7 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
             BeanUtils.copyProperties(company,companyDto);
             return companyDto;
         }else {
-            companyDto.setCompName("未填写");
             return companyDto;
         }
     }
