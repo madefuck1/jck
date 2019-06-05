@@ -134,12 +134,14 @@ public class AppEnquiryController extends  AppBaseController{
         //对数据捕捉异常
         try {
             //询盘信息
-            enquiryDto.setStrEnquiryType("0");
+            //3为求购数据
+            enquiryDto.setStrEnquiryType("3");
             enquiryDto.setEnquiryNumber(request.getParameter("enquiryNumber"));
             enquiryDto.setUserId(userInfo.getUserId());
             enquiryDto.setEnquiryTitle(request.getParameter("enquiryTitle"));
             enquiryDto.setCreateTime(DateUtils.string2Date(request.getParameter("createTime"),DateUtils.format1));
             enquiryDto.setTakeDate(DateUtils.string2Date(request.getParameter("takeDate"),DateUtils.format1));
+            enquiryDto.setEndTime(DateUtils.string2Date(request.getParameter("endTime"),DateUtils.format1));
             enquiryDto.setTakeName(request.getParameter("takeName"));
             enquiryDto.setTakePhone(request.getParameter("takePhone"));
             enquiryDto.setEnquiryRemark(request.getParameter("enquiryRemark"));

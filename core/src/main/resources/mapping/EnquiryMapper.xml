@@ -89,7 +89,7 @@
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
       left JOIN t_assort ta on tep.product_assort=ta.assort_id
     where
-      te.enquiry_status!=0 and end_time > (select now())
+      te.enquiry_status!=0 and te.end_time > (select now())
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
