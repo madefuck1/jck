@@ -48,7 +48,7 @@ a:hover{
 .icon{
 	width: 12px;
 	height:4px;
-	background: url(../../images/sprites.png) no-repeat;
+	background: url(../../images/sale/sprites.png) no-repeat;
 	display: inline-block;
 }
 .icon1{

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.StoreConstructionMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.StoreConstruction">
+        <id column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="store_logo" property="storeLogo" jdbcType="VARCHAR"/>
+        <result column="store_nav_color" property="storeNavColor" jdbcType="VARCHAR"/>
+        <result column="store_status" property="storeStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="StoreResultMap" type="com.soufang.base.dto.storeConstruction.StoreConstructionDto">
+        <id column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="store_logo" property="storeLogo" jdbcType="VARCHAR"/>
+        <result column="store_nav_color" property="storeNavColor" jdbcType="VARCHAR"/>
+        <result column="store_status" property="storeStatus" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    store_construction_id, shop_id, store_logo, store_nav_color, store_status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_store_construction
+        where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_store_construction
+    where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.StoreConstruction" useGeneratedKeys="true" keyColumn="store_construction_id" keyProperty="storeConstructionId">
+    insert into t_store_construction (store_construction_id, shop_id, store_logo, 
+      store_nav_color, store_status)
+    values (#{storeConstructionId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{storeLogo,jdbcType=VARCHAR}, 
+      #{storeNavColor,jdbcType=VARCHAR}, #{storeStatus,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.StoreConstruction">
+        insert into t_store_construction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="storeConstructionId != null">
+                store_construction_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="storeLogo != null">
+                store_logo,
+            </if>
+            <if test="storeNavColor != null">
+                store_nav_color,
+            </if>
+            <if test="storeStatus != null">
+                store_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="storeConstructionId != null">
+                #{storeConstructionId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="storeLogo != null">
+                #{storeLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="storeNavColor != null">
+                #{storeNavColor,jdbcType=VARCHAR},
+            </if>
+            <if test="storeStatus != null">
+                #{storeStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.StoreConstruction">
+        update t_store_construction
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="storeLogo != null">
+                store_logo = #{storeLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="storeNavColor != null">
+                store_nav_color = #{storeNavColor,jdbcType=VARCHAR},
+            </if>
+            <if test="storeStatus != null">
+                store_status = #{storeStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.StoreConstruction">
+    update t_store_construction
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      store_logo = #{storeLogo,jdbcType=VARCHAR},
+      store_nav_color = #{storeNavColor,jdbcType=VARCHAR},
+      store_status = #{storeStatus,jdbcType=INTEGER}
+    where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+  </update>
+
+    <select id="getStoreCInfo" resultType="java.lang.Long" resultMap="StoreResultMap">
+        select <include refid="Base_Column_List"></include> from t_store_construction where shop_id = #{shopId}
+    </select>
+
+</mapper>

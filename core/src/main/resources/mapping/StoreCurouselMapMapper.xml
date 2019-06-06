@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.StoreCurouselMapMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.StoreCurouselMap">
+        <id column="store_curousel_map_id" property="storeCurouselMapId" jdbcType="BIGINT"/>
+        <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="curousel_map_url" property="curouselMapUrl" jdbcType="VARCHAR"/>
+        <result column="store_curousel_map_link" property="storeCurouselMapLink" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    store_curousel_map_id, store_construction_id, product_id, curousel_map_url, store_curousel_map_link
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_store_curousel_map
+        where store_curousel_map_id = #{storeCurouselMapId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_store_curousel_map
+    where store_curousel_map_id = #{storeCurouselMapId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.StoreCurouselMap">
+    insert into t_store_curousel_map (store_curousel_map_id, store_construction_id, 
+      product_id, curousel_map_url, store_curousel_map_link
+      )
+    values (#{storeCurouselMapId,jdbcType=BIGINT}, #{storeConstructionId,jdbcType=BIGINT}, 
+      #{productId,jdbcType=BIGINT}, #{curouselMapUrl,jdbcType=VARCHAR}, #{storeCurouselMapLink,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.StoreCurouselMap">
+        insert into t_store_curousel_map
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="storeCurouselMapId != null">
+                store_curousel_map_id,
+            </if>
+            <if test="storeConstructionId != null">
+                store_construction_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="curouselMapUrl != null">
+                curousel_map_url,
+            </if>
+            <if test="storeCurouselMapLink != null">
+                store_curousel_map_link,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="storeCurouselMapId != null">
+                #{storeCurouselMapId,jdbcType=BIGINT},
+            </if>
+            <if test="storeConstructionId != null">
+                #{storeConstructionId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="curouselMapUrl != null">
+                #{curouselMapUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCurouselMapLink != null">
+                #{storeCurouselMapLink,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.StoreCurouselMap">
+        update t_store_curousel_map
+        <set>
+            <if test="storeConstructionId != null">
+                store_construction_id = #{storeConstructionId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="curouselMapUrl != null">
+                curousel_map_url = #{curouselMapUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCurouselMapLink != null">
+                store_curousel_map_link = #{storeCurouselMapLink,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where store_curousel_map_id = #{storeCurouselMapId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.StoreCurouselMap">
+    update t_store_curousel_map
+    set store_construction_id = #{storeConstructionId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      curousel_map_url = #{curouselMapUrl,jdbcType=VARCHAR},
+      store_curousel_map_link = #{storeCurouselMapLink,jdbcType=VARCHAR}
+    where store_curousel_map_id = #{storeCurouselMapId,jdbcType=BIGINT}
+  </update>
+
+    <!-- 删除店铺装修对应的轮播图-->
+    <delete id="delAllChart" parameterType="java.lang.Long">
+    delete from t_store_curousel_map
+    where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+  </delete>
+</mapper>

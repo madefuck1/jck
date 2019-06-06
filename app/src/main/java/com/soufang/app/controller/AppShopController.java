@@ -44,7 +44,7 @@ public class AppShopController {
      * @param shopId
      * @return
      */
-    @RequestMapping(value = "getShopDetail", method = RequestMethod.POST)
+    @RequestMapping(value = "getShopDetail/{shopId}", method = RequestMethod.POST)
     public DetailVo getShopDetail(@PathVariable Long shopId) {
         DetailVo vo = new DetailVo();
         ShopDto shopDetail = appShopFeign.getShopDetail(shopId);

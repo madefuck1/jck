@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.StoreProductAssortMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.StoreProductAssort">
+        <id column="store_product_assort_id" property="storeProductAssortId" jdbcType="BIGINT"/>
+        <result column="exclusive_assort_id" property="exclusiveAssortId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ResultMap" type="com.soufang.base.dto.storeConstruction.StoreProductAssortDto">
+        <id column="store_product_assort_id" property="storeProductAssortId" jdbcType="BIGINT"/>
+        <result column="exclusive_assort_id" property="exclusiveAssortId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+        <collection property="productDto" ofType="com.soufang.base.dto.product.ProductDto">
+            <id column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+            <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+            <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+            <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+            <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+            <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+            <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+            <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+            <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+            <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+            <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+            <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="key1" property="key1" jdbcType="VARCHAR"/>
+            <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+            <result column="key2" property="key2" jdbcType="VARCHAR"/>
+            <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+            <result column="key3" property="key3" jdbcType="VARCHAR"/>
+            <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+            <result column="key4" property="key4" jdbcType="VARCHAR"/>
+            <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+            <result column="key5" property="key5" jdbcType="VARCHAR"/>
+            <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+            <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
+                <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT"/>
+                <result column="product_id" property="productId" jdbcType="BIGINT"/>
+                <result column="collection_number" property="collectionNumber" jdbcType="BIGINT"/>
+                <result column="browse_number" property="browseNumber" jdbcType="BIGINT"/>
+                <result column="deal_number" property="dealNumber" jdbcType="BIGINT"/>
+                <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+                <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    store_product_assort_id, exclusive_assort_id, shop_id, product_id, is_show
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_store_product_assort
+        where store_product_assort_id = #{storeProductAssortId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_store_product_assort
+    where store_product_assort_id = #{storeProductAssortId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.StoreProductAssort">
+    insert into t_store_product_assort (store_product_assort_id, exclusive_assort_id, 
+      shop_id, product_id, is_show
+      )
+    values (#{storeProductAssortId,jdbcType=BIGINT}, #{exclusiveAssortId,jdbcType=BIGINT}, 
+      #{shopId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{isShow,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.StoreProductAssort">
+        insert into t_store_product_assort
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="storeProductAssortId != null">
+                store_product_assort_id,
+            </if>
+            <if test="exclusiveAssortId != null">
+                exclusive_assort_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="storeProductAssortId != null">
+                #{storeProductAssortId,jdbcType=BIGINT},
+            </if>
+            <if test="exclusiveAssortId != null">
+                #{exclusiveAssortId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.StoreProductAssort">
+        update t_store_product_assort
+        <set>
+            <if test="exclusiveAssortId != null">
+                exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow,jdbcType=INTEGER},
+            </if>
+        </set>
+        where store_product_assort_id = #{storeProductAssortId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.StoreProductAssort">
+    update t_store_product_assort
+    set exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      is_show = #{isShow,jdbcType=INTEGER}
+    where store_product_assort_id = #{storeProductAssortId,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="searchProduct" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto"
+            resultMap="ResultMap">
+        select * from (select * from t_store_product_assort
+            where shop_id = #{shopId}
+            <if test="exclusiveAssortId != null and exclusiveAssortId != 0">
+                and exclusive_assort_id = #{exclusiveAssortId}
+            </if>
+            ) T1
+        join t_product T2 on T1.product_id = T2.product_id
+        join t_product_statistics T3 on T2.product_id =T3.product_id
+        <if test="productName != null and productName != ''">
+            where T2.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+    </select>
+
+
+</mapper>
