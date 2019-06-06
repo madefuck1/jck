@@ -116,9 +116,9 @@
     left JOIN t_shop ts on ts.shop_id=tph.shop_id
     where teq.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
   </select>-->
-<update id="" parameterType="com.soufang.model.Purchase">
+<!--<update id="acceptPurchase" parameterType="com.soufang.model.Purchase">
     UPDATE t_purchase SET off_status=${offStatus} purchase_number=${purchaseNumber}
-</update>
+</update>-->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_purchase
@@ -226,8 +226,8 @@
   </update>
 
   <!--接收报价-->
-  <update id="" parameterType="" >
-    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus}
+  <update id="acceptPurchase" parameterType="com.soufang.model.Enquiry" >
+    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus} where enquiry_number = #{enquiry_number});
   </update>
 
 

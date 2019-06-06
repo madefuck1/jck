@@ -199,7 +199,10 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @return
      */
     public int acceptPurchase(PurchaseSo purchaseSo){
-     return acceptPurchase(purchaseSo);
+        Enquiry enquiry = new Enquiry();
+        enquiry.setEnquiryNumber(purchaseSo.getEnquiryNumber());
+        enquiry.setEnquiryStatus(4);
+     return purchaseMapper.acceptPurchase(enquiry);
     }
 
 }
