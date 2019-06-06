@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -91,5 +92,15 @@ public class AssortController {
             result.setSuccess(false);
         }
         return result;
+    }
+
+    /**
+     * 获取分类ID
+     * @param assortName
+     * @return
+     */
+    @RequestMapping(value = "getAssortIdByName", method = RequestMethod.POST)
+    public BigInteger getAssortIdByName(@RequestBody String assortName){
+        return getAssortIdByName(assortName);
     }
 }

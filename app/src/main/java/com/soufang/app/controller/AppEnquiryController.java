@@ -21,6 +21,7 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppEnquiryFeign;
+import com.soufang.app.feign.AssortFeign;
 import com.soufang.app.vo.enquiry.EnquiryDetailVo;
 import com.soufang.app.vo.enquiry.EnquiryGetDetailVo;
 import com.soufang.app.vo.enquiry.EnquiryListVo;
@@ -50,6 +51,8 @@ public class AppEnquiryController extends  AppBaseController{
 
     @Autowired
     AppEnquiryFeign appEnquiryFeign;
+    @Autowired
+    AssortFeign assortFeign;
 
     @Value("${upload.enquiry}")
     private String uploadUrl;
@@ -64,6 +67,7 @@ public class AppEnquiryController extends  AppBaseController{
     @ResponseBody
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public EnquiryListVo getList(HttpServletRequest request, @RequestBody EnquirySo enquirySo){
+        enquirySo.setEnquiryStatus(3);
         EnquiryListVo enquiryListVo  = new EnquiryListVo();
         PageHelp<EnquiryDto> pageHelp= appEnquiryFeign.getList(enquirySo);
         enquiryListVo.setData(pageHelp.getData());
@@ -110,6 +114,7 @@ public class AppEnquiryController extends  AppBaseController{
 
     /**
      * 想看询盘详情
+     * 需要判断该用户是否能发布报价信息--返回字段信息
      * @param enquiryNumber
      * @return
      */
@@ -125,6 +130,12 @@ public class AppEnquiryController extends  AppBaseController{
         return  enquiryGetDetailVo;
     }
 
+    /**
+     * 发布询盘
+     * @param file
+     * @param request
+     * @return
+     */
     @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "submitEnquiry",method = RequestMethod.POST)
@@ -138,7 +149,7 @@ public class AppEnquiryController extends  AppBaseController{
         try {
             //询盘信息
             //3为求购数据
-            enquiryDto.setStrEnquiryType("3");
+            enquiryDto.setStrEnquiryType("1");
             enquiryDto.setEnquiryNumber(request.getParameter("enquiryNumber"));
             enquiryDto.setUserId(userInfo.getUserId());
             enquiryDto.setEnquiryTitle(request.getParameter("enquiryTitle"));
@@ -154,7 +165,10 @@ public class AppEnquiryController extends  AppBaseController{
             enquiryProductDto.setProductNumber(Long.parseLong(request.getParameter("productNumber")));
             enquiryProductDto.setProductName(request.getParameter("productName"));
             enquiryProductDto.setProductUnit(request.getParameter("productUnit"));
+            //获取product_assort-根据name去获取getAssortIdByName
             enquiryProductDto.setAssortName(request.getParameter("assortName"));
+            int str = assortFeign.getAssortIdByName(request.getParameter("assortName")).intValue();
+            enquiryProductDto.setProductAssort(Long.parseLong(str+""));
             enquiryProductDto.setEnquiryNumber(enquiryDto.getEnquiryNumber());
             //对文件判断
             if(file != null) {

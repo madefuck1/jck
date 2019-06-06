@@ -12,6 +12,7 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppPurchaseFeign;
+import com.soufang.app.vo.enquiry.EnquiryVo;
 import com.soufang.app.vo.purchase.AcceptPurchaseVo;
 import com.soufang.app.vo.purchase.PurchaseListVo;
 import com.soufang.app.vo.purchase.PurchaseVo;
@@ -52,15 +53,15 @@ public class AppPurchaseController extends AppBaseController{
     @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "getPurchaseList",method = RequestMethod.POST)
-    public PurchaseListVo getPurchaseList(@RequestBody PurchaseSo purchaseSo,HttpServletRequest request){
+    public EnquiryVo getPurchaseList(@RequestBody PurchaseSo purchaseSo, HttpServletRequest request){
         UserDto userDto=this.getUserInfo(request);
         purchaseSo.setUserId(userDto.getUserId());
-        PageHelp<PurchaseDto> purchaseDtoPageHelp =appPurchaseFeign.getMyPurchaseList(purchaseSo);
-        PurchaseListVo purchaseListVo = new PurchaseListVo();
-        purchaseListVo.setData(purchaseDtoPageHelp.getData());
-        purchaseListVo.setSuccess(true);
-        purchaseListVo.setMessage("提交审核");
-        return purchaseListVo;
+        PageHelp<EnquiryDto> pageHelps =appPurchaseFeign.getMyPurchaseList(purchaseSo);
+        EnquiryVo enquiryVo = new EnquiryVo();
+        enquiryVo.setData(pageHelps.getData());
+        enquiryVo.setSuccess(true);
+        enquiryVo.setMessage("提交审核");
+        return enquiryVo;
     }
 
     /**
@@ -91,10 +92,17 @@ public class AppPurchaseController extends AppBaseController{
     public AcceptPurchaseVo acceptPurchase(@RequestBody PurchaseSo purchaseSo){
         AcceptPurchaseVo acceptPurchaseVo= new AcceptPurchaseVo();
         EnquiryDto enquiryDto = appPurchaseFeign.acceptPurchase(purchaseSo);
-        acceptPurchaseVo.setEnquiryStatus(enquiryDto.getEnquiryStatus().toString());
-        acceptPurchaseVo.setStatusMessage(enquiryDto.getStatusMessage());
-        acceptPurchaseVo.setMessage("提交审核");
-        acceptPurchaseVo.setSuccess(true);
+        if(enquiryDto.getEnquiryNumber()!=null){
+            //接受成功
+            acceptPurchaseVo.setEnquiryStatus(enquiryDto.getEnquiryStatus().toString());
+            acceptPurchaseVo.setStatusMessage(enquiryDto.getStatusMessage());
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(true);
+        }else{
+            //失败
+            acceptPurchaseVo.setMessage("提交审核");
+            acceptPurchaseVo.setSuccess(false);
+        }
         return acceptPurchaseVo;
     }
 

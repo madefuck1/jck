@@ -217,4 +217,9 @@
         LIMIT 1
     </select>
 
+    <!--通过名称查询ID-->
+    <select id="getAssortIdByName" parameterType="java.lang.String" resultType="java.math.BigInteger">
+        SELECT assort_id AS productAssort FROM t_assort WHERE assort_name=#{assortName}
+    </select>
+
 </mapper>

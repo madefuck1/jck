@@ -57,6 +57,10 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<EnquiryDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo) {
         purchaseSo.setPage((purchaseSo.getPage() - 1) * 5);
+        //查询SHOP信息通过用户ID
+        Shop shop =shopMapper.getByUserId(purchaseSo.getUserId());
+        //加入SHOPID
+        purchaseSo.setShopId(shop.getShopId());
         List<Enquiry> list = enquiryMapper.getMyPurchaseList(purchaseSo);
         List<EnquiryDto> listDto = new ArrayList<>();
         //询盘
@@ -187,6 +191,15 @@ public class PurchaseServiceImpl implements PurchaseService {
         BeanUtils.copyProperties(purchaseDto,purchase);
        return purchaseMapper.purchase(purchase);
 
+    }
+
+    /**
+     * 接收报价
+     * @param purchaseSo
+     * @return
+     */
+    public int acceptPurchase(PurchaseSo purchaseSo){
+     return acceptPurchase(purchaseSo);
     }
 
 }

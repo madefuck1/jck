@@ -41,4 +41,6 @@ public interface PurchaseService {
     Result isUseRefused(PurchaseDto purchaseDto);
 
     int purchase(PurchaseDto purchaseDto);
+
+    int acceptPurchase(PurchaseSo purchaseSo);
 }

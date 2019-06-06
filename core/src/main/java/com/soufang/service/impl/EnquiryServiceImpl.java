@@ -148,16 +148,20 @@ public class EnquiryServiceImpl implements EnquiryService {
             Date date = new Date();
             enquiry.setStrCreateTime(sdf1.format(enquiry.getCreateTime()));
             BeanUtils.copyProperties(enquiry, enquiryDto);
-            ShopDto shopDto=new ShopDto();
+           //对商铺信息进行判断是否存在
             Shop shop = enquiry.getShop();
-            BeanUtils.copyProperties(shop,shopDto);
-            //加入个人商铺信息
-            enquiryDto.setShopDto(shopDto);
+            if(shop.getShopId()!=null){
+                ShopDto shopDto=new ShopDto();
+                BeanUtils.copyProperties(shop,shopDto);
+                //加入个人商铺信息
+                enquiryDto.setShopDto(shopDto);
+            }
             List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
             for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
                 EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
                 BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
                 List<PurchaseDto> purchaseDtos = new ArrayList<>();
+
                 AssortDto assortDto =new AssortDto();
                 Assort assort = enquiryProduct.getAssort();
                 BeanUtils.copyProperties(assort,assortDto);

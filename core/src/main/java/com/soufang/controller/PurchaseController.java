@@ -5,8 +5,11 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.purchase.PurchaseSo;
+import com.soufang.model.Enquiry;
+import com.soufang.service.EnquiryService;
 import com.soufang.service.PurchaseService;
 import com.soufang.service.SysParamService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,8 @@ public class PurchaseController {
     PurchaseService purchaseService;
     @Autowired
     SysParamService sysParamService;
+    @Autowired
+    EnquiryService enquiryService;
 
     /**
      * 查询所有报价
@@ -31,13 +36,13 @@ public class PurchaseController {
      */
     @RequestMapping(value = "getMyPurchaseList",method = RequestMethod.POST)
     public PageHelp<EnquiryDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo){
-        PageHelp<EnquiryDto> purchaseDtoPageHelp = new PageHelp<>();
+        PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
         List<EnquiryDto> list= purchaseService.getMyPurchaseList(purchaseSo);
         //总条数
-        int count = purchaseService.getCount(purchaseSo);
-        purchaseDtoPageHelp.setData(list);
-        purchaseDtoPageHelp.setCount(count);
-        return purchaseDtoPageHelp;
+        int count = list.size();
+        pageHelp.setData(list);
+        pageHelp.setCount(count);
+        return pageHelp;
     }
 
     /**
@@ -93,5 +98,22 @@ public class PurchaseController {
         purchaseDto.setPurchaseNumber("PCH"+sysParamService.getPurchaseNumber());
         return purchaseService.purchase(purchaseDto);
     }
+
+    /**
+     * 接收报价
+     * @param purchaseSo
+     * @return
+     */
+    @RequestMapping(value = "acceptPurchase",method = RequestMethod.POST)
+    EnquiryDto acceptPurchase(@RequestBody PurchaseSo purchaseSo){
+        int i =purchaseService.acceptPurchase(purchaseSo);
+        EnquiryDto enquiryDto= new EnquiryDto();
+        if(i>0){
+            // 查询接受报价之后询盘状态
+            enquiryDto =enquiryService.getByEnqNum(purchaseSo.getEnquiryNumber());
+        }
+        return enquiryDto;
+    }
+
 
 }
