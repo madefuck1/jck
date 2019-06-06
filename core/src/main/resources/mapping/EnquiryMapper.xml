@@ -113,9 +113,9 @@
     from t_enquiry te
       LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
-      RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+      LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
     where
-      te.enquiry_status!=3 and end_time > (select now())
+      te.enquiry_status!=0 and end_time > (select now())
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
