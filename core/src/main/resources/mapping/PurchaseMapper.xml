@@ -89,7 +89,7 @@
   </sql>
 
   <select id="getPurchaseListByEnqunum" parameterType="java.lang.String" resultMap="detailResultMap">
-    select tp.*,ts.* from t_purchase tp
+    select tp.*,ts.*  from t_purchase tp
       LEFT JOIN t_enquiry_product tep on tep.enquiry_product_id=tp.enquiry_product_id
       LEFT JOIN t_enquiry te on te.enquiry_number= tep.enquiry_number
       LEFT JOIN t_shop ts on ts.shop_id= tp.shop_id
