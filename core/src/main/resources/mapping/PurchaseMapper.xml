@@ -227,7 +227,7 @@
 
   <!--接收报价-->
   <update id="acceptPurchase" parameterType="com.soufang.model.Enquiry" >
-    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus} where enquiry_number = #{enquiry_number});
+    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus} where enquiry_number = #{enquiryNumber});
   </update>
 
 
