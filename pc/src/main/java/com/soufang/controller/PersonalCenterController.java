@@ -109,6 +109,7 @@ public class PersonalCenterController extends BaseController {
             assessDto.setAssessType(a.getAssessType());
             assessDto.setAssessContent(a.getAssessContent());
             assessDto.setProductColor(a.getProductColor().substring(3));
+            assessDto.setProductSpec(a.getProductSpec().substring(3));
             assessDtos.add(assessDto);
         }
         Long orderShopId = assessFeign.putAssess(assessDtos);

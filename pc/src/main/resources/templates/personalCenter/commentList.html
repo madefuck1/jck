@@ -35,8 +35,8 @@
                             </div>
                             <div class="item-info">
                                 <div class="info-little">
-                                    <span class="productColor">颜色：${product.productColor}</span>
-                                    <span>包装：${product.productSpec}</span>
+                                    <span class="productColor">颜色：${product.productColor}</span><br/>
+                                    <span class="productSpec">包装：${product.productSpec}</span>
                                 </div>
                                 <div class="item-price">
                                     价格：<strong>${product.productPrice}</strong>
@@ -92,10 +92,12 @@
             var assessContent = $(this).find(".assessContent").val();
             var assessType = $(this).find(".item-opinion").find(".active").attr("data-value");
             var productColor = $(this).find(".productColor").html();
+            var productSpec = $(this).find(".productSpec").html();
             html += "<input type='hidden' name='list["+i+"].productId' value='"+ productId+"'>";
             html += "<input type='hidden' name='list["+i+"].assessContent' value='"+ assessContent+"'>";
             html += "<input type='hidden' name='list["+i+"].assessType' value='"+ assessType+"'>";
             html += "<input type='hidden' name='list["+i+"].productColor' value='"+ productColor+"'>";
+            html += "<input type='hidden' name='list["+i+"].productSpec' value='"+ productSpec+"'>";
             i++;
         })
         $("#assessForm").append(html);

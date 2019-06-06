@@ -6,6 +6,7 @@
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
     <result column="product_color" property="productColor" jdbcType="VARCHAR" />
+    <result column="product_spec" property="productSpec" jdbcType="VARCHAR" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="assess_type" property="assessType" jdbcType="INTEGER" />
     <result column="assess_content" property="assessContent" jdbcType="VARCHAR" />
@@ -18,6 +19,7 @@
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="product_color" jdbcType="VARCHAR" property="productColor" />
+    <result column="product_spec" jdbcType="VARCHAR" property="productSpec" />
     <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
     <result column="assess_type" jdbcType="INTEGER" property="assessType" />
     <result column="assess_content" jdbcType="VARCHAR" property="assessContent" />
@@ -28,11 +30,11 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    assess_id, shop_id, product_id, product_color, order_number, assess_type, assess_content,
+    assess_id, shop_id, product_id, product_color,product_spec, order_number, assess_type, assess_content,
     assess_user_id, create_time
   </sql>
   <sql id="return_Column_List" >
-    assess_id, shop_id, product_id,product_color, order_number, assess_type, assess_content, assess_user_id,
+    assess_id, shop_id, product_id,product_color,product_spec, order_number, assess_type, assess_content, assess_user_id,
     create_time,
     GetLoginNameByUserId(assess_user_id) as loginName,GetUserAvatarByUserId(assess_user_id) as userAvatar ,GetProductNameById(product_id) as product_name
   </sql>
@@ -40,7 +42,10 @@
     select
     <include refid="return_Column_List" />
     from t_assess
-    where shop_id = #{shopId,jdbcType=BIGINT}
+    where 1=1
+    <if test="shopId != null ">
+      and shop_id = #{shopId,jdbcType=BIGINT}
+    </if>
     <if test="type != null ">
       and assess_type = #{type}
     </if>
@@ -110,6 +115,9 @@
       <if test="productColor != null" >
         product_color,
       </if>
+      <if test="productSpec != null" >
+        product_spec,
+      </if>
       <if test="orderNumber != null" >
         order_number,
       </if>
@@ -138,6 +146,9 @@
       </if>
       <if test="productColor != null" >
         #{productColor,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpec != null" >
+        #{productSpec,jdbcType=VARCHAR},
       </if>
       <if test="orderNumber != null" >
         #{orderNumber,jdbcType=VARCHAR},

@@ -1,12 +1,29 @@
-package com.soufang.vo.assess;
+package com.soufang.app.vo.assess;
 
-public class AddAssessDetailVo {
-
+public class AddAssessVo {
+    private String orderNumber;
+    private Long shopId;
     private Long productId ;
     private Integer assessType ;
     private String assessContent;
     private String productColor;
     private String productSpec;
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public Long getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
+    }
 
     public Long getProductId() {
         return productId;
