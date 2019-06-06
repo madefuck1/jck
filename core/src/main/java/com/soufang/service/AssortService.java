@@ -3,7 +3,6 @@ package com.soufang.service;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.search.assort.AssortSo;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +33,5 @@ public interface AssortService {
 
     Map<String,Object> getAssortByKey(AssortSo so);
 
-     BigInteger getAssortIdByName(String assortName);
+     Long getAssortIdByName(String assortName);
 }

@@ -100,7 +100,7 @@ public class AssortController {
      * @return
      */
     @RequestMapping(value = "getAssortIdByName", method = RequestMethod.POST)
-    public BigInteger getAssortIdByName(@RequestBody String assortName){
-        return getAssortIdByName(assortName);
+    public Long getAssortIdByName(@RequestBody String assortName){
+        return assortService.getAssortIdByName(assortName);
     }
 }

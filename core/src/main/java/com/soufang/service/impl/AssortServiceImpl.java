@@ -130,7 +130,7 @@ public class AssortServiceImpl implements AssortService {
     }
 
     @Override
-    public BigInteger getAssortIdByName(String assortName){
+    public Long getAssortIdByName(String assortName){
         return getAssortIdByName(assortName);
     }
 
