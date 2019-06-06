@@ -36,5 +36,5 @@ public interface AssortMapper {
 
     Map<String,Object> getAssortByKey(AssortSo so);
 
-    BigInteger getAssortIdByName(String assortName);
+    Long getAssortIdByName(String assortName);
 }

@@ -131,7 +131,7 @@ public class AssortServiceImpl implements AssortService {
 
     @Override
     public Long getAssortIdByName(String assortName){
-        return getAssortIdByName(assortName);
+        return assortMapper.getAssortIdByName(assortName);
     }
 
 }
