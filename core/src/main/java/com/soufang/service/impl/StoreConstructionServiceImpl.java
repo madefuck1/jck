@@ -11,6 +11,7 @@ import com.soufang.mapper.StoreExclusiveAssortMapper;
 import com.soufang.mapper.StoreProductAssortMapper;
 import com.soufang.model.StoreConstruction;
 import com.soufang.model.StoreCurouselMap;
+import com.soufang.model.StoreExclusiveAssort;
 import com.soufang.service.StoreConstructionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,20 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
         storeExclusiveAssortMapper.updExclusiveAssort(temp);
         // 更新称显示
         if (storeExclusiveAssortMapper.updExclusiveAssort(storeExclusiveAssortDto) > 0) {
+            result.setSuccess(true);
+        } else {
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
+
+    @Override
+    public Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        StoreExclusiveAssort storeExclusiveAssort = new StoreExclusiveAssort();
+        BeanUtils.copyProperties(storeExclusiveAssortDto, storeExclusiveAssort);
+        Result result = new Result();
+        if (storeExclusiveAssortMapper.updateByPrimaryKeySelective(storeExclusiveAssort) > 0) {
             result.setSuccess(true);
         } else {
             result.setSuccess(false);

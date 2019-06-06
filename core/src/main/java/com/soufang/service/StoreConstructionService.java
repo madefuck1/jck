@@ -26,4 +26,6 @@ public interface StoreConstructionService {
     Result saveChart(List<StoreCurouselMapDto> storeCurouselMapDtoList);
 
     Result updExclusiveAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto);
 }

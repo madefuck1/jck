@@ -107,11 +107,26 @@ public class StoreConstructionController {
         return storeConstructionService.saveChart(list.getData());
     }
 
-
+    /**
+     * 保存选中分类
+     *
+     * @param storeExclusiveAssortDto
+     * @return
+     */
     @RequestMapping(value = "updExclusiveAssort", method = RequestMethod.POST)
     public Result updExclusiveAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
         return storeConstructionService.updExclusiveAssort(storeExclusiveAssortDto);
     }
+
+    /**
+     * @param storeExclusiveAssortDto
+     * @return
+     */
+    @RequestMapping(value = "saveProductSort", method = RequestMethod.POST)
+    public Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        return storeConstructionService.saveProductSort(storeExclusiveAssortDto);
+    }
+
 
 }
 

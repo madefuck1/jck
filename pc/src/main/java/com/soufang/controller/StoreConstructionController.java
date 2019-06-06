@@ -270,7 +270,7 @@ public class StoreConstructionController extends BaseController {
     }
 
     /**
-     * 保存选中分类
+     * 更新显示分类排序
      *
      * @param request
      * @param reqVo
@@ -286,10 +286,8 @@ public class StoreConstructionController extends BaseController {
         storeExclusiveAssortDto.setExclusiveAssortId(reqVo.getExclusiveAssortId());
         storeExclusiveAssortDto.setSortName(StoreConstructionSortEnum.getByKey(reqVo.getSortName()));
         storeExclusiveAssortDto.setShopId(shopInfo.getShopId());
-
-
         // 更新数据
-        Result result = new Result();
+        Result result =storeConstructionFeign.saveProductSort(storeExclusiveAssortDto);
         BaseVo baseVo = new BaseVo();
         if (result.isSuccess()) {
             baseVo.setSuccess(true);
