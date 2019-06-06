@@ -7,7 +7,6 @@ import java.util.List;
 
 public class EnquiryProductDto {
 
-    private List<PurchaseDto> purchaseDtos;
     private AssortDto assortDtos;
 
     private Long enquiryProductId;
@@ -33,14 +32,6 @@ public class EnquiryProductDto {
 
     public void setPurchases(List<PurchaseDto> purchases) {
         this.purchases = purchases;
-    }
-
-    public List<PurchaseDto> getPurchaseDtos() {
-        return purchaseDtos;
-    }
-
-    public void setPurchaseDtos(List<PurchaseDto> purchaseDtos) {
-        this.purchaseDtos = purchaseDtos;
     }
 
     public Long getEnquiryProductId() {

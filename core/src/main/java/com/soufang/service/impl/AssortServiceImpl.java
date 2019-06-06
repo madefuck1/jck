@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -127,4 +128,10 @@ public class AssortServiceImpl implements AssortService {
     public Map<String,Object> getAssortByKey(AssortSo so) {
         return assortMapper.getAssortByKey(so);
     }
+
+    @Override
+    public Long getAssortIdByName(String assortName){
+        return assortMapper.getAssortIdByName(assortName);
+    }
+
 }

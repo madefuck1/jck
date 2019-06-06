@@ -30,4 +30,10 @@ public interface OrderShopMapper {
     int updateActualPrice(OrderShop orderShop);
 
     int sendProduct(OrderShop orderShop);
+
+    OrderShopDto getOrderProduct(String orderNumber);
+
+    int updateOrderShopStatus(String orderNumber);
+
+    Long getOrderShopId(String orderNumber);
 }

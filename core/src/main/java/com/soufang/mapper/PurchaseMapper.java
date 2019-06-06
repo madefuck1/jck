@@ -3,6 +3,7 @@ package com.soufang.mapper;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.search.purchase.PurchaseSo;
+import com.soufang.model.Enquiry;
 import com.soufang.model.Purchase;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -35,6 +36,8 @@ public interface PurchaseMapper {
     List<Purchase> getPurchaseListByEnqunum( String enquiryNumber);
 
     int isUseRefused(Purchase purchase);
+
+    int acceptPurchase(Enquiry enquiry);
 
 
 }

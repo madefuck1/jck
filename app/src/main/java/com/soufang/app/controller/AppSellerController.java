@@ -55,8 +55,10 @@ public class AppSellerController extends AppBaseController {
         orderSo.setShopId(shopInfo.getShopId());
         orderSo.setOrderStatusList(PageOrderStatusEnum.getOrderStatusList(orderSo.getOrderStatus()));
         orderSo.setPage(orderSo.getPage());
-        orderSo.setLimit(5);
-        PageHelp<OrderShopDto> list = appSellerFeign.getSaleOrderList(orderSo);
+        if (StringUtils.isBlank(orderSo.getOrderNumber())) {
+            orderSo.setOrderNumber(null);
+        }
+        PageHelp<OrderShopDto> list = appSellerFeign.getList(orderSo);
         OrderShopListVo vo = new OrderShopListVo();
         if(list != null && list.getData().size() > 0){
             vo.setMessage("获取订单列表成功");

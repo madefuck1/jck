@@ -12,6 +12,7 @@ public class AssessDto {
     private Long productId;
     private String productName;
     private String productColor;
+    private String productSpec;
 
     private String orderNumber;
 
@@ -48,6 +49,14 @@ public class AssessDto {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getProductSpec() {
+        return productSpec;
+    }
+
+    public void setProductSpec(String productSpec) {
+        this.productSpec = productSpec;
     }
 
     public Long getAssessId() {

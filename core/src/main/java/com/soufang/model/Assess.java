@@ -10,6 +10,7 @@ public class Assess {
     private Long productId;
 
     private String productColor;
+    private String productSpec;
 
     private String orderNumber;
 
@@ -59,6 +60,14 @@ public class Assess {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber == null ? null : orderNumber.trim();
+    }
+
+    public String getProductSpec() {
+        return productSpec;
+    }
+
+    public void setProductSpec(String productSpec) {
+        this.productSpec = productSpec;
     }
 
     public Integer getAssessType() {

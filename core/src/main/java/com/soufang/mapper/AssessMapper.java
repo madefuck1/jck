@@ -11,7 +11,7 @@ public interface AssessMapper {
 
     int insert(Assess record);
 
-    int insertSelective(Assess record);
+    int insertSelective(AssessDto record);
 
     Assess selectByPrimaryKey(Long assessId);
 

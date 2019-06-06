@@ -66,7 +66,7 @@
     <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
     <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
     <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
-    <collection property="BaseResultMap" ofType="com.soufang.model.Shop">
+    <collection property="shop" ofType="com.soufang.model.Shop">
       <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
       <result column="user_id" property="userId" jdbcType="BIGINT"/>
       <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
@@ -89,7 +89,7 @@
   </sql>
 
   <select id="getPurchaseListByEnqunum" parameterType="java.lang.String" resultMap="detailResultMap">
-    select tp.*,ts. from t_purchase tp
+    select tp.*,ts.*  from t_purchase tp
       LEFT JOIN t_enquiry_product tep on tep.enquiry_product_id=tp.enquiry_product_id
       LEFT JOIN t_enquiry te on te.enquiry_number= tep.enquiry_number
       LEFT JOIN t_shop ts on ts.shop_id= tp.shop_id
@@ -116,9 +116,9 @@
     left JOIN t_shop ts on ts.shop_id=tph.shop_id
     where teq.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
   </select>-->
-<update id="" parameterType="com.soufang.model.Purchase">
+<!--<update id="acceptPurchase" parameterType="com.soufang.model.Purchase">
     UPDATE t_purchase SET off_status=${offStatus} purchase_number=${purchaseNumber}
-</update>
+</update>-->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_purchase
@@ -223,6 +223,11 @@
       SET offer_status='0'
       where enquiry_product_id in ( SELECT enquiry_product_id from t_enquiry_product
       where enquiry_number = #{enquiry_number});
+  </update>
+
+  <!--接收报价-->
+  <update id="acceptPurchase" parameterType="com.soufang.model.Enquiry" >
+    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus} where enquiry_number = #{enquiryNumber});
   </update>
 
 

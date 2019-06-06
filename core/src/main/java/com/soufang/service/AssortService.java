@@ -32,4 +32,6 @@ public interface AssortService {
     List<Map<String, Object>> getIdName();
 
     Map<String,Object> getAssortByKey(AssortSo so);
+
+     Long getAssortIdByName(String assortName);
 }

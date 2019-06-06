@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60dd660a-7c1e-4a0c-a974-0899b70de4a9" name="Default" comment="店铺装修logo照片上传地址我修改了  xu">
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/templates/shop/addShop.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/css/appstyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/comment.jpg_400x400.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/iconfont-bad.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/iconfont-badon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/iconfont-evaluate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/iconfont-good.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/iconfont-middle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/images/image.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/static/js/jquery-1.7.2.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/commentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/soufang/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/soufang/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/soufang/feign/AdminShopFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/soufang/feign/AdminShopFeign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/templates/shop/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/templates/shop/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/assess/AssessDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/assess/AssessDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/src/main/java/com.soufang.base/search/assess/AssessSo.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/src/main/java/com.soufang.base/search/assess/AssessSo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/AssessMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/AssessMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/model/Assess.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/model/Assess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssessServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssessServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/mapping/AssessMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/mapping/AssessMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/mapping/ShopMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/mapping/ShopMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/SellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/SellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/AssessFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/AssessFeign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/java/com/soufang/vo/assess/AssessVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/java/com/soufang/vo/assess/AssessVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/invoice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pc/src/main/resources/templates/product/introduction.html" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/resources/templates/product/introduction.html" afterDir="false" />
-    </list>
     <list id="497ac413-4efb-4593-b40b-60858eb7809d" name="nocommit" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/admin_war.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/admin_war_exploded.xml" beforeDir="false" />
@@ -309,6 +271,18 @@
       <change beforePath="$PROJECT_DIR$/eureka/eureka.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pc/pc.iml" beforeDir="false" />
     </list>
+    <list default="true" id="60dd660a-7c1e-4a0c-a974-0899b70de4a9" name="Default" comment="店铺装修logo照片上传地址我修改了  xu">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryPurchaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/mapping/PurchaseMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/mapping/PurchaseMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pc/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/pc/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/core/target/" />
     <ignored path="$PROJECT_DIR$/admin/target/" />
     <ignored path="$PROJECT_DIR$/base/target/" />
@@ -325,11 +299,72 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="commentList.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/commentList.html">
+      <file leaf-file-name="EnquiryPurchaseController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryPurchaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="219">
+              <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssortFeign.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="5" column="61" lean-forward="true" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssortController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="603">
+              <caret line="102" column="15" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssortServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="117" column="9" lean-forward="true" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
+              <folding>
+                <element signature="e#4367#4368#0" expanded="true" />
+                <element signature="e#4419#4420#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssortMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="220" column="94" selection-start-line="220" selection-start-column="94" selection-end-line="220" selection-end-column="94" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssortService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="651">
+              <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommonPullDownController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/CommonPullDownController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-309">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -340,6 +375,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -353,6 +390,13 @@
       <find>avatarUrl</find>
       <find>shopAvatarUrl</find>
       <find>vatarUrl</find>
+      <find>getCompany</find>
+      <find>getByUserId</find>
+      <find>updateUser</find>
+      <find>getList</find>
+      <find>getByEnqNum</find>
+      <find>getQuoteDetail</find>
+      <find>getAssortIdByName</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -361,9 +405,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/StoreConstructionController.java" />
-        <option value="$PROJECT_DIR$/base/src/main/resources/conf.properties" />
-        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/product/ProductDto.java" />
         <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/assess/AssessDto.java" />
         <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/vo/assess/AssessVo.java" />
         <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/search/assess/AssessSo.java" />
@@ -387,10 +428,34 @@
         <option value="$PROJECT_DIR$/admin/src/main/java/com/soufang/controller/ShopController.java" />
         <option value="$PROJECT_DIR$/admin/src/main/resources/templates/shop/addShop.html" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ShopController.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/model/Shop.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/company/CompanyDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/CompanyServiceImpl.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/utils/FtpClient.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/PcApplication.java" />
+        <option value="$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/ShopStatusEnum.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/settle/second.html" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/ShopService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/generatorConfig.xml" />
         <option value="$PROJECT_DIR$/core/src/main/resources/mapping/ShopMapper.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/ShopMapper.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/ShopServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/PcUserFeign.java" />
+        <option value="$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PcUserController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ShopController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppShopFeign.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppUserFeign.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppShopController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/mapping/PurchaseMapper.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/EnquiryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryPurchaseController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java" />
       </list>
     </option>
   </component>
@@ -418,10 +483,6 @@
           <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
           <item name="mybatis-generator" type="36feed69:MavenProjectsStructure$PluginNode" />
         </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="pc" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
       </expand>
       <select />
     </treeState>
@@ -441,9 +502,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -454,147 +513,47 @@
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="soufang" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="soufang" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="soufang" type="462c0819:PsiDirectoryNode" />
-              <item name="feign" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com.soufang.base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com.soufang.base" type="462c0819:PsiDirectoryNode" />
-              <item name="enums" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
@@ -644,127 +603,14 @@
             <path>
               <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
               <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="soufang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="soufang" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="soufang" type="462c0819:PsiDirectoryNode" />
-              <item name="feign" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="personalCenter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="personalCenter" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="soufang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eguangtong" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="sellerCenter" type="462c0819:PsiDirectoryNode" />
+              <item name="数据库设计" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -775,6 +621,7 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SearchEverywhereHistoryKey" value="assortmapp&#9;FILE&#9;file://D:/eguangtong/core/src/main/resources/mapping/AssortMapper.xml&#10;ass&#9;PSI&#9;JAVA://com.soufang.feign.AssessFeign&#10;enquiryMa&#9;FILE&#9;file://D:/eguangtong/core/src/main/resources/mapping/EnquiryMapper.xml&#10;enquirycon&#9;PSI&#9;JAVA://com.soufang.controller.EnquiryController&#10;enqui&#9;FILE&#9;file://D:/eguangtong/core/src/main/java/com/soufang/model/Enquiry.java&#10;PurchaseMapper&#9;FILE&#9;file://D:/eguangtong/core/src/main/resources/mapping/PurchaseMapper.xml&#10;appe&#9;FILE&#9;file://D:/eguangtong/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java&#10;app&#9;FILE&#9;file://D:/eguangtong/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java&#10;appenq&#9;PSI&#9;JAVA://com.soufang.app.controller.AppEnquiryController&#10;comp&#9;FILE&#9;file://D:/eguangtong/core/src/main/java/com/soufang/controller/CompanyController.java&#10;shopc&#9;FILE&#9;file://D:/eguangtong/core/src/main/java/com/soufang/controller/ShopController.java&#10;conf&#9;FILE&#9;file://D:/eguangtong/base/src/main/resources/conf.properties&#10;appbase&#9;PSI&#9;JAVA://com.soufang.app.controller.AppBaseController&#10;usermapp&#9;FILE&#9;file://D:/eguangtong/core/src/main/resources/mapping/UserMapper.xml&#10;companyc&#9;PSI&#9;JAVA://com.soufang.controller.CompanyController&#10;shopd&#9;FILE&#9;file://D:/eguangtong/base/src/main/java/com.soufang.base/dto/shop/ShopDto.java&#10;company&#9;PSI&#9;JAVA://com.soufang.model.Company" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -785,13 +632,13 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\29569\eguangtong\pc\src\main\resources\static\js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\29569\eguangtong\pc\src\main\resources\static\images" />
       <recent name="C:\Users\29569\eguangtong\pc\src\main\resources\static\css" />
       <recent name="C:\Users\29569\eguangtong\pc\src\main\resources\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\29569\eguangtong\pc\src\main\resources\static\js" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -808,9 +655,37 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/model/Company.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/CompanyMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppPurchaseController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppSellerController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppPurchaseFeign.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssessController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/controller/PurchaseController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/AssessMapper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/AssortMapper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/OrderMapper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/OrderShopMapper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/PurchaseMapper.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssessService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/PurchaseService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssessServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/EnquiryServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/PurchaseServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/AssessMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/EnquiryMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/OrderMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/OrderShopMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/core/src/main/resources/mapping/PurchaseMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/AssessFeign.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/resources/static/css/appstyle.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/commentList.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/order.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -818,6 +693,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/java/com/soufang/vo/assess/AddAssessDetailVo.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pc/src/main/java/com/soufang/vo/assess/AddAssessVo.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -918,7 +796,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.PcApplication">
+  <component name="RunManager" selected="Spring Boot.CoreApplication">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -1019,10 +897,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.PcApplication" />
         <item itemvalue="Spring Boot.CoreApplication" />
-        <item itemvalue="Spring Boot.AdminApplication" />
         <item itemvalue="Spring Boot.EurekaServerApplication" />
+        <item itemvalue="Spring Boot.PcApplication" />
+        <item itemvalue="Spring Boot.AdminApplication" />
         <item itemvalue="Spring Boot.AppApplication" />
       </list>
     </recent_temporary>
@@ -1040,6 +918,8 @@
       <updated>1559609939240</updated>
       <workItem from="1559609942890" duration="116000" />
       <workItem from="1559610077004" duration="24671000" />
+      <workItem from="1559693988025" duration="17834000" />
+      <workItem from="1559781544525" duration="4617000" />
     </task>
     <task id="LOCAL-00001" summary="店铺装修logo照片上传地址我修改了  xu">
       <created>1559610884916</created>
@@ -1048,11 +928,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559610884916</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="卖家入驻">
+      <created>1559717199794</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1559717199795</updated>
+    </task>
+    <task id="LOCAL-00003" summary="shop update">
+      <created>1559722566706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1559722566706</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24787000" />
+    <option name="totallyTimeSpent" value="47722000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1060,7 +954,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="9" weight="0.32995737" />
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.14285715" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="2" />
@@ -1068,18 +962,18 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="4" visible="true" weight="0.35877863" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.34042552" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3293348" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.5561614" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.38495094" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.5554311" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.38409853" />
       <window_info anchor="bottom" id="Spring" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2521322" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20309168" />
       <window_info anchor="right" id="Bean Validation" order="8" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="7" />
@@ -1126,393 +1020,408 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="店铺装修logo照片上传地址我修改了  xu" />
-    <option name="LAST_COMMIT_MESSAGE" value="店铺装修logo照片上传地址我修改了  xu" />
+    <MESSAGE value="卖家入驻" />
+    <MESSAGE value="shop update" />
+    <option name="LAST_COMMIT_MESSAGE" value="shop update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/utils/FtpClient.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="28" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssessServiceImpl.java">
+    <entry file="jar://D:/maven/repository/commons-net/commons-net/2.0/commons-net-2.0.jar!/org/apache/commons/net/ftp/FTP.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="173">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/AmazeUI-2.4.2/assets/css/amazeui.css">
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/PcApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="4084" column="1" selection-start-line="4084" selection-start-column="1" selection-end-line="4084" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/AssessMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/search/assess/AssessSo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="26" column="36" lean-forward="true" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-          <folding>
-            <element signature="e#761#762#0" expanded="true" />
-            <element signature="e#815#816#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
-            <element signature="e#927#928#0" expanded="true" />
-            <element signature="e#975#976#0" expanded="true" />
-            <element signature="e#1017#1018#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/ProductController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="430" column="41" lean-forward="true" selection-start-line="430" selection-start-column="41" selection-end-line="430" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/EnquiryStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/productList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="122" column="5" lean-forward="true" selection-start-line="119" selection-start-column="3" selection-end-line="122" selection-end-column="5" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#li#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#li#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/SellerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="213" column="18" lean-forward="true" selection-start-line="213" selection-start-column="18" selection-end-line="213" selection-end-column="18" />
-          <folding>
-            <element signature="e#7503#7504#0" expanded="true" />
-            <element signature="e#7557#7558#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/OrderStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/orderDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1157">
-          <caret line="217" column="60" lean-forward="true" selection-start-line="217" selection-start-column="60" selection-end-line="217" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/product/introduction.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="488" column="47" lean-forward="true" selection-start-line="488" selection-start-column="47" selection-end-line="488" selection-end-column="47" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/createEnquiry.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.script.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/common/layout/base.personalCenter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/js/jquery-1.7.2.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/address.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4239">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PersonalCenterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="83" column="41" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/common/includes/include.footer.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/common/include.menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-444" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/invoice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="131" column="14" lean-forward="true" selection-start-line="131" selection-start-column="14" selection-end-line="131" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#1;n#form#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/assessManagement.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="113" column="61" selection-start-line="113" selection-start-column="61" selection-end-line="113" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/sale/sale_evaluate.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="51" column="51" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/static/css/appstyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="102" lean-forward="true" selection-start-line="18" selection-start-column="102" selection-end-line="18" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/order.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="376" column="58" lean-forward="true" selection-start-line="374" selection-end-line="376" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/news/list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/news/addNews.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1377" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/dictionary/new.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="98" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/order/addOrder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1647">
-          <caret line="128" column="27" lean-forward="true" selection-start-line="128" selection-start-column="27" selection-end-line="128" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/company/companyInfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1053" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/myQuote.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="87" column="44" lean-forward="true" selection-start-line="84" selection-start-column="11" selection-end-line="87" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#p#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#a#0;n#div#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/shop/list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="111" column="43" selection-start-line="111" selection-start-column="43" selection-end-line="111" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/soufang/controller/NewsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="70" column="5" selection-start-line="67" selection-start-column="4" selection-end-line="70" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/user/UserDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+        <state relative-caret-position="331">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/company/CompanyDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.10.RELEASE/spring-web-4.3.10.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="168">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/UserLevelEnum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        <state relative-caret-position="384">
+          <caret line="34" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/enums/ShopStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/contract/ConfirmContractDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/sellerCenter/settle/second.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="158" column="60" selection-start-line="158" selection-start-column="60" selection-end-line="158" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-665">
+          <caret line="231" column="24" selection-start-line="231" selection-start-column="14" selection-end-line="231" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="555">
+          <caret line="199" column="33" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/CompanyServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/generatorConfig.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/SuggestMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/soufang/feign/AdminShopFeign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/soufang/controller/ShopController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/resources/templates/shop/addShop.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="170" column="53" lean-forward="true" selection-start-line="170" selection-start-column="53" selection-end-line="170" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/CompanyMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="128" column="41" lean-forward="true" selection-start-line="128" selection-start-column="8" selection-end-line="128" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/ShopMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/Shop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="32" />
-          <folding>
-            <element signature="e#1231#1232#0" expanded="true" />
-            <element signature="e#1267#1268#0" expanded="true" />
-            <element signature="e#1325#1326#0" expanded="true" />
-            <element signature="e#1375#1376#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="349">
+          <caret line="21" column="61" lean-forward="true" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/ShopMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="161" column="43" lean-forward="true" selection-start-line="161" selection-start-column="43" selection-end-line="161" selection-end-column="43" />
+        <state relative-caret-position="884">
+          <caret line="245" column="11" selection-start-line="245" selection-start-column="11" selection-end-line="245" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/shop/ShopDto.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/Shop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        <state relative-caret-position="222">
+          <caret line="13" column="33" lean-forward="true" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.7.RELEASE/spring-core-4.3.7.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/mapper/ShopMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="111" column="27" lean-forward="true" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
+        <state relative-caret-position="404">
+          <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/ShopServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+        <state relative-caret-position="212">
+          <caret line="109" column="26" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/PcUserFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="52" column="28" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/controller/PcUserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="284" column="8" selection-start-line="284" selection-start-column="8" selection-end-line="284" selection-end-column="8" />
+          <folding>
+            <element signature="method#login#0;class#PcUserController#0" />
+            <element signature="method#getCode#0;class#PcUserController#0" />
+            <element signature="method#register#0;class#PcUserController#0" />
+            <element signature="method#verfityCode#0;class#PcUserController#0" />
+            <element signature="method#uploadImg#0;class#PcUserController#0" />
+            <element signature="method#toSettleSecond#0;class#PcUserController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppUploadController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/dto/shop/ShopDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/vo/shop/DetailVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppBaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/resources/conf.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/base/src/main/java/com.soufang.base/utils/FtpClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="95" column="31" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/ShopService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="699">
+          <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/ShopController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="627">
+          <caret line="164" column="40" lean-forward="true" selection-start-line="164" selection-start-column="40" selection-end-line="164" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#adminCreateShop#0;class#ShopController#0" />
+            <element signature="method#checkPhone#0;class#ShopController#0" />
+            <element signature="method#checkCompany#0;class#ShopController#0" />
+            <element signature="method#checkSHop#0;class#ShopController#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pc/src/main/resources/templates/personalCenter/commentList.html">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppShopFeign.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="408">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/CompanyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppUserFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppShopController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="46" column="18" lean-forward="true" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/controller/AppEnquiryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
           <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/PurchaseMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="107" column="11" lean-forward="true" selection-start-line="107" selection-start-column="11" selection-end-line="107" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/model/Enquiry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/EnquiryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/PurchaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/EnquiryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="196" column="54" selection-start-line="196" selection-start-column="40" selection-end-line="196" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/EnquiryMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="83" column="33" lean-forward="true" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/PurchaseServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#7177#7178#0" expanded="true" />
+            <element signature="e#7223#7224#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/PurchaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="36" column="40" lean-forward="true" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2733">
+          <caret line="199" column="7" lean-forward="true" selection-start-line="199" selection-start-column="7" selection-end-line="199" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pc/src/main/java/com/soufang/feign/AssessFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AppAssessFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/EnquiryPurchaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/jdk1.8/jdk/src.zip!/java/math/BigInteger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/CommonPullDownController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-309">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/AssortService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/mapping/AssortMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="220" column="94" selection-start-line="220" selection-start-column="94" selection-end-line="220" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/service/impl/AssortServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="117" column="9" lean-forward="true" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
+          <folding>
+            <element signature="e#4367#4368#0" expanded="true" />
+            <element signature="e#4419#4420#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/soufang/controller/AssortController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="102" column="15" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/soufang/app/feign/AssortFeign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="61" lean-forward="true" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 
 @FeignClient("core")
 public interface AppAssessFeign {
 
     @RequestMapping(value = "/core/assess/getList",method = RequestMethod.POST)
     PageHelp<AssessDto> getList(@RequestBody AssessSo assessSo);
+
+    @RequestMapping(value = "/core/assess/putAssess",method = RequestMethod.POST)
+    Long putAssess(@RequestBody List<AssessDto> assessDtos);
 }

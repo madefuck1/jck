@@ -30,6 +30,19 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="enquiry_remark" property="enquiryRemark" jdbcType="VARCHAR" />
+    <collection property="shop" ofType="com.soufang.model.Shop">
+      <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+      <result column="user_id" property="userId" jdbcType="BIGINT"/>
+      <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+      <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+      <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+      <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+      <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+      <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+      <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+      <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </collection>
     <collection property="enquiryProducts" ofType="com.soufang.model.EnquiryProduct">
       <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
       <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
@@ -87,7 +100,8 @@
     select * from t_enquiry te
     LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
     LEFT JOIN t_purchase tp on tp.enquiry_product_id=tep.enquiry_product_id
-    where te.user_id =#{userId}  AND te.enquiry_status !=0
+    lEFT JOIN t_shop ts on ts. shop_id=tp.shop_id
+    where tp.shop_id =#{shopId}  AND te.enquiry_status !=0
     and end_time > (select now())
     order by te.create_time LIMIT #{page},#{limit};
   </select>
@@ -99,9 +113,9 @@
     from t_enquiry te
       LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
-      RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
+      LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
     where
-      te.enquiry_status!=3 and end_time > (select now())
+      te.enquiry_status!=0 and end_time > (select now())
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
@@ -119,8 +133,9 @@
       SELECT * FROM t_enquiry te
        left JOIN t_enquiry_product tep on tep.enquiry_number=tep.enquiry_number
         LEFT JOIN t_user tu on te.user_id=tu.user_id
-        RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
-        where te.enquiry_status=3
+        LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
+        left join t_shop ts on ts.user_id=te.user_id
+    where te.enquiry_status=3
         <if test="assortId != null and assortId != ''">
             and ta.assort_id=#{assortId}
         </if>

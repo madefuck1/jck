@@ -48,7 +48,7 @@
       product_assort, product_number, product_unit, 
       product_image)
     values (#{enquiryProductId,jdbcType=BIGINT}, #{enquiryNumber,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{assortName,jdbcType=BIGINT}, #{productNumber,jdbcType=BIGINT}, #{productUnit,jdbcType=VARCHAR},
+      #{productAssort,jdbcType=BIGINT}, #{productNumber,jdbcType=BIGINT}, #{productUnit,jdbcType=VARCHAR},
       #{productImage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.soufang.model.EnquiryProduct" >

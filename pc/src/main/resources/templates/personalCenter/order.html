@@ -126,7 +126,7 @@
                                                         <div class="am-btn am-btn-danger" onclick="delOrder(${orderShop.orderShopId?c});">删除</div>
                                                         </#if>
                                                         <#if orderShop.orderShopStatus ==8 >
-                                                        <div class="am-btn am-btn-danger" onclick="putAssess(${orderShop.orderShopId?c});">去评价</div>
+                                                        <div class="am-btn am-btn-danger" onclick="putAssess('${orderShop.orderNumber}')">去评价</div>
                                                         </#if>
                                                     </li>
                                                 </div>
@@ -157,6 +157,10 @@
 
 <script type="text/javascript">
 
+    //去评价
+    function putAssess(orderNumber) {
+        window.location.href = '/personalCenter/toPutAssess/'+orderNumber;
+    };
 
     $(function () {
         var urlParameters = location.search
@@ -185,10 +189,6 @@
         orderType = ${orderType};
 
     });
-
-    function putAssess(orderShopId) {
-
-    };
 
     function toList(param) {
         window.location.href = "/orderManager/toOrderManager"+param ;

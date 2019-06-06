@@ -120,7 +120,7 @@
     });
 
     // pagination 分页插件
-    function PageCallback(index,) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+    function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
         var orderNumber = $("#doc-ipt-3").val();
         var beginDate = $("#doc-ipt-4").val();
         var endDate = $("#doc-ipt-5").val();
@@ -133,7 +133,7 @@
         changeData(null,1,null,null,null,null);
 
     })
-    var count ;总数
+    var count ;//总数
     var allPage;//总页数
     var pageData = 5;//每页显示的条数
     var pageNo;//当前页码;
@@ -281,10 +281,11 @@
                 '                                                    <li class="td td-status">\n' +
                 '                                                        <div class="item-status">\n' +
                 '                                                            <p class="Mystatus">'+data.data[i].statusMessage+'</p><!--订单状态-->\n' +
+                                                                '            <p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">详情</a></p>\n' +
                 '                                                        </div>\n' +
                 '                                                    </li>';
                                                     }
-                                                    if(data.data[i].orderShopStatus != 1 ){
+                                                    if(data.data[i].orderShopStatus != 1 && data.data[i].orderShopStatus != 6 ){
                                                         orderContent += '<li class="td td-operation"></li>\n' +
                     '                                                    <li class="td td-status">\n' +
                     '                                                        <div class="item-status">\n' +
@@ -328,9 +329,7 @@
         changeData(orderNumber,1,orderStatus,null,beginDate,endDate);
     }
 
-    function toShip(orderNumber) {
-        window.location.href = '';
-    }
+
 
 
 </script>

@@ -4,6 +4,7 @@ import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.search.assort.AssortSo;
 import com.soufang.model.Assort;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -34,4 +35,6 @@ public interface AssortMapper {
     List<AssortDto> getAssortAByParentId(Long parentId);
 
     Map<String,Object> getAssortByKey(AssortSo so);
+
+    Long getAssortIdByName(String assortName);
 }

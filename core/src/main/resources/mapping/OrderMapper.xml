@@ -196,5 +196,9 @@
         update t_order set order_status=#{orderStatus} where order_number = #{orderNumber}
     </update>
 
+    <update id="updateOrderStatus" parameterType="java.lang.String">
+    update t_order set  order_status = 9
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
 
 </mapper>
