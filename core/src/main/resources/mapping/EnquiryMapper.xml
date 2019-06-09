@@ -19,6 +19,7 @@
   <resultMap id="ResultMap" type="com.soufang.model.Enquiry" >
     <id column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
     <result column="login_name" property="loginName" jdbcType="VARCHAR" />
     <result column="enquiry_title" property="enquiryTitle" jdbcType="VARCHAR" />
     <result column="enquiry_type" property="enquiryType" jdbcType="INTEGER" />
@@ -76,37 +77,27 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
-    enquiry_number, user_id, enquiry_title, enquiry_type, enquiry_status, take_date, 
+    enquiry_number, user_id,enquiry_title, enquiry_type, enquiry_status, take_date,
     take_address, take_name, take_phone, end_time, create_time, enquiry_remark
   </sql>
-  <select id="getByEnqNum" resultMap="ResultMap" parameterType="java.lang.String" >
+  <sql id="Return_column_list" >
+    enquiry_number, user_id,GetUserNameByUserId(user_id) as loginName,GetShopNameByUser_Id(user_id) AS shopName,enquiry_title, enquiry_type, enquiry_status, take_date,
+    take_address, take_name, take_phone, end_time, create_time, enquiry_remark
+  </sql>
+  <select id="getByEnqNum" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo" >
     select * from t_enquiry te
     left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
     LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
-    where te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+    where 1=1
+    <if test="enquiryNumber != null and enquiryNumber != ''">
+      and te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="enquiryProductId != null and enquiryProductId != ''">
+      and tep.enquiry_product_id=#{enquiryProductId}
+    </if>
   </select>
 
-  <select id="selectProductById" resultMap="ResultMap" parameterType="java.lang.String">
-       select * from t_enquiry te
-      left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
-      LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
-      left join t_user tu on tu.user_id=te.user_id
-      LEFT JOIN t_shop ts on ts.shop_id=tp.shop_id
-    where tep.enquiry_product_id=#{enquiryProductId}
-  </select>
-
-
-  <select id="getMyPurchaseList" parameterType="com.soufang.base.search.purchase.PurchaseSo" resultMap="ResultMap">
-    select * from t_enquiry te
-    LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
-    LEFT JOIN t_purchase tp on tp.enquiry_product_id=tep.enquiry_product_id
-    lEFT JOIN t_shop ts on ts. shop_id=tp.shop_id
-    where tp.shop_id =#{shopId}  AND te.enquiry_status !=0
-    and end_time > (select now())
-    order by te.create_time LIMIT #{page},#{limit};
-  </select>
-
-  <!--查询询盘列表数据-->
+  <!--查询询盘列表数据/没有存贮增加询盘时用户的商铺信息-->
   <select id="getList" resultMap="ResultMap"  parameterType="com.soufang.base.search.enquiry.EnquirySo">
     select
       *
@@ -114,6 +105,7 @@
       LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
       LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
+      LEFT JOIN t_shop ts on ts.user_id=te.user_id
     where
       te.enquiry_status!=0 and end_time > (select now())
     <if test="userId != null and userId !=''">
@@ -122,24 +114,13 @@
     <if test="shopId != null and shopId != 0 ">
       and tp.shop_id = #{shopId}
     </if>
+    <if test="assortId != 0 and assortId != 0">
+      and ta.assort_id=#{assortId}
+    </if>
     <if test="enquiryStatus != null and enquiryStatus != ''">
-      and enquiry_status = #{enquiryStatus}
+      and te.enquiry_status = #{enquiryStatus}
     </if>
     order by  te.create_time DESC LIMIT #{page},#{limit};
-  </select>
-
-  <!--求购列表信息-->
-  <select id="enquiryTableMessage" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo">
-      SELECT * FROM t_enquiry te
-       left JOIN t_enquiry_product tep on tep.enquiry_number=tep.enquiry_number
-        LEFT JOIN t_user tu on te.user_id=tu.user_id
-        LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
-        left join t_shop ts on ts.user_id=te.user_id
-    where te.enquiry_status=3
-        <if test="assortId != null and assortId != ''">
-            and ta.assort_id=#{assortId}
-        </if>
-        order by  te.create_time DESC LIMIT #{page},#{limit};
   </select>
 
   <select id="getMyQuoteCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
@@ -184,18 +165,6 @@
     and end_time > (select now())
   </select>
 
-  <!--求购总数-->
-  <select id="enquiryTableCount" parameterType="com.soufang.base.search.enquiry.EnquirySo" resultType="java.lang.Integer">
-    SELECT count(1) FROM t_enquiry te
-    left JOIN t_enquiry_product tep on tep.enquiry_number=tep.enquiry_number
-    LEFT JOIN t_user tu on te.user_id=tu.user_id
-    RIGHT JOIN t_assort ta on tep.product_assort=ta.assort_id
-    where te.enquiry_status=3
-    <if test="assortId != null and assortId != ''">
-      and ta.assort_id=#{assortId}
-    </if>
-  </select>
-
   <update id="banQuote" parameterType="java.lang.String">
     update t_enquiry set enquiry_status = -1 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>
@@ -204,8 +173,8 @@
     update t_enquiry set enquiry_status = 0 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>
 
-  <update id="delEnquiry" parameterType="java.lang.String">
-    UPDATE t_enquiry SET enquiry_status = 0 where enquiry_number = #{enquiryNumber}
+  <update id="delEnquiry" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+    UPDATE t_enquiry SET enquiry_status =#{enquiryStatus} where enquiry_number = #{enquiryNumber}
   </update>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

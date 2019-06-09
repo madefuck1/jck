@@ -26,7 +26,7 @@ public interface AppEnquiryFeign {
 
     //询盘详情
     @RequestMapping(value = "/core/enquiry/selEnquiryByNumber",method = RequestMethod.POST)
-    public EnquiryDto selEnquiryByNumber(@RequestBody String enquiryNumber);
+    public EnquiryDto selEnquiryByNumber(@RequestBody EnquirySo enquirySo);
 
 
 }

@@ -31,13 +31,11 @@ public interface PurchaseMapper {
 
     int delPurchaseByEnquiryNumber(String enquiryNumber);
 
-    public List<Purchase> getMyPurchaseList(PurchaseSo purchaseSo);
-
     List<Purchase> getPurchaseListByEnqunum( String enquiryNumber);
 
     int isUseRefused(Purchase purchase);
 
-    int acceptPurchase(Enquiry enquiry);
+    int acceptPurchase(PurchaseSo purchaseSo);
 
 
 }

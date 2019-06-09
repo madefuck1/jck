@@ -7,6 +7,7 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.vo.Enquiry.EnquiryAddVo;
+import com.soufang.vo.Enquiry.EnquiryDetailsVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public interface EnquiryFeign {
 
     //查看详情-询盘
     @RequestMapping(value = "core/enquiry/selEnquiryByNumber",method = RequestMethod.POST)
-    EnquiryDto selEnquiryByNumber(@RequestBody String enquiryNumber);
+    EnquiryDto selEnquiryByNumber(@RequestBody EnquirySo enquirySo);
 
     //获取单号
     @RequestMapping(value = "core/enquiry/toGetEqNumber",method = RequestMethod.POST)
@@ -51,7 +52,7 @@ public interface EnquiryFeign {
     @RequestMapping(value = "/core/purchase/updateUnitPrice",method = RequestMethod.POST)
     Result updateUnitPrice(@RequestBody PurchaseDto purchaseDto);
 
-    //求购列表信息
-    @RequestMapping(value = "core/enquiry/enquiryTableMessage",method = RequestMethod.POST)
-    PageHelp<FavoriteDto> enquiryTableMessage(@RequestBody EnquirySo enquirySo);
+    //发布报价
+    @RequestMapping(value = "core/purchase/purchase",method = RequestMethod.POST)
+    int purchase(@RequestBody PurchaseDto purchaseDto);
 }

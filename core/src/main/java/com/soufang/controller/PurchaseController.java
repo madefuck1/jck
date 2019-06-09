@@ -4,6 +4,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.model.Enquiry;
 import com.soufang.service.EnquiryService;
@@ -28,22 +29,6 @@ public class PurchaseController {
     SysParamService sysParamService;
     @Autowired
     EnquiryService enquiryService;
-
-    /**
-     * 查询所有报价
-     * @param purchaseSo
-     * @return
-     */
-    @RequestMapping(value = "getMyPurchaseList",method = RequestMethod.POST)
-    public PageHelp<EnquiryDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo){
-        PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
-        List<EnquiryDto> list= purchaseService.getMyPurchaseList(purchaseSo);
-        //总条数
-        int count = list.size();
-        pageHelp.setData(list);
-        pageHelp.setCount(count);
-        return pageHelp;
-    }
 
     /**
      * 查询报价信息
@@ -110,7 +95,9 @@ public class PurchaseController {
         EnquiryDto enquiryDto= new EnquiryDto();
         if(i>0){
             // 查询接受报价之后询盘状态
-            enquiryDto =enquiryService.getByEnqNum(purchaseSo.getEnquiryNumber());
+            EnquirySo enquirySo=new EnquirySo();
+            enquirySo.setEnquiryNumber(purchaseSo.getEnquiryNumber());
+            enquiryDto =enquiryService.getByEnqNum(enquirySo);
         }
         return enquiryDto;
     }

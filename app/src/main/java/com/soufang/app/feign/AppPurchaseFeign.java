@@ -15,14 +15,6 @@ import java.util.List;
 @FeignClient("core")
 public interface AppPurchaseFeign {
 
-    //查询我的所有报价
-    @RequestMapping(value = "/core/purchase/getMyPurchaseList",method = RequestMethod.POST)
-    public PageHelp<EnquiryDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo);
-
-    //查询报价信息
-    @RequestMapping(value = "/core/purchase/getPurchaseListByEnqunum",method = RequestMethod.POST)
-    public List<PurchaseDto> getPurchaseListByEnqunum(String enquiryNumber);
-
     //接收报价
     @RequestMapping(value = "/core/purchase/acceptPurchase",method = RequestMethod.POST)
     public EnquiryDto acceptPurchase(@RequestBody PurchaseSo purchaseSo);

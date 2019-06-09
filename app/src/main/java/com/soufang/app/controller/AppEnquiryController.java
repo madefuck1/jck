@@ -123,7 +123,9 @@ public class AppEnquiryController extends  AppBaseController{
     @RequestMapping(value = "getDetail/{enquiryNumber}",method = RequestMethod.POST)
     public EnquiryGetDetailVo getDetail(@PathVariable String enquiryNumber){
         EnquiryGetDetailVo enquiryGetDetailVo = new EnquiryGetDetailVo();
-        EnquiryDto enquiryDto = appEnquiryFeign.selEnquiryByNumber(enquiryNumber);
+        EnquirySo enquirySo= new EnquirySo();
+        enquirySo.setEnquiryNumber(enquiryNumber);
+        EnquiryDto enquiryDto = appEnquiryFeign.selEnquiryByNumber(enquirySo);
         enquiryGetDetailVo.setData(enquiryDto);
         enquiryGetDetailVo.setSuccess(true);
         enquiryGetDetailVo.setMessage("提交审核");

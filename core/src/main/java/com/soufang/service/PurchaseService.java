@@ -17,8 +17,6 @@ public interface PurchaseService {
      */
     List<PurchaseDto> getByProId(Long id);
 
-     List<EnquiryDto> getMyPurchaseList( PurchaseSo purchaseSo);
-
     /**
      * 新增报价单
      * @param purchaseDto

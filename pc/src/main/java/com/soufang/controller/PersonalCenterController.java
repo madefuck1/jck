@@ -723,17 +723,16 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 查看具体详情
-     * @param updateVo
+     * @param enquirySo
      * @return
      */
     @ResponseBody
     @MemberAccess
     @RequestMapping(value = "selEnquiryByNumber",method = RequestMethod.POST)
-    public EnquiryDto selEnquiryByNumber(@RequestBody EnquiryUpdateVo updateVo){
-        EnquiryDto enquiryDto=  enquiryFeign.selEnquiryByNumber(updateVo.getEnquiryNumber());
+    public EnquiryDto selEnquiryByNumber(@RequestBody EnquirySo enquirySo){
+        EnquiryDto enquiryDto=  enquiryFeign.selEnquiryByNumber(enquirySo);
         return  enquiryDto;
     }
-
 
 
     //返回参数设置

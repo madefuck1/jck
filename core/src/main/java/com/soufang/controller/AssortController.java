@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: chen
@@ -102,5 +103,15 @@ public class AssortController {
     @RequestMapping(value = "getAssortIdByName", method = RequestMethod.POST)
     public Long getAssortIdByName(@RequestBody String assortName){
         return assortService.getAssortIdByName(assortName);
+    }
+
+    /**
+     * 获取ID/NAME对象集合数据
+     * @return
+     */
+    @RequestMapping(value = "getIdName", method = RequestMethod.POST)
+    public List<Map<String, Object>> getIdName(){
+        List<Map<String, Object>> maps =assortService.getIdName();
+        return maps;
     }
 }

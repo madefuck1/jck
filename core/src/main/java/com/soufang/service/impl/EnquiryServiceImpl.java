@@ -9,6 +9,7 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.mapper.EnquiryMapper;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
@@ -39,9 +40,9 @@ public class EnquiryServiceImpl implements EnquiryService {
     PurchaseMapper purchaseMapper;
 
     @Override
-    public EnquiryDto getByEnqNum(String enquiryNumber) {
+    public EnquiryDto getByEnqNum(EnquirySo enquirySo) {
         EnquiryDto enquiryDto = new EnquiryDto();
-        Enquiry enquiry = enquiryMapper.getByEnqNum(enquiryNumber);
+        Enquiry enquiry = enquiryMapper.getByEnqNum(enquirySo);
         //状态-获取对应枚举
         enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
         BeanUtils.copyProperties(enquiry,enquiryDto);
@@ -62,31 +63,6 @@ public class EnquiryServiceImpl implements EnquiryService {
         }
         return enquiryDto;
     }
-
-    public EnquiryDto selectProductById(String enquiryProductId){
-        EnquiryDto enquiryDto = new EnquiryDto();
-        Enquiry enquiry = enquiryMapper.selectProductById(enquiryProductId);
-        //状态-获取对应枚举
-        enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
-        BeanUtils.copyProperties(enquiry,enquiryDto);
-        List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
-        for(EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()){
-            EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
-            //更改图片地址
-            enquiryProduct.setProductImage(PropertiesParam.file_pre+enquiryProduct.getProductImage());
-            BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
-            List<PurchaseDto> purchaseDtos = new ArrayList<>();
-            for (Purchase purchase : enquiryProduct.getPurchases()) {
-                PurchaseDto purchaseDto = new PurchaseDto();
-                BeanUtils.copyProperties(purchase, purchaseDto);
-                purchaseDtos.add(purchaseDto);
-            }
-            enquiryProductDtos.add(enquiryProductDto);
-            enquiryDto.setEnquiryProductDto(enquiryProductDtos);
-        }
-        return enquiryDto;
-    }
-
 
     @Override
     public List<EnquiryDto> getList(EnquirySo enquirySo) {
@@ -105,6 +81,11 @@ public class EnquiryServiceImpl implements EnquiryService {
             Date date= new Date();
             enquiry.setStrCreateTime(sdf1.format(enquiry.getCreateTime()));
             BeanUtils.copyProperties(enquiry, enquiryDto);
+            //加入店铺信息
+            ShopDto shopDto = new ShopDto();
+            Shop shop= enquiry.getShop();
+            BeanUtils.copyProperties(enquiry, shopDto);
+            enquiryDto.setShopDto(shopDto);
             List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
             for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
                 EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
@@ -125,55 +106,6 @@ public class EnquiryServiceImpl implements EnquiryService {
         return  listDto;
     }
 
-    /**
-     * 查询求购信息
-     * @param enquirySo
-     * @return
-     */
-    @Override
-    public List<EnquiryDto> enquiryTableMessage(EnquirySo enquirySo){
-        enquirySo.setPage((enquirySo.getPage() - 1) * 5);
-        List<Enquiry> lists= enquiryMapper.enquiryTableMessage(enquirySo);
-        List<EnquiryDto> listDtos = new ArrayList<>();
-        //询盘
-        for (int i = 0; i < lists.size(); i++) {
-            Enquiry enquiry = lists.get(i);
-            EnquiryDto enquiryDto = new EnquiryDto();
-            //状态-获取对应枚举
-            enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
-            // 格式化时间
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy MM dd");
-            Date date = new Date();
-            enquiry.setStrCreateTime(sdf1.format(enquiry.getCreateTime()));
-            BeanUtils.copyProperties(enquiry, enquiryDto);
-           //对商铺信息进行判断是否存在
-            Shop shop = enquiry.getShop();
-            if(shop.getShopId()!=null){
-                ShopDto shopDto=new ShopDto();
-                BeanUtils.copyProperties(shop,shopDto);
-                //加入个人商铺信息
-                enquiryDto.setShopDto(shopDto);
-            }
-            List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
-            for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
-                EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
-                BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
-                List<PurchaseDto> purchaseDtos = new ArrayList<>();
-
-                AssortDto assortDto =new AssortDto();
-                Assort assort = enquiryProduct.getAssort();
-                BeanUtils.copyProperties(assort,assortDto);
-                //产品中加上分类信息
-                enquiryProductDto.setAssortDtos(assortDto);
-                enquiryProductDtos.add(enquiryProductDto);
-            }
-            //加入产品信息
-            enquiryDto.setEnquiryProductDto(enquiryProductDtos);
-            //将询盘信息装入
-            listDtos.add(enquiryDto);
-        }
-        return listDtos;
-    }
 
     /**
      * 求购列表总数
@@ -279,7 +211,8 @@ public class EnquiryServiceImpl implements EnquiryService {
      */
     public int delEnquiry(String enquiryNumber){
         //通过enquiryNumber查出所有产品ID集合在所有产品ID找到-所有询价ID集合
-
+        EnquirySo enquirySo = new EnquirySo();
+        enquirySo.setEnquiryNumber(enquiryNumber);
         //1.删除询价信息
        int j= purchaseMapper.delPurchaseByEnquiryNumber(enquiryNumber);
 
@@ -287,7 +220,7 @@ public class EnquiryServiceImpl implements EnquiryService {
         int k= enquiryProductMapper.delByEnquiryNum(enquiryNumber);
 
         //3.删除询盘
-        int i = enquiryMapper.delEnquiry(enquiryNumber);
+        int i = enquiryMapper.delEnquiry(enquirySo);
 
         return i;
     }

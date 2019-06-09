@@ -10,6 +10,7 @@ public class EnquirySo {
     private Integer enquiryStatus;
     private Integer enquiryType;
     private String enquiryNumber;
+    private String enquiryProductId;
     private long assortId;
 
     public long getAssortId() {
@@ -82,5 +83,13 @@ public class EnquirySo {
 
     public void setEnquiryStatus(Integer enquiryStatus) {
         this.enquiryStatus = enquiryStatus;
+    }
+
+    public String getEnquiryProductId() {
+        return enquiryProductId;
+    }
+
+    public void setEnquiryProductId(String enquiryProductId) {
+        this.enquiryProductId = enquiryProductId;
     }
 }
