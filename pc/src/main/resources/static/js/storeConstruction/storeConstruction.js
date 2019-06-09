@@ -123,7 +123,10 @@ $(function () {
     // 初始化分类1
     initStoreAssort();
     // 初始化分类2
-    initStoreAssort2();
+    // initStoreAssort2();
+    $('#btn-mask-product').click(function () {
+        initStoreAssort2();
+    })
 })
 
 // 初始化分类
@@ -581,7 +584,7 @@ function clickBox(obj) {
 // 产品排序按钮保存按钮
 function maskProSave() {
     var param = {
-        exclusiveAssortId: $('#storeAssort').val(),
+        exclusiveAssortId: $('#mask-pro-select1').val(),
         sortName: $('#mask-pro-select2').val(),
     }
 
@@ -593,7 +596,7 @@ function maskProSave() {
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             if (res.success) {
-                storeACancel();
+                maskProCancel();
             }
         }
     });
