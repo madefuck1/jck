@@ -96,11 +96,9 @@
       where te.enquiry_number = #{enquiryNumber};
   </select>
 
-  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
-    	select count(1) from t_purchase tp
-	  LEFT JOIN t_enquiry_product tep on tep.enquiry_product_id=tp.enquiry_product_id
-	  LEFT JOIN t_enquiry te on te.enquiry_number= tep.enquiry_number
-      WHERE te.user_id =#{userId} AND te.enquiry_status !=0
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.model.Purchase">
+    	select count(1) from t_purchase
+      WHERE shop_id =#{shopId} and offer_status=1
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -127,7 +125,7 @@
   <!--新增报价-->
   <insert id="purchase" parameterType="com.soufang.model.Purchase" >
     insert into t_purchase (purchase_number, shop_id, enquiry_product_id,
-      unit_price, sum_price, offer_status, 
+      unit_price, sum_price, offer_status,
       offer_time,remark)
     values (#{purchaseNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{enquiryProductId,jdbcType=BIGINT}, 
       #{unitPrice,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, #{offerStatus,jdbcType=INTEGER}, 
@@ -208,13 +206,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.soufang.model.Purchase" >
     update t_purchase
-    set shop_id = #{shopId,jdbcType=BIGINT},
-      enquiry_product_id = #{enquiryProductId,jdbcType=BIGINT},
-      unit_price = #{unitPrice,jdbcType=DECIMAL},
-      sum_price = #{sumPrice,jdbcType=DECIMAL},
-      offer_status = #{offerStatus,jdbcType=INTEGER},
-      offer_time = #{offerTime,jdbcType=TIMESTAMP}
-    where purchase_number = #{purchaseNumber,jdbcType=VARCHAR}
+    set
+      unit_price = #{unitPrice},
+      sum_price = #{sumPrice},
+      offer_status = #{offerStatus},
+      offer_time = #{offerTime}
+    where shop_id = #{shopId}
   </update>
 
   <!--根据询盘信息查到产品ID去更改询价状态-->

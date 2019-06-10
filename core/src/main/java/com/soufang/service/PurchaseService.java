@@ -34,7 +34,7 @@ public interface PurchaseService {
     //查询报价信息
     List<PurchaseDto> getPurchaseListByEnqunum(String enquiryNumber);
 
-    int getCount( PurchaseSo purchaseSo);
+   // int getCount( PurchaseSo purchaseSo);
 
     Result isUseRefused(PurchaseDto purchaseDto);
 

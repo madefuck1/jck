@@ -21,7 +21,7 @@ public interface PurchaseMapper {
     //根据询盘查询报价单
     List<EnquiryDto> selPurchaseByenquiryNumber(String enquiryNumber);
 
-    int getCount(PurchaseSo purchaseSo);
+    int getCount(Purchase purchase);
 
     Purchase selectByPrimaryKey(String purchaseNumber);
 
