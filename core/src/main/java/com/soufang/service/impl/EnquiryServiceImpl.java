@@ -104,7 +104,7 @@ public class EnquiryServiceImpl implements EnquiryService {
                 enquiryProduct.setProductImage(PropertiesParam.file_pre+enquiryProduct.getProductImage());
                 BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
                 List<PurchaseDto> purchaseDtos = new ArrayList<>();
-                for (Purchase purchase : enquiryProduct.getPurchases()) {
+                for (Purchase purchase : enquiry.getEnquiryProducts().get(0).getPurchases()) {
                     PurchaseDto purchaseDto = new PurchaseDto();
                     BeanUtils.copyProperties(purchase, purchaseDto);
                     purchaseDtos.add(purchaseDto);
