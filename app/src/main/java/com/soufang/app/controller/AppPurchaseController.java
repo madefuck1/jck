@@ -58,7 +58,9 @@ public class AppPurchaseController extends AppBaseController{
     public EnquiryVo getPurchaseList(@RequestBody EnquirySo enquirySo, HttpServletRequest request){
         UserDto userDto=this.getUserInfo(request);
         //卖家要通过SHOPID查询报价信息
-        enquirySo.setShopId(userDto.getShopDto().getShopId());
+        enquirySo.setUserId(userDto.getUserId());
+        //因为用户信息的商铺信息取不到
+        enquirySo.setShopId(userDto.getUserId());
         PageHelp<EnquiryDto> pageHelps =appEnquiryFeign.getList(enquirySo);
         EnquiryVo enquiryVo = new EnquiryVo();
         enquiryVo.setData(pageHelps.getData());
