@@ -77,6 +77,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             Shop shop =shopMapper.getByUserId(enquirySo.getUserId());
             //加入SHOPID
             enquirySo.setShopId(shop.getShopId());
+            enquirySo.setUserId(null);
         }
         List<Enquiry> list = enquiryMapper.getList(enquirySo);
         List<EnquiryDto> listDto = new ArrayList<>();
