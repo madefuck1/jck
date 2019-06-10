@@ -337,4 +337,17 @@ public class ProductManageServiceImpl implements ProductManageService {
         }
         return result;
     }
+
+    @Override
+    public PageHelp<ProductDto> getAssortProduct(ProductManageSo so) {
+        so.setPage((so.getPage()-1)*so.getLimit());
+        List<ProductDto> products = productMapper.getAssortProduct(so);
+        for (ProductDto p:products) {
+            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
+        }
+        PageHelp<ProductDto> pageHelp = new PageHelp<>();
+        pageHelp.setData(products);
+        pageHelp.setCount(products.size());
+        return pageHelp;
+    }
 }

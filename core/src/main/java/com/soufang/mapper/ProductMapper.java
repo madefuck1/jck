@@ -42,4 +42,6 @@ public interface ProductMapper {
     int putUp(List<Integer> productIds);
 
     int deleteProduct(List<Integer> productIds);
+
+    List<ProductDto> getAssortProduct(ProductManageSo assortId);
 }

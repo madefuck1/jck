@@ -50,4 +50,7 @@ public interface ProductFeign {
 
     @RequestMapping(value = "core/productManage/updateProduct", method = RequestMethod.POST)
     Result updateProduct(@RequestBody ProductDto dto);
+
+    @RequestMapping(value = "core/productManage/getAssortProduct", method = RequestMethod.POST)
+    PageHelp<ProductDto> getAssortProduct(@RequestBody ProductManageSo so);
 }

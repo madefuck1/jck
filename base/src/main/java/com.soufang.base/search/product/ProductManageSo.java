@@ -12,7 +12,7 @@ public class ProductManageSo extends PageBase {
     // 产品名称
     private String productName;
     // 所属分类id
-    private String assortId;
+    private Long assortId;
     // 是否上架
     private Integer isUpper;
     private String startDate;

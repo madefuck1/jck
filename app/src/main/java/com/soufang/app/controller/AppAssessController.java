@@ -58,18 +58,14 @@ public class AppAssessController extends AppBaseController{
             assessDto.setAssessUserId(userInfo.getUserId());
             assessDto.setOrderNumber(addAssessVo.getOrderNumber());
             assessDto.setShopId(addAssessVo.getShopId());
-            assessDto.setProductId(a.getProductId());
             assessDto.setAssessType(a.getAssessType());
+            assessDto.setProductId(a.getProductId());
             assessDto.setAssessContent(a.getAssessContent());
             assessDto.setProductColor(a.getProductColor().substring(3));
             assessDto.setProductSpec(a.getProductSpec().substring(3));
             assessDtos.add(assessDto);
         }
         Long orderShopId = appAssessFeign.putAssess(assessDtos);
-        /*OrderShopDto orderShopDto = orderFeign.getDetail(orderShopId);
-        for (OrderProductDto orderProductDto : orderShopDto.getOrderProducts()) {
-            orderProductDto.setProductImage(orderProductDto.getProductImage());
-        }*/
         if(orderShopId != 0){
             vo.setSuccess(true);
             vo.setMessage("评价成功");

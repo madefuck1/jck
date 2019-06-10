@@ -55,4 +55,6 @@ public interface ProductManageService {
     Result deleteProduct(String[] ids);
 
     Result createProductFirst(ProductDto productDto);
+
+    PageHelp<ProductDto> getAssortProduct(ProductManageSo so);
 }

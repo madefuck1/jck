@@ -716,4 +716,14 @@
         </choose>
     </select>
 
+    <select id="getAssortProduct" resultMap="DtoResultMap" parameterType="com.soufang.base.search.product.ProductManageSo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_product
+        where assort_id = #{assortId,jdbcType=BIGINT}
+        <if test="page != null and limit != null ">
+            limit #{page},#{limit}
+        </if>
+    </select>
+
 </mapper>

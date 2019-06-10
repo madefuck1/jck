@@ -263,4 +263,11 @@ public class ProductManageController {
         Result result = productManageService.deleteProduct(ids);
         return result;
     }
+
+    @RequestMapping(value = "getAssortProduct", method = RequestMethod.POST)
+    PageHelp<ProductDto> getAssortProduct(@RequestBody ProductManageSo so){
+        PageHelp<ProductDto> pageHelp = productManageService.getAssortProduct(so);
+        return pageHelp;
+
+    }
 }

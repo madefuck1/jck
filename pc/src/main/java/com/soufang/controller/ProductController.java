@@ -11,12 +11,14 @@ import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.assess.AssessSo;
 import com.soufang.base.search.assort.AssortSo;
+import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.AssessFeign;
 import com.soufang.feign.CommonPullDownFeign;
 import com.soufang.feign.ProductFeign;
+import com.soufang.vo.product.ListProductVo;
 import com.soufang.vo.product.ListSpecReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -507,6 +509,17 @@ public class ProductController extends BaseController {
         map.put("productColor", productColor);
         map.put("productNumber", productNum);
         return "product/submitOrder";
+    }
+
+    //首页获取某类别的唱片信息
+    @ResponseBody
+    @RequestMapping(value = "getAssortProduct",method = RequestMethod.POST)
+    public ListProductVo getAssortProduct(@RequestBody ProductManageSo so){
+        PageHelp<ProductDto> pageHelp = productFeign.getAssortProduct(so);
+        ListProductVo vo = new ListProductVo();
+        vo.setData(pageHelp.getData());
+        vo.setCount(pageHelp.getCount());
+        return  vo;
     }
 
 }

@@ -11,8 +11,276 @@
 
 <#include "/common/includes/include.contain2.html"/>
 <#include "/common/includes/include.banner.html"/>
+<div id="index_list">
+    <div class="inquiry" id="enquiryList">
+        <div class="padd title">
+            <div class="title_left">询价</div>
+            <div class="title_right" onclick="getAllEnquiry(1,10)">查看全部</div>
+        </div>
+        <#list enquiryDtos as enquiry>
+        <#list enquiry.enquiryProductDto as product>
+            <div class="padd cloumn">
+                <div class="one">${product.productName}</div>
+                <div class="two">采购<span>${product.productNumber}</span>个</div>
+                <div class="three">剩余<span>${enquiry.effectiveTime}</span>天</div>
+            </div>
+        </#list>
+        </#list>
+</div>
+<div class="inquiry inquiry2">
+    <div class="padd title">
+        <div class="title_left">消息</div>
+        <div class="title_right">查看全部</div>
+    </div>
+    <div class="padd cloumn">
+        <div class="one">极限敏感词的发布要求</div>
+        <div class="four">2019-3-15</div>
+    </div>
+    <div class="padd cloumn">
+        <div class="one">发布产品为什么审核不通过</div>
+        <div class="four">2019-3-15</div>
+    </div>
+    <div class="padd cloumn">
+        <div class="one">重复信息处理规则</div>
+        <div class="four">2019-3-15</div>
+    </div>
+    <div class="padd cloumn border">
+        <div class="one">批量添加产品操作指南</div>
+        <div class="four">2019-3-15</div>
+    </div>
+</div>
+</div>
+<div id="shop">
+    <div class="shop_in">
+        <div class="shop_nav ">
+            <div class="shop_title curr" onclick="getAssortProduct(1,1,8)">
+                <div><i class="iconfont iconjixie"></i></div>
+                <p>机械五金</p>
+            </div>
+        </div>
+        <div class="shop_nav">
+            <div class="shop_title" onclick="getAssortProduct(2,1,8)">
+                <div><i class="iconfont icongongyeshebei"></i></div>
+                <p>工业设备</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(3,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconjiazhuangjiancai"></i></div>
+                <p>家装建材</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(4,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont icondianziyuanjian"></i></div>
+                <p>电子仪表</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(5,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont icondiangongdianqi"></i></div>
+                <p>电工电气</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(6,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconhuagong"></i></div>
+                <p>化工能源</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(7,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconjiaotongyunshu"></i></div>
+                <p>交通汽摩</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(8,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconanfang"></i></div>
+                <p>安防照明 </p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(9,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconriyongbaihuo"></i></div>
+                <p>日用百货</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(10,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont icondiannaoshuma"></i></div>
+                <p>数码电子</p>
+            </div>
+        </div>
+        <div class="shop_nav">
+            <div class="shop_title" onclick="getAssortProduct(11,1,8)">
+                <div><i class="iconfont iconxiuxianyule"></i></div>
+                <p>休闲娱乐 </p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(12,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconfuzhuangpeishi"></i></div>
+                <p>服装纺织</p>
+            </div>
+        </div>
+        <div class="shop_nav" onclick="getAssortProduct(13,1,8)">
+            <div class="shop_title">
+                <div><i class="iconfont iconshipinnongye"></i></div>
+                <p>农业食品</p>
+            </div>
+        </div>
+        <div class="shop_nav" style="margin-right: 0px">
+            <div class="shop_title" onclick="getAssortProduct(14,1,8)">
+                <div><i class="iconfont iconxiangbao"></i></div>
+                <p>箱包配件</p>
+            </div>
+        </div>
+    <div class="pro" id="pro">
 
+    </div>
+</div>
+</div>
+<div id="middleBanner">
+    <a href=""><img src="${contextPath}/images/middle-banner.png" alt=""></a>
+</div>
 
+<div id="vedio">
+    <h3>视频中心</h3>
+    <div class="vedio_down">
+        <div class="vedio_left">
+            <p class="vedio_cur"><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
+            <p><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
+            <p><a href="">潜水推流器，潜水曝气机优质厂家  </a></p>
+            <p><a href="">潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
+            <p><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
+            <p><a href="">3D展台 潜水搅拌机，潜水推流器 </a></p>
+            <p><a href="">3D展台 潜水搅拌机，潜水推流器 </a></p>
+        </div>
+        <div class="vedio_right">
+            <div class="vedio_one"></div>
+        </div>
+    </div>
+</div>
+<div id="bottomBanner">
+    <a href=""><img src="${contextPath}/images/banner-bottom.png" alt=""></a>
+</div>
+
+<div id="Recommend">
+    <div class="Recommend_row1 row2">
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec last">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+    </div>
+    <div class="Recommend_row1 row2">
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec last">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+    </div>
+    <div class="Recommend_row1 row2">
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+        <div class="rec last">
+            <dl class="rec_pic">
+                <dt></dt>
+                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
+                <dd>¥<span>49</span></dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<#include "sellerCenter/common/foot.html"/>
 </@override>
 
 <@override name="js">
@@ -20,7 +288,91 @@
 
 <script type="text/javascript">
     $('.am-slider').flexslider();
+
+    $(document).ready(function() {
+        $(".shop_nav").click(function() {
+            $(this).prevAll().children('div').removeClass("curr");
+            $(this).nextAll().children('div').removeClass("curr");
+            $(this).children('div').addClass("curr");
+        });
+    });
+    //初始化页面
+    $(function () {
+        //获取类别产品
+        getAssortProduct(23,1,8);
+    });
+    //获取某个类别的产品
+    function getAssortProduct(assortId,page,limit) {
+        var data = {
+            assortId:assortId,
+            page:page,
+            limit:limit
+        }
+        $.ajax({
+            url: '/product/getAssortProduct',
+            type: 'post',
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                if(data.count == 0){
+                    alert("没有当前类别的产品");
+                    getAssortProduct(23,1,8);
+                }
+                $("#pro").empty();
+                var pro = '<div class="pro_left" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
+                pro+='<div class="pro_right">\n' +
+            '            <div class="pro_top">\n' +
+            '                <dl class="pro_top1 one">\n' +
+            '                    <dt style="background: url('+data.data[0].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[0].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1">\n' +
+            '                    <dt style="background: url('+data.data[1].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[1].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1">\n' +
+            '                    <dt style="background: url('+data.data[2].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[2].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1 last">\n' +
+            '                    <dt style="background: url('+data.data[3].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[3].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '            </div>\n' +
+            '            <div class="pro_top pro_down">\n' +
+            '                <dl class="pro_top1 ">\n' +
+            '                    <dt style="background: url('+data.data[4].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[4].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1">\n' +
+            '                    <dt style="background: url('+data.data[5].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[5].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1">\n' +
+            '                    <dt style="background: url('+data.data[6].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[6].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '                <dl class="pro_top1 ">\n' +
+            '                    <dt style="background: url('+data.data[7].productImage+');"></dt>\n' +
+            '                    <dd>'+data.data[7].productName+'</dd>\n' +
+            '                </dl>\n' +
+            '            </div>\n' +
+            '        </div>';
+                $("#pro").append(pro);
+            },
+            error:function () {
+                alert("请求发送失败");
+            }
+        });
+    };
+
+    //查看全部询盘
+    function getAllEnquiry(page,limit) {
+        window.location.href = '';
+    }
+
 </script>
+
 </@override>
 
 <@extends name="/common/layout/base.html"/>
