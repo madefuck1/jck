@@ -13,6 +13,7 @@ import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.mapper.EnquiryMapper;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.mapper.PurchaseMapper;
+import com.soufang.mapper.ShopMapper;
 import com.soufang.model.*;
 import com.soufang.service.EnquiryService;
 import org.slf4j.Logger;
@@ -38,6 +39,8 @@ public class EnquiryServiceImpl implements EnquiryService {
     EnquiryProductMapper enquiryProductMapper;
     @Autowired
     PurchaseMapper purchaseMapper;
+    @Autowired
+    ShopMapper shopMapper;
 
     @Override
     public EnquiryDto getByEnqNum(EnquirySo enquirySo) {
@@ -68,6 +71,13 @@ public class EnquiryServiceImpl implements EnquiryService {
     public List<EnquiryDto> getList(EnquirySo enquirySo) {
         //页面默认加载赋值
         enquirySo.setPage((enquirySo.getPage() - 1) * 5);
+        //当没有用户信息则是查询我的报价信息
+        if("".equals(enquirySo.getUserId().longValue())||enquirySo.getUserId()==null){
+            //查询SHOP信息通过用户ID
+            Shop shop =shopMapper.getByUserId(enquirySo.getUserId());
+            //加入SHOPID
+            enquirySo.setShopId(shop.getShopId());
+        }
         List<Enquiry> list = enquiryMapper.getList(enquirySo);
         List<EnquiryDto> listDto = new ArrayList<>();
         //询盘
