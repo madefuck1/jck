@@ -210,7 +210,8 @@
       unit_price = #{unitPrice},
       sum_price = #{sumPrice},
       offer_status = #{offerStatus},
-      offer_time = #{offerTime}
+      offer_time = #{offerTime},
+      remark=#{remark}
     where shop_id = #{shopId}
   </update>
 
