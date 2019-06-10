@@ -39,5 +39,5 @@ public interface StoreConstructionFeign {
     Result updExclusiveAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
 
     @RequestMapping(value = "/core/store/saveProductSort", method = RequestMethod.POST)
-    Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto);
+    Result saveProductSort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
 }

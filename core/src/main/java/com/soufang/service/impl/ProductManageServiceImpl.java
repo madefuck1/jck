@@ -45,7 +45,9 @@ public class ProductManageServiceImpl implements ProductManageService {
 
         // 设置页面其实数量
         int page = dto.getPage();
-        page = (page-1) * dto.getLimit();
+        if (page != 0) {
+            page = (page - 1) * dto.getLimit();
+        }
         dto.setPage(page);
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();
@@ -107,17 +109,17 @@ public class ProductManageServiceImpl implements ProductManageService {
         // 从dto拷贝信息到product
         BeanUtils.copyProperties(dto, product);
         int i = productMapper.updateByPrimaryKeySelective(product);
-        if(dto.getProductColorDtoList() != null){
-            for(ProductColorDto productColorDto : dto.getProductColorDtoList()){
+        if (dto.getProductColorDtoList() != null) {
+            for (ProductColorDto productColorDto : dto.getProductColorDtoList()) {
                 ProductColor productColor = new ProductColor();
-                BeanUtils.copyProperties(productColorDto,productColor);
+                BeanUtils.copyProperties(productColorDto, productColor);
                 productColorMapper.updateByPrimaryKeySelective(productColor);
             }
         }
-        if(dto.getProductSpecDtoList() != null){
-            for(ProductSpecDto productSpecDto : dto.getProductSpecDtoList()){
+        if (dto.getProductSpecDtoList() != null) {
+            for (ProductSpecDto productSpecDto : dto.getProductSpecDtoList()) {
                 ProductSpec productSpec = new ProductSpec();
-                BeanUtils.copyProperties(productSpecDto,productSpec);
+                BeanUtils.copyProperties(productSpecDto, productSpec);
                 productSpecMapper.updateByPrimaryKeySelective(productSpec);
             }
         }
@@ -237,7 +239,7 @@ public class ProductManageServiceImpl implements ProductManageService {
     public PageHelp<ProductDto> getShopProductList(ProductManageSo productSo) {
         // 设置页面其实数量
         int page = productSo.getPage();
-        page =( page-1) * productSo.getLimit();
+        page = (page - 1) * productSo.getLimit();
         productSo.setPage(page);
         List<ProductDto> products = productMapper.getShopProductList(productSo);
         List<ProductDto> productDtos = new ArrayList<>();
@@ -256,7 +258,7 @@ public class ProductManageServiceImpl implements ProductManageService {
     public Result getDown(String[] ids) {
         Result result = new Result();
         List<Integer> productIds = new ArrayList<>();
-        for (int i = 0; i < ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             productIds.add(Integer.valueOf(ids[i]));
         }
         int count = productMapper.getDown(productIds);
@@ -267,7 +269,7 @@ public class ProductManageServiceImpl implements ProductManageService {
     public Result putUp(String[] ids) {
 
         List<Integer> productIds = new ArrayList<>();
-        for (int i = 0; i < ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             productIds.add(Integer.valueOf(ids[i]));
         }
         int count = productMapper.putUp(productIds);
@@ -277,18 +279,19 @@ public class ProductManageServiceImpl implements ProductManageService {
     @Override
     public Result deleteProduct(String[] ids) {
         List<Integer> productIds = new ArrayList<>();
-        for (int i = 0; i < ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             productIds.add(Integer.valueOf(ids[i]));
         }
         int count = productMapper.deleteProduct(productIds);
         return judge(count);
     }
-    private Result judge(int count){
+
+    private Result judge(int count) {
         Result result = new Result();
-        if(count > 0){
+        if (count > 0) {
             result.setMessage("修改成功");
             result.setSuccess(true);
-        }else {
+        } else {
             result.setMessage("修改失败");
             result.setSuccess(false);
         }
@@ -305,7 +308,7 @@ public class ProductManageServiceImpl implements ProductManageService {
             productMapper.insert(product);
             BigDecimal price = BigDecimal.ZERO;
             for (ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()) {
-                if(price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) > 0){
+                if (price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) > 0) {
                     price = productSpecDto.getSpecNumber();
                 }
                 ProductSpec productSpec = new ProductSpec();
@@ -327,9 +330,9 @@ public class ProductManageServiceImpl implements ProductManageService {
             productStatistics.setProductPrice(price.toString());
             productStatisticsMapper.insert(productStatistics);
             result.setMessage(product.getProductId().toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
-            logger.info("新增产品第一步报错：",e.getMessage());
+            logger.info("新增产品第一步报错：", e.getMessage());
             throw new BusinessException("新增产品报错");
         }
         return result;

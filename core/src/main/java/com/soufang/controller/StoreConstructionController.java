@@ -123,7 +123,7 @@ public class StoreConstructionController {
      * @return
      */
     @RequestMapping(value = "saveProductSort", method = RequestMethod.POST)
-    public Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto) {
+    public Result saveProductSort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
         return storeConstructionService.saveProductSort(storeExclusiveAssortDto);
     }
 

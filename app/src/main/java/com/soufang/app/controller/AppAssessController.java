@@ -4,6 +4,7 @@ package com.soufang.app.controller;
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppAssessFeign;
 import com.soufang.app.vo.AppVo;
+import com.soufang.app.vo.assess.AddAssessDetailVo;
 import com.soufang.app.vo.assess.AddAssessVo;
 import com.soufang.app.vo.assess.AssessVo;
 import com.soufang.base.dto.assess.AssessDto;
@@ -52,17 +53,23 @@ public class AppAssessController extends AppBaseController{
         AppVo vo = new AppVo();
         UserDto userInfo = this.getUserInfo(request);
         List<AssessDto> assessDtos = new ArrayList<>();
-        AssessDto assessDto = new AssessDto();
-        assessDto.setAssessUserId(userInfo.getUserId());
-        assessDto.setOrderNumber(addAssessVo.getOrderNumber());
-        assessDto.setShopId(addAssessVo.getShopId());
-        assessDto.setProductId(addAssessVo.getProductId());
-        assessDto.setAssessType(addAssessVo.getAssessType());
-        assessDto.setAssessContent(addAssessVo.getAssessContent());
-        assessDto.setProductColor(addAssessVo.getProductColor());
-        assessDto.setProductSpec(addAssessVo.getProductSpec());
-        assessDtos.add(assessDto);
+        for (AddAssessDetailVo a: addAssessVo.getList()) {
+            AssessDto assessDto = new AssessDto();
+            assessDto.setAssessUserId(userInfo.getUserId());
+            assessDto.setOrderNumber(addAssessVo.getOrderNumber());
+            assessDto.setShopId(addAssessVo.getShopId());
+            assessDto.setProductId(a.getProductId());
+            assessDto.setAssessType(a.getAssessType());
+            assessDto.setAssessContent(a.getAssessContent());
+            assessDto.setProductColor(a.getProductColor().substring(3));
+            assessDto.setProductSpec(a.getProductSpec().substring(3));
+            assessDtos.add(assessDto);
+        }
         Long orderShopId = appAssessFeign.putAssess(assessDtos);
+        /*OrderShopDto orderShopDto = orderFeign.getDetail(orderShopId);
+        for (OrderProductDto orderProductDto : orderShopDto.getOrderProducts()) {
+            orderProductDto.setProductImage(orderProductDto.getProductImage());
+        }*/
         if(orderShopId != 0){
             vo.setSuccess(true);
             vo.setMessage("评价成功");
