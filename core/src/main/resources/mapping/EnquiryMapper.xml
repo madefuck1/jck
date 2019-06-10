@@ -95,6 +95,7 @@
     <if test="enquiryProductId != null and enquiryProductId != ''">
       and tep.enquiry_product_id=#{enquiryProductId}
     </if>
+
   </select>
 
   <!--查询询盘列表数据/没有存贮增加询盘时用户的商铺信息-->
@@ -111,7 +112,7 @@
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
-    <if test="shopId != null and shopId != 0 ">
+    <if test="shopId != null and shopId != '' ">
       and tp.shop_id = #{shopId}
     </if>
     <if test="assortId != 0 and assortId != 0">
