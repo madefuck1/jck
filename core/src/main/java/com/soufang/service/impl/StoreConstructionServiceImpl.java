@@ -35,7 +35,20 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
 
     @Override
     public StoreConstructionDto getStoreInfo(Long shopId) {
-        return storeConstructionMapper.getStoreCInfo(shopId);
+
+        StoreConstructionDto storeConstructionDto;
+        storeConstructionDto = storeConstructionMapper.getStoreCInfo(shopId);
+        if (storeConstructionDto != null) {
+            StoreExclusiveAssortDto tempDto = new StoreExclusiveAssortDto();
+            tempDto.setShopId(shopId);
+            // 店铺装修页面初始化默认选显示的分类
+            tempDto.setIsShow(1);
+            List<StoreExclusiveAssortDto> storeExclusiveAssortDtoList = storeExclusiveAssortMapper.getStoreAssort(tempDto);
+            storeConstructionDto.setStoreExclusiveAssortDtoList(storeExclusiveAssortDtoList);
+            List<StoreCurouselMapDto> storeCurouselMapDtoList = storeCurouselMapMapper.getMapList(storeConstructionDto.getStoreConstructionId());
+            storeConstructionDto.setStoreCurouselMapDtoList(storeCurouselMapDtoList);
+        }
+        return storeConstructionDto;
     }
 
     @Override
@@ -115,6 +128,17 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
         BeanUtils.copyProperties(storeExclusiveAssortDto, storeExclusiveAssort);
         Result result = new Result();
         if (storeExclusiveAssortMapper.updateByPrimaryKeySelective(storeExclusiveAssort) > 0) {
+            result.setSuccess(true);
+        } else {
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
+    @Override
+    public Result publish(Long shopId) {
+        Result result = new Result();
+        if (storeConstructionMapper.publish(shopId) > 0 ? true : false) {
             result.setSuccess(true);
         } else {
             result.setSuccess(false);

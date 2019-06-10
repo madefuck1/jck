@@ -2,18 +2,23 @@ package com.soufang.controller;
 
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.enums.StoreConstructionSortEnum;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
+import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
-import com.soufang.vo.StoreContruction.DetailStoreProductSortReqVo;
-import com.soufang.vo.StoreContruction.ListStoreProductReqVo;
+import com.soufang.vo.StoreConstruction.DetailStoreConstructionVo;
+import com.soufang.vo.StoreConstruction.DetailStoreProductSortReqVo;
+import com.soufang.vo.StoreConstruction.ListStoreMapVo;
+import com.soufang.vo.StoreConstruction.ListStoreProductReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +39,8 @@ public class StoreConstructionController extends BaseController {
     @Autowired
     StoreConstructionFeign storeConstructionFeign;
 
+    @Autowired
+    PcUserFeign pcUserFeign;
 
     /**
      * 上传logo图片
@@ -175,7 +182,14 @@ public class StoreConstructionController extends BaseController {
         return list;
     }
 
-
+    /**
+     * 保存轮播图
+     *
+     * @param file
+     * @param chartLink
+     * @param request
+     * @return
+     */
     @ResponseBody
     @MemberAccess
     @RequestMapping(value = "saveShopChart", method = RequestMethod.POST)
@@ -209,9 +223,9 @@ public class StoreConstructionController extends BaseController {
      * @param chartLink
      * @return
      */
-    private BaseVo save(MultipartFile[] file, String[] chartLink, Long storeConstructionId) {
+    private ListStoreMapVo save(MultipartFile[] file, String[] chartLink, Long storeConstructionId) {
 
-        BaseVo baseVo = new BaseVo();
+        ListStoreMapVo vo = new ListStoreMapVo();
         Map<String, Object> map;
         StoreCurouselMapDto storeCurouselMapDto;
         List<StoreCurouselMapDto> storeCurouselMapDtoList = new ArrayList<>();
@@ -221,8 +235,8 @@ public class StoreConstructionController extends BaseController {
             if ((boolean) map.get("success")) {
                 storeCurouselMapDto.setCurouselMapUrl(map.get("uploadName").toString());
             } else {
-                baseVo.setSuccess(false);
-                return baseVo;
+                vo.setSuccess(false);
+                return vo;
             }
             storeCurouselMapDto.setStoreCurouselMapLink(chartLink[i]);
             storeCurouselMapDto.setStoreConstructionId(storeConstructionId);
@@ -232,11 +246,12 @@ public class StoreConstructionController extends BaseController {
         list.setData(storeCurouselMapDtoList);
         Result result = storeConstructionFeign.saveChart(list);
         if (result.isSuccess()) {
-            baseVo.setSuccess(true);
+            vo.setSuccess(true);
+            vo.setList(storeCurouselMapDtoList);
         } else {
-            baseVo.setSuccess(false);
+            vo.setSuccess(false);
         }
-        return baseVo;
+        return vo;
 
     }
 
@@ -287,7 +302,7 @@ public class StoreConstructionController extends BaseController {
         storeExclusiveAssortDto.setSortName(StoreConstructionSortEnum.getByKey(reqVo.getSortName()));
         storeExclusiveAssortDto.setShopId(shopInfo.getShopId());
         // 更新数据
-        Result result =storeConstructionFeign.saveProductSort(storeExclusiveAssortDto);
+        Result result = storeConstructionFeign.saveProductSort(storeExclusiveAssortDto);
         BaseVo baseVo = new BaseVo();
         if (result.isSuccess()) {
             baseVo.setSuccess(true);
@@ -295,6 +310,50 @@ public class StoreConstructionController extends BaseController {
             baseVo.setSuccess(false);
         }
         return baseVo;
+    }
+
+
+    /**
+     * 获取店铺装修信息
+     */
+    @MemberAccess
+    @ResponseBody
+    @RequestMapping(value = "getStoreConstructionInfo", method = RequestMethod.POST)
+    public DetailStoreConstructionVo getStoreInfo(HttpServletRequest request) {
+        DetailStoreConstructionVo vo = new DetailStoreConstructionVo();
+        // 店铺信息
+        ShopDto shop = getShopInfo(request);
+        vo.setShopDto(shop);
+        // 公司信息
+        CompanyDto company = pcUserFeign.getCompany(shop.getUserId());
+        vo.setCompanyDto(company);
+        StoreConstructionDto storeConstructionDto = storeConstructionFeign.getStoreInfo(shop.getShopId());
+        vo.setStoreConstructionDto(storeConstructionDto);
+        return vo;
+    }
+
+
+    /**
+     * 店铺装修预览页面
+     * toStorePreview
+     */
+    @MemberAccess
+    @RequestMapping(value = "toStorePreview", method = RequestMethod.GET)
+    public String toStorePreview(ModelMap map) {
+        return "/sellerCenter/StoreConstruction.preview";
+    }
+
+
+    /**
+     * 发布
+     */
+    @MemberAccess
+    @ResponseBody
+    @RequestMapping(value = "publish", method = RequestMethod.POST)
+    public Result publish(HttpServletRequest request) {
+        ShopDto shop = getShopInfo(request);
+        Result result = storeConstructionFeign.publish(shop.getShopId());
+        return result;
     }
 }
 

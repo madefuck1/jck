@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <title>店铺装修</title>
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/css/sale/base.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
+    <link rel="stylesheet" href="/static/css/sale/header-public.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-company.css">
+
+    <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f5f5;">
+
+<!-- 店铺装修top-->
+<#include "/sellerCenter/common/header.html"/>
+
+<div id="logo">
+    <!--    <img src="../images/sale/shop1.png" alt="">-->
+</div>
+<div id="nav">
+    <div class="nav_in">
+        <ul>
+            <li class="cur" onclick="switchPage();"><a href="#">首页</a></li>
+            <li onclick="switchPage();"><a href="#">公司概况</a></li>
+            <!--            <li><a href="">视频中心</a></li>-->
+        </ul>
+    </div>
+
+</div>
+<div id="shop-chart">
+    <div class="chart_in">
+        <div class="left">
+            <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
+                 data-am-slider='{"directionNav":false}'>
+                <ul class="am-slides" id="shop-chart-map">
+                    <!-- 图1 -->
+                    <li><img src="../images/sale/shop2.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right" id="right-company">
+            <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
+            <!-- <div class="Collection">-->
+            <!--     <span class="coll1">收藏</span>-->
+            <!--     <span class="coll2">已收藏</span>-->
+            <!-- </div>-->
+            <div>
+                <span class="one">联系电话：</span>
+                <span class="two" id="linkPhone">xxxx</span>
+            </div>
+            <div>
+                <span class="one">经营类目：</span>
+                <span class="two" id="mainProducts">xxxx</span>
+            </div>
+            <div>
+                <span class="one">联系地址：</span>
+                <span class="two" id="companyAddress">xxxx</span>
+            </div>
+            <div>
+                <span class="one">公司介绍：</span>
+                <span class="two" style="line-height: 40px" id="companyInfo">xxxx</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="shop-product">
+    <div class="product-in">
+        <div class="product-title" id="product-title">
+        </div>
+        <!-- 产品列表-->
+        <div class="product" style="text-align: center" id="product">
+        </div>
+    </div>
+</div>
+
+
+<!-- 页尾 -->
+<#include "/sellerCenter/common/foot.html"/>
+
+<script type="text/javascript" src="/static/js/storeConstruction/storeConstruction.preview.js"></script>
+
+</body>
+</html>

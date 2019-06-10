@@ -1,4 +1,4 @@
-package com.soufang.vo.StoreContruction;
+package com.soufang.vo.StoreConstruction;
 
 import lombok.Getter;
 import lombok.Setter;

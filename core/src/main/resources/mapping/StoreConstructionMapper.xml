@@ -29,7 +29,8 @@
     delete from t_store_construction
     where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.soufang.model.StoreConstruction" useGeneratedKeys="true" keyColumn="store_construction_id" keyProperty="storeConstructionId">
+    <insert id="insert" parameterType="com.soufang.model.StoreConstruction" useGeneratedKeys="true"
+            keyColumn="store_construction_id" keyProperty="storeConstructionId">
     insert into t_store_construction (store_construction_id, shop_id, store_logo, 
       store_nav_color, store_status)
     values (#{storeConstructionId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{storeLogo,jdbcType=VARCHAR}, 
@@ -102,5 +103,9 @@
     <select id="getStoreCInfo" resultType="java.lang.Long" resultMap="StoreResultMap">
         select <include refid="Base_Column_List"></include> from t_store_construction where shop_id = #{shopId}
     </select>
+
+    <update id="publish" parameterType="java.lang.Long">
+        update t_store_construction set store_status=1 where shop_id = #{shopId}
+    </update>
 
 </mapper>

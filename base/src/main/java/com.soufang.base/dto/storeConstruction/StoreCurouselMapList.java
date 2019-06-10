@@ -7,6 +7,6 @@ import java.util.List;
 
 @Setter
 @Getter
-public class StoreCurouselMapList {
+public class StoreCurouselMapList  {
     List<StoreCurouselMapDto> data;
 }

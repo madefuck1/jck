@@ -8,6 +8,15 @@
         <result column="curousel_map_url" property="curouselMapUrl" jdbcType="VARCHAR"/>
         <result column="store_curousel_map_link" property="storeCurouselMapLink" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="DtoResultMap" type="com.soufang.base.dto.storeConstruction.StoreCurouselMapDto">
+        <id column="store_curousel_map_id" property="storeCurouselMapId" jdbcType="BIGINT"/>
+        <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="curousel_map_url" property="curouselMapUrl" jdbcType="VARCHAR"/>
+        <result column="store_curousel_map_link" property="storeCurouselMapLink" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
     <sql id="Base_Column_List">
     store_curousel_map_id, store_construction_id, product_id, curousel_map_url, store_curousel_map_link
   </sql>
@@ -98,4 +107,12 @@
     delete from t_store_curousel_map
     where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
   </delete>
+
+    <select id="getMapList" parameterType="java.lang.Long" resultMap="DtoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_store_curousel_map
+        where store_construction_id = #{storeConstructionId,jdbcType=BIGINT}
+    </select>
+
 </mapper>

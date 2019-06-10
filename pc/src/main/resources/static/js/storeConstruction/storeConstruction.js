@@ -1,5 +1,6 @@
 // 鼠标移动加载编辑
 $(function () {
+    initHtmlPage();
     $("#logo").hover(function () {
         $(".logo-mask").show();
 
@@ -127,6 +128,16 @@ $(function () {
     $('#btn-mask-product').click(function () {
         initStoreAssort2();
     })
+
+    // 预览
+    $('#btn-publish-preview').click(function () {
+        window.open('/store/toStorePreview');
+    })
+    // 发布
+    $('#btn-publish').click(function () {
+        btnPublish();
+    })
+
 })
 
 // 初始化分类
@@ -478,6 +489,15 @@ function shopChartSave() {
         contentType: false,
     }).done(function (res) {
         if (res.success) {
+            var list = res.list;
+            var html = '';
+            for (var i = 0; i < list.length; i++) {
+                html += '<li>\n' +
+                    '      <img src="' + list[i].mapURL + '" alt="">\n' +
+                    '  </li>';
+            }
+            $('#shop-chart-map').empty();
+            $('#shop-chart-map').append(html);
             shopChartCancel();
         } else {
             alert("图片上传失败！")
@@ -596,7 +616,7 @@ function maskProSave() {
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             if (res.success) {
-                maskProCancel();
+                alert("保存成功！")
             }
         }
     });
@@ -611,9 +631,90 @@ function maskProCancel() {
     $(".mask-product").hide();
 }
 
+// 初始化页面
+function initHtmlPage() {
 
+    $.ajax({
+        url: '/store/getStoreConstructionInfo/',
+        dataType: 'json',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        success: function (res) {
+            var html = '';
+            //------------- 初始化logo-------
+            var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
+            if (storeLogoUrl != '') {
+                $('#logo').html('<img src="' + storeLogoUrl + '" alt="">');
+            } else {
+                // todo
+            }
+            //------------- 初始首页/公司概况/视频中心化背景颜色----------------
+            var storeNavColor = res.storeConstructionDto.storeNavColor;
+            if (storeNavColor != null && storeNavColor != '') {
+                $('#nav').css('background', storeNavColor);
+            } else {
+                // todo
+            }
+            //------------- 初始化轮播图 -------------------
+            var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
+            if (storeCurouselMapDtoList.length > 0) {
+                for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
+                    $('#side-left').flexslider('addSlide', '<li><img src="' + storeCurouselMapDtoList[i].mapURL + '" alt=""></li>');
+                    if (i == 0) {
+                        $('#side-left').flexslider('removeSlide', 0);
+                    }
+                }
+            } else {
+                // todo
+            }
+            //------------- 初始化公司信息-------------------
+            $('#companyName').html(res.companyDto.compName);
+            $('#linkPhone').html(res.companyDto.compPhone);
+            $('#mainProducts').html(res.shopDto.mainProducts);
+            $('#companyAddress').html(res.companyDto.compAddress);
+            $('#companyInfo').html(res.companyDto.companyInfo);
 
+            //------------- 初始化分类-------------
+            html = '';
+            var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
+            if (storeExclusiveAssortDtoList.length > 0) {
+                for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
+                    html += '<a href="#">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
 
+                }
+                html += '<div class="product-search" id="product-search">\n' +
+                    '        <input type="text" placeholder="店内搜索">\n' +
+                    '        <button type="button" class="am-btn am-btn-warning">搜索</button>\n' +
+                    '    </div>';
+
+                $('#product-title').empty();
+                $('#product-title').append(html);
+            } else {
+                // todo
+            }
+            //------------- 初始化产品-------------
+            //装修中，不展示产品。默认在浏览中展示产品
+        }
+    });
+
+}
+
+function btnPublish() {
+
+    $.ajax({
+        url: '/store/publish/',
+        dataType: 'json',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.success) {
+                alert("发布成功！")
+            } else {
+                alert("发布失败，请重新发布！")
+            }
+        }
+    });
+}
 
 
 

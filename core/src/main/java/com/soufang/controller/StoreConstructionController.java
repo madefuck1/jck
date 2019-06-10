@@ -73,7 +73,6 @@ public class StoreConstructionController {
         return storeConstructionService.getStoreAssort(dto);
     }
 
-
     /**
      * 轮播图下 产品检索
      *
@@ -127,6 +126,14 @@ public class StoreConstructionController {
         return storeConstructionService.saveProductSort(storeExclusiveAssortDto);
     }
 
+
+    /**
+     * 发布
+     */
+    @RequestMapping(value = "publish", method = RequestMethod.POST)
+    public Result publish(@RequestBody Long shopId){
+        return storeConstructionService.publish(shopId);
+    }
 
 }
 

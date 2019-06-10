@@ -17,4 +17,6 @@ public interface StoreConstructionMapper {
     int updateByPrimaryKey(StoreConstruction record);
 
     StoreConstructionDto getStoreCInfo(Long shopId);
+
+    int publish(Long shopId);
 }
