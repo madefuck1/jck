@@ -86,7 +86,7 @@ public class PersonalCenterController extends BaseController {
     @Value("${ftp.host}")
     private String port;//图片上传端口号
 
-
+    //评价中心
     @MemberAccess
     @RequestMapping(value = "/toPutAssess/{orderNumber}", method = RequestMethod.GET)
     public String toPutAssess(@PathVariable String orderNumber,ModelMap modelMap){
@@ -94,10 +94,10 @@ public class PersonalCenterController extends BaseController {
         modelMap.put("orderShop",orderShopDto);
         return "personalCenter/commentList";
     }
+    //提交评价
     @MemberAccess
     @RequestMapping(value = "/putAssess", method = RequestMethod.POST)
     public String toPutAssess(@ModelAttribute AddAssessVo addAssessVo,ModelMap model,HttpServletRequest request){
-        BaseVo vo = new BaseVo();
         UserDto userInfo = this.getUserInfo(request);
         List<AssessDto> assessDtos = new ArrayList<>();
         for (AddAssessDetailVo a: addAssessVo.getList()) {
