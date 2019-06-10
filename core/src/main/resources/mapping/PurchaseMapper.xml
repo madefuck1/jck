@@ -212,7 +212,7 @@
       offer_status = #{offerStatus},
       offer_time = #{offerTime},
       remark=#{remark}
-    where shop_id = #{shopId}
+    where shop_id = #{shopId} AND enquiry_product_id=#{enquiryProductId}
   </update>
 
   <!--根据询盘信息查到产品ID去更改询价状态-->
