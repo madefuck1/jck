@@ -11,6 +11,7 @@ public class Enquiry {
     private Long userId;
 
     private Shop shop;
+    private String shopName;
     private String loginName;
 
     //询价标题
@@ -49,6 +50,14 @@ public class Enquiry {
     private String statusMessage;
 
     private List<EnquiryProduct> enquiryProducts;
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 
     public String getStatusMessage() {
         return statusMessage;

@@ -21,6 +21,7 @@ public class EnquiryDto {
 
     private Long userId;
     private String loginName;
+    private String shopName;
 
     private String enquiryTitle;
 
@@ -355,5 +356,11 @@ public class EnquiryDto {
         this.purchaseDto = purchaseDto;
     }
 
+    public String getShopName() {
+        return shopName;
+    }
 
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 }

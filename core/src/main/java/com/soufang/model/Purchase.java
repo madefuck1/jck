@@ -21,6 +21,7 @@ public class Purchase {
     private Date offerTime;
 
     private  Shop shop;
+   private String  remark;
 
     public String getPurchaseNumber() {
         return purchaseNumber;
@@ -92,5 +93,13 @@ public class Purchase {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

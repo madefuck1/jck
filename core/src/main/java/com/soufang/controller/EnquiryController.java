@@ -136,24 +136,6 @@ public class EnquiryController {
     @RequestMapping(value = "addEnquiry",method = RequestMethod.POST)
     public Result addEnquiry(@RequestBody  EnquiryDto enquiryDto){
         Result result =new Result();
-        //获取单号
-        //String enquiryNumber = "EN"+sysParamService.getOrderNumber();
-        //存入创建时间
-        //enquiryDto.setCreateTime(DateUtils.getToday());
-        //存入单号
-        //enquiryDto.setEnquiryNumber(enquiryNumber);
-
-        /**
-         * 新增询盘商品信息
-         * 所有商品所属询盘都是当前新增时的询盘单号=enquiryNumber
-         */
-        //设置当前所有轮盘产品编号为setEnquiryNumber的值
-       /* for(int i = 0; i < enquiryProductDto.size();i++){
-            EnquiryProductDto epd =enquiryProductDto.get(i);
-            epd.setEnquiryNumber(enquiryNumber);
-        }*/
-        //调用新增方法-询盘信息/轮盘产品
-        //需要回滚操作
         if(enquiryService.insertSelective(enquiryDto)>0){
             result.setSuccess(true);
             result.setMessage("发布成功");
@@ -174,34 +156,18 @@ public class EnquiryController {
     public PageHelp<EnquiryDto> getList(@RequestBody EnquirySo enquirySo) {
         PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
         List<EnquiryDto> lists = enquiryService.getList(enquirySo);
-        int count = enquiryService.getCount(enquirySo);
+        int count =lists.size();
         pageHelp.setData(lists);
         pageHelp.setCount(count);
         return pageHelp;
     }
 
-    /**
-     * 求购列表信息
-     * @param enquirySo
-     * @return
-     */
-    @RequestMapping(value = "enquiryTableMessage",method = RequestMethod.POST)
-    public PageHelp<EnquiryDto> enquiryTableMessage(@RequestBody EnquirySo enquirySo){
-        PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
-        //获取列表
-        List<EnquiryDto> lists = enquiryService.enquiryTableMessage(enquirySo);
-        // 获取总数-根据分类
-        int tableCount=enquiryService.enquiryTableCount(enquirySo);
-        pageHelp.setData(lists);
-        pageHelp.setCount(tableCount);
-        return pageHelp;
-    }
 
-    /**
+   /* *//**
      * 获取我的报价列表
      * @param enquirySo
      * @return
-     */
+     *//*
     @RequestMapping(value = "getMyQuoteList",method = RequestMethod.POST)
     public PageHelp<EnquiryDto> getMyQuoteList(@RequestBody EnquirySo enquirySo) {
         PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
@@ -211,50 +177,24 @@ public class EnquiryController {
         pageHelp.setCount(count);
         return pageHelp;
     }
-
-    @RequestMapping(value = "getQuoteDetails",method = RequestMethod.POST)
+*/
+/*    @RequestMapping(value = "getQuoteDetails",method = RequestMethod.POST)
     public EnquiryDto getQuoteDetails(@RequestBody Long enquiryProductId){
         EnquiryDto enquiryDto =  enquiryService.getQuoteDetails(enquiryProductId);
         return enquiryDto;
-    }
+    }*/
     /**
      * 查询询盘信息详情
      * -包括所有询盘产品信息-询盘报价-询盘商铺信息
-     * @param enquiryNumber
+     * @param enquirySo
      * @return JSONArray
      */
     @RequestMapping(value = "selEnquiryByNumber",method = RequestMethod.POST)
-    public EnquiryDto selEnquiryByNumber(@RequestBody String enquiryNumber){
+    public EnquiryDto selEnquiryByNumber(@RequestBody EnquirySo enquirySo){
         //1.询盘-询盘产品对象集合-报价信息-商铺信息信息对象
-        EnquiryDto enquiryDto=  enquiryService.getByEnqNum(enquiryNumber);
+        EnquiryDto enquiryDto=  enquiryService.getByEnqNum(enquirySo);
         return enquiryDto;
     }
-
-    /**
-     * 查询详情-所有
-     * @param enquiryProductId
-     * @return
-     */
-    @RequestMapping(value = "selectProductById",method = RequestMethod.POST)
-    public EnquiryDto selectProductById(@RequestBody String enquiryProductId){
-        //1.询盘-询盘产品对象集合-报价信息-商铺信息信息对象
-        EnquiryDto enquiryDto=  enquiryService.selectProductById(enquiryProductId);
-        return enquiryDto;
-    }
-
-    /**
-     * 1查所询该询盘的有报价单--2查询询盘信息详情
-     * 报价信息 -报价是针对产品报价，应该在报价表中存入每个产品的关联标识
-     * 询盘产品信息-询盘报价-询盘商铺信息
-     * @param enquiryNumber
-     * @return purchaseDto
-     */
-   /* @RequestMapping(value = "selPurchaseByenquiryNumber",method = RequestMethod.POST)
-    public List<PurchaseDto> selPurchaseByenquiryNumber(@RequestBody String enquiryNumber){
-        List<PurchaseDto> purchaseDto  = purchaseService.selPurchaseByenquiryNumber(enquiryNumber);
-        return purchaseDto;
-    }*/
-
 
     /**
      * 修改当前询盘信息
@@ -298,7 +238,6 @@ public class EnquiryController {
         }
         return result;
     }
-
     //停用，恢复，删除可以整合为一个功能，页面直接判定即可。
 
 

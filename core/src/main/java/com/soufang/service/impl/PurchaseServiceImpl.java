@@ -6,6 +6,7 @@ import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.PurchaseStatusEnum;
+import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.EnquiryMapper;
@@ -55,39 +56,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public List<EnquiryDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo) {
-        purchaseSo.setPage((purchaseSo.getPage() - 1) * 5);
-        //查询SHOP信息通过用户ID
-        Shop shop =shopMapper.getByUserId(purchaseSo.getUserId());
-        //加入SHOPID
-        purchaseSo.setShopId(shop.getShopId());
-        List<Enquiry> list = enquiryMapper.getMyPurchaseList(purchaseSo);
-        List<EnquiryDto> listDto = new ArrayList<>();
-        //询盘
-        for (int i = 0; i < list.size(); i++) {
-            Enquiry enquiry = list.get(i);
-            EnquiryDto enquiryDto = new EnquiryDto();
-            //状态-获取对应枚举
-            BeanUtils.copyProperties(enquiry, enquiryDto);
-            List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
-            for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
-                EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
-                BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
-                List<PurchaseDto> purchaseDtos = new ArrayList<>();
-                for (Purchase purchase : enquiryProduct.getPurchases()) {
-                    PurchaseDto purchaseDto = new PurchaseDto();
-                    BeanUtils.copyProperties(purchase, purchaseDto);
-                    purchaseDtos.add(purchaseDto);
-                }
-                enquiryProductDtos.add(enquiryProductDto);
-            }
-            enquiryDto.setEnquiryProductDto(enquiryProductDtos);
-            listDto.add(enquiryDto);
-        }
-        return listDto;
-    }
-
-    @Override
     public int getCount(PurchaseSo purchaseSo) {
         return purchaseMapper.getCount(purchaseSo);
     }
@@ -108,7 +76,6 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
         return purchaseDto.size();
     }
-
 
     //查询报价信息
     public List<PurchaseDto> getPurchaseListByEnqunum(String enquiryNumber) {
@@ -175,7 +142,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDto.setShopId(shop.getShopId());
         //查询产品ID根据询盘编号
         List<EnquiryProduct> enquiryProducts =enquiryProductMapper.getByEnquiryNumber(purchaseDto.getEnquiryNumber());
-        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryProductId().toString());
+        if("".equals(purchaseDto.getEnquiryProductId())||purchaseDto.getEnquiryProductId()==null){
+            purchaseDto.setEnquiryProductId(enquiryProducts.get(0).getEnquiryProductId());
+
+        }
         //计算总价multiply
         purchaseDto.setSumPrice(purchaseDto.getUnitPrice().multiply(new BigDecimal(enquiryProducts.get(0).getProductNumber())));
         //多个产品
@@ -185,8 +155,6 @@ public class PurchaseServiceImpl implements PurchaseService {
        //单个产品
         purchaseDto.setOfferTime(DateUtils.getToday());
         purchaseDto.setOfferStatus(PurchaseStatusEnum.already_offer.getValue());
-        purchaseDto.setEnquiryProductId(enquiryProducts.get(0).getEnquiryProductId());
-        purchaseDto.setEnquiryNumber(enquiryProducts.get(0).getEnquiryNumber());
         Purchase purchase=new Purchase();
         BeanUtils.copyProperties(purchaseDto,purchase);
        return purchaseMapper.purchase(purchase);
@@ -199,10 +167,15 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @return
      */
     public int acceptPurchase(PurchaseSo purchaseSo){
-        Enquiry enquiry = new Enquiry();
-        enquiry.setEnquiryNumber(purchaseSo.getEnquiryNumber());
-        enquiry.setEnquiryStatus(4);
-     return purchaseMapper.acceptPurchase(enquiry);
+        EnquirySo enquirySo= new EnquirySo();
+        //接收报价-还需要去更改询盘状态为-已报价
+        if(purchaseSo.getOfferStatus()==2){
+            enquirySo.setEnquiryStatus(4);
+            enquirySo.setEnquiryNumber(purchaseSo.getEnquiryNumber());
+            //调用修改询盘状态
+            enquiryMapper.delEnquiry(enquirySo);
+        }
+     return purchaseMapper.acceptPurchase(purchaseSo);
     }
 
 }

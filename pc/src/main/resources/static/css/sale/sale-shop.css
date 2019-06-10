@@ -462,6 +462,7 @@ h4 {
 .icon {
     height: 40px;
     width: 190px;
+    background:  no-repeat;
 }
 
 .icon span {
@@ -471,45 +472,22 @@ h4 {
     margin-left: 20px;
 }
 
-.icon .up1 {
-    background: url(../../images/sale/shop15.png) no-repeat 0px 10px;
+.icon .up{
+    background: url(../../images/sale/shop.up.png) no-repeat 0px 10px;
 }
 
-.icon .up2 {
-    background: url(../../images/sale/shop16.png) no-repeat 0px 10px;
+.icon .down {
+    background: url(../../images/sale/shop.down.png) no-repeat 0px 10px;
 }
 
-.icon .up3 {
-    background: url(../../images/sale/shop21.png) no-repeat 0px 10px;
+.icon .del {
+    background: url(../../images/sale/shop.del.png) no-repeat 0px 10px;
 }
-
-.icon .down1 {
-    background: url(../../images/sale/shop17.png) no-repeat 0px 10px;
-}
-
-.icon .down2 {
-    background: url(../../images/sale/shop13.png) no-repeat 0px 10px;
-}
-
-.icon .down3 {
-    background: url(../../images/sale/shop20.png) no-repeat 0px 10px;
-}
-
-.icon .delet {
-    background: url(../../images/sale/shop12.png) no-repeat 0px 10px;
-}
-
-.icon .delet1 {
-    background: url(../../images/sale/shop24.png) no-repeat 0px 10px;
-}
-
 .icon .add {
-    background: url(../../images/sale/shop11.png) no-repeat 0px 10px;
+    background: url(../../images/sale/shop.add.png) no-repeat 0px 10px;
 }
 
-.icon .add {
-    background: url(../../images/sale/shop19.png) no-repeat 0px 10px;
-}
+
 
 .left-maskHeight {
     min-height: 280px
@@ -542,8 +520,8 @@ h4 {
 }
 
 .pro {
-    margin-top: 220px;
-    background: #F0F0F0;
+    margin-top: auto;
+    /*background: #F0F0F0;*/
 }
 
 .am-nav-tabs {
@@ -726,7 +704,7 @@ h4 {
 .Lnav-r01 {
     width: 390px;
     height: 40px;
-    cursor: pointer;
+    /*cursor: pointer;*/
     border-bottom: 1px solid #e6e6e6;
     padding: 0px 10px;
 }
@@ -738,13 +716,13 @@ h4 {
     line-height: 40px;
 }
 
-.Lnav-r01:focus {
-    background: #e6e6e6;
-}
+/*.Lnav-r01:focus {*/
+/*    background: #e6e6e6;*/
+/*}*/
 
-.Lnav-r .cur {
-    background: #e6e6e6;
-}
+/*.Lnav-r .cur {*/
+/*    !*background: #e6e6e6;*!*/
+/*}*/
 
 .Lnav-r01 input {
     float: left;
@@ -771,13 +749,13 @@ h4 {
     text-align: right;
 }
 
-.mask-proselect .am-selected-btn.am-btn-default {
+.mask-pro-select .am-selected-btn.am-btn-default {
     width: 380px;
     height: 40px;
     margin-top: 10px
 }
 
-.mask-proselect .button {
+.mask-pro-select .button {
     margin-top: 40px;
     margin-right: 60px
 
@@ -845,5 +823,7 @@ h4 {
 .upload-picload-p:hover {
     width:auto
 }
-
+.aChangeColor:hover{
+    color: red;
+}
 

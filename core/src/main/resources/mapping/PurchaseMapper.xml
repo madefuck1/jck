@@ -128,10 +128,10 @@
   <insert id="purchase" parameterType="com.soufang.model.Purchase" >
     insert into t_purchase (purchase_number, shop_id, enquiry_product_id,
       unit_price, sum_price, offer_status, 
-      offer_time)
+      offer_time,remark)
     values (#{purchaseNumber,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{enquiryProductId,jdbcType=BIGINT}, 
       #{unitPrice,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, #{offerStatus,jdbcType=INTEGER}, 
-      #{offerTime,jdbcType=TIMESTAMP})
+      #{offerTime,jdbcType=TIMESTAMP},#{remark})
   </insert>
   <insert id="insertSelective" parameterType="com.soufang.model.Purchase" >
     insert into t_purchase
@@ -226,8 +226,8 @@
   </update>
 
   <!--接收报价-->
-  <update id="acceptPurchase" parameterType="com.soufang.model.Enquiry" >
-    UPDATE t_enquiry SET  enquiry_status= #{enquiryStatus} where enquiry_number = #{enquiryNumber});
+  <update id="acceptPurchase" parameterType="com.soufang.base.search.purchase.PurchaseSo" >
+    update t_purchase set offer_status=#{offerStatus} WHERE purchase_number=#{purchaseNumber}
   </update>
 
 

@@ -14,9 +14,7 @@ public interface EnquiryService {
      * @param enquiryNumber
      * @return
      */
-    EnquiryDto getByEnqNum(String enquiryNumber);
-
-    EnquiryDto selectProductById(String enquiryProductId);
+    EnquiryDto getByEnqNum( EnquirySo enquirySo);
 
     /**
      * 按条件查询询盘信息集合
@@ -24,8 +22,6 @@ public interface EnquiryService {
      * @return
      */
     List<EnquiryDto> getList(EnquirySo enquirySo);
-
-    List<EnquiryDto> enquiryTableMessage(EnquirySo enquirySo);
 
     int  enquiryTableCount(EnquirySo EnquirySo);
 

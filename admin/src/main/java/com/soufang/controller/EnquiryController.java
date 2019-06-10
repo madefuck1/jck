@@ -113,6 +113,7 @@ public class EnquiryController {
 
         return "/enquiry/addEnquiry";
     }
+
     @ResponseBody
     @RequestMapping(value = "getAssortIdName", method = RequestMethod.GET)
     public List<Map<String, Object>> getAssortIdName(){

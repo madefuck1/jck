@@ -1,5 +1,6 @@
 package com.soufang.mapper;
 
+import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.model.Enquiry;
@@ -10,12 +11,10 @@ public interface EnquiryMapper {
 
     /**
      * 由询盘号拿询盘信息
-     * @param enquiryNumber
+     * @param enquirySo
      * @return
      */
-    Enquiry getByEnqNum(String enquiryNumber);
-
-    Enquiry selectProductById(String enquiryProductId);
+    Enquiry getByEnqNum(EnquirySo enquirySo);
 
     //查询详情-询盘-产品-询价
     Enquiry selDetailEnquiryAndProAndPur(Enquiry enquiry);
@@ -76,13 +75,10 @@ public interface EnquiryMapper {
 
     int updateByPrimaryKey(Enquiry record);
     //删除询盘
-    int delEnquiry(String enquiryNumber);
+    int delEnquiry(EnquirySo enquirySo);
 
     //查询我的报价
     List<Enquiry> getMyPurchaseList(PurchaseSo purchaseSo);
-
-    //求购列表信息
-    List<Enquiry> enquiryTableMessage(EnquirySo EnquirySo);
 
     int  enquiryTableCount(EnquirySo EnquirySo);
 }

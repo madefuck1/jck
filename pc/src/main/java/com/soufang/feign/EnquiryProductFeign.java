@@ -13,8 +13,5 @@ public interface EnquiryProductFeign {
     //删除照片
     @RequestMapping(value = "core/enquiryProduct/delEnProImgUrl",method = RequestMethod.POST)
     Result delEnProImgUrl(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo);
-    //查看产品详情
-    @RequestMapping(value = "core/enquiry/selectProductById",method = RequestMethod.POST)
-    EnquiryDto selectProductById(@RequestBody String enquiryProductId);
 
 }

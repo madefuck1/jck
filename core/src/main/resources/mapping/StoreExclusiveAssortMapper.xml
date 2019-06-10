@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.StoreExclusiveAssortMapper">
+    <resultMap id="BaseResultMap" type="com.soufang.model.StoreExclusiveAssort">
+        <id column="exclusive_assort_id" property="exclusiveAssortId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+        <result column="sort_name" property="sortName" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="DtoResultMap" type="com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto">
+        <id column="exclusive_assort_id" property="exclusiveAssortId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+        <result column="sort_name" property="sortName" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    exclusive_assort_id, shop_id, assort_name, sort_name, is_show
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_store_exclusive_assort
+        where exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_store_exclusive_assort
+    where exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.soufang.model.StoreExclusiveAssort">
+    insert into t_store_exclusive_assort (exclusive_assort_id, shop_id, assort_name, 
+      sort_name, is_show)
+    values (#{exclusiveAssortId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{assortName,jdbcType=VARCHAR}, 
+      #{sortName,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.soufang.model.StoreExclusiveAssort">
+        insert into t_store_exclusive_assort
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exclusiveAssortId != null">
+                exclusive_assort_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="assortName != null">
+                assort_name,
+            </if>
+            <if test="sortName != null">
+                sort_name,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exclusiveAssortId != null">
+                #{exclusiveAssortId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="assortName != null">
+                #{assortName,jdbcType=VARCHAR},
+            </if>
+            <if test="sortName != null">
+                #{sortName,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.StoreExclusiveAssort">
+        update t_store_exclusive_assort
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="assortName != null">
+                assort_name = #{assortName,jdbcType=VARCHAR},
+            </if>
+            <if test="sortName != null">
+                sort_name = #{sortName,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow,jdbcType=INTEGER},
+            </if>
+        </set>
+        where exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.soufang.model.StoreExclusiveAssort">
+    update t_store_exclusive_assort
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      assort_name = #{assortName,jdbcType=VARCHAR},
+      sort_name = #{sortName,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=INTEGER}
+    where exclusive_assort_id = #{exclusiveAssortId,jdbcType=BIGINT}
+  </update>
+
+    <select id="getStoreAssort" parameterType="com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto"
+            resultMap="DtoResultMap">
+        select <include refid="Base_Column_List"></include> from t_store_exclusive_assort where shop_id = #{shopId}
+        <if test="isShow!=null and isShow!=0">
+            and is_show = #{isShow}
+        </if>
+    </select>
+
+    <update id="updExclusiveAssort" parameterType="com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto">
+        update t_store_exclusive_assort
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="assortName != null">
+                assort_name = #{assortName,jdbcType=VARCHAR},
+            </if>
+            <if test="sortName != null">
+                sort_name = #{sortName,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow,jdbcType=INTEGER},
+            </if>
+        </set>
+        where shop_id = #{shopId,jdbcType=INTEGER}
+        <if test="exclusiveAssortIds!=null and exclusiveAssortIds!=''">
+            and find_in_set(exclusive_assort_id,#{exclusiveAssortIds,jdbcType=VARCHAR})
+        </if>
+    </update>
+
+</mapper>
+
