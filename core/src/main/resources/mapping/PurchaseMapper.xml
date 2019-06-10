@@ -98,7 +98,7 @@
 
   <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.model.Purchase">
     	select count(1) from t_purchase
-      WHERE shop_id =#{shopId} and offer_status=1
+      WHERE shop_id =#{shopId} and enquiry_product_id=#{enquiryProductId} and offer_status=1
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -210,8 +210,9 @@
       unit_price = #{unitPrice},
       sum_price = #{sumPrice},
       offer_status = #{offerStatus},
-      offer_time = #{offerTime}
-    where shop_id = #{shopId}
+      offer_time = #{offerTime},
+      remark=#{remark}
+    where shop_id = #{shopId} and enquiry_product_id=#{enquiryProductId}
   </update>
 
   <!--根据询盘信息查到产品ID去更改询价状态-->
