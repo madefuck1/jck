@@ -54,6 +54,10 @@ public class EnquiryServiceImpl implements EnquiryService {
             EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
             //更改图片地址
             enquiryProduct.setProductImage(PropertiesParam.file_pre+enquiryProduct.getProductImage());
+            AssortDto assortDto =new AssortDto();
+            Assort assort =enquiryProduct.getAssort();
+            BeanUtils.copyProperties(assort, assortDto);
+            enquiryProductDto.setAssortDtos(assortDto);
             BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
             List<PurchaseDto> purchaseDtos = new ArrayList<>();
             for (Purchase purchase : enquiryProduct.getPurchases()) {
