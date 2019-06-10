@@ -40,4 +40,7 @@ public interface StoreConstructionFeign {
 
     @RequestMapping(value = "/core/store/saveProductSort", method = RequestMethod.POST)
     Result saveProductSort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    @RequestMapping(value = "/core/store/publish", method = RequestMethod.POST)
+    Result publish(Long shopId);
 }

@@ -28,4 +28,6 @@ public interface StoreConstructionService {
     Result updExclusiveAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
 
     Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    Result publish(Long shopId);
 }

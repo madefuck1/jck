@@ -15,7 +15,6 @@ import com.soufang.app.feign.AppEnquiryFeign;
 import com.soufang.app.feign.AppPurchaseFeign;
 import com.soufang.app.vo.enquiry.EnquiryVo;
 import com.soufang.app.vo.purchase.AcceptPurchaseVo;
-import com.soufang.app.vo.purchase.PurchaseListVo;
 import com.soufang.app.vo.purchase.PurchaseVo;
 import com.soufang.app.vo.purchase.addPurchaseVo;
 import com.soufang.base.dto.enquiry.EnquiryDto;
@@ -24,7 +23,6 @@ import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +57,10 @@ public class AppPurchaseController extends AppBaseController{
     @RequestMapping(value = "getPurchaseList",method = RequestMethod.POST)
     public EnquiryVo getPurchaseList(@RequestBody EnquirySo enquirySo, HttpServletRequest request){
         UserDto userDto=this.getUserInfo(request);
+        //卖家要通过SHOPID查询报价信息
         enquirySo.setUserId(userDto.getUserId());
+        //因为用户信息的商铺信息取不到
+        enquirySo.setShopId(userDto.getUserId());
         PageHelp<EnquiryDto> pageHelps =appEnquiryFeign.getList(enquirySo);
         EnquiryVo enquiryVo = new EnquiryVo();
         enquiryVo.setData(pageHelps.getData());

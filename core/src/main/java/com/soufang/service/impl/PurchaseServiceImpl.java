@@ -55,11 +55,6 @@ public class PurchaseServiceImpl implements PurchaseService {
         return listDto;
     }
 
-    @Override
-    public int getCount(PurchaseSo purchaseSo) {
-        return purchaseMapper.getCount(purchaseSo);
-    }
-
     /**
      * 新增报价单
      *
@@ -133,7 +128,6 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
         return  result;
     }
-
     public int purchase(PurchaseDto purchaseDto){
         Result result = new Result();
         //查询SHOP信息通过用户ID
@@ -157,8 +151,16 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDto.setOfferStatus(PurchaseStatusEnum.already_offer.getValue());
         Purchase purchase=new Purchase();
         BeanUtils.copyProperties(purchaseDto,purchase);
-       return purchaseMapper.purchase(purchase);
+        //对报价做判断-
+        int i =purchaseMapper.getCount(purchase);
+        if(i>0){
+            //已存在报价-存在则更新报价信息
+            return purchaseMapper.updateByPrimaryKey(purchase);
 
+        }else{
+            //-增加报价信息
+            return purchaseMapper.purchase(purchase);
+        }
     }
 
     /**
