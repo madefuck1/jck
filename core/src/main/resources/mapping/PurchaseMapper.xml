@@ -98,7 +98,7 @@
 
   <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.model.Purchase">
     	select count(1) from t_purchase
-      WHERE shop_id =#{shopId} and offer_status=1
+      WHERE shop_id =#{shopId} and enquiry_product_id=#{enquiryProductId} and offer_status=1
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
