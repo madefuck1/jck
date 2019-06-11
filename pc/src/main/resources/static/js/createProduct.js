@@ -142,6 +142,7 @@ function addSpecHtml(){
         i++;
     });
     html.find(".minNumber").attr("name","productSpecDtoList["+priceNumber+"].minNumber");
+    html.find(".maxNumber").attr("name","productSpecDtoList["+priceNumber+"].minNumber");
     html.find(".specNumber").attr("name","productSpecDtoList["+priceNumber+"].specNumber");
     priceNumber++ ;
 
