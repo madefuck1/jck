@@ -268,6 +268,5 @@ public class ProductManageController {
     PageHelp<ProductDto> getAssortProduct(@RequestBody ProductManageSo so){
         PageHelp<ProductDto> pageHelp = productManageService.getAssortProduct(so);
         return pageHelp;
-
     }
 }

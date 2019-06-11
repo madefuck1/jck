@@ -7,7 +7,7 @@ public class AddAssessVo {
 
     private String orderNumber ;
     private Long shopId;
-    private List<AddAssessDetailVo> list;
+    private List<AddAssessDetailVo> data;
 
     public Long getShopId() {
         return shopId;
@@ -25,11 +25,11 @@ public class AddAssessVo {
         this.orderNumber = orderNumber;
     }
 
-    public List<AddAssessDetailVo> getList() {
-        return list;
+    public List<AddAssessDetailVo> getData() {
+        return data;
     }
 
-    public void setList(List<AddAssessDetailVo> list) {
-        this.list = list;
+    public void setData(List<AddAssessDetailVo> data) {
+        this.data = data;
     }
 }

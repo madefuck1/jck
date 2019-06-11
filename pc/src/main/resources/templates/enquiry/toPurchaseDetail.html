@@ -97,6 +97,7 @@
 		<div class="tb-detail-hd">
 			<h3 style="font-size: 16px; font-weight: bold" id="productName"></h3>
 			<input type="hidden" id="enquiryProductId" value="${enquiryProductId}">
+			<input type="hidden" id="purchaseNumber">
 
 		</div>
 		<div class="clear-down">
@@ -175,6 +176,7 @@
 
 
 <div class="clear_form">
+
 	<h4 style="margin-bottom: 10px">报价信息</h4>
 	<table class="am-table am-table-bordered">
 		<thead style="background: #e6e6e6;">
@@ -227,6 +229,7 @@
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
+                $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
                 $("#statusMessage").html(data.statusMessage);
@@ -236,7 +239,7 @@
                 $("#takeAddress").html(data.takeAddress);
                 $("#enquiryRemark").html(data.enquiryRemark);
                 $("#productName").html(data.enquiryProductDto[0].productName);
-                $("#productImage").html("<img src='"+data.enquiryProductDto[0].productImage+"' alt='' width='400px;'height='400px;'>");
+                $("#productImage").html("<img src='"+data.enquiryProductDto[0].productImage+"' alt='' STYLE='width:400px;height:400px;'>");
                 var nowTime=getNowFormatDate();
                 $("#nowTime").html(nowTime);
                 $("#strEndTime").html(data.strEndTime);
@@ -262,6 +265,32 @@
 
     //报价
     function PurchaseNow() {
+        var purchaseNumber=$("#purchaseNumber").val();
+        if ( purchaseNumber != null){
+            if(confirm("已经进行报价，请确认是否进行当前报价操作")){
+                var unitPrice=$("#unitPrice").val();
+                var enquiryProductId=$("#enquiryProductId").val();
+                var enquiryNumber=$("#enquiryNumber").val();
+                var remark=$("#remark").val();
+                var str={unitPrice:unitPrice,enquiryProductId:enquiryProductId,remark:remark,enquiryNumber:enquiryNumber};
+                $.ajax({
+                    url: "purchase",
+                    type: "post",
+                    data: JSON.stringify(str),
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.message);
+                    }
+                });
+            }
+        }
+
+            /*  var purchaseNumber=$("#purchaseNumber").val();
+              if (purchaseNumber==null||purchaseNumber==""){
+              }*/
+
+      /*  //对报价进行判断-是否报价过，需要提醒：已经进行报价，请确认是否进行当前报价操作
         var unitPrice=$("#unitPrice").val();
         var enquiryProductId=$("#enquiryProductId").val();
         var enquiryNumber=$("#enquiryNumber").val();
@@ -276,6 +305,6 @@
             success: function (data) {
 				alert(data.message);
             }
-        });
+        });*/
     }
 </script>

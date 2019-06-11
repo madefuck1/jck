@@ -212,14 +212,19 @@ public class PcUserController extends BaseController{
         return baseVo;
     }
 
-
+    /**
+     * 跳转商铺信息增加页面
+     * @param map
+     * @param request
+     * @return
+     */
     @MemberAccess
     @RequestMapping(value = "toSettle",method = RequestMethod.GET)
     public String toSettle(ModelMap map , HttpServletRequest request){
         map.put("userInfo",getUserInfo(request));
         if(getShopInfo(request) == null){
             //已经是商家，不能再入驻
-            return "404";
+            return "notFound";
         }else {
             return "sellerCenter/settle/first";
         }
@@ -246,12 +251,20 @@ public class PcUserController extends BaseController{
         if(result.isSuccess()){
             return  "sellerCenter/settle/second";
         }else {
-            return "404" ;
+            return "notFound";
         }
     }
 
 
+    /**
+     * 商铺信息提交
+     * @param request
+     * @param companyFile
+     * @param idCardFile
+     * @return
+     */
     @MemberAccess
+    @ResponseBody
     @RequestMapping(value = "settleInfo" , method = RequestMethod.POST)
     public BaseVo settleInfo(HttpServletRequest request ,
                              MultipartFile companyFile , MultipartFile[] idCardFile){
@@ -260,12 +273,13 @@ public class PcUserController extends BaseController{
         CompanyDto companyDto = pcUserFeign.getCompany(getUserInfo(request).getUserId());
         companyDto.setCompLinker(userDto.getRealName());
         companyDto.setCompPhone(userDto.getPhone());
+        companyDto.setUserId(userDto.getUserId());
         companyDto.setCompName(request.getParameter("compName"));
         companyDto.setCompType(Integer.valueOf(request.getParameter("compType")));
         companyDto.setCompanyInfo(request.getParameter("compInfo"));
         companyDto.setCompAddress(request.getParameter("compAddress"));
         companyDto.setBank(request.getParameter("bank"));
-        companyDto.setBankNumber(request.getParameter("banKNumber"));
+        companyDto.setBankNumber(request.getParameter("bankNumber"));
         Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
         if((boolean)companyResult.get("success")){
             companyDto.setCompUrls(companyResult.get("uploadName").toString());
@@ -283,6 +297,8 @@ public class PcUserController extends BaseController{
         shopDto.setShopIntroduce(companyDto.getCompanyInfo());
         userDto.setShopDto(shopDto);
         pcUserFeign.settleShop(userDto);
+        baseVo.setMessage("添加成功");
+        baseVo.setSuccess(true);
         return baseVo;
     }
 

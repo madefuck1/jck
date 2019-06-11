@@ -28,6 +28,12 @@
     <#include "/common/includes/include.script.html"/>
 
     <@block name="js"/>
-    <script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+   <!-- <script type="text/javascript" src="/static/js/includes/include.search.js"></script>-->
     <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+    <script>
+        $("#sellerSearchProduct").on("click", function () {
+            var searchProductName = $("#search_productName").val();
+            window.location.href = "/product/search?&searchProductName=" + searchProductName;
+        });
+    </script>
 </html>

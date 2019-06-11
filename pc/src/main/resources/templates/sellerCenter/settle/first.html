@@ -71,7 +71,7 @@
                                 </span>
                             </div>
                             <a style="margin-top: 20px; display: inline-block; text-align: center; width: 100%">
-                                <button type="submit" class="am-btn am-btn-secondary am-btn-lg button-size">下一步</button>
+                                <button type="submit" class="am-btn am-btn-secondary am-btn-lg button-size" onclick="return myfunction()" >下一步</button>
                             </a>
                         </div>
                     </div>
@@ -93,6 +93,16 @@
         $("input[name=fixedCity]").val(fixedPhone[1]);
         $("input[name=fixedNumber]").val(fixedPhone[2]);
     })
+    //下一步弹框确认
+    function myfunction()
+    {
+        if(confirm("请确认当前信息是否进入下一步？")){
+            document.update.submit();
+        }
+        else{
+            return false;//必须加！点击取消时才会保存之前的数据！
+        }
+    }
 </script>
 </@override>
 <@extends name="/common/layout/base.sellerCenter.html"/>

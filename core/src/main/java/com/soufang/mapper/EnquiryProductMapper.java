@@ -1,5 +1,6 @@
 package com.soufang.mapper;
 
+import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.model.EnquiryProduct;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface EnquiryProductMapper {
     int updateByPrimaryKey(EnquiryProduct record);
 
     int delEnProImgUrl(Long enquiryProductId);
+
+    List<EnquiryProductDto> getIndexProductList();
 }

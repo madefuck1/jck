@@ -132,20 +132,50 @@
         if($("input[name=mainProducts]").val() == ''){
             return "主营产品未填写";
         }
+
+
         if($("input[name=bankNumber]").val() == ''){
             return "卡号未填写";
+        }else{
+            if(!validateNum($("input[name=bankNumber]").val())){
+                return ;
+            }
         }
+
+
         if($("input[name=bank]").val() == ''){
             return "开户行未填写";
         }
         return null ;
     }
 
+    // 验证卡号长度且必须为数字信息
+    function validateNum(str)
+    {
+        if(!(str.length>16 && str.length<19))
+        {
+            alert("请重新核对卡号号码位数是否遗漏");
+            return false;
+        }
+        else
+        {
+            for(var i=0; i<str.length; i++)
+            {
+                if(str.charAt(i)<'0' || str.charAt(i)>'9')
+                {
+                    alert("输入的卡号必须为数字信息");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     function submitSettle(){
         var message = checkForm();
         if(message != null){
             alert(message);
-        }else {
+        }else{
             var formData = new FormData();
             formData.append("compType",$("input[name=companyType]").val());
             formData.append("compName",$("input[name=compName]").val());
@@ -159,8 +189,8 @@
             formData.append("idCardFile",$(".idCard input[type=file]").last()[0].files[0]);
             formData.append("companyFile",$(".company input[type=file]")[0].files[0]);
             $.ajax({
-                url: '/user/settleInfo',
-                type: 'post',
+                url: "settleInfo",
+                type: "post",
                 cache: false,
                 data: formData,
                 dataType: "json",
@@ -175,7 +205,7 @@
                     }
                 }
             });
-        }
+    }
     }
 
     function idCard(obj,number){

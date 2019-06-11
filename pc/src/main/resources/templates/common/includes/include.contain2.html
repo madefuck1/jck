@@ -10,6 +10,7 @@
                         <li><a href="/enquiry/toEnquiryList">求购信息</a></li>
                         <li><a href="">纺织咨询</a></li>
                         <li><a href="">联系我们</a></li>
+                        <li><a href="/exhibition/toExhibition">展会信息</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +39,13 @@
                 <div class="information">
                     <div class="left">
                         <div class="pic"></div>
-                        <p class="load">您好！请<a href="javascript">登陆/注册</a></p>
+                        <#if isLonIn?? && isLonIn != "N">
+                        <p>欢迎您 &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+                           
+                        </p>
+                        <#else>
+                        <p>欢迎您 &nbsp;请<a href="/user/toLogin">登录</a> &nbsp;<a href="/user/toRegister">注册会员</a></p>
+                        </#if>
                     </div>
                     <div class="center">
                         <div class="center1">

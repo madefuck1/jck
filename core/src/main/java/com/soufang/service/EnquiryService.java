@@ -11,7 +11,7 @@ public interface EnquiryService {
 
     /**
      * 由询盘号拿询盘信息
-     * @param enquiryNumber
+     * @param enquirySo
      * @return
      */
     EnquiryDto getByEnqNum( EnquirySo enquirySo);

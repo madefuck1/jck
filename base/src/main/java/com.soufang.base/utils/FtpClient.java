@@ -82,7 +82,7 @@ public class FtpClient {
             }
             ftpClient.setControlEncoding("UTF-8"); // 中文支持
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            ftpClient.enterLocalPassiveMode();
+            ftpClient.enterLocalPassiveMode(); //被动模式
             ftpClient.changeWorkingDirectory(url);
 
             InputStream local = multipartFile.getInputStream();
@@ -97,6 +97,7 @@ public class FtpClient {
             map.put("success", success);
             return map;
         } catch (Exception e) {
+            e.printStackTrace();
             map.put("success", false);
             return map;
         }finally {

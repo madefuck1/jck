@@ -55,4 +55,5 @@ public interface EnquiryFeign {
     //发布报价
     @RequestMapping(value = "core/purchase/purchase",method = RequestMethod.POST)
     int purchase(@RequestBody PurchaseDto purchaseDto);
+
 }

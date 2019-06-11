@@ -1,7 +1,9 @@
 package com.soufang.controller;
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.service.EnquiryProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,5 +35,10 @@ public class EnquiryProductController {
             result.setMessage("删除失败");
         }
         return result;
+    }
+
+    @RequestMapping(value = "getIndexProductList",method = RequestMethod.POST)
+    PageHelp<EnquiryProductDto> getIndexProductList(){
+        return enquiryProductService.getIndexProductList();
     }
 }

@@ -71,7 +71,7 @@
 
     <build>
         <!--打包文件名-->
-        <finalName>soufang-app</finalName>
+        <finalName>soufang-admin</finalName>
         <!--打包方式-->
         <plugins>
             <plugin>
