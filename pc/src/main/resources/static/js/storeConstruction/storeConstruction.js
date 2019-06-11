@@ -57,7 +57,7 @@ $(function () {
         $(".mask-product").off("mouseout")
     });
     /*头部导航*/
-    $("#nav").hover(function () {
+    $("#nav2").hover(function () {
         $(".salenav-mask").show();
 
     })
@@ -292,7 +292,7 @@ function btnNavSave() {
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             if (res.success) {
-                $('#nav').css('background', background);
+                $('#nav2').css('background', background);
                 btnNavCancel();
             } else {
                 alert(res.message)
@@ -382,7 +382,7 @@ function showAllFileName(obj, type) {
 
 function addShopChart(obj) {
     var length = $('#mask-con-2').find('.upload-chart').length;
-    if (length <= 4) {
+    if (length < 4) {
         var html = '<div class="upload upload-chart">\n' +
             '           <div class="am-form-group am-form-file" hidden>\n' +
             '               <input name="fileName" type="file" multiple onchange="changeValue(this)">\n' +
@@ -651,7 +651,7 @@ function initHtmlPage() {
             //------------- 初始首页/公司概况/视频中心化背景颜色----------------
             var storeNavColor = res.storeConstructionDto.storeNavColor;
             if (storeNavColor != null && storeNavColor != '') {
-                $('#nav').css('background', storeNavColor);
+                $('#nav2').css('background', storeNavColor);
             } else {
                 // todo
             }

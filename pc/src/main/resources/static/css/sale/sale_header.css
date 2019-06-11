@@ -81,7 +81,7 @@ h2{
 	margin-left: 20px;
 }
 .icon{
-	background-image: url(../../images/sprites.png);
+	/*background-image: url(../../images/sprites.png);*/
 	background-repeat: no-repeat;
 }
 .icon1{
@@ -339,7 +339,7 @@ h2{
 	box-shadow:0px 5px 10px rgba(0,0,0,0.05);
 	opacity:1;
 	margin: 0 auto;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	font-size: 16px;
 	text-align: center;
 }

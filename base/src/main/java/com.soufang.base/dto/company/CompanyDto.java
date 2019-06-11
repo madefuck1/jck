@@ -1,5 +1,7 @@
 package com.soufang.base.dto.company;
 
+import com.soufang.base.PropertiesParam;
+import com.soufang.base.enums.CompanyTypeEnum;
 import com.soufang.base.utils.DateUtils;
 
 import java.util.Date;
@@ -9,24 +11,35 @@ public class CompanyDto {
     private Long userId;
     private String compName;
     private Integer compType;
+    private String compTypeString;
     private String companyInfo;
     private String compAddress;
     private String compLinker;
     private String compPhone;
     private String compUrls;
+    private String companyURL;
+
     private String compCorporate;
     private String bank;
     private String bankNumber;
     private String longitude;
     private String latitude;
     private Date createTime;
-    private  String  strCreateTime;
+    private String strCreateTime;
+
+    public String getCompTypeString() {
+        return compType == null ? "" : CompanyTypeEnum.getByKey(compType);
+    }
+
+    public String getCompanyURL() {
+        return compUrls == null ? "" : PropertiesParam.file_pre + compUrls;
+    }
 
     public String getStrCreateTime() {
-        if(createTime == null){
+        if (createTime == null) {
             return null;
-        }else {
-            return DateUtils.date2String(createTime,DateUtils.format1);
+        } else {
+            return DateUtils.date2String(createTime, DateUtils.format1);
         }
     }
 
@@ -55,9 +68,7 @@ public class CompanyDto {
     }
 
     public String getCompName() {
-
-            return compName;
-
+        return compName;
     }
 
     public void setCompName(String compName) {
@@ -65,9 +76,7 @@ public class CompanyDto {
     }
 
     public String getCompAddress() {
-
-            return compAddress;
-
+        return compAddress;
     }
 
     public void setCompAddress(String compAddress) {
@@ -75,9 +84,7 @@ public class CompanyDto {
     }
 
     public String getCompLinker() {
-
-            return compLinker;
-
+        return compLinker;
     }
 
     public String getBank() {
@@ -102,7 +109,7 @@ public class CompanyDto {
 
     public String getCompPhone() {
 
-            return compPhone;
+        return compPhone;
 
     }
 
@@ -112,7 +119,7 @@ public class CompanyDto {
 
     public String getCompUrls() {
 
-            return compUrls;
+        return compUrls;
 
     }
 
@@ -122,7 +129,7 @@ public class CompanyDto {
 
     public String getCompCorporate() {
 
-            return compCorporate;
+        return compCorporate;
 
     }
 
@@ -131,9 +138,9 @@ public class CompanyDto {
     }
 
     public String getLongitude() {
-        if(longitude == null){
+        if (longitude == null) {
             return "0";
-        }else {
+        } else {
             return longitude;
         }
     }
@@ -143,10 +150,10 @@ public class CompanyDto {
     }
 
     public String getLatitude() {
-        if(latitude == null){
-            return"0";
-        }
-        else {return latitude;
+        if (latitude == null) {
+            return "0";
+        } else {
+            return latitude;
         }
     }
 

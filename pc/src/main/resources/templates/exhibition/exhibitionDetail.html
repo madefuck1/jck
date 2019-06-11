@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>展会详情</title>
+	<link rel="stylesheet" href="../../static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+	<link rel="stylesheet" href="../../static/css/header.css">
+	<link rel="stylesheet" href="../../static/css/iconfont1.css">
+	<link rel="stylesheet" href="../../static/css/expodetail.css">
+	<script src="../../static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+	<script src="../../static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+	<script src="../../static/js/jquery-3.1.1.js" ></script>
+</head>
+
+<body>
+	
+	
+	<div id="nav">
+		<div class="nav_in">
+			<div class="left">
+			<p>欢迎您  &nbsp;请<a href="javascript">登录</a>  &nbsp;<a href="javascript">注册会员</a></p>
+		</div>
+		<div class="right">
+			<p class="service">客服电话：400-xxx-xxxx</p>
+			<div class="order">
+				<a href="#">我的订单</a>
+				<span class="icon icon1"></span>			
+			</div>
+			<div class="seller">
+				<a href="#">卖家中心</a>
+				<span class="icon icon1"></span>			
+			</div>
+			<div class="shopping">
+				<a href="#">购物车</a>
+				<a href="#">(0)</a>			
+			</div>	
+		</div>
+		
+		</div>
+	</div>
+	<div id="search">
+		<div class="search_in">
+			<div class="logo"></div>
+			<div class="sear">
+				<div class="tog">
+					<div class="tog_in">
+						<a href="#">产品</a>
+						<i class="iconfont iconxialajiantou"></i>
+						<ul>
+							<li><a href="">产品</a></li>
+							<li><a href="">店铺</a></li>
+						</ul>
+					</div>
+					<input type="text" placeholder="布料" class="sousuo">
+				</div>
+				
+				
+				<button type="submit" class="cont"><a href="02 search.html">搜索</a></button>
+				
+			</div>
+		</div>
+	</div>
+	<div id="contain">
+			<div class="list">
+				<div class="list_in">	
+					<div class="list_up">
+							<div class="title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
+							<div class="header">
+							<ul>
+								<li><a href="/">首页</a></li>
+								<li><a href="">现货</a></li>
+								<li><a href="">求购信息</a></li>
+								<li class="cur"><a href="">纺织资讯</a></li>
+								<li><a href="">联系我们</a></li>
+							</ul>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="expoDetail">
+		<ol class="am-breadcrumb">
+		  <li><a href="#">首页</a></li>
+		  <li><a href="#">展会</a></li>
+		  <li><a href="#">详情</a></li>
+		</ol>
+		<div class="expo-table01">
+			<h3>基本信息</h3>
+			<div class="table01-in">
+				<table>
+				<tbody>
+				<input type="hidden" id="exhibitionId" value="${exhibitionId}">
+					<tr>
+						<th>组织机构:</th>
+						<td id="exhibitionOrganization"></td>
+					</tr>
+					<tr>
+						<th>展期:</th>
+						<td><span id="exhibitionStartTime"></span><span id="exhibitionEndTime"></span></td>
+					</tr>
+					<tr>
+						<th>展馆名称:</th>
+						<td id="exhibitionName"></td>
+					</tr>
+					<tr>
+						<th>地区:</th>
+						<td id="exhibitionArea"></td>
+					</tr>
+					<tr>
+						<th>联系人:</th>
+						<td id="exhibitionContact"></td>
+					</tr>
+					<tr>
+						<th>电子邮箱:</th>
+						<td id="exhibitionEmail"></td>
+					</tr>
+					<tr>
+						<th>电话:</th>
+						<td id="exhibitionPhone"></td>
+					</tr>
+					<tr>
+						<th>传真:</th>
+						<td id="exhibitionFax"></td>
+					</tr>
+					
+				</tbody>
+
+			</table>
+			</div>
+			<h3>展会信息</h3>
+			<div class="table01-in">
+				<table>
+				<tbody>
+					<tr>
+						<th>展会主页:</th>
+						<td id="exhibitionIndexUrl"></td>
+					</tr>
+					<tr>
+						<th>所属行业:</th>
+						<td id="assortName">
+						</td>
+					</tr>
+					<tr>
+						<th>展会介绍:</th>
+						<td id="exhibitionIntroduce">
+						</td>
+					</tr>
+					
+				</tbody>
+
+			</table>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
+<script>
+	$(function(){
+	  	//exhibitionId
+		var exhibitionId=$("#exhibitionId").val();
+		var str={exhibitionId:exhibitionId};
+        $.ajax({
+            url : "selExhibitionList",
+            type : "post",
+			data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                $("#exhibitionOrganization").html(v.exhibitionOrganization);
+                $("#exhibitionStartTime").html(v.exhibitionStartTime);
+                $("#exhibitionEndTime").html(v.exhibitionEndTime);
+                $("#exhibitionName").html(v.exhibitionName);
+                $("#exhibitionArea").html(v.exhibitionArea);
+                $("#exhibitionEmail").html(v.exhibitionEmail);
+                $("#exhibitionContact").html(v.exhibitionContact);
+                $("#exhibitionPhone").html(v.exhibitionPhone);
+                $("#exhibitionFax").html(v.exhibitionFax);
+                $("#assortName").html(v.assortDto.assortName);
+                $("#exhibitionIntroduce").html(v.exhibitionIntroduce);
+                $("#exhibitionIndexUrl").html( "<a href='"+v.exhibitionIndexUrl+"'>访问官方网址</a>");
+                });
+                }
+
+        });
+	})
+</script>

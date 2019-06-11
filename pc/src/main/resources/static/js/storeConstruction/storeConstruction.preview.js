@@ -23,7 +23,7 @@ function initHtmlPage() {
          //------------- 初始首页/公司概况/视频中心化背景颜色----------------
          var storeNavColor = res.storeConstructionDto.storeNavColor;
          if (storeNavColor != null && storeNavColor != '') {
-            $('#nav').css('background', storeNavColor);
+            $('#nav2').css('background', storeNavColor);
          } else {
             // todo
          }
@@ -39,12 +39,21 @@ function initHtmlPage() {
          } else {
             // todo
          }
+
          //------------- 初始化公司信息-------------------
          $('#companyName').html(res.companyDto.compName);
          $('#linkPhone').html(res.companyDto.compPhone);
          $('#mainProducts').html(res.shopDto.mainProducts);
          $('#companyAddress').html(res.companyDto.compAddress);
          $('#companyInfo').html(res.companyDto.companyInfo);
+
+         //------------- 初始化公司概况-------------------
+         $('#company_name').html(res.companyDto.compName);
+         $('#company_address').html(res.companyDto.compAddress);
+         $('#company_corporate').html(res.companyDto.compCorporate);
+         $('#company_type').html(res.companyDto.compTypeString);
+         $('#business_scope').html(res.shopDto.businessScope);
+         $('#company_urls').attr("src",res.companyDto.companyURL);
 
          //------------- 初始化分类-------------
          html = '';

@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tog,#search,.sear .sousuo,#contain{
+		background: #fff!important;
+		}
+.tog_in ul li{
+	padding-left: 0px;
+	
+}
+.tog_in ul{
+	
+	margin: 0px;
+}
+#expoDetail{
+	width: 1190px;
+	
+	overflow: hidden;
+	background: #fff;
+	margin: 20px auto;
+	padding: 10px 10px 50px 10px;
+}
+.am-breadcrumb a{
+	color: #333;
+}
+.expo-table01{
+	
+	min-height: 800px;
+	overflow: hidden;
+	padding: 0px 10px
+	
+}
+.expo-table01 h3{
+	font-size: 18px;
+}
+/*.expo-table01 h3 span{
+	width: 4px;
+	height: 18px;
+	background: red;
+	display: inline-block;
+	margin-right: 6px
+}*/
+.table01-in{
+	padding: 0 80px;
+}
+.expo-table01 table{
+	border-collapse:collapse;
+	border-spacing: 0px;
+	width: 100%;
+	
+}
+
+.expo-table01 table th{
+	padding: 12px 32px;
+	text-align: right;
+	vertical-align: middle;
+	font-weight: normal;
+	background: #f5f5f5;
+	border: 1px solid #e6e6e6;
+	font-size: 14px;
+	width: 205px;
+}
+
+.expo-table01 table td{
+	padding: 12px 32px;
+	vertical-align: top;
+	border: 1px solid #e6e6e6;
+	font-size: 14px;
+	text-align: left;
+	font-weight: normal;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

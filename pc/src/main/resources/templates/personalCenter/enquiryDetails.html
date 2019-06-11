@@ -108,21 +108,28 @@
     $(function(){
         var str={enquiryProductId:enquiryProductId};
         $.ajax({
-            url : "selectProductById",
+            url : "selEnquiryByNumber",
             type : "post",
             data:JSON.stringify(str),
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
                 console.log(data);
-                $("#enquiryTitle").val(data.enquiryTitle);
-                $("#userID").val(data.userID);
+                $("#loginName").html(data.loginName);
+                $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
-                $("#createTime").val(longFormatDate(data.createTime));
-                $("#takeDate").val(longFormatDate(data.takeDate));
-                $("#detailStreet").val(data.takeAddress);
-                $("#enquiryRemark").val(data.enquiryRemark);
-                $("#enquiryStatus").val(data.statusMessage);
+                $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
+                $("#strCreateTime").html(data.strCreateTime);
+                $("#strTakeDate").html(data.strTakeDate);
+                $("#statusMessage").html(data.statusMessage);
+                $("#productNumber").html(data.enquiryProductDto[0].productNumber);
+                $("#enquiryProductId").html(data.enquiryProductDto[0].enquiryProductId);
+                $("#productUnit").html(data.enquiryProductDto[0].productUnit);
+                $("#takeAddress").html(data.takeAddress);
+                $("#enquiryRemark").html(data.enquiryRemark);
+                $("#productName").html(data.enquiryProductDto[0].productName);
+                $("#productImage").html("<img src='"+data.enquiryProductDto[0].productImage+"' alt='' STYLE='width:400px;height:400px;'>");
+
                 $.each(data.enquiryProductDto, function (i, v) {
                     //需要循环插入报价信息
                     var whatever = liContent(v);
