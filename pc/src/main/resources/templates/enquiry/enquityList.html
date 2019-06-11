@@ -87,14 +87,16 @@
 	<p style="line-height: 40px;">
 		<span style="font-weight: bold">求购信息</span>
 		<span>(共找到<span style="color: red; font-size: 12px">1180</span>条求购信息)</span>
-		<button type="submit" class="purbutton"><a href="/enquiry/create">发布询价单</a></button>
+		<button type="submit" class="purbutton"><a href="">发布询价单</a></button>
 	</p>
 	<div class="pur-list">
 		<ul id="showAssort">
 			<div id="showMoreAssort">
 			</div>
+			<div id="showMoreAssort2" style="display: none;">
+			</div>
 			<li style="width: 50px;">
-			<a href="#" style="color: #333;">+展开</a>
+			<a href="javascript:void(0);" style="color: #333;" ONCLICK="toLoadMore()">+展开</a>
 		</li>
 		</ul>
 		<div class="plist-down">
@@ -144,9 +146,13 @@
             dataType : "json",
             success : function(data) {
                 $.each(data, function (i, v) {
-                   var whatever = liContentAssort(v);
-                    $("#showMoreAssort").append(whatever);
-
+                    if (i<18){
+                        whatever=liContentAssort(v);
+                        $("#showMoreAssort").append(whatever);
+                    }else{
+                        var endEver=liContentAssort(v);
+                        $("#showMoreAssort2").append(endEver);
+                    }
                 });
             }
         });
@@ -162,6 +168,7 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
+                console.log(data);
                 var whatever="";
               	 $("#showMoreAssorts").html("");
                 if(data.count==0){
@@ -211,7 +218,7 @@
         +"<p>剩余<span style='color: #F58022'>27</span>天</p>"
         +"</td>"
         +"<td>"
-        +"<p>柳州市华绿商贸有限公司</p>"
+        +"<p>"+shopName+"</p>"
         +"</td>"
         +"<td>"
         +"<button class='am-btn am-btn-danger am-radius' onclick='toPurchase(\""+enquiryProductId+"\")'>立即报价</button>"
@@ -225,7 +232,12 @@
 
     //跳转报价页面
     function toPurchase(enquiryProductId){
-	    console.log(enquiryProductId);
-        window.location.href="/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId;
+        window.location.href="/enquiry/toPurchaseDetails?enquiryProductId="+enquiryProductId;
 	}
+
+
+	//加载更多
+	function toLoadMore() {
+        document.getElementById("showMoreAssort2").style.display = "block";
+    }
 </script>
