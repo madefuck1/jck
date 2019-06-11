@@ -228,10 +228,22 @@ public class EnquiryPurchaseController extends BaseController{
      * @param modelMap
      * @return
      */
+    @RequestMapping(value = "toPurchaseDetails", method = RequestMethod.GET)
+    public String toPurchaseDetails(String enquiryProductId,ModelMap modelMap){
+        modelMap.put("enquiryProductId",enquiryProductId);
+        return "enquiry/toPurchaseDetail";
+    }
+
+    /**
+     *  跳转询盘详情页面
+     * @param enquiryProductId
+     * @param modelMap
+     * @return
+     */
     @RequestMapping(value = "toEnquiryDetails", method = RequestMethod.GET)
     public String toEnquiryDetails(String enquiryProductId,ModelMap modelMap){
         modelMap.put("enquiryProductId",enquiryProductId);
-        return "enquiry/toPurchaseDetail";
+        return "personalCenter/enquiryDetails";
     }
 
     //求购列表

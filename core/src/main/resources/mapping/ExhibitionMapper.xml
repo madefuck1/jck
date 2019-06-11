@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.ExhibitionMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Exhibition" >
+    <id column="exhibition_Id" property="exhibitionId" jdbcType="INTEGER" />
+    <result column="exhibition_Name" property="exhibitionName" jdbcType="VARCHAR" />
+    <result column="exhibition_Title" property="exhibitionTitle" jdbcType="VARCHAR" />
+    <result column="assort_id" property="assortid" jdbcType="VARCHAR" />
+    <result column="exhibition_Status" property="exhibitionStatus" jdbcType="VARCHAR" />
+    <result column="exhibition_StartTime" property="exhibitionStartTime" jdbcType="TIMESTAMP" />
+    <result column="exhibition_Area" property="exhibitionArea" jdbcType="VARCHAR" />
+    <result column="exhibition_Photo" property="exhibitionPhoto" jdbcType="VARCHAR" />
+    <result column="exhibition_EndTime" property="exhibitionEndTime" jdbcType="TIMESTAMP" />
+    <result column="exhibition_Contact" property="exhibitionContact" jdbcType="VARCHAR" />
+    <result column="exhibition_Organization" property="exhibitionOrganization" jdbcType="VARCHAR" />
+    <result column="exhibition_Email" property="exhibitionEmail" jdbcType="VARCHAR" />
+    <result column="exhibition_Phone" property="exhibitionPhone" jdbcType="VARCHAR" />
+    <result column="exhibition_Fax" property="exhibitionFax" jdbcType="VARCHAR" />
+    <result column="exhibition_IndexUrl" property="exhibitionIndexUrl" jdbcType="VARCHAR" />
+    <result column="exhibition_Introduce" property="exhibitionIntroduce" jdbcType="VARCHAR" />
+    <collection property="assort" ofType="com.soufang.model.Assort">
+      <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
+      <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    exhibition_Name,exhibition_Title, assort_id,exhibition_StartTime, exhibition_Area, exhibition_Photo, exhibition_EndTime,exhibition_Status,
+    exhibition_Contact,exhibition_Organization,exhibition_Email,exhibition_Phone,exhibition_Fax,exhibition_IndexUrl,exhibition_Introduce
+  </sql>
+  <sql id="Return_column_list" >
+    exhibition_Id,exhibition_Name,exhibition_Title, assort_id,exhibition_StartTime, exhibition_Area, exhibition_Photo, exhibition_EndTime,exhibition_Status,
+    exhibition_Contact,exhibition_Organization,exhibition_Email,exhibition_Phone,exhibition_Fax,exhibition_IndexUrl,exhibition_Introduce
+  </sql>
+  <select id="selExhibition" parameterType="com.soufang.base.search.exhibition.ExhibitionSo" resultMap="BaseResultMap">
+      select * from t_exhibition te left join t_assort ta on te.assort_id=ta.assort_id
+      WHERE 1=1
+      <if test="exhibitionId != null and exhibitionId !=''">
+      AND  te.exhibition_Id =#{exhibitionId}
+      </if>
+  </select>
+
+</mapper>
