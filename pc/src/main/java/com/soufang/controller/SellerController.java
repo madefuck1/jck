@@ -282,11 +282,30 @@ public class SellerController extends BaseController {
 
 
     // begin-------------------- 店铺装修 -----------------------
+
+    /**
+     * 分类管理
+     * @param request
+     * @param model
+     * @return
+     */
+    @MemberAccess
+    @RequestMapping(value = "toStoreAssortManage", method = RequestMethod.GET)
+    public String toStoreAssortManage(HttpServletRequest request, ModelMap model) {
+        return "/sellerCenter/storeAssortManage";
+    }
+
+
+
+    /**
+     * 店铺装修
+     * @param request
+     * @param model
+     * @return
+     */
     @MemberAccess
     @RequestMapping(value = "toStoreConstruction", method = RequestMethod.GET)
     public String toStoreConstruction(HttpServletRequest request, ModelMap model) {
-
-
         return "/sellerCenter/StoreConstruction";
     }
 

@@ -30,4 +30,10 @@ public interface StoreConstructionService {
     Result saveProductSort(StoreExclusiveAssortDto storeExclusiveAssortDto);
 
     Result publish(Long shopId);
+
+    Result delAssortByKey(Long assortId);
+
+    Result registerAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    Result updAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
 }

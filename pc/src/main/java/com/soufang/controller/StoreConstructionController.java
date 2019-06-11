@@ -6,15 +6,14 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.enums.StoreConstructionSortEnum;
+import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
-import com.soufang.vo.StoreConstruction.DetailStoreConstructionVo;
-import com.soufang.vo.StoreConstruction.DetailStoreProductSortReqVo;
-import com.soufang.vo.StoreConstruction.ListStoreMapVo;
-import com.soufang.vo.StoreConstruction.ListStoreProductReqVo;
+import com.soufang.vo.StoreConstruction.*;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -193,7 +192,7 @@ public class StoreConstructionController extends BaseController {
     @ResponseBody
     @MemberAccess
     @RequestMapping(value = "saveShopChart", method = RequestMethod.POST)
-    public BaseVo saveShopChart(MultipartFile[] file, String[] chartLink, HttpServletRequest request) {
+    public ListStoreMapVo saveShopChart(MultipartFile[] file, String[] chartLink, HttpServletRequest request) {
         ShopDto shopInfo = getShopInfo(request);
         Result result;
         StoreConstructionDto dto = storeConstructionFeign.getStoreInfo(shopInfo.getShopId());
@@ -211,7 +210,7 @@ public class StoreConstructionController extends BaseController {
             // 清空轮播图
             storeConstructionFeign.delAllChart(dto.getStoreConstructionId());
         }
-        BaseVo baseVo = save(file, chartLink, dto.getStoreConstructionId());
+        ListStoreMapVo baseVo = save(file, chartLink, dto.getStoreConstructionId());
         return baseVo;
 
     }
@@ -265,7 +264,7 @@ public class StoreConstructionController extends BaseController {
     @RequestMapping(value = "storeASave/{assortIds}", method = RequestMethod.POST)
     @MemberAccess
     @ResponseBody
-    public BaseVo showAssort(HttpServletRequest request, @PathVariable String assortIds) {
+    public Result showAssort(HttpServletRequest request, @PathVariable String assortIds) {
         // 封装数据
         String ids = assortIds.substring(1);
         StoreExclusiveAssortDto storeExclusiveAssortDto = new StoreExclusiveAssortDto();
@@ -275,13 +274,7 @@ public class StoreConstructionController extends BaseController {
         storeExclusiveAssortDto.setIsShow(1);
         // 更新数据
         Result result = storeConstructionFeign.updExclusiveAssort(storeExclusiveAssortDto);
-        BaseVo baseVo = new BaseVo();
-        if (result.isSuccess()) {
-            baseVo.setSuccess(true);
-        } else {
-            baseVo.setSuccess(false);
-        }
-        return baseVo;
+        return result;
     }
 
     /**
@@ -294,7 +287,7 @@ public class StoreConstructionController extends BaseController {
     @RequestMapping(value = "saveProductSort", method = RequestMethod.POST)
     @MemberAccess
     @ResponseBody
-    public BaseVo saveProductSort(HttpServletRequest request, @RequestBody DetailStoreProductSortReqVo reqVo) {
+    public Result saveProductSort(HttpServletRequest request, @RequestBody DetailStoreProductSortReqVo reqVo) {
         // 封装数据
         ShopDto shopInfo = getShopInfo(request);
         StoreExclusiveAssortDto storeExclusiveAssortDto = new StoreExclusiveAssortDto();
@@ -302,14 +295,7 @@ public class StoreConstructionController extends BaseController {
         storeExclusiveAssortDto.setSortName(StoreConstructionSortEnum.getByKey(reqVo.getSortName()));
         storeExclusiveAssortDto.setShopId(shopInfo.getShopId());
         // 更新数据
-        Result result = storeConstructionFeign.saveProductSort(storeExclusiveAssortDto);
-        BaseVo baseVo = new BaseVo();
-        if (result.isSuccess()) {
-            baseVo.setSuccess(true);
-        } else {
-            baseVo.setSuccess(false);
-        }
-        return baseVo;
+        return storeConstructionFeign.saveProductSort(storeExclusiveAssortDto);
     }
 
 
@@ -355,6 +341,61 @@ public class StoreConstructionController extends BaseController {
         Result result = storeConstructionFeign.publish(shop.getShopId());
         return result;
     }
+
+    /**
+     * 分类删除
+     *
+     * @param request
+     * @param assortId
+     * @return
+     */
+    @RequestMapping(value = "delAssort/{assortId}", method = RequestMethod.POST)
+    @MemberAccess
+    @ResponseBody
+    public Result delAssortByKey(HttpServletRequest request, @PathVariable Long assortId) {
+        // 封装数据
+        Result result = storeConstructionFeign.delAssortByKey(assortId);
+        return result;
+    }
+
+
+    /**
+     * 分类添加/更新
+     *
+     * @param request
+     * @param reqVo
+     * @return
+     */
+    @RequestMapping(value = "addOrUpd", method = RequestMethod.POST)
+    @MemberAccess
+    @ResponseBody
+    public Result addOrUpdateAssort(HttpServletRequest request, @RequestBody DetailStoreAssortReqVo reqVo) {
+        Result result = new Result();
+
+        ShopDto shopInfo = getShopInfo(request);
+        if (StringUtils.isBlank(reqVo.getAssortName())) {
+            result.setSuccess(false);
+            result.setMessage("分类名称不能为空");
+            return result;
+        }
+        // 封装数据
+        StoreExclusiveAssortDto storeExclusiveAssortDto = new StoreExclusiveAssortDto();
+        if (reqVo.getExclusiveAssortId() == null) {
+            //添加
+            storeExclusiveAssortDto.setShopId(shopInfo.getShopId());
+            storeExclusiveAssortDto.setAssortName(reqVo.getAssortName());
+            storeExclusiveAssortDto.setIsShow(0);
+            result = storeConstructionFeign.registerAssort(storeExclusiveAssortDto);
+        } else {
+            //更新
+            storeExclusiveAssortDto.setExclusiveAssortId(reqVo.getExclusiveAssortId());
+            storeExclusiveAssortDto.setAssortName(reqVo.getAssortName());
+            result = storeConstructionFeign.updAssort(storeExclusiveAssortDto);
+        }
+        return result;
+    }
+
+
 }
 
 

@@ -43,4 +43,13 @@ public interface StoreConstructionFeign {
 
     @RequestMapping(value = "/core/store/publish", method = RequestMethod.POST)
     Result publish(Long shopId);
+
+    @RequestMapping(value = "/core/store/delAssortByKey", method = RequestMethod.POST)
+    Result delAssortByKey(@RequestBody Long assortId);
+
+    @RequestMapping(value = "/core/store/registerAssort", method = RequestMethod.POST)
+    Result registerAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    @RequestMapping(value = "/core/store/updAssort", method = RequestMethod.POST)
+    Result updAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
 }

@@ -1,10 +1,11 @@
 <!--卖家  左边菜单-->
-<div class="sale_menu" >
+<div class="sale_menu">
     <ul class="am-list admin-sidebar-list" id="collapase-nav-1">
-        <li  class="am-panel">
-            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/sellerCenter/toIndex"> 首 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a>
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/sellerCenter/toIndex"> 首
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a>
         </li>
-        <li  class="am-panel">
+        <li class="am-panel">
             <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/sellerCenter/toSellerCenter">
                 基本信息
             </a>
@@ -27,14 +28,24 @@
                 <li><a href="/sellerCenter/toProductList"> 产品列表 </a></li>
             </ul>
         </li>
-        <li  class="am-panel active">
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#store-const'}">
+                店铺装修 <i class="am-icon-angle-right am-fr am-icon-angle-down"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="store-const">
+                <li><a href="#" onclick="window.open('/sellerCenter/toStoreConstruction')"><span class="am-margin-left-sm"></span>电脑端装修 </a></li>
+                <li><a href="/sellerCenter/toStoreAssortManage"><span class="am-margin-left-sm"></span>分类管理</a></li>
+                <li><a href="#/roleList/0"><span class="am-margin-left-sm"></span>产品分类</a></li>
+            </ul>
+        </li>
+        <li class="am-panel active">
             <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/enquiry/toMyQuote"> 我的报价</a>
         </li>
         <li class="am-panel">
             <a data-am-collapse="{parent: '#collapase-nav-1', target: '#role-nav'}">
                 消息管理 <i class="am-icon-angle-down am-fr am-margin-right"></i>
             </a>
-            <ul class="am-list am-collapse admin-sidebar-sub" id="role-nav" >
+            <ul class="am-list am-collapse admin-sidebar-sub" id="role-nav">
                 <li><a href="#/companyAdd">我的消息 </a></li>
                 <li><a href="/03-2产品列表.html"> 产品列表 </a></li>
             </ul>

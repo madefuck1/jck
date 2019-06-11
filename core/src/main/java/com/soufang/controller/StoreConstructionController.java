@@ -131,29 +131,32 @@ public class StoreConstructionController {
      * 发布
      */
     @RequestMapping(value = "publish", method = RequestMethod.POST)
-    public Result publish(@RequestBody Long shopId){
+    public Result publish(@RequestBody Long shopId) {
         return storeConstructionService.publish(shopId);
     }
 
+    /**
+     * 通过key删除分类
+     *
+     * @param assortId
+     * @return
+     */
+    @RequestMapping(value = "delAssortByKey", method = RequestMethod.POST)
+    public Result delAssortByKey(@RequestBody Long assortId) {
+        Result result = storeConstructionService.delAssortByKey(assortId);
+        return result;
+    }
+
+
+    @RequestMapping(value = "registerAssort", method = RequestMethod.POST)
+    public Result registerAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        return storeConstructionService.registerAssort(storeExclusiveAssortDto);
+    }
+
+    @RequestMapping(value = "updAssort", method = RequestMethod.POST)
+    public Result updAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        return storeConstructionService.updAssort(storeExclusiveAssortDto);
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
