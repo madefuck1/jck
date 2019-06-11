@@ -57,4 +57,5 @@ public interface ProductManageService {
     Result createProductFirst(ProductDto productDto);
 
     PageHelp<ProductDto> getAssortProduct(ProductManageSo so);
+
 }

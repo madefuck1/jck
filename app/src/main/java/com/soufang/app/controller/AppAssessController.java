@@ -53,7 +53,7 @@ public class AppAssessController extends AppBaseController{
         AppVo vo = new AppVo();
         UserDto userInfo = this.getUserInfo(request);
         List<AssessDto> assessDtos = new ArrayList<>();
-        for (AddAssessDetailVo a: addAssessVo.getList()) {
+        for (AddAssessDetailVo a: addAssessVo.getData()) {
             AssessDto assessDto = new AssessDto();
             assessDto.setAssessUserId(userInfo.getUserId());
             assessDto.setOrderNumber(addAssessVo.getOrderNumber());
@@ -61,8 +61,8 @@ public class AppAssessController extends AppBaseController{
             assessDto.setAssessType(a.getAssessType());
             assessDto.setProductId(a.getProductId());
             assessDto.setAssessContent(a.getAssessContent());
-            assessDto.setProductColor(a.getProductColor().substring(3));
-            assessDto.setProductSpec(a.getProductSpec().substring(3));
+            assessDto.setProductColor(a.getProductColor());
+            assessDto.setProductSpec(a.getProductSpec());
             assessDtos.add(assessDto);
         }
         Long orderShopId = appAssessFeign.putAssess(assessDtos);

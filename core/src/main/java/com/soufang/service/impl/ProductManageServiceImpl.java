@@ -350,4 +350,5 @@ public class ProductManageServiceImpl implements ProductManageService {
         pageHelp.setCount(products.size());
         return pageHelp;
     }
+
 }

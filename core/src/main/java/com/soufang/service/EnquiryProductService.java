@@ -1,6 +1,7 @@
 package com.soufang.service;
 
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.page.PageHelp;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface EnquiryProductService {
 
     //删除照片
     int delEnProImgUrl(Long enquiryProductId);
+
+    PageHelp<EnquiryProductDto> getIndexProductList();
 }
