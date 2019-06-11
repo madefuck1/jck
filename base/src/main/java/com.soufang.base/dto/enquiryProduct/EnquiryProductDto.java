@@ -3,6 +3,7 @@ package com.soufang.base.dto.enquiryProduct;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class EnquiryProductDto {
@@ -29,6 +30,7 @@ public class EnquiryProductDto {
     public List<PurchaseDto> getPurchases() {
         return purchases;
     }
+
 
     public void setPurchases(List<PurchaseDto> purchases) {
         this.purchases = purchases;

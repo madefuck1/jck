@@ -1,5 +1,30 @@
+<!--<div id="nav_seller">-->
+	<!--<div class="nav_in">-->
+		<!--<div class="left">-->
+			<!--<p>欢迎您  &nbsp;请<a href="javascript" style="color:#F58022 ">登录</a>  &nbsp;<a href="javascript" style="color:#F58022 ">注册会员</a></p>-->
+		<!--</div>-->
+		<!--<div class="right">-->
+			<!--<div><a href="#">公司首页</a></div>-->
+			<!--<div class="service"><a href="#">客服电话：400-xxx-xxxx</a></div>-->
+			<!--<div class="order">-->
+				<!--<a href="#">我的订单</a>-->
+				<!--<span class="icon icon1"></span>-->
+			<!--</div>-->
+			<!--<div class="seller">-->
+				<!--<a href="#">卖家中心</a>-->
+				<!--<span class="icon icon1"></span>-->
+			<!--</div>-->
+			<!--<div class="shopping">-->
+				<!--<a href="#">购物车</a>-->
+				<!--<a href="#">(0)</a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+	<!--</div>-->
+<!--</div>-->
+
 <!--头 -->
-<div id="nav">
+<div id="nav_seller">
 	<div class="nav_in">
 		<div class="left" id="html_top">
 			<#if isLonIn?? && isLonIn != "N">
@@ -11,21 +36,23 @@
 			<p>欢迎您 &nbsp;请<a href="/user/toLogin">登录</a> &nbsp;<a href="/user/toRegister">注册会员</a></p>
 			</#if>
 		</div>
-        <div class="right">
-            <p class="service"><a href="#">客服电话：400-xxx-xxxx</a></p>
-            <div class="order">
-                <a href="/sellerCenter/toSoldProduct">我的订单</a>
-                <span class="icon icon1"></span>
-            </div>
-            <div class="seller">
-                <a href="/sellerCenter/toIndex">卖家中心</a>
-                <span class="icon icon1"></span>
-            </div>
-            <div class="shopping">
-                <a href="/shopCar/getList">购物车</a>
-                <a id="carCount" href="#">(${shopCarCount!0})</a>
-            </div>
-        </div>
-    </div>
+	<div class="right">
+		<div><a href="#">公司首页</a></div>
+		<p class="service"><a href="#">客服电话：400-xxx-xxxx</a></p>
+		<div class="order">
+			<a href="/sellerCenter/toSoldProduct">我的订单</a>
+			<span class="icon icon1"></span>
+		</div>
+		<div class="seller">
+			<a href="/sellerCenter/toIndex">卖家中心</a>
+			<span class="icon icon1"></span>
+		</div>
+		<div class="shopping">
+			<a href="/shopCar/getList">购物车</a>
+			<a id="carCount" href="#">(10)</a>
+			<!--<a id="carCount" href="#">(${shopCarCount!0})</a>-->
+		</div>
+	</div>
+</div>
 </div>
 

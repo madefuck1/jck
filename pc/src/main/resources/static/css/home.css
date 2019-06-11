@@ -775,7 +775,7 @@ h2{
 .rec_pic dt{
 	width: 210px;
 	height: 210px;
-	background: url(/static/images/pro3.png);
+	background: url(${product.productImage});
 	margin:10px; 
 }
 .rec_pic dd:nth-of-type(1){

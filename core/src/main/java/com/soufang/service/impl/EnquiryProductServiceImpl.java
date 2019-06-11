@@ -1,7 +1,10 @@
 package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.mapper.EnquiryProductMapper;
 import com.soufang.model.EnquiryProduct;
 import com.soufang.service.EnquiryProductService;
@@ -78,6 +81,17 @@ public class EnquiryProductServiceImpl implements EnquiryProductService {
     //删除照片
     public int delEnProImgUrl(Long enquiryProductId){
        return enquiryProductMapper.delEnProImgUrl(enquiryProductId);
+    }
+
+    @Override
+    public PageHelp<EnquiryProductDto> getIndexProductList() {
+        List<EnquiryProductDto> enquiryProductDtos = enquiryProductMapper.getIndexProductList();
+        for (EnquiryProductDto p:enquiryProductDtos) {
+            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
+        }
+        PageHelp<EnquiryProductDto> pageHelp = new PageHelp<>();
+        pageHelp.setData(enquiryProductDtos);
+        return pageHelp;
     }
 
 

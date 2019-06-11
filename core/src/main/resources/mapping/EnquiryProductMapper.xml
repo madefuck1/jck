@@ -10,12 +10,35 @@
     <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
     <result column="product_image" property="productImage" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="resultMap" type="com.soufang.base.dto.enquiryProduct.EnquiryProductDto" >
+    <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+    <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+    <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+    <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+    <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+    <collection property="purchases" ofType="com.soufang.base.dto.purchase.PurchaseDto">
+      <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+      <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+      <result column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+      <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+      <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+      <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+      <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     enquiry_product_id, enquiry_number, product_name, product_assort, product_number, 
     product_unit, product_image
   </sql>
 
-
+  <select id="getIndexProductList" resultMap="resultMap">
+    select t_enquiry_product.*,t_purchase.*
+    from t_enquiry_product INNER JOIN t_purchase on t_enquiry_product.enquiry_product_id = t_purchase.enquiry_product_id
+    ORDER BY enquiry_number DESC LIMIT 16
+  </select>
   <select id="getByEnquiryNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

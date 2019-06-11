@@ -168,116 +168,75 @@
 
 <div id="Recommend">
     <div class="Recommend_row1 row2">
+        <#list EnquiryProductDtos1 as product>
+        <#if product_index < 4 >
         <div class="rec">
             <dl class="rec_pic">
                 <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
+                <dd>${product.productName}</dd>
+                <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
             </dl>
         </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
+        </#if>
+        <#if product_index == 4>
         <div class="rec last">
             <dl class="rec_pic">
                 <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
+                <dd>${product.productName}</dd>
+                <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
             </dl>
         </div>
+        <#break>
+        </#if>
+        </#list>
     </div>
+
     <div class="Recommend_row1 row2">
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec last">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
+    <#list EnquiryProductDtos2 as product>
+    <#if product_index < 4 >
+    <div class="rec">
+        <dl class="rec_pic">
+            <dt></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+        </dl>
     </div>
-    <div class="Recommend_row1 row2">
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
-        <div class="rec last">
-            <dl class="rec_pic">
-                <dt></dt>
-                <dd>网红成品窗帘套餐北欧简约地中海遮光客厅双层卧室雪尼</dd>
-                <dd>¥<span>49</span></dd>
-            </dl>
-        </div>
+    </#if>
+    <#if product_index == 4>
+    <div class="rec last">
+    <dl class="rec_pic">
+        <dt></dt>
+        <dd>${product.productName}</dd>
+        <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+    </dl>
     </div>
+    <#break>
+    </#if>
+    </#list>
+    </div>
+<div class="Recommend_row1 row2">
+    <#list EnquiryProductDtos3 as product>
+    <#if product_index < 4 >
+    <div class="rec">
+        <dl class="rec_pic">
+            <dt></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+        </dl>
+    </div>
+</#if>
+<#if product_index == 4>
+<div class="rec last">
+    <dl class="rec_pic">
+        <dt></dt>
+        <dd>${product.productName}</dd>
+        <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+    </dl>
+</div>
+<#break>
+</#if>
+</#list>
+</div>
 </div>
 
 <#include "sellerCenter/common/foot.html"/>
@@ -340,7 +299,7 @@
             '                </dl>\n' +
             '            </div>\n' +
             '            <div class="pro_top pro_down">\n' +
-            '                <dl class="pro_top1 ">\n' +
+            '                <dl class="pro_top1 one">\n' +
             '                    <dt style="background: url('+data.data[4].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[4].productName+'</dd>\n' +
             '                </dl>\n' +
@@ -352,7 +311,7 @@
             '                    <dt style="background: url('+data.data[6].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[6].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1 ">\n' +
+            '                <dl class="pro_top1 last">\n' +
             '                    <dt style="background: url('+data.data[7].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[7].productName+'</dd>\n' +
             '                </dl>\n' +

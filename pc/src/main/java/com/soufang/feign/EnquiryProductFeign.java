@@ -1,7 +1,8 @@
 package com.soufang.feign;
 
 import com.soufang.base.Result;
-import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.vo.enquiryProduct.EnquiryProductUpdateVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,4 +15,6 @@ public interface EnquiryProductFeign {
     @RequestMapping(value = "core/enquiryProduct/delEnProImgUrl",method = RequestMethod.POST)
     Result delEnProImgUrl(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo);
 
+    @RequestMapping(value = "core/enquiryProduct/getIndexProductList",method = RequestMethod.POST)
+    PageHelp<EnquiryProductDto> getIndexProductList();
 }

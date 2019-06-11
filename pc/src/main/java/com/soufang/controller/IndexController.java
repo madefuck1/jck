@@ -1,12 +1,16 @@
 package com.soufang.controller;
 
 import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.jiguang.JMessageDto;
 import com.soufang.base.jiguang.JMessageUtils;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.EnquiryFeign;
+import com.soufang.feign.EnquiryProductFeign;
+import com.soufang.feign.ProductFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Auther: chen
@@ -26,6 +31,8 @@ public class IndexController extends BaseController {
 
     @Autowired
     EnquiryFeign enquiryFeign;
+    @Autowired
+    EnquiryProductFeign enquiryProductFeign;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String toIndex(ModelMap map){
@@ -34,6 +41,15 @@ public class IndexController extends BaseController {
         enquirySo.setLimit(4);
         PageHelp<EnquiryDto> pageHelp = enquiryFeign.getList(enquirySo);
         map.put("enquiryDtos",pageHelp.getData());
+        PageHelp<EnquiryProductDto> enquiryDtoPageHelp = enquiryProductFeign.getIndexProductList();
+        List<EnquiryProductDto> list = enquiryDtoPageHelp.getData();
+        map.put("EnquiryProductDtos1",list);
+        map.put("EnquiryProductDtos1",list.subList(0,5));
+        map.put("EnquiryProductDtos2",list.subList(0,5));
+        map.put("EnquiryProductDtos3",list.subList(0,5));
+
+       /* List<EnquiryProductDto> list1 = list.subList(0,5);
+        List<EnquiryProductDto> list2 = list.subList(5,10);*/
 
         return "/index";
     }

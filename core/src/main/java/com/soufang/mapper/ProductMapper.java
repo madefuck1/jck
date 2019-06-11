@@ -44,4 +44,5 @@ public interface ProductMapper {
     int deleteProduct(List<Integer> productIds);
 
     List<ProductDto> getAssortProduct(ProductManageSo assortId);
+
 }
