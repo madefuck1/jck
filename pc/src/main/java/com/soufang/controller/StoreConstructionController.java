@@ -3,10 +3,11 @@ package com.soufang.controller;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.enums.StoreConstructionSortEnum;
-import com.soufang.base.utils.DateUtils;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.PcUserFeign;
@@ -396,44 +397,24 @@ public class StoreConstructionController extends BaseController {
     }
 
 
+    /**
+     * 分类添加初始化产品列表
+     *
+     * @param reqVo
+     * @return
+     */
+    @RequestMapping(value = "initProduct", method = RequestMethod.POST)
+    @MemberAccess
+    @ResponseBody
+    public PageHelp<ProductDto> initProduct(@RequestBody ListStoreProductReqVo reqVo) {
+        ProductDto productDto = new ProductDto();
+        productDto.setProductName(reqVo.getProductName());
+        productDto.setAssortType(reqVo.getAssortType());
+        productDto.setMinPrice(reqVo.getMinPrice());
+        productDto.setMaxPrice(reqVo.getMaxPrice());
+        PageHelp<ProductDto> pageHelp = storeConstructionFeign.initProduct(productDto);
+        return null;
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

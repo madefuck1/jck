@@ -2,190 +2,278 @@
 产品分类
 </@override>
 <@override name="css">
-<link rel="stylesheet" href="${contextPath}/css/sale/sort1.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_order.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_personal.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/prosort.css">
 </@override>
 <@override name="body">
 <div id="sale_center">
-    <div class="sale_aside">
-        <#include "/sellerCenter/common/seller.menu.html"/>
-        <div class="sale_con">
-            <ol class="am-breadcrumb">
-                <li><a href="">卖家工作台</a></li>
-                <li><a href="">产品分类</a></li>
-            </ol>
-            <div class="addButon">
-                <button type="button" class="am-btn am-btn-secondary" id="btn-add-assort">添加分类</button>
+   <div class="sale_aside">
+      <#include "/sellerCenter/common/seller.menu.html"/>
+      <div class="sale_con">
+         <ol class="am-breadcrumb">
+            <li><a href="">卖家工作台</a></li>
+            <li><a href="">产品分类</a></li>
+         </ol>
+         <div class="sale_down">
+
+            <!--全部的订单-->
+            <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+               <div class="am-tabs-bd">
+                  <div class="am-tab-panel am-fade am-in">
+                     <div class="topSearch">
+                        <input type="text" placeholder="输入产品名称" id="product-name">
+                        <span style="margin-left: 20px;">价格：</span>
+                        <input type="email" id="min-price">
+                        <span>-</span>
+                        <input type="email" id="max-price">
+                        <select data-am-selected id="assort-type">
+                           <option value="0">全部</option>
+                           <option value="1">未分类</option>
+                           <option value="2">已分类</option>
+                        </select>
+                        <button class="am-btn am-btn-secondary" style="height: 40px;margin-left: 20px;">搜索
+                        </button>
+                     </div>
+                     <div class="am-tab-up">
+                        <button type="button">批量分类</button>
+                     </div>
+                     <div class="order-top">
+                        <div class="th th-number">
+                           <label>
+                              <input type="checkbox">
+                           </label>
+                           <td class="td-inner">全选</td>
+                        </div>
+                        <div class="th th-item">
+                           <td class="td-inner">产品名称</td>
+                        </div>
+                        <div class="th th-operation">
+                           <td class="td-inner">价格</td>
+                        </div>
+                        <div class="th th-amount">
+                           <td class="td-inner">所属分类</td>
+                        </div>
+                        <div class="th th-operation">
+                           <td class="td-inner">操作</td>
+                        </div>
+                     </div>
+
+                     <div class="order-main">
+                        <div class="order-list" id="init-product">
+                           <!--列表-->
+                           <div class="order-status1">
+                              <div class="order-content">
+                                 <div class="order-left">
+                                    <ul class="item-list">
+                                       <li class="td td-number">
+                                          <div class="item-number item-number-margin">
+                                             <label>
+                                                <input type="checkbox">
+                                             </label>
+                                          </div>
+                                       </li>
+                                       <li class="td td-item">
+                                          <div class="item-pic">
+                                             <a href="#" class="J_MakePoint">
+                                                <img src="../images/kouhong.jpg_80x80.jpg"
+                                                     class="itempic J_ItemImg">
+                                             </a>
+                                          </div>
+                                          <div class="item-info">
+                                             <div class="item-basic-info">
+                                                <a href="#">
+                                                   <p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li class="td td-operation">
+                                          <div class="item-operation">
+                                             <p>￥29.90</p>
+
+                                          </div>
+
+                                       </li>
+                                       <li class="td td-amount" style="margin-top: 26px; color: #999;">
+                                          <div class="item-inner">
+                                             <p>暂无分类</p>
+
+                                          </div>
+
+                                       </li>
+                                       <li class="td td-operation">
+                                          <div class="item-operation">
+                                             <span>添加分类</span>
+                                          </div>
+
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div class="sort_down">
-                <table class="am-table am-table-striped am-table-hover">
-                    <thead>
-                    <tr>
-                        <th>
-                            <span>分类名称</span>
-                        </th>
-                        <th>创建时间</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-assort">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 <!--添加和编辑页面-->
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2"
      style="background: #fff; min-height: 200px; overflow: auto; width: 540px">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd" style="font-size: 14px" name="title-assort">分类</div>
-        <div class="sale_cloum1" style="padding-top: 20px">
-            <span class="am-u-sm-4 row1" style="line-height: 37px;">分类名称：</span>
-            <span class="am-u-sm-8 row2">
+   <div class="am-modal-dialog">
+      <div class="am-modal-hd" style="font-size: 14px" name="title-assort">分类</div>
+      <div class="sale_cloum1" style="padding-top: 20px">
+         <span class="am-u-sm-4 row1" style="line-height: 37px;">分类名称：</span>
+         <span class="am-u-sm-8 row2">
             <input type="text" id="assort_name" class="am-form-field" style="width: 200px">
             <input type="hidden" id="exclusive_assort_id" class="am-form-field" style="width: 200px">
             </span>
-        </div>
-        <div class="button" style="text-align: center;padding-top: 30px;">
-            <button onclick="saveAssort();" type="button" class="am-btn am-btn-sm am-btn-secondary"
-                    style="width: 100px;float: none;">保存
-            </button>
-            <button onclick="closeModal()" type="button" class="am-btn am-btn-sm am-btn-default"
-                    style="width: 100px;float: none;">取消
-            </button>
-        </div>
-    </div>
+      </div>
+      <div class="button" style="text-align: center;padding-top: 30px;">
+         <button onclick="saveAssort();" type="button" class="am-btn am-btn-sm am-btn-secondary"
+                 style="width: 100px;float: none;">保存
+         </button>
+         <button onclick="closeModal()" type="button" class="am-btn am-btn-sm am-btn-default"
+                 style="width: 100px;float: none;">取消
+         </button>
+      </div>
+   </div>
 </div>
-
 
 
 <!--确认框-->
 <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd"></div>
-        <div class="am-modal-bd">
-            确定要删除吗？
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-        </div>
-    </div>
+   <div class="am-modal-dialog">
+      <div class="am-modal-hd"></div>
+      <div class="am-modal-bd">
+         确定要删除吗？
+      </div>
+      <div class="am-modal-footer">
+         <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+         <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+      </div>
+   </div>
 </div>
 <!--消息提醒框-->
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="my-message">
-    <div class="am-modal-dialog" style="background: #a5d8a5">
-        <div class="am-modal-hd">
-            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-        </div>
-        <div class="am-modal-bd" id="message-content">
-        </div>
-    </div>
+   <div class="am-modal-dialog" style="background: #a5d8a5">
+      <div class="am-modal-hd">
+         <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+      </div>
+      <div class="am-modal-bd" id="message-content">
+      </div>
+   </div>
 </div>
 </@override>
 <@override name="js">
 <script type="text/javascript">
-    $(function () {
-        initProduct()
-    })
+   $(function () {
+      initProduct()
+   })
 
-    function initProduct() {
-        $.ajax({
-            url: '/store/storeAssort/0',
-            dataType: 'json',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var html = '';
-                if (data.length > 0) {
-                    for (var i = 0; i < data.length; i++) {
-                        html += '<tr>';
-                        html += ' <td style="vertical-align: middle;" name="assort_name">' + data[i].assortName + '</td>\n' +
-                            '     <td style="vertical-align: middle;" name="create_time">' + data[i].createTimeString + '</td>\n' +
-                            '     <td style="vertical-align: middle;">\n' +
-                            '         <input hidden name="exclusive_assort_id" value="' + data[i].exclusiveAssortId + '">\n' +
-                            '         <span style="background: #23ccfe"><a onclick="delAssort(this);" style="cursor: pointer;padding: 5px">删除</a></span>\n' +
-                            '         <span style="background: #23ccfe"><a onclick="editAssort(this);" style="cursor: pointer;padding: 5px">修改</a></span>\n' +
-                            '     </td>';
-                        html += '</tr>';
-                    }
-                } else {
-                    html += '无数据';
-                }
-                $('#table-assort').empty();
-                $('#table-assort').append(html);
+   function initProduct() {
+      var productName=$('#product-name').val();
+      var minPrice = $('#min-price').val();
+      var maxPrice = $('#max-price').val();
+      var assortType = $('#assort-type').val();
+      var param={
+         productName:productName,
+         minPrice:minPrice,
+         maxPrice:maxPrice,
+         assortType:assortType,
+      }
+      $.ajax({
+         url: '/store/initProduct',
+         dataType: 'json',
+         type: 'POST',
+         data: JSON.stringify(param),
+         contentType: "application/json; charset=utf-8",
+         success: function (data) {
+            var html = '';
+            if (data.length > 0) {
+               for (var i = 0; i < data.length; i++) {
+               }
+            } else {
+               html += '无数据';
             }
-        });
-    }
+            $('#table-assort').empty();
+            $('#table-assort').append(html);
+         }
+      });
+   }
 
-    $('#btn-add-assort').click(function () {
-        $('#doc-modal-2').modal('open');
-        $('#assort_name').val("");
-        $('#exclusive_assort_id').val("");
-    });
+   $('#btn-add-assort').click(function () {
+      $('#doc-modal-2').modal('open');
+      $('#assort_name').val("");
+      $('#exclusive_assort_id').val("");
+   });
 
-    function delAssort(obj) {
-        var exclusiveAssortId = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
-        $('#my-confirm').modal({
-            relatedElement: this,
-            onConfirm: function () {
-                $.ajax({
-                    url: '/store/delAssort/' + exclusiveAssortId,
-                    dataType: 'json',
-                    type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data.success) {
-                            initAssort();
-                        }
-                    }
-                })
-            },
-            onCancel: function () {
+   function delAssort(obj) {
+      var exclusiveAssortId = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
+      $('#my-confirm').modal({
+         relatedElement: this,
+         onConfirm: function () {
+            $.ajax({
+               url: '/store/delAssort/' + exclusiveAssortId,
+               dataType: 'json',
+               type: 'POST',
+               contentType: "application/json; charset=utf-8",
+               success: function (data) {
+                  if (data.success) {
+                     initAssort();
+                  }
+               }
+            })
+         },
+         onCancel: function () {
+         }
+      });
+   }
+
+   function editAssort(obj) {
+      $('#doc-modal-2').modal('open');
+      var exclusive_assort_id = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
+      var assort_name = $(obj).parents('tr').find('[name=assort_name]').html();
+      $('#assort_name').val(assort_name);
+      $('#exclusive_assort_id').val(exclusive_assort_id);
+   }
+
+   function saveAssort() {
+      if ($('#assort_name').val() == '') {
+         $('#message-content').html("分类名不能为空！");
+         $('#my-message').modal('open');
+         return;
+      }
+      var param = {
+         assortName: $('#assort_name').val(),
+         exclusiveAssortId: $('#exclusive_assort_id').val()
+      }
+      $.ajax({
+         url: '/store/addOrUpd/',
+         dataType: 'json',
+         type: 'POST',
+         data: JSON.stringify(param),
+         contentType: "application/json; charset=utf-8",
+         success: function (data) {
+            if (data.success) {
+               closeModal();
+               initAssort();
+            } else {
+               $('#my-message').modal('open');
             }
-        });
-    }
+         }
+      })
+   }
 
-    function editAssort(obj) {
-        $('#doc-modal-2').modal('open');
-        var exclusive_assort_id = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
-        var assort_name = $(obj).parents('tr').find('[name=assort_name]').html();
-        $('#assort_name').val(assort_name);
-        $('#exclusive_assort_id').val(exclusive_assort_id);
-    }
-
-    function saveAssort() {
-        if ($('#assort_name').val() == '') {
-            $('#message-content').html("分类名不能为空！");
-            $('#my-message').modal('open');
-            return;
-        }
-        var param = {
-            assortName: $('#assort_name').val(),
-            exclusiveAssortId: $('#exclusive_assort_id').val()
-        }
-        $.ajax({
-            url: '/store/addOrUpd/',
-            dataType: 'json',
-            type: 'POST',
-            data: JSON.stringify(param),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                if (data.success) {
-                    closeModal();
-                    initAssort();
-                } else {
-                    $('#my-message').modal('open');
-                }
-            }
-        })
-    }
-
-    function closeModal() {
-        $('#doc-modal-2').modal({
-            closable: false
-        });
-    }
+   function closeModal() {
+      $('#doc-modal-2').modal({
+         closable: false
+      });
+   }
 </script>
 </@override>
 <@extends name="/common/layout/base.sellerCenter.html"/>

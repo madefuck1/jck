@@ -284,20 +284,6 @@ public class SellerController extends BaseController {
     // begin-------------------- 店铺装修 -----------------------
 
     /**
-     * 分类管理
-     * @param request
-     * @param model
-     * @return
-     */
-    @MemberAccess
-    @RequestMapping(value = "toStoreAssortManage", method = RequestMethod.GET)
-    public String toStoreAssortManage(HttpServletRequest request, ModelMap model) {
-        return "/sellerCenter/storeAssortManage";
-    }
-
-
-
-    /**
      * 店铺装修
      * @param request
      * @param model
@@ -309,6 +295,29 @@ public class SellerController extends BaseController {
         return "/sellerCenter/StoreConstruction";
     }
 
+    /**
+     * 分类管理
+     * @param request
+     * @param model
+     * @return
+     */
+    @MemberAccess
+    @RequestMapping(value = "toStoreAssortManage", method = RequestMethod.GET)
+    public String toStoreAssortManage(HttpServletRequest request, ModelMap model) {
+        return "/sellerCenter/storeAssortManage";
+    }
+
+    /**
+     * 产品分类
+     * @param request
+     * @param model
+     * @return
+     */
+    @MemberAccess
+    @RequestMapping(value = "toStoreProductAssortManage", method = RequestMethod.GET)
+    public String toStoreProductAssortManage(HttpServletRequest request, ModelMap model) {
+        return "/sellerCenter/storeProductAssortManage";
+    }
 
     // end---------------------------------------------------
 }
