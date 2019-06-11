@@ -382,7 +382,7 @@ function showAllFileName(obj, type) {
 
 function addShopChart(obj) {
     var length = $('#mask-con-2').find('.upload-chart').length;
-    if (length <= 4) {
+    if (length < 4) {
         var html = '<div class="upload upload-chart">\n' +
             '           <div class="am-form-group am-form-file" hidden>\n' +
             '               <input name="fileName" type="file" multiple onchange="changeValue(this)">\n' +
