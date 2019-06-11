@@ -57,7 +57,7 @@ $(function () {
         $(".mask-product").off("mouseout")
     });
     /*头部导航*/
-    $("#nav").hover(function () {
+    $("#nav2").hover(function () {
         $(".salenav-mask").show();
 
     })
@@ -292,7 +292,7 @@ function btnNavSave() {
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             if (res.success) {
-                $('#nav').css('background', background);
+                $('#nav2').css('background', background);
                 btnNavCancel();
             } else {
                 alert(res.message)
@@ -651,7 +651,7 @@ function initHtmlPage() {
             //------------- 初始首页/公司概况/视频中心化背景颜色----------------
             var storeNavColor = res.storeConstructionDto.storeNavColor;
             if (storeNavColor != null && storeNavColor != '') {
-                $('#nav').css('background', storeNavColor);
+                $('#nav2').css('background', storeNavColor);
             } else {
                 // todo
             }

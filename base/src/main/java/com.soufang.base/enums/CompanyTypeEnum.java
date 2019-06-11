@@ -34,4 +34,13 @@ public enum CompanyTypeEnum {
         this.value = value;
         this.message = message;
     }
+    public static String getByKey(Integer value){
+        for (CompanyTypeEnum companyTypeEnum : CompanyTypeEnum.values()) {
+            if(companyTypeEnum.value == value){
+                return companyTypeEnum.getMessage();
+            }
+        }
+        return  null ;
+    }
+
 }
