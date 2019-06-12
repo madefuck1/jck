@@ -2,6 +2,7 @@ package com.soufang.base.dto.product;
 
 import com.soufang.base.PageBase;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.StaticContant;
 import lombok.Getter;
@@ -85,11 +86,12 @@ public class ProductDto extends PageBase implements Serializable {
     private ProductStatisticsDto productStatisticsDto;
 
     //封装spec
-    private List<SpecDto> specDtoList ;
+    private List<SpecDto> specDtoList;
 
     public String getCreateTimeString() {
         return createTime == null ? StaticContant.defaultDate : DateUtils.date2String(createTime, DateUtils.format1);
     }
+
     public String getProductUrl() {
         return PropertiesParam.file_pre + productImage;
     }
@@ -115,7 +117,7 @@ public class ProductDto extends PageBase implements Serializable {
 //    // 销量排序  （0:正序;1:倒序）
 //    private Integer sellSort;
 //     分类id
-     private String assortIds;
+    private String assortIds;
     // 起始价格
     //    private BigDecimal minPrice;
     //    // 结束价格
@@ -129,4 +131,13 @@ public class ProductDto extends PageBase implements Serializable {
 
     // app 产品对应最低价格
     private BigDecimal productPrice;
+
+    // 最大价格
+    private BigDecimal maxPrice;
+    // 最小价格
+    private BigDecimal minPrice;
+    // 分类类型 0:全部；1：未分类；2：已分类
+    private Integer assortType;
+    // 店铺产品对应分类
+    private List<StoreProductAssortDto> storeProductAssortDtoList;
 }

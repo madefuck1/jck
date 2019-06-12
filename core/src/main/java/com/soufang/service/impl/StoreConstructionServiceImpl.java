@@ -5,6 +5,7 @@ import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.storeConstruction.StoreCurouselMapDto;
 import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.StoreConstructionMapper;
 import com.soufang.mapper.StoreCurouselMapMapper;
 import com.soufang.mapper.StoreExclusiveAssortMapper;
@@ -145,27 +146,30 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
         }
         return result;
     }
+
+    @Override
+    public Result delAssortByKey(Long assortId) {
+        Result result = new Result();
+        result.setSuccess(storeExclusiveAssortMapper.deleteByPrimaryKey(assortId) > 0 ? true : false);
+        return result;
+    }
+
+    @Override
+    public Result registerAssort(StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        StoreExclusiveAssort storeExclusiveAssort = new StoreExclusiveAssort();
+        BeanUtils.copyProperties(storeExclusiveAssortDto, storeExclusiveAssort);
+        storeExclusiveAssort.setCreateTime(DateUtils.getToday());
+        Result result = new Result();
+        result.setSuccess(storeExclusiveAssortMapper.insert(storeExclusiveAssort) > 0 ? true : false);
+        return result;
+    }
+
+    @Override
+    public Result updAssort(StoreExclusiveAssortDto storeExclusiveAssortDto) {
+        StoreExclusiveAssort storeExclusiveAssort = new StoreExclusiveAssort();
+        BeanUtils.copyProperties(storeExclusiveAssortDto, storeExclusiveAssort);
+        Result result = new Result();
+        result.setSuccess(storeExclusiveAssortMapper.updateByPrimaryKeySelective(storeExclusiveAssort) > 0 ? true : false);
+        return result;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

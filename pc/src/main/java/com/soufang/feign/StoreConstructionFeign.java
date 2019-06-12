@@ -1,7 +1,9 @@
 package com.soufang.feign;
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.*;
+import com.soufang.base.page.PageHelp;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,4 +45,16 @@ public interface StoreConstructionFeign {
 
     @RequestMapping(value = "/core/store/publish", method = RequestMethod.POST)
     Result publish(Long shopId);
+
+    @RequestMapping(value = "/core/store/delAssortByKey", method = RequestMethod.POST)
+    Result delAssortByKey(@RequestBody Long assortId);
+
+    @RequestMapping(value = "/core/store/registerAssort", method = RequestMethod.POST)
+    Result registerAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    @RequestMapping(value = "/core/store/updAssort", method = RequestMethod.POST)
+    Result updAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    @RequestMapping(value = "/core/store/initProduct", method = RequestMethod.POST)
+    PageHelp<ProductDto> initProduct(ProductDto productDto);
 }

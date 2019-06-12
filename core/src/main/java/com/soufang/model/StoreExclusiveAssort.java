@@ -1,5 +1,7 @@
 package com.soufang.model;
 
+import java.util.Date;
+
 public class StoreExclusiveAssort {
     private Long exclusiveAssortId;
 
@@ -10,6 +12,8 @@ public class StoreExclusiveAssort {
     private String sortName;
 
     private Integer isShow;
+
+    private Date createTime;
 
     public Long getExclusiveAssortId() {
         return exclusiveAssortId;
@@ -49,5 +53,13 @@ public class StoreExclusiveAssort {
 
     public void setIsShow(Integer isShow) {
         this.isShow = isShow;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

@@ -318,7 +318,7 @@ function changeBackgroundColor(obj) {
 }
 
 // 双击修改内容
-function dblclickP(obj) {
+function dblclickP(obj,type) {
     $(obj).parent().find('.pro1').css('background-color', "#fff");
     $(obj).css('background-color', "#23ccfe");
     setTimeout(function () {
@@ -449,7 +449,7 @@ function searchProduct() {
             var html = '';
             if (res.length > 0) {
                 for (var i = 0; i < res.length; i++) {
-                    html += '<div class="pro1" onclick="changeBackgroundColor(this);" ondblclick="dblclickP(this);" >\n' +
+                    html += '<div class="pro1" onclick="changeBackgroundColor(this);" ondblclick="dblclickP(this,1);" >\n' +
                         '        <input hidden name="productId" value="' + res[i].productDto.productId + '">\n' +
                         '        <div class="prod am-fl">\n' +
                         '            <span class="pro-cloum1"></span>\n' +
