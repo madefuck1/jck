@@ -6,6 +6,7 @@
 <link href="${contextPath}/css/purch.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
 <link href="${contextPath}/css/infstyle.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_index.css">
 </@override>
 <@override name="body">
 <div class="center">
@@ -62,13 +63,13 @@
                                 <input   type="hidden" id="enquiryProductId" name="enquiryProductId"  />
                             </div>
                         </div>
-                        <div class="am-form-group am-form-group-height">
-                            <label class="am-form-label">求购图片</label>
-                            <div class="am-form-content">
-                                <input id="file" type="file">
+                        <div class="sale_cloum1" style="height: 110px;">
+                            <label class="am-form-label" >求购图片</label>
+                            <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
+                                <img class="sale_pic3" onclick="company(this)">
+                                <input type="file" id="file" style="display: none" onchange="showCompany(this)">
                             </div>
                         </div>
-                        <div id="showPhoto"></div>
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">求购量</label>
                             <div class="am-form-content">
@@ -334,6 +335,18 @@
         }
         return day;
     }
+    function company(obj){
+        $(obj).parent().find("input[type=file]").click();
+    }
+
+    function showCompany(obj){
+        var reads= new FileReader();
+        var file=obj.files[0];
+        reads.readAsDataURL(file);
+        reads.onload = function (e) {
+            $(obj).parent().find("img").first().attr("src",this.result);
+        };
+    }
 </script>
 </@override>
-<@extends name="/common/layout/base.personalCenter.html"/>
+<@extends name="/common/layout/base.sellerCenter.html"/>
