@@ -100,6 +100,8 @@
   </select>
 
   <!--查询询盘列表数据/没有存贮增加询盘时用户的商铺信息-->
+  <!--对报价截止日期查询做判断-需要传两个值-1.endTime参数是什么查询-2.orderType判断是什么排序方式-->
+  <!--根据orderType参数排序-1.有值则是动态倒正查询-2.没值则是所有公用查询方式-->
   <select id="getList" resultMap="ResultMap"  parameterType="com.soufang.base.search.enquiry.EnquirySo">
     select
       *
@@ -109,7 +111,7 @@
       LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
       LEFT JOIN t_shop ts on ts.user_id=te.user_id
     where
-      te.enquiry_status!=0 and end_time > (select now())
+      te.enquiry_status!=0 and te.end_time > (select now())
     <if test="userId != null and userId !=''">
       AND  te.user_id =#{userId}
     </if>
@@ -122,7 +124,23 @@
     <if test="enquiryStatus != null and enquiryStatus != ''">
       and te.enquiry_status = #{enquiryStatus}
     </if>
-    order by  te.create_time DESC LIMIT #{page},#{limit};
+      ORDER BY
+      <choose>
+        <when test="endTimeSort != '' and endTimeSort !=''">
+            te.end_time ${orderType}
+        </when>
+        <otherwise>
+          <choose>
+            <when test="orderType != '' and orderType !=null">
+              te.create_time ${orderType}
+            </when>
+             <otherwise>
+               te.create_time DESC
+             </otherwise>
+          </choose>
+        </otherwise>
+      </choose>
+     LIMIT #{page},#{limit};
   </select>
 
   <select id="getMyQuoteCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.enquiry.EnquirySo">
