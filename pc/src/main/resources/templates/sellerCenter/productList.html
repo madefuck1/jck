@@ -223,7 +223,7 @@
 '                                       </li>\n' +
 '                                       <li class="td td-operation">\n' +
 '                                            <div class="item-operation">\n' +
-'                                                 <p onclick="getProductInfo('+data.data[i].productId+')">编辑产品</p>\n' +
+'                                                 <p onclick="getProductInfo('+data.data[i].productId+')">产品详情</p>\n' +
 '                                                 <p style="line-height: 30px;" onclick="getDownNow('+data.data[i].productId+',pageNo,isUp)">立即下架</p>\n' +
 '                                            </div>\n' +
 '                                        </li>';
@@ -236,7 +236,7 @@
 '                                        </li>\n' +
 '                                        <li class="td td-operation">\n' +
 '                                            <div class="item-operation">\n' +
-'                                                 <p>编辑产品</p>\n' +
+'                                                 <p onclick="getProductInfo('+data.data[i].productId+')">产品详情</p>\n' +
 '                                                 <p style="line-height: 30px;"onclick="putUpNow('+data.data[i].productId+',pageNo,isUp)">立即上架</p>\n' +
 '                                            </div>\n' +
 '                                        </li>';
@@ -264,7 +264,8 @@
 
     //编辑产品
     function getProductInfo(productId) {
-        window.location.href = '/product/toDetail?productId='+productId;
+        window.open('/product/toDetail?productId='+productId,'_blank');
+        /*window.location.href = "/product/detail?&productId=" + productId;*/
     }
 
     //立即下架
