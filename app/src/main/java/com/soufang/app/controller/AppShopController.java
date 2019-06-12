@@ -41,7 +41,7 @@ public class AppShopController extends AppBaseController {
         so.setPage(reqVo.getPage());
         so.setLimit(reqVo.getLimit());
         // 查询数据
-        List<ShopDto> shopDtos = appShopFeign.appGetList(so);
+        List<ShopDto> shopDtos = appShopFeign.appGetList(so).getData();
         ListShopVo vo = new ListShopVo();
         vo.setData(shopDtos);
         return vo;

@@ -8,6 +8,7 @@
         <link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="${contextPath}/css/iconfont.css">
         <link rel="stylesheet" href="${contextPath}/css/header.css">
+
         <@block name="css"/>
     </head>
     <body>
@@ -16,6 +17,7 @@
         <#include "/common/includes/include.contain.html"/>
         <b class="line"></b>
         <@block name="body"/>
+        <#include "/common/includes/include.footer.html"/>
 
     </body>
     <#include "/common/includes/include.script.html"/>

@@ -1,7 +1,9 @@
 package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.mapper.ShopMapper;
 import com.soufang.model.Shop;
@@ -102,8 +104,15 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<ShopDto> appGetList(ShopSo shopSo) {
-        return shopMapper.appGetList(shopSo);
+    public PageHelp<ShopDto> appGetList(ShopSo shopSo) {
+        PageHelp<ShopDto> pageHelp = new PageHelp<>();
+        List<ShopDto> list = shopMapper.appGetList(shopSo);
+        for (int i = 0; i < list.size() ; i++) {
+            list.get(i).setAvatarUrl(PropertiesParam.file_pre+list.get(i).getAvatarUrl());
+        }
+        pageHelp.setData(list);
+        pageHelp.setCount(shopMapper.appGetCount(shopSo));
+        return pageHelp;
     }
 
     @Override

@@ -19,7 +19,7 @@ $("#btn_search").on("click", function () {
     if (searchType == 1) {
         window.location.href = "/product/search?&searchProductName=" + searchProductName;
     } else if (searchType == 2) {
-        window.location.href = "/product/search?&searchProductName=" + searchProductName;
+        window.location.href = "/shop/getList?&shopName=" + searchProductName;
     }
 });
 
