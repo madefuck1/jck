@@ -41,6 +41,10 @@ public class EnquiryController extends BaseController {
         enquirySo.setPage(enquirySo.getPage());
         enquirySo.setShopId(shopInfo.getShopId());
         enquirySo.setLimit(5);
+        if(enquirySo.getShopId() == null){
+            vo.setCount(0);
+             return vo;
+        }
         PageHelp<EnquiryDto> pageHelp = enquiryFeign.getMyQuoteList(enquirySo);
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());

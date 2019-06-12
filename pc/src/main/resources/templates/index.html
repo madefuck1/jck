@@ -146,7 +146,7 @@
     <a href=""><img src="${contextPath}/images/middle-banner.png" alt=""></a>
 </div>
 
-<div id="vedio">
+<!--<div id="vedio">
     <h3>视频中心</h3>
     <div class="vedio_down">
         <div class="vedio_left">
@@ -162,7 +162,7 @@
             <div class="vedio_one"></div>
         </div>
     </div>
-</div>
+</div>-->
 <div id="bottomBanner">
     <a href=""><img src="${contextPath}/images/banner-bottom.png" alt=""></a>
 </div>
@@ -240,7 +240,6 @@
 </div>
 </div>
 
-<#include "sellerCenter/common/foot.html"/>
 </@override>
 
 <@override name="js">
@@ -258,10 +257,11 @@
     });
 
     $(document).ready(function() {
-        $(".row_1").click(function() {
-            $(this).prevAll().children('div').removeClass("row1");
-            $(this).nextAll().children('div').removeClass("row1");
-            $(this).children('div').addClass("row1");
+        $(".row_1 a").click(function() {
+            $(this).prevAll().removeClass(" row1");
+            $(this).nextAll().removeClass(" row1");
+
+            $(this).addClass(" row1");
         });
     });
 
@@ -343,7 +343,7 @@
     }
     //查看全部询盘
     function getAllEnquiry(page,limit) {
-        window.location.href = '';
+        window.location.href = '/personalCenter/toEnquiryManage';
     }
 
 </script>
