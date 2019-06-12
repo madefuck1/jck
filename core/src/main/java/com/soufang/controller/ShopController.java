@@ -153,10 +153,10 @@ public class ShopController {
     }
 
     @RequestMapping(value = "appGetList",method = RequestMethod.POST)
-    public List<ShopDto> appGetList(@RequestBody ShopSo shopSo){
+    public PageHelp<ShopDto> appGetList(@RequestBody ShopSo shopSo){
         shopSo.setPage(shopSo.getLimit()*(shopSo.getPage() - 1));
-        List<ShopDto> list = shopService.appGetList(shopSo);
-        return list;
+        PageHelp<ShopDto> pageHelp = shopService.appGetList(shopSo);
+        return pageHelp;
     }
 
     @RequestMapping(value = "updateShop",method = RequestMethod.POST)

@@ -1,0 +1,101 @@
+<@override name="title">
+首页
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/home.css">
+<link rel="stylesheet" href="${contextPath}/css/header.index.css">
+<link rel="stylesheet" href="${contextPath}/css/search-shop.css">
+<link rel="stylesheet" href="${contextPath}/Pagination/css/jquery.pagination.css">
+
+<style>
+    #contain,.list{
+        height: auto;
+    }
+</style>
+</@override>
+
+<@override name="body">
+<#include "/common/includes/include.contain.html"/>
+<div id="search-shop">
+    <!--<div class="shop-up">-->
+        <!--<ul>-->
+            <!--<li><a href="">单位性质：</a></li>-->
+            <!--<li class="first"><a href="">全部</a></li>-->
+            <!--<li><a href="">企业</a></li>-->
+            <!--<li><a href="">个体工商户</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="shop-down" id="shopList">
+    </div>
+    <!--分页 -->
+    <div id="pagination" style="text-align: center"></div>
+</div>
+
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="${contextPath}/Pagination/js/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var shopName = "${searchProductName!}";
+        init(1,shopName);
+    })
+
+    function init(page,shopName){
+        var data = {page:1,limit:20,shopName:shopName};
+        $.ajax({
+            url: "/shop/getShopList",
+            type: "post",
+            data: JSON.stringify(data),
+            contentType:"application/json",
+            success: function (data) {
+                var html = "";
+                for (var i = 0; i < data.list.length; i++) {
+                    if(i % 3 == 2){
+                        html += '        <div class="shop-down1" style="margin-right: 0px;">\n' ;
+                    }else {
+                        html += '        <div class="shop-down1">\n' ;
+                    }
+                    html +=     '            <dl>\n' +
+                        '                <dt><img src="'+data.list[i].avatarUrl+'" alt="" width="80"></dt>\n' +
+                        '                <dd><h4>'+ data.list[i].shopName +'</h4></dd>\n' +
+                        '                <dd>\n' +
+                        '                    <p>\n' +
+                        '                        <span>经营类目：</span>\n' +
+                        '                        <span>'+ data.list[i].mainProducts +'</span>\n' +
+                        '                    </p>\n' +
+                        '                    <p>\n' +
+                        '                        <span>经营范围：</span>\n' +
+                        '                        <span>'+ data.list[i].businessScope +'</span>\n' +
+                        '                    </p>\n' +
+                        '                </dd>\n' +
+                        '                <dd><button>进入店铺</button></dd>\n' +
+                        '            </dl>\n' +
+                        '        </div>' ;
+                }
+                $("#shopList").empty();
+                $("#shopList").append(html);
+                $("#pagination").pagination(data.count, {   //total(一共多少条记录)不能少
+                    callback: PageCallback,
+                    prev_text: '上一页',
+                    next_text: '下一页',
+                    items_per_page: 40,             //每页显示最大条数
+                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                    current_page:page
+                });
+            }
+        });
+    }
+
+    function PageCallback(index) {
+        Init(index);
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

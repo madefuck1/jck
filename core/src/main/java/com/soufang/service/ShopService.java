@@ -1,6 +1,7 @@
 package com.soufang.service;
 
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
 
 
@@ -61,7 +62,7 @@ public interface ShopService {
     //通过userId获取店铺信息
     ShopDto getByUserId(Long userId);
 
-    List<ShopDto> appGetList(ShopSo shopSo);
+    PageHelp<ShopDto> appGetList(ShopSo shopSo);
 
     void updateShop(ShopDto shopDto);
 }
