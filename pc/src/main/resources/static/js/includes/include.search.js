@@ -13,7 +13,7 @@ function changeV(v) {
     $('#search_productName').focus()
 }
 
-$("#btn_search").on("click", function () {
+function btn_search(){
     var searchType = $("#search_type").val();
     var searchProductName = $("#search_productName").val();
     if (searchType == 1) {
@@ -21,7 +21,7 @@ $("#btn_search").on("click", function () {
     } else if (searchType == 2) {
         window.location.href = "/shop/getList?&shopName=" + searchProductName;
     }
-});
+}
 
 $(".tog_in").find('li').hover(function () {
     $(this).css("background-color", "#F58022");
