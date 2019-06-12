@@ -56,5 +56,8 @@ public interface StoreConstructionFeign {
     Result updAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto);
 
     @RequestMapping(value = "/core/store/initProduct", method = RequestMethod.POST)
-    PageHelp<ProductDto> initProduct(ProductDto productDto);
+    PageHelp<ProductDto> initProduct(@RequestBody ProductDto productDto);
+
+    @RequestMapping(value = "/core/store/saveProductAssort", method = RequestMethod.POST)
+    Result saveProductAssort(StoreProductAssortDto productAssortDto);
 }

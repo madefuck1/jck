@@ -142,11 +142,11 @@
     <select id="searchProduct" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto"
             resultMap="ResultMap">
         select * from (select * from t_store_product_assort
-            where shop_id = #{shopId}
-            <if test="exclusiveAssortId != null and exclusiveAssortId != 0">
-                and exclusive_assort_id = #{exclusiveAssortId}
-            </if>
-            ) T1
+        where shop_id = #{shopId}
+        <if test="exclusiveAssortId != null and exclusiveAssortId != 0">
+            and exclusive_assort_id = #{exclusiveAssortId}
+        </if>
+        ) T1
         join t_product T2 on T1.product_id = T2.product_id
         join t_product_statistics T3 on T2.product_id =T3.product_id
         <if test="productName != null and productName != ''">
@@ -154,5 +154,116 @@
         </if>
     </select>
 
+    <resultMap id="ProductResultMap" type="com.soufang.base.dto.product.ProductDto">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assortName" property="assortName" jdbcType="VARCHAR"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="kv1" property="kv1" jdbcType="VARCHAR"/>
+        <result column="kv2" property="kv2" jdbcType="VARCHAR"/>
+        <result column="kv3" property="kv3" jdbcType="VARCHAR"/>
+        <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
+        <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
+        <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
+
+        <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
+            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT"/>
+            <result column="browse_number" property="browseNumber" jdbcType="BIGINT"/>
+            <result column="deal_number" property="dealNumber" jdbcType="BIGINT"/>
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+            <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="storeProductAssortDtoList"
+                    ofType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto">
+            <id column="store_product_assort_id" property="storeProductAssortId" jdbcType="BIGINT"/>
+            <result column="exclusive_assort_id" property="exclusiveAssortId" jdbcType="BIGINT"/>
+            <result column="assort_name" property="assortName" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
+    <select id="initProduct" parameterType="com.soufang.base.dto.product.ProductDto" resultMap="ProductResultMap">
+        select t1.*, t2.store_product_assort_id,
+        t2.exclusive_assort_id,
+        getStoreAssortName (t2.exclusive_assort_id) AS assort_name,
+        t3.* from (
+        select * from t_product where shop_id = #{shopId}
+        <choose>
+            <when test="assortType==1">
+                and product_id not in (select product_id from t_store_product_assort where shop_id = 1)
+            </when>
+            <when test="assortType==2">
+                and product_id in (select product_id from t_store_product_assort where shop_id = 1)
+            </when>
+        </choose>
+        limit #{page},#{limit}
+        ) t1
+        LEFT JOIN t_store_product_assort t2 ON t1.product_id = t2.product_id AND t1.shop_id = t2.shop_id
+        LEFT JOIN t_product_statistics t3 ON t1.product_id = t3.product_id
+        where 1=1
+        <if test="productName!=null and productName!=''">
+            and t1.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="minPrice!=null and minPrice!=''">
+            and t3.product_price &gt;= #{minPrice}
+        </if>
+        <if test="maxPrice!=null and maxPrice!=''">
+            and t3.product_price &lt;= #{maxPrice}
+        </if>
+    </select>
+
+    <select id="initProductCount" parameterType="com.soufang.base.dto.product.ProductDto"
+            resultType="java.lang.Integer">
+        select count(0) from (
+        select * from t_product where shop_id = #{shopId}
+        <choose>
+            <when test="assortType==1">
+                and product_id not in (select product_id from t_store_product_assort where shop_id = 1)
+            </when>
+            <when test="assortType==2">
+                and product_id in (select product_id from t_store_product_assort where shop_id = 1)
+            </when>
+        </choose>
+        ) t1
+        left join t_product_statistics t3 on t1.product_id = t3.product_id
+        where 1=1
+        <if test="productName!=null and productName!=''">
+            and t1.product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="minPrice!=null and minPrice!=''">
+            and t3.product_price &gt;= #{minPrice}
+        </if>
+        <if test="maxPrice!=null and maxPrice!=''">
+            and t3.product_price &lt;= #{maxPrice}
+        </if>
+    </select>
+
+    <delete id="delProductAssort" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto">
+    delete from t_store_product_assort
+    where shop_id = #{shopId,jdbcType=BIGINT} and product_id = #{productId}
+    </delete>
 
 </mapper>

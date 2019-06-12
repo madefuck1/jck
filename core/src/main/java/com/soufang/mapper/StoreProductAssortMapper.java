@@ -1,5 +1,6 @@
 package com.soufang.mapper;
 
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.model.StoreProductAssort;
 
@@ -19,4 +20,11 @@ public interface StoreProductAssortMapper {
     int updateByPrimaryKey(StoreProductAssort record);
 
     List<StoreProductAssortDto> searchProduct(StoreProductAssortDto storeProductAssortDto);
+
+    List<ProductDto> initProduct(ProductDto productDto);
+
+    // 店铺产品数量
+    int initProductCount(ProductDto productDto);
+
+    int delProductAssort(StoreProductAssortDto productAssortDto);
 }

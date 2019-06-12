@@ -1,10 +1,12 @@
 package com.soufang.controller;
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.storeConstruction.StoreCurouselMapList;
 import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.model.StoreConstruction;
 import com.soufang.service.StoreConstructionService;
 import org.springframework.beans.BeanUtils;
@@ -147,15 +149,42 @@ public class StoreConstructionController {
         return result;
     }
 
-
+    /**
+     * 新增分类
+     *
+     * @param storeExclusiveAssortDto
+     * @return
+     */
     @RequestMapping(value = "registerAssort", method = RequestMethod.POST)
     public Result registerAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
         return storeConstructionService.registerAssort(storeExclusiveAssortDto);
     }
 
+    /**
+     * 更新分类
+     *
+     * @param storeExclusiveAssortDto
+     * @return
+     */
     @RequestMapping(value = "updAssort", method = RequestMethod.POST)
     public Result updAssort(@RequestBody StoreExclusiveAssortDto storeExclusiveAssortDto) {
         return storeConstructionService.updAssort(storeExclusiveAssortDto);
+    }
+
+    /**
+     * 获取店铺产品列表
+     *
+     * @param productDto
+     * @return
+     */
+    @RequestMapping(value = "initProduct", method = RequestMethod.POST)
+    public PageHelp<ProductDto> initProduct(@RequestBody ProductDto productDto) {
+        return storeConstructionService.initProduct(productDto);
+    }
+
+    @RequestMapping(value = "saveProductAssort", method = RequestMethod.POST)
+    public Result saveProductAssort(@RequestBody StoreProductAssortDto productAssortDto) {
+        return storeConstructionService.saveProductAssort(productAssortDto);
     }
 
 
