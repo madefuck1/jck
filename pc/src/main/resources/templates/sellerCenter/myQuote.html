@@ -88,9 +88,9 @@
             contentType: "application/json",
             success: function (data) {
                 count = data.count;
-                allPage = (data.count%pageData ==0)?(data.count/pageData):((parseInt(data.count/pageData))+1);
-                if(allPage == 0){
-                    allPage =1;
+                allPage = (data.count % pageData == 0) ? (data.count / pageData) : ((parseInt(data.count / pageData)) + 1);
+                if (allPage == 0) {
+                    allPage = 1;
                 }
                 pageNo = page;
                 tatus = enquiryStatus;
@@ -123,82 +123,80 @@
                     '                        </div>';
                 $("#quoteContent").append(quoteContent);
                 var quoteList = '';
-                if(data.length == 0 ){
+                if (data.length == 0) {
                     quoteList += '<h1>您当前没有询盘信息!!!</h1>';
-                }
-                for(var i = 0; i < data.data.length; i ++ ){
-                    for(var j = 0; j < data.data[i].enquiryProductDto.length; j++ ){
-                        quoteList += '<div class="order-status1">\n' +
-                            '<div class="order-content">\n' +
-                            '<div class="order-left">\n' +
-                            '<ul class="item-list">\n' +
-                           ' <li class="td td-item">\n' +
-'                                          <div class="item-pic">\n' +
-'                                               <a href="#" class="J_MakePoint">\n' +
-'                                                    <img src='+data.data[i].enquiryProductDto[j].productImage+' class="itempic J_ItemImg">\n' +
-'                                               </a>\n' +
-'                                           </div>\n' +
-'                                           <div class="item-info">\n' +
-'                                                  <div class="item-basic-info">\n' +
-'                                                       <a href="#">\n' +
-'                                                          <p>'+data.data[i].enquiryProductDto[j].productName+'</p>\n' +
-'                                                       </a>\n' +
-'                                                   </div>\n' +
-'                                            </div>\n' +
-'                                       </li>\n' +
-'                                       <li class="td td-price">\n' +
-'                                            <div class="item-price">\n' +
-'                                                 <p>还剩<span style="color: #40ADFB">'+data.data[i].effectiveTime+'</span>天</p>\n' +
-'                                            </div>\n' +
-'                                        </li>\n' +
-'                                        <li class="td td-price">\n' +
-'                                              <div class="item-price">\n' +
-'                                                   <p>'+data.data[i].enquiryProductDto[j].assortName+'</p>\n' +
-'                                              </div>\n' +
-'                                        </li>\n' +
-'                                        <li class="td td-price">\n' +
-'                                             <div class="item-price">\n' +
-'                                                  <p>'+data.data[i].strEnquiryStatus+'</p>\n' +
-'                                              </div>\n' +
-'                                         </li>';
+                } else {
+                    for (var i = 0; i < data.data.length; i++) {
+                        for (var j = 0; j < data.data[i].enquiryProductDto.length; j++) {
+                            quoteList += '<div class="order-status1">\n' +
+                                '<div class="order-content">\n' +
+                                '<div class="order-left">\n' +
+                                '<ul class="item-list">\n' +
+                                ' <li class="td td-item">\n' +
+                                '                                          <div class="item-pic">\n' +
+                                '                                               <a href="#" class="J_MakePoint">\n' +
+                                '                                                    <img src=' + data.data[i].enquiryProductDto[j].productImage + ' class="itempic J_ItemImg">\n' +
+                                '                                               </a>\n' +
+                                '                                           </div>\n' +
+                                '                                           <div class="item-info">\n' +
+                                '                                                  <div class="item-basic-info">\n' +
+                                '                                                       <a href="#">\n' +
+                                '                                                          <p>' + data.data[i].enquiryProductDto[j].productName + '</p>\n' +
+                                '                                                       </a>\n' +
+                                '                                                   </div>\n' +
+                                '                                            </div>\n' +
+                                '                                       </li>\n' +
+                                '                                       <li class="td td-price">\n' +
+                                '                                            <div class="item-price">\n' +
+                                '                                                 <p>还剩<span style="color: #40ADFB">' + data.data[i].effectiveTime + '</span>天</p>\n' +
+                                '                                            </div>\n' +
+                                '                                        </li>\n' +
+                                '                                        <li class="td td-price">\n' +
+                                '                                              <div class="item-price">\n' +
+                                '                                                   <p>' + data.data[i].enquiryProductDto[j].assortName + '</p>\n' +
+                                '                                              </div>\n' +
+                                '                                        </li>\n' +
+                                '                                        <li class="td td-price">\n' +
+                                '                                             <div class="item-price">\n' +
+                                '                                                  <p>' + data.data[i].strEnquiryStatus + '</p>\n' +
+                                '                                              </div>\n' +
+                                '                                         </li>';
 
-                            quoteList +='<li class="td td-price"> \n' +
-                '                             <div class="item-price">\n' +
-                '                                <p>'+data.data[i].enquiryProductDto[j].purchases[0].unitPrice+'/'+data.data[i].enquiryProductDto[j].productUnit+'</p>\n' +
-                '                             </div>\n' +
-                '                         </li>';
-
+                            quoteList += '<li class="td td-price"> \n' +
+                                '                             <div class="item-price">\n' +
+                                '                                <p>' + data.data[i].enquiryProductDto[j].purchases[0].unitPrice + '/' + data.data[i].enquiryProductDto[j].productUnit + '</p>\n' +
+                                '                             </div>\n' +
+                                '                         </li>';
 
 
                             quoteList += '<li class="td td-price">\n' +
-'                                             <div class="item-price">\n' +
-'                                                 <a onclick="toDetail('+data.data[i].enquiryProductDto[j].enquiryProductId+')"><p style="line-height: 30px;">详情</p></a>\n' +
-'                                             </div>\n' +
-'                                          </li>';
+                                '                                             <div class="item-price">\n' +
+                                '                                                 <a onclick="toDetail(' + data.data[i].enquiryProductDto[j].enquiryProductId + ')"><p style="line-height: 30px;">详情</p></a>\n' +
+                                '                                             </div>\n' +
+                                '                                          </li>';
 
-                        quoteList +='</ul>\n' +
-                            '                          </div>\n' +
-                            '                      </div>\n' +
-                            '                    </div>\n' +
-                            '                  </div>';
-                    }
-                }
-                quoteList +='</div>\n' +
-                    '       </div>\n' +
-                    '   </div>';
-                $("#quoteList").append(quoteList);
+                            quoteList += '</ul>\n' +
+                                '                          </div>\n' +
+                                '                      </div>\n' +
+                                '                    </div>\n' +
+                                '                  </div>';
+                        }
+                    }}
+                    quoteList += '</div>\n' +
+                        '       </div>\n' +
+                        '   </div>';
+                    $("#quoteList").append(quoteList);
 
-                $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
-                    current_page:page-1,                  //当前页码
-                    callback: PageCallback,
-                    prev_text: '上一页',
-                    next_text: '下一页',
-                    items_per_page: 5,             //每页显示最大条数
-                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
-                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-                });
-
-            },
+                    $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                        current_page: page - 1,                  //当前页码
+                        callback: PageCallback,
+                        prev_text: '上一页',
+                        next_text: '下一页',
+                        items_per_page: 5,             //每页显示最大条数
+                        num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                        num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                    });
+                },
             error:function () {
                 alert("请求发送失败");
             }
