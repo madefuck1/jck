@@ -511,10 +511,11 @@ public class ProductController extends BaseController {
         return "product/submitOrder";
     }
 
-    //首页获取某类别的唱片信息
+    //首页获取某类别的产品信息
     @ResponseBody
     @RequestMapping(value = "getAssortProduct",method = RequestMethod.POST)
     public ListProductVo getAssortProduct(@RequestBody ProductManageSo so){
+
         PageHelp<ProductDto> pageHelp = productFeign.getAssortProduct(so);
         ListProductVo vo = new ListProductVo();
         vo.setData(pageHelp.getData());

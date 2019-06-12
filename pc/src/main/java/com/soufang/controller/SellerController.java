@@ -221,8 +221,9 @@ public class SellerController extends BaseController {
     @RequestMapping(value = "/getAssess", method = RequestMethod.POST)
     public AssessVo getAssess(HttpServletRequest request, @RequestBody AssessSo assessSo){
         AssessVo vo = new AssessVo();
-        ShopDto shopInfo = this.getShopInfo(request);
-        assessSo.setShopId(shopInfo.getShopId());
+        //获取产品的评价只需要产品ID 产品名相同店铺不同的产品id也不同
+        /*ShopDto shopInfo = this.getShopInfo(request);
+        assessSo.setShopId(shopInfo.getShopId());*/
         if(assessSo.getLimit() == null){
             assessSo.setLimit(5);
         }

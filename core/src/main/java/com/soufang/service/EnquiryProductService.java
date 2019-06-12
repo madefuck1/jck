@@ -31,5 +31,5 @@ public interface EnquiryProductService {
     //删除照片
     int delEnProImgUrl(Long enquiryProductId);
 
-    PageHelp<EnquiryProductDto> getIndexProductList();
+
 }

@@ -66,7 +66,7 @@
                         <div class="am-form-group">
                             <label for="user-email" class="am-form-label">电子邮件</label>
                             <div class="am-form-content">
-                                <input id="user-email" value="${userInfo.email}" placeholder="Email" type="email">
+                                <input id="user-email" value="${userInfo.email!}" placeholder="Email" type="email">
                             </div>
                         </div>
                         <div class="info-btn">
@@ -76,8 +76,6 @@
                 </div>
             </div>
         </div>
-        <!--底部-->
-        <#include "/common/includes/include.footer.html"/>
     </div>
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>

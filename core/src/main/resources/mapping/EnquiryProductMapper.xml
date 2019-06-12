@@ -34,11 +34,6 @@
     product_unit, product_image
   </sql>
 
-  <select id="getIndexProductList" resultMap="resultMap">
-    select t_enquiry_product.*,t_purchase.*
-    from t_enquiry_product INNER JOIN t_purchase on t_enquiry_product.enquiry_product_id = t_purchase.enquiry_product_id
-    ORDER BY enquiry_number DESC LIMIT 16
-  </select>
   <select id="getByEnquiryNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

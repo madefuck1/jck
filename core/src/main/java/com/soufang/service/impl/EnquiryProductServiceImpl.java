@@ -83,16 +83,6 @@ public class EnquiryProductServiceImpl implements EnquiryProductService {
        return enquiryProductMapper.delEnProImgUrl(enquiryProductId);
     }
 
-    @Override
-    public PageHelp<EnquiryProductDto> getIndexProductList() {
-        List<EnquiryProductDto> enquiryProductDtos = enquiryProductMapper.getIndexProductList();
-        for (EnquiryProductDto p:enquiryProductDtos) {
-            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
-        }
-        PageHelp<EnquiryProductDto> pageHelp = new PageHelp<>();
-        pageHelp.setData(enquiryProductDtos);
-        return pageHelp;
-    }
 
 
 }

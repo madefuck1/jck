@@ -58,4 +58,5 @@ public interface ProductManageService {
 
     PageHelp<ProductDto> getAssortProduct(ProductManageSo so);
 
+    PageHelp<ProductDto> getIndexFootProduct();
 }

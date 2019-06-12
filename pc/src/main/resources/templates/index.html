@@ -27,28 +27,29 @@
         </#list>
         </#list>
 </div>
-<div class="inquiry inquiry2">
-    <div class="padd title">
-        <div class="title_left">消息</div>
-        <div class="title_right">查看全部</div>
-    </div>
-    <div class="padd cloumn">
-        <div class="one">极限敏感词的发布要求</div>
-        <div class="four">2019-3-15</div>
-    </div>
-    <div class="padd cloumn">
-        <div class="one">发布产品为什么审核不通过</div>
-        <div class="four">2019-3-15</div>
-    </div>
-    <div class="padd cloumn">
-        <div class="one">重复信息处理规则</div>
-        <div class="four">2019-3-15</div>
-    </div>
-    <div class="padd cloumn border">
-        <div class="one">批量添加产品操作指南</div>
-        <div class="four">2019-3-15</div>
-    </div>
-</div>
+    <!--消息管理-->
+    <!--<div class="inquiry inquiry2">
+        <div class="padd title">
+            <div class="title_left">消息</div>
+            <div class="title_right">查看全部</div>
+        </div>
+        <div class="padd cloumn">
+            <div class="one">极限敏感词的发布要求</div>
+            <div class="four">2019-3-15</div>
+        </div>
+        <div class="padd cloumn">
+            <div class="one">发布产品为什么审核不通过</div>
+            <div class="four">2019-3-15</div>
+        </div>
+        <div class="padd cloumn">
+            <div class="one">重复信息处理规则</div>
+            <div class="four">2019-3-15</div>
+        </div>
+        <div class="padd cloumn border">
+            <div class="one">批量添加产品操作指南</div>
+            <div class="four">2019-3-15</div>
+        </div>
+    </div>-->
 </div>
 <div id="shop">
     <div class="shop_in">
@@ -168,22 +169,22 @@
 
 <div id="Recommend">
     <div class="Recommend_row1 row2">
-        <#list EnquiryProductDtos1 as product>
+        <#list productDtos1 as product>
         <#if product_index < 4 >
         <div class="rec">
-            <dl class="rec_pic">
-                <dt></dt>
+            <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+                <dt style="background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
-                <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+                <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
             </dl>
         </div>
         </#if>
         <#if product_index == 4>
         <div class="rec last">
-            <dl class="rec_pic">
-                <dt></dt>
+            <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+                <dt style="background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
-                <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+                <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
             </dl>
         </div>
         <#break>
@@ -192,22 +193,22 @@
     </div>
 
     <div class="Recommend_row1 row2">
-    <#list EnquiryProductDtos2 as product>
+    <#list productDtos2 as product>
     <#if product_index < 4 >
     <div class="rec">
-        <dl class="rec_pic">
-            <dt></dt>
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+            <dt style="background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
-            <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
         </dl>
     </div>
     </#if>
     <#if product_index == 4>
     <div class="rec last">
-    <dl class="rec_pic">
-        <dt></dt>
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+        <dt style="background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
-        <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+        <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
     </dl>
     </div>
     <#break>
@@ -215,22 +216,22 @@
     </#list>
     </div>
 <div class="Recommend_row1 row2">
-    <#list EnquiryProductDtos3 as product>
+    <#list productDtos3 as product>
     <#if product_index < 4 >
     <div class="rec">
-        <dl class="rec_pic">
-            <dt></dt>
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+            <dt style="background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
-            <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
         </dl>
     </div>
 </#if>
 <#if product_index == 4>
 <div class="rec last">
-    <dl class="rec_pic">
-        <dt></dt>
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+        <dt style="background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
-        <dd>¥<span>${product.purchases[0].unitPrice}</span></dd>
+        <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
     </dl>
 </div>
 <#break>
@@ -255,10 +256,19 @@
             $(this).children('div').addClass("curr");
         });
     });
+
+    $(document).ready(function() {
+        $(".row_1").click(function() {
+            $(this).prevAll().children('div').removeClass("row1");
+            $(this).nextAll().children('div').removeClass("row1");
+            $(this).children('div').addClass("row1");
+        });
+    });
+
     //初始化页面
     $(function () {
         //获取类别产品
-        getAssortProduct(23,1,8);
+        getAssortProduct(1,1,8);
     });
     //获取某个类别的产品
     function getAssortProduct(assortId,page,limit) {
@@ -278,40 +288,40 @@
                     getAssortProduct(23,1,8);
                 }
                 $("#pro").empty();
-                var pro = '<div class="pro_left" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
+                var pro = '<div class="pro_left" onclick="getProductInfo('+data.data[0].productId+')" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
                 pro+='<div class="pro_right">\n' +
             '            <div class="pro_top">\n' +
-            '                <dl class="pro_top1 one">\n' +
+            '                <dl class="pro_top1 one" onclick="getProductInfo('+data.data[0].productId+')">\n' +
             '                    <dt style="background: url('+data.data[0].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[0].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1">\n' +
+            '                <dl class="pro_top1 " onclick="getProductInfo('+data.data[1].productId+')">\n' +
             '                    <dt style="background: url('+data.data[1].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[1].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1">\n' +
+            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[2].productId+')">\n' +
             '                    <dt style="background: url('+data.data[2].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[2].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1 last">\n' +
+            '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[3].productId+')">\n' +
             '                    <dt style="background: url('+data.data[3].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[3].productName+'</dd>\n' +
             '                </dl>\n' +
             '            </div>\n' +
-            '            <div class="pro_top pro_down">\n' +
+            '            <div class="pro_top pro_down" onclick="getProductInfo('+data.data[4].productId+')">\n' +
             '                <dl class="pro_top1 one">\n' +
             '                    <dt style="background: url('+data.data[4].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[4].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1">\n' +
+            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[5].productId+')">\n' +
             '                    <dt style="background: url('+data.data[5].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[5].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1">\n' +
+            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[6].productId+')">\n' +
             '                    <dt style="background: url('+data.data[6].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[6].productName+'</dd>\n' +
             '                </dl>\n' +
-            '                <dl class="pro_top1 last">\n' +
+            '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[7].productId+')">\n' +
             '                    <dt style="background: url('+data.data[7].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[7].productName+'</dd>\n' +
             '                </dl>\n' +
@@ -325,6 +335,12 @@
         });
     };
 
+
+    //产品详情
+    function getProductInfo(productId) {
+        window.open('/product/toDetail?productId='+productId,'_blank');
+
+    }
     //查看全部询盘
     function getAllEnquiry(page,limit) {
         window.location.href = '';
