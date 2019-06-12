@@ -231,7 +231,7 @@ public class EnquiryPurchaseController extends BaseController{
     @RequestMapping(value = "toPurchaseDetails", method = RequestMethod.GET)
     public String toPurchaseDetails(String enquiryProductId,ModelMap modelMap){
         modelMap.put("enquiryProductId",enquiryProductId);
-        return "enquiry/toPurchaseDetail";
+        return "enquiry/enquiryDetails";
     }
 
     /**
@@ -253,7 +253,7 @@ public class EnquiryPurchaseController extends BaseController{
     }
 
     /**
-     * 列表-询盘
+     * 列表-求购
      * @param request
      * @return
      */

@@ -224,7 +224,7 @@ public class PcUserController extends BaseController{
         map.put("userInfo",getUserInfo(request));
         if(getShopInfo(request) == null){
             //已经是商家，不能再入驻
-            return "notFound";
+            return "404";
         }else {
             return "sellerCenter/settle/first";
         }
@@ -251,7 +251,7 @@ public class PcUserController extends BaseController{
         if(result.isSuccess()){
             return  "sellerCenter/settle/second";
         }else {
-            return "notFound";
+            return "404";
         }
     }
 

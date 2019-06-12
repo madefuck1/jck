@@ -65,6 +65,26 @@ public class EnquiryAddVo {
     private Integer page;
     private Integer limit;
 
+    //截止时间排序判断字段
+    private  String endTimeSort;
+    //排序类型-1.正序、2.倒序
+    private  String orderType;
+
+    public void setEndTimeSort(String endTimeSort) {
+        this.endTimeSort = endTimeSort;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getEndTimeSort() {
+        return endTimeSort;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
 
     public Integer getPage() {
         return page;

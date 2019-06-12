@@ -23,10 +23,10 @@
 
 													<ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs">
 														<li class="am-active"><a href="javascript:void(0)"onclick="getPurchaseList('')" >全部求购</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(1)">求购中</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(2)">已求购</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(3)">已报价</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(4)">采购成功</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1)">审核中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(3)">求购中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(4)">已报价</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(5)">采购成功</a></li>
 													</ul>
 
 													<div class="am-tabs-bd">
@@ -209,11 +209,11 @@ function getPurchaseList(enquiryStatus){
             $("#order-list1").html("");
 		}else if(enquiryStatus==1){
 			$("#order-list2").html("");
-		}else if (enquiryStatus=2){
+		}else if (enquiryStatus=3){
 			$("#order-list3").html("");
-		}else if (enquiryStatus==3){
-			$("#order-list4").html("");
 		}else if (enquiryStatus==4){
+			$("#order-list4").html("");
+		}else if (enquiryStatus==5){
 			$("#order-list5").html("");
 		}
 
@@ -238,9 +238,9 @@ function getPurchaseList(enquiryStatus){
                         $("#order-list2").append(whatever);
                     }else if (enquiryStatus=2){
                         $("#order-list3").append(whatever);
-                    }else if (enquiryStatus==3){
-                        $("#order-list4").append(whatever);
                     }else if (enquiryStatus==4){
+                        $("#order-list4").append(whatever);
+                    }else if (enquiryStatus==5){
                         $("#order-list5").append(whatever);
                     }
                     });
@@ -302,6 +302,13 @@ function liContent(v) {
            +"</li>"
            +"</ul>"
    }
+    var upstr;
+    <!--只有审核不通过后才能编辑-->
+    if(enquiryStatus==2){
+        upstr="<p class='Mystatus'><a href='javascript:void(0);' id='updateEnquiry'  onclick='updateEnquiry(\""+enquiryNumber+"\",\""+1+"\")'>编辑</a></p>";
+    }else{
+        upstr="";
+	}
 
 				var li= $("<div class ='order-status5'>"
 						+"<div class='order-title'>"
@@ -321,7 +328,7 @@ function liContent(v) {
 									+"<div class='move-right'>"
 										+"<li class='td td-status'>"
 											+"<div class='item-status'>"
-												+"<p class='Mystatus'><a href='javascript:void(0);' id='updateEnquiry' onclick='updateEnquiry(\""+enquiryNumber+"\",\""+1+"\")'>编辑</a></p>"
+											+upstr
 												+"<p class='order-info'><a href='javascript:void(0);' onclick='delEnquiry(\""+enquiryNumber+"\")'>删除</a></p>"
 											+"</div>"
 										+"</li>"
@@ -330,12 +337,6 @@ function liContent(v) {
 						+"</div>"
 				+"</div>"
 		);
-	<!--只有审核不通过后才能编辑-->
-/*	if(enquiryStatus==1){
-	    console.log("编辑按钮判断");
-		$('#updateEnquiry').style.display="block";
-		 <!--style='display:none;'-->
-	}*/
 	return li;
 }
 
