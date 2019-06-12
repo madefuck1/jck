@@ -163,11 +163,11 @@ public class EnquiryController {
     }
 
 
-   /* *//**
+    /**
      * 获取我的报价列表
      * @param enquirySo
-     * @return
-     *//*
+     * @return*/
+
     @RequestMapping(value = "getMyQuoteList",method = RequestMethod.POST)
     public PageHelp<EnquiryDto> getMyQuoteList(@RequestBody EnquirySo enquirySo) {
         PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
@@ -177,12 +177,11 @@ public class EnquiryController {
         pageHelp.setCount(count);
         return pageHelp;
     }
-*/
-/*    @RequestMapping(value = "getQuoteDetails",method = RequestMethod.POST)
+    @RequestMapping(value = "getQuoteDetails",method = RequestMethod.POST)
     public EnquiryDto getQuoteDetails(@RequestBody Long enquiryProductId){
         EnquiryDto enquiryDto =  enquiryService.getQuoteDetails(enquiryProductId);
         return enquiryDto;
-    }*/
+    }
     /**
      * 查询询盘信息详情
      * -包括所有询盘产品信息-询盘报价-询盘商铺信息
