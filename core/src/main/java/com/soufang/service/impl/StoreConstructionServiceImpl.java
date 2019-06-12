@@ -1,10 +1,13 @@
 package com.soufang.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.soufang.base.Result;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.storeConstruction.StoreCurouselMapDto;
 import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.StoreConstructionMapper;
 import com.soufang.mapper.StoreCurouselMapMapper;
@@ -13,6 +16,7 @@ import com.soufang.mapper.StoreProductAssortMapper;
 import com.soufang.model.StoreConstruction;
 import com.soufang.model.StoreCurouselMap;
 import com.soufang.model.StoreExclusiveAssort;
+import com.soufang.model.StoreProductAssort;
 import com.soufang.service.StoreConstructionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,5 +175,40 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
         Result result = new Result();
         result.setSuccess(storeExclusiveAssortMapper.updateByPrimaryKeySelective(storeExclusiveAssort) > 0 ? true : false);
         return result;
+    }
+
+    @Override
+    public PageHelp<ProductDto> initProduct(ProductDto productDto) {
+        PageHelp<ProductDto> pageHelp = new PageHelp<>();
+        int page = productDto.getPage();
+        if (page != 0) {
+            productDto.setPage(page * productDto.getLimit());
+        }
+        List<ProductDto> list = storeProductAssortMapper.initProduct(productDto);
+        int count = storeProductAssortMapper.initProductCount(productDto);
+
+        pageHelp.setData(list);
+        pageHelp.setCount(count);
+        return pageHelp;
+    }
+
+    @Override
+    public Result saveProductAssort(StoreProductAssortDto productAssortDto) {
+
+//         先根据店铺和产品id清空产品分类
+        storeProductAssortMapper.delProductAssort(productAssortDto);
+
+        // 再重新添加产品分类
+        StoreProductAssortDto tempDto = new StoreProductAssortDto();
+        StoreProductAssort storeProductAssort;
+        tempDto.setShopId(productAssortDto.getShopId());
+        tempDto.setProductId(productAssortDto.getProductId());
+        for (String temp : productAssortDto.getExclusiveAssortIds()) {
+            tempDto.setExclusiveAssortId(Long.valueOf(temp));
+            storeProductAssort = new StoreProductAssort();
+            BeanUtils.copyProperties(tempDto, storeProductAssort);
+            storeProductAssortMapper.insert(storeProductAssort);
+        }
+        return new Result();
     }
 }

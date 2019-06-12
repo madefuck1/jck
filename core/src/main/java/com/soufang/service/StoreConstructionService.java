@@ -1,10 +1,12 @@
 package com.soufang.service;
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.storeConstruction.StoreCurouselMapDto;
 import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.model.StoreConstruction;
 
 import java.util.List;
@@ -36,4 +38,8 @@ public interface StoreConstructionService {
     Result registerAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
 
     Result updAssort(StoreExclusiveAssortDto storeExclusiveAssortDto);
+
+    PageHelp<ProductDto> initProduct(ProductDto productDto);
+
+    Result saveProductAssort(StoreProductAssortDto productAssortDto);
 }
