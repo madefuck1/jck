@@ -12,22 +12,15 @@
         </#if>
         </div>
         <div class="right">
-
             <p class="service">客服电话：400-xxx-xxxx</p>
             <div class="order">
-                <a href="#">我的订单</a>
-                <span class="icon icon1"></span>
-            </div>
-            <div class="seller">
-                <a href="#">卖家中心</a>
+                <a href="/sellerCenter/toSoldProduct">我的订单</a>
                 <span class="icon icon1"></span>
             </div>
             <div class="shopping">
-                <a href="#">购物车</a>
-                <a href="#">(0)</a>
+                <a href="/shopCar/getList">购物车</a>
+                <a id="carCount" href="#">(${shopCarCount!0})</a>
             </div>
-
         </div>
-
     </div>
 </div>

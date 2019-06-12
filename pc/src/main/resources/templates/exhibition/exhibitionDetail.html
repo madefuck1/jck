@@ -1,87 +1,14 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>展会详情</title>
-	<link rel="stylesheet" href="../../static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
-	<link rel="stylesheet" href="../../static/css/header.css">
-	<link rel="stylesheet" href="../../static/css/iconfont1.css">
-	<link rel="stylesheet" href="../../static/css/expodetail.css">
-	<script src="../../static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-	<script src="../../static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-	<script src="../../static/js/jquery-3.1.1.js" ></script>
-</head>
-
-<body>
-	
-	
-	<div id="nav">
-		<div class="nav_in">
-			<div class="left">
-			<p>欢迎您  &nbsp;请<a href="javascript">登录</a>  &nbsp;<a href="javascript">注册会员</a></p>
-		</div>
-		<div class="right">
-			<p class="service">客服电话：400-xxx-xxxx</p>
-			<div class="order">
-				<a href="#">我的订单</a>
-				<span class="icon icon1"></span>			
-			</div>
-			<div class="seller">
-				<a href="#">卖家中心</a>
-				<span class="icon icon1"></span>			
-			</div>
-			<div class="shopping">
-				<a href="#">购物车</a>
-				<a href="#">(0)</a>			
-			</div>	
-		</div>
-		
-		</div>
-	</div>
-	<div id="search">
-		<div class="search_in">
-			<div class="logo"></div>
-			<div class="sear">
-				<div class="tog">
-					<div class="tog_in">
-						<a href="#">产品</a>
-						<i class="iconfont iconxialajiantou"></i>
-						<ul>
-							<li><a href="">产品</a></li>
-							<li><a href="">店铺</a></li>
-						</ul>
-					</div>
-					<input type="text" placeholder="布料" class="sousuo">
-				</div>
-				
-				
-				<button type="submit" class="cont"><a href="02 search.html">搜索</a></button>
-				
-			</div>
-		</div>
-	</div>
-	<div id="contain">
-			<div class="list">
-				<div class="list_in">	
-					<div class="list_up">
-							<div class="title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
-							<div class="header">
-							<ul>
-								<li><a href="/">首页</a></li>
-								<li><a href="">现货</a></li>
-								<li><a href="">求购信息</a></li>
-								<li class="cur"><a href="">纺织资讯</a></li>
-								<li><a href="">联系我们</a></li>
-							</ul>
-							</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<@override name="title">
+展会详情
+</@override>
+<@override name="css">
+	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
+	<link rel="stylesheet" href="${contextPath}/css/expodetail.css">
+</@override>
+<@override name="body">
 	<div id="expoDetail">
 		<ol class="am-breadcrumb">
-		  <li><a href="#">首页</a></li>
-		  <li><a href="#">展会</a></li>
+		  <li><a href="/exhibition/toExhibition">展会</a></li>
 		  <li><a href="#">详情</a></li>
 		</ol>
 		<div class="expo-table01">
@@ -153,8 +80,8 @@
 		</div>
 		
 	</div>
-</body>
-</html>
+</@override>
+<@override name="js">
 <script>
 	$(function(){
 	  	//exhibitionId
@@ -186,3 +113,5 @@
         });
 	})
 </script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

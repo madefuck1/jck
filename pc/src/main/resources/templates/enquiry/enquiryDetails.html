@@ -1,5 +1,5 @@
 <@override name="title">
-询盘详情
+求购详情
 </@override>
 
 <@override name="css">
@@ -15,7 +15,9 @@
 			</div>
 			<div class="clearfixRight">
 				<div class="tb-detail-hd">
-					<h3 style="font-size: 16px; font-weight: bold" ><span id="enquiryTitle"></span></h3>
+					<h3 style="font-size: 16px; font-weight: bold" ><span id="productName"></span></h3>
+					<input type="hidden" id="enquiryProductId" value="${enquiryProductId}">
+					<input type="hidden" id="purchaseNumber">
 				</div>
 				<div class="clear-down">
 					<div class="cloum1">
@@ -57,7 +59,7 @@
 					<div class="cloum1">
 						<span class="am-u-sm-2">求购数量：</span>
 						<span class="am-u-sm-10">
-							<span id="productNumber"></span>
+							<span id="productNumber"><span id="productUnit"></span></span>
 						</span>
 
 					</div>
@@ -82,30 +84,50 @@
 			<div class="clear"></div>
 	
 		</div>
-	
-		<div class="clear_form">
-		<h4 style="margin-bottom: 10px">订单报价信息</h4>
-		<table class="am-table am-table-bordered" id="purchaseTables">
-			<thead style="background: #e6e6e6;">
-				<tr>
-					<th>报价日期</th>
-					<th>报价公司</th>
-					<th>报价</th>
-					<th>备注</th>
-					<th>操作</th>
-				</tr>
-			</thead>
+
+
+<div class="clear_form">
+
+	<h4 style="margin-bottom: 10px">报价信息</h4>
+	<table class="am-table am-table-bordered">
+		<thead style="background: #e6e6e6;">
+		<tr>
+			<th>报价日期</th>
+			<th>单价</th>
+			<th>价格有效期</th>
+			<th>交货期</th>
+			<th>是否含税</th>
+			<th>备注</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td id="nowTime" ></td>
+			<td><input type="text" style="border: 1px solid #e6e6e6;padding: 5px 2px; width: 70px;" id="unitPrice">&nbsp;元</td>
+			<td id="strEndTime"></td>
+			<td>30天</td>
+			<td>
+				<input type="radio">是
+				<input type="radio">否
+			</td>
+			<td><input type="text" id="remark"/></td>
+		</tr>
+
+		</tbody>
 	</table>
-	</div>
+	<button class="am-btn am-btn-secondary" style="margin-left: 46%;margin-top: 60px;" onclick="PurchaseNow()">立即发布</button>
+</div>
+
 
 
 </@override>
 <@override name="js">
 <script>
-	//获取详情询盘ID
-    var enquiryProductId = "${enquiryProductId}";
     $(function(){
+        console.log("默认加载");
+        var enquiryProductId= $("#enquiryProductId").val();
         var str={enquiryProductId:enquiryProductId};
+        //默认加载数据  enquiryTableMessage
         $.ajax({
             url : "selEnquiryByNumber",
             type : "post",
@@ -113,7 +135,6 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
-                console.log(data);
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
@@ -128,91 +149,51 @@
                 $("#enquiryRemark").html(data.enquiryRemark);
                 $("#productName").html(data.enquiryProductDto[0].productName);
                 $("#productImage").html("<img src='"+data.enquiryProductDto[0].productImage+"' alt='' STYLE='width:400px;height:400px;'>");
-
-                $.each(data.enquiryProductDto, function (i, v) {
-                    //需要循环插入报价信息
-                    var whatever = liContent(v);
-                    $("#purchaseTables").append(whatever)
-                });
+                var nowTime=getNowFormatDate();
+                $("#nowTime").html(nowTime);
+                $("#strEndTime").html(data.strEndTime);
             }
         });
-	});
-        function liContent(v){
-            var purchases=v.purchases;
-            console.log(purchases);
-            var li;
-            var tables="";
-			for(var i = 0 ;i< purchases.length ; i++) {
-			    if (purchases[i].purchaseNumber==null||urchases[i].purchaseNumber==null){
-					tables=$("<tbody><tr colspan='5'>"
-                    +"<td colspan='5'>当前无报价信息</td>"
-                        +"</tr>"
-                        +"</tbody>"
-                    );
-				}else{
-                var offerTime = purchases[i].strOfferTime;
-                //var shopName=v.shopDto.shopName;
-                var shopName="杭州私房公司";
-                var unitPrice = purchases[i].unitPrice;
-                var productUnit = v.productUnit;
-                var remark = purchases[i].remark;
-                var purchaseNumber = purchases[i].purchaseNumber;
-                li +=
-                    "<td>" + offerTime + "</td>"
-                    + "<td>" + shopName + "</td>"
-                    + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
-                    + "<td>" + remark + "</td>"
-                    + "<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",1" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",0" + ")'>拒绝</a></td>"
-            }
-				 tables=$("<tbody><tr>"
-						+li
-                    +"</tr>"
-                    +"</tbody>"
-				);
-            }
-                return tables;
-        }
-    function isUseRejused(purchaseNumber,offStatus){
-		var str ={purchaseNumber:purchaseNumber,offStatus:offStatus};
-        $.ajax({
-            url: "selectProductById",
-            type: "post",
-            data: JSON.stringify(str),
-            contentType: 'application/json; charset=UTF-8',
-            dataType: "json",
-            success: function (data) {
-				console.log(data);
-				console.log("需要弹出是否成功！");
-            }
-        });
-    }
+    });
 
-    function longFormatDate(longTypeDate) {
-        var datetimeType = "";
+    //获取当前时间
+    function getNowFormatDate() {
         var date = new Date();
-        date.setTime(longTypeDate);
-        datetimeType+= date.getFullYear();   //年  
-        datetimeType+= "-" + getMonth(date); //月   
-        datetimeType+= "-" + getDay(date);   //日  
-        return datetimeType;
-    }
-    //返回月   
-    function getMonth(date){
-        var month = "";
-        month = date.getMonth() + 1;
-        if(month<10){
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
             month = "0" + month;
         }
-        return month;
-    }
-    //返回日 
-    function getDay(date){
-        var day = "";
-        day = date.getDate();
-        if(day<10){
-            day = "0" + day;
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
         }
-        return day;
+        var currentdate = year + "-" + month + "-" + strDate;
+        return currentdate;
+    }
+
+    //报价
+    function PurchaseNow() {
+        var purchaseNumber=$("#purchaseNumber").val();
+        if ( purchaseNumber != null){
+            if(confirm("已经进行报价，请确认是否进行当前报价操作")){
+                var unitPrice=$("#unitPrice").val();
+                var enquiryProductId=$("#enquiryProductId").val();
+                var enquiryNumber=$("#enquiryNumber").val();
+                var remark=$("#remark").val();
+                var str={unitPrice:unitPrice,enquiryProductId:enquiryProductId,remark:remark,enquiryNumber:enquiryNumber};
+                $.ajax({
+                    url: "purchase",
+                    type: "post",
+                    data: JSON.stringify(str),
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.message);
+                    }
+                });
+            }
+        }
     }
 </script>
 </@override>

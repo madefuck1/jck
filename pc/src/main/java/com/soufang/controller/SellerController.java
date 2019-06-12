@@ -17,6 +17,7 @@ import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.AssessFeign;
 import com.soufang.feign.OrderFeign;
 import com.soufang.feign.ProductFeign;
+import com.soufang.feign.ShopFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.User.UpdateInformation;
 import com.soufang.vo.assess.AssessVo;
@@ -47,28 +48,45 @@ public class SellerController extends BaseController {
     @Autowired
     AssessFeign assessFeign;
 
+    @Autowired
+    ShopFeign shopFeign;
+
     //卖家首页
     @MemberAccess
     @RequestMapping(value = "/toIndex", method = RequestMethod.GET)
     public String indexHtml(HttpServletRequest request, ModelMap map) {
-        // 跳转先判定是否是有卖家权限，没有就直接跳转申请成为卖家页面  todo
-        return "sellerCenter/index";
+        // 跳转先判定是否是有卖家权限，没有就直接跳转申请成为卖家页面
+        UserDto userInfo = this.getUserInfo(request);
+        ShopDto shopDto = shopFeign.getByUserId(userInfo.getUserId());
+        if(StringUtils.isBlank(shopDto.getShopName())){
+            //map.put("noShopInfo","您还不是卖家，请填写公司信息");
+            return "defaultPage/noCompanyInfo";
+        }else {
+            return "sellerCenter/index";
+        }
+
     }
 
     //查看个人信息
     @MemberAccess
     @RequestMapping(value = "/toSellerCenter", method = RequestMethod.GET)
     public String toSellerCenter(HttpServletRequest request, ModelMap map) {
-        // 跳转先判定是否是有卖家权限，没有就直接跳转申请成为卖家页面  todo
+        // 跳转先判定是否是有卖家权限，没有就直接跳转申请成为卖家页面
         UserDto userInfo = this.getUserInfo(request);
+        ShopDto shopDto = shopFeign.getByUserId(userInfo.getUserId());
+        if(StringUtils.isBlank(shopDto.getShopName())){
+            return "defaultPage/noCompanyInfo";
+        }else {
 //        String idCard[] = userInfo.getIdCardUrl().split(";");
 //        userInfo.setIdCardUrl(PropertiesParam.file_pre+idCard[0]);
 //        userInfo.setrIdCardUrl(PropertiesParam.file_pre+idCard[1]);
-        CompanyDto companyDto = pcUserFeign.getCompany(userInfo.getUserId());
-        companyDto.setCompUrls(PropertiesParam.file_pre + companyDto.getCompUrls());
-        userInfo.setCompanyDto(companyDto);
-        map.put("userInfo", userInfo);
-        return "sellerCenter/information";
+            CompanyDto companyDto = pcUserFeign.getCompany(userInfo.getUserId());
+            companyDto.setCompUrls(PropertiesParam.file_pre + companyDto.getCompUrls());
+            userInfo.setCompanyDto(companyDto);
+            map.put("userInfo", userInfo);
+            return "sellerCenter/information";
+        }
+
     }
 
     //去修改个人信息
@@ -138,7 +156,6 @@ public class SellerController extends BaseController {
     public String toOrderManager() {
         return "sellerCenter/soldProduct";
     }
-
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "getSoldProduct", method = RequestMethod.POST)
@@ -199,15 +216,15 @@ public class SellerController extends BaseController {
     public String toEvaluationManagement() {
         return "sellerCenter/assessManagement";
     }
-
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "/getAssess", method = RequestMethod.POST)
-    public AssessVo getAssess(HttpServletRequest request, @RequestBody AssessSo assessSo) {
+    public AssessVo getAssess(HttpServletRequest request, @RequestBody AssessSo assessSo){
         AssessVo vo = new AssessVo();
-        ShopDto shopInfo = this.getShopInfo(request);
-        assessSo.setShopId(shopInfo.getShopId());
-        if (assessSo.getLimit() == null) {
+        //获取产品的评价只需要产品ID 产品名相同店铺不同的产品id也不同
+        /*ShopDto shopInfo = this.getShopInfo(request);
+        assessSo.setShopId(shopInfo.getShopId());*/
+        if(assessSo.getLimit() == null){
             assessSo.setLimit(5);
         }
         PageHelp<AssessDto> pageHelp = assessFeign.getList(assessSo);

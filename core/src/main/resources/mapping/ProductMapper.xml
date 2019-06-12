@@ -715,15 +715,22 @@
             </when>
         </choose>
     </select>
-
-    <select id="getAssortProduct" resultMap="DtoResultMap" parameterType="com.soufang.base.search.product.ProductManageSo">
-        select
-        <include refid="Base_Column_List"/>
-        from t_product
-        where assort_id = #{assortId,jdbcType=BIGINT}
-        <if test="page != null and limit != null ">
-            limit #{page},#{limit}
+    <select id="getAssortProduct" parameterType="com.soufang.base.dto.product.ProductDto"
+            resultMap="DtoResultMap">
+        select  product_id,product_name,product_image
+         from t_product
+        where 1 = 1
+        <if test="assortIds != null and assortIds != ''">
+            and FIND_IN_SET(assort_id,#{assortIds})
         </if>
+        limit #{page},#{limit}
     </select>
 
+
+    <select id="getIndexFootProduct" resultMap="DtoResultMap">
+        select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
+        from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
+        where 1 = 1 order by t_product_statistics.browse_number desc
+        limit 0,16;
+    </select>
 </mapper>

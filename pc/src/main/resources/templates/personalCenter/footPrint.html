@@ -26,8 +26,7 @@
 								<div id="oneWeekTable" ></div>
 					</div>
 				</div>
-				<!--底部-->
-				<#include "/common/includes/include.footer.html"/>
+
 				</div>
 				<!--左边菜单-->
 				<#include "/personalCenter/common/include.menu.html"/>
@@ -73,11 +72,6 @@
     }
 
     //动态加载数据
-    function  liContent(v) {
-		var footprintId=v.footprintId;
-		var productName=v.productDto.productName;
-		var productPrice=v.productDto.productPrice;
-		var productImage=v.productDto.productUrl;
 	function liContentToDays(i,v){
         var footprintId=v.footprintId;
         var createTime=v.createTime;

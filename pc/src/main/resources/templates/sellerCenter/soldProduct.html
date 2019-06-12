@@ -27,31 +27,27 @@
                     <form class="am-form am-form-horizontal am-u-sm-6">
                         <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">订单编号：</label>
                         <div class="am-form-group am-u-sm-9">
-                            <input type="email" id="doc-ipt-3" placeholder="请输入订单编号"  style="width: 250px">
+                            <input type="text" id="doc-ipt-3" placeholder="请输入订单编号">
+                        </div>
+                    </form>
+                    <form class="am-form am-form-horizontal am-u-sm-6">
+                        <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">更新时间：</label>
+                        <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
+                            <span class="am-input-group-btn am-datepicker-add-on">
+                                <input type="text"id="doc-ipt-4" class="am-form-field"  placeholder="请选择起始时间" style="position: absolute;width: 130px;">
+                            </span>
+                        </div>
+                        <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
+                            <span class="am-input-group-btn am-datepicker-add-on">
+                                <input type="text" id="doc-ipt-5"class="am-form-field" placeholder="请选择结束时间" style="width: 130px;margin-left: 140px;">
+                            </span>
                         </div>
                     </form>
                 </div>
-                <div class="cloum1">
-                <form class="am-form am-form-horizontal am-u-sm-6">
-                    <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">成交时间：</label>
-                    <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 250px">
-                            <span class="am-input-group-btn am-datepicker-add-on">
-                                <input type="text"id="doc-ipt-4" class="am-form-field"  placeholder="请选择起始时间">
-                            </span>
-                    </div>
-                    <div style="height: 20px"> </div>
-                    <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 250px">
-                            <span class="am-input-group-btn am-datepicker-add-on">
-                                <input type="text" id="doc-ipt-5"class="am-form-field" placeholder="请选择结束时间">
-                            </span>
-                    </div>
-                </form>
+            <div class="cloum1">
+                <button type="button" onclick="search()" class="am-btn am-btn-secondary" style="margin-left: 13.5%; width:140px">搜&nbsp;&nbsp;&nbsp;索</button>
             </div>
 
-                <div class="cloum1">
-                    <button type="button" onclick="search()" class="am-btn am-btn-secondary" style="margin-left: 13.5%; width:140px">搜&nbsp;&nbsp;&nbsp;索</button>
-
-                </div>
                 <!--全部的订单-->
                 <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs >
                     <!--头部-->
@@ -84,9 +80,9 @@
                                 <div class="th th-price">
                                     <td class="td-i nner">实收款</td>
                                 </div>
-                                <div class="th th-operation">
+                                <!--<div class="th th-operation">
                                     <td class="td-inner">商品操作</td>
-                                </div>
+                                </div>-->
                                 <div class="th th-status">
                                     <td class="td-inner">交易状态</td>
                                 </div>
@@ -246,27 +242,11 @@
                         '                                                        </div>\n' +
                         '                                                    </li>';
                                                     if(data.data[i].orderShopStatus == 1 ){
-                                                        orderContent += '<li class="td td-operation">\n' +
-                '                                                        <div class="item-operation">\n' +
-                '                                                           <button type="button"  class="am-btn am-btn-success"  id="doc-prompt-toggle" > 改价</button>\n' +
-                '                                                           </div>\n' +
-                            '                                            <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">\n' +
-                            '                                            <div class="am-modal-dialog">\n' +
-                             '                                           <div class="am-modal-hd">更改价格</div>\n' +
-                            '                                               <div class="am-modal-bd">\n' +
-                             '                                                  请输入新价格\n' +
-                              '                                             <input type="text" class="am-modal-prompt-input">\n' +
-                               '                                         </div>\n' +
-                             '                                           <div class="am-modal-footer">\n' +
-                              '                                             <span class="am-modal-btn" data-am-modal-cancel>取消</span>\n' +
-                              '                                             <span class="am-modal-btn" data-am-modal-confirm>提交</span>\n' +
-                               '                                         </div>\n' +
-                               '                                     </div>\n' +
-                               '                                     </div>\n' +
-                '                                                    </li>\n' +
+                                                        orderContent += '<li class="td td-operation"> </li>\n' +
                 '                                                    <li class="td td-status">\n' +
                 '                                                        <div class="item-status">\n' +
                 '                                                            <p class="Mystatus">'+data.data[i].statusMessage+'</p><!--订单状态-->\n' +
+                                                                        '<p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">详情</a></p>\n' +
                 '                                                        </div>\n' +
                 '                                                    </li>';
                                                     }

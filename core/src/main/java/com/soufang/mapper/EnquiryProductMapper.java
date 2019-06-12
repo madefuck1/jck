@@ -25,5 +25,5 @@ public interface EnquiryProductMapper {
 
     int delEnProImgUrl(Long enquiryProductId);
 
-    List<EnquiryProductDto> getIndexProductList();
+
 }

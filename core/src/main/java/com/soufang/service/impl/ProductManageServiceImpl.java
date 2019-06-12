@@ -3,6 +3,7 @@ package com.soufang.service.impl;
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
+import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
@@ -12,6 +13,8 @@ import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.mapper.*;
 import com.soufang.model.*;
 import com.soufang.service.ProductManageService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -340,14 +343,37 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public PageHelp<ProductDto> getAssortProduct(ProductManageSo so) {
+        StringBuffer assortIds = new StringBuffer();
+        List<AssortDto> assortDtos = assortMapper.getAssortAByParentId(so.getAssortId());
+
+        for (int i = 0; i < assortDtos.size(); i++){
+            assortIds.append(String.valueOf(assortDtos.get(i).getAssortId()+","));
+        }
+
         so.setPage((so.getPage()-1)*so.getLimit());
-        List<ProductDto> products = productMapper.getAssortProduct(so);
+        ProductDto productDto = new ProductDto();
+
+        productDto.setAssortIds(String.valueOf(assortIds));
+        productDto.setLimit(so.getLimit());
+        productDto.setPage(so.getPage());
+        List<ProductDto> products = productMapper.getAssortProduct(productDto);
         for (ProductDto p:products) {
             p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
         pageHelp.setCount(products.size());
+        return pageHelp;
+    }
+
+    @Override
+    public PageHelp<ProductDto> getIndexFootProduct() {
+        PageHelp<ProductDto> pageHelp = new PageHelp<>();
+        List<ProductDto> list = productMapper.getIndexFootProduct();
+        for (ProductDto p:list) {
+            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
+        }
+        pageHelp.setData(list);
         return pageHelp;
     }
 

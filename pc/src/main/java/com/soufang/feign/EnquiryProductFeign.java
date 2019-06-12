@@ -15,6 +15,5 @@ public interface EnquiryProductFeign {
     @RequestMapping(value = "core/enquiryProduct/delEnProImgUrl",method = RequestMethod.POST)
     Result delEnProImgUrl(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo);
 
-    @RequestMapping(value = "core/enquiryProduct/getIndexProductList",method = RequestMethod.POST)
-    PageHelp<EnquiryProductDto> getIndexProductList();
+
 }

@@ -269,4 +269,9 @@ public class ProductManageController {
         PageHelp<ProductDto> pageHelp = productManageService.getAssortProduct(so);
         return pageHelp;
     }
+
+    @RequestMapping(value = "getIndexFootProduct", method = RequestMethod.POST)
+    PageHelp<ProductDto> getIndexFootProduct(){
+        return productManageService.getIndexFootProduct();
+    }
 }

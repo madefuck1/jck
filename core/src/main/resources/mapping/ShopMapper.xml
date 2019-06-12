@@ -188,11 +188,20 @@
             concat(P.key5, '：', P.key5_value) as kv5,
             GetMinPriceByProductId(P.product_id) from t_product P
     )t_product on t_shop.shop_id = t_product.shop_id
-    where 1=1
+    where
+      t_shop.shop_status = 0
     <if test="shopName!=null and shopName!=''">
       and  t_shop.shop_name like concat(concat('%',#{shopName}),'%')
     </if>
   </select>
+
+    <select id="appGetCount" parameterType="com.soufang.base.search.shop.ShopSo" resultType="java.lang.Integer">
+        select count(0) from t_shop
+        where t_shop.shop_status = 0
+        <if test="shopName!=null and shopName!=''">
+            and  t_shop.shop_name like concat(concat('%',#{shopName}),'%')
+        </if>
+    </select>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Shop">
         update t_shop
