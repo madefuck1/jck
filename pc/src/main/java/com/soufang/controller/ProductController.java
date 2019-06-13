@@ -433,7 +433,7 @@ public class ProductController extends BaseController {
         assessSo.setProductId(productId);
         Map<String,Integer> allCount = assessFeign.getCount(assessSo);
         map.put("allCount",allCount);
-        return "product/introduction";
+        return "product/productDetail";
     }
 
     /**
