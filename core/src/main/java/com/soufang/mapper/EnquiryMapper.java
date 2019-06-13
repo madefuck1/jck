@@ -81,4 +81,6 @@ public interface EnquiryMapper {
     List<Enquiry> getMyPurchaseList(PurchaseSo purchaseSo);
 
     int  enquiryTableCount(EnquirySo EnquirySo);
+
+    Long selUserIdByEnquiryNumber(String enquiryNumber);
 }

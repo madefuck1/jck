@@ -346,4 +346,8 @@
       enquiry_remark = #{enquiryRemark,jdbcType=VARCHAR}
     where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>
+
+  <select id="selUserIdByEnquiryNumber" resultType="java.lang.Long" parameterType="java.lang.String">
+      SELECT user_id FROM t_enquiry WHERE enquiry_number=#{enquiryNumber}
+  </select>
 </mapper>

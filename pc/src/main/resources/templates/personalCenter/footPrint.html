@@ -52,6 +52,11 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
+                console.log(data);
+               /* if (data.data.length==0){
+					//没有数据
+
+				}*/
                 $.each(data.data, function (i, v) {
                     //当天数据-当数据卫当日-则添加到列表
                     console.log("时间判断")

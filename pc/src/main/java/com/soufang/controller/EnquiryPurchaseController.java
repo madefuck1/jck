@@ -5,6 +5,7 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
@@ -291,6 +292,38 @@ public class EnquiryPurchaseController extends BaseController{
     public List<Map<String, Object>> getIdName(){
         List<Map<String, Object>> list = assortFeign.getIdName();
         return list;
+    }
+
+
+    /**
+     * 判断是否为商家
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @MemberAccess
+    @RequestMapping(value = "isOrNoShopUser", method = RequestMethod.POST)
+    public Result isOrNoShopUser(HttpServletRequest request,@RequestBody EnquirySo enquirySo ){
+        Result result= new Result();
+        UserDto userInfo = getUserInfo(request);
+        //查询当前商铺信息
+        ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
+        if("".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
+            result.setMessage("不可以报价");
+        }else{
+        if(shopInfo.getShopStatus()==0){
+            //是商家 且询盘产品不是自己
+            //查询当前产品所属询盘用户信息
+            Long userId=enquiryFeign.selUserIdByEnquiryNumber(enquirySo.getEnquiryNumber());
+            if(!(userInfo.getUserId().equals(userId))){
+                //相等则是统一商家
+                result.setMessage("可以报价");
+            }
+        }else{
+            result.setMessage("不可以报价");
+        }
+        }
+        return result;
     }
 
     /**

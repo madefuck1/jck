@@ -199,10 +199,13 @@ public class EnquiryServiceImpl implements EnquiryService {
     /**
      * 修改询盘信息
      */
+    @Override
     public int updateEnquiry(EnquiryDto enquiryDto){
         try {
             Enquiry enquiry = new Enquiry();
             BeanUtils.copyProperties(enquiryDto,enquiry);
+            //审核失败改为待审核
+            enquiry.setEnquiryStatus(1);
             //修改询盘信息
             int i=enquiryMapper.updateByPrimaryKeySelective(enquiry);
             //循环修改询盘产品信息
@@ -224,6 +227,7 @@ public class EnquiryServiceImpl implements EnquiryService {
      * 删除询盘-产品-询价
      * @return
      */
+    @Override
     public int delEnquiry(String enquiryNumber){
         //通过enquiryNumber查出所有产品ID集合在所有产品ID找到-所有询价ID集合
         EnquirySo enquirySo = new EnquirySo();
@@ -240,5 +244,14 @@ public class EnquiryServiceImpl implements EnquiryService {
         return i;
     }
 
+    /**
+     * 查询询盘用户ID
+     * @param enquiryNumber
+     * @return
+     */
+    @Override
+   public Long selUserIdByEnquiryNumber(String enquiryNumber){
+        return enquiryMapper.selUserIdByEnquiryNumber(enquiryNumber);
+    }
 
 }

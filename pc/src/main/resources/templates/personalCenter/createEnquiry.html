@@ -58,12 +58,12 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="am-form-group pur_height">
+                       <!-- <div class="am-form-group pur_height">
                             <label class="am-form-label">求购状态</label>
                             <div class="am-form-content">
                                 <input id="enquiryStatus" style="border: 0px;outline:none;cursor: pointer;margin-top: 8px" value="待审核" readonly="readonly" />
                             </div>
-                        </div>
+                        </div>-->
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">产品名称</label>
                             <div class="am-form-content">
@@ -224,10 +224,6 @@
                 var value3=obj3[i].value;//获取当前选择项的值.
             }
         }
-           if(value1==null|value1==""){
-               alert("请选择分类信息");
-               return ;
-           }
 
            var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
            if(enquiryTitle==null|enquiryTitle==""){
@@ -250,6 +246,10 @@
                alert("求购数量只能输入数字");
                return;
            }
+        if(value1==null|value1==""){
+            alert("请选择分类信息");
+            return ;
+        }
            if (detailStreet==null || detailStreet==""){
                alert("请输入详细地址细心");
                return;

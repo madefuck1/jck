@@ -124,7 +124,6 @@
 <@override name="js">
 <script>
     $(function(){
-        console.log("默认加载");
         var enquiryProductId= $("#enquiryProductId").val();
         var str={enquiryProductId:enquiryProductId};
         //默认加载数据  enquiryTableMessage
@@ -141,9 +140,7 @@
                 var str=data.enquiryProductDto[0].purchases[0].purchaseNumber;
                 if (str==null || str=="null" ||str ==""){
                     $("#purchaseNumber").val(0);
-					console.log("没有报价信息");
                 }else{
-                    console.log("有报价信息");
                     $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
 				}
                 $("#strCreateTime").html(data.strCreateTime);
@@ -181,15 +178,30 @@
 
     //报价
     function PurchaseNow() {
-        var purchaseNumber=$("#purchaseNumber").val();
-        console.log(purchaseNumber)
-        if ( purchaseNumber!=0){
-            if(confirm("已经进行报价，请确认是否进行当前报价操作")){
-                toSubmit();
-            }
-        }else{
-            toSubmit();
-		}
+        var enquiryNumber=$("#enquiryNumber").val();
+        //通过查询SHOP信息判断是否存在商铺信息-判断不是商家则不能报价
+		//如果是自己发布的不能报价
+		var str = {enquiryNumber:enquiryNumber};
+        $.ajax({
+            url: "isOrNoShopUser",
+			data:JSON.stringify(str),
+            type: "post",
+            contentType: 'application/json; charset=UTF-8',
+            dataType: "json",
+            success: function (data) {
+                if (data.message=="可以报价"){
+                    var purchaseNumber=$("#purchaseNumber").val();
+                    if ( purchaseNumber!=0){
+                        if(confirm("已经进行报价，请确认是否进行当前报价操作")){
+                            toSubmit();
+                        }
+                    }else{
+                        toSubmit();
+					}
+				}
+           			 }
+        });
+
     }
 
     function toSubmit() {

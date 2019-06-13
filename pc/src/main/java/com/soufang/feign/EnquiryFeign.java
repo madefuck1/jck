@@ -56,4 +56,8 @@ public interface EnquiryFeign {
     @RequestMapping(value = "core/purchase/purchase",method = RequestMethod.POST)
     int purchase(@RequestBody PurchaseDto purchaseDto);
 
+    //查询询盘用户信息
+    @RequestMapping(value = "core/enquiry/selUserIdByEnquiryNumber",method = RequestMethod.POST)
+    public Long selUserIdByEnquiryNumber(String enquiryNumber);
+
 }

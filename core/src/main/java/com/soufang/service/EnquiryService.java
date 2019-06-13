@@ -73,4 +73,6 @@ public interface EnquiryService {
 
     //获取报价详情
     EnquiryDto getQuoteDetails(Long enquiryProductId);
+
+    Long selUserIdByEnquiryNumber(String enquiryNumber);
 }

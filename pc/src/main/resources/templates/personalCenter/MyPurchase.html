@@ -342,19 +342,7 @@ function liContent(v) {
 
 /*编辑/-带着编号跳转到修改页面 -将编号存入redis -  页面回显信息*/
 function updateEnquiry(enquiryNumber,isUpdate){
-    //var str={enquiryNumber:enquiryNumber};
-
-   /* $.ajax({
-        url : "toAddPurchase",
-        type : "post",
-        data:JSON.stringify(str),
-        contentType: 'application/json; charset=UTF-8',
-        dataType : "json",
-        success : function(data) {
-            console.log(data.enquiryNumber);*/
             window.location.href="/enquiry/create?enquiryNumber="+enquiryNumber+"&isUpdate="+isUpdate;
-     //   }
-    //});
 }
 <!--删除-->
 function delEnquiry(enquiryNumber){
@@ -373,24 +361,5 @@ function delEnquiry(enquiryNumber){
 		});
 }
 </script>
-<!--<script>
-    function addEnquiry() {
-        $.ajax({
-            url : "addEnquiry",
-            type : "post",
-            data:{},
-            contentType: 'application/json; charset=UTF-8',
-            dataType : "json",
-            success : function(data) {
-            }
-        });
-    }
-
-    function dateFormat_2(longTypeDate){
-        var longTypeDate=new Date(longTypeDate);
-        longTypeDate=longTypeDate.getFullYear()+longTypeDate.getDate()+longTypeDate.getDay();
-        return longTypeDate;
-    }
-</script>-->
 </@override>
 <@extends name="/common/layout/base.personalCenter.html"/>

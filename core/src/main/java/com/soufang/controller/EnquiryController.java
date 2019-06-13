@@ -277,4 +277,14 @@ public class EnquiryController {
         return result;
     }
 
+    /**
+     * 查询询盘用户信息
+     * @param enquiryNumber
+     * @return
+     */
+    @RequestMapping(value = "selUserIdByEnquiryNumber",method = RequestMethod.POST)
+    public Long selUserIdByEnquiryNumber(String enquiryNumber){
+        return  enquiryService.selUserIdByEnquiryNumber(enquiryNumber);
+    }
+
 }
