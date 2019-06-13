@@ -112,7 +112,6 @@
             }else if (orderType==1){
                 orderType="desc";
             }
-		console.log(orderType);
         var str={page:1,limit:10,
 					assortId:assortId,
 					enquiryStatus:3,
@@ -161,7 +160,7 @@
         var productUnit=productDto[0].productUnit;
         var enquiryProductId=productDto[0].enquiryProductId;
         var purchaseLength=0;
-        if (productDto[0].purchases.purchaseNumber!=undefined){
+        if (productDto[0].purchases[0].purchaseNumber!=undefined){
             purchaseLength=productDto[0].purchases.length;
 		}
 		var shopDto=v.shopDto;
