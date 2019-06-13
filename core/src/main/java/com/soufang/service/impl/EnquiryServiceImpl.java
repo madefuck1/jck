@@ -99,7 +99,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             //加入店铺信息
             ShopDto shopDto = new ShopDto();
             Shop shop= enquiry.getShop();
-            BeanUtils.copyProperties(enquiry, shopDto);
+            BeanUtils.copyProperties(shop, shopDto);
             enquiryDto.setShopDto(shopDto);
             List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
             for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
