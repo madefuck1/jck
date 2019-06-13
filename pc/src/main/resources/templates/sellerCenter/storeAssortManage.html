@@ -56,19 +56,6 @@
         </div>
     </div>
 </div>
-<!--确认框-->
-<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd"></div>
-        <div class="am-modal-bd">
-            确定要删除吗？
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-        </div>
-    </div>
-</div>
 <!--消息提醒框-->
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="my-message">
     <div class="am-modal-dialog" style="background: #a5d8a5">
@@ -122,25 +109,23 @@
     });
 
     function delAssort(obj) {
-        var exclusiveAssortId = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
-        $('#my-confirm').modal({
-            relatedElement: this,
-            onConfirm: function () {
-                $.ajax({
-                    url: '/store/delAssort/' + exclusiveAssortId,
-                    dataType: 'json',
-                    type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        if (data.success) {
-                            initAssort();
-                        }
+        var url = '/store/delAssort/' + $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
+        if(confirm("真的要删除分类吗？")){
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.success) {
+                        initAssort();
                     }
-                })
-            },
-            onCancel: function () {
-            }
-        });
+                }
+            })
+        }else{
+
+        }
+
     }
 
     function editAssort(obj) {

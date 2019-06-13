@@ -138,7 +138,14 @@
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
-                $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
+                var str=data.enquiryProductDto[0].purchases[0].purchaseNumber;
+                if (str==null || str=="null" ||str ==""){
+                    $("#purchaseNumber").val(0);
+					console.log("没有报价信息");
+                }else{
+                    console.log("有报价信息");
+                    $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
+				}
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
                 $("#statusMessage").html(data.statusMessage);
@@ -175,25 +182,33 @@
     //报价
     function PurchaseNow() {
         var purchaseNumber=$("#purchaseNumber").val();
-        if ( purchaseNumber != null){
+        console.log(purchaseNumber)
+        if ( purchaseNumber!=0){
             if(confirm("已经进行报价，请确认是否进行当前报价操作")){
-                var unitPrice=$("#unitPrice").val();
-                var enquiryProductId=$("#enquiryProductId").val();
-                var enquiryNumber=$("#enquiryNumber").val();
-                var remark=$("#remark").val();
-                var str={unitPrice:unitPrice,enquiryProductId:enquiryProductId,remark:remark,enquiryNumber:enquiryNumber};
-                $.ajax({
-                    url: "purchase",
-                    type: "post",
-                    data: JSON.stringify(str),
-                    contentType: 'application/json; charset=UTF-8',
-                    dataType: "json",
-                    success: function (data) {
-                        alert(data.message);
-                    }
-                });
+                toSubmit();
             }
-        }
+        }else{
+            toSubmit();
+		}
+    }
+
+    function toSubmit() {
+        var unitPrice=$("#unitPrice").val();
+        var enquiryProductId=$("#enquiryProductId").val();
+        var enquiryNumber=$("#enquiryNumber").val();
+        var remark=$("#remark").val();
+        var str={unitPrice:unitPrice,enquiryProductId:enquiryProductId,remark:remark,enquiryNumber:enquiryNumber};
+        $.ajax({
+            url: "purchase",
+            type: "post",
+            data: JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType: "json",
+            success: function (data) {
+                alert(data.message);
+                window.location.href="/enquiry/toPurchaseDetails?enquiryProductId="+enquiryProductId;
+            }
+        });
     }
 </script>
 </@override>

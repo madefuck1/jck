@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${contextPath}/Pagination/css/jquery.pagination.css">
 
 <style>
-    #contain,.list{
+    #contain, .list {
         height: auto;
     }
 </style>
@@ -19,12 +19,12 @@
 <#include "/common/includes/include.contain.html"/>
 <div id="search-shop">
     <!--<div class="shop-up">-->
-        <!--<ul>-->
-            <!--<li><a href="">单位性质：</a></li>-->
-            <!--<li class="first"><a href="">全部</a></li>-->
-            <!--<li><a href="">企业</a></li>-->
-            <!--<li><a href="">个体工商户</a></li>-->
-        <!--</ul>-->
+    <!--<ul>-->
+    <!--<li><a href="">单位性质：</a></li>-->
+    <!--<li class="first"><a href="">全部</a></li>-->
+    <!--<li><a href="">企业</a></li>-->
+    <!--<li><a href="">个体工商户</a></li>-->
+    <!--</ul>-->
     <!--</div>-->
     <div class="shop-down" id="shopList">
     </div>
@@ -42,42 +42,42 @@
 <script type="text/javascript">
     $(function () {
         var shopName = "${searchProductName!}";
-        init(1,shopName);
+        init(1, shopName);
         $("#search_type_name").html(text);
         $("#search_type").val(2);
     })
 
-    function init(page,shopName){
-        var data = {page:1,limit:20,shopName:shopName};
+    function init(page, shopName) {
+        var data = {page: page, limit: 20, shopName: shopName};
         $.ajax({
             url: "/shop/getShopList",
             type: "post",
             data: JSON.stringify(data),
-            contentType:"application/json",
+            contentType: "application/json",
             success: function (data) {
                 var html = "";
                 for (var i = 0; i < data.list.length; i++) {
-                    if(i % 3 == 2){
-                        html += '        <div class="shop-down1" style="margin-right: 0px;">\n' ;
-                    }else {
-                        html += '        <div class="shop-down1">\n' ;
+                    if (i % 3 == 2) {
+                        html += '        <div class="shop-down1" style="margin-right: 0px;">\n';
+                    } else {
+                        html += '        <div class="shop-down1">\n';
                     }
-                    html +=     '            <dl>\n' +
-                        '                <dt><img src="'+data.list[i].avatarUrl+'" alt="" width="80"></dt>\n' +
-                        '                <dd><h4>'+ data.list[i].shopName +'</h4></dd>\n' +
+                    html += '            <dl>\n' +
+                        '                <dt><img src="' + data.list[i].avatarUrl + '" alt="" width="80"></dt>\n' +
+                        '                <dd><h4>' + data.list[i].shopName + '</h4></dd>\n' +
                         '                <dd>\n' +
                         '                    <p>\n' +
                         '                        <span>经营类目：</span>\n' +
-                        '                        <span>'+ data.list[i].mainProducts +'</span>\n' +
+                        '                        <span>' + data.list[i].mainProducts + '</span>\n' +
                         '                    </p>\n' +
                         '                    <p>\n' +
                         '                        <span>经营范围：</span>\n' +
-                        '                        <span>'+ data.list[i].businessScope +'</span>\n' +
+                        '                        <span>' + data.list[i].businessScope + '</span>\n' +
                         '                    </p>\n' +
                         '                </dd>\n' +
-                        '                <dd><button>进入店铺</button></dd>\n' +
+                        '                <dd><button onclick="openStore(' + data.list[i].shopId + ')">进入店铺</button></dd>\n' +
                         '            </dl>\n' +
-                        '        </div>' ;
+                        '        </div>';
                 }
                 $("#shopList").empty();
                 $("#shopList").append(html);
@@ -88,7 +88,7 @@
                     items_per_page: 40,             //每页显示最大条数
                     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-                    current_page:page
+                    current_page: page
                 });
             }
         });
@@ -96,6 +96,11 @@
 
     function PageCallback(index) {
         Init(index);
+    }
+
+    function openStore(shopId) {
+        var url = '/shop/toStoreIndex?shopId=' + shopId;
+        window.open(url);
     }
 </script>
 </@override>

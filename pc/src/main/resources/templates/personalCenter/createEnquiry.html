@@ -38,7 +38,7 @@
                             <label class="am-form-label">发布时间</label>
                             <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
                                 <span class="am-input-group-btn am-datepicker-add-on">
-                                    <input type="text" id="createTime" class="am-form-field"  placeholder="请选择起始时间">
+                                    <input type="text" id="createTime" class="am-form-field"  placeholder="请选择发布时间">
                                 </span>
                             </div>
                         </div>
@@ -46,18 +46,26 @@
                             <label class="am-form-label">交付时间</label>
                             <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
                                 <span class="am-input-group-btn am-datepicker-add-on">
-                                    <input type="text" id="takeDate" class="am-form-field"  placeholder="请选择起始时间">
+                                    <input type="text" id="takeDate" class="am-form-field"  placeholder="请选择交付时间">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">报价截止</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="endTime" class="am-form-field"  placeholder="请选择报价截止时间">
                                 </span>
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">求购状态</label>
                             <div class="am-form-content">
-                                <input id="enquiryStatus" style="background-color: transparent;" value="求购中" readonly="readonly" />
+                                <input id="enquiryStatus" style="border: 0px;outline:none;cursor: pointer;margin-top: 8px" value="待审核" readonly="readonly" />
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">求购产品名称</label>
+                            <label class="am-form-label">产品名称</label>
                             <div class="am-form-content">
                                 <input id="productName" placeholder="如无纺布等" type="text">
                                 <input   type="hidden" id="enquiryProductId" name="enquiryProductId"  />
@@ -66,20 +74,38 @@
                         <div class="sale_cloum1" style="height: 110px;">
                             <label class="am-form-label" >求购图片</label>
                             <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
-                                <img class="sale_pic3" onclick="company(this)">
+                                <img class="sale_pic4" onclick="company(this)">
                                 <input type="file" id="file" style="display: none" onchange="showCompany(this)">
                             </div>
                         </div>
+                        <div id="showPhoto"></div>
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">求购量</label>
                             <div class="am-form-content">
-                                <input type="text" id="productNumber" class="pur_m" placeholder="请填写数量">
-                                <select id="productUnit" data-am-selected>
-                                    <option value="a">米</option>
-                                    <option value="b" selected>公斤</option>
+                                <input type="text" id="productNumber"class="pur_enquirm" placeholder="请填写数量">
+                                <select id="productUnit" style="width:150px;padding: 5px;">
+                                    <option value="米">米</option>
+                                    <option value="公斤" >公斤</option>
+                                    <option value="千克" selected>千克</option>
+                                    <option value="公升" >公升</option>
+                                    <option value="箱" >箱</option>
+                                    <option value="包" >包</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">产品分类</label>
+                            <div class="am-form-content">
+                                <select id="productSort1"  style="width:150px;padding: 5px;float: left;" onchange="toFindSort(1)">
+                                    <option value="" selected>请选择</option>
+                                </select>
+                                <select id="productSort2"  style="width:150px;padding: 5px;float: left;margin-left:5px;" onchange="toFindSort(2)">
+                                </select>
+                                <select id="productSort3"  style="width:150px;padding: 5px;float: left;margin-left:5px;">
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">详细地址</label>
                             <div class="am-form-content">
@@ -121,8 +147,48 @@
            //查询详情信息
            details(enquiryNumber);
        }
-
+        findSort(0,0);
     });
+
+    //对类别下拉框赋值
+    function  findSort(sortNum,sortName) {
+        $.get("/pc/commonPullDown/getAssortAByParentId/"+sortNum,function (data) {
+            if (sortName==0){
+                $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if (sortName==1){
+                $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if (sortName==2){
+                $("#productSort3").html("");
+            }
+            $.each(data, function (i, v) {
+                var whatever = liContentSort(v,sortName+1);
+                if (sortName==0){
+                    $("#productSort1").append(whatever);
+                }else if(sortName==1){
+                    $("#productSort2").append(whatever);
+                }else if (sortName==2){
+                    $("#productSort3").append(whatever);
+                }
+
+            });
+        });
+    }
+
+    //下拉框发生变化获取对应数据
+    function toFindSort(selectNum) {
+        var key = document.getElementById("productSort1");
+        var value = key.options[key.selectedIndex].value;
+        findSort(value,selectNum);
+    }
+
+    //插入HTML下拉框类别
+    function liContentSort(v,sortName) {
+        var li=$("<option value='"+v.assortId+"'> "+v.assortName+"</option>");
+        return li;
+    }
+
     var file;
     $('#file').on('change', function () {
         file = this.files[0];
@@ -142,210 +208,290 @@
         var productNumber = $("#productNumber").val();
         var detailStreet=$("#detailStreet").val();
 
-        var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
-        if(enquiryTitle==null|enquiryTitle==""){
-            alert("请输入求购标题");
-            return ;
-        }else if(len>80){
-            alert("求购标题不得超过40个汉字");
-            return;
-        }
+        //获取下拉框类别的值
+       var key1 = document.getElementById("productSort1");
+        var value1 = key1.options[key1.selectedIndex].value;
 
-        if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
-            alert("交付时间必须大于发起求购时间");
-            return;
-        }else if(takeDate==""||takeDate==null){
-            alert("请选择交付时间");
-            return;
+        var obj=document.getElementById("productSort2");
+        for(var i=0;i<obj.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj[i].selected==true) {
+                var value2=obj[i].value;//获取当前选择项的值.
+            }
         }
-        var re = /^[1-9]+[0-9]*]*$/;
-        if(!re.test(productNumber)){
-            alert("求购数量只能输入数字");
-            return;
+        var obj3=document.getElementById("productSort3");
+        for(var i=0;i<obj3.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj3[i].selected==true) {
+                var value3=obj3[i].value;//获取当前选择项的值.
+            }
         }
-        if (detailStreet==null || detailStreet==""){
-            alert("请输入详细地址细心");
-            return;
-        }
-        if(isUpdate==""||isUpdate==null){
-            //新增
-            createEnquiry();
+           if(value1==null|value1==""){
+               alert("请选择分类信息");
+               return ;
+           }
+
+           var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
+           if(enquiryTitle==null|enquiryTitle==""){
+               alert("请输入求购标题");
+               return ;
+           }else if(len>80){
+               alert("求购标题不得超过40个汉字");
+               return;
+           }
+
+           if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
+               alert("交付时间必须大于发起求购时间");
+               return;
+           }else if(takeDate==""||takeDate==null){
+               alert("请选择交付时间");
+               return;
+           }
+           var re = /^[1-9]+[0-9]*]*$/;
+           if(!re.test(productNumber)){
+               alert("求购数量只能输入数字");
+               return;
+           }
+           if (detailStreet==null || detailStreet==""){
+               alert("请输入详细地址细心");
+               return;
+           }
+           formData = new FormData()
+           formData.append("file", file);
+           formData.append("enquiryTitle", $("#enquiryTitle").val());
+           formData.append("enquiryNumber", $("#enquiryNumber").val());
+           formData.append("createTime", $("#createTime").val());
+           formData.append("takeDate", $("#takeDate").val());
+           formData.append("productName", $("#productName").val());
+           formData.append("productUnit", $("#productUnit").val());
+           formData.append("detailStreet", $("#detailStreet").val());
+           formData.append("enquiryRemark", $("#enquiryRemark").val());
+           formData.append("productName", $("#productName").val());
+           formData.append("productNumber",$("#productNumber").val());
+           formData.append("enquiryProductId",$("#enquiryProductId").val());
+           formData.append("endTime",$("#endTime").val());
+
+        if (value3 != null | value3!=undefined){
+            formData.append("productAssort",value3);
+        }else if (value2 != null |value2 !=undefined){
+            formData.append("productAssort",value2);
         }else{
-            //修改
-            updateSubmit()
+            formData.append("productAssort",value1);
         }
-    });
+           if(isUpdate==""||isUpdate==null){
+               //新增
+              createEnquiry(formData);
+           }else{
+               //修改
+               updateSubmit(formData)
+           }
+       });
 
-    //修改
-    function updateSubmit(){
-        formData = new FormData()
-        formData.append("file", file);
-        formData.append("enquiryTitle", $("#enquiryTitle").val());
-        formData.append("enquiryNumber", $("#enquiryNumber").val());
-        formData.append("createTime", $("#createTime").val());
-        formData.append("takeDate", $("#takeDate").val());
-        formData.append("productName", $("#productName").val());
-        formData.append("productUnit", $("#productUnit").val());
-        formData.append("detailStreet", $("#detailStreet").val());
-        formData.append("enquiryRemark", $("#enquiryRemark").val());
-        formData.append("productName", $("#productName").val());
-        formData.append("productNumber",$("#productNumber").val());
-        formData.append("enquiryProductId",$("#enquiryProductId").val());
-        $.ajax({
-            url: "updateEnquiryAndProduct",
-            type: "post",
-            cache: false,
-            data: formData,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                //需要弹框操作失败与否
-                //需要返回列表页面
-                window.location.href="/personalCenter/toEnquiryManage";
-            }
-        });
-    }
+       //修改
+       function updateSubmit(formData){
+           $.ajax({
+               url: "updateEnquiryAndProduct",
+               type: "post",
+               cache: false,
+               data: formData,
+               dataType: "json",
+               processData: false,
+               contentType: false,
+               success: function (data) {
+                   //需要弹框操作失败与否
+                   //需要返回列表页面
+                   alert(data.message);
+                   window.location.href="/personalCenter/toEnquiryManage";
+               }
+           });
+       }
 
-    //新增
-    function createEnquiry(){
-        console.log("新增");
-        formData = new FormData()
-        formData.append("file", file);
-        formData.append("enquiryTitle", $("#enquiryTitle").val());
-        formData.append("enquiryNumber", $("#enquiryNumber").val());
-        formData.append("createTime", $("#createTime").val());
-        formData.append("takeDate", $("#takeDate").val());
-        formData.append("productName", $("#productName").val());
-        formData.append("productUnit", $("#productUnit").val());
-        formData.append("detailStreet", $("#detailStreet").val());
-        formData.append("enquiryRemark", $("#enquiryRemark").val());
-        formData.append("productNumber",$("#productNumber").val());
-        console.log("+++++");
-        $.ajax({
-            url: "createEnquiry",
-            type: "post",
-            cache: false,
-            data: formData,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                //上传成功的处理
-                if (data.success==true) {
-                    alert(data.message);
-                    window.location.href="/personalCenter/toEnquiryManage";
-                } else {
-                }
-            }
-        });
-    }
+       //新增
+       function createEnquiry(formData){
+           $.ajax({
+               url: "createEnquiry",
+               type: "post",
+               cache: false,
+               data: formData,
+               dataType: "json",
+               processData: false,
+               contentType: false,
+               success: function (data) {
+                   //上传成功的处理
+                   if (data.success==true) {
+                       alert(data.message);
+                       window.location.href="/personalCenter/toEnquiryManage";
+                   } else {
+                   }
+               }
+           });
+       }
 
-    //查询详情信息并-赋值表单
-    function details(enquiryNumber){
-        var str={enquiryNumber:enquiryNumber};
-        $.ajax({
-            url : "selEnquiryByNumber",
-            type : "post",
-            data:JSON.stringify(str),
-            contentType: 'application/json; charset=UTF-8',
-            dataType : "json",
-            success : function(data) {
-                $("#enquiryTitle").val(data.enquiryTitle);
-                $("#enquiryNumber").val(data.enquiryNumber);
-                $("#createTime").val(longFormatDate(data.createTime));
-                $("#takeDate").val(longFormatDate(data.takeDate));
-                $("#detailStreet").val(data.takeAddress);
-                $("#enquiryRemark").val(data.enquiryRemark);
-                $("#enquiryStatus").val(data.statusMessage);
-                $.each(data.enquiryProductDto, function (i, v) {
-                    //需要循环插入产品
-                    var whatever = liContent(v);
-                    $("#showPhoto").append(whatever)
-                });
-            }
-        });
-    }
+       //查询详情信息并-赋值表单
+       function details(enquiryNumber){
+           var str={enquiryNumber:enquiryNumber};
+           $.ajax({
+               url : "selEnquiryByNumber",
+               type : "post",
+               data:JSON.stringify(str),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   $("#enquiryTitle").val(data.enquiryTitle);
+                   $("#enquiryNumber").val(data.enquiryNumber);
+                   $("#createTime").val(longFormatDate(data.createTime));
+                   $("#takeDate").val(longFormatDate(data.takeDate));
+                   $("#endTime").val(longFormatDate(data.endTime));
+                   $("#detailStreet").val(data.takeAddress);
+                   $("#enquiryRemark").val(data.enquiryRemark);
+                   $("#enquiryStatus").val(data.statusMessage);
+                   $.each(data.enquiryProductDto, function (i, v) {
+                       //需要循环插入产品
+                       var whatever = liContent(v);
+                       $("#showPhoto").append(whatever)
+                   });
+               }
+           });
+       }
 
-    function liContent(v){
-        var productImage= v.productImage;
-        var productName=v.productName;
-        var enquiryProductId = v.enquiryProductId;
-        console.log(enquiryProductId);
-        $("#enquiryProductId").val(enquiryProductId);
-        $("#productNumber").val(v.productNumber);
-        $("#productName").val(productName);
-        $("#productUnit").val(v.productUnit);
-        var li=$("<div class='goods'>"
-                    +"<div class='goods-box first-box'>"
-                        +"<div class='goods-pic'>"
-                            +"<div class='goods-pic-box'>"
-                                +"<a class='goods-pic-link' target='_blank' href='#' title='"+productName+"'>"
-                                +"<img src='"+productImage+"' class='goods-img'></a>"
-                            +"</div>"
-                            +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'></i></a>"
-                         +"</div> " +
-                        "</div>" +
-                    "</div>"
-        );
-            return li;
-    }
+       function liContent(v){
+           var productImage= v.productImage;
+           var productName=v.productName;
+           var enquiryProductId = v.enquiryProductId;
+           var productAssort=v.productAssort;
+           giveAssortValue(productAssort);
+           $("#enquiryProductId").val(enquiryProductId);
+           $("#productNumber").val(v.productNumber);
+           $("#productName").val(productName);
+           $("#productUnit").val(v.productUnit);
 
-    //删除照片地址-删除照片
-    function delEnProImgUrl(enquiryProductId){
-        var str={enquiryProductId:enquiryProductId};
-        $.ajax({
-            url : "delEnProImgUrl",
-            type : "post",
-            data:JSON.stringify(str),
-            contentType: 'application/json; charset=UTF-8',
-            dataType : "json",
-            success : function(data) {
-                alert(data.message);
-                //需要提示删除成功-更新页面数据
-            }
-        });
-    }
+           var li=$("<div class='goods'>"
+                       +"<div class='goods-box first-box'>"
+                           +"<div class='goods-pic'>"
+                               +"<div class='goods-pic-box'>"
+                                   +"<img src='"+productImage+"' class='goods-img' style='height: 200px;width: 300px;'>"
+                               +"</div>"
+                               +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'>删除</i></a>"
+                            +"</div> " +
+                           "</div>" +
+                       "</div>"
+           );
+               return li;
+       }
 
-    function longFormatDate(longTypeDate) {
-        var datetimeType = "";
-        var date = new Date();
-        date.setTime(longTypeDate);
-        datetimeType+= date.getFullYear();   //年  
-        datetimeType+= "-" + getMonth(date); //月   
-        datetimeType+= "-" + getDay(date);   //日  
-        return datetimeType;
-    }
-    //返回月   
-    function getMonth(date){
-        var month = "";
-        month = date.getMonth() + 1;
-        if(month<10){
-            month = "0" + month;
-        }
-        return month;
-    }
-    //返回日 
-    function getDay(date){
-        var day = "";
-        day = date.getDate();
-        if(day<10){
-            day = "0" + day;
-        }
-        return day;
-    }
-    function company(obj){
-        $(obj).parent().find("input[type=file]").click();
-    }
+       //删除照片地址-删除照片
+       function delEnProImgUrl(enquiryProductId){
+           var str={enquiryProductId:enquiryProductId};
+           $.ajax({
+               url : "delEnProImgUrl",
+               type : "post",
+               data:JSON.stringify(str),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   alert(data.message);
+                   //需要提示删除成功-更新页面数据
+               }
+           });
+       }
 
-    function showCompany(obj){
-        var reads= new FileReader();
-        var file=obj.files[0];
-        reads.readAsDataURL(file);
-        reads.onload = function (e) {
-            $(obj).parent().find("img").first().attr("src",this.result);
-        };
-    }
+       function longFormatDate(longTypeDate) {
+           var datetimeType = "";
+           var date = new Date();
+           date.setTime(longTypeDate);
+           datetimeType+= date.getFullYear();   //年  
+           datetimeType+= "-" + getMonth(date); //月   
+           datetimeType+= "-" + getDay(date);   //日  
+           return datetimeType;
+       }
+       //返回月   
+       function getMonth(date){
+           var month = "";
+           month = date.getMonth() + 1;
+           if(month<10){
+               month = "0" + month;
+           }
+           return month;
+       }
+       //返回日 
+       function getDay(date){
+           var day = "";
+           day = date.getDate();
+           if(day<10){
+               day = "0" + day;
+           }
+           return day;
+       }
+       function company(obj){
+           $(obj).parent().find("input[type=file]").click();
+       }
+
+       function showCompany(obj){
+           var reads= new FileReader();
+           var file=obj.files[0];
+           reads.readAsDataURL(file);
+           reads.onload = function (e) {
+               $(obj).parent().find("img").first().attr("src",this.result);
+           };
+       }
+
+       function giveAssortValue(productAssort) {
+           var productAssort=productAssort;
+           var key1 = document.getElementById("productSort1");
+           var obj=document.getElementById("productSort2");
+           var obj3=document.getElementById("productSort3");
+           var stepSon=0;
+            var parentAssortId;
+           var str2={productAssort:productAssort};
+           $.ajax({
+               url : "selParentIdByAssortId",
+               type : "post",
+               data:JSON.stringify(str2),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   parentAssortId=data;
+                   console.log(parentAssortId);
+                   for (var i = 0 ; i<key1.options.length;i++){
+                       if (parentAssortId==key1.options[i].value){
+                           key1.options[i].selected = true;
+                           toFindSort(1);
+                           toFindSort(2);
+                           stepSon=1;
+                           console.log("1");
+                           break;
+                       }
+                   }
+                   if (stepSon!=1){
+                       var strs={productAssort:parentAssortId};
+                       var  parentAssortId2;
+                       $.ajax({
+                           url : "selParentIdByAssortId",
+                           type : "post",
+                           data:JSON.stringify(strs),
+                           contentType: 'application/json; charset=UTF-8',
+                           dataType : "json",
+                           success : function(data) {
+                                parentAssortId2=data;
+                               console.log(data);
+                               for (var i = 0 ; i<key1.length;i++){
+                                   if (parentAssortId2==key1.options[i].value){
+                                       console.log("第二次赋值");
+                                       console.log("1");
+                                       key1.options[i].selected = true;
+                                       toFindSort(1);
+                                       toFindSort(2);
+                                       break;
+                                   }
+                               }
+
+                           }
+                       });
+                   }
+               }
+           });
+
+
+
+       }
 </script>
 </@override>
 <@extends name="/common/layout/base.personalCenter.html"/>

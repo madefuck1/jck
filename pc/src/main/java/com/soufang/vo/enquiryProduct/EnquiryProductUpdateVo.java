@@ -27,4 +27,6 @@ public class EnquiryProductUpdateVo {
 
     private String enquiryProductId;
 
+    private Long productAssort;
+
 }
