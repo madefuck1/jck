@@ -18,4 +18,7 @@ public interface ShopFeign {
 
     @RequestMapping(value = "/core/shop/appGetList",method = RequestMethod.POST)
     PageHelp<ShopDto> appGetList(@RequestBody ShopSo shopSo);
+
+    @RequestMapping(value = "/core/shop/getDetail",method = RequestMethod.POST)
+    ShopDto getShopInfo(@RequestBody Long shopId);
 }
