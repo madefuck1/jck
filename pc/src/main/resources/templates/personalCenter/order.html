@@ -21,12 +21,12 @@
                 <hr/>
                 <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
                     <ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs listType">
-                        <li><a onclick="toList('?page=1&number=1')" data-param="number=1" >所有订单</a></li>
-                        <li><a onclick="toList('?page=1&orderStatus=3&number=2')" data-param="number=2">待付款</a></li>
-                        <li><a onclick="toList('?page=1&orderStatus=6&number=3')" data-param="number=3">待发货</a></li>
-                        <li><a onclick="toList('?page=1&orderStatus=7&number=4')" data-param="number=4">待收货</a></li>
-                        <li><a onclick="toList('?page=1&orderStatus=8&number=5')" data-param="number=5">待评价</a></li>
-                        <li><a onclick="toList('?page=1&orderType=3&number=6')" data-param="number=6">线下订单</a></li>
+                        <li class="am-active"><a data-status="1">所有订单</a></li>
+                        <li><a data-status="2">待付款</a></li>
+                        <li><a data-status="3">待发货</a></li>
+                        <li><a data-status="4">待收货</a></li>
+                        <li><a data-status="5">待评价</a></li>
+                        <li><a data-status="6">线下订单</a></li>
                     </ul>
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active">
@@ -55,85 +55,6 @@
                             </div>
                             <div class="order-main">
                                 <div class="order-list">
-                                    <#list orderShopList as orderShop>
-                                    <div class="order-status5">
-                                        <div class="order-title">
-                                            <div class="dd-num">订单编号：<a href="javascript:;">${orderShop.orderNumber}</a></div>
-                                            <span>成交时间：${orderShop.createTimeString}</span>
-                                            <span class="order_shop">${orderShop.shopName}</span>
-                                        </div>
-                                        <div class="order-content">
-                                            <div class="order-left">
-                                                <#list orderShop.orderProducts as orderProduct>
-                                                <ul class="item-list">
-                                                    <li class="td td-item">
-                                                        <div class="item-pic">
-                                                            <a class="J_MakePoint" onclick="javascript:window.open('/product/toDetail?productId='+${orderProduct.productId},'_blank');"href="#">
-                                                                <img src="${orderProduct.productImage}" class="itempic">
-                                                            </a>
-                                                        </div>
-                                                        <div class="item-info">
-                                                            <div class="item-basic-info">
-                                                                    <a onclick="javascript:window.open('/product/toDetail?productId='+${orderProduct.productId},'_blank');"href="#">
-                                                                    <p>${orderProduct.productName}</p>
-                                                                    <p class="info-little">颜色：${orderProduct.productColor}
-                                                                        <br>规格：${orderProduct.productSpec} </p>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="td td-price">
-                                                        <div class="item-price">
-                                                            ${orderProduct.productPrice?string('0.00')}
-                                                        </div>
-                                                    </li>
-                                                    <li class="td td-number">
-                                                        <div class="item-number">
-                                                            <span>×</span>${orderProduct.productNumber}
-                                                        </div>
-                                                    </li>
-                                                    <li class="td td-operation">
-                                                        <div class="item-operation">
-                                                            ${(orderProduct.productPrice*orderProduct.productNumber)?string('0.00')}
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                </#list>
-                                            </div>
-                                            <div class="order-right">
-                                                <li class="td td-amount">
-                                                    <div class="item-amount">
-                                                        合计：${orderShop.sumPrice?string('0.00')}
-
-                                                    </div>
-                                                </li>
-                                                <div class="move-right">
-                                                    <li class="td td-status">
-                                                        <div class="item-status">
-                                                            <p class="Mystatus">${orderShop.statusMessage}</p>
-                                                            <p class="order-info"><a href="/orderManager/toDetail/${orderShop.orderShopId?c}">订单详情</a></p>
-
-                                                        </div>
-                                                    </li>
-                                                    <li class="td td-change order_pay">
-                                                        <#if orderShop.orderShopStatus ==3 || orderShop.orderShopStatus ==5>
-                                                        <div class="am-btn am-btn-danger" onclick="onPay(${orderShop.orderShopId?c});">支付</div>
-                                                        </#if>
-                                                        <#if orderShop.orderShopStatus ==1 || orderShop.orderShopStatus ==2 || orderShop.orderShopStatus ==3>
-                                                        <div class="am-btn am-btn-danger" onclick="cancelOrder(${orderShop.orderShopId?c});" >取消</div>
-                                                        </#if>
-                                                        <#if orderShop.orderShopStatus ==0 || orderShop.orderShopStatus ==9>
-                                                        <div class="am-btn am-btn-danger" onclick="delOrder(${orderShop.orderShopId?c});">删除</div>
-                                                        </#if>
-                                                        <#if orderShop.orderShopStatus ==8 >
-                                                        <div class="am-btn am-btn-danger" onclick="putAssess('${orderShop.orderNumber}')">去评价</div>
-                                                        </#if>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </#list>
                                 </div>
                                 <!--分页 -->
                                 <div id="pagination" style="text-align: center;padding-top: 12px"></div>
@@ -156,48 +77,39 @@
 
 <script type="text/javascript">
 
+    $(".listType li a").bind("click",function () {
+        $(this).parents(".listType").find("li").removeClass("am-active");
+        $(this).parent().addClass("am-active");
+        Init(0);
+    })
+
     //去评价
     function putAssess(orderNumber) {
         window.location.href = '/personalCenter/toPutAssess/'+orderNumber;
     };
 
     $(function () {
-        var urlParameters = location.search
-        if (urlParameters != "/") {
-            $(".listType").find("a").each(function () {
-                $(this).parent().removeClass("am-active");
-                if(urlParameters.indexOf($(this).attr('data-param')) > 0){
-                    $(this).parent().addClass("am-active");
-                }
-            })
-        }
-        // pagination 分页插件
-        $("#pagination").pagination(${orderCount!0}, {   //total(一共多少条记录)不能少
-            callback: PageCallback,
-            prev_text: '上一页',
-            next_text: '下一页',
-            items_per_page: 5,             //每页显示最大条数
-            num_display_entries: 4,        //连续分页主体部分显示的分页条目数
-            num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-        });
-        function PageCallback(index, jq) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
-            Init(index);
-        }
-
-        orderStatus = ${orderStatus!};
-        orderType = ${orderType};
-
+        Init(0);
     });
 
-    function toList(param) {
-        window.location.href = "/orderManager/toOrderManager"+param ;
+    function PageCallback(index) {
+        Init(index);
     }
 
-    function Init(pageIndex) {      //这个参数就是点击的那个分页的页数索引值，第一页为0，上面提到了，下面这部分就是AJAX传值了。
-
-        $.get("/orderManager/clickPage?orderType=" + orderType + "&orderStatus="
-            + orderStatus + "&pageIndex=" + pageIndex, function (result) {
+    function Init(pageIndex) {
+        var data = $(".am-active").find("a").attr("data-status");
+        $.get("/orderManager/clickPage?data=" + data + "&pageIndex=" + pageIndex, function (result) {
             loadOrderList(result);
+            // pagination 分页插件
+            $("#pagination").pagination(result.count, {   //total(一共多少条记录)不能少
+                callback: PageCallback,
+                prev_text: '上一页',
+                next_text: '下一页',
+                items_per_page: 5,             //每页显示最大条数
+                num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                current_page:pageIndex
+            });
         });
     }
 
