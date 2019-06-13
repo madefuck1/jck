@@ -148,12 +148,13 @@ img {
         max-width: 600px;
     }
 
-    textarea {
-        min-height: 120px;
+    .textarea {
+        min-height: 75px;
         border: 1px solid #F5F8FA;;
         padding: 10px;
         margin: 0px 0px;
     }
+
 
     .filePic {
         position: absolute;

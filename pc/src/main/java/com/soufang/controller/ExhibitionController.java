@@ -45,7 +45,6 @@ public class ExhibitionController {
      * @param model
      * @return
      */
-    @MemberAccess
     @RequestMapping(value = "toExhibition", method = RequestMethod.GET)
     public String toExhibition(HttpServletRequest request, ModelMap model) {
         return "exhibition/exhibition";
@@ -57,7 +56,6 @@ public class ExhibitionController {
      * @param model
      * @return
      */
-    @MemberAccess
     @RequestMapping(value = "toExhibitionDetail", method = RequestMethod.GET)
     public String toExhibitionDetail(String exhibitionId, ModelMap model) {
         model.put("exhibitionId",exhibitionId);
@@ -69,7 +67,6 @@ public class ExhibitionController {
      * @return
      */
     @ResponseBody
-    @MemberAccess
     @RequestMapping(value = "selExhibitionList",method = RequestMethod.POST)
     public PageHelp<ExhibitionDto> selExhibitionList(@RequestBody ExhibitionDetailVo exhibitionDetailVo){
         ExhibitionSo exhibitionSo =new ExhibitionSo();
