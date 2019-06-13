@@ -222,4 +222,9 @@
         SELECT assort_id AS productAssort FROM t_assort WHERE assort_name=#{assortName}
     </select>
 
+    <!--查询上级ID-->
+    <select id="selParentIdByAssortId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select assort_id from t_assort where assort_id=(select parent_id from t_assort where assort_id=#{productAssort})
+    </select>
+
 </mapper>
