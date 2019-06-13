@@ -16,4 +16,7 @@ public interface CommonPullDownService {
     List<AssortDto> getAssortByParentId(Long parentId);
 
     List<AssortDto> getAssortAByParentId(Long parentId);
+
+    List<AssortDto> selUnderAssort(Long assortId);
+
 }

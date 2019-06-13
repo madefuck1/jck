@@ -138,21 +138,15 @@
         });
 	});
         function liContent(v){
+            console.log(v);
             var purchases=v.purchases;
             console.log(purchases);
             var li;
             var tables="";
 			for(var i = 0 ;i< purchases.length ; i++) {
-			    if (purchases[i].purchaseNumber==null||urchases[i].purchaseNumber==null){
-					tables=$("<tbody><tr colspan='5'>"
-                    +"<td colspan='5'>当前无报价信息</td>"
-                        +"</tr>"
-                        +"</tbody>"
-                    );
-				}else{
                 var offerTime = purchases[i].strOfferTime;
-                //var shopName=v.shopDto.shopName;
-                var shopName="杭州私房公司";
+                var shopName=v.shopName;
+                //var shopName="杭州私房公司";
                 var unitPrice = purchases[i].unitPrice;
                 var productUnit = v.productUnit;
                 var remark = purchases[i].remark;
@@ -162,8 +156,7 @@
                     + "<td>" + shopName + "</td>"
                     + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
                     + "<td>" + remark + "</td>"
-                    + "<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",1" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(" + purchaseNumber + ",0" + ")'>拒绝</a></td>"
-            }
+                    + "<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
 				 tables=$("<tbody><tr>"
 						+li
                     +"</tr>"
@@ -175,7 +168,7 @@
     function isUseRejused(purchaseNumber,offStatus){
 		var str ={purchaseNumber:purchaseNumber,offStatus:offStatus};
         $.ajax({
-            url: "selectProductById",
+            url: "acceptPurchase",
             type: "post",
             data: JSON.stringify(str),
             contentType: 'application/json; charset=UTF-8',

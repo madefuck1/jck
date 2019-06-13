@@ -1,6 +1,7 @@
 package com.soufang.controller;
 
 import com.soufang.base.Result;
+import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
@@ -28,10 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -189,7 +187,7 @@ public class EnquiryPurchaseController extends BaseController{
      */
     @ResponseBody
     @MemberAccess
-    @RequestMapping(value = "selParentIdByAssortId",method = RequestMethod.POST)
+    @RequestMapping(value = "selParentIdByAssortId",method = RequestMethod.GET)
     public Long selParentIdByAssortId(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo){
       return  assortFeign.selParentIdByAssortId(enquiryProductUpdateVo.getProductAssort());
     }

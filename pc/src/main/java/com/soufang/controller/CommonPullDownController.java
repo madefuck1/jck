@@ -35,4 +35,11 @@ public class CommonPullDownController {
         return mapListOption;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "selUnderAssort/{assortId}", method = RequestMethod.GET)
+    public List<AssortDto> selUnderAssort(@PathVariable Long assortId) {
+        List<AssortDto> mapListOption = commonPullDownFeign.selUnderAssort(assortId);
+        return mapListOption;
+    }
+
 }

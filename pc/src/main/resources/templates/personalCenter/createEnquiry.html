@@ -150,27 +150,14 @@
         findSort(0,0);
     });
 
-    //对类别下拉框赋值
+    //对类别下拉框赋值-初始化
     function  findSort(sortNum,sortName) {
         $.get("/pc/commonPullDown/getAssortAByParentId/"+sortNum,function (data) {
-            if (sortName==0){
                 $("#productSort2").html("");
                 $("#productSort3").html("");
-            }else if (sortName==1){
-                $("#productSort2").html("");
-                $("#productSort3").html("");
-            }else if (sortName==2){
-                $("#productSort3").html("");
-            }
             $.each(data, function (i, v) {
-                var whatever = liContentSort(v,sortName+1);
-                if (sortName==0){
+                var whatever = liContentSort(v);
                     $("#productSort1").append(whatever);
-                }else if(sortName==1){
-                    $("#productSort2").append(whatever);
-                }else if (sortName==2){
-                    $("#productSort3").append(whatever);
-                }
 
             });
         });
@@ -178,13 +165,40 @@
 
     //下拉框发生变化获取对应数据
     function toFindSort(selectNum) {
-        var key = document.getElementById("productSort1");
-        var value = key.options[key.selectedIndex].value;
-        findSort(value,selectNum);
+        var key;
+        var sortNum;
+        if (selectNum==1){
+             key = document.getElementById("productSort1");
+             sortNum = key.options[key.selectedIndex].value;
+        }else{
+             key = document.getElementById("productSort2");
+             sortNum = key.options[key.selectedIndex].value;
+        }
+        findMoreSort(sortNum,selectNum);
+    }
+    //对类别下拉框赋值
+    function  findMoreSort(sortNum,sortName) {
+        $.get("/pc/commonPullDown/selUnderAssort/"+sortNum,function (data) {
+           if (sortName==1){
+               $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if(sortName==2){
+               $("#productSort3").html("");
+           }
+            $.each(data, function (i, v) {
+                var whatever = liContentSort(v);
+                if(sortName==1){
+                    $("#productSort2").append(whatever);
+                    toFindSort(2);
+                }else if (sortName==2){
+                    $("#productSort3").append(whatever);
+                }
+            });
+        });
     }
 
     //插入HTML下拉框类别
-    function liContentSort(v,sortName) {
+    function liContentSort(v) {
         var li=$("<option value='"+v.assortId+"'> "+v.assortName+"</option>");
         return li;
     }

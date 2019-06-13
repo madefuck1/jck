@@ -39,4 +39,6 @@ public interface AssortMapper {
     Long getAssortIdByName(String assortName);
 
     Long selParentIdByAssortId(Long parentId);
+
+    List<AssortDto> selUnderAssort(Long assordId);
 }

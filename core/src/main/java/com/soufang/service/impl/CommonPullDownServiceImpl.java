@@ -93,4 +93,8 @@ public class CommonPullDownServiceImpl implements CommonPullDownService {
     public List<AssortDto> getAssortAByParentId(Long parentId) {
         return assortMapper.getAssortAByParentId(parentId);
     }
+    @Override
+   public List<AssortDto> selUnderAssort(Long assortId){
+       return assortMapper.selUnderAssort(assortId);
+    }
 }

@@ -30,6 +30,10 @@ public interface CommonPullDownFeign {
     @RequestMapping(value = "/core/commonPullDown/getAssortAByParentId",method = RequestMethod.POST)
     List<AssortDto> getAssortAByParentId(Long parentId);
 
+
+    @RequestMapping(value = "/core/commonPullDown/selUnderAssort",method = RequestMethod.POST)
+    List<AssortDto> selUnderAssort(Long assortId);
+
     @RequestMapping(value = "/core/assort/getDetail",method = RequestMethod.POST)
     AssortDto detail(@RequestBody Long assortId);
 

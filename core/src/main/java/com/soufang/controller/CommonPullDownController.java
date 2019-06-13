@@ -73,6 +73,16 @@ public class CommonPullDownController {
         return commonPullDownService.getAssortAByParentId(parentId);
     }
 
+    /**
+     * 根据当前ID查询下面所有ID
+     * @param assortId
+     * @return
+     */
+    @RequestMapping(value = "selUnderAssort",method = RequestMethod.POST)
+    public List<AssortDto> selUnderAssort(@RequestBody Long assortId){
+        return commonPullDownService.selUnderAssort(assortId);
+    }
+
     @RequestMapping(value = "getAssortByKey", method = RequestMethod.POST)
     public Map<String,Object> getAssortByKey(@RequestBody AssortSo so){
         return assortService.getAssortByKey(so);

@@ -205,6 +205,11 @@
         select <include refid="Base_Column_List"></include>  from t_assort where parent_id = #{parendId}
     </select>
 
+    <select id="selUnderAssort" parameterType="java.lang.Long" resultMap="ResultMap">
+        select <include refid="Base_Column_List"></include>  from t_assort where parent_id=#{assordId};
+    </select>
+
+
     <select id="getAssortByKey" parameterType="com.soufang.base.search.assort.AssortSo" resultType="java.util.Map">
         SELECT A.assort_id as aId,A.assort_name as aName, B.assort_id bId, B.assort_name bName,C.assort_id cId,C.assort_name cName  from t_assort A LEFT JOIN t_assort B ON B.parent_id=A.assort_id LEFT JOIN t_assort C on C.parent_id = B.assort_id
         where 1=1
