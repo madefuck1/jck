@@ -33,8 +33,6 @@ public interface PurchaseMapper {
 
     List<Purchase> getPurchaseListByEnqunum( String enquiryNumber);
 
-    int isUseRefused(Purchase purchase);
-
     int acceptPurchase(PurchaseSo purchaseSo);
 
 

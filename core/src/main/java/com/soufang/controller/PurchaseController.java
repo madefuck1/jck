@@ -65,14 +65,6 @@ public class PurchaseController {
     }
 
     /**
-     * 采用/拒绝
-     */
-    @RequestMapping(value = "isUseRefused",method = RequestMethod.POST)
-    Result isUseRefused(@RequestBody PurchaseDto purchaseDto){
-        return purchaseService.isUseRefused(purchaseDto);
-    }
-
-    /**
      * 报价
      * @param purchaseDto
      * @return
@@ -100,6 +92,16 @@ public class PurchaseController {
             enquiryDto =enquiryService.getByEnqNum(enquirySo);
         }
         return enquiryDto;
+    }
+    /**
+     * 接收报价
+     * @param purchaseSo
+     * @return
+     */
+    @RequestMapping(value = "acceptPurchasePc",method = RequestMethod.POST)
+    int acceptPurchasePc(@RequestBody PurchaseSo purchaseSo){
+        int i =purchaseService.acceptPurchase(purchaseSo);
+        return i;
     }
 
 

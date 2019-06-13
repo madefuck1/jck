@@ -10,6 +10,9 @@
  */
 package com.soufang.vo.purchase;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈报价〉
@@ -18,11 +21,15 @@ package com.soufang.vo.purchase;
  * @create 2019/6/3
  * @since 1.0.0
  */
+@Getter
+@Setter
 public class PurchseUseRefusedVo {
 
     private String purchaseNumber;
 
     private int offerStatus;
+
+    private String enquiryNumber;
 
 
 }

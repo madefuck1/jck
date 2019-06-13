@@ -113,21 +113,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return result;
     }
 
-    //报价-采用拒绝
-    public Result isUseRefused(PurchaseDto purchaseDto) {
-        Purchase purchase = new Purchase();
-        BeanUtils.copyProperties(purchaseDto, purchase);
-        Result result = new Result();
-        int i = purchaseMapper.isUseRefused(purchase);
-        if (i > 0) {
-            result.setSuccess(true);
-            result.setMessage("操作成功");
-        } else {
-            result.setSuccess(false);
-            result.setMessage("操作失败");
-        }
-        return  result;
-    }
+    @Override
     public int purchase(PurchaseDto purchaseDto){
         Result result = new Result();
         //查询SHOP信息通过用户ID
@@ -168,6 +154,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * @param purchaseSo
      * @return
      */
+    @Override
     public int acceptPurchase(PurchaseSo purchaseSo){
         EnquirySo enquirySo= new EnquirySo();
         //接收报价-还需要去更改询盘状态为-已报价

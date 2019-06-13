@@ -10,6 +10,7 @@ import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
@@ -229,9 +230,19 @@ public class EnquiryPurchaseController extends BaseController{
      */
     @ResponseBody
     @MemberAccess
-    @RequestMapping(value = "isUseRefused",method = RequestMethod.POST)
-    public Result isUseRefused(@RequestBody PurchseUseRefusedVo purchseUseRefusedVo){
-        Result result = purchaseFeign.isUseRefused(purchseUseRefusedVo);
+    @RequestMapping(value = "acceptPurchase",method = RequestMethod.POST)
+    public Result acceptPurchase(@RequestBody PurchseUseRefusedVo purchseUseRefusedVo){
+        Result result= new Result();
+        PurchaseSo purchaseSo =new PurchaseSo();
+        purchaseSo.setOfferStatus(purchseUseRefusedVo.getOfferStatus());
+        purchaseSo.setPurchaseNumber(purchseUseRefusedVo.getPurchaseNumber());
+        purchaseSo.setEnquiryNumber(purchseUseRefusedVo.getEnquiryNumber());
+        int i = purchaseFeign.acceptPurchasePc(purchaseSo);
+        if(i>0){
+            result.setMessage("报价成功");
+        }else{
+            result.setMessage("报价异常");
+        }
         return result;
     }
 

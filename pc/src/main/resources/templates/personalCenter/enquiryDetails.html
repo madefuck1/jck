@@ -113,7 +113,6 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
-                console.log(data);
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
@@ -121,6 +120,7 @@
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
                 $("#statusMessage").html(data.statusMessage);
+                $("#statusMessage").val(data.statusMessage);
                 $("#productNumber").html(data.enquiryProductDto[0].productNumber);
                 $("#enquiryProductId").html(data.enquiryProductDto[0].enquiryProductId);
                 $("#productUnit").html(data.enquiryProductDto[0].productUnit);
@@ -138,35 +138,55 @@
         });
 	});
         function liContent(v){
-            console.log(v);
+            console.log($("#statusMessage").val());
             var purchases=v.purchases;
-            console.log(purchases);
             var li;
             var tables="";
+            var doThis;
 			for(var i = 0 ;i< purchases.length ; i++) {
-                var offerTime = purchases[i].strOfferTime;
-                var shopName=v.shopName;
-                //var shopName="杭州私房公司";
-                var unitPrice = purchases[i].unitPrice;
-                var productUnit = v.productUnit;
-                var remark = purchases[i].remark;
-                var purchaseNumber = purchases[i].purchaseNumber;
-                li +=
-                    "<td>" + offerTime + "</td>"
-                    + "<td>" + shopName + "</td>"
-                    + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
-                    + "<td>" + remark + "</td>"
-                    + "<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
-				 tables=$("<tbody><tr>"
-						+li
-                    +"</tr>"
-                    +"</tbody>"
-				);
+                if(purchases[i].purchaseNumber==null||purchases[i].purchaseNumber==""){
+                    tables=$("<tbody><tr>"
+                        +"<td colspan='5'>当前没有报价信息</td>"
+                        +"</tr>"
+                        +"</tbody>"
+                    )
+                }else{
+                    var offerTime = purchases[i].strOfferTime;
+                    var shopName=v.shopName;
+                    //var shopName="杭州私房公司";
+                    var unitPrice = purchases[i].unitPrice;
+                    var productUnit = v.productUnit;
+                    var remark = purchases[i].remark;
+                    var purchaseNumber = purchases[i].purchaseNumber;
+                    if ($("#statusMessage").val()!="已报价"){
+                        if (purchases[i].offerStatus==3) {
+                            doThis = "<td style='color: #40ADFB'>已拒绝</td>"
+                        }else{
+                            doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
+						}
+                    }else{
+                            doThis="<td style='color: #40ADFB'>已报价</td>"
+
+                    }
+                    li +=
+                        "<td>" + offerTime + "</td>"
+                        + "<td>" + shopName + "</td>"
+                        + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
+                        + "<td>" + remark + "</td>"
+						+doThis
+                    tables=$("<tbody><tr>"
+                        +li
+                        +"</tr>"
+                        +"</tbody>"
+                    );
+                }
             }
                 return tables;
         }
     function isUseRejused(purchaseNumber,offStatus){
-		var str ={purchaseNumber:purchaseNumber,offStatus:offStatus};
+		var enquiryNumber= $("#enquiryNumber").val();
+        console.log(purchaseNumber,offStatus,enquiryNumber);
+		var str ={purchaseNumber:purchaseNumber,offerStatus:offStatus,enquiryNumber:enquiryNumber};
         $.ajax({
             url: "acceptPurchase",
             type: "post",
@@ -174,8 +194,12 @@
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
             success: function (data) {
-				console.log(data);
-				console.log("需要弹出是否成功！");
+                if (data.message=="报价成功"){
+                    alert("操作成功");
+                    window.location.href="/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId;
+				}
+
+
             }
         });
     }
