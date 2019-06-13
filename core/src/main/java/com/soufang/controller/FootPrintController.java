@@ -63,7 +63,7 @@ public class FootPrintController {
         PageHelp<FootPrintDto> pageHelp = new PageHelp<>();
         List<FootPrintDto> footPrintDtoList=  footPrintService.selFootPrintOneWeek(footPrintSo);
         //获取总数量
-        int count =footPrintService.getFoPtCount(footPrintSo);
+        int count =footPrintDtoList.size();
         pageHelp.setData(footPrintDtoList);
         pageHelp.setCount(count);
         return pageHelp;
