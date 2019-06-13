@@ -26,6 +26,7 @@ var priceHtml = '<div class="attr1-cloum2">\n' +
     '    <div class="am-u-sm-6">\n' +
     '        <input type="number"  class="minNumber" required onchange="writeNumber(this)"  name="productSpecDtoList[0].minNumber">\n' +
     '        <input type="hidden"  class="maxNumber"  name="productSpecDtoList[0].maxNumber">\n' +
+    '        <input type="hidden"  class="specName"  name="productSpecDtoList[0].specName">\n' +
     '    </div>\n' +
     '    <div class="am-u-sm-6">\n' +
     '        <input type="number"class="specNumber" required onchange="writeNumber(this)"  name="productSpecDtoList[0].specNumber">\n' +
@@ -70,6 +71,7 @@ function addColorHtml(obj){
 function addPriceHtml(obj){
     var html = priceHtml ;
     html = html.replace("productSpecDtoList[0]",'productSpecDtoList['+priceNumber+']')
+        .replace("productSpecDtoList[0]",'productSpecDtoList['+priceNumber+']')
         .replace("productSpecDtoList[0]",'productSpecDtoList['+priceNumber+']')
         .replace("productSpecDtoList[0]",'productSpecDtoList['+priceNumber+']');
     priceNumber++;
@@ -141,9 +143,10 @@ function addSpecHtml(){
         }
         i++;
     });
-    html.find(".minNumber").attr("name","productSpecDtoList["+priceNumber+"].minNumber");
-    html.find(".maxNumber").attr("name","productSpecDtoList["+priceNumber+"].minNumber");
-    html.find(".specNumber").attr("name","productSpecDtoList["+priceNumber+"].specNumber");
+    html.find(".attr1-cloum2 .minNumber").attr("name","productSpecDtoList["+priceNumber+"].minNumber");
+    html.find(".attr1-cloum2 .maxNumber").attr("name","productSpecDtoList["+priceNumber+"].maxNumber");
+    html.find(".attr1-cloum2 .specNumber").attr("name","productSpecDtoList["+priceNumber+"].specNumber");
+    html.find(".attr1-cloum2 .specName").attr("name","productSpecDtoList["+priceNumber+"].specName");
     priceNumber++ ;
 
     $(".specList").append(html);
@@ -272,12 +275,10 @@ function createForm(){
         })
         html += '<input type="hidden" name="productJson" value="'+ productJson+'">' ;
 
-        var i=0;
         $(".base1").each(function () {
             var specName = $(this).find(".specName").val();
             $(this).find(".priceInput").find(".attr1-cloum2").each(function () {
-                html += '<input type="hidden" name="productSpecDtoList['+i+'].specName" value="'+specName+'">';
-                i++;
+               $(this).find(".specName").val(specName);
             })
         })
         $(".Master-pic .mpic-1 input").each(function () {
@@ -311,7 +312,7 @@ function createForm(){
                         contentType: false,
                         success: function (data) {
                             alert("新增产品成功");
-                            //window.location.href="";
+                            window.location.href="/sellerCenter/toProductList";
                         }
                     });
                 }
