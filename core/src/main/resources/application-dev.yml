@@ -3,9 +3,9 @@ spring:
       name: core
    datasource:
       name: soufang
-      url: jdbc:mysql://182.61.39.89:3306/soufang?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://121.199.22.218:3306/eguangtong?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: root
-      password: root123456
+      password: root!123456
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.jdbc.Driver
       filters: stat
