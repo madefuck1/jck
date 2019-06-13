@@ -257,13 +257,13 @@
     });
 
     $(document).ready(function() {
-        $(".row_1 a").click(function() {
+        $(".row_1 li").click(function() {
             $(this).prevAll().removeClass(" row1");
             $(this).nextAll().removeClass(" row1");
-
             $(this).addClass(" row1");
         });
     });
+
 
     //初始化页面
     $(function () {

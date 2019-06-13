@@ -97,7 +97,7 @@
                             <p>${order.orderDto.takePhone}</p>
                             <p><#if order.orderDto.orderType == 2>线上支付<#else>线下支付</#if></p>
                             <p>普通发票</p>
-                            <p>${order.orderDto.orderRemark}</p>
+                            <p>${order.orderDto.orderRemark!}</p>
                         </div>
 
                     </div>
@@ -224,8 +224,7 @@
             </div>
 
         </div>
-    <!--底部-->
-    <#include "/common/includes/include.footer.html"/>
+
     </div>
 <!--左边菜单-->
 <#include "/personalCenter/common/include.menu.html"/>
