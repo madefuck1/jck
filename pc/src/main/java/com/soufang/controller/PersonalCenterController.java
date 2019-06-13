@@ -623,13 +623,6 @@ public class PersonalCenterController extends BaseController {
         return newEnquiryNumber;
     }
 
-    @MemberAccess
-    @RequestMapping(value = "/toPurchaseHtml", method = RequestMethod.GET)
-    public String toPurchaseHtml(String enquiryNumber,String isUpdate,ModelMap map){
-        map.put("enquiryNumber",enquiryNumber);
-        map.put("isUpdate",isUpdate);
-        return "personalCenter/purchase2";
-    }
     /**
      * 新增求购信息
      * @param file

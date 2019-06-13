@@ -102,6 +102,15 @@ input{
 	margin-right: 10px;
 	cursor: pointer;
 }
+.sale_pic4{
+
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	background: url(../../images/sale/01.png);
+	margin-left: 30px;
+	cursor: pointer;
+}
 
 #sale_center{
 	width: 100%;

@@ -112,7 +112,6 @@
             }else if (orderType==1){
                 orderType="desc";
             }
-		console.log(orderType);
         var str={page:1,limit:10,
 					assortId:assortId,
 					enquiryStatus:3,
@@ -127,6 +126,7 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
+                $("#purchaseLength").html(data.data.length);
                 var whatever="";
               	 $("#showMoreAssorts").html("");
                 if(data.count==0){
@@ -159,9 +159,10 @@
         var productNumber=productDto[0].productNumber;
         var productUnit=productDto[0].productUnit;
         var enquiryProductId=productDto[0].enquiryProductId;
-		var purchaseNumber=productDto[0].purchases.productNumber;
-		var purchaseLength=productDto[0].purchases.length;
-        $("#purchaseLength").html(purchaseLength);
+        var purchaseLength=0;
+        if (productDto[0].purchases[0].purchaseNumber!=undefined){
+            purchaseLength=productDto[0].purchases.length;
+		}
 		var shopDto=v.shopDto;
 		var shopName=shopDto.shopName;
 

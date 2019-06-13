@@ -57,57 +57,68 @@ public class OrderController extends BaseController {
 
     @MemberAccess
     @RequestMapping(value = "toOrderManager", method = RequestMethod.GET)
-    public String toOrderManager(HttpServletRequest request, ModelMap model, Integer orderStatus, Integer orderType
-            , Integer pageIndex) {
-        UserDto userInfo = this.getUserInfo(request);
-        OrderSo orderSo = new OrderSo();
-        orderSo.setUserId(userInfo.getUserId());
-        if (orderStatus != null && orderStatus != 0) {
-            orderSo.setOrderStatus(orderStatus);
-        }
-        if (orderType != null && orderType == 3) {
-            orderSo.setOrderType(3);
-        }
-        orderSo.setLimit(5);
-        orderSo.setPage(1);
-        PageHelp<OrderShopDto> pageHelp = orderFeign.getList(orderSo);
-        model.put("orderStatus", orderStatus == null ? 0 : orderStatus);
-        model.put("orderType", orderType == null ? 0 : orderType);
-        model.put("orderShopList", pageHelp.getData());
-        model.put("orderCount",pageHelp.getCount());
+    public String toOrderManager() {
         return "personalCenter/order";
     }
-
 
     /**
      *  检索页面 ajax请求刷订单页面
      * @param request
-     * @param orderType
-     * @param orderStatus
      * @param pageIndex
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "clickPage", method = RequestMethod.GET)
-    public Map<String, Object> searchAssortWithSort(HttpServletRequest request, Integer orderType, Integer orderStatus, Integer pageIndex) {
+    public Map<String, Object> searchAssortWithSort(HttpServletRequest request,
+          Integer data, Integer pageIndex) {
         Map<String, Object> map = new HashMap<>();
         UserDto userInfo = this.getUserInfo(request);
         OrderSo orderSo = new OrderSo();
         orderSo.setUserId(userInfo.getUserId());
-        if (orderStatus != null && orderStatus != 0) {
-            orderSo.setOrderStatus(orderStatus);
-        }
-        if (orderType != null && orderType == 3) {
-            orderSo.setOrderType(3);
-        }
         orderSo.setLimit(5);
-        orderSo.setPage(pageIndex);
-
+        if(pageIndex == 0){
+            orderSo.setPage(1);
+        }else {
+            orderSo.setPage(pageIndex);
+        }
+        setData(data,orderSo);
         PageHelp<OrderShopDto> pageHelp = orderFeign.getList(orderSo);
-
         // 订单
         map.put("list", pageHelp.getData());
+        map.put("count",pageHelp.getCount());
         return map;
+    }
+
+    private void setData(Integer data , OrderSo orderSo){
+        switch (data){
+            case 1 :
+                break ; //全部订单
+            case 2 :
+                //待付款
+                orderSo.setOrderStatusList("3,5");
+                orderSo.setOrderType(2);
+                break;
+            case 3 :
+                //待发货
+                orderSo.setOrderStatusList("6");
+                orderSo.setOrderType(2);
+                break;
+            case 4 :
+                //待收货
+                orderSo.setOrderStatusList("7");
+                orderSo.setOrderType(2);
+                break;
+            case 5 :
+                //待评价
+                orderSo.setOrderStatusList("8");
+                orderSo.setOrderType(2);
+                break;
+            case 6 :
+                //线下订单
+                orderSo.setOrderType(3);
+                break;
+        }
+
     }
 
 
@@ -238,6 +249,7 @@ public class OrderController extends BaseController {
         if (contractDto != null && contractDto.getContractDownUrl() != null) {
             baseVo.setMessage(PropertiesParam.file_pre + contractDto.getContractDownUrl());
         } else {
+            //TODO 合同下载地址
             Map<String, String> map = new HashMap<>();
             map.put("${sub}", orderShopDto.getOrderNumber());
             map.put("${item1}", "湖南大学");
