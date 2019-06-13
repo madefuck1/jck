@@ -55,6 +55,30 @@ public class BaseController {
         ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
         return shopInfo;
     }
+
+    //退出，清除cookie
+    public void deletetoken(HttpServletRequest request) {
+        String token = "";
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null || cookies.length == 0) {
+            return;
+        } else {
+            for (Cookie cookie : cookies) {
+                switch (cookie.getName()) {
+                    case "token":
+                        token = cookie.getValue();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            boolean info = RedisUtils.existsObject(token);
+            if (info) {
+                RedisUtils.delkeyObject(token);
+            }
+        }
+    }
+
     /**
      * 生成随机数 保存token
      *

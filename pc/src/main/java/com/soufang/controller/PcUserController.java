@@ -46,6 +46,12 @@ public class PcUserController extends BaseController{
     @Autowired
     PcUserFeign pcUserFeign;
 
+    @RequestMapping(value = "signOut", method = RequestMethod.GET)
+    public String signOut(HttpServletRequest request ){
+        this.deletetoken(request);
+        return "/login/login";
+    }
+
     @RequestMapping(value = "toLogin", method = RequestMethod.GET)
     public String toLogin(){
         return "/login/login";
@@ -133,6 +139,7 @@ public class PcUserController extends BaseController{
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
             userDto.setEmail(registerReqVo.getEmail());
+            userDto.setPhone(registerReqVo.getEmail());
         }else {
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getPhone());
             userDto.setPhone(registerReqVo.getPhone());
