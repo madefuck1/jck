@@ -221,8 +221,9 @@ public class SellerController extends BaseController {
     @RequestMapping(value = "/getAssess", method = RequestMethod.POST)
     public AssessVo getAssess(HttpServletRequest request, @RequestBody AssessSo assessSo){
         AssessVo vo = new AssessVo();
-        ShopDto shopInfo = this.getShopInfo(request);
-        assessSo.setShopId(shopInfo.getShopId());
+        //获取产品的评价只需要产品ID 产品名相同店铺不同的产品id也不同
+        /*ShopDto shopInfo = this.getShopInfo(request);
+        assessSo.setShopId(shopInfo.getShopId());*/
         if(assessSo.getLimit() == null){
             assessSo.setLimit(5);
         }
@@ -238,6 +239,7 @@ public class SellerController extends BaseController {
     public String toProductList() {
         return "sellerCenter/productList";
     }
+
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "/getProductList", method = RequestMethod.POST)
@@ -253,33 +255,36 @@ public class SellerController extends BaseController {
         vo.setData(pageHelp.getData());
         return vo;
     }
+
     //产品下架
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "/getDown", method = RequestMethod.POST)
-    public BaseVo getDown(String[] ids ) {
+    public BaseVo getDown(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.getDown(ids);
         vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }
+
     //产品上架
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "/putUp", method = RequestMethod.POST)
-    public BaseVo putUp(String[] ids ) {
+    public BaseVo putUp(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.putUp(ids);
         vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }
+
     //删除产品
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
-    public BaseVo deleteProduct( String[] ids ) {
+    public BaseVo deleteProduct(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.deleteProduct(ids);
         vo.setMessage(result.getMessage());
@@ -298,11 +303,11 @@ public class SellerController extends BaseController {
     }
 
 
-
     // begin-------------------- 店铺装修 -----------------------
 
     /**
      * 店铺装修
+     *
      * @param request
      * @param model
      * @return
@@ -315,6 +320,7 @@ public class SellerController extends BaseController {
 
     /**
      * 分类管理
+     *
      * @param request
      * @param model
      * @return
@@ -327,6 +333,7 @@ public class SellerController extends BaseController {
 
     /**
      * 产品分类
+     *
      * @param request
      * @param model
      * @return

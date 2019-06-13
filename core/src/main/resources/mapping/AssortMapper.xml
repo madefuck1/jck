@@ -201,7 +201,7 @@
 
 
 
-    <select id="getAssortAByParentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="getAssortAByParentId" parameterType="java.lang.Long" resultMap="ResultMap">
         select <include refid="Base_Column_List"></include>  from t_assort where parent_id = #{parendId}
     </select>
 

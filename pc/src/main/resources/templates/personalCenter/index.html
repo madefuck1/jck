@@ -26,7 +26,7 @@
                                     <img src="${userInfo.avatar}">
                                 </a>
                                 <div class="m-info">
-                                    <em class="s-name">${userInfo.userName}</em>
+                                    <em class="s-name">${userInfo.userName!}</em>
                                     <div class="vip1"><a href="#"><span></span><em>会员专享</em></a></div>
                                     <div class="safeText" style="text-align: center">
                                     </div>
@@ -65,13 +65,13 @@
                                 <i class="s-icon"></i>我的求购
                             </div>
                             <p class="m-big squareS">
-                                <a href="#">
+                                <a href="/enquiry/create">
                                     <i><img src="../images/purchasing.png"/></i>
                                     <span class="m-title">发布求购</span>
                                 </a>
                             </p>
                             <p class="m-big squareL">
-                                <a href="#">
+                                <a href="/personalCenter/toEnquiryManage">
                                     <i><img src="../images/myPurchase.png" width="50"/></i>
                                     <span class="m-title">我的求购</span>
                                 </a>
@@ -204,8 +204,6 @@
                 </div>
             </div>
         </div>
-        <!--底部-->
-        <#include "/common/includes/include.footer.html"/>
 </div>
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>

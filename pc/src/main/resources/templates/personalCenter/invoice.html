@@ -76,7 +76,7 @@
                         </div>
                         <hr/>
                         <div class="am-u-md-12 am-u-lg-8" style="margin: 20px;">
-                            <form class="am-form am-form-horizontal">
+                            <form class="am-form am-form-horizontal" id="invoiceInfo">
 
                                 <div class="am-form-group">
                                     <label class="am-form-label"><span style="color: #FA4D46">*</span>名称：</label>
@@ -130,8 +130,6 @@
 
             <div class="clear"></div>
         </div>
-        <!--底部-->
-        <#include "/common/includes/include.footer.html"/>
     </div>
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>
@@ -159,6 +157,10 @@
             var form = $(obj).parents("form");
             $(form)[0].reset();
         }
+        function resetinvoiceInfo() {
+            var form = document.getElementById("invoiceInfo");
+            $(form)[0].reset();
+        }
 
         function addInvoice() {
             var data = {
@@ -178,6 +180,7 @@
                     if(data.success){
                         alert(data.message);
                         initData();
+                        resetinvoiceInfo();
                     }else {
                         alert(data.message);
                     }
@@ -331,8 +334,8 @@
                     if(data.success){
                         /*alert(data.message);*/
                         $("#InvoiceList").empty();
+                        var defaultInvoice;
                         for(i = 0; i< data.data.length;i++){
-                            var defaultInvoice;
                             var invoiceId = data.data[i].invoiceId;
                             var invoiceHead = data.data[i].invoiceHead;
                             var taxNumber = data.data[i].taxNumber;
@@ -380,7 +383,9 @@
                         }
 
                     }else {
-                     alert(data.message);
+                        defaultInvoice = "您没有发票信息";
+                        $("#InvoiceList").append(defaultInvoice);
+                     /*alert(data.message);*/
                     }
                 },
                 error: function (data) {

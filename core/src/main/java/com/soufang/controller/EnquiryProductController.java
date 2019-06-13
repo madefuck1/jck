@@ -37,8 +37,5 @@ public class EnquiryProductController {
         return result;
     }
 
-    @RequestMapping(value = "getIndexProductList",method = RequestMethod.POST)
-    PageHelp<EnquiryProductDto> getIndexProductList(){
-        return enquiryProductService.getIndexProductList();
-    }
+
 }

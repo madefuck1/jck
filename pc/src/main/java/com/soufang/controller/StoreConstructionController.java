@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -406,15 +407,43 @@ public class StoreConstructionController extends BaseController {
     @RequestMapping(value = "initProduct", method = RequestMethod.POST)
     @MemberAccess
     @ResponseBody
-    public PageHelp<ProductDto> initProduct(@RequestBody ListStoreProductReqVo reqVo) {
+    public PageHelp<ProductDto> initProduct(HttpServletRequest request, @RequestBody ListStoreProductReqVo reqVo) {
+        ShopDto shopInfo = getShopInfo(request);
         ProductDto productDto = new ProductDto();
+        productDto.setShopId(shopInfo.getShopId());
         productDto.setProductName(reqVo.getProductName());
         productDto.setAssortType(reqVo.getAssortType());
         productDto.setMinPrice(reqVo.getMinPrice());
         productDto.setMaxPrice(reqVo.getMaxPrice());
+        productDto.setPage(reqVo.getPage());
+        productDto.setLimit(reqVo.getLimit());
         PageHelp<ProductDto> pageHelp = storeConstructionFeign.initProduct(productDto);
-        return null;
+        return pageHelp;
     }
 
+
+    /**
+     * 分类绑定
+     *
+     * @param request
+     * @param reqVo
+     * @return
+     */
+    @RequestMapping(value = "saveProductAssort", method = RequestMethod.POST)
+    @MemberAccess
+    @ResponseBody
+    public Result saveProductAssort(HttpServletRequest request, @RequestBody DetailProductAssortReqVo reqVo) {
+        ShopDto shopInfo = getShopInfo(request);
+        StoreProductAssortDto productAssortDto = new StoreProductAssortDto();
+        productAssortDto.setShopId(shopInfo.getShopId());
+        productAssortDto.setProductId(reqVo.getProductId());
+        if (reqVo.getExclusiveAssortIds() != null && !"".equals(reqVo.getExclusiveAssortIds())) {
+            String[] split = reqVo.getExclusiveAssortIds().split(",");
+            List<String> ids = Arrays.asList(split);
+            productAssortDto.setExclusiveAssortIds(ids);
+        }
+        return storeConstructionFeign.saveProductAssort(productAssortDto);
+
+    }
 
 }

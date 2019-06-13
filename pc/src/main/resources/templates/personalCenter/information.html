@@ -32,7 +32,7 @@
                     </div>
                     <p class="am-form-help">头像</p>
                     <div class="info-m">
-                        <div><b>用户名：<i>${userInfo.userName}</i></b></div>
+                        <div><b>用户名：<i>${userInfo.userName!}</i></b></div>
                         <div class="vip">
                             <span></span><a href="#">会员专享</a>
                         </div>
@@ -45,28 +45,28 @@
                         <div class="am-form-group">
                             <label for="user-name2" class="am-form-label">昵称</label>
                             <div class="am-form-content">
-                                <input type="text" id="user-name2" placeholder="nickname" value="${userInfo.userName}">
+                                <input type="text" id="user-name2" placeholder="nickname" value="${userInfo.userName!}">
                                 <small>昵称长度不能超过40个汉字</small>
                             </div>
                         </div>
                         <div class="am-form-group">
                             <label for="user-name" class="am-form-label">姓名</label>
                             <div class="am-form-content">
-                                <input type="text" id="user-name" placeholder="name" value="${userInfo.realName}">
+                                <input type="text" id="user-name" placeholder="name" value="${userInfo.realName!}">
                             </div>
                         </div>
 
                         <div class="am-form-group">
                             <label for="user-phone" class="am-form-label">电话</label>
                             <div class="am-form-content">
-                                <input id="user-phone" value="${userInfo.phone}" placeholder="telephonenumber" type="tel">
+                                <input id="user-phone" value="${userInfo.phone!}" placeholder="telephonenumber" type="tel">
 
                             </div>
                         </div>
                         <div class="am-form-group">
                             <label for="user-email" class="am-form-label">电子邮件</label>
                             <div class="am-form-content">
-                                <input id="user-email" value="${userInfo.email}" placeholder="Email" type="email">
+                                <input id="user-email" value="${userInfo.email!}" placeholder="Email" type="email">
                             </div>
                         </div>
                         <div class="info-btn">
@@ -76,8 +76,6 @@
                 </div>
             </div>
         </div>
-        <!--底部-->
-        <#include "/common/includes/include.footer.html"/>
     </div>
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>

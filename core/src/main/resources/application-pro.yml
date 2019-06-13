@@ -2,8 +2,8 @@ spring:
    application:
       name: core
    datasource:
-      name: soufang
-      url: jdbc:mysql://121.199.22.218:3306/eguangtong?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      name: egaungtong
+      url: jdbc:mysql://121.199.22.218:3306/yhkj_eguangtong?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: root
       password: root!123456
       type: com.alibaba.druid.pool.DruidDataSource

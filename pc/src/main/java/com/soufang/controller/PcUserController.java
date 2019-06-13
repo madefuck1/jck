@@ -46,6 +46,12 @@ public class PcUserController extends BaseController{
     @Autowired
     PcUserFeign pcUserFeign;
 
+    @RequestMapping(value = "signOut", method = RequestMethod.GET)
+    public String signOut(HttpServletRequest request ){
+        this.deletetoken(request);
+        return "/login/login";
+    }
+
     @RequestMapping(value = "toLogin", method = RequestMethod.GET)
     public String toLogin(){
         return "/login/login";
@@ -133,6 +139,7 @@ public class PcUserController extends BaseController{
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
             userDto.setEmail(registerReqVo.getEmail());
+            userDto.setPhone(registerReqVo.getEmail());
         }else {
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getPhone());
             userDto.setPhone(registerReqVo.getPhone());
@@ -178,38 +185,45 @@ public class PcUserController extends BaseController{
     @RequestMapping(value = "addInformation",method = RequestMethod.POST)
     public BaseVo uploadImg(MultipartFile file,HttpServletRequest request){
         BaseVo baseVo = new BaseVo();
-        UserDto userDto = this.getUserInfo(request);
-        String loginName = request.getParameter("loginName");
-        String vip = request.getParameter("vip");
-        userDto.setUserName(loginName);
-        CompanyDto companyDto = new CompanyDto();
-        //修改个人登录名
-        Result result  = pcUserFeign.update(userDto);
-        //判断是否是供应商
-        if(vip.equals("supplier")){
-            //供应商注册
-            companyDto.setUserId(userDto.getUserId());
-            companyDto.setCompPhone(request.getParameter("companyPhone"));
-            companyDto.setCompName(request.getParameter("companyName"));
-            companyDto.setCompAddress(request.getParameter("companyAddress"));
-            companyDto.setCompCorporate(request.getParameter("companyCorporate"));
-            Map<String,Object> map = FtpClient.uploadImage(file,uploadUrl);
-            if((boolean)map.get("success")){
-                companyDto.setCompUrls(String.valueOf(map.get("uploadName")));
-                result = pcUserFeign.addCompany(companyDto);
+        UserDto userDto;
+        try {
+            userDto = this.getUserInfo(request);
+            String loginName = request.getParameter("loginName");
+            String vip = request.getParameter("vip");
+            userDto.setUserName(loginName);
+            CompanyDto companyDto = new CompanyDto();
+            //修改个人登录名
+            Result result  = pcUserFeign.update(userDto);
+            //判断是否是供应商
+            if(vip.equals("supplier")){
+                //供应商注册
+                companyDto.setUserId(userDto.getUserId());
+                companyDto.setCompPhone(request.getParameter("companyPhone"));
+                companyDto.setCompName(request.getParameter("companyName"));
+                companyDto.setCompAddress(request.getParameter("companyAddress"));
+                companyDto.setCompCorporate(request.getParameter("companyCorporate"));
+                Map<String,Object> map = FtpClient.uploadImage(file,uploadUrl);
+                if((boolean)map.get("success")){
+                    companyDto.setCompUrls(String.valueOf(map.get("uploadName")));
+                    result = pcUserFeign.addCompany(companyDto);
+                }else {
+                    baseVo.setSuccess(false);
+                    baseVo.setMessage("营业执照上传失败");
+                    return baseVo;
+                }
+            }
+            if(result.isSuccess()){
+                baseVo.setMessage("注册成功");
             }else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("营业执照上传失败");
-                return baseVo;
+                baseVo.setMessage("注册失败");
             }
-        }
-        if(result.isSuccess()){
-            baseVo.setMessage("注册成功");
-        }else {
+            return baseVo;
+        }catch (Exception e){
             baseVo.setSuccess(false);
-            baseVo.setMessage("注册失败");
+            baseVo.setMessage("请先登录,才能注册店铺");
+            return baseVo;
         }
-        return baseVo;
     }
 
     /**

@@ -32,7 +32,7 @@ public class IndexController extends BaseController {
     @Autowired
     EnquiryFeign enquiryFeign;
     @Autowired
-    EnquiryProductFeign enquiryProductFeign;
+    ProductFeign productFeign;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String toIndex(ModelMap map){
@@ -41,12 +41,13 @@ public class IndexController extends BaseController {
         enquirySo.setLimit(4);
         PageHelp<EnquiryDto> pageHelp = enquiryFeign.getList(enquirySo);
         map.put("enquiryDtos",pageHelp.getData());
-        PageHelp<EnquiryProductDto> enquiryDtoPageHelp = enquiryProductFeign.getIndexProductList();
-        List<EnquiryProductDto> list = enquiryDtoPageHelp.getData();
-        map.put("EnquiryProductDtos1",list);
-        map.put("EnquiryProductDtos1",list.subList(0,5));
-        map.put("EnquiryProductDtos2",list.subList(0,5));
-        map.put("EnquiryProductDtos3",list.subList(0,5));
+
+        PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
+        List<ProductDto> list = productDtos.getData();
+        map.put("productDtos1",list);
+        map.put("productDtos1",list.subList(0,5));
+        map.put("productDtos2",list.subList(0,5));
+        map.put("productDtos3",list.subList(0,5));
 
        /* List<EnquiryProductDto> list1 = list.subList(0,5);
         List<EnquiryProductDto> list2 = list.subList(5,10);*/
