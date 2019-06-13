@@ -4,6 +4,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.config.interceptor.MemberAccess;
@@ -37,9 +38,11 @@ public class EnquiryController extends BaseController {
     @RequestMapping(value = "getMyQuote", method = RequestMethod.POST)
     public EnquiryVo getMyQuote(HttpServletRequest request, @RequestBody EnquirySo enquirySo) {
         EnquiryVo vo = new EnquiryVo();
+        UserDto userInfo = this.getUserInfo(request);
         ShopDto shopInfo = this.getShopInfo(request);
         enquirySo.setPage(enquirySo.getPage());
         enquirySo.setShopId(shopInfo.getShopId());
+        enquirySo.setUserId(userInfo.getUserId());
         enquirySo.setLimit(5);
         if(enquirySo.getShopId() == null){
             vo.setCount(0);
