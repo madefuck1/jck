@@ -1,5 +1,5 @@
 <@override name="title">
-订单管理
+订单详情
 </@override>
 
 <@override name="css">
@@ -97,7 +97,7 @@
                             <p>${order.orderDto.takePhone}</p>
                             <p><#if order.orderDto.orderType == 2>线上支付<#else>线下支付</#if></p>
                             <p>普通发票</p>
-                            <p>${order.orderDto.orderRemark}</p>
+                            <p>${order.orderDto.orderRemark!}</p>
                         </div>
 
                     </div>
@@ -115,15 +115,17 @@
                             </p>
                             <p>${user.userName}</p>
                             <p>${user.phone}</p>
+                            <#if order.orderDto.orderType == 2>
                             <p><#if order.orderShopStatus == 1> 未提交
                                 <#elseif order.orderShopStatus ==2> 审核中
                                 <#elseif order.orderShopStatus ==10> 审核失败
                                 <#else> 审核成功</#if>
                             </p>
                             <div class="am-btn am-btn-warning" onclick="downContract(${order.orderShopId?c})">下载合同</div>
-                                <input type="hidden" class="orderNumber" value="${order.orderNumber}">
-                                <input type="hidden" class="orderShopId" value="${order.orderShopId?c}">
-                                <input type="file" id="image" class="am-btn am-btn-warning" onchange="uploadContract()"/>上传合同
+                            <input type="hidden" class="orderNumber" value="${order.orderNumber}">
+                            <input type="hidden" class="orderShopId" value="${order.orderShopId?c}">
+                            <input type="file" id="image" class="am-btn am-btn-warning" onchange="uploadContract()"/>上传合同
+                            </#if>
                         </div>
                     </div>
                 </div>
@@ -216,16 +218,13 @@
                         <#elseif order.orderShopStatus == 7>
                             <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;">收货</button>
                         <#elseif order.orderShopStatus == 8>
-                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="putAssess('${orderShop.orderNumber}')">评价</button>
+                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="putAssess('${order.orderNumber}')">评价</button>
                         </#if>
                         <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">订单审核中</button>
                     </div>
                 </div>
             </div>
-
         </div>
-    <!--底部-->
-    <#include "/common/includes/include.footer.html"/>
     </div>
 <!--左边菜单-->
 <#include "/personalCenter/common/include.menu.html"/>
