@@ -100,6 +100,7 @@ public class EnquiryPurchaseController extends BaseController{
             enquiryDto.setEnquiryTitle(request.getParameter("enquiryTitle"));
             enquiryDto.setCreateTime(DateUtils.string2Date(request.getParameter("createTime"),DateUtils.format1));
             enquiryDto.setTakeDate(DateUtils.string2Date(request.getParameter("takeDate"),DateUtils.format1));
+            enquiryDto.setEndTime(DateUtils.string2Date(request.getParameter("endTime"),DateUtils.format1));
             enquiryDto.setEnquiryRemark(request.getParameter("enquiryRemark"));
             enquiryDto.setTakeAddress(request.getParameter("detailStreet"));
             List<EnquiryProductDto> enquiryProductDtos= new ArrayList<>();
@@ -108,6 +109,7 @@ public class EnquiryPurchaseController extends BaseController{
             enquiryProductDto.setProductName(request.getParameter("productName"));
             enquiryProductDto.setProductUnit(request.getParameter("productUnit"));
             enquiryProductDto.setEnquiryNumber(enquiryDto.getEnquiryNumber());
+            enquiryProductDto.setProductAssort(Long.parseLong(request.getParameter("productAssort")));
             enquiryProductDtos.add(enquiryProductDto);
             enquiryDto.setEnquiryProductDto(enquiryProductDtos);
         map = FtpClient.uploadImage(file,uploadUrl);
@@ -177,6 +179,18 @@ public class EnquiryPurchaseController extends BaseController{
             result=enquiryFeign.updateEnquiryAndProduct(enquiryDto);
         }
         return judgeEnquiry(result);
+    }
+
+    /**
+     * 查询上级信息
+     * @param enquiryProductUpdateVo
+     * @return
+     */
+    @ResponseBody
+    @MemberAccess
+    @RequestMapping(value = "selParentIdByAssortId",method = RequestMethod.POST)
+    public Long selParentIdByAssortId(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo){
+      return  assortFeign.selParentIdByAssortId(enquiryProductUpdateVo.getProductAssort());
     }
 
     /**

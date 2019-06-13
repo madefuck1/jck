@@ -34,4 +34,6 @@ public interface AssortService {
     Map<String,Object> getAssortByKey(AssortSo so);
 
      Long getAssortIdByName(String assortName);
+
+    Long selParentIdByAssortId(Long parentId);
 }

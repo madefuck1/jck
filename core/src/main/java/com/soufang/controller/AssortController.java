@@ -114,4 +114,14 @@ public class AssortController {
         List<Map<String, Object>> maps =assortService.getIdName();
         return maps;
     }
+
+    /**
+     * 查询上级ID
+     * @param parentId
+     * @return
+     */
+    @RequestMapping(value = "selParentIdByAssortId", method = RequestMethod.POST)
+    public  Long selParentIdByAssortId(@RequestBody Long parentId){
+        return  assortService.selParentIdByAssortId(parentId);
+    }
 }

@@ -134,4 +134,9 @@ public class AssortServiceImpl implements AssortService {
         return assortMapper.getAssortIdByName(assortName);
     }
 
+    @Override
+    public Long selParentIdByAssortId(Long parentId){
+      return  assortMapper.selParentIdByAssortId(parentId);
+    }
+
 }
