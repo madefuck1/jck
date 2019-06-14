@@ -306,13 +306,15 @@ public class PcUserController extends BaseController{
         }
         String idCards = "";
         if(idCardFile != null){
-            Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,userUrl);
-            if((boolean)companyResult.get("success")){
-                idCards += companyResult.get("uploadName").toString() +";";
-            }else {
-                baseVo.setSuccess(false);
-                baseVo.setMessage("图片上传失败");
-                return baseVo;
+            for (int i = 0; i < idCardFile.length; i++) {
+                Map<String , Object> companyResult = FtpClient.uploadImage(idCardFile[i],userUrl);
+                if((boolean)companyResult.get("success")){
+                    idCards += companyResult.get("uploadName").toString() +";";
+                }else {
+                    baseVo.setSuccess(false);
+                    baseVo.setMessage("图片上传失败");
+                    return baseVo;
+                }
             }
         }
         userDto.setIdCardUrl(idCards);
