@@ -245,13 +245,8 @@ public class ProductManageServiceImpl implements ProductManageService {
         page = (page - 1) * productSo.getLimit();
         productSo.setPage(page);
         List<ProductDto> products = productMapper.getShopProductList(productSo);
-        List<ProductDto> productDtos = new ArrayList<>();
-        for (ProductDto productDto : products) {
-            productDto.setProductImage(PropertiesParam.file_pre + productDto.getProductImage());
-            productDtos.add(productDto);
-        }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
-        pageHelp.setData(productDtos);
+        pageHelp.setData(products);
         int count = productMapper.getShopProductCount(productSo);
         pageHelp.setCount(count);
         return pageHelp;

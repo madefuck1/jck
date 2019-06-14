@@ -13,48 +13,48 @@
 <fieldset class="layui-elem-field">
     <legend>入驻负责人姓名</legend>
     <div class="layui-field-box">
-        ${userDto.realName}
+        ${userDto.realName!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>店铺名</legend>
     <div class="layui-field-box">
-        ${shopDto.shopName}
+        ${shopDto.shopName!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>店铺介绍</legend>
     <div class="layui-field-box">
-        ${shopDto.shopIntroduce}
+        ${shopDto.shopIntroduce!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>业务范围</legend>
     <div class="layui-field-box">
-        ${shopDto.businessScope}
+        ${shopDto.businessScope!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>主营产品</legend>
     <div class="layui-field-box">
-        ${shopDto.mainProducts}
+        ${shopDto.mainProducts!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>店铺等级</legend>
     <div class="layui-field-box">
-        ${shopDto.shopLevel}
+        ${shopDto.shopLevel!''}
     </div>
 </fieldset>
 <fieldset class="layui-elem-field">
     <legend>入驻时间</legend>
     <div class="layui-field-box">
-        ${shopDto.strCreateTime}
+        ${shopDto.strCreateTime!''}
     </div>
 </fieldset>
 
 <div class="layui-input-block">
-    <button class="layui-btn" lay-submit type="button" onclick="reviewYes(${shopDto.shopId})">审核通过</button>
+    <button class="layui-btn" lay-submit type="button" onclick="reviewYes(${shopDto.shopId!''})">审核通过</button>
 </div>
 
 <div class="layui-form-item layui-form-text">
