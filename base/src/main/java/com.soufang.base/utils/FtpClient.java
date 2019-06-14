@@ -50,17 +50,15 @@ public class FtpClient {
 
 
     private static FTPClient getInstance() {
-        if (INSTANCE == null) {
-            try {
-                INSTANCE = new FTPClient();
-                INSTANCE.connect(host, port);
-                INSTANCE.login(userName, password);
-                if (!FTPReply.isPositiveCompletion(INSTANCE.getReplyCode())) {
-                    INSTANCE.disconnect();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            INSTANCE = new FTPClient();
+            INSTANCE.connect(host, port);
+            INSTANCE.login(userName, password);
+            if (!FTPReply.isPositiveCompletion(INSTANCE.getReplyCode())) {
+                INSTANCE.disconnect();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return INSTANCE;
     }

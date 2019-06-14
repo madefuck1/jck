@@ -103,10 +103,10 @@ public class PcUserController extends BaseController{
             SmsSendResponse smsSendResponse = MessageUtil.setMessage("【可可西里】验证码："+VerCode,phone);
             if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
-                MessageDto messageDto = new MessageDto(phone,VerCode,0,DateUtils.getToday(),1);
-                result = pcUserFeign.addMessage(messageDto);
                 RedisUtils.setString(RedisConstants.verfity_code +phone,VerCode,code_time);
             }
+            MessageDto messageDto = new MessageDto(phone,VerCode,0,DateUtils.getToday(),1);
+            result = pcUserFeign.addMessage(messageDto);
         }else if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             //发送邮箱验证码
             String email = registerReqVo.getEmail();
@@ -255,12 +255,12 @@ public class PcUserController extends BaseController{
         CompanyDto companyDto = pcUserFeign.getCompany(userDto.getUserId());
         companyDto.setCompUrls(PropertiesParam.file_pre+companyDto.getCompUrls());
         map.put("companyInfo",companyDto);
-        String[] idCards = userDto.getIdCardUrl().split(";");
-        String idCardList = "";
-        for (int i = 0; i < idCards.length; i++) {
-            idCardList += PropertiesParam.file_pre + idCards[i]+ ";";
-        }
-        userDto.setIdCardUrl(idCardList);
+//        String[] idCards = userDto.getIdCardUrl().split(";");
+//        String idCardList = "";
+//        for (int i = 0; i < idCards.length; i++) {
+//            idCardList += PropertiesParam.file_pre + idCards[i]+ ";";
+//        }
+//        userDto.setIdCardUrl(idCardList);
         map.put("userInfo",userDto);
         if(result.isSuccess()){
             return  "sellerCenter/settle/second";
@@ -294,14 +294,30 @@ public class PcUserController extends BaseController{
         companyDto.setCompAddress(request.getParameter("compAddress"));
         companyDto.setBank(request.getParameter("bank"));
         companyDto.setBankNumber(request.getParameter("bankNumber"));
-        Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
-        if((boolean)companyResult.get("success")){
-            companyDto.setCompUrls(companyResult.get("uploadName").toString());
-        }else {
-            baseVo.setSuccess(false);
-            baseVo.setMessage("图片上传失败");
-            return baseVo;
+        if(companyFile != null){
+            Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
+            if((boolean)companyResult.get("success")){
+                companyDto.setCompUrls(companyResult.get("uploadName").toString());
+            }else {
+                baseVo.setSuccess(false);
+                baseVo.setMessage("图片上传失败");
+                return baseVo;
+            }
         }
+        String idCards = "";
+        if(idCardFile != null){
+            for (int i = 0; i < idCardFile.length; i++) {
+                Map<String , Object> companyResult = FtpClient.uploadImage(idCardFile[i],userUrl);
+                if((boolean)companyResult.get("success")){
+                    idCards += companyResult.get("uploadName").toString() +";";
+                }else {
+                    baseVo.setSuccess(false);
+                    baseVo.setMessage("图片上传失败");
+                    return baseVo;
+                }
+            }
+        }
+        userDto.setIdCardUrl(idCards);
         userDto.setCompanyDto(companyDto);
         ShopDto shopDto = shopFeign.getByUserId(userDto.getUserId());
         shopDto.setMainProducts(request.getParameter("mainProducts"));
