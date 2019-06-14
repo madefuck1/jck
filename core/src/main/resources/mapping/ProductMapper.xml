@@ -141,7 +141,6 @@
     </resultMap>
 
 
-
     <sql id="Base_Column_List">
     product_id, shop_id, shop_name, product_name, is_upper, assort_id, product_json, 
     product_unit, product_detail, product_image, product_level, product_send_country,
@@ -161,7 +160,7 @@
     </select>
 
     <update id="getDown" parameterType="list" keyProperty="id" useGeneratedKeys="true">
-        <foreach collection="list" index="index" item="productId" >
+        <foreach collection="list" index="index" item="productId">
             update t_product
             <set>
                 is_upper = 0
@@ -170,7 +169,7 @@
         </foreach>
     </update>
     <update id="putUp" parameterType="list" keyProperty="id" useGeneratedKeys="true">
-        <foreach collection="list" index="index" item="productId" >
+        <foreach collection="list" index="index" item="productId">
             update t_product
             <set>
                 is_upper = 1
@@ -178,8 +177,8 @@
             WHERE product_id = #{productId};
         </foreach>
     </update>
-    <update id="deleteProduct" parameterType="list" keyProperty="id" useGeneratedKeys="true" >
-        <foreach collection="list" index="index" item="productId" >
+    <update id="deleteProduct" parameterType="list" keyProperty="id" useGeneratedKeys="true">
+        <foreach collection="list" index="index" item="productId">
             update t_product
             <set>
                 is_upper = -1
@@ -501,7 +500,7 @@
         <if test="userId!=0 and userId!=null">
             left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
         </if>
-        where 1 = 1
+        where 1 = 1 and P.is_upper = 1
         <if test="shopId != null">
             and P.shop_id = #{shopId}
         </if>
@@ -571,7 +570,7 @@
             resultType="java.lang.Integer">
         SELECT count(1)
         FROM t_product
-        WHERE 1 = 1
+        WHERE 1 = 1 and P.is_upper = 1
         <if test="shopId != null">
             and shop_id = #{shopId}
         </if>
@@ -619,7 +618,7 @@
         <if test="userId!=0 and userId!=null">
             left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
         </if>
-        WHERE P.product_id = #{productId}
+        WHERE P.product_id = #{productId} and P.is_upper = 1
 
 
     </select>
@@ -633,7 +632,7 @@
         concat(P.key3, '：', P.key3_value) as kv3,
         concat(P.key4, '：', P.key4_value) as kv4,
         concat(P.key5, '：', P.key5_value) as kv5
-        from ( select * from t_product order by product_level limit 10) as P
+        from ( select * from t_product where is_upper = 1 order by product_level limit 10) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
         join t_product_statistics St on P.product_id = St.product_id
@@ -643,11 +642,12 @@
         select P.*,PS.* from t_footprint FP
         join t_product P on FP.product_id=P.product_id
         join t_product_statistics PS on PS.product_id = P.product_id
-        where FP.user_id =#{userId}
+        where FP.user_id =#{userId} and P.is_upper = 1
         order by FP.create_time
     </select>
 
-    <select id="getProductDetailBySpec_Number" resultMap="ProductAndSpecDto" parameterType="com.soufang.base.dto.product.ProductDto">
+    <select id="getProductDetailBySpec_Number" resultMap="ProductAndSpecDto"
+            parameterType="com.soufang.base.dto.product.ProductDto">
 
         select * from (SELECT * from t_product where product_id= #{productId} ) product
         left join t_product_spec spec ON spec.product_id = product.product_id and spec.spec_name = #{productSpec}
@@ -659,7 +659,7 @@
             resultMap="DtoResultMap">
         select tp.*,tps.*
         from t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id
-        where 1 = 1
+        where 1 = 1 and tp.is_upper = 1
         <if test="shopId != null">
             and tp.shop_id = #{shopId}
         </if>
@@ -687,7 +687,8 @@
         order by tp.create_time LIMIT #{page},#{limit}
     </select>
 
-    <select id="getShopProductCount" parameterType="com.soufang.base.search.product.ProductManageSo" resultType="java.lang.Integer">
+    <select id="getShopProductCount" parameterType="com.soufang.base.search.product.ProductManageSo"
+            resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id WHERE 1=1
         <if test="shopId != null">
@@ -717,9 +718,9 @@
     </select>
     <select id="getAssortProduct" parameterType="com.soufang.base.dto.product.ProductDto"
             resultMap="DtoResultMap">
-        select  product_id,product_name,product_image
-         from t_product
-        where 1 = 1
+        select product_id,product_name,product_image
+        from t_product
+        where 1 = 1 and is_upper = 1
         <if test="assortIds != null and assortIds != ''">
             and FIND_IN_SET(assort_id,#{assortIds})
         </if>
@@ -730,7 +731,7 @@
     <select id="getIndexFootProduct" resultMap="DtoResultMap">
         select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
         from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
-        where 1 = 1 order by t_product_statistics.browse_number desc
+        where 1 =  and t_product.is_upper != -11 order by t_product_statistics.browse_number desc
         limit 0,16;
     </select>
 </mapper>
