@@ -150,8 +150,7 @@
     }
 
     // 验证卡号长度且必须为数字信息
-    function validateNum(str)
-    {
+    function validateNum(str){
         if(!(str.length>16 && str.length<19))
         {
             alert("请重新核对卡号号码位数是否遗漏");
@@ -244,7 +243,7 @@
 
     $(function () {
         $("input[name=companyInfo]").html("${companyInfo.companyInfo!}");
-        var idCard = "${userInfo.idCardUrl}".split(";");
+        var idCard = "${userInfo.idCardUrl!}".split(";");
         if(idCard[0].indexOf("upload") > 0){
             $(".idCard .sale_pic1").attr("src",idCard[0]);
         }

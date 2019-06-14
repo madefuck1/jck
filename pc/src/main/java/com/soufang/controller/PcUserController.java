@@ -255,12 +255,12 @@ public class PcUserController extends BaseController{
         CompanyDto companyDto = pcUserFeign.getCompany(userDto.getUserId());
         companyDto.setCompUrls(PropertiesParam.file_pre+companyDto.getCompUrls());
         map.put("companyInfo",companyDto);
-        String[] idCards = userDto.getIdCardUrl().split(";");
-        String idCardList = "";
-        for (int i = 0; i < idCards.length; i++) {
-            idCardList += PropertiesParam.file_pre + idCards[i]+ ";";
-        }
-        userDto.setIdCardUrl(idCardList);
+//        String[] idCards = userDto.getIdCardUrl().split(";");
+//        String idCardList = "";
+//        for (int i = 0; i < idCards.length; i++) {
+//            idCardList += PropertiesParam.file_pre + idCards[i]+ ";";
+//        }
+//        userDto.setIdCardUrl(idCardList);
         map.put("userInfo",userDto);
         if(result.isSuccess()){
             return  "sellerCenter/settle/second";
