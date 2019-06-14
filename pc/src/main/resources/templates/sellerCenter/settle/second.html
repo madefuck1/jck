@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="${contextPath}/css/sale/openShop.css">
 </@override>
 <@override name="body">
+<div id="loadingdiv" style="display:block;" >
+         <div class="loading-block show" class="fixed">                        
+               <img src="/static/images/quanquan.gif" style="width: 110px;height: 110px;">                   
+         </div>
+</div>
 <div id="sale_center">
     <div class="sale_aside">
         <!--引入左边菜单-->
@@ -99,7 +104,7 @@
                                             <input type="file" style="display: none" onchange="showCompany(this)">
                                         </div>
                                     </div>
-                                    <a><button type="button" onclick="submitSettle()" class="am-btn am-btn-secondary am-btn-lg button-size">立即提交</button></a>
+                                    <a><button type="button" id="submitSettle" onclick="submitSettle()" class="am-btn am-btn-secondary am-btn-lg button-size">立即提交</button></a>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +117,7 @@
 </@override>
 <@override name="js">
 <script type="text/javascript">
-
+    $("#loadingdiv").hide();
     function checkForm(){
         if($("input[name=companyType]").val() == ''){
             return "公司类型未选择";
@@ -209,6 +214,12 @@
                     } else {
                         alert("编辑失败:" + data.message)
                     }
+                }, beforeSend: function () {
+                    $("#loadingdiv").show();
+                    $("#submitSettle").attr("disabled", "disabled");
+                },compete:function(){
+                    $("#loadingdiv").hide();
+                    $("#submitSettle").removeAttr("disabled");
                 }
             });
     }
