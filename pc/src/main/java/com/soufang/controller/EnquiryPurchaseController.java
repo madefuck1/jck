@@ -13,6 +13,7 @@ import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
+import com.soufang.base.utils.IOClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.AssortFeign;
 import com.soufang.feign.EnquiryFeign;
@@ -112,14 +113,18 @@ public class EnquiryPurchaseController extends BaseController{
             enquiryProductDto.setProductAssort(Long.parseLong(request.getParameter("productAssort")));
             enquiryProductDtos.add(enquiryProductDto);
             enquiryDto.setEnquiryProductDto(enquiryProductDtos);
-        map = FtpClient.uploadImage(file,uploadUrl);
-        if((boolean)map.get("success")){
-            enquiryProductDto.setProductImage(String.valueOf(map.get("uploadName")));
-            result= enquiryFeign.addEnquiry(enquiryDto);
-        } else {
-            result.setSuccess(false);
-            result.setMessage("图片上传失败");
-        }
+            if(file != null){
+                map = IOClient.uploadImage(file,uploadUrl);
+                if((boolean)map.get("success")){
+                    enquiryProductDto.setProductImage(String.valueOf(map.get("uploadName")));
+                    result= enquiryFeign.addEnquiry(enquiryDto);
+                } else {
+                    result.setSuccess(false);
+                    result.setMessage("图片上传失败");
+                }
+            }else {
+                result= enquiryFeign.addEnquiry(enquiryDto);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
