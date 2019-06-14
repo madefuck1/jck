@@ -294,14 +294,28 @@ public class PcUserController extends BaseController{
         companyDto.setCompAddress(request.getParameter("compAddress"));
         companyDto.setBank(request.getParameter("bank"));
         companyDto.setBankNumber(request.getParameter("bankNumber"));
-        Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
-        if((boolean)companyResult.get("success")){
-            companyDto.setCompUrls(companyResult.get("uploadName").toString());
-        }else {
-            baseVo.setSuccess(false);
-            baseVo.setMessage("图片上传失败");
-            return baseVo;
+        if(companyFile != null){
+            Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,uploadUrl);
+            if((boolean)companyResult.get("success")){
+                companyDto.setCompUrls(companyResult.get("uploadName").toString());
+            }else {
+                baseVo.setSuccess(false);
+                baseVo.setMessage("图片上传失败");
+                return baseVo;
+            }
         }
+        String idCards = "";
+        if(idCardFile != null){
+            Map<String , Object> companyResult = FtpClient.uploadImage(companyFile,userUrl);
+            if((boolean)companyResult.get("success")){
+                idCards += companyResult.get("uploadName").toString() +";";
+            }else {
+                baseVo.setSuccess(false);
+                baseVo.setMessage("图片上传失败");
+                return baseVo;
+            }
+        }
+        userDto.setIdCardUrl(idCards);
         userDto.setCompanyDto(companyDto);
         ShopDto shopDto = shopFeign.getByUserId(userDto.getUserId());
         shopDto.setMainProducts(request.getParameter("mainProducts"));
