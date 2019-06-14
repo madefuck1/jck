@@ -347,7 +347,7 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<AssortDto> assortDtos = assortMapper.getAssortAByParentId(so.getAssortId());
 
         for (int i = 0; i < assortDtos.size(); i++){
-            assortIds.append(String.valueOf(assortDtos.get(i).getAssortId()+","));
+            assortIds.append(assortDtos.get(i).getAssortId()+",");
         }
 
         so.setPage((so.getPage()-1)*so.getLimit());

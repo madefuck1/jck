@@ -90,23 +90,23 @@
         <div class="clearfixLeft" id="clearcontent">
             <div class="box">
                 <div class="tb-booth tb-pic tb-s310">
-                    <a href="${images[0]}"><img src="${images[0]}" alt="细节展示放大镜特效"
-                                                rel="${images[0]}" class="jqzoom"/></a>
+                    <a href="${images[0]!''}"><img src="${images[0]!''}" alt="细节展示放大镜特效"
+                                                rel="${images[0]!''}" class="jqzoom"/></a>
                 </div>
                 <ul class="tb-thumb" id="thumblist">
                     <#list images as item>
                     <#if item_index==0>
                     <li class="tb-selected">
                         <div class="tb-pic tb-s40">
-                            <a href="#"><img src="${item}" mid="${item}"
-                                             big="${item}"></a>
+                            <a href="#"><img src="${item!''}" mid="${item}"
+                                             big="${item!''}"></a>
                         </div>
                     </li>
                     <#else>
                     <li>
                         <div class="tb-pic tb-s40">
-                            <a href="#"><img src="${item}" mid="${item}"
-                                             big="${item}"></a>
+                            <a href="#"><img src="${item!''}" mid="${item!''}"
+                                             big="${item!''}"></a>
                         </div>
                     </li>
                                                                     </#if>
@@ -119,7 +119,7 @@
             <!--规格属性-->
             <!--名称-->
             <div class="tb-detail-hd">
-                <h1>${detail.productName}</h1>
+                <h1>${detail.productName!''}</h1>
             </div>
             <div class="tb-detail-list" id="specList">
                 <!--价格 数量-->
@@ -131,7 +131,7 @@
                         <#list detail.specDtoList as item>
                         <#if item_index==0>
                         <div class="am-u-sm-10">
-                            <span class="pri1" style="padding-right: 5%">￥<span class="pri2">${item.specDetailDtoList[0].specNumber}</span></span>
+                            <span class="pri1" style="padding-right: 5%">￥<span class="pri2">${item.specDetailDtoList[0].specNumber!''}</span></span>
                         </div>
                                                                                 </#if>
                                                                                 </#list>
@@ -143,7 +143,7 @@
                         <#list detail.specDtoList as item>
                         <#if item_index==0>
                         <div class="am-u-sm-10">
-                            <span style="padding-right: 5%">${item.specDetailDtoList[0].minNumber}-${item.specDetailDtoList[0].maxNumber}${detail.productUnit!}</span>
+                            <span style="padding-right: 5%">${item.specDetailDtoList[0].minNumber!''}-${item.specDetailDtoList[0].maxNumber!''}${detail.productUnit!''}</span>
                         </div>
                                                                                 </#if>
                                                                                 </#list>
@@ -154,7 +154,7 @@
             <!--地址-->
             <dl class="iteminfo_parameter freight add">
                 <dt>发货地点:</dt>
-                <dd>${detail.productSendProvince!}${detail.productSendCity!}</dd>
+                <dd>${detail.productSendProvince!''}${detail.productSendCity!''}</dd>
             </dl>
             <dl class="iteminfo_parameter freight add2" style="margin-top: 6px">
                 <dt>产品状态:</dt>
@@ -183,11 +183,15 @@
                                         <ul id="productColor">
                                             <#list detail.productColorDtoList as item>
                                             <#if item_index==0>
-                                            <li onclick="selectColor(this,${item.spock?c},${item.isSpot})"
-                                                class="sku-line selected ">${item.productColor}<i></i></li>
+                                            <li onclick="selectColor(this,${item.spock?c},${item.isSpot!''})"
+                                                class="sku-line selected ">
+                                                    ${item.productColor!'--'}
+                                                <i></i></li>
                                             <#else>
-                                            <li onclick="selectColor(this,${item.spock?c},${item.isSpot})"
-                                                class="sku-line ">${item.productColor}<i></i></li>
+                                            <li onclick="selectColor(this,${item.spock?c},${item.isSpot!''})"
+                                                class="sku-line ">
+                                                ${item.productColor!'--'}
+                                                <i></i></li>
                                                                                     </#if>
                                                                                 </#list>
                                         </ul>
@@ -198,9 +202,9 @@
                                             <#list detail.specDtoList as item>
                                             <#if item_index==0>
                                             <li onclick="selectSpec(this)" class="sku-line selected ">
-                                                ${item.specName}<i></i></li>
+                                                ${item.specName!''}<i></i></li>
                                             <#else>
-                                            <li onclick="selectSpec(this)" class="sku-line ">${item.specName}<i></i>
+                                            <li onclick="selectSpec(this)" class="sku-line ">${item.specName!''}<i></i>
                                             </li>
                                                                                 </#if>
                                                                                 </#list>
@@ -213,14 +217,14 @@
                                                    name="" type="button"
                                                    value="-"/>
                                             <input id="productNum" name="" type="text"
-                                                   value="${detail.specDtoList[0].specDetailDtoList[0].minNumber}"
+                                                   value="${detail.specDtoList[0].specDetailDtoList[0].minNumber!'0'}"
                                                    oninput="value=value.replace(/[^\d]/g,'')"
                                                    style="width:80px;"/>
                                             <input id="productAdd" class="am-btn am-btn-default" name=""
                                                    type="button"
                                                    value="+"/>
                                             <span id="spock" class="tb-hidden">库存<span name="productSpock"
-                                                                                       class="stock">${detail.productColorDtoList[0].spock?replace(',','')}</span>件</span>
+                                                                                       class="stock">${detail.productColorDtoList[0].spock!''?replace(',','')}</span>件</span>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
@@ -261,16 +265,16 @@
                     <h2>${leftName}</h2>
                 </div>
                 <#list leftList as item>
-                <li class="first">
+                <li class="first" style="border-top: 1px solid #D4D4D4; padding-bottom: 10px">
                     <div class="p-img">
-                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"
-                           href="#"><img class="" src="${item.productUrl}"> </a>
+                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"
+                           href="#"><img class="" src="${item.URL!''}"> </a>
                     </div>
                     <div class="p-name"><a
-                            onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"
-                            href="#">${item.productName}</a>
+                            onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"
+                            href="#">${item.productName!''}</a>
                     </div>
-                    <div class="p-price"><strong>￥${item.productStatisticsDto.productPrice}</strong></div>
+                    <div class="p-price"><strong>￥${item.productStatisticsDto.productPrice!''}</strong></div>
                 </li>
                                                     </#list>
             </ul>
@@ -459,7 +463,7 @@
 <#include "/common/includes/include.footer.html"/>
 </body>
 <script type="text/javascript">
-    var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber}";
+    var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber!'1'}";
 
     $(function () {
         $('.flexslider').flexslider({

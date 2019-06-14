@@ -385,12 +385,41 @@ public class ProductController extends BaseController {
      */
     @RequestMapping(value = "toDetail", method = RequestMethod.GET)
     public String introductionHtml(HttpServletRequest request, ModelMap map, Long productId) {
+        // 是否登录
+        UserDto userInfo = null;
+        try {
+            userInfo = getUserInfo(request);
+            if (userInfo != null && userInfo.getUserId() != null) {
+                // 足迹列表
+                ProductDto temp = new ProductDto();
+                temp.setUserId(userInfo.getUserId());
+                List<ProductDto> footPrintList = productFeign.getFootPrintList(temp);
+                map.put("leftName", "浏览记录");
+                map.put("leftList", footPrintList);
+            } else {
+                // 推荐列表
+                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+                map.put("leftName", "热门产品");
+                map.put("leftList", hotProductList.getData());
+            }
+        } catch (NumberFormatException e) {
+            // 推荐列表
+            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+            map.put("leftName", "热门产品");
+            map.put("leftList", hotProductList.getData());
+        }
         ProductDto dto = new ProductDto();
         dto.setProductId(productId);
+        dto.setUserId(userInfo.getUserId());
         ProductDto productDto = productFeign.getProductDetail(dto);
 
         // 产品图片
-        List<String> productImages = Arrays.asList(productDto.getProductUrl().split(";"));
+        List<String> resultImage = Arrays.asList(productDto.getProductImage().split(";"));
+        List<String> productImages = new ArrayList<>();
+        for (String temp : resultImage) {
+            temp = PropertiesParam.file_pre + temp;
+            productImages.add(temp);
+        }
         map.put("images", productImages);
 
         // 宝贝详情
@@ -403,37 +432,32 @@ public class ProductController extends BaseController {
 
         // 产品参数
         StringBuilder str = new StringBuilder();
-        str.append(productDto.getKv1() + ",");
-        str.append(productDto.getKv2() + ",");
-        str.append(productDto.getKv3() + ",");
-        str.append(productDto.getKv4() + ",");
-        str.append(productDto.getKv5() + ",");
-        String[] productJson = null;
+        if (productDto.getKv1() != null) {
+            str.append(productDto.getKv1() + ";");
+        }
+        if (productDto.getKv2() != null) {
+            str.append(productDto.getKv2() + ";");
+        }
+        if (productDto.getKv3() != null) {
+            str.append(productDto.getKv3() + ";");
+        }
+        if (productDto.getKv4() != null) {
+            str.append(productDto.getKv4() + ";");
+        }
+        if (productDto.getKv5() != null) {
+            str.append(productDto.getKv5() + ";");
+        }
         if (!"".equals(productDto.getProductJson()) && productDto.getProductJson() != null) {
 //            str.append(productDto.getProductJson().substring(1, productDto.getProductJson().length() - 1).replace("\"", ""));
-            productJson = str.toString().split(";");
+            str.append(productDto.getProductJson() + ";");
         }
+        String[] productJson = null;
+        productJson = str.toString().split(";");
         map.put("productJson", productJson);
 
         // 产品信息
         map.put("detail", productDto);
 
-        // 是否登录
-        UserDto userInfo;
-        try {
-            userInfo = getUserInfo(request);
-            // 足迹列表
-            ProductDto temp = new ProductDto();
-            temp.setUserId(userInfo.getUserId());
-            List<ProductDto> footPrintList = productFeign.getFootPrintList(temp);
-            map.put("leftName", "浏览记录");
-            map.put("leftList", footPrintList);
-        } catch (NumberFormatException e) {
-            // 推荐列表
-            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
-            map.put("leftName", "热门产品");
-            map.put("leftList", hotProductList.getData());
-        }
         //获取各种评价的总数量
         AssessSo assessSo = new AssessSo();
         assessSo.setProductId(productId);
