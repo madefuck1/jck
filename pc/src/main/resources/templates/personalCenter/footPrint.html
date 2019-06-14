@@ -18,6 +18,10 @@
 								<div class="am-cf am-padding">
 									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的足迹</strong></div>
 								</div>
+							<div id="noData" style="visibility:hidden;">
+							<#include "/noData.html"/>
+							</div>
+
 								<hr/>
 								<!--足迹列表 /今天-->
 								<div id="tableFoot"></div>
@@ -53,10 +57,10 @@
             dataType : "json",
             success : function(data) {
                 console.log(data);
-               /* if (data.data.length==0){
+               if (data.data.length==0){
 					//没有数据
-
-				}*/
+                   document.getElementById("noData").style.visibility="visible";//显示
+				}
                 $.each(data.data, function (i, v) {
                     //当天数据-当数据卫当日-则添加到列表
                     console.log("时间判断")
