@@ -132,19 +132,19 @@
         if($("input[name=mainProducts]").val() == ''){
             return "主营产品未填写";
         }
-
-        if($("input[name=bankNumber]").val() == ''){
+        var str =$("input[name=bankNumber]").val();
+        if(str == ''){
             return "卡号未填写";
         }else{
-            if(!($("input[name=bankNumber]").val().length>16 && $("input[name=bankNumber]").val().length<19))
+            if(!(str.length>16 && str.length<19))
             {
                 return "请重新核对卡号号码位数是否遗漏";
             }
             else
             {
-                for(var i=0; i<$("input[name=bankNumber]").val(); i++)
+                for(var i=0; i<str.length; i++)
                 {
-                    if($("input[name=bankNumber]").val().charAt(i)<'0' || $("input[name=bankNumber]").val().charAt(i)>'9')
+                    if(str.charAt(i)<'0' || str.charAt(i)>'9')
                     {
                         return "输入的卡号必须为数字信息";
                     }
