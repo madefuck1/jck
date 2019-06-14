@@ -169,6 +169,7 @@
 
 <div id="Recommend">
     <div class="Recommend_row1 row2">
+        <#if productDtos1??>
         <#list productDtos1 as product>
         <#if product_index < 4 >
         <div class="rec">
@@ -190,9 +191,11 @@
         <#break>
         </#if>
         </#list>
+        </#if>
     </div>
 
     <div class="Recommend_row1 row2">
+    <#if productDtos1??>
     <#list productDtos2 as product>
     <#if product_index < 4 >
     <div class="rec">
@@ -214,8 +217,10 @@
     <#break>
     </#if>
     </#list>
+    </#if>
     </div>
 <div class="Recommend_row1 row2">
+    <#if productDtos1??>
     <#list productDtos3 as product>
     <#if product_index < 4 >
     <div class="rec">
@@ -237,6 +242,7 @@
 <#break>
 </#if>
 </#list>
+</#if>
 </div>
 </div>
 
@@ -284,7 +290,7 @@
             contentType:"application/json",
             success:function (data) {
                 if(data.count == 0){
-                    alert("没有当前类别的产品");
+                    //alert("没有当前类别的产品");
                     getAssortProduct(23,1,8);
                 }
                 $("#pro").empty();
