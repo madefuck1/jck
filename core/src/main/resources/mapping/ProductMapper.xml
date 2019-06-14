@@ -227,7 +227,7 @@
             <if test="productName != null">
                 product_name,
             </if>
-            <if test="isUpper != null">
+            <if test="isUpper != null and isUpper !=''">
                 is_upper,
             </if>
             <if test="assortId != null">
@@ -304,7 +304,7 @@
             <if test="productName != null">
                 #{productName,jdbcType=VARCHAR},
             </if>
-            <if test="isUpper != null">
+            <if test="isUpper != null and isUpper !=''">
                 #{isUpper,jdbcType=INTEGER},
             </if>
             <if test="assortId != null">
@@ -381,7 +381,7 @@
             <if test="productName != null">
                 product_name = #{productName,jdbcType=VARCHAR},
             </if>
-            <if test="isUpper != null">
+            <if test="isUpper != null and isUpper !=''">
                 is_upper = #{isUpper,jdbcType=INTEGER},
             </if>
             <if test="assortId != null">
@@ -500,14 +500,14 @@
         <if test="userId!=0 and userId!=null">
             left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
         </if>
-        where 1 = 1 and P.is_upper = 1
+        where 1 = 1
         <if test="shopId != null">
             and P.shop_id = #{shopId}
         </if>
         <if test="productName != null and productName != '' ">
             and P.product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null">
+        <if test="isUpper != null and isUpper !=''">
             and P.is_upper = #{isUpper}
         </if>
         <if test="assortId != null and assortId != 0">
@@ -570,14 +570,14 @@
             resultType="java.lang.Integer">
         SELECT count(1)
         FROM t_product
-        WHERE 1 = 1 and P.is_upper = 1
+        WHERE 1 = 1
         <if test="shopId != null">
             and shop_id = #{shopId}
         </if>
         <if test="productName != null">
             and product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null">
+        <if test="isUpper != null and isUpper !=''">
             and is_upper = #{isUpper}
         </if>
         <if test="assortId != null">
@@ -618,9 +618,10 @@
         <if test="userId!=0 and userId!=null">
             left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
         </if>
-        WHERE P.product_id = #{productId} and P.is_upper = 1
-
-
+        WHERE P.product_id = #{productId}
+        <if test="isUpper != null and isUpper !=''">
+            and tp.is_upper = #{isUpper}
+        </if>
     </select>
 
 
@@ -632,7 +633,11 @@
         concat(P.key3, '：', P.key3_value) as kv3,
         concat(P.key4, '：', P.key4_value) as kv4,
         concat(P.key5, '：', P.key5_value) as kv5
-        from ( select * from t_product where is_upper = 1 order by product_level limit 10) as P
+        from ( select * from t_product where
+        <if test="isUpper != null and isUpper !=''">
+            and tp.is_upper = #{isUpper}
+        </if>
+        order by product_level limit 10) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
         join t_product_statistics St on P.product_id = St.product_id
@@ -642,7 +647,10 @@
         select P.*,PS.* from t_footprint FP
         join t_product P on FP.product_id=P.product_id
         join t_product_statistics PS on PS.product_id = P.product_id
-        where FP.user_id =#{userId} and P.is_upper = 1
+        where FP.user_id =#{userId}
+        <if test="isUpper != null and isUpper !=''">
+            and tp.is_upper = #{isUpper}
+        </if>
         order by FP.create_time
     </select>
 
@@ -659,14 +667,14 @@
             resultMap="DtoResultMap">
         select tp.*,tps.*
         from t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id
-        where 1 = 1 and tp.is_upper = 1
+        where 1 = 1
         <if test="shopId != null">
             and tp.shop_id = #{shopId}
         </if>
         <if test="productName != null and productName != '' ">
             and tp.product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null">
+        <if test="isUpper != null and isUpper !=''">
             and tp.is_upper = #{isUpper}
         </if>
         <choose>
@@ -697,7 +705,7 @@
         <if test="productName != null and productName != '' ">
             and tp.product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null">
+        <if test="isUpper != null and isUpper !=''">
             and tp.is_upper = #{isUpper}
         </if>
         <choose>
@@ -720,7 +728,10 @@
             resultMap="DtoResultMap">
         select product_id,product_name,product_image
         from t_product
-        where 1 = 1 and is_upper = 1
+        where 1 = 1
+        <if test="isUpper != null and isUpper !=''">
+            and tp.is_upper = #{isUpper}
+        </if>
         <if test="assortIds != null and assortIds != ''">
             and FIND_IN_SET(assort_id,#{assortIds})
         </if>
@@ -731,7 +742,8 @@
     <select id="getIndexFootProduct" resultMap="DtoResultMap">
         select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
         from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
-        where 1 =  and t_product.is_upper != -11 order by t_product_statistics.browse_number desc
+        where 1 = 1
+        order by t_product_statistics.browse_number desc
         limit 0,16;
     </select>
 </mapper>

@@ -78,13 +78,13 @@ public class ProductController extends BaseController {
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public Result createProduct(@ModelAttribute ProductDto productDto , HttpServletRequest request) {
-        productDto = init(productDto,request);
+    public Result createProduct(@ModelAttribute ProductDto productDto, HttpServletRequest request) {
+        productDto = init(productDto, request);
         Result result = productFeign.createProductFirst(productDto);
         return result;
     }
 
-    private ProductDto init(ProductDto productDto , HttpServletRequest request){
+    private ProductDto init(ProductDto productDto, HttpServletRequest request) {
         Date date = DateUtils.getToday();
         ShopDto shopDto = getShopInfo(request);
         productDto.setShopId(shopDto.getShopId());
@@ -101,7 +101,7 @@ public class ProductController extends BaseController {
         productDto.setProductLevel(1);
         productDto.setCreateTime(date);
         List<ProductColorDto> productColorDtos = new ArrayList<>();
-        for(ProductColorDto productColorDto : productDto.getProductColorDtoList()){
+        for (ProductColorDto productColorDto : productDto.getProductColorDtoList()) {
             productColorDto.setIsSpot(0);
             productColorDto.setCreateTime(date);
             productColorDto.setSpock(new BigDecimal("99999999"));
@@ -109,8 +109,8 @@ public class ProductController extends BaseController {
         }
         productDto.setProductColorDtoList(productColorDtos);
         List<ProductSpecDto> productSpecDtos = new ArrayList<>();
-        for(ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()){
-            if(productSpecDto.getMaxNumber() ==null){
+        for (ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()) {
+            if (productSpecDto.getMaxNumber() == null) {
                 productSpecDto.setMaxNumber(99999999L);
             }
             productSpecDto.setPriceSecret(0);
@@ -124,22 +124,22 @@ public class ProductController extends BaseController {
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "createSecond", method = RequestMethod.POST)
-    public Result createSecond(MultipartFile[] files , MultipartFile[] files2 , Long productId) {
+    public Result createSecond(MultipartFile[] files, MultipartFile[] files2, Long productId) {
         ProductDto temp = new ProductDto();
         temp.setProductId(productId);
         ProductDto productDto = productFeign.getProductDetail(temp);
         StringBuffer productImage = new StringBuffer();
-        for (int i = 0; i < files.length ; i++) {
-            Map<String , Object> map = FtpClient.uploadImage(files[i],productUrl);
-            if((boolean)map.get("success")){
-                productImage.append(map.get("uploadName").toString()+";");
+        for (int i = 0; i < files.length; i++) {
+            Map<String, Object> map = FtpClient.uploadImage(files[i], productUrl);
+            if ((boolean) map.get("success")) {
+                productImage.append(map.get("uploadName").toString() + ";");
             }
         }
         StringBuffer productDetail = new StringBuffer();
-        for (int i = 0; i < files2.length ; i++) {
-            Map<String , Object> map = FtpClient.uploadImage(files2[i],productUrl);
-            if((boolean)map.get("success")){
-                productDetail.append(map.get("uploadName").toString()+";");
+        for (int i = 0; i < files2.length; i++) {
+            Map<String, Object> map = FtpClient.uploadImage(files2[i], productUrl);
+            if ((boolean) map.get("success")) {
+                productDetail.append(map.get("uploadName").toString() + ";");
             }
         }
         productDto.setProductImage(productImage.toString());
@@ -147,6 +147,7 @@ public class ProductController extends BaseController {
         Result result = productFeign.updateProduct(productDto);
         return result;
     }
+
     /**
      * 检索页面
      *
@@ -161,6 +162,7 @@ public class ProductController extends BaseController {
         Integer limit = 40;
         ProductDto dto = new ProductDto();
         dto.setProductName(searchProductName);
+        dto.setIsUpper(1);//上架的产品
         model.put("searchProductName", searchProductName);
         // 设置翻页
         dto.setPage(0);
@@ -297,6 +299,7 @@ public class ProductController extends BaseController {
         Integer limit = 40;
         ProductDto dto = new ProductDto();
         dto.setProductName(searchProductName);
+        dto.setIsUpper(1);
         // 设置翻页
         dto.setLimit(limit);
         dto.setPage(pageIndex);
@@ -431,8 +434,8 @@ public class ProductController extends BaseController {
         //获取各种评价的总数量
         AssessSo assessSo = new AssessSo();
         assessSo.setProductId(productId);
-        Map<String,Integer> allCount = assessFeign.getCount(assessSo);
-        map.put("allCount",allCount);
+        Map<String, Integer> allCount = assessFeign.getCount(assessSo);
+        map.put("allCount", allCount);
         return "product/productDetail";
     }
 
@@ -513,14 +516,14 @@ public class ProductController extends BaseController {
 
     //首页获取某类别的产品信息
     @ResponseBody
-    @RequestMapping(value = "getAssortProduct",method = RequestMethod.POST)
-    public ListProductVo getAssortProduct(@RequestBody ProductManageSo so){
+    @RequestMapping(value = "getAssortProduct", method = RequestMethod.POST)
+    public ListProductVo getAssortProduct(@RequestBody ProductManageSo so) {
 
         PageHelp<ProductDto> pageHelp = productFeign.getAssortProduct(so);
         ListProductVo vo = new ListProductVo();
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());
-        return  vo;
+        return vo;
     }
 
 }
