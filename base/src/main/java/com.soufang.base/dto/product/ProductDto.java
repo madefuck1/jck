@@ -41,6 +41,7 @@ public class ProductDto extends PageBase implements Serializable {
 
     private String productImage;
     private String productUrl;
+    private String URL;
 
     private Integer productLevel;
 
@@ -94,6 +95,10 @@ public class ProductDto extends PageBase implements Serializable {
 
     public String getProductUrl() {
         return PropertiesParam.file_pre + productImage;
+    }
+
+    public String getURL() {
+        return productImage == null || "".equals(productImage) ? "" : PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";"));
     }
 
 
