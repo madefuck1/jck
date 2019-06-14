@@ -142,9 +142,9 @@
             }
             else
             {
-                for(var i=0; i<str.length; i++)
+                for(var i=0; i<$("input[name=bankNumber]").val(); i++)
                 {
-                    if(str.charAt(i)<'0' || str.charAt(i)>'9')
+                    if($("input[name=bankNumber]").val().charAt(i)<'0' || $("input[name=bankNumber]").val().charAt(i)>'9')
                     {
                         return "输入的卡号必须为数字信息";
                     }
