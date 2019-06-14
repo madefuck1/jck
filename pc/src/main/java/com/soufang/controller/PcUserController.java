@@ -103,10 +103,10 @@ public class PcUserController extends BaseController{
             SmsSendResponse smsSendResponse = MessageUtil.setMessage("【可可西里】验证码："+VerCode,phone);
             if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
-                MessageDto messageDto = new MessageDto(phone,VerCode,0,DateUtils.getToday(),1);
-                result = pcUserFeign.addMessage(messageDto);
                 RedisUtils.setString(RedisConstants.verfity_code +phone,VerCode,code_time);
             }
+            MessageDto messageDto = new MessageDto(phone,VerCode,0,DateUtils.getToday(),1);
+            result = pcUserFeign.addMessage(messageDto);
         }else if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             //发送邮箱验证码
             String email = registerReqVo.getEmail();
