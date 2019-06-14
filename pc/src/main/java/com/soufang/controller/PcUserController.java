@@ -95,7 +95,7 @@ public class PcUserController extends BaseController {
     @RequestMapping(value = "sendCode", method = RequestMethod.POST)
     public BaseVo getCode(@RequestBody RegisterReqVo registerReqVo) {
         BaseVo baseVo = new BaseVo();
-        Result result = new Result();
+        Result result;
         String VerCode = GetRandomUtils.getRandom();
         if (StringUtils.isNotBlank(registerReqVo.getPhone())) {
             //发送手机验证码
@@ -138,10 +138,10 @@ public class PcUserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public BaseVo register(@RequestBody RegisterReqVo registerReqVo, HttpServletResponse response) {
-        BaseVo baseVo = new BaseVo();
+        BaseVo baseVo;
         UserDto userDto = new UserDto();
-        Result result = new Result();
-        String code = null;
+        Result result;
+        String code;
         if (StringUtils.isNotBlank(registerReqVo.getEmail())) {
             code = RedisUtils.getString(RedisConstants.verfity_code + registerReqVo.getEmail());
             userDto.setEmail(registerReqVo.getEmail());
