@@ -633,10 +633,8 @@
         concat(P.key3, '：', P.key3_value) as kv3,
         concat(P.key4, '：', P.key4_value) as kv4,
         concat(P.key5, '：', P.key5_value) as kv5
-        from ( select * from t_product where
-        <if test="isUpper != null and isUpper !=''">
-            and tp.is_upper = #{isUpper}
-        </if>
+        from ( select * from t_product where 1=1
+            and is_upper = 1
         order by product_level limit 10) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
@@ -742,7 +740,7 @@
     <select id="getIndexFootProduct" resultMap="DtoResultMap">
         select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
         from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
-        where 1 = 1
+        where 1 = 1 and is_upper =1
         order by t_product_statistics.browse_number desc
         limit 0,16;
     </select>

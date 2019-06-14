@@ -370,9 +370,9 @@ public class ProductManageServiceImpl implements ProductManageService {
     public PageHelp<ProductDto> getIndexFootProduct() {
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         List<ProductDto> list = productMapper.getIndexFootProduct();
-        for (ProductDto p:list) {
-            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
-        }
+//        for (ProductDto p:list) {
+//            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
+//        }
         pageHelp.setData(list);
         return pageHelp;
     }
