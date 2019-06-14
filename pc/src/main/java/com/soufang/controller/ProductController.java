@@ -408,8 +408,11 @@ public class ProductController extends BaseController {
         str.append(productDto.getKv3() + ",");
         str.append(productDto.getKv4() + ",");
         str.append(productDto.getKv5() + ",");
-        str.append(productDto.getProductJson().substring(1, productDto.getProductJson().length() - 1).replace("\"", ""));
-        String[] productJson = str.toString().split(",");
+        String[] productJson = null;
+        if (!"".equals(productDto.getProductJson()) && productDto.getProductJson() != null) {
+//            str.append(productDto.getProductJson().substring(1, productDto.getProductJson().length() - 1).replace("\"", ""));
+            productJson = str.toString().split(";");
+        }
         map.put("productJson", productJson);
 
         // 产品信息
