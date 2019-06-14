@@ -45,6 +45,7 @@ public class UserController {
         }
         ShopDto shopDto = userDto.getShopDto();
         if(shopDto.getShopId() == null){
+            shopDto.setUserId(userDto.getUserId());
             shopDto.setCreateTime(DateUtils.getToday());
             shopService.addShop(shopDto);
         }else {
