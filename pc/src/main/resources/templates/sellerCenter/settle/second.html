@@ -34,7 +34,7 @@
                                         <span class="am-u-sm-2 row1">单位性质：</span>
                                         <div class="am-u-sm-10 sale_fz">
                                             <label class="am-radio-inline">
-                                                <input type="radio"  value="1" name="companyType"> 企业
+                                                <input type="radio" value="1" name="companyType"> 企业
                                             </label>
                                             <label class="am-radio-inline">
                                                 <input type="radio" value="2" name="companyType"> 个体工商户
@@ -44,48 +44,56 @@
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">公司名称：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <input type="text" name="compName" value="${companyInfo.compName!}" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="compName" value="${companyInfo.compName!}"
+                                                   class="am-form-field" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">公司简介：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style=" float: left;">
-                                            <textarea name="compInfo" class="" rows="1" id="doc-ta-1" style="border: 1px solid #E6E6E6; width: 58%"></textarea>
+                                            <textarea name="compInfo" class="" rows="1" id="doc-ta-1"
+                                                      style="border: 1px solid #E6E6E6; width: 58%;line-height: 1.5;height: 250px"></textarea>
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">详细地址：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <input type="text" name="compAddress" value="${companyInfo.compAddress!}" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="compAddress" value="${companyInfo.compAddress!}"
+                                                   class="am-form-field" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">经营范围：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <input type="text" name="businessScope" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="businessScope" class="am-form-field"
+                                                   placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">主营产品：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <input type="text" name="mainProducts" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="mainProducts" class="am-form-field"
+                                                   placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">银行卡号：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <input type="text" name="bankNumber" value="${companyInfo.bankNumber!}" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="bankNumber" value="${companyInfo.bankNumber!}"
+                                                   class="am-form-field" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="">
                                         <span class="am-u-sm-2 row1">开户银行：</span>
                                         <div class="am-u-sm-10 row2" style=" float: left;">
-                                            <input type="text" name="bank" value="${companyInfo.bank!}" class="am-form-field" placeholder="请输入">
+                                            <input type="text" name="bank" value="${companyInfo.bank!}"
+                                                   class="am-form-field" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">身份证照片：</span>
-                                        <div class="idCard am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                        <div class="idCard am-form-group am-u-sm-10 row2"
+                                             style="width: 50%; float: left">
                                             <img class="sale_pic1" onclick="idCard(this,1)">
                                             <img class="sale_pic2" onclick="idCard(this,2)">
                                             <input type="file" style="display:none;" onchange="showIdCard(this,1)">
@@ -94,12 +102,17 @@
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">营业执照：</span>
-                                        <div class="company am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
+                                        <div class="company am-form-group am-u-sm-10 row2"
+                                             style="width: 50%; float: left">
                                             <img class="sale_pic3" onclick="company(this)">
                                             <input type="file" style="display: none" onchange="showCompany(this)">
                                         </div>
                                     </div>
-                                    <a><button type="button" onclick="submitSettle()" class="am-btn am-btn-secondary am-btn-lg button-size">立即提交</button></a>
+                                    <a>
+                                        <button type="button" onclick="submitSettle()"
+                                                class="am-btn am-btn-secondary am-btn-lg button-size">立即提交
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -113,39 +126,34 @@
 <@override name="js">
 <script type="text/javascript">
 
-    function checkForm(){
-        if($("input[name=companyType]").val() == ''){
+    function checkForm() {
+        if ($("input[name=companyType]").val() == '') {
             return "公司类型未选择";
         }
-        if($("input[name=compName]").val() == ''){
+        if ($("input[name=compName]").val() == '') {
             return "公司名称未填写";
         }
-        if($("textarea[name=compInfo]").val() == ''){
+        if ($("textarea[name=compInfo]").val() == '') {
             return "公司介绍未填写";
         }
-        if($("input[name=compAddress]").val() == ''){
+        if ($("input[name=compAddress]").val() == '') {
             return "公司地址未填写";
         }
-        if($("input[name=businessScope]").val() == ''){
+        if ($("input[name=businessScope]").val() == '') {
             return "经营范围未填写";
         }
-        if($("input[name=mainProducts]").val() == ''){
+        if ($("input[name=mainProducts]").val() == '') {
             return "主营产品未填写";
         }
-        var str =$("input[name=bankNumber]").val();
-        if(str == ''){
+        var str = $("input[name=bankNumber]").val();
+        if (str == '') {
             return "卡号未填写";
-        }else{
-            if(!(str.length>16 && str.length<19))
-            {
+        } else {
+            if (!(str.length > 16 && str.length < 19)) {
                 return "请重新核对卡号号码位数是否遗漏";
-            }
-            else
-            {
-                for(var i=0; i<str.length; i++)
-                {
-                    if(str.charAt(i)<'0' || str.charAt(i)>'9')
-                    {
+            } else {
+                for (var i = 0; i < str.length; i++) {
+                    if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                         return "输入的卡号必须为数字信息";
                     }
                 }
@@ -153,47 +161,42 @@
         }
 
 
-        if($("input[name=bank]").val() == ''){
+        if ($("input[name=bank]").val() == '') {
             return "开户行未填写";
         }
-        return null ;
+        return null;
     }
 
     // 验证卡号长度且必须为数字信息
-    function validateNum(str){
-        if(!(str.length>16 && str.length<19))
-        {
+    function validateNum(str) {
+        if (!(str.length > 16 && str.length < 19)) {
             return "请重新核对卡号号码位数是否遗漏";
-        }
-        else
-        {
-            for(var i=0; i<str.length; i++)
-            {
-                if(str.charAt(i)<'0' || str.charAt(i)>'9')
-                {
+        } else {
+            for (var i = 0; i < str.length; i++) {
+                if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                     return "输入的卡号必须为数字信息";
                 }
             }
         }
     }
 
-    function submitSettle(){
+    function submitSettle() {
         var message = checkForm();
-        if(message != null){
+        if (message != null) {
             alert(message);
-        }else{
+        } else {
             var formData = new FormData();
-            formData.append("compType",$("input[name=companyType]").val());
-            formData.append("compName",$("input[name=compName]").val());
-            formData.append("compInfo",$("textarea[name=compInfo]").val());
-            formData.append("compAddress",$("input[name=compAddress]").val());
-            formData.append("businessScope",$("input[name=businessScope]").val());
-            formData.append("mainProducts",$("input[name=mainProducts]").val());
-            formData.append("bankNumber",$("input[name=bankNumber]").val());
-            formData.append("bank",$("input[name=bank]").val());
-            formData.append("idCardFile",$(".idCard input[type=file]").first()[0].files[0]);
-            formData.append("idCardFile",$(".idCard input[type=file]").last()[0].files[0]);
-            formData.append("companyFile",$(".company input[type=file]")[0].files[0]);
+            formData.append("compType", $("input[name=companyType]").val());
+            formData.append("compName", $("input[name=compName]").val());
+            formData.append("compInfo", $("textarea[name=compInfo]").val());
+            formData.append("compAddress", $("input[name=compAddress]").val());
+            formData.append("businessScope", $("input[name=businessScope]").val());
+            formData.append("mainProducts", $("input[name=mainProducts]").val());
+            formData.append("bankNumber", $("input[name=bankNumber]").val());
+            formData.append("bank", $("input[name=bank]").val());
+            formData.append("idCardFile", $(".idCard input[type=file]").first()[0].files[0]);
+            formData.append("idCardFile", $(".idCard input[type=file]").last()[0].files[0]);
+            formData.append("companyFile", $(".company input[type=file]")[0].files[0]);
             $.ajax({
                 url: "settleInfo",
                 type: "post",
@@ -211,39 +214,39 @@
                     }
                 }
             });
-    }
+        }
     }
 
-    function idCard(obj,number){
-        if(number ==1){
+    function idCard(obj, number) {
+        if (number == 1) {
             $(obj).parent().find("input").first().click();
-        }else {
+        } else {
             $(obj).parent().find("input").last().click();
         }
     }
 
-    function company(obj){
+    function company(obj) {
         $(obj).parent().find("input[type=file]").click();
     }
 
-    function showCompany(obj){
-        var reads= new FileReader();
-        var file=obj.files[0];
+    function showCompany(obj) {
+        var reads = new FileReader();
+        var file = obj.files[0];
         reads.readAsDataURL(file);
         reads.onload = function (e) {
-            $(obj).parent().find("img").first().attr("src",this.result);
+            $(obj).parent().find("img").first().attr("src", this.result);
         };
     }
 
-    function showIdCard(obj,number){
-        var reads= new FileReader();
-        var file=obj.files[0];
+    function showIdCard(obj, number) {
+        var reads = new FileReader();
+        var file = obj.files[0];
         reads.readAsDataURL(file);
         reads.onload = function (e) {
-            if(number ==1){
-                $(obj).parent().find("img").first().attr("src",this.result);
-            }else {
-                $(obj).parent().find("img").last().attr("src",this.result);
+            if (number == 1) {
+                $(obj).parent().find("img").first().attr("src", this.result);
+            } else {
+                $(obj).parent().find("img").last().attr("src", this.result);
             }
         };
     }
@@ -251,14 +254,14 @@
     $(function () {
         $("input[name=companyInfo]").html("${companyInfo.companyInfo!}");
         var idCard = "${userInfo.idCardUrl!}".split(";");
-        if(idCard[0].indexOf("upload") > 0){
-            $(".idCard .sale_pic1").attr("src",idCard[0]);
+        if (idCard[0].indexOf("upload") > 0) {
+            $(".idCard .sale_pic1").attr("src", idCard[0]);
         }
-        if(idCard.indexOf("upload")>0){
-            $(".idCard .sale_pic2").attr("src",idCard[1]);
+        if (idCard.indexOf("upload") > 0) {
+            $(".idCard .sale_pic2").attr("src", idCard[1]);
         }
-        if("${companyInfo.compUrls!}".indexOf("upload")>0){
-            $(".company .sale_pic3").attr("src","${companyInfo.compUrls!}");
+        if ("${companyInfo.compUrls!}".indexOf("upload") > 0) {
+            $(".company .sale_pic3").attr("src", "${companyInfo.compUrls!}");
         }
     })
 </script>
