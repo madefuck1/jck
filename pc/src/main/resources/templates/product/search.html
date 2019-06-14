@@ -115,9 +115,9 @@
                         <input hidden id="productId" value="${item.productId}">
                         <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
                             <div style="height: 230px;">
-                                <img src="${item.productUrl}"/>
+                                <img src="${item.URL}"/>
                             </div>
-                            <p class="title fl">${item.productName}</p>
+                            <p class="title fl">${item.productName!}</p>
                             <p class="price fl">
                                 <b>¥</b>
                                 <strong>${item.productStatisticsDto.productPrice}</strong>
