@@ -74,6 +74,10 @@ public class FtpClient {
         FTPClient ftpClient = getInstance();
         try {
             boolean success;
+            if(multipartFile == null){
+                map.put("success", false);
+                return map;
+            }
             int reply = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftpClient.disconnect();
@@ -114,6 +118,10 @@ public class FtpClient {
         Map<String, Object> map = new HashMap<>();
         FTPClient ftpClient = getInstance();
         try {
+            if(inputStream == null){
+                map.put("success", false);
+                return map;
+            }
             boolean success;
             int reply = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {

@@ -295,7 +295,7 @@ function createForm() {
 
         $("#createForm").append(html);
 
-
+        $("#createForm").prop("disabled","true");
         var form = $("#createForm");
         var options = {
             url: '/product/create',

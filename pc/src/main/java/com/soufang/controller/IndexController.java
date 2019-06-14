@@ -42,7 +42,7 @@ public class IndexController extends BaseController {
         PageHelp<EnquiryDto> pageHelp = enquiryFeign.getList(enquirySo);
         map.put("enquiryDtos",pageHelp.getData());
 
-        PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
+//        PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
 //        List<ProductDto> list = productDtos.getData();
 //        map.put("productDtos1",list);
 //        map.put("productDtos1",list.subList(0,5));
