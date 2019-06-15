@@ -8,7 +8,7 @@
 </@override>
 <@override name="body">
 <div id="loadingdiv" style="display:block;" >
-         <div class="loading-block show" class="fixed">                        
+         <div class="loading-block show" class="fixed" >                        
                <img src="/static/images/quanquan.gif" style="width: 110px;height: 110px;">                   
          </div>
 </div>
@@ -114,8 +114,7 @@
                                         </div>
                                     </div>
                                     <a>
-                                        <button type="button" id="submitSettle" onclick="submitSettle()"
-                                                class="am-btn am-btn-secondary am-btn-lg button-size">立即提交
+                                        <button type="button" id="subShop" onclick="submitSettle()"  class="am-btn am-btn-secondary am-btn-lg button-size">立即提交
                                         </button>
                                     </a>
                                 </div>
@@ -131,8 +130,6 @@
 <@override name="js">
 <script type="text/javascript">
     $("#loadingdiv").hide();
-    function checkForm() {
-        if ($("input[name=companyType]").val() == '') {
     function checkForm(){
         if($("input[name=companyType]").val() == ''){
             return "公司类型未选择";
@@ -221,10 +218,10 @@
                     }
                 }, beforeSend: function () {
                     $("#loadingdiv").show();
-                    $("#submitSettle").attr("disabled", "disabled");
+                    $("#subShop").attr("disabled", "disabled");
                 },compete:function(){
                     $("#loadingdiv").hide();
-                    $("#submitSettle").removeAttr("disabled");
+                    $("#subShop").removeAttr("disabled");
                 }
             });
         }
