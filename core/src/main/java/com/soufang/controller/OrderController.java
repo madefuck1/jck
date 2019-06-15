@@ -139,24 +139,6 @@ public class OrderController {
         return pageHelp;
     }
 
-    /*@RequestMapping(value = "getSaleOrderList", method = RequestMethod.POST)
-    public PageHelp<OrderShopDto> getSaleOrderList(@RequestBody OrderSo orderSo){
-        List<OrderShopDto> list = orderService.getSaleOrderList(orderSo);
-        PageHelp<OrderShopDto> pageHelp = new PageHelp<>();
-        for (OrderShopDto orderShopDto : list) {
-            orderShopDto.setStatusMessage(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getMessage());
-            orderShopDto.setStatusColor(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getButtonColor());
-            for (OrderProductDto orderProductDto : orderShopDto.getOrderProducts()) {
-                orderProductDto.setProductImage(PropertiesParam.file_pre + orderProductDto.getProductImage());
-            }
-        }
-        int count = orderService.getCount(orderSo);
-        PageHelper.startPage(orderSo.getPage(),5);
-        pageHelp.setCount(count);
-        pageHelp.setData(list);
-        return pageHelp;
-    }*/
-
     /**
      * 通过订单号获取订单明细
      *
