@@ -22,7 +22,7 @@
         <div class="am-form-group center_top">
             <label for="doc-vld-name-2-1" class="am-u-sm-2 am-form-label" >登录名</label>
             <div class="am-u-sm-10">
-                <input type="text" id="doc-vld-name-2-1" name="loginName" placeholder="6-20位字符，需包含字母" minlength="6" required>
+                <input type="text" id="doc-vld-name-2-1" name="loginName" placeholder="2-20位字符，需包含字母" minlength="2" required>
             </div>
         </div>
         <div class="am-form-group center_top">
@@ -74,13 +74,21 @@
         </div>
         <div class="am-form-group center_top">
             <label for="doc-vld-name-2-1" class="am-u-sm-2 am-form-label">公司营业执照</label>
-
             <div class="am-form-group am-form-file  up_pic center_top">
                 <button type="button" class="am-btn am-btn-default am-btn-sm">
                     <i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
+                <!--<img class="sale_pic4" onclick="company(this)">
+                <input type="file" id="doc-form-file" style="display: none" onchange="showCompany(this)">-->
                 <input id="doc-form-file"type="file" multiple>
             </div>
         </div>
+        <!--<div class="sale_cloum1" style="height: 110px;">
+            <label class="am-form-label" >求购图片</label>
+            <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
+                <img class="sale_pic4" onclick="company(this)">
+                <input type="file" id="file" style="display: none" onchange="showCompany(this)">
+            </div>
+        </div>-->
 
         <div class="am-form-group " style="margin-top: 60px">
             <div class="am-u-sm-8 am-u-sm-offset-2 ">
@@ -98,6 +106,19 @@
 <@override name="js">
 <script>
 
+
+    /*function company(obj){
+        $(obj).parent().find("input[type=file]").click();
+    }
+
+    function showCompany(obj){
+        var reads= new FileReader();
+        var file=obj.files[0];
+        reads.readAsDataURL(file);
+        reads.onload = function (e) {
+            $(obj).parent().find("img").first().attr("src",this.result);
+        };
+    }*/
 
 
     var show_num = [];
