@@ -13,7 +13,6 @@ import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
-import com.soufang.base.utils.IOClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.AssortFeign;
 import com.soufang.feign.EnquiryFeign;
@@ -114,7 +113,7 @@ public class EnquiryPurchaseController extends BaseController{
             enquiryProductDtos.add(enquiryProductDto);
             enquiryDto.setEnquiryProductDto(enquiryProductDtos);
             if(file != null){
-                map = IOClient.uploadImage(file,uploadUrl);
+                map = FtpClient.uploadImage(file,uploadUrl);
                 if((boolean)map.get("success")){
                     enquiryProductDto.setProductImage(String.valueOf(map.get("uploadName")));
                     result= enquiryFeign.addEnquiry(enquiryDto);
