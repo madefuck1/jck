@@ -96,7 +96,9 @@ public class ProductDto extends PageBase implements Serializable {
         return PropertiesParam.file_pre + productImage;
     }
 
-
+    public String getUrl() {
+        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";")) : PropertiesParam.file_pre + productImage ;
+    }
 
     // 产品具体对应规格数量的信息
     private ProductSpecDto productSpecDto;

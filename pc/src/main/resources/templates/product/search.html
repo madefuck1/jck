@@ -115,7 +115,7 @@
                         <input hidden id="productId" value="${item.productId}">
                         <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
                             <div style="height: 230px;">
-                                <img src="${item.URL}"/>
+                                <img src="${item.url}"/>
                             </div>
                             <p class="title fl">${item.productName!}</p>
                             <p class="price fl">
@@ -128,7 +128,7 @@
                         </a>
                     </div>
                 </li>
-            </#list>
+                </#list>
             </ul>
             <!--分页 -->
             <div id="pagination" style="text-align: center"></div>
@@ -140,7 +140,7 @@
             <li>
                 <div class="i-pic check">
                     <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
-                    <img src="${item.URL}"/>
+                    <img src="${item.url}"/>
                     <p class="check-title">${item.productName}</p>
                     <p class="price fl">
                         <b>¥</b>
@@ -182,14 +182,16 @@
             initAssort("#select2",${assortIdA},"${assortNameB}");
         }
         // pagination 分页插件
-        $("#pagination").pagination(${productCount!0}, {   //total(一共多少条记录)不能少
-            callback: PageCallback,
-            prev_text: '上一页',
-            next_text: '下一页',
-            items_per_page: 40,             //每页显示最大条数
-            num_display_entries: 4,        //连续分页主体部分显示的分页条目数
-            num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-        });
+        // $("#pagination").pagination(${productCount!0}, {   //total(一共多少条记录)不能少
+        //     callback: PageCallback,
+        //     prev_text: '上一页',
+        //     next_text: '下一页',
+        //     items_per_page: 40,             //每页显示最大条数
+        //     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+        //     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+        //     current_page: 0,
+        // });
+        Init(0);
 
     });
     function PageCallback(index, jq) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
@@ -324,14 +326,14 @@
             productListHtml(result);
             // pagination 分页插件
             $("#pagination").pagination(result.productCount, {   //total(一共多少条记录)不能少
-            callback: PageCallback,
-            prev_text: '上一页',
-            next_text: '下一页',
-            items_per_page: 40,             //每页显示最大条数
-            num_display_entries: 4,        //连续分页主体部分显示的分页条目数
-            num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-            current_page:pageIndex,
-             });
+                callback: PageCallback,
+                prev_text: '上一页',
+                next_text: '下一页',
+                items_per_page: 40,             //每页显示最大条数
+                num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                current_page: pageIndex,
+            });
         });
     }
 
