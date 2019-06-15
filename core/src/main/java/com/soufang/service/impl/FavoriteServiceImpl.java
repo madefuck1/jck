@@ -35,8 +35,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         // 查询对应用户的收藏数量
         int count = favoriteMapper.getFavoriteCount(favoriteSo);
         favorite.setCount(count);
-        List<FavoriteDto> lists = new ArrayList<>();
-        lists = favoriteMapper.getFavoriteList(favoriteSo);
+        List<FavoriteDto> lists = favoriteMapper.getFavoriteList(favoriteSo);
         //更改图片地址
         for(int i =0;i<lists.size();i++){
             FavoriteDto favoriteDto = lists.get(i);

@@ -26,7 +26,7 @@ public class PropertiesParam {
 
     @PostConstruct
     public void getApiToken() {
-        file_pre = "http://"+ftpHost+":"+returnPort+"/";
+        file_pre = "http://"+ftpHost+":"+returnPort;
     }
 
 
