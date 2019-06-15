@@ -18,7 +18,7 @@
 								<div class="am-cf am-padding">
 									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的足迹</strong></div>
 								</div>
-							<div id="noData" style="visibility:hidden;">
+							<div id="noData" style="display:none;">
 							<#include "/noData.html"/>
 							</div>
 
@@ -57,24 +57,22 @@
             dataType : "json",
             success : function(data) {
                if (data.data.length==0){
-					//没有数据
-                   document.getElementById("noData").style.visibility="visible";//显示
-				}
-                $.each(data.data, function (i, v) {
-                    //当天数据-当数据卫当日-则添加到列表
-                    console.log("时间判断")
-                    console.log("收藏时间"+longFormatDate(v.createTime))
-                    console.log("今天时间"+newTimes())
-					console.log(longFormatDate(v.createTime)==newTimes());
-					if(longFormatDate(v.createTime)==newTimes()){
-                        var toDays=liContentToDays(i,v);
-					}else{
-                        //一周以内
-                        var oneWeedEver = liContent(i,v);
-					}
-                    $("#tableFoot").append(toDays);
-                    $("#oneWeekTable").append(oneWeedEver);
-                });
+                   document.getElementById("noData").style.display="block";//显示
+				}else{
+                   $.each(data.data, function (i, v) {
+                       //当天数据-当数据卫当日-则添加到列表
+                       if(longFormatDate(v.createTime)==newTimes()){
+                           //当天数据
+                           var toDays=liContentToDays(i,v);
+                       }else{
+                           //一周以内
+                           var oneWeedEver = liContent(i,v);
+                       }
+                       $("#tableFoot").append(toDays);
+                       $("#oneWeekTable").append(oneWeedEver);
+                   });
+			   }
+
             }
         });
     }
@@ -82,7 +80,7 @@
     //动态加载数据
 	function liContentToDays(i,v){
         var footprintId=v.footprintId;
-        var createTime=v.createTime;
+        var createTime=longFormatDate(v.createTime);
         var productName=v.productDto.productName;
         var productPrice=v.productStatisticsDto.productPrice;
         var productImage=v.productDto.productImage;
@@ -90,12 +88,11 @@
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
 		//截取年月日
-        var listTimes=createTime.split("-");
         var content = "";
         var ToDaystableHead;
         if(i==0){
             ToDaystableHead= "<div class='goods-date' data-date='"+createTime+"'>"
-                +"<span><i class='month-lite'>"+listTimes[1]+"</i>.<i class='day-lite'>"+listTimes[2]+"</i><i class='date-desc'>今天</i></span>"
+                +"<span><i class='month-lite'>"+createTime.substring(0,4)+"</i>.<i class='day-lite'>"+createTime.substring(4,6)+"</i><i class='date-desc'>今天</i></span>"
                 +"<del class='am-icon-trash'></del>"
                 +"<s class='line'></s>"
                 +"</div>"
@@ -145,10 +142,9 @@
 
     //动态加载数据
     function  liContent(i,v) {
-	    console.log(v);
        	var prodts= v.productDto;
 		var footprintId=v.footprintId;
-		var createTime=v.createTime;
+		var createTime=longFormatDate(v.createTime);
 		var productName=prodts.productName;
 		var productPrice=v.productStatisticsDto.productPrice;
 		var productImage=prodts.productImage;
@@ -210,7 +206,6 @@
 
 	//删除
     function delFootPrint(footprintId){
-	    console.log("删除"+footprintId);
 	    //唯一标识
 	    var str = {footprintId:footprintId};
         $.ajax({
@@ -221,8 +216,7 @@
             dataType : "json",
             success : function(data) {
                 //操作完成
-                console.log(data.message);
-                alert("删除成功弹框");
+                alert(data.message);
             }
         });
 	}
