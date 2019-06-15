@@ -728,7 +728,7 @@
         from t_product
         where 1 = 1
         <if test="isUpper != null and isUpper !=''">
-            and tp.is_upper = #{isUpper}
+            and is_upper = #{isUpper}
         </if>
         <if test="assortIds != null and assortIds != ''">
             and FIND_IN_SET(assort_id,#{assortIds})

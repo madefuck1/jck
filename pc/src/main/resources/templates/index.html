@@ -60,79 +60,79 @@
             </div>
         </div>
         <div class="shop_nav">
-            <div class="shop_title" onclick="getAssortProduct(2,1,8)">
+            <div class="shop_title" onclick="getAssortProduct(11,1,8)">
                 <div><i class="iconfont icongongyeshebei"></i></div>
                 <p>工业设备</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(3,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(21,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconjiazhuangjiancai"></i></div>
                 <p>家装建材</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(4,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(33,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondianziyuanjian"></i></div>
                 <p>电子仪表</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(5,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(45,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondiangongdianqi"></i></div>
                 <p>电工电气</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(6,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(71,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconhuagong"></i></div>
                 <p>化工能源</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(7,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(59,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconjiaotongyunshu"></i></div>
                 <p>交通汽摩</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(8,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(78,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconanfang"></i></div>
                 <p>安防照明 </p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(9,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(85,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconriyongbaihuo"></i></div>
                 <p>日用百货</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(10,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(92,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondiannaoshuma"></i></div>
                 <p>数码电子</p>
             </div>
         </div>
         <div class="shop_nav">
-            <div class="shop_title" onclick="getAssortProduct(11,1,8)">
+            <div class="shop_title" onclick="getAssortProduct(99,1,8)">
                 <div><i class="iconfont iconxiuxianyule"></i></div>
                 <p>休闲娱乐 </p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(12,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(106,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconfuzhuangpeishi"></i></div>
                 <p>服装纺织</p>
             </div>
         </div>
-        <div class="shop_nav" onclick="getAssortProduct(13,1,8)">
+        <div class="shop_nav" onclick="getAssortProduct(115,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconshipinnongye"></i></div>
                 <p>农业食品</p>
             </div>
         </div>
         <div class="shop_nav" style="margin-right: 0px">
-            <div class="shop_title" onclick="getAssortProduct(14,1,8)">
+            <div class="shop_title" onclick="getAssortProduct(122,1,8)">
                 <div><i class="iconfont iconxiangbao"></i></div>
                 <p>箱包配件</p>
             </div>
@@ -280,6 +280,7 @@
     function getAssortProduct(assortId,page,limit) {
         var data = {
             assortId:assortId,
+            isUpper:1,
             page:page,
             limit:limit
         }
@@ -291,7 +292,7 @@
             success:function (data) {
                 if(data.count == 0){
                     //alert("没有当前类别的产品");
-                    getAssortProduct(23,1,8);
+                    getAssortProduct(11,1,8);
                 }
                 $("#pro").empty();
                 var pro = '<div class="pro_left" onclick="getProductInfo('+data.data[0].productId+')" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
@@ -335,9 +336,9 @@
             '        </div>';
                 $("#pro").append(pro);
             },
-            error:function () {
+           /* error:function () {
                 alert("请求发送失败");
-            }
+            }*/
         });
     };
 

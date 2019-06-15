@@ -16,7 +16,6 @@ import java.util.List;
 
 @Setter
 @Getter
-@ToString
 public class ProductDto extends PageBase implements Serializable {
 
     private Long productId;
@@ -41,7 +40,7 @@ public class ProductDto extends PageBase implements Serializable {
 
     private String productImage;
     private String productUrl;
-    private String URL;
+    private String url;
 
     private Integer productLevel;
 
@@ -97,9 +96,6 @@ public class ProductDto extends PageBase implements Serializable {
         return PropertiesParam.file_pre + productImage;
     }
 
-    public String getURL() {
-        return productImage == null || "".equals(productImage) ? "" : PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";"));
-    }
 
 
     // 产品具体对应规格数量的信息
