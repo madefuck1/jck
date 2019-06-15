@@ -266,6 +266,7 @@ function createForm() {
     var reason = checkForm();
     if (reason != null) {
         alert(reason);
+        $("#submit-product").removeAttr("disabled");
     } else {
         var formData = new FormData();
         var html = "";

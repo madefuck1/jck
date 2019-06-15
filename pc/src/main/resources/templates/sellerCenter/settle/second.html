@@ -188,6 +188,7 @@
         var message = checkForm();
         if (message != null) {
             alert(message);
+            $("#subShop").removeAttr("disabled");
         } else {
             var formData = new FormData();
             formData.append("compType", $("input[name=companyType]").val());
