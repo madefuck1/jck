@@ -25,6 +25,12 @@
     <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
     <script type="text/javascript" src="/static/js/includes/include.contain.js"></script>
 
+    <style>
+        #contain, .list {
+            height: auto;
+        }
+    </style>
+
 </head>
 
 <body style="background: #fff">
@@ -128,7 +134,7 @@
                 </#list>
             </ul>
             <!--分页 -->
-            <div id="pagination" style="text-align: center"></div>
+            <div id="pagination-product" style="text-align: center"></div>
         </div>
         <div class="search-side">
 
@@ -322,7 +328,7 @@
             + assortId + "&orderSort=" + orderSort + "&pageIndex=" + pageIndex, function (result) {
             productListHtml(result);
             // pagination 分页插件
-            $("#pagination").pagination(result.productCount, {   //total(一共多少条记录)不能少
+            $("#pagination-product").pagination(result.productCount, {   //total(一共多少条记录)不能少
                 callback: PageCallback,
                 prev_text: '上一页',
                 next_text: '下一页',

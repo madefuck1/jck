@@ -4,7 +4,7 @@
 
 <@override name="css">
 <link rel="stylesheet" href="${contextPath}/css/home.css">
-<link rel="stylesheet" href="${contextPath}/css/header.index.css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
 <link rel="stylesheet" href="${contextPath}/css/search-shop.css">
 <link rel="stylesheet" href="${contextPath}/Pagination/css/jquery.pagination.css">
 
@@ -18,14 +18,6 @@
 <@override name="body">
 <#include "/common/includes/include.contain.html"/>
 <div id="search-shop">
-    <!--<div class="shop-up">-->
-    <!--<ul>-->
-    <!--<li><a href="">单位性质：</a></li>-->
-    <!--<li class="first"><a href="">全部</a></li>-->
-    <!--<li><a href="">企业</a></li>-->
-    <!--<li><a href="">个体工商户</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
     <div class="shop-down" id="shopList">
     </div>
     <!--分页 -->
@@ -43,7 +35,7 @@
     $(function () {
         var shopName = "${searchProductName!}";
         init(0, shopName);
-        $("#search_type_name").html(text);
+        $("#search_type_name").html("店铺");
         $("#search_type").val(2);
     })
 
