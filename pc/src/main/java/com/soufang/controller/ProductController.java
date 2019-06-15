@@ -549,7 +549,6 @@ public class ProductController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "getAssortProduct", method = RequestMethod.POST)
     public ListProductVo getAssortProduct(@RequestBody ProductManageSo so) {
-
         PageHelp<ProductDto> pageHelp = productFeign.getAssortProduct(so);
         ListProductVo vo = new ListProductVo();
         vo.setData(pageHelp.getData());

@@ -16,3 +16,4 @@ function initIncludeTop(request) {
         $('#carCount').text("(" + carCount + ")");
     }
 }
+

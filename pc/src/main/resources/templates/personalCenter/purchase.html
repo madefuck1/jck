@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--<link href="/static/images/favicon1.ico" rel="shortcut icon" type="image/x-icon">-->
+    <title>新建询盘
+    </title>
+    <link href="/static/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="/static/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/personal.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+
+    <link href="/static/css/purch.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/personal.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/infstyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/sale/sale_index.css">
+</head>
+<body>
+<!--头 -->
+<div id="nav">
+    <div class="nav_in">
+        <div class="left" id="html_top">
+            <p>欢迎您 &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">2956928146@qq.com</a>
+                &nbsp;<a href="#" target="_blank">消息(5)</a>
+                <a href="/user/signOut">退出登录</a>
+                <!-- todo 消息跳转 -->
+            </p>
+        </div>
+        <div class="right">
+            <p class="service">客服电话：400-xxx-xxxx</p>
+            <div class="order">
+                <a href="/orderManager/toOrderManager">我的订单</a>
+                <span class="icon icon1"></span>
+            </div>
+            <div class="seller">
+                <a href="/sellerCenter/toIndex">卖家中心</a>
+                <span class="icon icon1"></span>
+            </div>
+            <div class="shopping">
+                <a href="/shopCar/getList">购物车</a>
+                <a id="carCount" href="#">(0)</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="search">
+    <div class="search_in">
+        <div class="logo" style="margin-top: 24px; cursor: pointer" onclick="javascript:window.open('index');"href="#"><img src="/static/images/img/logo.png" alt=""></div>
+        <div class="sear">
+            <div class="tog">
+                <div class="tog_in">
+                    <a id="search_type_name" href="#">产品</a>
+                    <i class="iconfont iconxialajiantou"></i>
+                    <ul>
+                        <li onclick="changeV(this)"><a>产品</a></li>
+                        <li onclick="changeV(this)"><a>店铺</a></li>
+                    </ul>
+                </div>
+                <input id="search_type" hidden value="1">
+                <input id="search_productName" type="text" style="width: 100%;" placeholder="布料" value="" class="sousuo">
+            </div>
+
+
+            <button id="btn_search"  onclick="btn_search();" class="cont">搜索</button>
+
+        </div>
+    </div>
+</div>
+<div id="contain">
+    <div class="list">
+        <div class="list_in" style="position:relative">
+            <div class="list_up" style="position: relative;">
+                <div class="title" id="contain_title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
+                <div class="header">
+                    <ul>
+                        <li class="cur"><a href="/index">首页</a></li>
+                        <li><a href="/enquiry/toEnquiryList">求购信息</a></li>
+                        <li><a href="/exhibition/toExhibition">展会信息</a></li>
+                        <li><a href="">纺织咨询</a></li>
+                        <li><a href="">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list_down" hidden style="position: absolute;left: 0px;top: 40px;z-index: 9999999;">
+                <div class="list_left" id="contain_list_left">
+                    <div class="meu">
+                        <input type="hidden" value="1">
+                        <div class="list_liftIn">
+                            <div class="list_cloum1">
+                                <i class="iconfont"></i>
+                                <span class="span1"
+                                      onclick="clickAssortName('A1','机械五金');">机械五金</span>
+                            </div>
+                        </div>
+                    </div>                    <div class="meu">
+                    <input type="hidden" value="2">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A2','工业环保');">工业环保</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="3">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A3','家装家居');">家装家居</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="4">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A4','电子仪表');">电子仪表</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="5">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A5','交通运输');">交通运输</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="6">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A6','化工冶金');">化工冶金</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="7">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A7','安防照明');">安防照明</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="8">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A8','日用百货');">日用百货</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="9">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A9','电脑数码');">电脑数码</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="10">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A10','休闲娱乐');">休闲娱乐</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="11">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A11','纺织服装');">纺织服装</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="12">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A12','农业食品');">农业食品</span>
+                        </div>
+                    </div>
+                </div>                    <div class="meu">
+                    <input type="hidden" value="13">
+                    <div class="list_liftIn">
+                        <div class="list_cloum1">
+                            <i class="iconfont"></i>
+                            <span class="span1"
+                                  onclick="clickAssortName('A13','箱包盒子');">箱包盒子</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="list_right" style="display: none">
+                    <div class="list_con">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<b class="line"></b>
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-info">
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg"><span id="titleName"></span></strong> / <small>Publish&nbsp;Purchase</small></div>
+                </div>
+                <hr/>
+                <div class="info-main">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label class="am-form-label">求购标题</label>
+                            <div class="am-form-content">
+                                <input type="text" id="enquiryTitle" placeholder="求购标题">
+                                <small>标题不能超过40个汉字</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">编号</label>
+                            <div class="am-form-content">
+                                <p>END2019061300049</p>
+                                <input type="hidden" id="isUpdate" value="">
+                                <input type="hidden" id="enquiryNumber" value="END2019061300049">
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">发布时间</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="createTime" class="am-form-field"  placeholder="请选择发布时间">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">交付时间</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="takeDate" class="am-form-field"  placeholder="请选择交付时间">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">报价截止</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="endTime" class="am-form-field"  placeholder="请选择报价截止时间">
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <div class="am-form-group pur_height">
+                             <label class="am-form-label">求购状态</label>
+                             <div class="am-form-content">
+                                 <input id="enquiryStatus" style="border: 0px;outline:none;cursor: pointer;margin-top: 8px" value="待审核" readonly="readonly" />
+                             </div>
+                         </div>-->
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">产品名称</label>
+                            <div class="am-form-content">
+                                <input id="productName" placeholder="如无纺布等" type="text">
+                                <input   type="hidden" id="enquiryProductId" name="enquiryProductId"  />
+                            </div>
+                        </div>
+                        <div class="sale_cloum1" style="height: 110px;">
+                            <label class="am-form-label" >求购图片</label>
+                            <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
+                                <img class="sale_pic4" onclick="company(this)">
+                                <input type="file" id="file" style="display: none" onchange="showCompany(this)">
+                            </div>
+                        </div>
+                        <div id="showPhoto"></div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">求购量</label>
+                            <div class="am-form-content">
+                                <input type="text" id="productNumber"class="pur_enquirm" placeholder="请填写数量">
+                                <select id="productUnit" style="width:150px;padding: 5px;">
+                                    <option value="米">米</option>
+                                    <option value="公斤" >公斤</option>
+                                    <option value="千克" selected>千克</option>
+                                    <option value="公升" >公升</option>
+                                    <option value="箱" >箱</option>
+                                    <option value="包" >包</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">产品分类</label>
+                            <div class="am-form-content">
+                                <select id="productSort1"  style="width:150px;padding: 5px;float: left;" onchange="toFindSort(1)">
+                                    <option value="" selected>请选择</option>
+                                </select>
+                                <select id="productSort2"  style="width:150px;padding: 5px;float: left;margin-left:5px;" onchange="toFindSort(2)">
+                                </select>
+                                <select id="productSort3"  style="width:150px;padding: 5px;float: left;margin-left:5px;">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">详细地址</label>
+                            <div class="am-form-content">
+                                <input id="detailStreet" placeholder="如街道，门牌号等" type="text">
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">描述</label>
+                            <div class="am-form-content">
+                                <textarea class="disp" rows="5" id="enquiryRemark" placeholder="如格型、循环尺寸、成分、克重、门幅、色牢度、环保标准等等"></textarea>
+                            </div>
+                        </div>
+                        <div class="info-btn">
+                            <div class="am-btn am-btn-warning" id="save">保存</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--左边菜单-->
+    <aside class="menu">
+        <ul>
+            <li class="person active">
+                <a href="/personalCenter/toPersonalCenter"><i class="am-icon-user"></i>个人中心</a>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                <ul>
+                    <li><a href="/personalCenter/toInformation">个人信息</a></li>
+                    <!--<li><a href="safety.html">安全设置</a></li>-->
+                    <li><a href="/personalCenter/toAddress">地址管理</a></li>
+                    <li><a href="/personalCenter/toInvoice">发票管理</a></li>
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                <ul>
+                    <li><a href="/orderManager/toOrderManager">订单管理</a></li>
+                    <!--<li><a href="change.html">退款售后</a></li>
+                    <li><a href="comment.html">评价商品</a></li>-->
+                </ul>
+            </li>
+            <!--<li class="person">
+                <p><i class="am-icon-dollar"></i>我的资产</p>
+                <ul>
+                    <li><a href="walletlist.html">账户余额</a></li>
+                </ul>
+            </li>-->
+            <li class="person">
+                <p><i class="am-icon-credit-card-alt"></i>我的求购</p>
+                <ul>
+                    <li><a href="/enquiry/create">发布求购</a></li>
+                    <li><a href="/personalCenter/toEnquiryManage">我的求购 </a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-heart"></i>我的收藏</p>
+                <ul>
+                    <li><a href="/personalCenter/toFavoriteManage">收藏</a></li>
+                    <li><a href="/personalCenter/toFootPrintManage">足迹</a></li>
+                </ul>
+            </li>
+
+            <li class="person">
+                <p><i class="am-icon-qq"></i>在线客服</p>
+                <ul>
+                    <li><a href="/personalCenter/toSuggest">意见反馈</a></li>
+
+                    <!--<li><a href="news.html">我的消息</a></li>-->
+                </ul>
+            </li>
+            <li class="person">
+                <p><i class="am-icon-shopping-cart"></i><a href="/shopCar/getList">购物车&nbsp;</a></p>
+            </li>
+        </ul>
+    </aside></div>
+
+
+
+<style>
+    *{margin: 0;padding: 0;border: 0;list-style: none;}
+    a{
+        text-decoration: none;
+    }
+    ul li{
+        list-style: none;
+    }
+    #foot{
+        width: 100%;
+        height: 310px;
+        background: #333;
+        overflow: hidden;
+        /*margin-top: 20px;*/
+    }
+
+    .foot_in{
+        width: 1200px;
+        height: 180px;
+        margin: 0 auto;
+        margin-top: 20px;
+
+    }
+    .foot_in .colu1{
+        width: 188px;
+        float: left;
+        color: #eee;
+        font-size: 16px;
+        line-height: 32px;
+
+    }
+
+    .colu1 a{
+        color: #999;
+        font-size: 14px;
+    }
+
+    .foot_in .colu2{
+        width: 280px;
+        float: left;
+    }
+    .colu2 h3{
+        font-size: 24px;
+        text-align: left;
+        color: #F5F5F5;
+    }
+    .colu2 p{
+        font-size: 12px;
+        color: #999999;
+        text-align: left;
+        line-height: 30px;
+
+    }
+    .colu2 div{
+        width:140px;
+        height:45px;
+        background:#F5F5F5;
+        text-align: center;
+        margin-top: 26px;
+
+    }
+    .colu2 div a{
+        line-height: 48px;
+        color:#333333;
+        font-size: 14px;
+        display: block;
+        margin-right: 20px;
+
+    }
+    .colu2 div span{
+        display: block;
+        width: 45px;
+        height: 45px;
+        background:url(../../../static/images/sale/CustomerService.png) no-repeat center right;
+        float: left;
+
+
+    }
+    .colu3{
+        float: left;
+        width: 150px;
+        margin-right: 28px;
+
+    }
+
+    .colu3 div{
+        width:140px;
+        height:45px;
+        border:1px solid rgba(107,107,107,1);
+
+        text-align: center;
+    }
+    .colu3 div a{
+        line-height: 45px;
+        color: #999;
+        font-size: 14px;
+        display: inline-block;
+    }
+    .colu3 .blog{
+        margin-top: 10px;
+    }
+
+    .about ul{
+        width: 1200px;
+        margin: 0 auto;
+        height: 34px;
+    }
+    .about ul li{
+        float: left;
+    }
+    .about li a{
+        color: #ccc;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        margin-right: 6px;
+    }
+
+    .company{
+        width: 1200px;
+        margin: 0 auto;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .wechat{
+        width: 30px;
+        height: 30px;
+        background: url(../../../static/images/sale/QRCode.jpg) no-repeat 10px center;
+
+    }
+
+    .blog{
+        width: 30px;
+        height: 30px;
+        background: url(../../../static/images/sale/QRCode.jpg) no-repeat 10px center;
+
+    }
+
+    .sear input {
+        vertical-align: baseline;
+    }
+    .columpic{
+        width: 90px;
+        height: 90px;
+        background: url(../../../static/images/sale/QRCode.jpg);
+        transform: scale(1.15);
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+
+</style>
+
+<div id="foot">
+    <div class="foot_in">
+        <div class="colu1">
+            <dl>
+                <dt>新手上路</dt>
+                <dd><a href="/user/toRegister">免费注册</a></dd>
+                <dd><a href="/user/toLogin">买家入口</a></dd>
+                <dd><a href="/user/toLogin">卖家入口</a></dd>
+            </dl>
+        </div>
+        <div class="colu1">
+            <dl>
+                <dt>采购商服务</dt>
+                <dd><a href="/product/search">找产品</a></dd>
+                <dd><a href="/enquiry/create">发布询价单</a></dd>
+                <dd><a href="javascript">招募供应商</a></dd>
+                <dd><a href="javascript">采购专场</a></dd>
+            </dl>
+        </div>
+        <div class="colu1">
+            <dl>
+                <dt>供应商商服务</dt>
+                <dd><a href="javascript">发布产品</a></dd>
+                <dd><a href="javascript">找采购信息</a></dd>
+                <dd><a href="javascript">会员服务</a></dd>
+                <dd><a href="javascript">诚信保障</a></dd>
+            </dl>
+        </div>
+        <div class="colu2">
+            <h3>400-123-1234</h3>
+            <p>7x24小时客服热线（仅收市话费）</p>
+            <div><span></span><a href="javascript">在线客服</a></div>
+        </div>
+        <div class="colu3">
+            <p style="color: #f5f5f5;line-height: 40px">关注我们</p>
+            <div class="wechat"><a href="javascript">官方微信</a></div>
+            <div class="blog"><a href="javascript">官方微博</a></div>
+        </div>
+        <div class="colu3">
+            <p style="color: #f5f5f5;line-height: 40px">移动端</p>
+            <a href="javascript" class="columpic"></a>
+
+        </div>
+    </div>
+    <div class="about">
+        <ul>
+            <li><a href="javascript">关于我们 |</a></li>
+            <li><a href="javascript">联系我们 |</a></li>
+            <li><a href="javascript">客服中心 |</a></li>
+            <li><a href="javascript">代理加盟 |</a></li>
+            <li><a href="javascript">站点地图 |</a></li>
+            <li><a href="javascript">隐私策略 |</a></li>
+            <li><a href="javascript">会员协议 |</a></li>
+            <li><a href="javascript">法律声明 |</a></li>
+            <li><a href="javascript">友情链接</a></li>
+        </ul>
+    </div>
+
+    <div class="company">Copyright 2015-2019 绍兴远恒互联网络科技有限公司 版权所有  浙ICP备19009440号   电话:0575-85025309  邮编:312000  </div>
+
+</div>
+
+
+</body>
+<script src="/static/js/jquery-3.1.1.js"></script>
+<script src="/static/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+<script>
+    $(function(){
+        var isUpdate= $("#isUpdate").val();
+        var enquiryNumber= $("#enquiryNumber").val();
+        if(isUpdate==null||isUpdate==""){
+            //新增
+            $("#titleName").html("发布求购");
+        }else{
+            //修改
+            $("#titleName").html("修改求购");
+            //查询详情信息
+            details(enquiryNumber);
+        }
+        findSort(0,0);
+    });
+
+    //对类别下拉框赋值
+    function  findSort(sortNum,sortName) {
+        $.get("/pc/commonPullDown/getAssortAByParentId/"+sortNum,function (data) {
+            if (sortName==0){
+                $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if (sortName==1){
+                $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if (sortName==2){
+                $("#productSort3").html("");
+            }
+            $.each(data, function (i, v) {
+                var whatever = liContentSort(v,sortName+1);
+                if (sortName==0){
+                    $("#productSort1").append(whatever);
+                }else if(sortName==1){
+                    $("#productSort2").append(whatever);
+                }else if (sortName==2){
+                    $("#productSort3").append(whatever);
+                }
+
+            });
+        });
+    }
+
+    //下拉框发生变化获取对应数据
+    function toFindSort(selectNum) {
+        var key = document.getElementById("productSort1");
+        var value = key.options[key.selectedIndex].value;
+        findSort(value,selectNum);
+    }
+
+    //插入HTML下拉框类别
+    function liContentSort(v,sortName) {
+        var li=$("<option value='"+v.assortId+"'> "+v.assortName+"</option>");
+        return li;
+    }
+
+    var file;
+    $('#file').on('change', function () {
+        file = this.files[0];
+        var fileName = file.name;
+        var fileType = fileName.substr(fileName.length - 4, fileName.length);
+        if (fileType == '.gif' || fileType == '.jpeg' || fileType == '.jpg' || fileType == '.png' || fileType == '.bmp') {
+
+        } else {
+            alert('文件类型不正确');
+        }
+    });
+    $("#save").click(function (){
+        var enquiryTitle = $("#enquiryTitle").val();
+        var createTime = $("#createTime").val();
+        var takeDate = $("#takeDate").val();
+        var isUpdate= $("#isUpdate").val();
+        var productNumber = $("#productNumber").val();
+        var detailStreet=$("#detailStreet").val();
+
+        //获取下拉框类别的值
+        var key1 = document.getElementById("productSort1");
+        var value1 = key1.options[key1.selectedIndex].value;
+
+        var obj=document.getElementById("productSort2");
+        for(var i=0;i<obj.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj[i].selected==true) {
+                var value2=obj[i].value;//获取当前选择项的值.
+            }
+        }
+        var obj3=document.getElementById("productSort3");
+        for(var i=0;i<obj3.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj3[i].selected==true) {
+                var value3=obj3[i].value;//获取当前选择项的值.
+            }
+        }
+
+        var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
+        if(enquiryTitle==null|enquiryTitle==""){
+            alert("请输入求购标题");
+            return ;
+        }else if(len>80){
+            alert("求购标题不得超过40个汉字");
+            return;
+        }
+
+        if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
+            alert("交付时间必须大于发起求购时间");
+            return;
+        }else if(takeDate==""||takeDate==null){
+            alert("请选择交付时间");
+            return;
+        }
+        var re = /^[1-9]+[0-9]*]*$/;
+        if(!re.test(productNumber)){
+            alert("求购数量只能输入数字");
+            return;
+        }
+        if(value1==null|value1==""){
+            alert("请选择分类信息");
+            return ;
+        }
+        if (detailStreet==null || detailStreet==""){
+            alert("请输入详细地址细心");
+            return;
+        }
+        formData = new FormData()
+        formData.append("file", file);
+        formData.append("enquiryTitle", $("#enquiryTitle").val());
+        formData.append("enquiryNumber", $("#enquiryNumber").val());
+        formData.append("createTime", $("#createTime").val());
+        formData.append("takeDate", $("#takeDate").val());
+        formData.append("productName", $("#productName").val());
+        formData.append("productUnit", $("#productUnit").val());
+        formData.append("detailStreet", $("#detailStreet").val());
+        formData.append("enquiryRemark", $("#enquiryRemark").val());
+        formData.append("productName", $("#productName").val());
+        formData.append("productNumber",$("#productNumber").val());
+        formData.append("enquiryProductId",$("#enquiryProductId").val());
+        formData.append("endTime",$("#endTime").val());
+
+        if (value3 != null | value3!=undefined){
+            formData.append("productAssort",value3);
+        }else if (value2 != null |value2 !=undefined){
+            formData.append("productAssort",value2);
+        }else{
+            formData.append("productAssort",value1);
+        }
+        if(isUpdate==""||isUpdate==null){
+            //新增
+            createEnquiry(formData);
+        }else{
+            //修改
+            updateSubmit(formData)
+        }
+    });
+
+    //修改
+    function updateSubmit(formData){
+        $.ajax({
+            url: "updateEnquiryAndProduct",
+            type: "post",
+            cache: false,
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                //需要弹框操作失败与否
+                //需要返回列表页面
+                alert(data.message);
+                window.location.href="/personalCenter/toEnquiryManage";
+            }
+        });
+    }
+
+    //新增
+    function createEnquiry(formData){
+        $.ajax({
+            url: "createEnquiry",
+            type: "post",
+            cache: false,
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                //上传成功的处理
+                if (data.success==true) {
+                    alert(data.message);
+                    window.location.href="/personalCenter/toEnquiryManage";
+                } else {
+                }
+            }
+        });
+    }
+
+    //查询详情信息并-赋值表单
+    function details(enquiryNumber){
+        var str={enquiryNumber:enquiryNumber};
+        $.ajax({
+            url : "selEnquiryByNumber",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $("#enquiryTitle").val(data.enquiryTitle);
+                $("#enquiryNumber").val(data.enquiryNumber);
+                $("#createTime").val(longFormatDate(data.createTime));
+                $("#takeDate").val(longFormatDate(data.takeDate));
+                $("#endTime").val(longFormatDate(data.endTime));
+                $("#detailStreet").val(data.takeAddress);
+                $("#enquiryRemark").val(data.enquiryRemark);
+                $("#enquiryStatus").val(data.statusMessage);
+                $.each(data.enquiryProductDto, function (i, v) {
+                    //需要循环插入产品
+                    var whatever = liContent(v);
+                    $("#showPhoto").append(whatever)
+                });
+            }
+        });
+    }
+
+    function liContent(v){
+        var productImage= v.productImage;
+        var productName=v.productName;
+        var enquiryProductId = v.enquiryProductId;
+        var productAssort=v.productAssort;
+        giveAssortValue(productAssort);
+        $("#enquiryProductId").val(enquiryProductId);
+        $("#productNumber").val(v.productNumber);
+        $("#productName").val(productName);
+        $("#productUnit").val(v.productUnit);
+
+        var li=$("<div class='goods'>"
+            +"<div class='goods-box first-box'>"
+            +"<div class='goods-pic'>"
+            +"<div class='goods-pic-box'>"
+            +"<img src='"+productImage+"' class='goods-img' style='height: 200px;width: 300px;'>"
+            +"</div>"
+            +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'>删除</i></a>"
+            +"</div> " +
+            "</div>" +
+            "</div>"
+        );
+        return li;
+    }
+
+    //删除照片地址-删除照片
+    function delEnProImgUrl(enquiryProductId){
+        var str={enquiryProductId:enquiryProductId};
+        $.ajax({
+            url : "delEnProImgUrl",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                alert(data.message);
+                //需要提示删除成功-更新页面数据
+            }
+        });
+    }
+
+    function longFormatDate(longTypeDate) {
+        var datetimeType = "";
+        var date = new Date();
+        date.setTime(longTypeDate);
+        datetimeType+= date.getFullYear();   //年  
+        datetimeType+= "-" + getMonth(date); //月   
+        datetimeType+= "-" + getDay(date);   //日  
+        return datetimeType;
+    }
+    //返回月   
+    function getMonth(date){
+        var month = "";
+        month = date.getMonth() + 1;
+        if(month<10){
+            month = "0" + month;
+        }
+        return month;
+    }
+    //返回日 
+    function getDay(date){
+        var day = "";
+        day = date.getDate();
+        if(day<10){
+            day = "0" + day;
+        }
+        return day;
+    }
+    function company(obj){
+        $(obj).parent().find("input[type=file]").click();
+    }
+
+    function showCompany(obj){
+        var reads= new FileReader();
+        var file=obj.files[0];
+        reads.readAsDataURL(file);
+        reads.onload = function (e) {
+            $(obj).parent().find("img").first().attr("src",this.result);
+        };
+    }
+
+    function giveAssortValue(productAssort) {
+        var productAssort=productAssort;
+        var key1 = document.getElementById("productSort1");
+        var obj=document.getElementById("productSort2");
+        var obj3=document.getElementById("productSort3");
+        var stepSon=0;
+        var parentAssortId;
+        var str2={productAssort:productAssort};
+        $.ajax({
+            url : "selParentIdByAssortId",
+            type : "post",
+            data:JSON.stringify(str2),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                parentAssortId=data;
+                console.log(parentAssortId);
+                for (var i = 0 ; i<key1.options.length;i++){
+                    if (parentAssortId==key1.options[i].value){
+                        key1.options[i].selected = true;
+                        toFindSort(1);
+                        toFindSort(2);
+                        stepSon=1;
+                        console.log("1");
+                        break;
+                    }
+                }
+                if (stepSon!=1){
+                    var strs={productAssort:parentAssortId};
+                    var  parentAssortId2;
+                    $.ajax({
+                        url : "selParentIdByAssortId",
+                        type : "post",
+                        data:JSON.stringify(strs),
+                        contentType: 'application/json; charset=UTF-8',
+                        dataType : "json",
+                        success : function(data) {
+                            parentAssortId2=data;
+                            console.log(data);
+                            for (var i = 0 ; i<key1.length;i++){
+                                if (parentAssortId2==key1.options[i].value){
+                                    console.log("第二次赋值");
+                                    console.log("1");
+                                    key1.options[i].selected = true;
+                                    toFindSort(1);
+                                    toFindSort(2);
+                                    break;
+                                }
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+    }
+</script>
+
+</html>

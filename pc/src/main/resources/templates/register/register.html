@@ -37,7 +37,7 @@
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" id="code" placeholder="请输入验证码">
                                 <a class="btn" href="javascript:void(0);" id="sendEmailCode" >
-                                    <span id="dyEmailButton">获取</span></a>
+                                    <span id="dyEmailButton" style="width: 100px">获取</span></a>
                             </div>
                             <div class="user-pass">
                                 <label for="password"><i class="am-icon-lock"></i></label>
@@ -71,7 +71,7 @@
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" id="codeP" placeholder="请输入验证码">
                                 <a class="btn" href="javascript:void(0);"  id="sendMobileCode">
-                                    <span id="dyMobileButton">获取</span></a>
+                                    <span id="dyMobileButton" style="width: 100px">获取</span></a>
                             </div>
                             <div class="user-pass">
                                 <label for="password"><i class="am-icon-lock"></i></label>
@@ -131,6 +131,7 @@
         $(this).attr("disabled",true);
         var data = '{"phone":"'+$("#phone").val()+'"}' ;
         if(flag){
+            alert("验证码已发送，请查收！");
             var timer = setInterval(function () {
                 if(time == 120 && flag){
                     flag = false;
@@ -170,6 +171,7 @@
         $(this).attr("disabled",true);
         var data = '{"email":"'+$("#email").val()+'"}' ;
         if(flag){
+            alert("验证码已发送，请查收");
             var timer = setInterval(function () {
                 if(time == 120 && flag){
                     flag = false;
