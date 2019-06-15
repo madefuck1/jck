@@ -34,7 +34,7 @@ public class AssortController {
         return "/assort/list";
     }
 
-    @MemberAccess
+//    @MemberAccess
     @ResponseBody
     @RequestMapping(value = "getList", method = RequestMethod.GET)
     public AssortVo getList() {
@@ -50,7 +50,7 @@ public class AssortController {
         return "/assort/new";
     }
 
-    @MemberAccess
+//    @MemberAccess
     @ResponseBody
     @RequestMapping(value = "addAssort", method = RequestMethod.POST)
     public AdminVo addAssort(@RequestBody AssortReqVo assortReqVo) {
