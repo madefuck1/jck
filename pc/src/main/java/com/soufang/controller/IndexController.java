@@ -42,16 +42,12 @@ public class IndexController extends BaseController {
         PageHelp<EnquiryDto> pageHelp = enquiryFeign.getList(enquirySo);
         map.put("enquiryDtos",pageHelp.getData());
 
-//        PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
-//        List<ProductDto> list = productDtos.getData();
-//        map.put("productDtos1",list);
-//        map.put("productDtos1",list.subList(0,5));
-//        map.put("productDtos2",list.subList(0,5));
-//        map.put("productDtos3",list.subList(0,5));
-
-       /* List<EnquiryProductDto> list1 = list.subList(0,5);
-        List<EnquiryProductDto> list2 = list.subList(5,10);*/
-
+        PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
+        List<ProductDto> list = productDtos.getData();
+        map.put("productDtos1",list);
+        map.put("productDtos1",list.subList(0,5));
+        map.put("productDtos2",list.subList(5,10));
+        map.put("productDtos3",list.subList(10,15));
         return "/index";
     }
 
