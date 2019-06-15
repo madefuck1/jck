@@ -177,6 +177,8 @@ public class PcUserController extends BaseController {
             baseVo.setSuccess(false);
             baseVo.setMessage("验证码错误");
         }
+        //TODO 开发阶段注释验证码
+        baseVo.setSuccess(true);
         return baseVo;
     }
 

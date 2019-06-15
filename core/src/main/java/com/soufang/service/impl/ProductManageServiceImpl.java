@@ -339,21 +339,25 @@ public class ProductManageServiceImpl implements ProductManageService {
     @Override
     public PageHelp<ProductDto> getAssortProduct(ProductManageSo so) {
         StringBuffer assortIds = new StringBuffer();
-        List<AssortDto> assortDtos = assortMapper.getAssortAByParentId(so.getAssortId());
+        List<AssortDto> assortDtos = assortMapper.getAssortByParentId(so.getAssortId());
 
         for (int i = 0; i < assortDtos.size(); i++){
-            assortIds.append(assortDtos.get(i).getAssortId()+",");
+            for (int j = 0; j < assortDtos.get(i).getChildren().size(); j ++){
+
+                    assortIds.append(assortDtos.get(i).getChildren().get(j).getAssortId()+",");
+
+            }
         }
 
         so.setPage((so.getPage()-1)*so.getLimit());
         ProductDto productDto = new ProductDto();
-
         productDto.setAssortIds(String.valueOf(assortIds));
         productDto.setLimit(so.getLimit());
         productDto.setPage(so.getPage());
         List<ProductDto> products = productMapper.getAssortProduct(productDto);
-        for (ProductDto p:products) {
-            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
+         for (ProductDto p:products) {
+            String [] img  = p.getProductImage().split(";");
+            p.setProductImage(PropertiesParam.file_pre+img[0]);
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
@@ -365,9 +369,10 @@ public class ProductManageServiceImpl implements ProductManageService {
     public PageHelp<ProductDto> getIndexFootProduct() {
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         List<ProductDto> list = productMapper.getIndexFootProduct();
-//        for (ProductDto p:list) {
-//            p.setProductImage(PropertiesParam.file_pre+p.getProductImage());
-//        }
+        for (ProductDto p:list) {
+            String [] img  = p.getProductImage().split(";");
+            p.setProductImage(PropertiesParam.file_pre+img[0]);
+        }
         pageHelp.setData(list);
         return pageHelp;
     }

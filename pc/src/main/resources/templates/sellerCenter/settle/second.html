@@ -191,9 +191,13 @@
             $("#subShop").removeAttr("disabled");
         } else {
             var formData = new FormData();
+            var comInfo = $("textarea[name=compInfo]").val() ;
+            var reg1 = new RegExp("\"","g");
+            var reg2 = new RegExp("\'","g");
+            comInfo = comInfo.replace(reg1,"“").replace(reg2,"“");
             formData.append("compType", $("input[name=companyType]").val());
             formData.append("compName", $("input[name=compName]").val());
-            formData.append("compInfo", $("textarea[name=compInfo]").val());
+            formData.append("compInfo", comInfo);
             formData.append("compAddress", $("input[name=compAddress]").val());
             formData.append("businessScope", $("input[name=businessScope]").val());
             formData.append("mainProducts", $("input[name=mainProducts]").val());

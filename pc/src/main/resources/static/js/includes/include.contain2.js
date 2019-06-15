@@ -70,3 +70,11 @@ function clickAssortName(k, v) {
 }
 
 
+/*$(document).ready(function() {
+    $(".list_up .header ul ").click(function() {
+        $(this).prevAll().removeClass("cur");
+        $(this).nextAll().removeClass("cur");
+        $(this).addClass("cur");
+    });
+});*/
+

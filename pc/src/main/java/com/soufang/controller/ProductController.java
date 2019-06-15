@@ -303,65 +303,69 @@ public class ProductController extends BaseController {
         // 设置翻页
         dto.setLimit(limit);
         dto.setPage(pageIndex);
-        if (orderSort == 2) {
-            dto.setSort(1);
-            dto.setSortType(1);
-        } else if (orderSort == 3) {
-            dto.setSort(0);
-            dto.setSortType(3);
-        } else if (orderSort == 4) {
-            dto.setSort(1);
-            dto.setSortType(3);
+        if (orderSort != null) {
+            if (orderSort == 2) {
+                dto.setSort(1);
+                dto.setSortType(1);
+            } else if (orderSort == 3) {
+                dto.setSort(0);
+                dto.setSortType(3);
+            } else if (orderSort == 4) {
+                dto.setSort(1);
+                dto.setSortType(3);
+            }
         }
         Long tempId;
         List<AssortDto> tempList;
         StringBuilder stringBuilder;
-        switch (assortId.substring(0, 1)) {
-            case "A":
-                // 选一级分类
-                tempId = Long.valueOf(assortId.substring(1));
-                tempList = commonPullDownFeign.getAssortByParentId(tempId);
-                stringBuilder = new StringBuilder();
-                if (tempList.size() != 0) {
-                    for (AssortDto tempDto : tempList) {
-                        if (tempDto.getChildren().size() != 0) {
-                            for (AssortDto children : tempDto.getChildren()) {
-                                stringBuilder.append("," + children.getAssortId());
+        if (assortId != null && !"".equals(assortId)) {
+            switch (assortId.substring(0, 1)) {
+                case "A":
+                    // 选一级分类
+                    tempId = Long.valueOf(assortId.substring(1));
+                    tempList = commonPullDownFeign.getAssortByParentId(tempId);
+                    stringBuilder = new StringBuilder();
+                    if (tempList.size() != 0) {
+                        for (AssortDto tempDto : tempList) {
+                            if (tempDto.getChildren().size() != 0) {
+                                for (AssortDto children : tempDto.getChildren()) {
+                                    stringBuilder.append("," + children.getAssortId());
+                                }
+                            } else {
+                                stringBuilder.append("," + tempDto.getAssortId());
                             }
-                        } else {
-                            stringBuilder.append("," + tempDto.getAssortId());
                         }
+                        dto.setAssortIds(stringBuilder.toString().substring(1));
+                    } else {
+                        dto.setAssortId(tempId);
                     }
-                    dto.setAssortIds(stringBuilder.toString().substring(1));
-                } else {
-                    dto.setAssortId(tempId);
-                }
-                break;
-            case "B":
-                // 选二级分类
-                tempId = Long.valueOf(assortId.substring(1));
-                tempList = commonPullDownFeign.getAssortAByParentId(tempId);
-                stringBuilder = new StringBuilder();
-                if (tempList.size() != 0) {
-                    for (AssortDto tempDto : tempList) {
-                        if (tempDto.getChildren() != null) {
-                            for (AssortDto children : tempDto.getChildren()) {
-                                stringBuilder.append("," + children.getAssortId());
+                    break;
+                case "B":
+                    // 选二级分类
+                    tempId = Long.valueOf(assortId.substring(1));
+                    tempList = commonPullDownFeign.getAssortAByParentId(tempId);
+                    stringBuilder = new StringBuilder();
+                    if (tempList.size() != 0) {
+                        for (AssortDto tempDto : tempList) {
+                            if (tempDto.getChildren() != null) {
+                                for (AssortDto children : tempDto.getChildren()) {
+                                    stringBuilder.append("," + children.getAssortId());
+                                }
+                                dto.setAssortIds(stringBuilder.toString().substring(1));
+                            } else {
+                                stringBuilder.append("," + tempDto.getAssortId());
                             }
-                            dto.setAssortIds(stringBuilder.toString().substring(1));
-                        } else {
-                            stringBuilder.append("," + tempDto.getAssortId());
                         }
+                        dto.setAssortIds(stringBuilder.toString().substring(1));
+                    } else {
+                        dto.setAssortIds(assortId.substring(1));
                     }
-                    dto.setAssortIds(stringBuilder.toString().substring(1));
-                } else {
+                    break;
+                case "C":
+                    // 选三级分类
                     dto.setAssortIds(assortId.substring(1));
-                }
-                break;
-            case "C":
-                // 选三级分类
-                dto.setAssortIds(assortId.substring(1));
-                break;
+                    break;
+            }
         }
 
         // 产品列表
@@ -545,7 +549,6 @@ public class ProductController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "getAssortProduct", method = RequestMethod.POST)
     public ListProductVo getAssortProduct(@RequestBody ProductManageSo so) {
-
         PageHelp<ProductDto> pageHelp = productFeign.getAssortProduct(so);
         ListProductVo vo = new ListProductVo();
         vo.setData(pageHelp.getData());

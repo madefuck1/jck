@@ -493,36 +493,36 @@
                 0 as is_scan
             </otherwise>
         </choose>
-        from ( select * from t_product limit #{page},#{limit}) as P
+        from ( select * from t_product
+        where 1=1
+        <if test="shopId != null">
+            and shop_id = #{shopId}
+        </if>
+        <if test="productName != null and productName != '' ">
+            and product_name like concat(concat('%',#{productName}),'%')
+        </if>
+        <if test="isUpper != null">
+            and is_upper = #{isUpper}
+        </if>
+        <if test="assortId != null and assortId != 0">
+            and FIND_IN_SET(assort_id,#{assortId})
+        </if>
+        <if test="assortIds != null and assortIds != ''">
+            and FIND_IN_SET(assort_id,#{assortIds})
+        </if>
+        <if test="shopName != null and shopName != '' ">
+            and shop_Name like concat(concat('%',#{shopName}),'%')
+        </if>
+        <if test="productSendCity != null and productSendCity != ''">
+            and product_send_city like concat(concat('%',#{productSendCity}),'%')
+        </if>
+        limit #{page},#{limit}) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
         join t_product_statistics St on P.product_id = St.product_id
         <if test="userId!=0 and userId!=null">
             left join t_footprint FP on FP.product_id=P.product_id and FP.user_id = #{userId}
         </if>
-        where 1 = 1
-        <if test="shopId != null">
-            and P.shop_id = #{shopId}
-        </if>
-        <if test="productName != null and productName != '' ">
-            and P.product_name like concat(concat('%',#{productName}),'%')
-        </if>
-        <if test="isUpper != null and isUpper !=''">
-            and P.is_upper = #{isUpper}
-        </if>
-        <if test="assortId != null and assortId != 0">
-            and FIND_IN_SET(P.assort_id,#{assortId})
-        </if>
-        <if test="assortIds != null and assortIds != ''">
-            and FIND_IN_SET(P.assort_id,#{assortIds})
-        </if>
-        <if test="shopName != null and shopName != '' ">
-            and P.shop_Name like concat(concat('%',#{shopName}),'%')
-        </if>
-        <if test="productSendCity != null and productSendCity != ''">
-            and P.product_send_city like concat(concat('%',#{productSendCity}),'%')
-        </if>
-
         <choose>
             <when test="sortType == 1 ">
                 <choose>
@@ -728,7 +728,7 @@
         from t_product
         where 1 = 1
         <if test="isUpper != null and isUpper !=''">
-            and tp.is_upper = #{isUpper}
+            and is_upper = #{isUpper}
         </if>
         <if test="assortIds != null and assortIds != ''">
             and FIND_IN_SET(assort_id,#{assortIds})

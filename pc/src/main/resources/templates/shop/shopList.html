@@ -4,7 +4,7 @@
 
 <@override name="css">
 <link rel="stylesheet" href="${contextPath}/css/home.css">
-<link rel="stylesheet" href="${contextPath}/css/header.index.css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
 <link rel="stylesheet" href="${contextPath}/css/search-shop.css">
 <link rel="stylesheet" href="${contextPath}/Pagination/css/jquery.pagination.css">
 
@@ -18,14 +18,6 @@
 <@override name="body">
 <#include "/common/includes/include.contain.html"/>
 <div id="search-shop">
-    <!--<div class="shop-up">-->
-    <!--<ul>-->
-    <!--<li><a href="">单位性质：</a></li>-->
-    <!--<li class="first"><a href="">全部</a></li>-->
-    <!--<li><a href="">企业</a></li>-->
-    <!--<li><a href="">个体工商户</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
     <div class="shop-down" id="shopList">
     </div>
     <!--分页 -->
@@ -42,8 +34,8 @@
 <script type="text/javascript">
     $(function () {
         var shopName = "${searchProductName!}";
-        init(1, shopName);
-        $("#search_type_name").html(text);
+        init(0, shopName);
+        $("#search_type_name").html("店铺");
         $("#search_type").val(2);
     })
 
@@ -68,12 +60,12 @@
                         '                <dd>\n' +
                         '                    <p>\n' +
                         '                        <span>经营类目：</span>\n' +
-                        '                        <span>' + data.list[i].mainProducts + '</span>\n' +
+                        '                        <span style="width:200px; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">' + data.list[i].mainProducts + '</span>\n' +
                         '                    </p>\n' +
-                        '                    <p>\n' +
-                        '                        <span>经营范围：</span>\n' +
-                        '                        <span>' + data.list[i].businessScope + '</span>\n' +
-                        '                    </p>\n' +
+                        // '                    <p>\n' +
+                        // '                        <span>经营范围：</span>\n' +
+                        // '                        <span>' + data.list[i].businessScope + '</span>\n' +
+                        // '                    </p>\n' +
                         '                </dd>\n' +
                         '                <dd><button onclick="openStore(' + data.list[i].shopId + ')">进入店铺</button></dd>\n' +
                         '            </dl>\n' +

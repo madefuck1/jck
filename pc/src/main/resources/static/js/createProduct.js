@@ -43,6 +43,13 @@ var priceShowHtml = '<div class="attr1-cloum2 attr1-right">\n' +
     '    </div>\n' +
     '</div>';
 
+function changeUnit(obj){
+    var unit = $(obj).val();
+    $(".productUnit").each(function () {
+        $(this).html(unit);
+    })
+}
+
 function addParamHtml() {
     var html = "";
     if (paramNumber % 2 == 1) {

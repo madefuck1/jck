@@ -15,5 +15,5 @@ public interface AdminProductManageFeign {
     PageHelp<ProductDto> list(@RequestBody ProductDto dto);
 
     @RequestMapping(value = "/core/productManage/getProductDetail", method = RequestMethod.POST)
-    ProductDto getDetail(@RequestBody Long productId);
+    ProductDto getDetail(@RequestBody ProductDto dto);
 }
