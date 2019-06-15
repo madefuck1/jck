@@ -32,6 +32,7 @@ public class IOClient {
             return map ;
         }catch (Exception e){
             e.printStackTrace();
+            map.put("success",false);
         }
         return map;
     }

@@ -154,7 +154,7 @@
                                         <span>计量单位：</span>
                                     </span>
                             <span class="am-u-sm-10 am-form">
-                                <input type="text" class="" name="productUnit" placeholder="请输入">
+                                <input type="text" class="" name="productUnit" placeholder="请输入" onchange="changeUnit(this)">
                             </span>
                         </div>
                         <span class="base-cloum1">
@@ -187,17 +187,17 @@
                                 <div class="attr1">
                                     <div class="priceInput attr1-on am-u-sm-6">
                                         <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（米）</span>
+                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
                                             <span class="am-u-sm-6">产品单价（元）</span>
                                         </div>
                                         <div class="attr1-cloum2">
                                             <div class="am-u-sm-6">
-                                                <input type="number" class="minNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].minNumber" placeholder="1">
+                                                <input type="number" class="minNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].minNumber">
                                                 <input type="hidden"  class="maxNumber"  name="productSpecDtoList[0].maxNumber">
                                                 <input type="hidden"  class="specName"  name="productSpecDtoList[0].specName">
                                             </div>
                                             <div class="am-u-sm-6">
-                                                <input type="number" class="specNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].specNumber" placeholder=" 10">
+                                                <input type="number" class="specNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].specNumber">
                                                 <span class="attr1-pic"></span>
                                             </div>
                                         </div>
@@ -207,7 +207,7 @@
                                     </div>
                                     <div class="priceShow attr1-on am-u-sm-5">
                                         <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（米）</span>
+                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
                                             <span class="am-u-sm-6">产品单价（元）</span>
                                         </div>
                                         <div class="attr1-cloum2 attr1-right">
@@ -215,7 +215,7 @@
                                                 <p class="numberSection"></p>
                                             </div>
                                             <div class="am-u-sm-6">
-                                                <p>￥<span class="numberPrice" style="color:#F58022 "></span>/米</p>
+                                                <p>￥<span class="numberPrice" style="color:#F58022 "></span>/<span class="productUnit"></span></p>
                                             </div>
                                         </div>
                                     </div>
