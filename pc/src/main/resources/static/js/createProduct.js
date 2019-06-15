@@ -312,12 +312,15 @@ function createForm() {
                         processData: false,
                         contentType: false,
                         beforeSend: function () {
-                            loading("数据提交中，请稍后......");  // 数据加载成功之前，使用loading组件
+                            $("#loadingdiv").show();
+                            $("#submit-product").attr("disabled", "disabled");
                         },
                         success: function (data) {
                             alert("新增产品成功");
-                            window.location.href = "/sellerCenter/toProductList";
                             window.location.href="/sellerCenter/toProductList";
+                        },compete:function(){
+                            $("#loadingdiv").hide();
+                            $("#submit-product").removeAttr("disabled");
                         },error: function (data) {
                             alert("网络请求失败，请重试！");
                         }
