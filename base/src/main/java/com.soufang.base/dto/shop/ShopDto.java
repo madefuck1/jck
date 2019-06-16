@@ -1,6 +1,7 @@
 package com.soufang.base.dto.shop;
 
 import com.soufang.base.dto.product.ProductDto;
+import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.utils.DateUtils;
 
 import java.util.Date;
@@ -32,12 +33,8 @@ public class  ShopDto {
     public String getStrShopStatus() {
         if (shopStatus == null) {
             return null;
-        } else if (shopStatus == 1) {
-            return "审核通过";
-        } else if (shopStatus == 0) {
-            return "审核不通过";
         } else {
-            return "未审核";
+            return ShopStatusEnum.getShopStatusByKey(shopStatus);
         }
     }
 
