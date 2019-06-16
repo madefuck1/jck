@@ -18,12 +18,14 @@
 							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的收藏</strong> / <small>My&nbsp;Collection</small></div>
 						</div>
 						<hr/>
-
 						<div class="you-like">
 							<div class="s-bar">
 								我的收藏
 								<a class="am-badge am-btn-warning am-round">降价</a>
 								<a class="am-badge am-btn-warning am-round">下架</a>
+							</div>
+							<div id="noData" style="display:none;">
+								<#include "/noData.html"/>
 							</div>
 							<div class="s-content" id="allTables" >
 							</div>
@@ -58,11 +60,17 @@
 			contentType: 'application/json; charset=UTF-8',
 			dataType : "json",
 			success : function(data) {
-                count=data.count;
-				$.each(data.data, function (i, v) {
-					var whatever = liContent(v);
-					$("#allTables").append(whatever);
-				});
+                if (data.count==0){
+                    //没有数据
+                    document.getElementById("noData").style.display="block";//显示
+                    document.getElementById("more").style.display="none";//显示
+				}else{
+                    $.each(data.data, function (i, v) {
+                        var whatever = liContent(v);
+                        $("#allTables").append(whatever);
+                    });
+				}
+
 			}
 		});
 	}

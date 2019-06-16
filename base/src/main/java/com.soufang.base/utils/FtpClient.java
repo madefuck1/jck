@@ -100,7 +100,7 @@ public class FtpClient {
             return map;
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("success", false);
+            map = IOClient.uploadImage(multipartFile,url);
             return map;
         }finally {
             if (ftpClient.isConnected()) {

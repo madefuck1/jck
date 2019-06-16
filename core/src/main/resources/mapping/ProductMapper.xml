@@ -501,7 +501,7 @@
         <if test="productName != null and productName != '' ">
             and product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null and isUpper !=''">
+        <if test="isUpper != null">
             and is_upper = #{isUpper}
         </if>
         <if test="assortId != null and assortId != 0">

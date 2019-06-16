@@ -1,27 +1,27 @@
 <!doctype html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-   <title>店铺装修</title>
-   <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
-   <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
-   <link rel="stylesheet" href="/static/css/sale/base.css">
-   <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
-   <link rel="stylesheet" href="/static/css/sale/sale-company.css">
-   <link rel="stylesheet" href="/static/css/sale/sale_header.css">
+    <#include "/common/includes/header.html"/>
 
-   <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-   <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <title>店铺装修</title>
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/css/sale/base.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-company.css">
+    <link rel="stylesheet" href="/static/css/sale/sale_header.css">
 
-   <style>
-      * {
-         margin: 0px;
-         padding: 0px;
-         border: 0px;
-         list-style: none;
-      }
-   </style>
+    <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            list-style: none;
+        }
+    </style>
 </head>
 
 <body style="background: #f5f5f5;">
@@ -30,281 +30,284 @@
 <#include "/sellerCenter/common/header.html"/>
 
 <div id="logo" style="height: 120px;">
-   <!--    <img src="../images/sale/shop1.png" alt="">-->
+    <!--    <img src="../images/sale/shop1.png" alt="">-->
 </div>
 <div id="nav2">
-   <div class="nav_in">
-      <ul>
-         <li class="cur" onclick="switchPage(this,1);"><a href="#">首页</a></li>
-         <li onclick="switchPage(this,2);"><a href="#">公司概况</a></li>
-         <!--            <li><a href="">视频中心</a></li>-->
-      </ul>
-   </div>
+    <div class="nav_in">
+        <ul>
+            <li class="cur" onclick="switchPage(this,1);"><a href="#">首页</a></li>
+            <li onclick="switchPage(this,2);"><a href="#">公司概况</a></li>
+            <!--            <li><a href="">视频中心</a></li>-->
+        </ul>
+    </div>
 
 </div>
 <div id="shop-chart">
-   <div class="chart_in">
-      <div class="left">
-         <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
-              data-am-slider='{"directionNav":false}'>
-            <ul class="am-slides" id="shop-chart-map">
-               <!-- 图1 -->
-               <li><img src="../images/sale/shop2.png" alt=""></li>
-            </ul>
-         </div>
-      </div>
-      <div class="right" id="right-company">
-         <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
-         <!-- <div class="Collection">-->
-         <!--     <span class="coll1">收藏</span>-->
-         <!--     <span class="coll2">已收藏</span>-->
-         <!-- </div>-->
-         <div>
-            <span class="one">联系电话：</span>
-            <span class="two" id="linkPhone">xxxx</span>
-         </div>
-         <div>
-            <span class="one">经营类目：</span>
-            <span class="two" id="mainProducts">xxxx</span>
-         </div>
-         <div>
-            <span class="one">联系地址：</span>
-            <span class="two" id="companyAddress">xxxx</span>
-         </div>
-         <div>
-            <span class="one">公司介绍：</span>
-            <span class="two" style="line-height: 40px" id="companyInfo">xxxx</span>
-         </div>
-      </div>
-   </div>
+    <div class="chart_in">
+        <div class="left">
+            <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
+                 data-am-slider='{"directionNav":false}'>
+                <ul class="am-slides" id="shop-chart-map">
+                    <!-- 图1 -->
+                    <li><img src="../images/sale/shop2.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right" id="right-company">
+            <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
+            <!-- <div class="Collection">-->
+            <!--     <span class="coll1">收藏</span>-->
+            <!--     <span class="coll2">已收藏</span>-->
+            <!-- </div>-->
+            <div>
+                <span class="one">联系电话：</span>
+                <span class="two" id="linkPhone">xxxx</span>
+            </div>
+            <div>
+                <span class="one">经营类目：</span>
+                <span class="two" id="mainProducts" style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">xxxx</span>
+            </div>
+            <div>
+                <span class="one">联系地址：</span>
+                <span class="two" id="companyAddress" style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
+            </div>
+            <div>
+                <span class="one">公司介绍：</span>
+                <span class="two" id="companyInfo"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="shop-product">
-   <div class="product-in">
-      <div class="product-title" id="product-title">
-      </div>
-      <!-- 产品列表-->
-      <div class="product" style="text-align: center" id="product">
-      </div>
-   </div>
+    <div class="product-in">
+        <div class="product-title" id="product-title">
+        </div>
+        <!-- 产品列表-->
+        <div class="product" style="text-align: center" id="product">
+        </div>
+    </div>
 </div>
 <!--公司概况-->
 <div id="company" hidden>
-   <h4>工商注册信息</h4>
-   <div class="company-left">
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">统一社会信用代码/注册号：</p>-->
-<!--         <p class="right">91440300573137960X</p>-->
-<!--      </div>-->
-      <div class="company-cloum1">
-         <p class="left">公司名称：</p>
-         <p class="right" id="company_name"></p>
-      </div>
-      <div class="company-cloum1">
-         <p class="left">注册地址：</p>
-         <p class="right" id="company_address"></p>
-      </div>
-      <div class="company-cloum1">
-         <p class="left">法定代表人：</p>
-         <p class="right" id="company_corporate"></p>
-      </div>
-      <div class="company-cloum1">
-         <p class="left">企业类型：</p>
-         <p class="right" id="company_type"></p>
-      </div>
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">经营期限：</p>-->
-<!--         <p class="right">2018-3-29~长期</p>-->
-<!--      </div>-->
-      <div class="company-cloum1">
-         <p class="left">经营范围：</p>
-         <p class="right right1" id="business_scope"></p>
-      </div>
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">年报/年检情况：</p>-->
-<!--         <p class="right">2018年成立</p>-->
-<!--      </div>-->
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">成立日期：</p>-->
-<!--         <p class="right">2018-03-29</p>-->
-<!--      </div>-->
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">登记机关：</p>-->
-<!--         <p class="right">绍兴市市场监督管理局</p>-->
-<!--      </div>-->
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">申请人姓名：</p>-->
-<!--         <p class="right">贾女士</p>-->
-<!--      </div>-->
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">申请人部门：</p>-->
-<!--         <p class="right">销售部</p>-->
-<!--      </div>-->
-<!--      <div class="company-cloum1">-->
-<!--         <p class="left">申请人职位：</p>-->
-<!--         <p class="right">经理</p>-->
-<!--      </div>-->
-   </div>
-   <div class="company-right">
-      <img id="company_urls" src="" alt="">
-      <p style="color: #999; text-align: center">营业执照</p>
-   </div>
+    <h4>工商注册信息</h4>
+    <div class="company-left">
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">统一社会信用代码/注册号：</p>-->
+        <!--         <p class="right">91440300573137960X</p>-->
+        <!--      </div>-->
+        <div class="company-cloum1">
+            <p class="left">公司名称：</p>
+            <p class="right" id="company_name"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">注册地址：</p>
+            <p class="right" id="company_address"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">法定代表人：</p>
+            <p class="right" id="company_corporate"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">企业类型：</p>
+            <p class="right" id="company_type"></p>
+        </div>
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">经营期限：</p>-->
+        <!--         <p class="right">2018-3-29~长期</p>-->
+        <!--      </div>-->
+        <div class="company-cloum1">
+            <p class="left">经营范围：</p>
+            <p class="right right1" id="business_scope"></p>
+        </div>
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">年报/年检情况：</p>-->
+        <!--         <p class="right">2018年成立</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">成立日期：</p>-->
+        <!--         <p class="right">2018-03-29</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">登记机关：</p>-->
+        <!--         <p class="right">绍兴市市场监督管理局</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人姓名：</p>-->
+        <!--         <p class="right">贾女士</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人部门：</p>-->
+        <!--         <p class="right">销售部</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人职位：</p>-->
+        <!--         <p class="right">经理</p>-->
+        <!--      </div>-->
+    </div>
+    <div class="company-right">
+        <img id="company_urls" src="" alt="">
+        <p style="color: #999; text-align: center">营业执照</p>
+    </div>
 </div>
 
 <!-- 页尾 -->
 <#include "/sellerCenter/common/foot.html"/>
 
 <script type="text/javascript">
-   $(function () {
-      initHtmlPage();
-   })
+    $(function () {
+        initHtmlPage();
+    })
 
-   // 初始化页面
-   function initHtmlPage() {
+    // 初始化页面
+    function initHtmlPage() {
 
-      $.ajax({
-         url: '/shop/getStoreIndexInfo/${shopId!}',
-         dataType: 'json',
-         type: 'POST',
-         contentType: "application/json; charset=utf-8",
-         success: function (res) {
-            var html = '';
-            //------------- 初始化logo-------
-            var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
-            if (storeLogoUrl != '') {
-               $('#logo').html('<img src="' + storeLogoUrl + '" alt="">');
-            } else {
-               // todo
+        $.ajax({
+            url: '/shop/getStoreIndexInfo/${shopId!}',
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var html = '';
+                //------------- 初始化公司信息-------------------
+                $('#companyName').html(res.companyDto.compName);
+                $('#linkPhone').html(res.companyDto.compPhone);
+                $('#mainProducts').html(res.shopDto.mainProducts);
+                $('#companyAddress').html(res.companyDto.compAddress);
+                $('#companyInfo').html(res.companyDto.companyInfo);
+
+                //------------- 初始化公司概况-------------------
+                $('#company_name').html(res.companyDto.compName);
+                $('#company_address').html(res.companyDto.compAddress);
+                $('#company_corporate').html(res.companyDto.compCorporate);
+                $('#company_type').html(res.companyDto.compTypeString);
+                $('#business_scope').html(res.shopDto.businessScope);
+                $('#company_urls').attr("src", res.companyDto.companyURL);
+
+                //------------- 初始化logo-------
+                if (res.storeConstructionDto) {
+                    var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
+                    if (storeLogoUrl != '') {
+                        $('#logo').html('<img src="' + storeLogoUrl + '" alt="">');
+                    } else {
+                        // todo
+                    }
+
+
+                    //------------- 初始首页/公司概况/视频中心化背景颜色----------------
+                    var storeNavColor = res.storeConstructionDto.storeNavColor;
+                    if (storeNavColor != null && storeNavColor != '') {
+                        $('#nav2').css('background', storeNavColor);
+                    } else {
+                        // todo
+                    }
+                    //------------- 初始化轮播图 -------------------
+                    var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
+                    if (storeCurouselMapDtoList.length > 0) {
+                        for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
+                            $('#side-left').flexslider('addSlide', '<li style="cursor: pointer" onclick="' + storeCurouselMapDtoList[i].storeCurouselMapLink + '"><img src="' + storeCurouselMapDtoList[i].mapURL + '" alt=""></li>');
+                            if (i == 0) {
+                                $('#side-left').flexslider('removeSlide', 0);
+                            }
+                        }
+                    } else {
+                        // todo
+                    }
+                    //------------- 初始化分类-------------
+                    html = '';
+                    var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
+                    if (storeExclusiveAssortDtoList.length > 0) {
+                        for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
+                            if (i == 0) {
+                                html += '<a class="cur" onclick="clickAssortName(this)">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
+                                //------------- 初始化产品-------------
+                                var param = {
+                                    exclusiveAssortId: storeExclusiveAssortDtoList[i].exclusiveAssortId
+                                }
+                                initProductList(param);
+                            } else {
+                                html += '<a onclick="clickAssortName(this)">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
+                            }
+                        }
+                        html += '<div class="product-search" id="product-search">\n' +
+                            '        <input id="searchPName" type="text" placeholder="店内搜索">\n' +
+                            '        <button type="button" class="am-btn am-btn-warning" onclick="searchP()">搜索</button>\n' +
+                            '    </div>';
+
+                        $('#product-title').empty();
+                        $('#product-title').append(html);
+                    } else {
+                        // todo
+                    }
+                }
             }
-            //------------- 初始首页/公司概况/视频中心化背景颜色----------------
-            var storeNavColor = res.storeConstructionDto.storeNavColor;
-            if (storeNavColor != null && storeNavColor != '') {
-               $('#nav2').css('background', storeNavColor);
-            } else {
-               // todo
+        });
+
+    }
+
+    function clickAssortName(obj) {
+        $(obj).parent().find('a').removeClass("cur");
+        $(obj).addClass('cur');
+        searchP()
+    }
+
+    function searchP() {
+        var exclusiveAssortId = $('#product-title').find('.cur').children('input').val();
+        var param = {
+            productName: $("#searchPName").val(),
+            exclusiveAssortId: exclusiveAssortId
+        }
+        initProductList(param);
+    }
+
+    function initProductList(param) {
+
+        $.ajax({
+            url: '/store/searchProduct',
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(param),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                initTable(data);
             }
-            //------------- 初始化轮播图 -------------------
-            var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
-            if (storeCurouselMapDtoList.length > 0) {
-               for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
-                  $('#side-left').flexslider('addSlide', '<li style="cursor: pointer" onclick="' + storeCurouselMapDtoList[i].storeCurouselMapLink + '"><img src="' + storeCurouselMapDtoList[i].mapURL + '" alt=""></li>');
-                  if (i == 0) {
-                     $('#side-left').flexslider('removeSlide', 0);
-                  }
-               }
-            } else {
-               // todo
-            }
+        })
+    }
 
-            //------------- 初始化公司信息-------------------
-            $('#companyName').html(res.companyDto.compName);
-            $('#linkPhone').html(res.companyDto.compPhone);
-            $('#mainProducts').html(res.shopDto.mainProducts);
-            $('#companyAddress').html(res.companyDto.compAddress);
-            $('#companyInfo').html(res.companyDto.companyInfo);
-
-            //------------- 初始化公司概况-------------------
-            $('#company_name').html(res.companyDto.compName);
-            $('#company_address').html(res.companyDto.compAddress);
-            $('#company_corporate').html(res.companyDto.compCorporate);
-            $('#company_type').html(res.companyDto.compTypeString);
-            $('#business_scope').html(res.shopDto.businessScope);
-            $('#company_urls').attr("src",res.companyDto.companyURL);
-
-            //------------- 初始化分类-------------
-            html = '';
-            var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
-            if (storeExclusiveAssortDtoList.length > 0) {
-               for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
-                  if (i == 0) {
-                     html += '<a class="cur" onclick="clickAssortName(this)">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
-                     //------------- 初始化产品-------------
-                     var param = {
-                        exclusiveAssortId: storeExclusiveAssortDtoList[i].exclusiveAssortId
-                     }
-                     initProductList(param);
-                  } else {
-                     html += '<a onclick="clickAssortName(this)">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
-                  }
-               }
-               html += '<div class="product-search" id="product-search">\n' +
-                       '        <input id="searchPName" type="text" placeholder="店内搜索">\n' +
-                       '        <button type="button" class="am-btn am-btn-warning" onclick="searchP()">搜索</button>\n' +
-                       '    </div>';
-
-               $('#product-title').empty();
-               $('#product-title').append(html);
-            } else {
-               // todo
-            }
-
-         }
-      });
-
-   }
-
-   function clickAssortName(obj) {
-      $(obj).parent().find('a').removeClass("cur");
-      $(obj).addClass('cur');
-      searchP()
-   }
-
-   function searchP() {
-      var exclusiveAssortId = $('#product-title').find('.cur').children('input').val();
-      var param = {
-         productName: $("#searchPName").val(),
-         exclusiveAssortId: exclusiveAssortId
-      }
-      initProductList(param);
-   }
-
-   function initProductList(param) {
-
-      $.ajax({
-         url: '/store/searchProduct',
-         dataType: 'json',
-         type: 'POST',
-         data: JSON.stringify(param),
-         contentType: "application/json; charset=utf-8",
-         success: function (data) {
-            initTable(data);
-         }
-      })
-   }
-
-   function initTable(data) {
-      var html = '';
-      if (data.length > 0) {
-         for (var i = 0; i < data.length; i++) {
-            html += '<dl>\n' +
+    function initTable(data) {
+        var html = '';
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                html += '<dl>\n' +
                     '        <dt class="pro-pic1"><img src="' + data[i].productDto.productUrl + '"></dt>\n' +
                     '        <dd class="title1">' + data[i].productDto.productName + '</dd>\n' +
                     '        <dd class="title2">￥<span style="font-size: 18px;">' + data[i].productDto.productStatisticsDto.productPrice + '</span></dd>\n' +
                     '    </dl>';
-         }
-      } else {
-         html += '<div style="padding-top: 25px">没有检索到相匹配的产品！</div>';
-      }
-      $('#product').empty();
-      $('#product').append(html);
-   }
+            }
+        } else {
+            html += '<div style="padding-top: 25px">没有检索到相匹配的产品！</div>';
+        }
+        $('#product').empty();
+        $('#product').append(html);
+    }
 
 
-   function switchPage(obj, type) {
-      $(obj).parent().find('li').removeClass('cur');
-      $(obj).addClass('cur');
-      switch (type) {
-         case 1:
-            $('#shop-product').show();
-            $('#shop-chart').show();
-            $('#company').hide()
-            break;
-         case 2:
-            $('#shop-product').hide();
-            $('#shop-chart').hide();
-            $('#company').show()
-            break;
-      }
-   }
+    function switchPage(obj, type) {
+        $(obj).parent().find('li').removeClass('cur');
+        $(obj).addClass('cur');
+        switch (type) {
+            case 1:
+                $('#shop-product').show();
+                $('#shop-chart').show();
+                $('#company').hide()
+                break;
+            case 2:
+                $('#shop-product').hide();
+                $('#shop-chart').hide();
+                $('#company').show()
+                break;
+        }
+    }
 </script>
 
 </body>

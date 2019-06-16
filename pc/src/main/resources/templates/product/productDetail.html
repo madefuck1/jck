@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+<#assign staticPath=request.contextPath!/>
+<#assign contextPath=request.contextPath+"/static" />
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <#assign staticPath=request.contextPath!/>
-    <#assign contextPath=request.contextPath+"/static" />
+    <#include "/common/includes/header.html"/>
     <title>${detail.productName}</title>
 
     <link href="/static/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
@@ -268,7 +266,7 @@
                 <li class="first" style="border-top: 1px solid #D4D4D4; padding-bottom: 10px">
                     <div class="p-img">
                         <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"
-                           href="#"><img class="" src="${item.URL!''}"> </a>
+                           href="#"><img class="" src="${item.url!''}"> </a>
                     </div>
                     <div class="p-name"><a
                             onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"

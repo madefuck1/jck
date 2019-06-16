@@ -38,6 +38,9 @@ public class ShopController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "getShopList", method = RequestMethod.POST)
     public ShopVo getShopList(@RequestBody ShopSo shopSo) {
+        if(shopSo.getPage() == 0){
+            shopSo.setPage(1);
+        }
         PageHelp<ShopDto> pageHelp = shopFeign.appGetList(shopSo);
         ShopVo shopVo = new ShopVo();
         shopVo.setCount(pageHelp.getCount());

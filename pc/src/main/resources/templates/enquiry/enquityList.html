@@ -130,7 +130,9 @@
                 var whatever="";
               	 $("#showMoreAssorts").html("");
                 if(data.count==0){
-                    $("#showMoreAssorts").html("暂无相关数据");
+                    var noData=$("<tr><th colspan='5'>暂无相关数据</th></tr>");
+                    //$("#showMoreAssorts").html("暂无相关数据");
+                    $("#showMoreAssorts").append(noData);
                 }
                 $.each(data.data, function (i, v) {
 					whatever=liContent(v);

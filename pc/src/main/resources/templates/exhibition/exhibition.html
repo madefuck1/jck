@@ -16,7 +16,6 @@
 			</ul>
 		</div>
 	</div>
-	<#include "/common/includes/include.footer.html"/>
 </@override>
 <@override name="js">
 <script>
@@ -53,7 +52,7 @@
 	var li=$("<li class='expo-img'>"
 		+"<a href='javascript:void(0);' onclick='toDetail("+exhibitionId+")'><img src='"+exhibitionPhoto+"'alt='' width='282'></a>"
 		+" <div class='expo0li01'>"
-	    +" <h3>"+exhibitionTitle+"</h3>"
+	    +" <h3  style='text-overflow:ellipsis; white-space:nowrap; overflow:hidden;'>"+exhibitionTitle+"</h3>"
 		+"<p>"+assortName+"</p>"
         +"<ul>"
         +"<li>"
