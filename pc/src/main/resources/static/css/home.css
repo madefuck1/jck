@@ -263,21 +263,21 @@ h2 {
 
 .list_down {
     width: 994px;
-    height: 566px;
+    height: 630px;
     position: relative;
 
 }
 
 .list_down .list_left {
     width: 190px;
-    height: 566px;
+    height: 630px;
     float: left;
     background: #fff;
 }
 
 .list_down .list_right {
     width: 800px;
-    height: 566px;
+    height: 630px;
     float: left;
     border: 2px solid rgba(245, 128, 34, 1);
     background: #fff;

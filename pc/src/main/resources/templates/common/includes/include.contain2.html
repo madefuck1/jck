@@ -3,7 +3,7 @@
     <div class="list">
         <div class="list_in">
             <div class="list_up">
-                <div class="title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
+                <div class="title" id="contain_title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
                 <div class="header">
                     <ul>
                         <li class="cur"><a href="/index">首页</a></li>
@@ -14,18 +14,19 @@
                 </div>
             </div>
             <div class="list_down">
-                <div class="list_left">
+                <div class="list_left" hidden>
                     <#list assortList as assort>
-                        <div class="meu">
-                            <input type="hidden" value="${assort.assortId}">
-                            <div class="list_liftIn">
-                                <div class="list_cloum1">
-                                    <i class="iconfont"></i>
-                                    <span class="span1" onclick="clickAssortName('A${assort.assortId}','${assort.assortName}');">${assort.assortName}</span>
-                                </div>
+                    <div class="meu">
+                        <input type="hidden" value="${assort.assortId}">
+                        <div class="list_liftIn">
+                            <div class="list_cloum1">
+                                <i class="iconfont"></i>
+                                <span class="span1"
+                                      onclick="clickAssortName('A${assort.assortId}','${assort.assortName}');">${assort.assortName}</span>
                             </div>
                         </div>
-                    </#list>
+                    </div>
+                                        </#list>
                 </div>
                 <div class="list_right" style="display: none">
                     <div class="list_con">
@@ -40,24 +41,24 @@
                         <div class="pic"></div>
                         <#if isLonIn?? && isLonIn != "N">
                         <p>欢迎您 &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
-                           
+
                         </p>
                         <#else>
                         <p>欢迎您 &nbsp;请<a href="/user/toLogin">登录</a> &nbsp;<a href="/user/toRegister">注册会员</a></p>
-                        </#if>
+                                                </#if>
                     </div>
                     <div class="center">
                         <a href="/enquiry/create">
-                        <div class="center1">
-                            <div class="pic1" style="background: url(static/images/img/purchase.png);"></div>
-                            <p class="p1">发布求购</p>
-                        </div>
+                            <div class="center1">
+                                <div class="pic1" style="background: url(static/images/img/purchase.png);"></div>
+                                <p class="p1">发布求购</p>
+                            </div>
                         </a>
                         <a href="/user/toSettle">
-                        <div class="center2">
-                            <div class="pic2" style="background: url(static/images/img/openShop.png);"></div>
-                            <p class="p1">开通商铺</p>
-                        </div>
+                            <div class="center2">
+                                <div class="pic2" style="background: url(static/images/img/openShop.png);"></div>
+                                <p class="p1">开通商铺</p>
+                            </div>
                         </a>
                         <div class="center3">
                             <div class="pic3" style="background: url(static/images/img/pushInfo.png);"></div>
@@ -70,10 +71,10 @@
                     </div>
                     <div class="right" style="margin-left: 80px;margin-top: 20px">
                         <div class="row_1 ">
-                            <a href="/personalCenter/toEnquiryManage" class="backColor" style="font-size: large">我的询盘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/personalCenter/toEnquiryManage" class="backColor"
+                               style="font-size: large">我的询盘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="/orderManager/toOrderManager" class="backColor" style="font-size: large">我的订单</a>
                         </div>
-
                     </div>
                 </div>
             </div>
