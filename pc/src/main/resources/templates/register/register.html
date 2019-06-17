@@ -219,6 +219,10 @@
             }else {
                 var password = $("#passwordP").val();
                 var passwordP = $("#passwordRepeatP").val();
+                if(password == "" || password == null || password == undefined){
+                    alert("密码不能为空");
+                    return false;
+                }
                 if(passwordP != password){
                     alert("两次密码输入不一致");
                     return false;
@@ -234,6 +238,10 @@
             }else {
                 var password = $("#password").val();
                 var passwordP = $("#passwordRepeat").val();
+                if(password == "" || password == null || password == undefined){
+                    alert("密码不能为空");
+                    return false;
+                }
                 if(passwordP != password){
                     alert("两次密码输入不一致");
                     return false;

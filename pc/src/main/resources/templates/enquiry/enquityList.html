@@ -126,18 +126,20 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
-                $("#purchaseLength").html(data.data.length);
                 var whatever="";
               	 $("#showMoreAssorts").html("");
                 if(data.count==0){
                     var noData=$("<tr><th colspan='5'>暂无相关数据</th></tr>");
                     //$("#showMoreAssorts").html("暂无相关数据");
                     $("#showMoreAssorts").append(noData);
-                }
+                    $("#purchaseLength").html(0);
+                }else {
+                    $("#purchaseLength").html(data.data.length);
                 $.each(data.data, function (i, v) {
 					whatever=liContent(v);
                     $("#showMoreAssorts").append(whatever);
                 });
+                }
             }
         });
     }
@@ -157,6 +159,10 @@
         var enquiryNumber=v.enquiryNumber;
         //报价截至日期
         var endTime=v.strEndTime;
+        var date1 = new Date();
+        var date2 = new Date(endTime);
+       	var date = date2.getTime()-date1.getTime();
+        var distanceDate = Math.floor(date/(24*3600*1000));
         var productDto=v.enquiryProductDto;
         var productNumber=productDto[0].productNumber;
         var productUnit=productDto[0].productUnit;
@@ -177,7 +183,7 @@
         +"</td>"
         +"<td>"
         +"<p>"+endTime+"</p>"
-        +"<p>剩余<span style='color: #F58022'>27</span>天</p>"
+        +"<p>剩余<span style='color: #F58022'>"+distanceDate+"</span>天</p>"
         +"</td>"
         +"<td>"
         +"<p>"+shopName+"</p>"
