@@ -361,7 +361,7 @@ h2{
 	color: #333;
 	font-size: 14px;
 	display: inline-block;
-	height: 40px;
+	height: auto;
 	margin-left: 6px;
 }
 
@@ -378,7 +378,7 @@ h2{
 
 	border-bottom: 1px dashed #e6e6e6;
 	display: inline-block;
-	height: 40px;
+	height: auto;
 
 }
 .list_oncloum1 .con span{
