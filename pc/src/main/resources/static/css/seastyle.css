@@ -43,8 +43,12 @@ p {
 
 img {
     width: 100%;
-}
 
+}
+.limit img{
+    width: auto;
+    height: 218px;
+}
 .price {
     color: #e4393c;
     font-weight: 600;
@@ -119,10 +123,12 @@ img {
 }
 
 .select a:hover {
-    color: #f60;
-    background-color: #f3edc2
+    color: #fff!important;
+    background-color: #f60;
 }
-
+.sort a{
+    color: #333;
+}
 .select .selected a {
     color: #F00;
     border: #999 solid 1px;
@@ -299,6 +305,7 @@ dl#select3 .dd-conent {
     position: absolute;
     bottom: 5px;
     right: 5px;
+    color: #999;
 }
 
 .price.fl {
@@ -520,10 +527,14 @@ dl#select3 .dd-conent {
         overflow: hidden;
         height: 36px;
         line-height: 18px;
+        margin-bottom: 18px;
+        color: #333;
     }
 
     .i-pic .price.fl {
         font-size: 16px;
+        margin-top: 20px;
+        font-size: 14px;
     }
 }
 
@@ -605,6 +616,7 @@ dl#select3 .dd-conent {
         height: 36px;
         font-size: 16px;
         margin: 10px 10px 0px 4px;
+        color: #333;
     }
 }
 

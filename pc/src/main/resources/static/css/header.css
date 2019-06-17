@@ -292,6 +292,7 @@ h2{
 .header ul li{
 	float: left;
 	margin-left: 60px;
+	cursor: pointer;
 }
 .header li a{
 	color: #333;
