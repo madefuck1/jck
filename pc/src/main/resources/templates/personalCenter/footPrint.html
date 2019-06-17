@@ -83,7 +83,7 @@
         var createTime=longFormatDate(v.createTime);
         var productName=v.productDto.productName;
         var productPrice=v.productStatisticsDto.productPrice;
-        var productImage=v.productDto.productImage;
+        var productImage=v.productDto.url;
         var isUpper=v.productDto.isUpper;
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
@@ -129,8 +129,8 @@
             +"<div class='clear'></div>"
             +"<div class='goods-num'>"
             +"<div class='match-recom'>"
-            +"<a href='#' class='match-recom-item'>找相似</a>"
-            +"<a href='#' class='match-recom-item'>找搭配</a>"
+            // +"<a href='#' class='match-recom-item'>找相似</a>"
+            // +"<a href='#' class='match-recom-item'>找搭配</a>"
             +"<i><em></em><span></span></i>"
             +"</div>"
             +"</div> </div></div></div>"
