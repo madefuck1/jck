@@ -4,8 +4,8 @@ import com.soufang.base.sms.SendCodeTool;
 import com.soufang.base.sms.SmsSendResponse;
 
 public class MessageUtil {
-    private static String account = "N341310_N9724353";
-    private static String password = "F32Xk9gMqC6de7";
+    private static String account = "N625423_N9724353";
+    private static String password = "WR1VndhAgl22b8";
     private static String smsSingleRequestServerUrl = "http://smsbj1.253.com/msg/send/json";
     private static String report = "true";
 
@@ -15,7 +15,7 @@ public class MessageUtil {
     }
 
     public static void main(String[] args){
-        SmsSendResponse smsSendResponse = setMessage("【可可西里】ceshi","18785081470");
+        SmsSendResponse smsSendResponse = setMessage("【进出口产品交易网】ceshi","13867556162");
         System.out.println(smsSendResponse.getTime());
         System.out.println(smsSendResponse.getMsgId());
         System.out.println(smsSendResponse.getCode());
