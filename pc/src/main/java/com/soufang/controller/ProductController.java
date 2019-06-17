@@ -347,7 +347,7 @@ public class ProductController extends BaseController {
                     stringBuilder = new StringBuilder();
                     if (tempList.size() != 0) {
                         for (AssortDto tempDto : tempList) {
-                            if (tempDto.getChildren() != null) {
+                            if (tempDto.getChildren() .size() != 0) {
                                 for (AssortDto children : tempDto.getChildren()) {
                                     stringBuilder.append("," + children.getAssortId());
                                 }
