@@ -16,6 +16,11 @@ public class CompanyController {
     @Autowired
     CompanyService companyService;
 
+    @RequestMapping(value = "getCompanyByName" , method = RequestMethod.POST)
+    CompanyDto getCompany(@RequestBody String name){
+        return companyService.selectByCompanyName(name);
+    }
+
     @RequestMapping(value = "companyInfo", method = RequestMethod.POST)
     CompanyDto companyInfo(@RequestBody Long id){
         return companyService.getByUserId(id);
