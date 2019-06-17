@@ -603,7 +603,6 @@ public class PersonalCenterController extends BaseController {
      * @param request
      * @return
      */
-    @MemberAccess
     @RequestMapping(value = "/toEnquiryManage", method = RequestMethod.GET)
     public String toEnquiryManage(HttpServletRequest request) {
         return "personalCenter/MyPurchase";
