@@ -60,9 +60,9 @@ public class EnquiryPurchaseController extends BaseController{
     @Value("${upload.enquiry}")
     private String uploadUrl;
 
-
+    @MemberAccess
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String create(String enquiryNumber,String isUpdate,ModelMap modelMap){
+    public String create(String enquiryNumber,String isUpdate,ModelMap modelMap,HttpServletRequest request){
         if(isUpdate==null || "".equals(isUpdate)){
             //新增
             String newEnquiryNumber = enquiryFeign.toGetEqNumber();
@@ -256,6 +256,7 @@ public class EnquiryPurchaseController extends BaseController{
      * @param modelMap
      * @return
      */
+    @MemberAccess
     @RequestMapping(value = "toPurchaseDetails", method = RequestMethod.GET)
     public String toPurchaseDetails(String enquiryProductId,ModelMap modelMap){
         modelMap.put("enquiryProductId",enquiryProductId);
@@ -286,7 +287,6 @@ public class EnquiryPurchaseController extends BaseController{
      * @return
      */
     @ResponseBody
-    @MemberAccess
     @RequestMapping(value = "getEnquiryList",method = RequestMethod.POST)
     public  PageHelp<EnquiryDto> getEnquiryList(HttpServletRequest request,@RequestBody EnquiryAddVo enquiryAddVo){
         EnquirySo enquirySo =new EnquirySo();
