@@ -93,7 +93,7 @@ public class MemberInterceptor extends HandlerInterceptorAdapter {
                         // 购物车数量
                         modelAndView.addObject("shopCarCount", shopCarFeign.getShopCarCountByUserId(userId));
                         // 消息数量 todo 获取消息数量
-                        modelAndView.addObject("pushInfoCount", 5);
+                        modelAndView.addObject("pushInfoCount", 0);
                     }
                 } else {
                     modelAndView.addObject("isLonIn", "N");

@@ -52,6 +52,9 @@ public class ProductManageServiceImpl implements ProductManageService {
             page = (page - 1) * dto.getLimit();
         }
         dto.setPage(page);
+        if(StringUtils.isBlank(dto.getProductName())){
+            dto.setProductName(null);
+        }
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();
         for (ProductDto productDto : products) {
@@ -312,7 +315,7 @@ public class ProductManageServiceImpl implements ProductManageService {
             productMapper.insert(product);
             BigDecimal price = BigDecimal.ZERO;
             for (ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()) {
-                if (price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) > 0) {
+                if (price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) < 0) {
                     price = productSpecDto.getSpecNumber();
                 }
                 ProductSpec productSpec = new ProductSpec();

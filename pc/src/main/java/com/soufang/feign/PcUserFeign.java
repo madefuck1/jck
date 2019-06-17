@@ -35,6 +35,9 @@ public interface PcUserFeign {
     @RequestMapping(value = "/core/company/getCompany",method = RequestMethod.POST)
     CompanyDto getCompany(@RequestBody Long userId);
 
+    @RequestMapping(value = "/core/company/getCompanyByName" , method = RequestMethod.POST)
+    CompanyDto getCompany(@RequestBody String name);
+
     @RequestMapping(value = "/core/company/updateCompany",method = RequestMethod.POST)
     Result updateCompany(@RequestBody CompanyDto companyDto);
 
