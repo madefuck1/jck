@@ -542,7 +542,7 @@ h2 {
 }
 
 .padd {
-    padding: 0px 50px 0 20px;
+    padding: 0px 30px;
 }
 
 .inquiry .title {
@@ -551,7 +551,10 @@ h2 {
 
 
 }
-
+.padd .three{
+    width: 90px;
+    text-align: right;
+}
 .title_left {
     color: #222;
     font-size: 20px;
@@ -568,9 +571,9 @@ h2 {
 }
 
 .cloumn {
-    height: 49px;
+    height: 50px;
     line-height: 49px;
-
+    cursor: pointer;
 
     color: #333;
     font-size: 16px;
@@ -595,12 +598,12 @@ h2 {
 }
 
 .cloumn .two {
-
+    text-align: center;
     width: 206px;
 }
 
 .cloumn .four {
-    margin-left: 190px;
+    margin-left: 226px;
 }
 
 .cloumn span {

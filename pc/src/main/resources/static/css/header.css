@@ -373,7 +373,9 @@ h2{
 	margin-right: 34px;
 }
 
-
+.list_oncloum1 .title:hover{
+	color:#F58022!important;
+}
 .list_oncloum1 .con{
 
 	border-bottom: 1px dashed #e6e6e6;
@@ -383,9 +385,12 @@ h2{
 }
 .list_oncloum1 .con span{
 	margin-right: 34px;
+
 }
 
-
+.list_oncloum1 .con span:hover{
+	color:#F58022!important;
+}
 .down{
 	width:1190px;
 	height:100px;
