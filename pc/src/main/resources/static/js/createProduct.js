@@ -39,7 +39,7 @@ var priceShowHtml = '<div class="attr1-cloum2 attr1-right">\n' +
     '        <p class="numberSection"></p>\n' +
     '    </div>\n' +
     '    <div class="am-u-sm-6">\n' +
-    '        <p>￥<span class="numberPrice" style="color:#F58022 "></span>/米</p>\n' +
+    '        <p>￥<span class="numberPrice" style="color:#F58022 "></span>/<span class="productUnit"></span></p>\n' +
     '    </div>\n' +
     '</div>';
 
@@ -83,7 +83,8 @@ function addPriceHtml(obj) {
         .replace("productSpecDtoList[0]", 'productSpecDtoList[' + priceNumber + ']');
     priceNumber++;
     $(obj).parent().find(".priceInput").append(html);
-    $(obj).parent().find(".priceShow").append(priceShowHtml);
+    var priceHtml = priceShowHtml.replace('<span class="productUnit">','<span class="productUnit">'+$("[name=productUnit]").val());
+    $(obj).parent().find(".priceShow").append(priceHtml);
 }
 
 

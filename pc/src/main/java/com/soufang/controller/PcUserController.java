@@ -100,7 +100,7 @@ public class PcUserController extends BaseController {
         if (StringUtils.isNotBlank(registerReqVo.getPhone())) {
             //发送手机验证码
             String phone = registerReqVo.getPhone();
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【可可西里】验证码：" + VerCode, phone);
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易】验证码：" + VerCode, phone);
             if (smsSendResponse.getCode().equals("0")) {
                 //短信发送后，将信息保存在数据库t_message
                 RedisUtils.setString(RedisConstants.verfity_code + phone, VerCode, code_time);

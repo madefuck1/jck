@@ -501,9 +501,14 @@
         <if test="productName != null and productName != '' ">
             and product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null">
-            and is_upper = #{isUpper}
-        </if>
+        <choose>
+            <when test="isUpper!=null">
+                and is_upper = #{isUpper}
+            </when>
+            <otherwise>
+                and is_upper = -1
+            </otherwise>
+        </choose>
         <if test="assortId != null and assortId != 0">
             and FIND_IN_SET(assort_id,#{assortId})
         </if>
@@ -672,9 +677,14 @@
         <if test="productName != null and productName != '' ">
             and tp.product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null and isUpper !=''">
-            and tp.is_upper = #{isUpper}
-        </if>
+        <choose>
+            <when test="isUpper!=null">
+                and tp.is_upper = #{isUpper}
+            </when>
+            <otherwise>
+                and tp.is_upper != -1
+            </otherwise>
+        </choose>
         <choose>
             <when test="startDate != null and endDate != null and startDate != '' and endDate != ''  ">
                 and tp.create_time between #{startDate} and #{endDate}
