@@ -506,7 +506,7 @@
                 and is_upper = #{isUpper}
             </when>
             <otherwise>
-                and is_upper = -1
+                and is_upper != -1
             </otherwise>
         </choose>
         <if test="assortId != null and assortId != 0">

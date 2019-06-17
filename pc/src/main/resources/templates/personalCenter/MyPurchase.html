@@ -251,7 +251,7 @@ function getPurchaseList(enquiryStatus){
 
 
 function liContent(v) {
-		var enquiryNumber=v.enquiryNumber;
+    var enquiryNumber=v.enquiryNumber;
 		var enquiryTitle=v.enquiryTitle;
 		var takeDate=v.strTakeDate;
 		var createTime=v.strCreateTime;
@@ -263,6 +263,7 @@ function liContent(v) {
     var proList="";
    for(var i = 0 ; i<listProductDto.length; i++){
        var productNumber=listProductDto[i].productNumber;
+       var assortName=listProductDto[i].assortName;
        var productUnit=listProductDto[i].productUnit;
        var productName=listProductDto[i].productName;
        var productImage=listProductDto[i].productImage;
@@ -278,7 +279,7 @@ function liContent(v) {
            +"<div class='item-basic-info'>"
            +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"'>"
            +"<p>"+productName+"</p>"
-           +"<p class='info-little'>颜色：12#川南玛瑙"
+           +"<p class='info-little'>类别："+assortName
            +"<br/>包装：裸装 </p>"
            +"</a>"
            +"</div>"

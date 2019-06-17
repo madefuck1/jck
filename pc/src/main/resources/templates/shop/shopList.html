@@ -1,35 +1,59 @@
-<@override name="title">
-首页
-</@override>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<@override name="css">
-<link rel="stylesheet" href="${contextPath}/css/home.css">
-<link rel="stylesheet" href="${contextPath}/css/header.css">
-<link rel="stylesheet" href="${contextPath}/css/search-shop.css">
-<link rel="stylesheet" href="${contextPath}/Pagination/css/jquery.pagination.css">
+<#assign staticPath=request.contextPath!/>
+<#assign contextPath=request.contextPath+"/static" />
+<head>
+    <#include "/common/includes/header.html"/>
+    <title>店铺搜索页面</title>
+    <!-- css样式 -->
+    <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/css/seastyle.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="${contextPath}/css/header.css">
+    <link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+    <link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+    <link rel="stylesheet" href="${contextPath}/css/search-shop.css">
 
-<style>
-    #contain, .list {
-        height: auto;
-    }
-</style>
-</@override>
+    <!-- 引入js -->
+    <script type="text/javascript" src="${contextPath}/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.contain.js"></script>
 
-<@override name="body">
-<#include "/common/includes/include.contain.html"/>
-<div id="search-shop">
-    <div class="shop-down" id="shopList">
+    <style>
+        #contain, .list {
+            height: auto;
+        }
+    </style>
+
+</head>
+
+<body style="background: #fff">
+<!--顶部导航条 -->
+<#include "/common/includes/include.top.html"/>
+
+<!--悬浮搜索框-->
+<#include "/common/includes/include.search.html"/>
+
+<!-- 行业分类、首页~~ -->
+<div class="search-shop" style="padding-top:10px">
+    <#include "/common/includes/include.contain.html"/>
+    <div class="shop-down am-g am-g-fixed" id="shopList">
     </div>
-    <!--分页 -->
-    <div id="pagination" style="text-align: center"></div>
+    <div id="pagination" style="text-align: center">
+    </div>
 </div>
-
-
-</@override>
-
-<@override name="js">
-<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
-<script type="text/javascript" src="${contextPath}/Pagination/js/jquery.pagination.js"></script>
+</div>
+<#include "/common/includes/include.footer.html"/>
+</div>
+<b class="line"></b>
+<!--菜单 -->
+<div class="theme-popover-mask"></div>
+</body>
 
 <script type="text/javascript">
     $(function () {
@@ -95,6 +119,4 @@
         window.open(url);
     }
 </script>
-</@override>
-
-<@extends name="/common/layout/base.html"/>
+</html>

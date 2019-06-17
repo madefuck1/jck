@@ -57,7 +57,7 @@ public class FootPrintServiceImpl implements FootPrintService {
             ProductDto productDto = new ProductDto();
             BeanUtils.copyProperties(fp.getProduct(),productDto);
             //更改图片地址
-            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage());
+//            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage());
             //商店信息
             ShopDto shopDto =new ShopDto();
             BeanUtils.copyProperties(fp.getShop(),shopDto);

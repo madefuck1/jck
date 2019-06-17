@@ -44,7 +44,11 @@ input{font-size:12px;font-size:100%;outline:none;line-height:normal;color:#444;}
 
 .theme-options dd{margin:10px 0px ;}
 
-
+.item-pic img{
+ width: 80px;
+ height: 80px;
+ background-size: cover;
+}
 @media only screen and (min-width:640px) 
  {
 .theme-span{height:0px;background:#fff ;}
