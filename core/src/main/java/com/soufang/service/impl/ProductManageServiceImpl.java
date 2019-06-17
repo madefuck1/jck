@@ -362,7 +362,10 @@ public class ProductManageServiceImpl implements ProductManageService {
         productDto.setPage(so.getPage());
         List<ProductDto> products = productMapper.getAssortProduct(productDto);
          for (ProductDto p:products) {
-            String [] img  = p.getProductImage().split(";");
+             String [] img = new String[10];
+             if(StringUtils.isNotBlank(p.getProductImage())){
+                 img = p.getProductImage().split(";");
+             }
              if(StringUtils.isNotBlank(p.getProductImage())){
                  p.setProductImage(PropertiesParam.file_pre+img[0]);
              }
@@ -378,7 +381,10 @@ public class ProductManageServiceImpl implements ProductManageService {
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         List<ProductDto> list = productMapper.getIndexFootProduct();
         for (ProductDto p:list) {
-            String [] img  = p.getProductImage().split(";");
+            String [] img = new String[10];
+            if(StringUtils.isNotBlank(p.getProductImage())){
+                img = p.getProductImage().split(";");
+            }
             if(StringUtils.isNotBlank(p.getProductImage())){
                 p.setProductImage(PropertiesParam.file_pre+img[0]);
             }
