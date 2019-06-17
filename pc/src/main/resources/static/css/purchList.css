@@ -45,7 +45,9 @@ background: #fff!important;
 	overflow: hidden;
 	margin-top: 10px;
 }
-
+.ptitle1 p{
+	cursor: pointer;
+}
 .ptitle{
 	width: 1190px;
 	height: 40px;
