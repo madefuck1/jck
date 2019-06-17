@@ -129,8 +129,14 @@
             <td>${enquiryDetail.strEnquiryStatus}</td>
             <td id="quote"><p>${enquiryDetail.enquiryProductDto[0].purchases[0].unitPrice}/${enquiryDetail.enquiryProductDto[0].productUnit}</p></td>
             <td>${enquiryDetail.enquiryRemark}</td>
+            <#if enquiryDetail.strEnquiryStatus != "采购成功">
             <td style="color: #40ADFB"><button id="myBT">修改价格</button>
             </td>
+            </#if>
+            <#if enquiryDetail.strEnquiryStatus == "采购成功">
+            <td >
+            </td>
+            </#if>
         </tr>
         </tbody>
     </table>
