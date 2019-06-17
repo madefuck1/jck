@@ -105,9 +105,9 @@ h2{
 .logo{
 	width: 20%;
 	height: auto;
-	background: #40ADFB;
+
 	float: left;
-	
+	margin-left: -268px;
 }
 .sear{
 	float: right;
