@@ -220,6 +220,9 @@
                         <#elseif order.orderShopStatus == 8>
                             <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="putAssess('${order.orderNumber}')">评价</button>
                         </#if>
+                        <#elseif order.orderType == 3>
+                        <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" >已完成</button>
+                        </#if>
                         <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">订单审核中</button>
                     </div>
                 </div>
