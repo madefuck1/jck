@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('#contain_title').mouseenter(function () {
+        $('.list_left').show();
+    })
     var obj = $(".list_down .list_left .meu");
     $(obj).each(function () {
         $(this).mouseenter(function () {
@@ -48,19 +51,19 @@ $(document).ready(function () {
             $(this).css("background", "#fff");
             $(this).find(".span1").css("color", "#333");
         });
-
         $(".list_down").mouseleave(function () {
             setTimeout(function () {
                 $(".list_right").hide();
             }, 1);
+            $('.list_left').hide();
         })
 
         $(".list_con").mouseleave(function () {
             setTimeout(function () {
                 $(".list_right").hide();
             }, 1);
+            $('.list_left').hide();
         })
-
     })
 });
 

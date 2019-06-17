@@ -52,6 +52,9 @@ public class ProductManageServiceImpl implements ProductManageService {
             page = (page - 1) * dto.getLimit();
         }
         dto.setPage(page);
+        if(StringUtils.isBlank(dto.getProductName())){
+            dto.setProductName(null);
+        }
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();
         for (ProductDto productDto : products) {
@@ -245,6 +248,12 @@ public class ProductManageServiceImpl implements ProductManageService {
         page = (page - 1) * productSo.getLimit();
         productSo.setPage(page);
         List<ProductDto> products = productMapper.getShopProductList(productSo);
+//        for (ProductDto p:products) {
+//            String [] img  = p.getProductImage().split(";");
+//            if(StringUtils.isNotBlank(p.getProductImage())){
+//                p.setProductImage(PropertiesParam.file_pre+img[0]);
+//            }
+//        }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
         int count = productMapper.getShopProductCount(productSo);
@@ -306,7 +315,7 @@ public class ProductManageServiceImpl implements ProductManageService {
             productMapper.insert(product);
             BigDecimal price = BigDecimal.ZERO;
             for (ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()) {
-                if (price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) > 0) {
+                if (price.subtract(productSpecDto.getSpecNumber()).compareTo(BigDecimal.ZERO) < 0) {
                     price = productSpecDto.getSpecNumber();
                 }
                 ProductSpec productSpec = new ProductSpec();
@@ -343,12 +352,9 @@ public class ProductManageServiceImpl implements ProductManageService {
 
         for (int i = 0; i < assortDtos.size(); i++){
             for (int j = 0; j < assortDtos.get(i).getChildren().size(); j ++){
-
-                    assortIds.append(assortDtos.get(i).getChildren().get(j).getAssortId()+",");
-
+                assortIds.append(assortDtos.get(i).getChildren().get(j).getAssortId()+",");
             }
         }
-
         so.setPage((so.getPage()-1)*so.getLimit());
         ProductDto productDto = new ProductDto();
         productDto.setAssortIds(String.valueOf(assortIds));
@@ -357,7 +363,9 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<ProductDto> products = productMapper.getAssortProduct(productDto);
          for (ProductDto p:products) {
             String [] img  = p.getProductImage().split(";");
-            p.setProductImage(PropertiesParam.file_pre+img[0]);
+             if(StringUtils.isNotBlank(p.getProductImage())){
+                 p.setProductImage(PropertiesParam.file_pre+img[0]);
+             }
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
@@ -371,7 +379,9 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<ProductDto> list = productMapper.getIndexFootProduct();
         for (ProductDto p:list) {
             String [] img  = p.getProductImage().split(";");
-            p.setProductImage(PropertiesParam.file_pre+img[0]);
+            if(StringUtils.isNotBlank(p.getProductImage())){
+                p.setProductImage(PropertiesParam.file_pre+img[0]);
+            }
         }
         pageHelp.setData(list);
         return pageHelp;

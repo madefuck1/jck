@@ -225,7 +225,7 @@
   </update>
 
   <update id="resetPass" parameterType="java.lang.Long">
-    update t_user set user_password = "111111"
+    update t_user set user_password = "96e79218965eb72c92a549dd5a330112"
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 

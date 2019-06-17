@@ -35,4 +35,13 @@ public enum ShopStatusEnum {
         this.message = message;
     }
 
+    public static  String getShopStatusByKey(int value){
+        for (ShopStatusEnum shopStatusEnum : ShopStatusEnum.values()) {
+            if(shopStatusEnum.value == value){
+                return shopStatusEnum.getMessage();
+            }
+        }
+        return  null ;
+    }
+
 }
