@@ -162,6 +162,16 @@ public class EnquiryController {
         return pageHelp;
     }
 
+    @RequestMapping(value = "getIndexEnquiryList",method = RequestMethod.POST)
+    PageHelp<EnquiryDto> getIndexEnquiryList(@RequestBody EnquirySo enquirySo){
+        PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
+        List<EnquiryDto> lists = enquiryService.getIndexEnquiryList(enquirySo);
+        int count =lists.size();
+        pageHelp.setData(lists);
+        pageHelp.setCount(count);
+        return pageHelp;
+    }
+
 
     /**
      * 获取我的报价列表

@@ -22,6 +22,10 @@ public interface EnquiryFeign {
     @RequestMapping(value = "core/enquiry/getList",method = RequestMethod.POST)
     PageHelp<EnquiryDto> getList(@RequestBody EnquirySo enquirySo);
 
+    //首页列表查询
+    @RequestMapping(value = "core/enquiry/getIndexEnquiryList",method = RequestMethod.POST)
+    PageHelp<EnquiryDto> getIndexEnquiryList(@RequestBody EnquirySo enquirySo);
+
     //我的报价列表
     @RequestMapping(value = "core/enquiry/getMyQuoteList",method = RequestMethod.POST)
     PageHelp<EnquiryDto> getMyQuoteList(@RequestBody EnquirySo enquirySo);

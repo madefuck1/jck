@@ -39,7 +39,7 @@ public class IndexController extends BaseController {
         EnquirySo enquirySo = new EnquirySo();
         enquirySo.setPage(1);
         enquirySo.setLimit(4);
-        PageHelp<EnquiryDto> pageHelp = enquiryFeign.getList(enquirySo);
+        PageHelp<EnquiryDto> pageHelp = enquiryFeign.getIndexEnquiryList(enquirySo);
         map.put("enquiryDtos",pageHelp.getData());
 
         PageHelp<ProductDto> productDtos = productFeign.getIndexFootProduct();
