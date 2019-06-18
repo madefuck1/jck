@@ -47,6 +47,8 @@
 
 	//查询列表
 	function  selFootPrint() {
+        $("#tableFoot").html("");
+        $("#oneWeekTable").html("");
 	    var str={page:1,limit:5};
         //查询产品列表方法
         $.ajax({
@@ -56,6 +58,7 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
+                console.log(data);
                if (data.data.length==0){
                    document.getElementById("noData").style.display="block";//显示
 				}else{
@@ -84,6 +87,8 @@
         var productName=v.productDto.productName;
         var productPrice=v.productStatisticsDto.productPrice;
         var productImage=v.productDto.url;
+        var productId=v.productDto.productId;
+        console.log(productId);
         var isUpper=v.productDto.isUpper;
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
@@ -107,7 +112,8 @@
             +"<div class='goods-box first-box'>"
             +"<div class='goods-pic'>"
             +"<div class='goods-pic-box'>"
-            +"<a class='goods-pic-link' target='_blank' href='#' title='"+productName+"'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")' title='"+productName+"'  class='goods-pic-link' target='_blank'>"
+
             +"<img src='"+productImage+"' class='goods-img'></a>"
             +"</div>"
             +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
@@ -143,10 +149,12 @@
     //动态加载数据
     function  liContent(i,v) {
        	var prodts= v.productDto;
+       	console.log(prodts);
 		var footprintId=v.footprintId;
 		var createTime=longFormatDate(v.createTime);
 		var productName=prodts.productName;
 		var productPrice=v.productStatisticsDto.productPrice;
+		var enquiryProductId=prodts.enquiryProductId;
 		var productImage=prodts.productImage;
 		var isUpper=prodts.isUpper;
 		if(isUpper==1){
@@ -173,7 +181,7 @@
             +"<div class='goods-box first-box'>"
            	+"<div class='goods-pic'>"
             +"<div class='goods-pic-box'>"
-            +"<a class='goods-pic-link' target='_blank' href='#' title='"+productName+"'>"
+            +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"' title='"+productName+"'  class='goods-pic-link' target='_blank'>"
             +"<img src='"+productImage+"' class='goods-img'></a>"
             +"</div>"
             +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
@@ -217,9 +225,14 @@
             success : function(data) {
                 //操作完成
                 alert(data.message);
+                window.location.href = "/personalCenter/toFootPrintManage";
             }
         });
 	}
+
+    function openProductDetail(value) {
+        window.location.href = "/product/toDetail?productId=" + value;
+    }
 
 	// 获取当前时间
 	function newTimes(){
