@@ -14,6 +14,7 @@ import com.soufang.feign.ProductFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,4 +62,10 @@ public class IndexController extends BaseController {
         return dto ;
     }
 
+
+    @RequestMapping(value = "index/getMessageDetail/{id}", method = RequestMethod.GET)
+    public String  getMessageDetail(@PathVariable long id ,ModelMap map){
+        map.put("id",id);
+        return "personalCenter/messageDetail";
+    }
 }

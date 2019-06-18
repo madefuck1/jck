@@ -67,7 +67,7 @@ public class SellerController extends BaseController {
 
     }
 
-    //查看个人信息
+    //卖家查看个人信息
     @MemberAccess
     @RequestMapping(value = "/toSellerCenter", method = RequestMethod.GET)
     public String toSellerCenter(HttpServletRequest request, ModelMap map) {
@@ -301,6 +301,17 @@ public class SellerController extends BaseController {
 
         return "sellerCenter/releaseProduct";
     }
+
+    //获取我的消息列表
+    @MemberAccess
+    @RequestMapping(value = "/toGetMyNews", method = RequestMethod.GET)
+    public String toGetMyNews(HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+
+        return "sellerCenter/myNews";
+    }
+
+
 
 
     // begin-------------------- 店铺装修 -----------------------

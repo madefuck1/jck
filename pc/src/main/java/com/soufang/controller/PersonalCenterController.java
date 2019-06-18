@@ -781,4 +781,13 @@ public class PersonalCenterController extends BaseController {
         Result result = pcUserFeign.addSuggest(suggestDto);
         return result;
     }
+
+
+    //首页消息列表
+   /* @MemberAccess
+    @RequestMapping(value = "getIndexMessage", method = RequestMethod.POST)
+    public String getIndexMessage() {
+
+        return "personalCenter/messageDetail";
+    }*/
 }

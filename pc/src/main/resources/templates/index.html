@@ -30,21 +30,21 @@
     <div class="inquiry inquiry2">
         <div class="padd title">
             <div class="title_left">消息</div>
-            <div class="title_right">查看全部</div>
+            <!--<div class="title_right">查看全部</div>-->
         </div>
-        <div class="padd cloumn">
+        <div class="padd cloumn" onclick="getMessageDetail(1)">
             <div class="one">极限敏感词的发布要求</div>
             <div class="four">2019-5-17</div>
         </div>
-        <div class="padd cloumn">
+        <div class="padd cloumn" onclick="getMessageDetail(2)">
             <div class="one">发布产品为什么审核不通过</div>
             <div class="four">2019-4-01</div>
         </div>
-        <div class="padd cloumn">
+        <div class="padd cloumn" onclick="getMessageDetail(3)">
             <div class="one">重复信息处理规则</div>
             <div class="four">2019-3-20</div>
         </div>
-        <div class="padd cloumn border">
+        <div class="padd cloumn border" onclick="getMessageDetail(4)">
             <div class="one">批量添加产品操作指南</div>
             <div class="four">2019-3-15</div>
         </div>
@@ -351,6 +351,10 @@
     //查看全部询盘
     function getAllEnquiry(page,limit) {
         window.location.href = '/enquiry/toEnquiryList';
+    }
+
+    function getMessageDetail(id) {
+        window.location.href = '/index/getMessageDetail/'+id;
     }
 
 </script>
