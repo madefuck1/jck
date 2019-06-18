@@ -25,7 +25,6 @@ public class StoreConstructionDto {
 
     private List<StoreExclusiveAssortDto> storeExclusiveAssortDtoList;
 
-
     public String getStoreLogoUrl() {
         return storeLogo == null ? "" : PropertiesParam.file_pre + storeLogo;
     }

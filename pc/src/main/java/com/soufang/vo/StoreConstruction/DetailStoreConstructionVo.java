@@ -16,4 +16,6 @@ public class DetailStoreConstructionVo extends BaseVo {
     private ShopDto shopDto;
 
     private CompanyDto companyDto;
+
+    private Boolean isCollection;
 }

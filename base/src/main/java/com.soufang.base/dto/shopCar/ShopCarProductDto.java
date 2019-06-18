@@ -6,6 +6,7 @@ import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.product.ProductStatisticsDto;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,7 +36,12 @@ public class ShopCarProductDto {
     private String productUrl;
 
     public String getProductUrl() {
-        return PropertiesParam.file_pre + productImage;
+        if(StringUtils.isBlank(productImage)){
+            return PropertiesParam.file_pre + "/uploadProduct/product.jpg";
+        }else {
+            String[] images = productImage.split(";");
+            return PropertiesParam.file_pre + images[0];
+        }
     }
 
     private BigDecimal productPrice;
