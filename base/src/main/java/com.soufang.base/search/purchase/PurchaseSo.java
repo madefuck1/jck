@@ -30,6 +30,7 @@ public class PurchaseSo {
     private long shopId;
     private String enquiryNumber;
     private String purchaseNumber;
+    private String  enquiryProductId;
     private Integer enquiryStatus;
     private Integer offerStatus;
     private int unitPrice;

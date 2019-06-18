@@ -63,8 +63,14 @@ public class EnquiryServiceImpl implements EnquiryService {
             for (Purchase purchase : enquiryProduct.getPurchases()) {
                 PurchaseDto purchaseDto = new PurchaseDto();
                 BeanUtils.copyProperties(purchase, purchaseDto);
+                ShopDto shopDto = new ShopDto();
+                Shop shop= purchase.getShop();
+                BeanUtils.copyProperties(shop, shopDto);
+                purchaseDto.setShopDto(shopDto);
+                purchaseDto.setShopName(shop.getShopName());
                 purchaseDtos.add(purchaseDto);
             }
+            enquiryProductDto.setPurchases(purchaseDtos);
             enquiryProductDtos.add(enquiryProductDto);
             enquiryDto.setEnquiryProductDto(enquiryProductDtos);
         }
@@ -164,7 +170,14 @@ public class EnquiryServiceImpl implements EnquiryService {
      */
     @Override
     public  int  enquiryTableCount(EnquirySo EnquirySo){
-        return enquiryMapper.enquiryTableCount(EnquirySo);
+        List<Enquiry> list = enquiryMapper.enquiryTableCount(EnquirySo);
+        int eplength=0;
+        for (int i = 0; i < list.size(); i++) {
+            Enquiry enquiry = list.get(i);
+            List<EnquiryProduct> enquiryProduct = enquiry.getEnquiryProducts();
+            eplength+=enquiryProduct.size();
+        }
+        return eplength;
     }
 
     @Override

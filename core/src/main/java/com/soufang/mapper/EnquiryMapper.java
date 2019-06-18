@@ -82,7 +82,7 @@ public interface EnquiryMapper {
     //查询我的报价
     List<Enquiry> getMyPurchaseList(PurchaseSo purchaseSo);
 
-    int  enquiryTableCount(EnquirySo EnquirySo);
+    List<Enquiry>  enquiryTableCount(EnquirySo EnquirySo);
 
     Long selUserIdByEnquiryNumber(String enquiryNumber);
 }

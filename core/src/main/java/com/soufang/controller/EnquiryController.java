@@ -156,7 +156,8 @@ public class EnquiryController {
     public PageHelp<EnquiryDto> getList(@RequestBody EnquirySo enquirySo) {
         PageHelp<EnquiryDto> pageHelp = new PageHelp<>();
         List<EnquiryDto> lists = enquiryService.getList(enquirySo);
-        int count =lists.size();
+        //总条数
+        int count=enquiryService.enquiryTableCount(enquirySo);
         pageHelp.setData(lists);
         pageHelp.setCount(count);
         return pageHelp;
@@ -293,7 +294,7 @@ public class EnquiryController {
      * @return
      */
     @RequestMapping(value = "selUserIdByEnquiryNumber",method = RequestMethod.POST)
-    public Long selUserIdByEnquiryNumber(String enquiryNumber){
+    public Long selUserIdByEnquiryNumber(@RequestBody String enquiryNumber){
         return  enquiryService.selUserIdByEnquiryNumber(enquiryNumber);
     }
 

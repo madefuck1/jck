@@ -227,6 +227,10 @@
   <update id="acceptPurchase" parameterType="com.soufang.base.search.purchase.PurchaseSo" >
     update t_purchase set offer_status=#{offerStatus} WHERE purchase_number=#{purchaseNumber}
   </update>
+<!--拒绝所有报价-->
+  <update id="refusePurchase" parameterType="com.soufang.base.search.purchase.PurchaseSo" >
+    UPDATE t_purchase  set offer_status=#{offerStatus} where enquiry_product_id=#{enquiryProductId} and offer_status=1
+  </update>
 
 
 </mapper>

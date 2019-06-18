@@ -35,5 +35,7 @@ public interface PurchaseMapper {
 
     int acceptPurchase(PurchaseSo purchaseSo);
 
+    int refusePurchase(PurchaseSo purchaseSo);
+
 
 }

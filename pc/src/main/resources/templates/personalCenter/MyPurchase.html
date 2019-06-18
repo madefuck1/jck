@@ -4,7 +4,7 @@
 
 <@override name="css">
 <link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
 </@override>
 <@override name="body">
 		<div class="center">
@@ -12,21 +12,18 @@
 									<div class="main-wrap">
 
 										<div class="user-order">
-
 						<!--标题 -->
 											<div class="am-cf am-padding">
 												<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的求购</strong></div>
 											</div>
 											<hr/>
-
 												<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
-
-													<ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs">
-														<li class="am-active"><a href="javascript:void(0)"onclick="getPurchaseList('')" >全部求购</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(1)">审核中</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(3)">求购中</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(4)">已报价</a></li>
-														<li><a href="javascript:void(0)" onclick="getPurchaseList(5)">采购成功</a></li>
+													<ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs listType">
+														<li class="am-active"><a href="javascript:void(0)"onclick="getPurchaseList(1,'')" >全部求购</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,1)">审核中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,3)">求购中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,4)">已报价</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,5)">采购成功</a></li>
 													</ul>
 
 													<div class="am-tabs-bd">
@@ -57,131 +54,9 @@
 															</div>
 
 															<div class="order-main">
-																<div class="order-list" id="order-list1">
+																<div class="order-list" id="order-list">
 																</div>
-															</div>
-														</div>
-														<div class="am-tab-panel am-fade" id="tab2">
-
-															<div class="order-top">
-																<div class="th th-item">
-																	<td class="td-inner">商品</td>
-																</div>
-																<div class="th th-price">
-																	<td class="td-inner">单价</td>
-																</div>
-																<div class="th th-number">
-																	<td class="td-inner">数量</td>
-																</div>
-																<div class="th th-operation">
-																	<td class="td-inner">商品操作</td>
-																</div>
-																<div class="th th-amount">
-																	<td class="td-inner">合计</td>
-																</div>
-																<div class="th th-status">
-																	<td class="td-inner">交易状态</td>
-																</div>
-																<div class="th th-change">
-																	<td class="td-inner">交易操作</td>
-																</div>
-															</div>
-
-															<div class="order-main">
-																<div class="order-list" id="order-list2">
-																</div>
-															</div>
-														</div>
-														<div class="am-tab-panel am-fade" id="tab3">
-															<div class="order-top">
-																<div class="th th-item">
-																	<td class="td-inner">商品</td>
-																</div>
-																<div class="th th-price">
-																	<td class="td-inner">单价</td>
-																</div>
-																<div class="th th-number">
-																	<td class="td-inner">数量</td>
-																</div>
-																<div class="th th-operation">
-																	<td class="td-inner">商品操作</td>
-																</div>
-																<div class="th th-amount">
-																	<td class="td-inner">合计</td>
-																</div>
-																<div class="th th-status">
-																	<td class="td-inner">交易状态</td>
-																</div>
-																<div class="th th-change">
-																	<td class="td-inner">交易操作</td>
-																</div>
-															</div>
-
-															<div class="order-main">
-																<div class="order-list" id="order-list3">
-																</div>
-															</div>
-														</div>
-														<div class="am-tab-panel am-fade" id="tab4">
-															<div class="order-top">
-																<div class="th th-item">
-																	<td class="td-inner">商品</td>
-																</div>
-																<div class="th th-price">
-																	<td class="td-inner">单价</td>
-																</div>
-																<div class="th th-number">
-																	<td class="td-inner">数量</td>
-																</div>
-																<div class="th th-operation">
-																	<td class="td-inner">商品操作</td>
-																</div>
-																<div class="th th-amount">
-																	<td class="td-inner">合计</td>
-																</div>
-																<div class="th th-status">
-																	<td class="td-inner">交易状态</td>
-																</div>
-																<div class="th th-change">
-																	<td class="td-inner">交易操作</td>
-																</div>
-															</div>
-
-															<div class="order-main">
-																<div class="order-list" id="order-list4">
-																</div>
-															</div>
-														</div>
-
-														<div class="am-tab-panel am-fade" id="tab5">
-															<div class="order-top">
-																<div class="th th-item">
-																	<td class="td-inner">商品</td>
-																</div>
-																<div class="th th-price">
-																	<td class="td-inner">单价</td>
-																</div>
-																<div class="th th-number">
-																	<td class="td-inner">数量</td>
-																</div>
-																<div class="th th-operation">
-																	<td class="td-inner">商品操作</td>
-																</div>
-																<div class="th th-amount">
-																	<td class="td-inner">合计</td>
-																</div>
-																<div class="th th-status">
-																	<td class="td-inner">交易状态</td>
-																</div>
-																<div class="th th-change">
-																	<td class="td-inner">交易操作</td>
-																</div>
-															</div>
-
-															<div class="order-main">
-																<div class="order-list" id="order-list5">
-																	<!--不同状态的订单	-->
-																</div>
+															<div id="pagination" style="text-align: center;padding-top: 12px"></div>
 															</div>
 														</div>
 													</div>
@@ -197,30 +72,31 @@
 
 </@override>
 <@override name="js">
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
 <script>
+    $(".listType li a").bind("click",function () {
+        $(this).parents(".listType").find("li").removeClass("am-active");
+        $(this).parent().addClass("am-active");
+    })
+
+    // pagination 分页插件
+    function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+        getPurchaseList(index + 1, "");
+    }
 <!--默认加载-->
 $(function(){
-	getPurchaseList("");
+	getPurchaseList(1,"");
 });
 <!--获取求购数据列表-->
-function getPurchaseList(enquiryStatus){
+function getPurchaseList(page,enquiryStatus){
+    var count;//总的数目
+    var allPage;//总页数
+    var pageData = 5;//每页显示的条数
     	var enquiryStatus=enquiryStatus;
-		if(enquiryStatus==""){
-            $("#order-list1").html("");
-		}else if(enquiryStatus==1){
-			$("#order-list2").html("");
-		}else if (enquiryStatus=3){
-			$("#order-list3").html("");
-		}else if (enquiryStatus==4){
-			$("#order-list4").html("");
-		}else if (enquiryStatus==5){
-			$("#order-list5").html("");
-		}
-
 		<!--求购状态-->
 		var str={enquiryStatus:enquiryStatus,
-                page:1,
-                limit:10
+                page:page,
+                limit:pageData
 		};
 		$.ajax({
 				url : "getEnquiryList",
@@ -229,20 +105,24 @@ function getPurchaseList(enquiryStatus){
 				contentType: 'application/json; charset=UTF-8',
 				dataType : "json",
 				success : function(data) {
-                    var whatever="";
-					$.each(data.data, function (i, v) {
-                         whatever = liContent(v);
-                    if(enquiryStatus==""){
-                        $("#order-list1").append(whatever);
-                    }else if(enquiryStatus==1){
-                        $("#order-list2").append(whatever);
-                    }else if (enquiryStatus=2){
-                        $("#order-list3").append(whatever);
-                    }else if (enquiryStatus==4){
-                        $("#order-list4").append(whatever);
-                    }else if (enquiryStatus==5){
-                        $("#order-list5").append(whatever);
+                    count=data.count;
+                    allPage = (data.count % pageData == 0) ? (data.count / pageData) : ((parseInt(data.count / pageData)) + 1);
+                    if (allPage == 0) {
+                        allPage = 1;
                     }
+                    $("#order-list").html("");
+					$.each(data.data, function (i, v) {
+                      var  whatever = liContent(v);
+                      $("#order-list").append(whatever);
+                    });
+                    $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                        current_page: page - 1,                  //当前页码
+                        callback: PageCallback,
+                        prev_text: '上一页',
+                        next_text: '下一页',
+                        items_per_page: 5,             //每页显示最大条数
+                        num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                        num_edge_entries: 1        //两侧显示的首尾分页的条目数
                     });
 				}
 		});

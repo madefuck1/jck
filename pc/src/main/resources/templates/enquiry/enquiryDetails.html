@@ -103,7 +103,7 @@
 		<tbody>
 		<tr>
 			<td id="nowTime" ></td>
-			<td><input type="text" style="border: 1px solid #e6e6e6;padding: 5px 2px; width: 70px;" id="unitPrice">&nbsp;元</td>
+			<td><input type="text" style="border: 1px solid #e6e6e6;padding: 5px 2px; width: 70px;" id="unitPrice" name="unitPrice">&nbsp;元</td>
 			<td id="strEndTime"></td>
 			<td>30天</td>
 			<td>
@@ -179,12 +179,22 @@
         return currentdate;
     }
 
+    function checkForm(){
+        if ($("input[name=unitPrice]").val() == '') {
+            return "报价价格不能为空";
+        }
+    }
+
     //报价
     function PurchaseNow(obj) {
         var enquiryNumber=$("#enquiryNumber").val();
         //通过查询SHOP信息判断是否存在商铺信息-判断不是商家则不能报价
 		//如果是自己发布的不能报价
 		var str = {enquiryNumber:enquiryNumber};
+        var message = checkForm();
+        if (message != null) {
+            alert(message);
+        }
         $.ajax({
             url: "isOrNoShopUser",
 			data:JSON.stringify(str),

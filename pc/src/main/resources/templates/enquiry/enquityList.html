@@ -4,6 +4,7 @@
 <@override name="css">
 	<link rel="stylesheet" href="${contextPath}/css/purchList.css">
 	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
+<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
 </@override>
 
 <@override name="body">
@@ -26,7 +27,7 @@
 			</div>
 			<li style="width: 50px;">
 			<a href="#" style="color: #333;"  id="toggle" >+展开</a>
-		</li>
+			</li>
 		</ul>
 		<div class="plist-down">
 			<div class="ptitle">
@@ -39,8 +40,8 @@
 				</p>
 				<p>
 					<span>发布日期</span>
-					<a href="javascript:void(0);" onclick="tablieList(0,'',0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;"></a>
-					<a href="javascript:void(0);" onclick="tablieList(0,'',1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;"></a>
+					<a href="javascript:void(0);" onclick="tablieList(1,0,'',0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;"></a>
+					<a href="javascript:void(0);" onclick="tablieList(1,0,'',1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;"></a>
 				</p>
 			</div>
 			<div class="ptitle1">
@@ -57,7 +58,9 @@
 					<tbody id="showMoreAssorts">
 					</tbody>
 				</table>
-
+				<div id="pageManage">
+					<div id="pagination" style="text-align: center"></div>
+				</div>
 			</div>
 
 		</div>
@@ -65,15 +68,14 @@
 </div>
 </@override>
 <@override name="js">
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+<script>// pagination 分页插件
+function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+    tablieList(index + 1, 0,"",1);
+}
 
-<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
-<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
-<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
-
-<script TYPE="application/javascript">
 	$(function(){
-	    //通过查询
-        tablieList(0,"","");
+        tablieList(1,0,"",1);
         //默认加载数据--产品分类	getIdName
         $.ajax({
             url : "getIdName",
@@ -98,31 +100,30 @@
         });
 	});
 	//截止时间查询
-	function endTimeSort(orderType) {
-	    var orderType=orderType;
-	    if (orderType ==0){
-            orderType="asc";
-		}else{
-            orderType="desc";
-		}
+	function endTimeSort(index,orderType) {
 	    var assortId=0;
 	    var endTimeSort="endTimeSort";
-        tablieList(assortId,endTimeSort,orderType);
+        tablieList(1,assortId,endTimeSort,orderType);
     }
 
-	function tablieList(assortId,endTimeSort,orderType) {
+    //数据加载
+	function tablieList(page,assortId,endTimeSort,orderType) {
+        $("#showMoreAssorts").html("");
+        var count;//总的数目
+        var allPage;//总页数
+        var pageData = 5;//每页显示的条数
         var orderType=orderType;
-            if (orderType ==0){
-                orderType="asc";
-            }else if (orderType==1){
-                orderType="desc";
-            }
-        var str={page:1,limit:10,
-					assortId:assortId,
-					enquiryStatus:3,
-            		endTimeSort:endTimeSort,
-            		orderType:orderType
-				};
+        if (orderType ==0){
+            orderType="asc";
+        }else if (orderType==1){
+            orderType="desc";
+        }
+        var str={page:page,limit:pageData,
+            assortId:assortId,
+            enquiryStatus:3,
+            endTimeSort:endTimeSort,
+            orderType:orderType
+        };
         //默认加载数据 --询盘列表
         $.ajax({
             url : "getEnquiryList",
@@ -131,8 +132,8 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
+                count=data.count;
                 var whatever="";
-              	 $("#showMoreAssorts").html("");
                 if(data.count==0){
                     var noData=$("<tr><th colspan='5'>暂无相关数据</th></tr>");
                     //$("#showMoreAssorts").html("暂无相关数据");
@@ -140,49 +141,66 @@
                     $("#purchaseLength").html(0);
                 }else {
                     $("#purchaseLength").html(data.data.length);
-                $.each(data.data, function (i, v) {
-					whatever=liContent(v);
-                    $("#showMoreAssorts").append(whatever);
-                });
+                    $.each(data.data, function (i, v) {
+                        whatever=liContent(v);
+                        $("#showMoreAssorts").append(whatever);
+                    });
                 }
+                $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                    current_page: page-1,                  //当前页码
+                    callback: PageCallback,
+                    prev_text: '上一页',
+                    next_text: '下一页',
+                    items_per_page: 5,             //每页显示最大条数
+                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                });
             }
         });
     }
 
-	//分类展示
-	function liContentAssort(v) {
-		var li=$(
-            "<li><a href='javascript:void(0);' onclick='tablieList("+v.assortId+")'>"+v.assortName+"</a> </li>"
-		);
-		return li;
+//分类展示
+function liContentAssort(v) {
+    var li=$(
+        "<li><a href='javascript:void(0);' onclick='tablieList(\""+1+"\",\""+v.assortId+"\",\""+''+"\",\""+1+"\")' >"+v.assortName+"</a> </li>"
+    );
+    return li;
+}
+
+//列表展示
+function liContent(v){
+    var enquiryTitle=v.enquiryTitle;
+    var createTime=v.strCreateTime;
+    var enquiryNumber=v.enquiryNumber;
+    //报价截至日期
+    var endTime=v.strEndTime;
+    var date1 = new Date();
+    var date2 = new Date(endTime);
+    var date = date2.getTime()-date1.getTime();
+    var distanceDate = Math.floor(date/(24*3600*1000));
+    var productDto=v.enquiryProductDto;
+    for(var i = 0 ; i<productDto.length; i++){
+        var productNumber=productDto[i].productNumber;
+        var productName=productDto[i].productName;
+        var productUnit=productDto[i].productUnit;
+        var enquiryProductId=productDto[i].enquiryProductId;
+        var purchaseLength=0;
+        if (productDto[i].purchases[i].purchaseNumber!=undefined){
+            purchaseLength=productDto[i].purchases.length;
+        }
+    }
+    var shopDto=v.shopDto;
+    var shopName=shopDto.shopName;
+    if (shopName==null||shopName==""){
+        shopName="无采购信息";
     }
 
-	//列表展示
-	function liContent(v){
-        var enquiryTitle=v.enquiryTitle;
-        var createTime=v.strCreateTime;
-        var enquiryNumber=v.enquiryNumber;
-        //报价截至日期
-        var endTime=v.strEndTime;
-        var date1 = new Date();
-        var date2 = new Date(endTime);
-       	var date = date2.getTime()-date1.getTime();
-        var distanceDate = Math.floor(date/(24*3600*1000));
-        var productDto=v.enquiryProductDto;
-        var productNumber=productDto[0].productNumber;
-        var productUnit=productDto[0].productUnit;
-        var enquiryProductId=productDto[0].enquiryProductId;
-        var purchaseLength=0;
-        if (productDto[0].purchases[0].purchaseNumber!=undefined){
-            purchaseLength=productDto[0].purchases.length;
-		}
-		var shopDto=v.shopDto;
-		var shopName=shopDto.shopName;
 
-		var li=$("<tr>"
-            +"<td>"
-            +"<p style='color:#0066cc'>"+enquiryTitle+"</p>"
-            +"<p>发布日期："+createTime+"</p>"
+
+    var li=$("<tr>"
+        +"<td>"
+        +"<p style='color:#0066cc'>"+productName+"</p>"
+        +"<p>发布日期："+createTime+"</p>"
         +"</td>"
         +"<td>"+productNumber+productUnit
         +"</td>"
@@ -195,7 +213,7 @@
         +"</td>"
         +"<td>"
         +"<button class='am-btn am-btn-danger am-radius' onclick='toPurchase(\""+enquiryProductId+"\")'>立即报价</button>"
-            +"<p >已有<span style='color: #F58022'>"+purchaseLength+"</span>人报价</p>"
+        +"<p >已有<span style='color: #F58022'>"+purchaseLength+"</span>人报价</p>"
         +"</td>"
         +"</tr>"
 

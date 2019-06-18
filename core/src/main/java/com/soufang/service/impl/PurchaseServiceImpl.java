@@ -161,8 +161,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         if(purchaseSo.getOfferStatus()==2){
             enquirySo.setEnquiryStatus(4);
             enquirySo.setEnquiryNumber(purchaseSo.getEnquiryNumber());
-            //调用修改询盘状态
+            //调用修改询盘状态-已报价
             enquiryMapper.delEnquiry(enquirySo);
+            //修改其他所有报价为拒绝
+            purchaseMapper.refusePurchase(purchaseSo);
         }
      return purchaseMapper.acceptPurchase(purchaseSo);
     }

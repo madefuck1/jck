@@ -77,6 +77,60 @@
       </collection>
     </collection>
   </resultMap>
+
+
+  <resultMap id="DetailResultMap" type="com.soufang.model.Enquiry" >
+    <id column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="shopName" property="shopName" jdbcType="VARCHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="enquiry_title" property="enquiryTitle" jdbcType="VARCHAR" />
+    <result column="enquiry_type" property="enquiryType" jdbcType="INTEGER" />
+    <result column="enquiry_status" property="enquiryStatus" jdbcType="INTEGER" />
+    <result column="take_date" property="takeDate" jdbcType="TIMESTAMP" />
+    <result column="take_address" property="takeAddress" jdbcType="VARCHAR" />
+    <result column="take_name" property="takeName" jdbcType="VARCHAR" />
+    <result column="take_phone" property="takePhone" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enquiry_remark" property="enquiryRemark" jdbcType="VARCHAR" />
+    <collection property="enquiryProducts" ofType="com.soufang.model.EnquiryProduct">
+      <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+      <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+      <result column="product_name" property="productName" jdbcType="VARCHAR" />
+      <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+      <result column="assort_name" property="assortName" jdbcType="VARCHAR" />
+      <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+      <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+      <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+      <collection property="purchases" ofType="com.soufang.model.Purchase">
+        <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+        <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+        <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+        <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+        <collection property="shop" ofType="com.soufang.model.Shop">
+        <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+      </collection>
+      </collection>
+      <collection property="assort" ofType="com.soufang.model.Assort">
+        <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="assort_level" property="assortLevel" jdbcType="INTEGER"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+      </collection>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     enquiry_number, user_id,enquiry_title, enquiry_type, enquiry_status, take_date,
     take_address, take_name, take_phone, end_time, create_time, enquiry_remark
@@ -85,11 +139,12 @@
     enquiry_number, user_id,GetUserNameByUserId(user_id) as loginName,GetShopNameByUser_Id(user_id) AS shopName,enquiry_title, enquiry_type, enquiry_status, take_date,
     take_address, take_name, take_phone, end_time, create_time, enquiry_remark
   </sql>
-  <select id="getByEnqNum" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo" >
+  <select id="getByEnqNum" resultMap="DetailResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo" >
     select * from t_enquiry te
     left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
     LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
     LEFT JOIN t_assort ta on ta.assort_id=tep.product_assort
+    LEFT JOIN t_shop ts ON ts.shop_id=tp.shop_id
     where 1=1
     <if test="enquiryNumber != null and enquiryNumber != ''">
       and te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
@@ -97,9 +152,26 @@
     <if test="enquiryProductId != null and enquiryProductId != ''">
       and tep.enquiry_product_id=#{enquiryProductId}
     </if>
-
   </select>
 
+  <select id="enquiryTableCount" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo">
+      select
+          *
+        from t_enquiry te
+    LEFT JOIN t_enquiry_product tep on te.enquiry_number=tep.enquiry_number
+    LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
+         where
+             te.enquiry_status!=0 and te.end_time > (select now())
+        <if test="userId != null and userId !=''">
+          AND  te.user_id =#{userId}
+        </if>
+    <if test="assortId != 0 and assortId != 0">
+      and ta.assort_id=#{assortId}
+    </if>
+    <if test="enquiryStatus != null and enquiryStatus != ''">
+      and te.enquiry_status = #{enquiryStatus}
+    </if>
+  </select>
   <!--查询询盘列表数据/没有存贮增加询盘时用户的商铺信息-->
   <!--对报价截止日期查询做判断-需要传两个值-1.endTime参数是什么查询-2.orderType判断是什么排序方式-->
   <!--根据orderType参数排序-1.有值则是动态倒正查询-2.没值则是所有公用查询方式-->

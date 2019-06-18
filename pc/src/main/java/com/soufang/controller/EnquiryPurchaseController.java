@@ -241,6 +241,7 @@ public class EnquiryPurchaseController extends BaseController{
         purchaseSo.setOfferStatus(purchseUseRefusedVo.getOfferStatus());
         purchaseSo.setPurchaseNumber(purchseUseRefusedVo.getPurchaseNumber());
         purchaseSo.setEnquiryNumber(purchseUseRefusedVo.getEnquiryNumber());
+        purchaseSo.setEnquiryProductId(purchseUseRefusedVo.getEnquiryProductId());
         int i = purchaseFeign.acceptPurchasePc(purchaseSo);
         if(i>0){
             result.setMessage("报价成功");

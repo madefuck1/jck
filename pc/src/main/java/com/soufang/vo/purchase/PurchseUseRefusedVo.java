@@ -26,6 +26,7 @@ import lombok.Setter;
 public class PurchseUseRefusedVo {
 
     private String purchaseNumber;
+    private String enquiryProductId;
 
     private int offerStatus;
 

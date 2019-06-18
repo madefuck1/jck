@@ -42,6 +42,10 @@ public class PurchaseDto {
         this.shopDto = shopDto;
     }
 
+    public String getShopName() {
+        return shopName;
+    }
+
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }
@@ -120,10 +124,6 @@ public class PurchaseDto {
 
     public void setOfferTime(Date offerTime) {
         this.offerTime = offerTime;
-    }
-
-    public String getShopName() {
-        return shopName;
     }
 
     public Long getUserId() {
