@@ -381,55 +381,44 @@
     </div>
     <div class="clear"></div>
     <div class="theme-popover-mask"></div>
-    <div class="theme-popover">
+    <div class="theme-popover" style="height:450px">
 
         <!--标题 -->
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong></div>
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg title">新增地址</strong></div>
         </div>
         <hr/>
         <div class="am-u-md-12">
             <form class="am-form am-form-horizontal">
                 <div class="am-form-group">
-                    <label for="user-name" class="am-form-label">收货人</label>
+                    <label  class="am-form-label">收货人</label>
                     <div class="am-form-content">
-                        <input type="text" id="user-name" placeholder="收货人">
+                        <input type="hidden" id="addressId" value="">
+                        <input type="text" id="linkName" placeholder="收货人">
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label for="user-phone" class="am-form-label">手机号码</label>
+                    <label class="am-form-label">手机号码</label>
                     <div class="am-form-content">
-                        <input id="user-phone" placeholder="手机号必填" type="email">
+                        <input type="text" id="linkPhone" placeholder="手机号必填" >
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label for="user-phone" class="am-form-label">所在地</label>
-                    <div class="am-form-content address">
-                        <select data-am-selected>
-                            <option value="a">浙江省</option>
-                            <option value="b">湖北省</option>
-                        </select>
-                        <select data-am-selected>
-                            <option value="a">温州市</option>
-                            <option value="b">武汉市</option>
-                        </select>
-                        <select data-am-selected>
-                            <option value="a">瑞安区</option>
-                            <option value="b">洪山区</option>
-                        </select>
+                    <label class="am-form-label">国家</label>
+                    <div class="am-form-content">
+                        <input type="text" class="" id="country" placeholder="输入国家">
                     </div>
                 </div>
-
                 <div class="am-form-group">
-                    <label for="user-intro" class="am-form-label">详细地址</label>
+                    <label class="am-form-label">详细地址</label>
                     <div class="am-form-content">
-                        <textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+                        <textarea class="" rows="3" id="detailAddress" placeholder="输入详细地址"></textarea>
                         <small>100字以内写出你的详细地址...</small>
                     </div>
                 </div>
                 <div class="am-form-group theme-poptit">
                     <div class="am-u-sm-9 am-u-sm-push-3">
-                        <div class="am-btn am-btn-danger">保存</div>
+                        <div class="am-btn am-btn-danger" onclick="submitAddress()">保存</div>
                         <div class="am-btn am-btn-danger close">取消</div>
                     </div>
                 </div>
@@ -444,6 +433,50 @@
 
 <@override name="js">
 <script type="text/javascript">
+    function submitAddress(){
+        if($("#addressId").val() != ""){
+            $(".title").html("修改地址");
+            var data = {addressId:$("#addressId").val(),country:$("#country").val(),detailAddress:$("#detailAddress").val(),linkName:$("#linkName").val(),linkPhone:$("#linkPhone").val()};
+            $.ajax({
+                url: '/personalCenter/toUpdateAddress/update',
+                dataType: 'json',
+                type: 'post',
+                data:JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    initAddress();
+                    $(".theme-popover").hide();
+                    $(".theme-popover-mask").hide();
+                    cleanInput();
+                }
+            });
+        }else{
+            $(".title").html("新增地址");
+            var data = {country:$("#country").val(),detailAddress:$("#detailAddress").val(),linkName:$("#linkName").val(),linkPhone:$("#linkPhone").val()};
+            $.ajax({
+                url: '/personalCenter/saveAddress',
+                dataType: 'json',
+                type: 'post',
+                data:JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    initAddress();
+                    $(".theme-popover").hide();
+                    $(".theme-popover-mask").hide();
+                    cleanInput();
+                }
+            });
+        }
+    }
+
+    function cleanInput(){
+        $("#addressId").val("");
+        $("#country").val("");
+        $("#detailAddress").val("");
+        $("#linkName").val("");
+        $("#linkPhone").val("");
+    }
+
     function submit(){
         var html = "";
         var i = 0 ;
@@ -503,9 +536,42 @@
                     if(address.isDefaultAddress == 0){
                         addressHtml += '<a onclick="setDefault('+address.addressId+')">设为默认</a><span class="new-addr-bar">|</span>';
                     }
-                    addressHtml += '<a href="#">编辑</a><span class="new-addr-bar">|</span><a>删除</a></div></li>';
+                    addressHtml += '<a onclick="update(this)">编辑</a><span class="new-addr-bar">|</span><a onclick="deleteAddress(this)">删除</a></div></li>';
                 }
                 $("#addressList").append(addressHtml);
+            }
+        });
+    }
+
+    function update(obj){
+        var addressId = $(obj).parents(".user-addresslist").find('.addressId').val();
+        $.ajax({
+            url: '/personalCenter/updateAddress/'+addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#addressId").val(data.addressId);
+                $("#country").val(data.country);
+                $("#detailAddress").val(data.detailAddress);
+                $("#linkName").val(data.linkName);
+                $("#linkPhone").val(data.linkPhone);
+                $(".theme-popover-mask").show();
+                $(".theme-popover").show();
+            }
+        });
+    }
+
+
+    function deleteAddress(obj){
+        var addressId = $(obj).parents(".user-addresslist").find('.addressId').val();
+        $.ajax({
+            url: '/personalCenter/delete/'+addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                initAddress();
             }
         });
     }

@@ -212,7 +212,7 @@ public class PersonalCenterController extends BaseController {
         addressDto.setDetailAddress(addressAddVo.getDetailAddress());
         addressDto.setLinkName(addressAddVo.getLinkName());
         addressDto.setLinkPhone(addressAddVo.getLinkPhone());
-        addressDto.setIsDefaultAddress(addressAddVo.getIsDefaultAddress());
+        addressDto.setIsDefaultAddress(0);
         Result result = pcAddressFeign.saveAddress(addressDto);
         return judge(result);
     }
@@ -229,6 +229,15 @@ public class PersonalCenterController extends BaseController {
         return "personalCenter/address";
     }
 
+
+    @MemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updateAddress/{addressId}", method = RequestMethod.GET)
+    public AddressDto updateAddress(@PathVariable long addressId,HttpServletRequest request) {
+        AddressDto addressDto = pcAddressFeign.getAddressById(addressId);
+        return addressDto;
+    }
+
     //编辑地址
     @ResponseBody
     @MemberAccess
@@ -242,7 +251,7 @@ public class PersonalCenterController extends BaseController {
         addressDto.setDetailAddress(updateAddressVo.getDetailAddress());
         addressDto.setLinkName(updateAddressVo.getLinkName());
         addressDto.setLinkPhone(updateAddressVo.getLinkPhone());
-        addressDto.setIsDefaultAddress(updateAddressVo.getIsDefaultAddress());
+        addressDto.setIsDefaultAddress(0);
         Result result = pcAddressFeign.update(addressDto);
         return judge(result);
     }
@@ -276,7 +285,6 @@ public class PersonalCenterController extends BaseController {
         }
         return vo;
     }
-
     /**
      * 收获地址页面跳转
      *
@@ -303,7 +311,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 发票管理
-     *
      * @param
      * @return
      */
@@ -447,11 +454,11 @@ public class PersonalCenterController extends BaseController {
     }
 
 
+
     //我的收藏----------------------------------
 
     /**
      * 跳转管理页面
-     *
      * @param request
      * @return
      */
@@ -464,7 +471,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 查询列表数据
-     *
      * @param favoriteAddVo
      * @param request
      * @return
@@ -502,7 +508,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 删除收藏
-     *
      * @param favoriteId
      * @return
      */
@@ -531,7 +536,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 我的足迹页面跳转
-     *
      * @param request
      * @return
      */
@@ -555,7 +559,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 查询展示列表
-     *
      * @param request
      * @return
      */
@@ -573,7 +576,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 删除足迹
-     *
      * @param footPrintAddVo
      * @return
      */
@@ -588,7 +590,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 查看详情页面
-     *
      * @param footPringtId
      * @return
      */
@@ -612,6 +613,7 @@ public class PersonalCenterController extends BaseController {
         }
         return vo;
     }
+
 
 
     //我的求购---------------------------------
@@ -703,7 +705,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 列表-询盘
-     *
      * @param request
      * @return
      */
@@ -725,7 +726,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 删除-询盘/产品信息
-     *
      * @param updateVo
      * @return
      */
@@ -739,7 +739,6 @@ public class PersonalCenterController extends BaseController {
 
     /**
      * 查看具体详情
-     *
      * @param enquirySo
      * @return
      */
