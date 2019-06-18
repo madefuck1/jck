@@ -55,21 +55,23 @@
         </div>
         <div class="right" id="right-company">
             <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
-            <!-- <div class="Collection">-->
-            <!--     <span class="coll1">收藏</span>-->
-            <!--     <span class="coll2">已收藏</span>-->
-            <!-- </div>-->
+            <div class="Collection" style="cursor: pointer" onclick="collection();">
+                <!--                 <span class="coll1">收藏</span>-->
+                <!--                 <span class="coll2">已收藏</span>-->
+            </div>
             <div>
                 <span class="one">联系电话：</span>
                 <span class="two" id="linkPhone">xxxx</span>
             </div>
             <div>
                 <span class="one">经营类目：</span>
-                <span class="two" id="mainProducts" style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">xxxx</span>
+                <span class="two" id="mainProducts"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">xxxx</span>
             </div>
             <div>
                 <span class="one">联系地址：</span>
-                <span class="two" id="companyAddress" style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
+                <span class="two" id="companyAddress"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
             </div>
             <div>
                 <span class="one">公司介绍：</span>
@@ -170,6 +172,14 @@
             success: function (res) {
                 var html = '';
                 //------------- 初始化公司信息-------------------
+                if (res.isCollection) {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                } else {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll1">收藏</span>')
+                }
+                $().html()
                 $('#companyName').html(res.companyDto.compName);
                 $('#linkPhone').html(res.companyDto.compPhone);
                 $('#mainProducts').html(res.shopDto.mainProducts);
@@ -307,6 +317,26 @@
                 $('#company').show()
                 break;
         }
+    }
+
+    function collection() {
+        $.ajax({
+            url: '/shop/isCollection?shopId=${shopId!}&type=2',
+            dataType: 'json',
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data) {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                } else {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll1">收藏</span>')
+                }
+            }
+        });
+
+
     }
 </script>
 

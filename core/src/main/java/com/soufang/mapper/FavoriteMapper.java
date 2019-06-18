@@ -27,4 +27,6 @@ public interface FavoriteMapper {
     int getFavoriteCount(FavoriteSo favoriteSo);
 
     int isFavorite(FavoriteDto dto);
+
+    int delFavorite(FavoriteDto favoriteDto);
 }

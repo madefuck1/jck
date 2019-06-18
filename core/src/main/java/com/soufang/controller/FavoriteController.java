@@ -75,6 +75,10 @@ public class FavoriteController {
     }
 
 
+    @RequestMapping(value = "delFavorite",method = RequestMethod.POST)
+    public void delFavorite(@RequestBody FavoriteDto favoriteDto){
+        favoriteService.delFavorite(favoriteDto);
+    }
 }
 
 
