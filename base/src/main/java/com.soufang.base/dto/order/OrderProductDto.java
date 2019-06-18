@@ -29,6 +29,12 @@ public class OrderProductDto {
 
     private String productColor;
     private String productImage;
+    private String url;
+
+    public String getUrl() {
+        return image == null || "".equals(image) ? "" : productImage.indexOf(";")!= -1 ? PropertiesParam.file_pre + image.substring(0, image.indexOf(";")) : PropertiesParam.file_pre + image ;
+    }
+
     private String image;
 
     private ProductDto productDto;
