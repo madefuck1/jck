@@ -24,6 +24,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     /**
      * 获取收藏列表信息-店铺和产品-类型字段的区分
+     *
      * @param favoriteSo
      * @return
      */
@@ -31,16 +32,16 @@ public class FavoriteServiceImpl implements FavoriteService {
     public PageHelp<FavoriteDto> getFavoriteList(FavoriteSo favoriteSo) {
         PageHelp<FavoriteDto> favorite = new PageHelp<>();
         //根据页数查信息/根据页数查信息
-        favoriteSo.setPage((favoriteSo.getPage()-1)*5);
+        favoriteSo.setPage((favoriteSo.getPage() - 1) * 5);
         // 查询对应用户的收藏数量
         int count = favoriteMapper.getFavoriteCount(favoriteSo);
         favorite.setCount(count);
         List<FavoriteDto> lists = favoriteMapper.getFavoriteList(favoriteSo);
         //更改图片地址
-        for(int i =0;i<lists.size();i++){
+        for (int i = 0; i < lists.size(); i++) {
             FavoriteDto favoriteDto = lists.get(i);
-            ProductDto productDto=favoriteDto.getProductDto();
-            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage());
+            ProductDto productDto = favoriteDto.getProductDto();
+            productDto.setProductImage(PropertiesParam.file_pre + productDto.getProductImage());
         }
         favorite.setData(lists);
         return favorite;
@@ -48,6 +49,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     /**
      * 新增收藏-店铺和产品-类型字段的区分
+     *
      * @param dto
      * @return
      */
@@ -58,12 +60,13 @@ public class FavoriteServiceImpl implements FavoriteService {
         favorite.setCreateTime(DateUtils.getToday());
         // 从 FavoriteDto 拷贝到 Favorite
         BeanUtils.copyProperties(dto, favorite);
+        favorite.setCreateTime(DateUtils.getToday());
         int I = favoriteMapper.insert(favorite);
         return I > 0 ? true : false;
     }
 
     //判断是否收藏-返回收藏ID
-    public long iSExistFavoriteId(FavoriteDto dto){
+    public long iSExistFavoriteId(FavoriteDto dto) {
         Favorite favorite = new Favorite();
         BeanUtils.copyProperties(dto, favorite);
         return favoriteMapper.iSExistFavoriteId(favorite);
@@ -71,6 +74,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     /**
      * 删除收藏-店铺和产品公用
+     *
      * @param favoriteId
      * @return
      */
@@ -85,5 +89,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     public boolean isFavorite(FavoriteDto dto) {
         int I = favoriteMapper.isFavorite(dto);
         return I > 0 ? true : false;
+    }
+
+    @Override
+    public void delFavorite(FavoriteDto favoriteDto) {
+        favoriteMapper.delFavorite(favoriteDto);
     }
 }

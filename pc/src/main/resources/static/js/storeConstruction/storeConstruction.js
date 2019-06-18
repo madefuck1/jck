@@ -641,31 +641,51 @@ function initHtmlPage() {
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             var html = '';
-            //------------- 初始化logo-------
-            var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
-            if (storeLogoUrl != '') {
-                $('#logo').html('<img src="' + storeLogoUrl + '" alt="">');
-            } else {
-                // todo
-            }
-            //------------- 初始首页/公司概况/视频中心化背景颜色----------------
-            var storeNavColor = res.storeConstructionDto.storeNavColor;
-            if (storeNavColor != null && storeNavColor != '') {
-                $('#nav2').css('background', storeNavColor);
-            } else {
-                // todo
-            }
-            //------------- 初始化轮播图 -------------------
-            var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
-            if (storeCurouselMapDtoList.length > 0) {
-                for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
-                    $('#side-left').flexslider('addSlide', '<li><img src="' + storeCurouselMapDtoList[i].mapURL + '" alt=""></li>');
-                    if (i == 0) {
-                        $('#side-left').flexslider('removeSlide', 0);
-                    }
+            if (res.storeConstructionDto != null) {
+                //------------- 初始化logo-------
+                var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
+                if (storeLogoUrl != '') {
+                    $('#logo').html('<img src="' + storeLogoUrl + '" alt="">');
+                } else {
+                    // todo
                 }
-            } else {
-                // todo
+                //------------- 初始首页/公司概况/视频中心化背景颜色----------------
+                var storeNavColor = res.storeConstructionDto.storeNavColor;
+                if (storeNavColor != null && storeNavColor != '') {
+                    $('#nav2').css('background', storeNavColor);
+                } else {
+                    // todo
+                }
+                //------------- 初始化轮播图 -------------------
+                var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
+                if (storeCurouselMapDtoList.length > 0) {
+                    for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
+                        $('#side-left').flexslider('addSlide', '<li><img src="' + storeCurouselMapDtoList[i].mapURL + '" alt=""></li>');
+                        if (i == 0) {
+                            $('#side-left').flexslider('removeSlide', 0);
+                        }
+                    }
+                } else {
+                    // todo
+                }
+                //------------- 初始化分类-------------
+                html = '';
+                var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
+                if (storeExclusiveAssortDtoList.length > 0) {
+                    for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
+                        html += '<a href="#">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
+
+                    }
+                    html += '<div class="product-search" id="product-search">\n' +
+                        '        <input type="text" placeholder="店内搜索">\n' +
+                        '        <button type="button" class="am-btn am-btn-warning">搜索</button>\n' +
+                        '    </div>';
+
+                    $('#product-title').empty();
+                    $('#product-title').append(html);
+                } else {
+                    // todo
+                }
             }
             //------------- 初始化公司信息-------------------
             $('#companyName').html(res.companyDto.compName);
@@ -674,24 +694,6 @@ function initHtmlPage() {
             $('#companyAddress').html(res.companyDto.compAddress);
             $('#companyInfo').html(res.companyDto.companyInfo);
 
-            //------------- 初始化分类-------------
-            html = '';
-            var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
-            if (storeExclusiveAssortDtoList.length > 0) {
-                for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
-                    html += '<a href="#">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
-
-                }
-                html += '<div class="product-search" id="product-search">\n' +
-                    '        <input type="text" placeholder="店内搜索">\n' +
-                    '        <button type="button" class="am-btn am-btn-warning">搜索</button>\n' +
-                    '    </div>';
-
-                $('#product-title').empty();
-                $('#product-title').append(html);
-            } else {
-                // todo
-            }
             //------------- 初始化产品-------------
             //装修中，不展示产品。默认在浏览中展示产品
         }

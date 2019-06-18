@@ -46,13 +46,13 @@
 
         </collection>
         <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
-            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT" />
-            <result column="product_id" property="productId" jdbcType="BIGINT" />
-            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT" />
-            <result column="browse_number" property="browseNumber" jdbcType="BIGINT" />
-            <result column="deal_number" property="dealNumber" jdbcType="BIGINT" />
-            <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
-            <result column="product_stock" property="productStock" jdbcType="VARCHAR" />
+            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT"/>
+            <result column="browse_number" property="browseNumber" jdbcType="BIGINT"/>
+            <result column="deal_number" property="dealNumber" jdbcType="BIGINT"/>
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+            <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
         </collection>
         <collection property="productSpecDto" ofType="com.soufang.base.dto.product.ProductSpecDto">
             <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
@@ -76,7 +76,7 @@
         where favorite_id = #{favoriteId,jdbcType=BIGINT}
     </select>
     <!--收藏列表查询-->
-    <select id="getFavoriteList" parameterType="com.soufang.base.search.favorite.FavoriteSo" resultMap="DtoResultMap" >
+    <select id="getFavoriteList" parameterType="com.soufang.base.search.favorite.FavoriteSo" resultMap="DtoResultMap">
         select
           *
         from t_favorite tf
@@ -180,22 +180,22 @@
         select count(1) from t_favorite where user_id =#{userId} and favorite_target_type = #{favoriteTargetType}
     </select>
 
-   <!-- <select id="getFavoriteList" parameterType="com.soufang.base.dto.favorite.FavoriteDto"
-            resultMap="DtoResultMap">
-        select
-        <include refid="Base_Column_List"></include>
-        from t_favorite where user_id =#{userId} and favorite_target_type = #{favoriteTargetType}
-        <if test="favoriteTargetName != null and favoriteTargetName != '' ">
-            and favoriteTargetName like concat(concat('%',#{favoriteTargetName}),'%')
-        </if>
-    </select>-->
+    <!-- <select id="getFavoriteList" parameterType="com.soufang.base.dto.favorite.FavoriteDto"
+             resultMap="DtoResultMap">
+         select
+         <include refid="Base_Column_List"></include>
+         from t_favorite where user_id =#{userId} and favorite_target_type = #{favoriteTargetType}
+         <if test="favoriteTargetName != null and favoriteTargetName != '' ">
+             and favoriteTargetName like concat(concat('%',#{favoriteTargetName}),'%')
+         </if>
+     </select>-->
 
     <select id="isFavorite" parameterType="com.soufang.base.dto.favorite.FavoriteDto" resultType="java.lang.Integer">
         select count(1) from t_favorite where favorite_target_id = #{favoriteTargetId}
-        and favorite_target_type = #{favoriteTargetType}
+        and favorite_target_type = #{favoriteTargetType} and user_id=#{userId}
     </select>
 
-    <select id="iSExistFavoriteId" parameterType="com.soufang.model.FootPrint"  resultType="java.lang.Long">
+    <select id="iSExistFavoriteId" parameterType="com.soufang.model.FootPrint" resultType="java.lang.Long">
         select favoriteId from t_favorite
         where user_id=#{userId}
         and favorite_target_id= #{favoriteTargetId}
@@ -203,5 +203,11 @@
         and favorite_target_type=#{favoriteTargetType}
 
     </select>
+
+    <delete id="delFavorite" parameterType="com.soufang.base.dto.favorite.FavoriteDto">
+        delete from t_favorite
+        where user_id=#{userId} and favorite_target_id= #{favoriteTargetId} and favorite_target_type=#{favoriteTargetType}
+    </delete>
+
 
 </mapper>

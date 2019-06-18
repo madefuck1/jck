@@ -251,7 +251,7 @@
                 </li>
                 <li>
                     <div class="clearfix tb-btn tb-btn-basket theme-login">
-                        <a href="#" style="background: red" target="_blank"><i></i>卖家店铺</a>
+                        <a onclick="openStore()" style="background: red"><i></i>进入店铺</a>
                     </div>
                 </li>
             </div>
@@ -733,7 +733,7 @@
                 data.productSpec = $(this).text();
             }
         });
-        data.productUnit = "${detail.productUnit}";
+        data.productUnit = "${detail.productUnit!''}";
 
         $.ajax({
             url: '/shopCar/addToCar',
@@ -753,5 +753,10 @@
             }
         });
     }
+    function openStore() {
+        window.open("/shop/toStoreIndex?shopId=${detail.productId}")
+    }
+
+
 </script>
 </html>

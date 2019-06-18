@@ -75,4 +75,6 @@ public interface EnquiryService {
     EnquiryDto getQuoteDetails(Long enquiryProductId);
 
     Long selUserIdByEnquiryNumber(String enquiryNumber);
+
+    List<EnquiryDto> getIndexEnquiryList(EnquirySo enquirySo);
 }
