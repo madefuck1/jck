@@ -26,6 +26,8 @@ public interface EnquiryMapper {
      */
     List<Enquiry> getList(EnquirySo enquirySo);
 
+    List<Enquiry> getIndexEnquiryList(EnquirySo enquirySo);
+
     /**
      * 获取我的报价列表数量
      * @param enquirySo

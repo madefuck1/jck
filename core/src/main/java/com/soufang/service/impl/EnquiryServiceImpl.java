@@ -120,7 +120,42 @@ public class EnquiryServiceImpl implements EnquiryService {
         }
         return  listDto;
     }
-
+    @Override
+    public List<EnquiryDto> getIndexEnquiryList(EnquirySo enquirySo) {
+        //页面默认加载赋值
+        enquirySo.setPage((enquirySo.getPage() - 1) * 4);
+        List<Enquiry> list = enquiryMapper.getIndexEnquiryList(enquirySo);
+        List<EnquiryDto> listDto = new ArrayList<>();
+        //询盘
+        for (int i = 0; i < list.size(); i++) {
+            Enquiry enquiry = list.get(i);
+            EnquiryDto enquiryDto = new EnquiryDto();
+            //状态-获取对应枚举
+            enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
+            // 格式化时间
+            SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy MM dd" );
+            Date date= new Date();
+            enquiry.setStrCreateTime(sdf1.format(enquiry.getCreateTime()));
+            BeanUtils.copyProperties(enquiry, enquiryDto);
+            List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
+            for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
+                EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
+                //更改图片地址
+                enquiryProduct.setProductImage(PropertiesParam.file_pre+enquiryProduct.getProductImage());
+                BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
+                List<PurchaseDto> purchaseDtos = new ArrayList<>();
+                for (Purchase purchase : enquiry.getEnquiryProducts().get(0).getPurchases()) {
+                    PurchaseDto purchaseDto = new PurchaseDto();
+                    BeanUtils.copyProperties(purchase, purchaseDto);
+                    purchaseDtos.add(purchaseDto);
+                }
+                enquiryProductDtos.add(enquiryProductDto);
+            }
+            enquiryDto.setEnquiryProductDto(enquiryProductDtos);
+            listDto.add(enquiryDto);
+        }
+        return  listDto;
+    }
 
     /**
      * 求购列表总数
@@ -253,5 +288,6 @@ public class EnquiryServiceImpl implements EnquiryService {
    public Long selUserIdByEnquiryNumber(String enquiryNumber){
         return enquiryMapper.selUserIdByEnquiryNumber(enquiryNumber);
     }
+
 
 }
