@@ -20,4 +20,10 @@ public interface FavoriteFeign {
 
     @RequestMapping(value = "core/favorite/removeFavorite",method = RequestMethod.POST)
     Result removeFavorite(@RequestBody Long favoriteId);
+
+    @RequestMapping(value = "core/favorite/isFavorite",method = RequestMethod.POST)
+    Boolean isCollect(FavoriteDto favoriteDto);
+
+    @RequestMapping(value = "core/favorite/delFavorite",method = RequestMethod.POST)
+    void delFavorite(FavoriteDto favoriteDto);
 }
