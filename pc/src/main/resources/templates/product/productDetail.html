@@ -249,6 +249,11 @@
                         <a id="LikBasket" onclick="addShopCar()"><i></i>加入购物车</a>
                     </div>
                 </li>
+                <li>
+                    <div class="clearfix tb-btn tb-btn-basket theme-login">
+                        <a href="#" style="background: red" target="_blank"><i></i>卖家店铺</a>
+                    </div>
+                </li>
             </div>
         </div>
     </div>
@@ -695,7 +700,7 @@
         var productId, shopId, productNum, productColor = '', productSpec = '';
         productId = "${detail.productId}";
         shopId = "${detail.shopId}";
-        productNum = $('#productNum').val();
+        productNum = $('#productNum').val().replace(/,/g,"");
         $('#productColor').children('li').each(function () {
             if ($(this).is(".selected")) {
                 productColor = $(this).text();
@@ -717,7 +722,7 @@
         var data = {};
         data.productId = "${detail.productId}";
         data.shopId = "${detail.shopId}";
-        data.productNum = $('#productNum').val();
+        data.productNum = $('#productNum').val().replace(/,/g,"");//将字符串中""全部替换成''
         $('#productColor').children('li').each(function () {
             if ($(this).is(".selected")) {
                 data.productColor = $(this).text();

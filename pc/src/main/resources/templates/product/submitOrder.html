@@ -178,25 +178,25 @@
                                     <li class="td td-item">
                                         <div class="item-pic">
                                             <a href="#" class="J_MakePoint">
-                                                <img src="${productDto.productUrl}" class="itempic J_ItemImg"></a>
+                                                <img src="${productDto.url!''}" class="itempic J_ItemImg"></a>
                                         </div>
                                         <div class="item-info">
                                             <div class="item-basic-info">
-                                                <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">${productDto.productName}</a>
+                                                <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">${productDto.productName!''}</a>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="td td-info">
                                         <div class="item-props">
-                                            <span class="sku-line" name = "productColor">${productColor}</span>
+                                            <span class="sku-line" name = "productColor">${productColor!''}</span>
                                             <span class="sku-line">&nbsp;&nbsp;</span>
-                                            <span class="sku-line" name = "productSpecName">${productDto.productSpecDto.specName}</span>
+                                            <span class="sku-line" name = "productSpecName">${productDto.productSpecDto.specName!''}</span>
                                         </div>
                                     </li>
                                     <li class="td td-price">
                                         <div class="item-price price-promo-promo">
                                             <div class="price-content">
-                                                <em class="J_Price price-now">${productDto.productSpecDto.specNumber?string('0.00')}/${productDto.productUnit}</em>
+                                                <em class="J_Price price-now">${productDto.productSpecDto.specNumber!0?string('0.00')}/${productDto.productUnit!''}</em>
                                             </div>
                                         </div>
                                     </li>
@@ -215,7 +215,7 @@
                                 <li class="td td-sum">
                                     <div class="td-inner">
                                         <em tabindex="0" class="J_ItemSum number">${(productNumber *
-                                            productDto.productSpecDto.specNumber)?string('0.00')}</em>
+                                            productDto.productSpecDto.specNumber!0)?string('0.00')}</em>
                                     </div>
                                 </li>
                             </ul>

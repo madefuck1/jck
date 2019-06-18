@@ -174,7 +174,7 @@
         <#if product_index < 4 >
         <div class="rec">
             <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-                <dt style="background: url(${product.productImage});"></dt>
+                <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
                 <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
             </dl>
@@ -183,7 +183,7 @@
         <#if product_index == 4>
         <div class="rec last">
             <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-                <dt style="background: url(${product.productImage});"></dt>
+                <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
                 <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
             </dl>
@@ -200,7 +200,7 @@
     <#if product_index < 4 >
     <div class="rec">
         <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-            <dt style="background: url(${product.productImage});"></dt>
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
             <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
         </dl>
@@ -209,7 +209,7 @@
     <#if product_index == 4>
     <div class="rec last">
     <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-        <dt style="background: url(${product.productImage});"></dt>
+        <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
         <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
     </dl>
@@ -225,7 +225,7 @@
     <#if product_index < 4 >
     <div class="rec">
         <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-            <dt style="background: url(${product.productImage});"></dt>
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
             <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
         </dl>
@@ -234,7 +234,7 @@
 <#if product_index == 4>
 <div class="rec last">
     <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
-        <dt style="background: url(${product.productImage});"></dt>
+        <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
         <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
     </dl>
@@ -299,37 +299,37 @@
                 pro+='<div class="pro_right">\n' +
             '            <div class="pro_top">\n' +
             '                <dl class="pro_top1 one" onclick="getProductInfo('+data.data[0].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[0].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[0].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[0].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1 " onclick="getProductInfo('+data.data[1].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[1].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[1].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[1].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1" onclick="getProductInfo('+data.data[2].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[2].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[2].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[2].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[3].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[3].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[3].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[3].productName+'</dd>\n' +
             '                </dl>\n' +
             '            </div>\n' +
             '            <div class="pro_top pro_down" onclick="getProductInfo('+data.data[4].productId+')">\n' +
             '                <dl class="pro_top1 one">\n' +
-            '                    <dt style="background: url('+data.data[4].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[4].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[4].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1" onclick="getProductInfo('+data.data[5].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[5].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[5].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[5].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1" onclick="getProductInfo('+data.data[6].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[6].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[6].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[6].productName+'</dd>\n' +
             '                </dl>\n' +
             '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[7].productId+')">\n' +
-            '                    <dt style="background: url('+data.data[7].productImage+');"></dt>\n' +
+            '                    <dt style="background-size: cover!important;background: url('+data.data[7].productImage+');"></dt>\n' +
             '                    <dd>'+data.data[7].productName+'</dd>\n' +
             '                </dl>\n' +
             '            </div>\n' +
@@ -350,7 +350,7 @@
     }
     //查看全部询盘
     function getAllEnquiry(page,limit) {
-        window.location.href = '/personalCenter/toEnquiryManage';
+        window.location.href = '/enquiry/toEnquiryList';
     }
 
 </script>

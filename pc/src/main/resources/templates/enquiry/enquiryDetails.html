@@ -115,13 +115,16 @@
 
 		</tbody>
 	</table>
-	<button class="am-btn am-btn-secondary" style="margin-left: 46%;margin-top: 60px;" onclick="PurchaseNow()">立即发布</button>
+	<button class="am-btn am-btn-secondary" style="margin-left: 46%;margin-top: 60px;" onclick="PurchaseNow(this)">立即发布</button>
 </div>
 
 
 
 </@override>
 <@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
 <script>
     $(function(){
         var enquiryProductId= $("#enquiryProductId").val();
@@ -177,7 +180,7 @@
     }
 
     //报价
-    function PurchaseNow() {
+    function PurchaseNow(obj) {
         var enquiryNumber=$("#enquiryNumber").val();
         //通过查询SHOP信息判断是否存在商铺信息-判断不是商家则不能报价
 		//如果是自己发布的不能报价
@@ -193,10 +196,10 @@
                     var purchaseNumber=$("#purchaseNumber").val();
                     if ( purchaseNumber!=0){
                         if(confirm("已经进行报价，请确认是否进行当前报价操作")){
-                            toSubmit();
+                            toSubmit(obj);
                         }
                     }else{
-                        toSubmit();
+                        toSubmit(obj);
 					}
 				}else{
                     alert("不是卖家或者自己的求购不能报价");
@@ -206,7 +209,8 @@
 
     }
 
-    function toSubmit() {
+    function toSubmit(obj) {
+		$(obj).prop("disabled",true);
         var unitPrice=$("#unitPrice").val();
         var enquiryProductId=$("#enquiryProductId").val();
         var enquiryNumber=$("#enquiryNumber").val();
@@ -220,7 +224,7 @@
             dataType: "json",
             success: function (data) {
                 alert(data.message);
-                window.location.href="/enquiry/toPurchaseDetails?enquiryProductId="+enquiryProductId;
+                window.open("/enquiry/toMyQuote");
             }
         });
     }

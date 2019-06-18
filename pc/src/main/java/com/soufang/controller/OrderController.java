@@ -62,7 +62,8 @@ public class OrderController extends BaseController {
     }
 
     /**
-     *  检索页面 ajax请求刷订单页面
+     * 检索页面 ajax请求刷订单页面
+     *
      * @param request
      * @param pageIndex
      * @return
@@ -70,50 +71,50 @@ public class OrderController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "clickPage", method = RequestMethod.GET)
     public Map<String, Object> searchAssortWithSort(HttpServletRequest request,
-          Integer data, Integer pageIndex) {
+                                                    Integer data, Integer pageIndex) {
         Map<String, Object> map = new HashMap<>();
         UserDto userInfo = this.getUserInfo(request);
         OrderSo orderSo = new OrderSo();
         orderSo.setUserId(userInfo.getUserId());
         orderSo.setLimit(5);
-        if(pageIndex == 0){
+        if (pageIndex == 0) {
             orderSo.setPage(1);
-        }else {
+        } else {
             orderSo.setPage(pageIndex);
         }
-        setData(data,orderSo);
+        setData(data, orderSo);
         PageHelp<OrderShopDto> pageHelp = orderFeign.getList(orderSo);
         // 订单
         map.put("list", pageHelp.getData());
-        map.put("count",pageHelp.getCount());
+        map.put("count", pageHelp.getCount());
         return map;
     }
 
-    private void setData(Integer data , OrderSo orderSo){
-        switch (data){
-            case 1 :
-                break ; //全部订单
-            case 2 :
+    private void setData(Integer data, OrderSo orderSo) {
+        switch (data) {
+            case 1:
+                break; //全部订单
+            case 2:
                 //待付款
                 orderSo.setOrderStatusList("3,5");
                 orderSo.setOrderType(2);
                 break;
-            case 3 :
+            case 3:
                 //待发货
                 orderSo.setOrderStatusList("6");
                 orderSo.setOrderType(2);
                 break;
-            case 4 :
+            case 4:
                 //待收货
                 orderSo.setOrderStatusList("7");
                 orderSo.setOrderType(2);
                 break;
-            case 5 :
+            case 5:
                 //待评价
                 orderSo.setOrderStatusList("8");
                 orderSo.setOrderType(2);
                 break;
-            case 6 :
+            case 6:
                 //线下订单
                 orderSo.setOrderType(3);
                 break;
@@ -153,7 +154,7 @@ public class OrderController extends BaseController {
         orderDto.setBuyerName(userInfo.getUserName());
         AddressDto addressDto = pcAddressFeign.getAddressById(reqVo.getAddressId());
         orderDto.setTakeName(addressDto.getLinkName());
-        orderDto.setTakeAddress(addressDto.getCountry()+addressDto.getDetailAddress());
+        orderDto.setTakeAddress(addressDto.getCountry() + addressDto.getDetailAddress());
         orderDto.setTakePhone(addressDto.getLinkPhone());
         orderDto.setOrderType(reqVo.getPayType() == 0 ? OrderTypeEnum.OFF_LINE.getValue() : OrderTypeEnum.ON_LINE.getValue());
         orderDto.setOrderRemark(reqVo.getRemark());
@@ -182,10 +183,14 @@ public class OrderController extends BaseController {
         orderProductDto.setProductName(productDto.getProductName());
         orderProductDto.setProductNumber(new BigDecimal(reqVo.getProductNumber()));
         orderProductDto.setProductUnit(productDto.getProductUnit());
-        orderProductDto.setProductPrice(productDto.getProductSpecDto().getSpecNumber());
+        orderProductDto.setProductPrice(productDto.getProductSpecDto().getSpecNumber() == null ? BigDecimal.ZERO : productDto.getProductSpecDto().getSpecNumber());
         orderProductDto.setProductColor(reqVo.getProductColor());
         orderProductDto.setProductSpec(reqVo.getProductSpecName());
-        sumMoney = sumMoney.add(orderProductDto.getProductNumber().multiply(orderProductDto.getProductPrice()));
+        if (orderProductDto.getProductPrice() != null) {
+            sumMoney = sumMoney.add(orderProductDto.getProductNumber().multiply(orderProductDto.getProductPrice()));
+        } else {
+            sumMoney = BigDecimal.ZERO;
+        }
         orderProductDtos.add(orderProductDto);
         orderShopDto.setOrderProducts(orderProductDtos);
         orderShopDto.setSumPrice(sumMoney);
@@ -363,9 +368,9 @@ public class OrderController extends BaseController {
                     so.setPage(reqVo.getEndPage() + 1);
                     break;
                 case 2:
-                    if(reqVo.getHitPage()==0){
-                        so.setPage(reqVo.getHitPage()+1);
-                    }else{
+                    if (reqVo.getHitPage() == 0) {
+                        so.setPage(reqVo.getHitPage() + 1);
+                    } else {
                         so.setPage(reqVo.getHitPage());
                     }
 
@@ -383,9 +388,9 @@ public class OrderController extends BaseController {
             for (OrderShopDto temp : list.getData()) {
                 temp.setStatusMessage(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getMessage());
                 temp.setStatusColor(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getButtonColor());
-                for (OrderProductDto orderProductDto : temp.getOrderProducts()) {
-                    orderProductDto.setProductImage(orderProductDto.getProductImage());
-                }
+//                for (OrderProductDto orderProductDto : temp.getOrderProducts()) {
+//                    orderProductDto.setProductImage(orderProductDto.getUrl());
+//                }
             }
             // page 翻页
             if (reqVo.getStartPage() == null) {
@@ -409,8 +414,8 @@ public class OrderController extends BaseController {
                 vo.setHitPage(reqVo.getHitPage());
             }
             vo.setNumber(reqVo.getNumber());
-            vo.setOrderStatus(reqVo.getOrderStatus()==null?0:reqVo.getOrderStatus());
-            vo.setOrderType(reqVo.getOrderType()==null?0:reqVo.getOrderType());
+            vo.setOrderStatus(reqVo.getOrderStatus() == null ? 0 : reqVo.getOrderStatus());
+            vo.setOrderType(reqVo.getOrderType() == null ? 0 : reqVo.getOrderType());
             double ceil = Math.ceil(new Double(list.getCount()) / 5);
             vo.setTotalPages((int) ceil);
             vo.setList(list.getData());
