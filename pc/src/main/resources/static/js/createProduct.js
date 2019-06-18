@@ -83,8 +83,8 @@ function addPriceHtml(obj) {
         .replace("productSpecDtoList[0]", 'productSpecDtoList[' + priceNumber + ']');
     priceNumber++;
     $(obj).parent().find(".priceInput").append(html);
-    var priceHtml = priceShowHtml.replace('<span class="productUnit">','<span class="productUnit">'+$("[name=productUnit]").val());
-    $(obj).parent().find(".priceShow").append(priceHtml);
+    var priceSHow = priceShowHtml.replace('<span class="productUnit">','<span class="productUnit">'+$("[name=productUnit]").val());
+    $(obj).parent().find(".priceShow").append(priceSHow);
 }
 
 
