@@ -301,7 +301,6 @@ public class EnquiryPurchaseController extends BaseController{
      * @return
      */
     @ResponseBody
-    @MemberAccess
     @RequestMapping(value = "getIdName",method = RequestMethod.POST)
     public List<Map<String, Object>> getIdName(){
         List<Map<String, Object>> list = assortFeign.getIdName();
