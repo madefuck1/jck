@@ -63,11 +63,14 @@ public class EnquiryServiceImpl implements EnquiryService {
             for (Purchase purchase : enquiryProduct.getPurchases()) {
                 PurchaseDto purchaseDto = new PurchaseDto();
                 BeanUtils.copyProperties(purchase, purchaseDto);
-                ShopDto shopDto = new ShopDto();
-                Shop shop= purchase.getShop();
-                BeanUtils.copyProperties(shop, shopDto);
-                purchaseDto.setShopDto(shopDto);
-                purchaseDto.setShopName(shop.getShopName());
+                if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
+                    Shop shop= purchase.getShop();
+                    if("".equals(shop.getShopName())||null==shop.getShopName()){
+                        purchaseDto.setShopName("没有商铺信息");
+                    }else{
+                        purchaseDto.setShopName(shop.getShopName());
+                    }
+                }
                 purchaseDtos.add(purchaseDto);
             }
             enquiryProductDto.setPurchases(purchaseDtos);
