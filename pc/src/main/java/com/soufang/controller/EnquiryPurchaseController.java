@@ -332,6 +332,16 @@ public class EnquiryPurchaseController extends BaseController{
             if(!(userInfo.getUserId().equals(userId))){
                 //相等则是统一商家
                 result.setMessage("可以报价");
+                //还要判断当前用户有没有对该询盘报价过
+                PurchaseSo purchaseSo =new PurchaseSo();
+                purchaseSo.setEnquiryProductId(enquirySo.getEnquiryProductId());
+                purchaseSo.setShopId(shopInfo.getShopId());
+               int userPumber= purchaseFeign.userPurchaseNumber(purchaseSo);
+               if(userPumber > 0 ){
+                   result.setMessage("已经报价过");
+               }
+            }else{
+                result.setMessage("不可以报价");
             }
         }else{
             result.setMessage("不可以报价");

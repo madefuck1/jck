@@ -232,5 +232,10 @@
     UPDATE t_purchase  set offer_status=#{offerStatus} where enquiry_product_id=#{enquiryProductId} and offer_status=1
   </update>
 
+  <!--查询产品用户报价信息-->
+  <select id="userPurchaseNumber" parameterType="com.soufang.base.search.purchase.PurchaseSo" resultType="java.lang.Integer">
+    select COUNT(0) from t_purchase where enquiry_product_id=#{enquiryProductId} and shop_id=#{shopId}
+  </select>
+
 
 </mapper>

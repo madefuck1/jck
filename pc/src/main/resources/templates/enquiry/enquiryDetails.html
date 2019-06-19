@@ -188,13 +188,14 @@
     //报价
     function PurchaseNow(obj) {
         var enquiryNumber=$("#enquiryNumber").val();
+        var enquiryProductId= $("#enquiryProductId").val();
         //通过查询SHOP信息判断是否存在商铺信息-判断不是商家则不能报价
 		//如果是自己发布的不能报价
-		var str = {enquiryNumber:enquiryNumber};
+		var str = {enquiryNumber:enquiryNumber,enquiryProductId:enquiryProductId};
         var message = checkForm();
         if (message != null) {
             alert(message);
-        }
+        }else{
         $.ajax({
             url: "isOrNoShopUser",
 			data:JSON.stringify(str),
@@ -202,20 +203,21 @@
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 if (data.message=="可以报价"){
-                    var purchaseNumber=$("#purchaseNumber").val();
-                    if ( purchaseNumber!=0){
-                        if(confirm("已经进行报价，请确认是否进行当前报价操作")){
-                            toSubmit(obj);
-                        }
-                    }else{
+                    if(confirm("请确认报价信息是否进行当前报价操作")){
                         toSubmit(obj);
-					}
+                    }
+				}else if (data.message=="已经报价过"){
+                    if(confirm("已经报价过，请确认是否进行当前报价操作")){
+						toSubmit(obj);
+                    }
 				}else{
                     alert("不是卖家或者自己的求购不能报价");
 				}
-           			 }
+			}
         });
+        }
 
     }
 
