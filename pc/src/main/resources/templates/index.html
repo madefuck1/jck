@@ -4,11 +4,14 @@
 
 <@override name="css">
 <link rel="stylesheet" href="${contextPath}/css/home.css">
-<link rel="stylesheet" href="${contextPath}/css/header.index.css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
 </@override>
-
+<style>
+    .search_in ul{
+        z-index: 999;
+    }
+</style>
 <@override name="body">
-
 <#include "/common/includes/include.contain2.html"/>
 <#include "/common/includes/include.banner.html"/>
 <div id="index_list">
@@ -173,7 +176,7 @@
         <#list productDtos1 as product>
         <#if product_index < 4 >
         <div class="rec">
-            <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+            <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
                 <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
                 <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
@@ -182,7 +185,7 @@
         </#if>
         <#if product_index == 4>
         <div class="rec last">
-            <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+            <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
                 <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
                 <dd>${product.productName}</dd>
                 <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
@@ -199,7 +202,7 @@
     <#list productDtos2 as product>
     <#if product_index < 4 >
     <div class="rec">
-        <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
             <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
             <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
@@ -208,7 +211,7 @@
     </#if>
     <#if product_index == 4>
     <div class="rec last">
-    <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
         <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
         <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
@@ -224,7 +227,7 @@
     <#list productDtos3 as product>
     <#if product_index < 4 >
     <div class="rec">
-        <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
             <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
             <dd>${product.productName}</dd>
             <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
@@ -233,7 +236,7 @@
 </#if>
 <#if product_index == 4>
 <div class="rec last">
-    <dl class="rec_pic" onclick="getProductInfo(${product.productId})">
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
         <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
         <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
