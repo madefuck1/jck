@@ -156,6 +156,8 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public int acceptPurchase(PurchaseSo purchaseSo){
+        //操作类型
+        int i =purchaseSo.getOfferStatus();
         EnquirySo enquirySo= new EnquirySo();
         //接收报价-还需要去更改询盘状态为-已报价
         if(purchaseSo.getOfferStatus()==2){
@@ -163,10 +165,18 @@ public class PurchaseServiceImpl implements PurchaseService {
             enquirySo.setEnquiryNumber(purchaseSo.getEnquiryNumber());
             //调用修改询盘状态-已报价
             enquiryMapper.delEnquiry(enquirySo);
+            //拒绝状态3
+            purchaseSo.setOfferStatus(3);
             //修改其他所有报价为拒绝
             purchaseMapper.refusePurchase(purchaseSo);
         }
+        purchaseSo.setOfferStatus(i);
      return purchaseMapper.acceptPurchase(purchaseSo);
+    }
+
+    @Override
+   public int userPurchaseNumber(PurchaseSo purchaseSo){
+       return  purchaseMapper.userPurchaseNumber(purchaseSo);
     }
 
 }

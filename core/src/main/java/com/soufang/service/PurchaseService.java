@@ -39,4 +39,6 @@ public interface PurchaseService {
     int purchase(PurchaseDto purchaseDto);
 
     int acceptPurchase(PurchaseSo purchaseSo);
+
+    int userPurchaseNumber(PurchaseSo purchaseSo);
 }
