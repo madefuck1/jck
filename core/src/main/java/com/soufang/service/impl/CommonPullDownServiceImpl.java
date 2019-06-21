@@ -95,6 +95,7 @@ public class CommonPullDownServiceImpl implements CommonPullDownService {
     }
     @Override
    public List<AssortDto> selUnderAssort(Long assortId){
-       return assortMapper.selUnderAssort(assortId);
+        List<AssortDto>  assortDtos= assortMapper.selUnderAssort(assortId);
+       return assortDtos;
     }
 }

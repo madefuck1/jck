@@ -17,6 +17,7 @@
     <resultMap id="ResultMap" type="com.soufang.base.dto.assort.AssortDto">
         <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
         <result column="assort_name" property="assortName" jdbcType="VARCHAR"/>
+        <result column="assort_level" property="assortLevel" jdbcType="INTEGER"/>
         <collection property="children" ofType="com.soufang.base.dto.assort.AssortDto">
             <id column="assort_id2" property="assortId" jdbcType="BIGINT"/>
             <result column="assort_name2" property="assortName" jdbcType="VARCHAR"/>

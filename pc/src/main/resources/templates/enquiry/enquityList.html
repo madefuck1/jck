@@ -20,15 +20,24 @@
 		<button type="submit" class="purbutton"><a href="/enquiry/create">发布询价单</a></button>
 	</p>
 	<div class="pur-list">
-		<ul id="showAssort">
-			<div id="showMoreAssort">
-			</div>
-			<div id="showMoreAssort2" style="display: none;">
-			</div>
-			<li style="width: 50px;">
-			<a href="#" style="color: #333;"  id="toggle" >+展开</a>
-			</li>
-		</ul>
+						<ul id="showAssort">
+							<li>请选择分类：</li>
+							<div id="showMoreAssort">
+							</div>
+						</ul>
+						<div style="border:1px; display: none;" id="sma2">
+							<ul>
+								<li>请选择分类：</li>
+							<div id="showMoreAssort2">
+							</div>
+							</ul>
+						</div>
+						<div style="border:1px;display: none;" id="sma3">
+							<ul>
+								<li>请选择分类：</li>
+							<div id="showMoreAssort3">
+							</div></ul>
+						</div>
 		<div class="plist-down">
 			<div class="ptitle">
 				<p>
@@ -74,30 +83,53 @@ function PageCallback(index) {     //前一个表示您当前点击的那个分�
     tablieList(index + 1, 0,"",1);
 }
 
-	$(function(){
-        tablieList(1,0,"",1);
-        //默认加载数据--产品分类	getIdName
-        $.ajax({
-            url : "getIdName",
-            type : "post",
-            contentType: 'application/json; charset=UTF-8',
-            dataType : "json",
-            success : function(data) {
-                $.each(data, function (i, v) {
-                    if (i<18){
-                        whatever=liContentAssort(v);
-                        $("#showMoreAssort").append(whatever);
-                    }else{
-                        var endEver=liContentAssort(v);
-                        $("#showMoreAssort2").append(endEver);
-                    }
-                });
+function showSortList(assortId,assortLevel) {
+    //默认加载数据--产品分类	getIdName
+    $.get("/pc/commonPullDown/selUnderAssort/"+assortId,function (data) {
+        if (assortLevel==1){
+            $("#showMoreAssort2").html("");
+            $("#showMoreAssort3").html("");
+            document.getElementById('sma3').style.display='none';
+            document.getElementById('sma2').style.display='block';
+        }else if (assortLevel ==2){
+            $("#showMoreAssort3").html("");
+            document.getElementById('sma3').style.display='block';
+        }else if(assortLevel==""){
+            $("#showMoreAssort").html("");
+            $("#showMoreAssort2").html("");
+            $("#showMoreAssort3").html("");
+        }
+        $.each(data, function (i, v) {
+            var whatever = liContentAssort(v,assortLevel);
+            if (assortLevel ==""){
+                $("#showMoreAssort").append(whatever);
+            }else if (assortLevel==1){
+                $("#showMoreAssort2").append(whatever);
+			}
+            else if (assortLevel ==2){
+                $("#showMoreAssort3").append(whatever);
             }
         });
-        $("#toggle").click(function() {
-            $(this).text($("#showMoreAssort2").is(":hidden") ? "收起" : "展开");
-            $("#showMoreAssort2").slideToggle();
-        });
+    });
+}
+//分类展示
+function liContentAssort(v,assortLevel) {
+    var li;
+    if (assortLevel == 2){
+        li=$(
+            "<li><a href='javascript:void(0);' onclick='tablieList(\""+1+"\",\""+v.assortId+"\",\""+''+"\",\""+1+"\")' >"+v.assortName+"</a> </li>"
+        );
+	}else{
+        li=$(
+            "<li><a href='javascript:void(0);' onclick='showSortList("+v.assortId+","+v.assortLevel+")' >"+v.assortName+"</a> </li>"
+        );
+	}
+    return li;
+}
+
+	$(function(){
+        tablieList(1,0,"",1);
+        showSortList(0,"");
 	});
 	//截止时间查询
 	function endTimeSort(index,orderType) {
@@ -140,7 +172,7 @@ function PageCallback(index) {     //前一个表示您当前点击的那个分�
                     $("#showMoreAssorts").append(noData);
                     $("#purchaseLength").html(0);
                 }else {
-                    $("#purchaseLength").html(data.data.length);
+                    $("#purchaseLength").html(count);
                     $.each(data.data, function (i, v) {
                         whatever=liContent(v);
                         $("#showMoreAssorts").append(whatever);
@@ -158,14 +190,6 @@ function PageCallback(index) {     //前一个表示您当前点击的那个分�
             }
         });
     }
-
-//分类展示
-function liContentAssort(v) {
-    var li=$(
-        "<li><a href='javascript:void(0);' onclick='tablieList(\""+1+"\",\""+v.assortId+"\",\""+''+"\",\""+1+"\")' >"+v.assortName+"</a> </li>"
-    );
-    return li;
-}
 
 //列表展示
 function liContent(v){
