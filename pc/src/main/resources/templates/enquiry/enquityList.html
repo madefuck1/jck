@@ -4,37 +4,53 @@
 <@override name="css">
 	<link rel="stylesheet" href="${contextPath}/css/purchList.css">
 	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
-<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
-</@override>
+	<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+<style type="text/css">
+	.pur-list2{
 
+		min-height: 100px;
+	}
+
+	.pur-list2 ul li{
+
+		float: left;
+		margin-left: 30px;
+	}
+	.pur-list2 ul li a{
+		line-height: 30px;
+	}
+	.pur-list2 ul{
+		padding: 6px 20px;
+		overflow: hidden;
+		border: 2px solid #e6e6e6;
+	}
+	.pur-list2 ul li a:link {color: black; text-decoration:none;}
+	.pur-list2 ul li a:hover {background-color: coral;}
+
+</style>
+</@override>
 <@override name="body">
 <div id="purch-center">
-	<!--<ol class="am-breadcrumb">
-		<li><a href="#">首页</a></li>
-		<li><a href="/enquiry/toEnquiryList">求购信息</a></li>
-		<li class="am-active">求购信息</li>
-	</ol>-->
 	<p style="line-height: 40px;">
 		<span style="font-weight: bold">求购信息</span>
 		<span>(共找到<span style="color: red; font-size: 12px" id="purchaseLength"></span>条求购信息)</span>
-		<button type="submit" class="purbutton"><a href="/enquiry/create">发布询价单</a></button>
+		<button type="submit" class="purbutton">
+			<a href="/enquiry/create">发布询价单</a></button>
 	</p>
-	<div class="pur-list">
+	<div class="pur-list2">
 						<ul id="showAssort">
-							<li>请选择分类：</li>
+							<li style="margin-left: 0px;"><a style="cursor:pointer;" onclick="tablieList(1,0,'',1)">查看全部</a></li>
 							<div id="showMoreAssort">
 							</div>
 						</ul>
 						<div style="border:1px; display: none;" id="sma2">
 							<ul>
-								<li>请选择分类：</li>
 							<div id="showMoreAssort2">
 							</div>
 							</ul>
 						</div>
 						<div style="border:1px;display: none;" id="sma3">
 							<ul>
-								<li>请选择分类：</li>
 							<div id="showMoreAssort3">
 							</div></ul>
 						</div>
