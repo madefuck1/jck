@@ -14,7 +14,7 @@ public class  ShopDto {
     private String shopName;
     private Integer shopLevel;
     private String shopIntroduce;
-    private String avatarUrl;
+    private String shopAvatarUrl;
     private String businessScope;
     private String mainProducts;
     private Integer shopStatus;
@@ -90,12 +90,12 @@ public class  ShopDto {
         this.shopIntroduce = shopIntroduce;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getShopAvatarUrl() {
+        return shopAvatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setShopAvatarUrl(String shopAvatarUrl) {
+        this.shopAvatarUrl = shopAvatarUrl;
     }
 
     public String getBusinessScope() {
