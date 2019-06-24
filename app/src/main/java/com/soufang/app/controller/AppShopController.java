@@ -57,6 +57,8 @@ public class AppShopController extends AppBaseController {
     public DetailVo getShopDetail(HttpServletRequest request) {
         DetailVo vo = new DetailVo();
         ShopDto shopDetail = getShopInfo(request);
+        CompanyDto companyDto = appUserFeign.companyInfo(shopDetail.getUserId());
+        shopDetail.setCompanyDto(companyDto);
         vo.setData(shopDetail);
         return vo;
     }

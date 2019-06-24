@@ -1,5 +1,6 @@
 package com.soufang.base.dto.shop;
 
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.utils.DateUtils;
@@ -21,6 +22,17 @@ public class  ShopDto {
     private String refuseReason;
     private Date createTime;
     private String strCreateTime;
+
+    private CompanyDto companyDto;
+
+
+    public CompanyDto getCompanyDto() {
+        return companyDto;
+    }
+
+    public void setCompanyDto(CompanyDto companyDto) {
+        this.companyDto = companyDto;
+    }
 
     public String getStrCreateTime() {
         if (createTime != null) {
