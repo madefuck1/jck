@@ -66,7 +66,7 @@ public class ProductManageController {
     @RequestMapping(value = "getHotProductList", method = RequestMethod.POST)
     public PageHelp<ProductDto> hotList() {
         PageHelp<ProductDto> pageHelp = productManageService.hotList();
-        return pageHelp;
+       return pageHelp;
     }
 
 

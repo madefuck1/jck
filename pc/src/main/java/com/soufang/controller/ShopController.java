@@ -1,6 +1,5 @@
 package com.soufang.controller;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.shop.ShopDto;
@@ -8,7 +7,6 @@ import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
-import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.FavoriteFeign;
 import com.soufang.feign.ShopFeign;
 import com.soufang.feign.StoreConstructionFeign;

@@ -10,6 +10,7 @@
  */
 package com.soufang.base.search.exhibition;
 
+import com.soufang.base.PageBase;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ExhibitionSo {
+public class ExhibitionSo extends PageBase {
     private int exhibitionId;
 }

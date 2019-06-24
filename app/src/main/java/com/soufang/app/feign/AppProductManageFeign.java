@@ -36,4 +36,9 @@ public interface AppProductManageFeign {
 
     @RequestMapping(value = "core/productManage/updateProduct", method = RequestMethod.POST)
     Result sellDownProduct(ProductDto dto);
+
+    @RequestMapping(value = "core/productManage/getHotProductList", method = RequestMethod.POST)
+    PageHelp<ProductDto> getHotProductList() ;
+
+
 }

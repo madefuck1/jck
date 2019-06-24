@@ -1,5 +1,7 @@
 package com.soufang.base.dto.shop;
 
+import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.utils.DateUtils;
@@ -7,7 +9,7 @@ import com.soufang.base.utils.DateUtils;
 import java.util.Date;
 import java.util.List;
 
-public class  ShopDto {
+public class ShopDto {
     private Long shopId;
     private Long userId;
     private String shopName;
@@ -21,6 +23,30 @@ public class  ShopDto {
     private String refuseReason;
     private Date createTime;
     private String strCreateTime;
+    private String url;
+    // 店铺产品总数
+    private Integer productCount;
+
+    // 店铺统计信息
+    private ShopStatisticsDto shopStatisticsDto;
+
+    public ShopDto() {
+    }
+
+    public String getUrl() {
+        return avatarUrl == null || "".equals(avatarUrl) ? avatarUrl : PropertiesParam.file_pre + avatarUrl;
+    }
+
+    private CompanyDto companyDto;
+
+
+    public CompanyDto getCompanyDto() {
+        return companyDto;
+    }
+
+    public void setCompanyDto(CompanyDto companyDto) {
+        this.companyDto = companyDto;
+    }
 
     public String getStrCreateTime() {
         if (createTime != null) {
@@ -137,6 +163,22 @@ public class  ShopDto {
 
     public void setProductDtoList(List<ProductDto> productDtoList) {
         this.productDtoList = productDtoList;
+    }
+
+    public ShopStatisticsDto getShopStatisticsDto() {
+        return shopStatisticsDto;
+    }
+
+    public void setShopStatisticsDto(ShopStatisticsDto shopStatisticsDto) {
+        this.shopStatisticsDto = shopStatisticsDto;
+    }
+
+    public Integer getProductCount() {
+        return productCount;
+    }
+
+    public void setProductCount(Integer productCount) {
+        this.productCount = productCount;
     }
 }
 

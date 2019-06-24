@@ -117,7 +117,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public int purchase(PurchaseDto purchaseDto){
         Result result = new Result();
         //查询SHOP信息通过用户ID
-        Shop shop =shopMapper.getByUserId(purchaseDto.getUserId());
+        ShopDto shop =shopMapper.getByUserId(purchaseDto.getUserId());
         //加入SHOPID
         purchaseDto.setShopId(shop.getShopId());
         //查询产品ID根据询盘编号

@@ -46,4 +46,8 @@ public interface ProductMapper {
     List<ProductDto> getAssortProduct(ProductDto productDto);
 
     List<ProductDto> getIndexFootProduct();
+
+    List<ProductDto> getShopProductManaList(ProductDto ProductDto);
+
+
 }

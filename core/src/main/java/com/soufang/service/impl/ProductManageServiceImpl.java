@@ -211,6 +211,13 @@ public class ProductManageServiceImpl implements ProductManageService {
     @Override
     public PageHelp<ProductDto> hotList() {
         List<ProductDto> products = productMapper.getHotList();
+        for (ProductDto p:products) {
+            String [] img  = new String[10];
+            if(StringUtils.isNotBlank(p.getProductImage())){
+                img = p.getProductImage().split(";");
+            }
+               p.setProductImage(PropertiesParam.file_pre+img[0]);
+       }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
         return pageHelp;
@@ -236,8 +243,6 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public ProductDto getProductDetailBySpec_Number(ProductDto dto) {
-
-
         return productMapper.getProductDetailBySpec_Number(dto);
     }
 
