@@ -42,6 +42,7 @@ public class ShopServiceImpl implements ShopService {
         Shop shop = shopMapper.getById(id);
         ShopDto shopDto = new ShopDto();
         BeanUtils.copyProperties(shop, shopDto);
+        shopDto.setAvatarUrl(PropertiesParam.file_pre+ shop.getShopAvatarUrl());
         return shopDto;
     }
 
@@ -124,6 +125,7 @@ public class ShopServiceImpl implements ShopService {
     public void updateShop(ShopDto shopDto) {
         Shop shop = new Shop();
         BeanUtils.copyProperties(shopDto,shop);
+        shop.setShopAvatarUrl(shopDto.getAvatarUrl());
         shopMapper.updateByPrimaryKeySelective(shop);
     }
 

@@ -1,5 +1,6 @@
 package com.soufang.base.dto.shop;
 
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.enums.ShopStatusEnum;
@@ -34,6 +35,17 @@ public class ShopDto {
 
     public String getUrl() {
         return avatarUrl == null || "".equals(avatarUrl) ? avatarUrl : PropertiesParam.file_pre + avatarUrl;
+    }
+
+    private CompanyDto companyDto;
+
+
+    public CompanyDto getCompanyDto() {
+        return companyDto;
+    }
+
+    public void setCompanyDto(CompanyDto companyDto) {
+        this.companyDto = companyDto;
     }
 
     public String getStrCreateTime() {
@@ -143,6 +155,7 @@ public class ShopDto {
 
     // app店铺附加产品列表
     private List<ProductDto> productDtoList;
+
 
     public List<ProductDto> getProductDtoList() {
         return productDtoList;
