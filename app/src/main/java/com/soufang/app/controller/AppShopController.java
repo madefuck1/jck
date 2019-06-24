@@ -8,6 +8,7 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.utils.FtpClient;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -75,13 +76,20 @@ public class AppShopController extends AppBaseController {
                 return vo;
             }
         }
-        shopDto.setShopName(request.getParameter("shopName"));
-        shopDto.setShopIntroduce(request.getParameter("shopIntroduce"));
-        shopDto.setMainProducts(request.getParameter("mainProducts"));
+        if(StringUtils.isNotBlank(request.getParameter("shopIntroduce"))){
+            shopDto.setShopIntroduce(request.getParameter("shopIntroduce"));
+        }
+        if(StringUtils.isNotBlank(request.getParameter("mainProducts"))){
+            shopDto.setMainProducts(request.getParameter("mainProducts"));
+        }
         appShopFeign.updateShop(shopDto);
         CompanyDto companyDto = appUserFeign.companyInfo(shopDto.getUserId());
-        companyDto.setCompPhone(request.getParameter("compPhone"));
-        companyDto.setCompAddress(request.getParameter("compAddress"));
+        if(StringUtils.isNotBlank(request.getParameter("compPhone"))){
+            companyDto.setCompPhone(request.getParameter("compPhone"));
+        }
+        if(StringUtils.isNotBlank(request.getParameter("compAddress"))){
+            companyDto.setCompAddress(request.getParameter("compAddress"));
+        }
         appUserFeign.updateCompany(companyDto);
         ShopDto shopDetail = getShopInfo(request);
         vo.setData(shopDetail);

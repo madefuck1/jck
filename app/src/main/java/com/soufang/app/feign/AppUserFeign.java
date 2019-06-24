@@ -47,11 +47,8 @@ public interface AppUserFeign {
     @RequestMapping(value = "/core/user/detail",method = RequestMethod.POST)
     UserDto detail(@RequestBody Long id);
 
-    @RequestMapping(value = "/core/user/companyInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/core/company/companyInfo", method = RequestMethod.POST)
     CompanyDto companyInfo(@RequestBody Long id);
-
-    @RequestMapping(value = "/core/adminUser/login",method = RequestMethod.POST)
-    Result login(@RequestBody AdminUserDto adminUserDto);
 
     @RequestMapping(value = "/core/user/getList",method = RequestMethod.POST)
     PageHelp<UserDto> getList(@RequestBody UserSo userSo);
