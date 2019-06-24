@@ -121,4 +121,17 @@ public class ShopServiceImpl implements ShopService {
         BeanUtils.copyProperties(shopDto,shop);
         shopMapper.updateByPrimaryKeySelective(shop);
     }
+
+    @Override
+    public List<ShopDto> getHotShop(){
+        List<Shop > shopList = shopMapper.getHotShop();
+        List<ShopDto> shopDtos = new ArrayList<>();
+        for (Shop shop: shopList) {
+            ShopDto shopDto = new ShopDto();
+            BeanUtils.copyProperties(shop,shopDto);
+            shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
+            shopDtos.add(shopDto);
+        }
+        return shopDtos;
+    }
 }

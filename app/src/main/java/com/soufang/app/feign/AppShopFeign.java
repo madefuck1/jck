@@ -26,4 +26,7 @@ public interface AppShopFeign {
 
     @RequestMapping(value = "/core/shop/updateShop",method = RequestMethod.POST)
     Result updateShop(@RequestBody ShopDto shopDto);
+
+    @RequestMapping(value = "/core/shop/getHotShop",method = RequestMethod.POST)
+    List<ShopDto> getHotShop();
 }

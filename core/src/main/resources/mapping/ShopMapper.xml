@@ -253,4 +253,11 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where shop_id = #{shopId,jdbcType=BIGINT}
   </update>
+
+
+    <select id="getHotShop" resultMap="BaseResultMap"  >
+    select * from t_shop
+    order BY  shop_level DESC  LIMIT 0,10
+  </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.soufang.service;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.model.Shop;
 
 
 import java.util.List;
@@ -65,4 +66,7 @@ public interface ShopService {
     PageHelp<ShopDto> appGetList(ShopSo shopSo);
 
     void updateShop(ShopDto shopDto);
+
+    //获取热门店铺
+    List<ShopDto> getHotShop();
 }

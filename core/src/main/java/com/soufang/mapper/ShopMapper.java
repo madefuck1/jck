@@ -88,4 +88,7 @@ public interface ShopMapper {
     int updateByPrimaryKeySelective(Shop record);
 
     int updateByPrimaryKey(Shop record);
+
+    //获取热门店铺
+    List<Shop> getHotShop();
 }

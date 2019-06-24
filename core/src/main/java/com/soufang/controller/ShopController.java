@@ -165,4 +165,10 @@ public class ShopController {
         shopService.updateShop(shopDto);
         return result;
     }
+
+    @RequestMapping(value = "getHotShop",method = RequestMethod.POST)
+    public List<ShopDto> getHotShop(){
+        List<ShopDto> shopDtos = shopService.getHotShop();
+        return shopDtos;
+    }
 }

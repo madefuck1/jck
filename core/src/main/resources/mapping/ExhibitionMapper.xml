@@ -37,6 +37,9 @@
       <if test="exhibitionId != null and exhibitionId !=''">
       AND  te.exhibition_Id =#{exhibitionId}
       </if>
+    <if test="page != null and limit != null">
+      limit #{page},#{limit}
+    </if>
   </select>
 
 </mapper>
