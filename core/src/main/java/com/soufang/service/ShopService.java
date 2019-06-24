@@ -1,6 +1,8 @@
 package com.soufang.service;
 
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.model.Shop;
@@ -69,4 +71,8 @@ public interface ShopService {
 
     //获取热门店铺
     List<ShopDto> getHotShop();
+
+    ShopStatisticsDto getShopStatisticsInfo(Long shopId);
+
+    List<ProductDto> getShopProductManaList(ProductDto productDto);
 }

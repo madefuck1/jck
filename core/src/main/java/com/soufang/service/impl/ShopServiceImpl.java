@@ -2,17 +2,20 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.mapper.ProductMapper;
 import com.soufang.mapper.ShopMapper;
+import com.soufang.mapper.ShopStatisticsMapper;
 import com.soufang.model.Shop;
 import com.soufang.service.ShopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +29,13 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     ShopMapper shopMapper;
+
+    @Autowired
+    ShopStatisticsMapper shopStatisticsMapper;
+
+    @Autowired
+    ProductMapper productMapper;
+
 
     @Override
     public ShopDto getById(Long id) {
@@ -94,12 +104,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopDto getByUserId(Long userId) {
-        Shop shop = shopMapper.getByUserId(userId);
-        ShopDto shopDto = new ShopDto();
-        if (shop == null) {
-            return new ShopDto();
-        }
-        BeanUtils.copyProperties(shop, shopDto);
+        ShopDto shopDto = shopMapper.getByUserId(userId);
         return shopDto;
     }
 
@@ -133,5 +138,15 @@ public class ShopServiceImpl implements ShopService {
             shopDtos.add(shopDto);
         }
         return shopDtos;
+    }
+
+    @Override
+    public ShopStatisticsDto getShopStatisticsInfo(Long shopId) {
+        return shopStatisticsMapper.getInfoByShopId(shopId);
+    }
+
+    @Override
+    public List<ProductDto> getShopProductManaList(ProductDto productDto) {
+        return productMapper.getShopProductManaList(productDto);
     }
 }

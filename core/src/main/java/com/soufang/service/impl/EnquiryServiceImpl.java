@@ -87,7 +87,7 @@ public class EnquiryServiceImpl implements EnquiryService {
         //当没有用户信息则是查询我的报价信息
         if(!("".equals(enquirySo.getShopId())||enquirySo.getShopId()==null)){
             //查询SHOP信息通过用户ID
-            Shop shop =shopMapper.getByUserId(enquirySo.getUserId());
+            ShopDto shop =shopMapper.getByUserId(enquirySo.getUserId());
             //加入SHOPID
             enquirySo.setShopId(shop.getShopId());
             enquirySo.setUserId(null);

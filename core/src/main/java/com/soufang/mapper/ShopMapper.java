@@ -73,7 +73,7 @@ public interface ShopMapper {
      */
     List<Map<String, Object>> getShopIdAndNameOption();
 
-    Shop getByUserId(Long userId);
+    ShopDto getByUserId(Long userId);
 
     /**
      * app 获取店铺列表
