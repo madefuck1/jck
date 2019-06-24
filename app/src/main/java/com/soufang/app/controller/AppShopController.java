@@ -71,7 +71,7 @@ public class AppShopController extends AppBaseController {
         if(avatarUrl != null){
             Map<String , Object> map = FtpClient.uploadImage(avatarUrl,companyUrl);
             if((boolean)map.get("success")){
-                shopDto.setShopAvatarUrl(map.get("uploadName").toString());
+                shopDto.setAvatarUrl(map.get("uploadName").toString());
             }else {
                 vo.setSuccess(false);
                 vo.setMessage("图片上传失败");
