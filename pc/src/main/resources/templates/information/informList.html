@@ -1,0 +1,198 @@
+<@override name="title">
+行业资讯
+</@override>
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/new.css">
+</@override>
+<@override name="body">
+	<div id="new-up">
+		<div class="new01">
+			<h3>e广通头条</h3>
+			<div class="newleft">
+				  <div data-am-widget="slider" class="am-slider am-slider-a3" data-am-slider='{"directionNav":false}' >
+				  <ul class="am-slides" id="leftPhotos">
+				  </ul>
+				</div>
+			</div>
+			<div class="newright" id="headlines">
+			</div>
+		</div>
+		<div class="new02">
+			<div class="new02-left" style="margin-right: 20px">
+				<h3>行业资讯</h3>
+				<div class="pic">
+					<dl class="dl01" id="d101">
+					</dl>
+					<div id="d101mores"></div>
+				</div>
+			</div>
+			<div class="new02-left new02-right">
+				<h3>政府要闻</h3>
+				<div class="pic">
+					<dl class="dl01" id="governNews">
+					</dl>
+					<div id="governNewsTexts"></div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="new02 new03">
+			<div class="new02-left">
+				<h3>热点精选</h3>
+				<div class="pic">
+					<dl class="dl01" id="hotNews">
+					</dl>
+					<button class="am-btn am-btn-block More">浏览更多</button>
+				</div>
+				
+			</div>
+			<div class="new02-left new03-right">
+				<h3>图片资讯</h3>
+				<div class="new03-pic" id="newPic" style="margin-right: 10px;">
+				</div>
+			</div>
+		</div>
+	</div>
+</@override>
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+<script>
+    $(function(){
+        informList("");
+    });
+
+    function informList(id) {
+        var str={id:id};
+        var num1=1;
+        var num2=1;
+        var num3=1;
+        $.ajax({
+            url : "selInformList",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                    if (v.origin==1){
+                        var whatever1=liContent1(v);
+                        $("#headlines").append(whatever1);
+                        if (num1<5){
+                            //广通展示图片4
+                            var whatever=liContent(v);
+                            $("#leftPhotos").append(whatever);
+						}
+                        num1++;
+					}else if(v.origin==2){
+                        var conts=v.content.split("</p>");
+                        //行业资讯
+                        if (num2==1){
+						var str2= "<dt style='width:190px;height:107px;'><img src='"+v.picture+"'  alt='无照片'></dt><dd><h4>"+v.title+"</h4></dd><dd>"+conts[0]+"</p></dd>"
+							$("#d101").html(str2);
+                        }else{
+                            var whatever2=liContent2(v);
+                            $("#d101mores").append(whatever2);
+						}
+                        num2++;
+					}else if(v.origin==3){
+                        var conts=v.content.split("</p>");
+                        //政府要闻
+                        if(num3==1){
+                            var str3= "<dt style='width: 190px;height: 107px;'><img src='"+v.picture+"' alt='无照片'></dt><dd><h4>"+v.title+"</h4></dd><dd>"+conts[0]+"</p></dd>"
+                            $("#governNews").html(str3);
+						}else{
+                            var whatever3=liContent2(v);
+                            $("#governNewsTexts").append(whatever3);
+						}
+                        num3++;
+					}else if(v.origin==4){
+                        //热点精选
+                        var whatever4=liContent4(v);
+                        $("#hotNews").append(whatever4);
+                    }else{
+                        var whatever5=liContent5(v);
+                        $("#newPic").append(whatever5);
+                    }
+
+                });
+            }
+        });
+    }
+    //e广通头条-图片轮播
+	function liContent(v){
+        var li=$("<li><img src='"+v.picture+"' alt='无照片'></li>");
+        return li;
+	}
+    //e广通头条-标题
+    function liContent1(v) {
+		var li=$("<p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>");
+		return li;
+    }
+	//行业资讯-政府要闻
+    function liContent2(v) {
+		var li=$("<p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>");
+		return li;
+    }
+    //热点精选
+    function liContent4(v) {
+        var conts=v.content.split("</p>");
+		var li=$(
+            +"<dt><img src='"+v.picture+"' alt='无照片'></dt>"
+            +"<dd><h4>"+v.title+"</h4></dd>"
+        +"<dd>"+conts[0]+"</p></dd>"
+        +"</dl>"
+		);
+		return li;
+    }
+	//图片资讯
+    function liContent5(v) {
+        var li=$("<img src='"+v.picture+"' alt=''>" +
+			"<p>"+v.title+"</p>");
+		return li;
+    }
+    //查看详情
+    function toDetail(id) {
+        window.location.href="/inform/toInformDetail?id="+id;
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

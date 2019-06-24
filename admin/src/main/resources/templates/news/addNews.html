@@ -1,5 +1,5 @@
 <@override name="title">
-新增字段
+新增新闻
 </@override>
 
 <@override name="css">
@@ -33,7 +33,14 @@
         <div class="layui-inline">
             <label class="layui-form-label">来源</label>
             <div class="layui-input-inline">
-                <input type="text" name="news_origin" id="news_origin" lay-verify="required" autocomplete="off" class="layui-input">
+                <select name="news_origin" id="news_origin" lay-verify="required" autocomplete="off" class="layui-input">
+                   <option value="0">请选择</option>
+                    <option value="1">e广通头条</option>
+                    <option value="2">行业资讯</option>
+                    <option value="3">政府要闻</option>
+                    <option value="4">热点精选</option>
+                    <option value="5">图片资讯</option>
+                </select>
             </div>
         </div>
     </div>
@@ -59,7 +66,7 @@
 
         layedit.set({
             uploadImage:{
-                url: '/admin/news/addNewsImg'
+                url: 'addNewsImg'
                 ,type:'post'
             }
         })
@@ -83,7 +90,7 @@
         var myContent = layedit.getContent(indexs);
         myContent = myContent.replace(/\"/g,"'");//将字符串中""全部替换成''
         var data = '{"title":"'+$("#news_title").val()+'","author":"'+$('#news_author').val()+'","content":"'+myContent+'","origin":"'+$('#news_origin').val()+'"}' ;
-        $.ajax({
+         $.ajax({
             url: "addNews",
             data:  data,
             type: "post",

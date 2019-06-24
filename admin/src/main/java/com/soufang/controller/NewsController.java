@@ -70,6 +70,12 @@ public class NewsController {
         return "/news/addNews";
     }
 
+
+    /**
+     * 新增新闻资讯
+     * @param newsReqVo
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "addNews", method = RequestMethod.POST)
     public AdminVo addNews(@RequestBody NewsReqVo newsReqVo){
@@ -113,8 +119,13 @@ public class NewsController {
         return adminVo;
     }
 
+    /**
+     * 新闻资讯新增时上传图片
+     * @param file
+     */
     @RequestMapping(value = "addNewsImg", method = RequestMethod.POST)
     public void addNewsImg(@RequestParam("file")MultipartFile file){
         Map<String,Object> map = FtpClient.uploadImage(file,"/news");
+
     }
 }
