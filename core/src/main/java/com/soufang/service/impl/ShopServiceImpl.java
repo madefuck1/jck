@@ -119,6 +119,7 @@ public class ShopServiceImpl implements ShopService {
     public void updateShop(ShopDto shopDto) {
         Shop shop = new Shop();
         BeanUtils.copyProperties(shopDto,shop);
+        shop.setShopAvatarUrl(shopDto.getAvatarUrl());
         shopMapper.updateByPrimaryKeySelective(shop);
     }
 
