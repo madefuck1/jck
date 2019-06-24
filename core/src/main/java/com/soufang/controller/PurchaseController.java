@@ -104,5 +104,11 @@ public class PurchaseController {
         return i;
     }
 
+    //查询用户是否对改询盘报价过
+    @RequestMapping(value = "userPurchaseNumber",method = RequestMethod.POST)
+    int userPurchaseNumber(@RequestBody PurchaseSo purchaseSo){
+        return purchaseService.userPurchaseNumber(purchaseSo);
+    }
+
 
 }

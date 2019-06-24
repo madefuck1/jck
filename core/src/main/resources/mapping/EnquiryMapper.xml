@@ -62,6 +62,7 @@
         <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
         <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
         <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
       </collection>
       <collection property="assort" ofType="com.soufang.model.Assort">
         <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
@@ -112,6 +113,7 @@
         <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
         <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
         <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <collection property="shop" ofType="com.soufang.model.Shop">
         <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
         <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>

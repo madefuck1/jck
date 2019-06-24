@@ -95,6 +95,8 @@
 					<th>操作</th>
 				</tr>
 			</thead>
+			<tbody id="contant" >
+			</tbody>
 	</table>
 	</div>
 
@@ -123,7 +125,6 @@
                 $("#statusMessage").val(data.statusMessage);
                 $("#productNumber").html(data.enquiryProductDto[0].productNumber);
                 $("#enquiryProductId").html(data.enquiryProductDto[0].enquiryProductId);
-                $("#enquiryProductId").val(data.enquiryProductDto[0].enquiryProductId);
                 $("#productUnit").html(data.enquiryProductDto[0].productUnit);
                 $("#takeAddress").html(data.takeAddress);
                 $("#enquiryRemark").html(data.enquiryRemark);
@@ -133,22 +134,21 @@
                 $.each(data.enquiryProductDto, function (i, v) {
                     //需要循环插入报价信息
                     var whatever = liContent(v);
-                    $("#purchaseTables").append(whatever)
+                    $("#contant").append(whatever)
                 });
             }
         });
 	});
         function liContent(v){
             var purchases=v.purchases;
-            var li;
-            var tables="";
+            console.log(purchases);
+            var li="";
             var doThis;
 			for(var i = 0 ;i< purchases.length ; i++) {
                 if(purchases[i].purchaseNumber==null||purchases[i].purchaseNumber==""){
-                    tables=$("<tbody><tr>"
+                    li=$("<tr>"
                         +"<td colspan='5'>当前没有报价信息</td>"
                         +"</tr>"
-                        +"</tbody>"
                     )
                 }else{
                     var offerTime = purchases[i].strOfferTime;
@@ -160,37 +160,35 @@
                         remark="无";
 					}
                     var purchaseNumber = purchases[i].purchaseNumber;
+                    console.log();
                     if ($("#statusMessage").val()!="已报价"){
-                        if (purchases[i].offerStatus==3) {
-                            doThis = "<td style='color: #40ADFB'>已拒绝</td>"
-                        }else{
                             doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
-						}
                     }else{
-                            doThis="<td style='color: #40ADFB'>已报价</td>"
+                        if (purchases[i].offerStatus==2) {
+                            doThis = "<td style='color: #40ADFB'>已接收</td>"
+                        }else{
+                            doThis="<td style='color: #40ADFB'>已拒绝</td>"
+						}
+
 
                     }
-                    li +=
-                        "<td>" + offerTime + "</td>"
+                    li+="<tr>"
+                        +"<td>" + offerTime + "</td>"
                         + "<td>" + shopName + "</td>"
                         + "<td>￥" + unitPrice + "/" + productUnit + "</td>"
                         + "<td>" + remark + "</td>"
 						+doThis
-                    tables=$("<tbody><tr>"
-                        +li
-                        +"</tr>"
-                        +"</tbody>"
-                    );
+                    +"</tr>"
+
                 }
             }
-                return tables;
+                return li;
         }
     function isUseRejused(purchaseNumber,offStatus){
 		var enquiryNumber= $("#enquiryNumber").val();
-		var enquiryProductId= $("#enquiryProductId").val();
-        console.log(purchaseNumber,offStatus,enquiryNumber);
+		console.log(enquiryProductId);
 		var str ={purchaseNumber:purchaseNumber,offerStatus:offStatus,enquiryNumber:enquiryNumber,enquiryProductId:enquiryProductId};
-        $.ajax({
+       $.ajax({
             url: "acceptPurchase",
             type: "post",
             data: JSON.stringify(str),
@@ -201,8 +199,6 @@
                     alert("操作成功");
                     window.location.href="/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId;
 				}
-
-
             }
         });
     }
