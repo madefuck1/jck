@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "app/index/")
-public class ExhibitionController extends AppBaseController{
+public class AppExhibitionController extends AppBaseController{
     @Autowired
     ExhibitionFeign exhibitionFeign;
 
@@ -43,8 +43,8 @@ public class ExhibitionController extends AppBaseController{
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "getExhibitionList",method = RequestMethod.POST)
-    public ExhibitionListVo getExhibitionList(@RequestBody ExhibitionSo exhibitionSo){
+    @RequestMapping(value = "selExhibitionList",method = RequestMethod.POST)
+    public ExhibitionListVo selExhibitionList(@RequestBody ExhibitionSo exhibitionSo){
         ExhibitionListVo enquiryListVo=new ExhibitionListVo();
         PageHelp<ExhibitionDto> pageHelp =exhibitionFeign.selExhibitionList(exhibitionSo);
         enquiryListVo.setData(pageHelp.getData());
@@ -57,8 +57,8 @@ public class ExhibitionController extends AppBaseController{
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "getExhibitionList/{exhibitionId}",method = RequestMethod.POST)
-    public ExhibitionListVo getExhibitionList(@RequestBody String exhibitionId){
+    @RequestMapping(value = "selExhibitionList/{exhibitionId}",method = RequestMethod.POST)
+    public ExhibitionListVo selExhibitionList(@RequestBody String exhibitionId){
         ExhibitionListVo enquiryListVo=new ExhibitionListVo();
         ExhibitionSo exhibitionSo= new ExhibitionSo();
         exhibitionSo.setExhibitionId(Integer.valueOf(exhibitionId));
