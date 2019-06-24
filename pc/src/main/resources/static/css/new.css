@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+.tog,#search,.sear .sousuo,#contain{
+	background: #fff!important;
+	
+}
+.tog_in ul{
+	padding-left: 0px;
+	margin: 0px;
+}
+
+#new-up{
+	width: 1190px;
+	min-height: 900px;
+	background: #fff;
+	margin: 20px auto;
+	overflow: hidden;
+	margin-bottom: 0px;
+}
+.newleft{
+	width: 560px;
+	height: 315px;
+	float: left;
+	margin-right: 20px;
+}
+
+.am-slider-a3 .am-control-nav{
+	opacity: 0.5;
+	height: 40px;
+	bottom: 0px;
+}
+
+.am-slider-a3 .am-control-nav li{
+	float: right;
+}
+#new-up{
+	padding: 20px;
+}
+.new01{
+	width: 1150px;
+	/*min-height: 330px;*/
+	overflow: hidden;
+}
+h3{
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.newright{
+	float: left;
+	width: 570px;
+}
+.newright p{
+	line-height: 22px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.newright p a{
+	font-size: 16px;
+	color: #333;
+	
+}
+.newright p a:hover{
+	color: #F58022;
+}
+.new02{
+	/*width: 1150px;
+	min-height: 380px;*/
+	overflow: hidden;
+}
+.new02-left{
+	float: left;
+	width: 565px;
+	height: 380px;
+}
+
+.new02-left .pic{
+	width: 565px;
+	height: 300px;
+	margin: 0px;
+}
+.new02-left .dl01 dt{
+	float: left;
+	width: 200px;
+}
+.new02-left .dl01 dd{
+	
+}
+
+.new02-left h4{
+	font-size: 16px!important;
+	font-weight: bold;
+	
+}
+
+.dl01 p{
+	color: #999;
+	line-height: 22px;
+	font-size: 16px;
+	cursor: pointer
+}
+
+.dl01{
+	height: 107px;
+}
+
+.pic p{
+	font-size: 16px;
+	cursor: pointer;
+}
+
+img{
+	cursor: pointer;
+}
+
+.new03 .new02-left,.new03 .new02-left .pic{
+	width: 770px;
+}
+.new03{
+	width: 1190px;
+}
+.new03 p{
+	height: 48px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;/*显示几行*/
+}
+.new03 .new02-left{
+	min-height: 880px;
+	margin-right: 20px;
+	
+}
+.new03 .new03-right{
+	float: left;
+	width: 360px;
+}
+.new03 .new03-pic p{
+	height: auto!important;
+	margin: 0px;
+	line-height: 36px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inherit;
+	
+}
+.new03-pic{
+	width: 175px;
+	float: left;
+	margin-bottom: 10px
+	
+}
+.More{
+	background: #F5F5F5;
+	padding: 12px;
+	font-size: 16px!important;
+	color: #999;
+}
+
+
