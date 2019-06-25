@@ -191,9 +191,9 @@ public class StoreConstructionController {
      * @param shopId
      * @return
      */
-    @RequestMapping(value = "isExitStoreInfo", method = RequestMethod.POST)
-    public Boolean isExitStoreInfo(@RequestBody Long shopId) {
-        return storeConstructionService.isExitStoreInfo(shopId);
+    @RequestMapping(value = "isExistStoreInfo", method = RequestMethod.POST)
+    public Boolean isExistStoreInfo(@RequestBody Long shopId) {
+        return storeConstructionService.isExistStoreInfo(shopId);
     }
 
 }

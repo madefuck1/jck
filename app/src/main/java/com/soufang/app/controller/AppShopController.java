@@ -4,17 +4,19 @@ import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppProductManageFeign;
 import com.soufang.app.feign.AppShopFeign;
 import com.soufang.app.feign.AppStoreConstructionFeign;
-import com.soufang.app.vo.productManage.ListProductVo;
+import com.soufang.app.feign.FavoriteFeign;
 import com.soufang.app.vo.shop.DetailStoreVo;
 import com.soufang.app.vo.shop.DetailVo;
 import com.soufang.app.vo.shop.ListShopReqVo;
 import com.soufang.app.vo.shop.ListShopVo;
 import com.soufang.base.PageBase;
 import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
+import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.utils.FtpClient;
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +41,9 @@ public class AppShopController extends AppBaseController {
 
     @Autowired
     AppProductManageFeign appProductManageFeign;
+
+    @Autowired
+    FavoriteFeign favoriteFeign;
 
     @Value("${upload.company}")
     private String companyUrl;
@@ -69,10 +74,10 @@ public class AppShopController extends AppBaseController {
      * @return
      */
     @RequestMapping(value = "getShopDetail/{shopId}", method = RequestMethod.POST)
-    public DetailStoreVo getShopDetail(@PathVariable Long shopId) {
+    public DetailStoreVo getShopDetail(HttpServletRequest request, @PathVariable Long shopId) {
         DetailStoreVo vo = new DetailStoreVo();
         // 判断是否已经装修
-        Boolean exitStoreInfo = appStoreConstructionFeign.isExitStoreInfo(shopId);
+        Boolean exitStoreInfo = appStoreConstructionFeign.isExistStoreInfo(shopId);
         if (exitStoreInfo) {
             //  已完成装修 返回具体信息
             // 店铺信息
@@ -81,6 +86,18 @@ public class AppShopController extends AppBaseController {
             shopDetail.setShopStatisticsDto(shopStatisticsInfo);
             StoreConstructionDto storeInfo = appStoreConstructionFeign.getStoreInfo(shopId);
             shopDetail.setLogoUrl(storeInfo.getStoreLogoUrl());
+            // 用户是否登录 登录查询是否已经收藏
+            UserDto userInfo = getUserInfo(request);
+            if (userInfo != null && userInfo.getUserId() != null) {
+                FavoriteDto favoriteDto = new FavoriteDto();
+                favoriteDto.setUserId(userInfo.getUserId());
+
+                favoriteDto.setFavoriteTargetType(2);
+                favoriteDto.setFavoriteTargetId(shopDetail.getShopId());
+                shopDetail.setCollection(favoriteFeign.isFavorite(favoriteDto));
+            }else{
+                shopDetail.setCollection(false);
+            }
             // 店铺推荐产品 取销量前六个
             List<ProductDto> productDtos = appProductManageFeign.getProductTop6(shopId);
             shopDetail.setProductDtoList(productDtos);

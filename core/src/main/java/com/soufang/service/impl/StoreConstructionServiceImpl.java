@@ -38,7 +38,7 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
     StoreCurouselMapMapper storeCurouselMapMapper;
 
     @Override
-    public Boolean isExitStoreInfo(Long shopId) {
+    public Boolean isExistStoreInfo(Long shopId) {
         StoreConstructionDto storeCInfo = storeConstructionMapper.getStoreCInfo(shopId);
         if (storeCInfo != null && storeCInfo.getStoreStatus() != 0) {
             return true;
