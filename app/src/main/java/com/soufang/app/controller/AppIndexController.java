@@ -13,6 +13,7 @@ import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.exhibition.ExhibitionSo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,6 +56,23 @@ public class AppIndexController extends AppBaseController{
     @RequestMapping(value = "getExhibitionList",method = RequestMethod.POST)
     public ExhibitionVo getExhibitionList(){
         ExhibitionSo so = new ExhibitionSo();
+        so.setPage(0);
+        so.setLimit(10);
+        ExhibitionVo vo = new ExhibitionVo();
+        PageHelp<ExhibitionDto> exhibitionDtos = appExhibitionFeign.selExhibitionList(so);
+        vo.setData(exhibitionDtos.getData());
+        return vo;
+    }
+
+    /**
+     * 查看详情-展会
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getExhibitionList/{exhibitionId}",method = RequestMethod.POST)
+    public ExhibitionVo getExhibitionList(@PathVariable String exhibitionId){
+        ExhibitionSo so = new ExhibitionSo();
+        so.setExhibitionId(Integer.valueOf(exhibitionId));
         so.setPage(0);
         so.setLimit(10);
         ExhibitionVo vo = new ExhibitionVo();
