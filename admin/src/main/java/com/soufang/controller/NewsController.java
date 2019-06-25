@@ -14,11 +14,14 @@ import com.soufang.base.utils.FtpClient;
 import com.soufang.feign.AdminNewsFeign;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.crypto.Data;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -123,9 +126,24 @@ public class NewsController {
      * 新闻资讯新增时上传图片
      * @param file
      */
+    @ResponseBody
     @RequestMapping(value = "addNewsImg", method = RequestMethod.POST)
-    public void addNewsImg(@RequestParam("file")MultipartFile file){
-        Map<String,Object> map = FtpClient.uploadImage(file,"/news");
-
+    public Object addNewsImg(@RequestParam("file")MultipartFile file) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> map = FtpClient.uploadImage(file, "/news");
+        if ((boolean) map.get("success")) {
+            Map<String, Object> result2 = new HashMap<String, Object>();
+            String uploadNameUrl = String.valueOf(map.get("uploadName"));
+            result2.put("src",uploadNameUrl);
+            result2.put("title",StringUtils.substringAfterLast(uploadNameUrl,"/"));
+            result.put("code", 0);    //0表示上传成功
+            result.put("msg", "上传成功"); //提示消息
+            result.put("data",result2);
+        } else {
+            result.put("code", 1);
+            result.put("msg", "上传失败");
+        }
+        return result;
     }
+
 }
