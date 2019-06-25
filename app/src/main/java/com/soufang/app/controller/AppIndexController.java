@@ -5,6 +5,7 @@ import com.soufang.app.feign.AppExhibitionFeign;
 import com.soufang.app.feign.AppProductManageFeign;
 import com.soufang.app.feign.AppShopFeign;
 import com.soufang.app.vo.banner.BannerVo;
+import com.soufang.app.vo.exhibition.ExhibitionListVo;
 import com.soufang.app.vo.exhibition.ExhibitionVo;
 import com.soufang.app.vo.productManage.ListHotProductReqVo;
 import com.soufang.app.vo.shop.ListShopVo;
@@ -16,10 +17,7 @@ import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.exhibition.ExhibitionSo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,10 +56,10 @@ public class AppIndexController extends AppBaseController{
 
     @ResponseBody
     @RequestMapping(value = "getExhibitionList",method = RequestMethod.POST)
-    public ExhibitionVo getExhibitionList(){
+    public ExhibitionVo getExhibitionList(@RequestBody ExhibitionSo exhibitionSo){
         ExhibitionSo so = new ExhibitionSo();
-        so.setPage(0);
-        so.setLimit(10);
+        so.setPage(exhibitionSo.getPage());
+        so.setLimit(exhibitionSo.getLimit());
         ExhibitionVo vo = new ExhibitionVo();
         PageHelp<ExhibitionDto> exhibitionDtos = appExhibitionFeign.selExhibitionList(so);
         vo.setData(exhibitionDtos.getData());
