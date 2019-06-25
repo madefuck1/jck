@@ -1,6 +1,7 @@
 package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.enums.UserLevelEnum;
 import com.soufang.base.search.user.UserSo;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getById(Long id) {
         UserDto userDto = userMapper.getById(id);
+        userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
         return userDto;
     }
 
