@@ -42,4 +42,6 @@ public interface StoreConstructionService {
     PageHelp<ProductDto> initProduct(ProductDto productDto);
 
     Result saveProductAssort(StoreProductAssortDto productAssortDto);
+
+    Boolean isExitStoreInfo(Long shopId);
 }

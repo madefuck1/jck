@@ -32,11 +32,11 @@ public interface ProductManageService {
      * @param productId,type
      * @return
      */
-    boolean updateProductStatistics(Long productId,Integer type);
+    boolean updateProductStatistics(Long productId, Integer type);
 
     void registerProduct(ProductDto dto);
 
-    PageHelp<ProductDto> hotList( );
+    PageHelp<ProductDto> hotList();
 
     List<ProductDto> getFootPrintList(ProductDto dto);
 
@@ -59,4 +59,6 @@ public interface ProductManageService {
     PageHelp<ProductDto> getAssortProduct(ProductManageSo so);
 
     PageHelp<ProductDto> getIndexFootProduct();
+
+    List<ProductDto> getProductTop6(ProductDto dto);
 }
