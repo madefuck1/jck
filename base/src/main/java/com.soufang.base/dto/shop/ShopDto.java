@@ -1,7 +1,7 @@
 package com.soufang.base.dto.shop;
 
-import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.utils.DateUtils;
@@ -30,8 +30,7 @@ public class ShopDto {
     // 店铺统计信息
     private ShopStatisticsDto shopStatisticsDto;
 
-    public ShopDto() {
-    }
+    private String logoUrl;
 
     public String getUrl() {
         return avatarUrl == null || "".equals(avatarUrl) ? avatarUrl : PropertiesParam.file_pre + avatarUrl;
@@ -179,6 +178,14 @@ public class ShopDto {
 
     public void setProductCount(Integer productCount) {
         this.productCount = productCount;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }
 

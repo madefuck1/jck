@@ -1,8 +1,11 @@
 package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
+import com.soufang.app.feign.AppProductManageFeign;
 import com.soufang.app.feign.AppShopFeign;
+import com.soufang.app.feign.AppStoreConstructionFeign;
 import com.soufang.app.vo.productManage.ListProductVo;
+import com.soufang.app.vo.shop.DetailStoreVo;
 import com.soufang.app.vo.shop.DetailVo;
 import com.soufang.app.vo.shop.ListShopReqVo;
 import com.soufang.app.vo.shop.ListShopVo;
@@ -11,19 +14,16 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.shop.ShopStatisticsDto;
+import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.utils.FtpClient;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +33,12 @@ public class AppShopController extends AppBaseController {
 
     @Autowired
     AppShopFeign appShopFeign;
+
+    @Autowired
+    AppStoreConstructionFeign appStoreConstructionFeign;
+
+    @Autowired
+    AppProductManageFeign appProductManageFeign;
 
     @Value("${upload.company}")
     private String companyUrl;
@@ -62,13 +68,28 @@ public class AppShopController extends AppBaseController {
      *
      * @return
      */
-    @RequestMapping(value = "getShopDetail", method = RequestMethod.POST)
-    public DetailVo getShopDetail(HttpServletRequest request) {
-        DetailVo vo = new DetailVo();
-        ShopDto shopDetail = getShopInfo(request);
-        CompanyDto companyDto = appUserFeign.companyInfo(shopDetail.getUserId());
-        shopDetail.setCompanyDto(companyDto);
-        vo.setData(shopDetail);
+    @RequestMapping(value = "getShopDetail/{shopId}", method = RequestMethod.POST)
+    public DetailStoreVo getShopDetail(@PathVariable Long shopId) {
+        DetailStoreVo vo = new DetailStoreVo();
+        // 判断是否已经装修
+        Boolean exitStoreInfo = appStoreConstructionFeign.isExitStoreInfo(shopId);
+        if (exitStoreInfo) {
+            //  已完成装修 返回具体信息
+            // 店铺信息
+            ShopDto shopDetail = appShopFeign.getShopDetail(shopId);
+            ShopStatisticsDto shopStatisticsInfo = appShopFeign.getShopStatisticsInfo(shopId);
+            shopDetail.setShopStatisticsDto(shopStatisticsInfo);
+            StoreConstructionDto storeInfo = appStoreConstructionFeign.getStoreInfo(shopId);
+            shopDetail.setLogoUrl(storeInfo.getStoreLogoUrl());
+            // 店铺推荐产品 取销量前六个
+            List<ProductDto> productDtos = appProductManageFeign.getProductTop6(shopId);
+            shopDetail.setProductDtoList(productDtos);
+            vo.setData(shopDetail);
+        } else {
+            // 未装修   返回空
+            vo.setSuccess(false);
+            vo.setMessage("店铺未装修");
+        }
         return vo;
     }
 
@@ -80,6 +101,7 @@ public class AppShopController extends AppBaseController {
      * @param avatarUrl
      * @return
      */
+    @AppMemberAccess
     @RequestMapping(value = "updateInfo", method = RequestMethod.POST)
     public DetailVo updateInfo(HttpServletRequest request, MultipartFile avatarUrl) {
         DetailVo vo = new DetailVo();
@@ -94,18 +116,18 @@ public class AppShopController extends AppBaseController {
                 return vo;
             }
         }
-        if(StringUtils.isNotBlank(request.getParameter("shopIntroduce"))){
+        if (StringUtils.isNotBlank(request.getParameter("shopIntroduce"))) {
             shopDto.setShopIntroduce(request.getParameter("shopIntroduce"));
         }
-        if(StringUtils.isNotBlank(request.getParameter("mainProducts"))){
+        if (StringUtils.isNotBlank(request.getParameter("mainProducts"))) {
             shopDto.setMainProducts(request.getParameter("mainProducts"));
         }
         appShopFeign.updateShop(shopDto);
         CompanyDto companyDto = appUserFeign.companyInfo(shopDto.getUserId());
-        if(StringUtils.isNotBlank(request.getParameter("compPhone"))){
+        if (StringUtils.isNotBlank(request.getParameter("compPhone"))) {
             companyDto.setCompPhone(request.getParameter("compPhone"));
         }
-        if(StringUtils.isNotBlank(request.getParameter("compAddress"))){
+        if (StringUtils.isNotBlank(request.getParameter("compAddress"))) {
             companyDto.setCompAddress(request.getParameter("compAddress"));
         }
         appUserFeign.updateCompany(companyDto);

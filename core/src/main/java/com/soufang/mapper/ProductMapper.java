@@ -49,5 +49,5 @@ public interface ProductMapper {
 
     List<ProductDto> getShopProductManaList(ProductDto ProductDto);
 
-
+    List<ProductDto> getProductTop6(ProductDto dto);
 }
