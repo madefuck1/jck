@@ -40,7 +40,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     //查询所有
    public  List<ExhibitionDto> selExhibition(ExhibitionSo exhibitionSo){
-       exhibitionSo.setPage((exhibitionSo.getPage() - 1) * 5);
+       if(!(exhibitionSo.getPage()==0||"".equals(exhibitionSo.getPage()))){
+           exhibitionSo.setPage((exhibitionSo.getPage() - 1) * 5);
+       }
        List<Exhibition> exhibitionList =exhibitionMapper.selExhibition(exhibitionSo);
        List<ExhibitionDto> exhibitionDtoList=new ArrayList<>();
        //转化对象DTO
