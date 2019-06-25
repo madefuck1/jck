@@ -76,13 +76,12 @@
         <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
         <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
         <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
-        <result column="product_count" property="productCount" jdbcType="INTEGER"/>
         <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
   <select id="getByUserId" resultMap="ShopAndProductCountMap" parameterType="java.lang.Long" >
-    select *,GetProductCountByShopId(shop_id)product_count from t_shop
+    select * from t_shop
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
 

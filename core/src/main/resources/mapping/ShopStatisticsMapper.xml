@@ -8,6 +8,13 @@
     <result column="shop_collection_count" property="shopCollectionCount" jdbcType="BIGINT" />
     <result column="shop_browse_count" property="shopBrowseCount" jdbcType="BIGINT" />
   </resultMap>
+  <resultMap id="ShopStatisticsDto" type="com.soufang.base.dto.shop.ShopStatisticsDto" >
+    <id column="shop_statistics_id" property="shopStatisticsId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_product_count" property="shopProductCount" jdbcType="BIGINT" />
+    <result column="shop_collection_count" property="shopCollectionCount" jdbcType="BIGINT" />
+    <result column="shop_browse_count" property="shopBrowseCount" jdbcType="BIGINT" />
+  </resultMap>
   <sql id="Base_Column_List" >
     shop_statistics_id, shop_id, shop_product_count, shop_collection_count, shop_browse_count
   </sql>
@@ -92,7 +99,7 @@
   </update>
 
 
-  <select id="getInfoByShopId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getInfoByShopId" parameterType="java.lang.Long" resultMap="ShopStatisticsDto">
     select
     <include refid="Base_Column_List" />
     from t_shop_statistics
