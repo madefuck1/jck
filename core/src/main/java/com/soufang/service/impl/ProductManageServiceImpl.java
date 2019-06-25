@@ -14,7 +14,6 @@ import com.soufang.mapper.*;
 import com.soufang.model.*;
 import com.soufang.service.ProductManageService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -398,4 +397,8 @@ public class ProductManageServiceImpl implements ProductManageService {
         return pageHelp;
     }
 
+    @Override
+    public List<ProductDto> getProductTop6(ProductDto dto) {
+        return productMapper.getProductTop6(dto);
+    }
 }

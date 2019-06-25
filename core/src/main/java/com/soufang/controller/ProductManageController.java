@@ -33,11 +33,11 @@ public class ProductManageController {
 
 
     @RequestMapping(value = "createProductFirst", method = RequestMethod.POST)
-    public Result createProductFirst(@RequestBody ProductDto productDto){
+    public Result createProductFirst(@RequestBody ProductDto productDto) {
         Result result = new Result();
-        try{
+        try {
             result = productManageService.createProductFirst(productDto);
-        }catch (BusinessException e){
+        } catch (BusinessException e) {
             result.setSuccess(false);
             result.setMessage(e.getMessage());
         }
@@ -66,7 +66,7 @@ public class ProductManageController {
     @RequestMapping(value = "getHotProductList", method = RequestMethod.POST)
     public PageHelp<ProductDto> hotList() {
         PageHelp<ProductDto> pageHelp = productManageService.hotList();
-       return pageHelp;
+        return pageHelp;
     }
 
 
@@ -108,15 +108,16 @@ public class ProductManageController {
 
     /**
      * 封装specList
+     *
      * @return
      */
     private List<SpecDto> getSpecDtoList(ProductDto productDto) {
         List<SpecDto> specDtos = new ArrayList<>();
-        for(ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()){
+        for (ProductSpecDto productSpecDto : productDto.getProductSpecDtoList()) {
             SpecDto spec = new SpecDto();
-            int number = -1 ;
-            for(int i=0 ; i <specDtos.size() ; i++){
-                if(productSpecDto.getSpecName().equals(specDtos.get(i).getSpecName())){
+            int number = -1;
+            for (int i = 0; i < specDtos.size(); i++) {
+                if (productSpecDto.getSpecName().equals(specDtos.get(i).getSpecName())) {
                     number = i;
                 }
             }
@@ -126,7 +127,7 @@ public class ProductManageController {
             specDetailDto.setMaxNumber(productSpecDto.getMaxNumber());
             specDetailDto.setPriceSecret(productSpecDto.getPriceSecret());
             specDetailDto.setSpecNumber(productSpecDto.getSpecNumber());
-            if(number < 0){
+            if (number < 0) {
                 spec.setSpecName(productSpecDto.getSpecName());
                 spec.setMin(productSpecDto.getMin());
                 spec.setSpecDetailDtoList(new ArrayList<>());
@@ -134,7 +135,7 @@ public class ProductManageController {
                 list.add(specDetailDto);
                 spec.setSpecDetailDtoList(list);
                 specDtos.add(spec);
-            }else {
+            } else {
                 List<SpecDetailDto> list = specDtos.get(number).getSpecDetailDtoList();
                 list.add(specDetailDto);
                 specDtos.get(number).setSpecDetailDtoList(list);
@@ -233,45 +234,54 @@ public class ProductManageController {
 
     /**
      * 根据productId specName number  获取对应价格
+     *
      * @param shopCarProductDto
      * @return
      */
     @RequestMapping(value = "selectPrice", method = RequestMethod.POST)
-    public BigDecimal selectPrice(@RequestBody ShopCarProductDto shopCarProductDto){
+    public BigDecimal selectPrice(@RequestBody ShopCarProductDto shopCarProductDto) {
         return productManageService.selectPrice(shopCarProductDto);
     }
 
     @RequestMapping(value = "getShopProductList", method = RequestMethod.POST)
-    public PageHelp<ProductDto> getShopProductList(@RequestBody ProductManageSo productSo){
+    public PageHelp<ProductDto> getShopProductList(@RequestBody ProductManageSo productSo) {
         return productManageService.getShopProductList(productSo);
     }
 
     @RequestMapping(value = "getDown", method = RequestMethod.POST)
-    Result getDown(@RequestBody String[] ids){
+    public Result getDown(@RequestBody String[] ids) {
         Result result = productManageService.getDown(ids);
         return result;
     }
 
     @RequestMapping(value = "putUp", method = RequestMethod.POST)
-    Result putUp(@RequestBody String[] ids){
+    public Result putUp(@RequestBody String[] ids) {
         Result result = productManageService.putUp(ids);
         return result;
     }
 
     @RequestMapping(value = "deleteProduct", method = RequestMethod.POST)
-    Result deleteProduct(@RequestBody String[] ids){
+    public Result deleteProduct(@RequestBody String[] ids) {
         Result result = productManageService.deleteProduct(ids);
         return result;
     }
 
     @RequestMapping(value = "getAssortProduct", method = RequestMethod.POST)
-    PageHelp<ProductDto> getAssortProduct(@RequestBody ProductManageSo so){
+    public PageHelp<ProductDto> getAssortProduct(@RequestBody ProductManageSo so) {
         PageHelp<ProductDto> pageHelp = productManageService.getAssortProduct(so);
         return pageHelp;
     }
 
     @RequestMapping(value = "getIndexFootProduct", method = RequestMethod.POST)
-    PageHelp<ProductDto> getIndexFootProduct(){
+    public PageHelp<ProductDto> getIndexFootProduct() {
         return productManageService.getIndexFootProduct();
+    }
+
+
+    @RequestMapping(value = "getProductTop6", method = RequestMethod.POST)
+    public List<ProductDto> getProductTop6(@RequestBody Long shopId){
+        ProductDto productDto = new ProductDto();
+        productDto.setShopId(shopId);
+        return  productManageService.getProductTop6(productDto);
     }
 }
