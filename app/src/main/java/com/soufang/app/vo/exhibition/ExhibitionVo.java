@@ -8,7 +8,6 @@ public class ExhibitionVo {
     private List<ExhibitionDto> data;
 
     public List<ExhibitionDto> getData() {
-
         return data;
     }
 

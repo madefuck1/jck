@@ -88,6 +88,7 @@ public class NewsController {
         newsDto.setContent(newsReqVo.getContent());
         newsDto.setOrigin(newsReqVo.getOrigin());
         newsDto.setCreateTime(DateUtils.getToday());
+        newsDto.setPicture(newsReqVo.getPicture());
         Result result = adminNewsFeign.addNews(newsDto);
         AdminVo adminVo = new AdminVo(result);
         return adminVo;
