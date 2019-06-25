@@ -43,5 +43,5 @@ public interface StoreConstructionService {
 
     Result saveProductAssort(StoreProductAssortDto productAssortDto);
 
-    Boolean isExitStoreInfo(Long shopId);
+    Boolean isExistStoreInfo(Long shopId);
 }

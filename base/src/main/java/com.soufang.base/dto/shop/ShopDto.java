@@ -26,18 +26,20 @@ public class ShopDto {
     private String url;
     // 店铺产品总数
     private Integer productCount;
-
     // 店铺统计信息
     private ShopStatisticsDto shopStatisticsDto;
-
+    // 店铺logo图片
     private String logoUrl;
+    // app店铺附加产品列表
+    private List<ProductDto> productDtoList;
+    // 公司信息
+    private CompanyDto companyDto;
+    // 是否被收藏
+    private Boolean collection;
 
     public String getUrl() {
         return avatarUrl == null || "".equals(avatarUrl) ? avatarUrl : PropertiesParam.file_pre + avatarUrl;
     }
-
-    private CompanyDto companyDto;
-
 
     public CompanyDto getCompanyDto() {
         return companyDto;
@@ -151,11 +153,6 @@ public class ShopDto {
         this.createTime = createTime;
     }
 
-
-    // app店铺附加产品列表
-    private List<ProductDto> productDtoList;
-
-
     public List<ProductDto> getProductDtoList() {
         return productDtoList;
     }
@@ -186,6 +183,15 @@ public class ShopDto {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+
+    public Boolean getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Boolean collection) {
+        this.collection = collection;
     }
 }
 

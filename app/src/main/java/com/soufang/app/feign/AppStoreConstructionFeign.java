@@ -12,6 +12,6 @@ public interface AppStoreConstructionFeign {
     @RequestMapping(value = "/core/store/getStoreInfo", method = RequestMethod.POST)
     StoreConstructionDto getStoreInfo(@RequestBody Long shopId);
 
-    @RequestMapping(value = "/core/store/isExitStoreInfo", method = RequestMethod.POST)
-    Boolean isExitStoreInfo(Long shopId);
+    @RequestMapping(value = "/core/store/isExistStoreInfo", method = RequestMethod.POST)
+    Boolean isExistStoreInfo(Long shopId);
 }
