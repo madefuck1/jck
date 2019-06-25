@@ -177,8 +177,8 @@ public class AppShopController extends AppBaseController {
      */
     @AppMemberAccess
     @RequestMapping(value = "getShopProOnRecentlyUpdate", method = RequestMethod.POST)
-    public ListProductVo getShopProOnRecentlyUpdate(HttpServletRequest request, @RequestBody PageBase pageBase) {
-        ListProductVo vo = new ListProductVo();
+    public DetailVo getShopProOnRecentlyUpdate(HttpServletRequest request, @RequestBody PageBase pageBase) {
+        DetailVo vo = new DetailVo();
         ShopDto shopInfo = getShopInfo(request);
         //判断店铺是否存在
 
@@ -195,7 +195,8 @@ public class AppShopController extends AppBaseController {
         productDto.setLimit(pageBase.getLimit());
         productDto.setSort(1);
         List<ProductDto> shopProductManaList = appShopFeign.getShopProductManaList(productDto);
-        vo.setData(shopProductManaList);
+        shopInfo.setProductDtoList(shopProductManaList);
+        vo.setData(shopInfo);
         return vo;
     }
 

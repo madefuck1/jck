@@ -18,7 +18,7 @@ public interface BannerService {
      * 得到所有图片集合
      * @return
      */
-    List<BannerDto> getList();
+    List<BannerDto> getList(Integer terminal);
 
     /**
      * 删除
