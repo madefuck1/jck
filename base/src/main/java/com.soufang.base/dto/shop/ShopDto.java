@@ -38,7 +38,11 @@ public class ShopDto {
     private Boolean collection;
 
     public String getUrl() {
-        return avatarUrl == null || "".equals(avatarUrl) ? avatarUrl : PropertiesParam.file_pre + avatarUrl;
+        if (avatarUrl == null || "".equals(avatarUrl) || avatarUrl.indexOf("http") != -1) {
+            return avatarUrl;
+        } else {
+            return PropertiesParam.file_pre + avatarUrl;
+        }
     }
 
     public CompanyDto getCompanyDto() {

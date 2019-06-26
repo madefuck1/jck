@@ -16,6 +16,7 @@ import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
+import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.utils.FtpClient;
@@ -217,5 +218,14 @@ public class AppShopController extends AppBaseController {
         return vo;
     }
 
+
+    @AppMemberAccess
+    @RequestMapping(value = "getStoreAssort/{shopId}", method = RequestMethod.POST)
+    public List<StoreExclusiveAssortDto>  getStoreAssort(@PathVariable Long shopId){
+        StoreExclusiveAssortDto storeExclusiveAssortDto = new StoreExclusiveAssortDto();
+        storeExclusiveAssortDto.setShopId(shopId);
+        storeExclusiveAssortDto.setIsShow(1);
+        return appStoreConstructionFeign.getStoreAssort(storeExclusiveAssortDto);
+    }
 
 }
