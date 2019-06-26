@@ -88,8 +88,9 @@
 
     function submitForm(){
         var myContent = layedit.getContent(indexs);
+        var picture=myContent.match(/src="(\S*)" alt=/)[1];
         myContent = myContent.replace(/\"/g,"'");//将字符串中""全部替换成''
-        var data = '{"title":"'+$("#news_title").val()+'","author":"'+$('#news_author').val()+'","content":"'+myContent+'","origin":"'+$('#news_origin').val()+'"}' ;
+        var data = '{"title":"'+$("#news_title").val()+'","author":"'+$('#news_author').val()+'","content":"'+myContent+'","origin":"'+$('#news_origin').val()+'","picture":"'+picture+'"}' ;
          $.ajax({
             url: "addNews",
             data:  data,

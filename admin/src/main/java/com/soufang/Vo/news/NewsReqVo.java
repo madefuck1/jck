@@ -8,6 +8,13 @@ public class NewsReqVo {
     private String origin;
     private String picture;
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getTitle() {
         return title;
@@ -41,11 +48,4 @@ public class NewsReqVo {
         this.origin = origin;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
 }

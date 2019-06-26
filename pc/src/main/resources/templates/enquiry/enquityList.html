@@ -183,6 +183,7 @@ function liContentAssort(v,assortLevel) {
                 count=data.count;
                 var whatever="";
                 if(data.count==0){
+                    $("#showMoreAssorts").html("");
                     var noData=$("<tr><th colspan='5'>暂无相关数据</th></tr>");
                     //$("#showMoreAssorts").html("暂无相关数据");
                     $("#showMoreAssorts").append(noData);
