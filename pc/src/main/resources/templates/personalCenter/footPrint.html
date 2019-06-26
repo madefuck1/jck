@@ -88,7 +88,6 @@
         var productPrice=v.productStatisticsDto.productPrice;
         var productImage=v.productDto.url;
         var productId=v.productDto.productId;
-        console.log(productId);
         var isUpper=v.productDto.isUpper;
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
@@ -128,9 +127,9 @@
             +"<span class='g_price'>"
             +"<span>¥</span><strong>"+productPrice+"</strong>"
             +"</span>"
-            +"<span class='g_price g_price-original'>"
+            /*+"<span class='g_price g_price-original'>"
             +"<span>¥</span><strong>142</strong>"
-            +"</span>"
+            +"</span>"*/
             +"</div>"
             +"<div class='clear'></div>"
             +"<div class='goods-num'>"
@@ -149,12 +148,11 @@
     //动态加载数据
     function  liContent(i,v) {
        	var prodts= v.productDto;
-       	console.log(prodts);
 		var footprintId=v.footprintId;
 		var createTime=longFormatDate(v.createTime);
 		var productName=prodts.productName;
 		var productPrice=v.productStatisticsDto.productPrice;
-		var enquiryProductId=prodts.enquiryProductId;
+        var productId=v.prodts.productId;
 		var productImage=prodts.productImage;
 		var isUpper=prodts.isUpper;
 		if(isUpper==1){
@@ -181,7 +179,7 @@
             +"<div class='goods-box first-box'>"
            	+"<div class='goods-pic'>"
             +"<div class='goods-pic-box'>"
-            +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"' title='"+productName+"'  class='goods-pic-link' target='_blank'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")'title='"+productName+"'  class='goods-pic-link' target='_blank'>"
             +"<img src='"+productImage+"' class='goods-img'></a>"
             +"</div>"
             +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
@@ -195,9 +193,6 @@
         +"<div class='goods-price'>"
             +"<span class='g_price'>"
             +"<span>¥</span><strong>"+productPrice+"</strong>"
-        +"</span>"
-        +"<span class='g_price g_price-original'>"
-            +"<span>¥</span><strong>142</strong>"
         +"</span>"
         +"</div>"
         +"<div class='clear'></div>"
