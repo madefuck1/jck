@@ -260,5 +260,4 @@ public class AppShopController extends AppBaseController {
         return vo;
     }
 
-
 }
