@@ -764,6 +764,9 @@
                     </if>
             ) T1
         JOIN t_product T2 ON T1.product_id = T2.product_id
+        <if test="productName !=null and productName !=''">
+            and T2.product_name  like concat(concat('%',#{productName}),'%')
+        </if>
         JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
         limit #{page},#{limit}
     </select>
@@ -784,6 +787,9 @@
                 </if>
         ) T1
         JOIN t_product T2 ON T1.product_id = T2.product_id
+        <if test="productName !=null and productName !=''">
+            and T2.product_name  like concat(concat('%',#{productName}),'%')
+        </if>
         JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
     </select>
 
@@ -805,6 +811,9 @@
                         WHERE
                             t_store_product_assort.shop_id = #{shopId}
                     )
+                <if test="productName !=null and productName !=''">
+                    and product_name  like concat(concat('%',#{productName}),'%')
+                </if>
             ) T1
         JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
         limit #{page},#{limit}
@@ -828,6 +837,9 @@
                         WHERE
                             t_store_product_assort.shop_id = #{shopId}
                     )
+                <if test="productName !=null and productName !=''">
+                    and product_name  like concat(concat('%',#{productName}),'%')
+                </if>
             ) T1
         JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
     </select>

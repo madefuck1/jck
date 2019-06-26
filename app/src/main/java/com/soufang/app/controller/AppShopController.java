@@ -245,7 +245,7 @@ public class AppShopController extends AppBaseController {
         StoreProductAssortDto productAssortDto = new StoreProductAssortDto();
         productAssortDto.setExclusiveAssortId(reqVo.getAssortId());
         productAssortDto.setShopId(reqVo.getShopId());
-
+        productAssortDto.setProductName(reqVo.getProductName());
         if (reqVo.getPage() == 0) {
             productAssortDto.setPage(0);
         } else {

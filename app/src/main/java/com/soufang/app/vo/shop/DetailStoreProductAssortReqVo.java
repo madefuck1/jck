@@ -9,5 +9,5 @@ import lombok.Setter;
 public class DetailStoreProductAssortReqVo extends PageBase {
     private Long shopId;
     private Long assortId;
-
+    private String productName;
 }
