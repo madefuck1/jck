@@ -748,6 +748,90 @@
         </collection>
     </resultMap>
 
+    <select id="getProductByAssortId1" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultMap="ProductAndProStatistics">
+        SELECT
+            T2.*,T3.*
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_store_product_assort
+                WHERE
+                    shop_id = #{shopId}
+                    <if test="exclusiveAssortId!=null and exclusiveAssortId!=0">
+                        and exclusive_assort_id = #{exclusiveAssortId}
+                    </if>
+            ) T1
+        JOIN t_product T2 ON T1.product_id = T2.product_id
+        JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getProductByAssortId1Count" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+        (
+            SELECT
+                *
+            FROM
+                t_store_product_assort
+            WHERE
+                shop_id = #{shopId}
+                <if test="exclusiveAssortId!=null and exclusiveAssortId!=0">
+                    and exclusive_assort_id = #{exclusiveAssortId}
+                </if>
+        ) T1
+        JOIN t_product T2 ON T1.product_id = T2.product_id
+        JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
+    </select>
+
+    <select id="getProductByAssortId2" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultMap="ProductAndProStatistics">
+        SELECT
+            T1.*,T3.*
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_product
+                WHERE
+                    product_id IN (
+                        SELECT DISTINCT
+                            product_id
+                        FROM
+                            t_store_product_assort
+                        WHERE
+                            t_store_product_assort.shop_id = #{shopId}
+                    )
+            ) T1
+        JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getProductByAssortId2Count" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_product
+                WHERE
+                    product_id IN (
+                        SELECT DISTINCT
+                            product_id
+                        FROM
+                            t_store_product_assort
+                        WHERE
+                            t_store_product_assort.shop_id = #{shopId}
+                    )
+            ) T1
+        JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
+    </select>
+
     <select id="getShopProductManaList" parameterType="com.soufang.base.dto.product.ProductDto"
             resultMap="ProductAndProStatistics">
         select tp.*,tps.*,GetShopProductMonthSellCount(tp.product_id) month_sell_count

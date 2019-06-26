@@ -4,6 +4,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shopCar.ShopCarProductDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,4 +43,7 @@ public interface AppProductManageFeign {
 
     @RequestMapping(value = "core/productManage/getProductTop6", method = RequestMethod.POST)
     List<ProductDto> getProductTop6(Long shopId);
+
+    @RequestMapping(value = "core/productManage/getProductByAssortId", method = RequestMethod.POST)
+    PageHelp<ProductDto> getProductByAssortId(StoreProductAssortDto productAssortDto);
 }

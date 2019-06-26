@@ -6,6 +6,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.footprint.FootPrintDto;
 import com.soufang.base.dto.product.*;
 import com.soufang.base.dto.shopCar.ShopCarProductDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.base.utils.DateUtils;
@@ -279,9 +280,14 @@ public class ProductManageController {
 
 
     @RequestMapping(value = "getProductTop6", method = RequestMethod.POST)
-    public List<ProductDto> getProductTop6(@RequestBody Long shopId){
+    public List<ProductDto> getProductTop6(@RequestBody Long shopId) {
         ProductDto productDto = new ProductDto();
         productDto.setShopId(shopId);
-        return  productManageService.getProductTop6(productDto);
+        return productManageService.getProductTop6(productDto);
+    }
+
+    @RequestMapping(value = "getProductByAssortId", method = RequestMethod.POST)
+    public PageHelp<ProductDto> getProductByAssortId(@RequestBody StoreProductAssortDto productAssortDto) {
+        return productManageService.getProductByAssortId(productAssortDto);
     }
 }

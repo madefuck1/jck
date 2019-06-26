@@ -5,10 +5,8 @@ import com.soufang.app.feign.AppProductManageFeign;
 import com.soufang.app.feign.AppShopFeign;
 import com.soufang.app.feign.AppStoreConstructionFeign;
 import com.soufang.app.feign.FavoriteFeign;
-import com.soufang.app.vo.shop.DetailStoreVo;
-import com.soufang.app.vo.shop.DetailVo;
-import com.soufang.app.vo.shop.ListShopReqVo;
-import com.soufang.app.vo.shop.ListShopVo;
+import com.soufang.app.vo.productManage.ListProductVo;
+import com.soufang.app.vo.shop.*;
 import com.soufang.base.PageBase;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
@@ -17,7 +15,9 @@ import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
 import com.soufang.base.utils.FtpClient;
 import org.apache.commons.lang.StringUtils;
@@ -96,7 +96,7 @@ public class AppShopController extends AppBaseController {
                 favoriteDto.setFavoriteTargetType(2);
                 favoriteDto.setFavoriteTargetId(shopDetail.getShopId());
                 shopDetail.setCollection(favoriteFeign.isFavorite(favoriteDto));
-            }else{
+            } else {
                 shopDetail.setCollection(false);
             }
             // 店铺推荐产品 取销量前六个
@@ -218,14 +218,47 @@ public class AppShopController extends AppBaseController {
         return vo;
     }
 
-
-    @AppMemberAccess
+    /**
+     * 获取店铺个性分类
+     *
+     * @param shopId
+     * @return
+     */
     @RequestMapping(value = "getStoreAssort/{shopId}", method = RequestMethod.POST)
-    public List<StoreExclusiveAssortDto>  getStoreAssort(@PathVariable Long shopId){
+    public ListStoreAssortVo getStoreAssort(@PathVariable Long shopId) {
         StoreExclusiveAssortDto storeExclusiveAssortDto = new StoreExclusiveAssortDto();
         storeExclusiveAssortDto.setShopId(shopId);
         storeExclusiveAssortDto.setIsShow(1);
-        return appStoreConstructionFeign.getStoreAssort(storeExclusiveAssortDto);
+        ListStoreAssortVo vo = new ListStoreAssortVo();
+        vo.setData(appStoreConstructionFeign.getStoreAssort(storeExclusiveAssortDto));
+        return vo;
     }
+
+    /**
+     * 通过分类获取产品
+     *
+     * @param reqVo
+     * @return
+     */
+    @RequestMapping(value = "getProductByAssortId", method = RequestMethod.POST)
+    public ListProductVo getProductByAssortId(@RequestBody DetailStoreProductAssortReqVo reqVo) {
+        StoreProductAssortDto productAssortDto = new StoreProductAssortDto();
+        productAssortDto.setExclusiveAssortId(reqVo.getAssortId());
+        productAssortDto.setShopId(reqVo.getShopId());
+
+        if (reqVo.getPage() == 0) {
+            productAssortDto.setPage(0);
+        } else {
+            productAssortDto.setPage((reqVo.getPage() - 1) * reqVo.getLimit());
+        }
+        productAssortDto.setLimit(reqVo.getLimit());
+        PageHelp<ProductDto> pageHelp = appProductManageFeign.getProductByAssortId(productAssortDto);
+
+        ListProductVo vo = new ListProductVo();
+        vo.setData(pageHelp.getData());
+        vo.setCount(pageHelp.getCount());
+        return vo;
+    }
+
 
 }
