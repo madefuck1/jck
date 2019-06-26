@@ -5,6 +5,7 @@ import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.shopCar.ShopCarProductDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.product.ProductManageSo;
 
@@ -61,4 +62,6 @@ public interface ProductManageService {
     PageHelp<ProductDto> getIndexFootProduct();
 
     List<ProductDto> getProductTop6(ProductDto dto);
+
+    PageHelp<ProductDto> getProductByAssortId(StoreProductAssortDto productAssortDto);
 }

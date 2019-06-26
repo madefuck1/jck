@@ -1,10 +1,11 @@
 package com.soufang.app.vo.exhibition;
 
+import com.soufang.app.vo.AppVo;
 import com.soufang.base.dto.exhibition.ExhibitionDto;
 
 import java.util.List;
 
-public class ExhibitionVo {
+public class ExhibitionVo extends AppVo {
     private List<ExhibitionDto> data;
 
     public List<ExhibitionDto> getData() {
