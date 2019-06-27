@@ -74,7 +74,7 @@ public class ProductManageServiceImpl implements ProductManageService {
                     productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
                 }
             }
-            productDto.setProductImage(productDetail.toString());
+            productDto.setProductDetail(productDetail.toString());
 
             productDtos.add(productDto);
         }
@@ -139,7 +139,7 @@ public class ProductManageServiceImpl implements ProductManageService {
                 productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
             }
         }
-        productDto.setProductImage(productDetail.toString());
+        productDto.setProductDetail(productDetail.toString());
         return productDto;
     }
 
