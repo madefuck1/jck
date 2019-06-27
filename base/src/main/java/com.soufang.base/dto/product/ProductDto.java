@@ -93,11 +93,11 @@ public class ProductDto extends PageBase implements Serializable {
     }
 
     public String getProductUrl() {
-        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";")) : PropertiesParam.file_pre + productImage ;
+        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? productImage.substring(0, productImage.indexOf(";")) : productImage ;
     }
 
     public String getUrl() {
-        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";")) : PropertiesParam.file_pre + productImage ;
+        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? productImage.substring(0, productImage.indexOf(";")) : productImage ;
     }
 
     // 产品具体对应规格数量的信息
