@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -40,13 +42,26 @@ public class InformController {
     InformFeign informFeign;
 
     /**
-     * 跳转纺织资讯页面
+     * 跳转纺织资讯页面-加载轮播图片
      * @param request
      * @param model
      * @return
      */
     @RequestMapping(value = "toInform", method = RequestMethod.GET)
     public String toInform(HttpServletRequest request, ModelMap model) {
+        NewsSo newsSo=new NewsSo();
+        newsSo.setPage(null);
+        PageHelp<NewsDto> pageHelp = informFeign.getNews(newsSo);
+        List<NewsDto> newsDtos =pageHelp.getData();
+        List<NewsDto> newsPhotos=new ArrayList<>();
+        NewsDto newsPhotoDto= new NewsDto();
+        for (NewsDto newsDto :newsDtos){
+            if(newsDto.getOrigin().equals("1")){
+                newsPhotoDto.setPicture(newsDto.getPicture());
+                newsPhotos.add(newsPhotoDto);
+            }
+        }
+        model.put("newsPhotos",newsPhotos);
         return "information/informList";
     }
 

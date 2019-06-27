@@ -30,7 +30,9 @@ public class NewsController {
     @RequestMapping (value = "getNews",method = RequestMethod.POST)
     public PageHelp<NewsDto> getNews(@RequestBody NewsSo newsSo){
         PageHelp<NewsDto> pageHelp = new PageHelp<>();
-        PageHelper.startPage(newsSo.getPage(),newsSo.getLimit());
+        if(!(newsSo.getPage()==null)){
+            PageHelper.startPage(newsSo.getPage(),newsSo.getLimit());
+        }
         List<NewsDto> list = newsService.getNews(newsSo);
         int count = newsService.getCount(newsSo);
         pageHelp.setCount(count);
