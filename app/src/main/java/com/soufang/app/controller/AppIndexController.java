@@ -85,8 +85,6 @@ public class AppIndexController extends AppBaseController{
     public ExhibitionVo getExhibitionList(@PathVariable String exhibitionId){
         ExhibitionSo so = new ExhibitionSo();
         so.setExhibitionId(Integer.valueOf(exhibitionId));
-        so.setPage(0);
-        so.setLimit(10);
         ExhibitionVo vo = new ExhibitionVo();
         PageHelp<ExhibitionDto> exhibitionDtos = appExhibitionFeign.selExhibitionList(so);
         vo.setData(exhibitionDtos.getData());
