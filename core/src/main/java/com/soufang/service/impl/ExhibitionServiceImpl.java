@@ -14,6 +14,7 @@ import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.exhibition.ExhibitionDto;
 import com.soufang.base.search.exhibition.ExhibitionSo;
+import com.soufang.mapper.AssortMapper;
 import com.soufang.mapper.ExhibitionMapper;
 import com.soufang.model.Assort;
 import com.soufang.model.Exhibition;
@@ -37,9 +38,14 @@ import java.util.List;
 public class ExhibitionServiceImpl implements ExhibitionService {
     @Autowired
     ExhibitionMapper exhibitionMapper;
+    @Autowired
+    AssortMapper assortMapper;
 
     //查询所有
    public  List<ExhibitionDto> selExhibition(ExhibitionSo exhibitionSo){
+       if(!(exhibitionSo.getPage()==null||"".equals(exhibitionSo.getPage()))){
+           exhibitionSo.setPage((exhibitionSo.getPage() - 1) * 5);
+       }
        List<Exhibition> exhibitionList =exhibitionMapper.selExhibition(exhibitionSo);
        List<ExhibitionDto> exhibitionDtoList=new ArrayList<>();
        //转化对象DTO
@@ -51,6 +57,17 @@ public class ExhibitionServiceImpl implements ExhibitionService {
            AssortDto assortDto =new AssortDto();
            BeanUtils.copyProperties(assort, assortDto);
            exhibitionDto.setAssortDto(assortDto);
+           //根据分类信息查询展会范围-拼接当前分类下面所有子分类/没有就是本分分类
+           List<AssortDto> assortDtos = assortMapper.selUnderAssort(assort.getAssortId());
+           String exhibitionScope="";
+           if(assortDtos.size()>0){
+               for (int j = 0;j<assortDtos.size() ; j++){
+                   exhibitionScope +=assortDtos.get(j).getAssortName()+",";
+               }
+           }else{
+               exhibitionScope=assort.getAssortName();
+           }
+           exhibition.setExhibitionScope(exhibitionScope);
            //更改图片地址
            exhibition.setExhibitionPhoto(PropertiesParam.file_pre+exhibition.getExhibitionPhoto());
            //展会信息

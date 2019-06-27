@@ -30,7 +30,7 @@
     });
 
 	function selList(exhibitionId) {
-        var str={exhibitionId:exhibitionId};
+        var str={exhibitionId:exhibitionId,page:"0"};
         $.ajax({
             url : "selExhibitionList",
             type : "post",

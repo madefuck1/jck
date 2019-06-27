@@ -187,5 +187,13 @@ public class StoreConstructionController {
         return storeConstructionService.saveProductAssort(productAssortDto);
     }
 
+    /**
+     * @param shopId
+     * @return
+     */
+    @RequestMapping(value = "isExistStoreInfo", method = RequestMethod.POST)
+    public Boolean isExistStoreInfo(@RequestBody Long shopId) {
+        return storeConstructionService.isExistStoreInfo(shopId);
+    }
 
 }

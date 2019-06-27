@@ -81,8 +81,8 @@
           *
         from t_favorite tf
         left join t_product tp on tf.favorite_target_id=tp.product_id
-        inner join t_product_statistics tps on tps.product_id=tp.product_id
-        INNER JOIN t_product_spec tpsp on tpsp.product_id = tp.product_id
+        left join t_product_statistics tps on tps.product_id=tp.product_id
+        left JOIN t_product_spec tpsp on tpsp.product_id = tp.product_id
         where 1=1
         and tf.user_id =#{userId}
         and tf.favorite_target_type=#{favoriteTargetType}

@@ -5,6 +5,7 @@ import com.soufang.Vo.AdminVo;
 import com.soufang.Vo.news.NewsReqVo;
 import com.soufang.Vo.news.NewsVo;
 import com.soufang.Vo.news.UpNewsReqVo;
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.news.NewsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.news.NewsSo;
@@ -27,7 +28,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/news")
 public class NewsController {
-
+    @Value("${upload.news}")
+    private String newsUrl;
     @Autowired
     AdminNewsFeign adminNewsFeign;
 
@@ -88,6 +90,7 @@ public class NewsController {
         newsDto.setContent(newsReqVo.getContent());
         newsDto.setOrigin(newsReqVo.getOrigin());
         newsDto.setCreateTime(DateUtils.getToday());
+        newsDto.setPicture(newsReqVo.getPicture());
         Result result = adminNewsFeign.addNews(newsDto);
         AdminVo adminVo = new AdminVo(result);
         return adminVo;
@@ -130,11 +133,11 @@ public class NewsController {
     @RequestMapping(value = "addNewsImg", method = RequestMethod.POST)
     public Object addNewsImg(@RequestParam("file")MultipartFile file) {
         Map<String, Object> result = new HashMap<String, Object>();
-        Map<String, Object> map = FtpClient.uploadImage(file, "/news");
+        Map<String, Object> map = FtpClient.uploadImage(file, newsUrl);
         if ((boolean) map.get("success")) {
             Map<String, Object> result2 = new HashMap<String, Object>();
             String uploadNameUrl = String.valueOf(map.get("uploadName"));
-            result2.put("src",uploadNameUrl);
+            result2.put("src", PropertiesParam.file_pre+uploadNameUrl);
             result2.put("title",StringUtils.substringAfterLast(uploadNameUrl,"/"));
             result.put("code", 0);    //0表示上传成功
             result.put("msg", "上传成功"); //提示消息

@@ -2,14 +2,17 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.mapper.CompanyMapper;
 import com.soufang.mapper.ProductMapper;
 import com.soufang.mapper.ShopMapper;
 import com.soufang.mapper.ShopStatisticsMapper;
+import com.soufang.model.Company;
 import com.soufang.model.Shop;
 import com.soufang.service.ShopService;
 import org.slf4j.Logger;
@@ -36,6 +39,9 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     ProductMapper productMapper;
 
+    @Autowired
+    CompanyMapper companyMapper;
+
 
     @Override
     public ShopDto getById(Long id) {
@@ -43,6 +49,10 @@ public class ShopServiceImpl implements ShopService {
         ShopDto shopDto = new ShopDto();
         BeanUtils.copyProperties(shop, shopDto);
         shopDto.setAvatarUrl(PropertiesParam.file_pre+ shop.getShopAvatarUrl());
+        Company company = companyMapper.getByUserId(shop.getUserId());
+        CompanyDto companyDto = new CompanyDto();
+        BeanUtils.copyProperties(company,companyDto);
+        shopDto.setCompanyDto(companyDto);
         return shopDto;
     }
 

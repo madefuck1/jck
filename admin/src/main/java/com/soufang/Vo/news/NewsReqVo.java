@@ -6,8 +6,15 @@ public class NewsReqVo {
     private String author;
     private String content;
     private String origin;
-    //private String picture;
+    private String picture;
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getTitle() {
         return title;
@@ -40,4 +47,5 @@ public class NewsReqVo {
     public void setOrigin(String origin) {
         this.origin = origin;
     }
+
 }

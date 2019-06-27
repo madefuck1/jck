@@ -1,6 +1,5 @@
 package com.soufang.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
@@ -37,6 +36,16 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
 
     @Autowired
     StoreCurouselMapMapper storeCurouselMapMapper;
+
+    @Override
+    public Boolean isExistStoreInfo(Long shopId) {
+        StoreConstructionDto storeCInfo = storeConstructionMapper.getStoreCInfo(shopId);
+        if (storeCInfo != null && storeCInfo.getStoreStatus() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public StoreConstructionDto getStoreInfo(Long shopId) {

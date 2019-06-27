@@ -8,13 +8,13 @@ import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.shopCar.ShopCarProductDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.mapper.*;
 import com.soufang.model.*;
 import com.soufang.service.ProductManageService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -52,7 +52,7 @@ public class ProductManageServiceImpl implements ProductManageService {
             page = (page - 1) * dto.getLimit();
         }
         dto.setPage(page);
-        if(StringUtils.isBlank(dto.getProductName())){
+        if (StringUtils.isBlank(dto.getProductName())) {
             dto.setProductName(null);
         }
         List<ProductDto> products = productMapper.getList(dto);
@@ -211,13 +211,13 @@ public class ProductManageServiceImpl implements ProductManageService {
     @Override
     public PageHelp<ProductDto> hotList() {
         List<ProductDto> products = productMapper.getHotList();
-        for (ProductDto p:products) {
-            String [] img  = new String[10];
-            if(StringUtils.isNotBlank(p.getProductImage())){
+        for (ProductDto p : products) {
+            String[] img = new String[10];
+            if (StringUtils.isNotBlank(p.getProductImage())) {
                 img = p.getProductImage().split(";");
             }
-               p.setProductImage(PropertiesParam.file_pre+img[0]);
-       }
+            p.setProductImage(PropertiesParam.file_pre + img[0]);
+        }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
         return pageHelp;
@@ -355,25 +355,25 @@ public class ProductManageServiceImpl implements ProductManageService {
         StringBuffer assortIds = new StringBuffer();
         List<AssortDto> assortDtos = assortMapper.getAssortByParentId(so.getAssortId());
 
-        for (int i = 0; i < assortDtos.size(); i++){
-            for (int j = 0; j < assortDtos.get(i).getChildren().size(); j ++){
-                assortIds.append(assortDtos.get(i).getChildren().get(j).getAssortId()+",");
+        for (int i = 0; i < assortDtos.size(); i++) {
+            for (int j = 0; j < assortDtos.get(i).getChildren().size(); j++) {
+                assortIds.append(assortDtos.get(i).getChildren().get(j).getAssortId() + ",");
             }
         }
-        so.setPage((so.getPage()-1)*so.getLimit());
+        so.setPage((so.getPage() - 1) * so.getLimit());
         ProductDto productDto = new ProductDto();
         productDto.setAssortIds(String.valueOf(assortIds));
         productDto.setLimit(so.getLimit());
         productDto.setPage(so.getPage());
         List<ProductDto> products = productMapper.getAssortProduct(productDto);
-         for (ProductDto p:products) {
-             String [] img = new String[10];
-             if(StringUtils.isNotBlank(p.getProductImage())){
-                 img = p.getProductImage().split(";");
-             }
-             if(StringUtils.isNotBlank(p.getProductImage())){
-                 p.setProductImage(PropertiesParam.file_pre+img[0]);
-             }
+        for (ProductDto p : products) {
+            String[] img = new String[10];
+            if (StringUtils.isNotBlank(p.getProductImage())) {
+                img = p.getProductImage().split(";");
+            }
+            if (StringUtils.isNotBlank(p.getProductImage())) {
+                p.setProductImage(PropertiesParam.file_pre + img[0]);
+            }
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);
@@ -385,17 +385,39 @@ public class ProductManageServiceImpl implements ProductManageService {
     public PageHelp<ProductDto> getIndexFootProduct() {
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         List<ProductDto> list = productMapper.getIndexFootProduct();
-        for (ProductDto p:list) {
-            String [] img = new String[10];
-            if(StringUtils.isNotBlank(p.getProductImage())){
+        for (ProductDto p : list) {
+            String[] img = new String[10];
+            if (StringUtils.isNotBlank(p.getProductImage())) {
                 img = p.getProductImage().split(";");
             }
-            if(StringUtils.isNotBlank(p.getProductImage())){
-                p.setProductImage(PropertiesParam.file_pre+img[0]);
+            if (StringUtils.isNotBlank(p.getProductImage())) {
+                p.setProductImage(PropertiesParam.file_pre + img[0]);
             }
         }
         pageHelp.setData(list);
         return pageHelp;
     }
 
+    @Override
+    public List<ProductDto> getProductTop6(ProductDto dto) {
+        return productMapper.getProductTop6(dto);
+    }
+
+    @Override
+    public PageHelp<ProductDto> getProductByAssortId(StoreProductAssortDto productAssortDto) {
+        PageHelp<ProductDto> pageHelp = new PageHelp<>();
+        List<ProductDto> list;
+        int count;
+        // 判断是否为该店铺下的全部全部商品
+        if (productAssortDto.getExclusiveAssortId() != null && productAssortDto.getExclusiveAssortId() != 0) {
+            list = productMapper.getProductByAssortId1(productAssortDto);
+            count = productMapper.getProductByAssortId1Count(productAssortDto);
+        } else {
+            list = productMapper.getProductByAssortId2(productAssortDto);
+            count = productMapper.getProductByAssortId2Count(productAssortDto);
+        }
+        pageHelp.setCount(count);
+        pageHelp.setData(list);
+        return pageHelp;
+    }
 }

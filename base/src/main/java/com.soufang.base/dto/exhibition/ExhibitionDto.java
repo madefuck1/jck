@@ -37,6 +37,10 @@ public class ExhibitionDto {
 
     //分类
     private String assortid;
+
+    //展会范围
+    private String exhibitionScope;
+
     //地址
     private String exhibitionArea;
     //图片
@@ -225,5 +229,13 @@ public class ExhibitionDto {
 
     public void setExhibitionIntroduce(String exhibitionIntroduce) {
         this.exhibitionIntroduce = exhibitionIntroduce;
+    }
+
+    public String getExhibitionScope() {
+        return exhibitionScope;
+    }
+
+    public void setExhibitionScope(String exhibitionScope) {
+        this.exhibitionScope = exhibitionScope;
     }
 }

@@ -1,6 +1,7 @@
 package com.soufang.mapper;
 
 import com.soufang.base.dto.product.ProductDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.model.Product;
 
@@ -49,5 +50,11 @@ public interface ProductMapper {
 
     List<ProductDto> getShopProductManaList(ProductDto ProductDto);
 
+    List<ProductDto> getProductTop6(ProductDto dto);
 
+    List<ProductDto> getProductByAssortId1(StoreProductAssortDto productAssortDto);
+    int getProductByAssortId1Count(StoreProductAssortDto productAssortDto);
+
+    List<ProductDto> getProductByAssortId2(StoreProductAssortDto productAssortDto);
+    int getProductByAssortId2Count(StoreProductAssortDto productAssortDto);
 }

@@ -1,5 +1,6 @@
 package com.soufang.service.impl;
 
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.BannerMapper;
@@ -25,7 +26,7 @@ public class BannerServiceImpl implements BannerService {
         Banner banner = new Banner();
         banner.setBannerImage(bannerDto.getBannerImage());
         banner.setCreateTime(DateUtils.getToday());
-        banner.setTerminal(2000);
+        banner.setTerminal(bannerDto.getTerminal());
         banner.setIsDelete(0);
         banner.setSort(1);
         bannerMapper.addImg(banner);
@@ -37,8 +38,15 @@ public class BannerServiceImpl implements BannerService {
      * @return
      */
     @Override
-    public List<BannerDto> getList() {
-        return bannerMapper.getList();
+    public List<BannerDto> getList(Integer terminal) {
+        Banner banner = new Banner();
+        banner.setTerminal(terminal);
+        List<BannerDto> list = bannerMapper.getList(banner);
+        //设置图片地址
+        for (BannerDto b :list) {
+            b.setBannerImage(PropertiesParam.file_pre+b.getBannerImage());
+        }
+        return list;
     }
 
     /**
