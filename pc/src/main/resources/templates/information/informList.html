@@ -10,12 +10,14 @@
 <@override name="body">
 	<div id="new-up">
 		<div class="new01">
-			<h3>e广通头条</h3>
+			<h3>进出口产品交易头条</h3>
 			<div class="newleft">
-				  <div data-am-widget="slider" class="am-slider am-slider-a3" data-am-slider='{"directionNav":false}' >
-					  <ul class="am-slides" id="leftPhotos">
-					  </ul>
-
+				<div class="banner am-slider am-slider-default " data-am-flexslider>
+					<ul class="am-slides">
+					<#list newsPhotos as news>
+						<li><img src="${news.picture}" alt=""></li>
+					</#list>
+					</ul>
 				</div>
 			</div>
 			<div class="newright" id="headlines">
@@ -70,9 +72,7 @@
     });
 
     function informList(id) {
-
         var str={id:id};
-        var num1=1;
         var num2=1;
         var num3=1;
         var num4=0;
@@ -87,13 +87,6 @@
                     if (v.origin==1){
                         var whatever1=liContent1(v);
                         $("#headlines").append(whatever1);
-                        if (num1<5){
-                            //广通展示图片4
-                            var li=$("<li><img  style='width:560px;height:315px;' src='"+v.picture+"' alt=''></li>");
-                            $("#leftPhotos").append(li);
-                            num1++;
-						}
-
 					}else if(v.origin==2){
                         //行业资讯
                         if (num2==1){
