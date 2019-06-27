@@ -93,7 +93,7 @@ public class ProductDto extends PageBase implements Serializable {
     }
 
     public String getProductUrl() {
-        return PropertiesParam.file_pre + productImage;
+        return productImage == null || "".equals(productImage) ? "" : productImage.indexOf(";")!= -1 ? PropertiesParam.file_pre + productImage.substring(0, productImage.indexOf(";")) : PropertiesParam.file_pre + productImage ;
     }
 
     public String getUrl() {
