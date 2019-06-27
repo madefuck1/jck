@@ -58,7 +58,24 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();
         for (ProductDto productDto : products) {
-            productDto.setProductImage(productDto.getProductImage());
+            StringBuffer productImage = new StringBuffer();
+            if(StringUtils.isNotBlank(productDto.getProductImage())){
+                String[] imageArray = productDto.getProductImage().split(";");
+                for (int i = 0; i <imageArray.length ; i++) {
+                    productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                }
+            }
+            productDto.setProductImage(productImage.toString());
+
+            StringBuffer productDetail = new StringBuffer();
+            if(StringUtils.isNotBlank(productDto.getProductDetail())){
+                String[] imageArray = productDto.getProductDetail().split(";");
+                for (int i = 0; i <imageArray.length ; i++) {
+                    productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                }
+            }
+            productDto.setProductImage(productDetail.toString());
+
             productDtos.add(productDto);
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
@@ -105,7 +122,25 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public ProductDto getDetail(ProductDto dto) {
-        return productMapper.getDetail(dto);
+        ProductDto productDto =  productMapper.getDetail(dto);
+        StringBuffer productImage = new StringBuffer();
+        if(StringUtils.isNotBlank(productDto.getProductImage())){
+            String[] imageArray = productDto.getProductImage().split(";");
+            for (int i = 0; i <imageArray.length ; i++) {
+                productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+            }
+        }
+        productDto.setProductImage(productImage.toString());
+
+        StringBuffer productDetail = new StringBuffer();
+        if(StringUtils.isNotBlank(productDto.getProductDetail())){
+            String[] imageArray = productDto.getProductDetail().split(";");
+            for (int i = 0; i <imageArray.length ; i++) {
+                productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+            }
+        }
+        productDto.setProductImage(productDetail.toString());
+        return productDto;
     }
 
 
