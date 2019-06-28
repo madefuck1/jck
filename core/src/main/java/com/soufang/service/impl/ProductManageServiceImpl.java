@@ -435,7 +435,14 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public List<ProductDto> getProductTop6(ProductDto dto) {
-        return productMapper.getProductTop6(dto);
+        List<ProductDto> productDtos = productMapper.getProductTop6(dto);
+        for (int i = 0; i < productDtos.size(); i++) {
+            if(StringUtils.isNotBlank(productDtos.get(i).getProductImage())){
+                String[] imageArray = productDtos.get(i).getProductImage().split(";");
+                productDtos.get(i).setUrl(PropertiesParam.file_pre+imageArray[0]);
+            }
+        }
+        return  productDtos;
     }
 
     @Override
