@@ -127,9 +127,11 @@ public class ShopServiceImpl implements ShopService {
         for (int i = 0; i < list.size() ; i++) {
             list.get(i).setAvatarUrl(PropertiesParam.file_pre+list.get(i).getAvatarUrl());
             for(int j = 0 ; j < list.get(i).getProductDtoList().size() ; j++){
-                if(StringUtils.isNotBlank(list.get(i).getProductDtoList().get(j).getProductUrl())){
-                    String[] imageArray = list.get(i).getProductDtoList().get(j).getProductUrl().split(";");
+                if(StringUtils.isNotBlank(list.get(i).getProductDtoList().get(j).getProductImage())){
+                    String[] imageArray = list.get(i).getProductDtoList().get(j).getProductImage().split(";");
                     list.get(i).getProductDtoList().get(j).setProductUrl(PropertiesParam.file_pre+imageArray[0]);
+                }else {
+                    list.get(i).getProductDtoList().get(j).setProductUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
                 }
             }
         }
