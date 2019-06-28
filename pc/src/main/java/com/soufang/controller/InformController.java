@@ -61,7 +61,12 @@ public class InformController {
                 newsPhotos.add(newsPhotoDto);
             }
         }
-        model.put("newsPhotos",newsPhotos);
+        if (newsPhotos.size() > 5) {//判断list长度
+            List newList = newsPhotos.subList(0, 4);//取前四条数据
+            model.put("newsPhotos",newList);
+        } else{
+            model.put("newsPhotos",newsPhotos);
+        }
         return "information/informList";
     }
 
