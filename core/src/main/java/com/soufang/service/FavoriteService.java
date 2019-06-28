@@ -14,7 +14,7 @@ public interface FavoriteService {
 
     boolean isFavorite(FavoriteDto dto);
 
-    long iSExistFavoriteId(FavoriteDto dto);
+    Long iSExistFavoriteId(FavoriteDto dto);
 
     void delFavorite(FavoriteDto favoriteDto);
 }

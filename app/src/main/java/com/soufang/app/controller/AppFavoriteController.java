@@ -120,7 +120,7 @@ public class AppFavoriteController extends AppBaseController{
             favoriteDto.setFavoriteTargetId(favoriteAddVo.getFavoriteTargetId());
             favoriteDto.setFavoriteTargetName(favoriteAddVo.getFavoriteTargetName());
             favoriteDto.setUserId(userInfo.getUserId());
-            long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
+            Long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
             if("".equals(favoriteId)){
                 //新增
                 result = favoriteFeign.addFavorite(favoriteDto);

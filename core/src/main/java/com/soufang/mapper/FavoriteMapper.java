@@ -11,7 +11,7 @@ public interface FavoriteMapper {
 
     int insert(Favorite record);
 
-    long iSExistFavoriteId(Favorite record);
+    Long iSExistFavoriteId(Favorite record);
 
     int insertSelective(Favorite record);
 
