@@ -37,14 +37,6 @@ public class ShopDto {
     // 是否被收藏
     private Boolean collection;
 
-    public String getUrl() {
-        if (avatarUrl == null || "".equals(avatarUrl) || avatarUrl.indexOf("http") != -1) {
-            return avatarUrl;
-        } else {
-            return PropertiesParam.file_pre + avatarUrl;
-        }
-    }
-
     public CompanyDto getCompanyDto() {
         return companyDto;
     }
