@@ -124,12 +124,12 @@ public class AppFavoriteController extends AppBaseController{
             if("".equals(favoriteId)||favoriteId==null){
                 //新增
                 result = favoriteFeign.addFavorite(favoriteDto);
-                result.setSuccess(true);
+                result.setSuccess(false);
                 result.setMessage("收藏成功");
             }else{
                 //删除
                 result= favoriteFeign.removeFavorite(favoriteId);
-                result.setSuccess(false);
+                result.setSuccess(true);
                 result.setMessage("取消收藏");
             }
         }
