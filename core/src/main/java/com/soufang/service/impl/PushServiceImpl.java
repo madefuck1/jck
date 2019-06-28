@@ -21,6 +21,9 @@ public class PushServiceImpl implements PushService {
     @Override
     public PageHelp<PushDto> getList(PushSo pushSo) {
         PageHelp pageHelp = new PageHelp();
+        if(pushSo.getPage() != 0){
+            pushSo.setPage((pushSo.getPage()-1)*pushSo.getLimit());
+        }
         List<PushDto> list = pushMapper.getList(pushSo);
         int count = pushMapper.getCount(pushSo);
         pageHelp.setData(list);

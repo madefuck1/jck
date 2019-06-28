@@ -1,10 +1,11 @@
 package com.soufang.app.vo.push;
 
+import com.soufang.app.vo.AppVo;
 import com.soufang.base.dto.push.PushDto;
 
 import java.util.List;
 
-public class PushVo {
+public class PushVo extends AppVo {
     private List<PushDto> data;
     private Integer count;
 
