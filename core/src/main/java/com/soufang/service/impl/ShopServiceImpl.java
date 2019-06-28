@@ -15,6 +15,7 @@ import com.soufang.mapper.ShopStatisticsMapper;
 import com.soufang.model.Company;
 import com.soufang.model.Shop;
 import com.soufang.service.ShopService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -125,6 +126,12 @@ public class ShopServiceImpl implements ShopService {
         List<ShopDto> list = shopMapper.appGetList(shopSo);
         for (int i = 0; i < list.size() ; i++) {
             list.get(i).setAvatarUrl(PropertiesParam.file_pre+list.get(i).getAvatarUrl());
+            for(int j = 0 ; j < list.get(i).getProductDtoList().size() ; j++){
+                if(StringUtils.isNotBlank(list.get(i).getProductDtoList().get(j).getProductUrl())){
+                    String[] imageArray = list.get(i).getProductDtoList().get(j).getProductUrl().split(";");
+                    list.get(i).getProductDtoList().get(j).setProductUrl(PropertiesParam.file_pre+imageArray[0]);
+                }
+            }
         }
         pageHelp.setData(list);
         pageHelp.setCount(shopMapper.appGetCount(shopSo));
