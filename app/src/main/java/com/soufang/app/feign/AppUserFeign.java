@@ -55,4 +55,5 @@ public interface AppUserFeign {
 
     @RequestMapping(value = "/core/company/updateCompany",method = RequestMethod.POST)
     Result updateCompany(@RequestBody CompanyDto companyDto);
+
 }

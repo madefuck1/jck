@@ -99,4 +99,5 @@ public interface UserMapper {
      */
     int updatePasswordByPhone(User user);
     int updatePasswordByEmail(User user);
+
 }

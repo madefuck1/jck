@@ -98,4 +98,6 @@ public interface UserService {
     int update(UserDto userDto);
 
     void updateUserInfo(UserDto userDto);
+
+
 }

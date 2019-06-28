@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.PushMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.Push" >
+    <id column="push_id" property="pushId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="push_content" property="pushContent" jdbcType="VARCHAR" />
+    <result column="push_type" property="pushType" jdbcType="INTEGER" />
+    <result column="push_status" property="pushStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="resultMap" type="com.soufang.base.dto.push.PushDto" >
+    <id column="push_id" property="pushId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="push_content" property="pushContent" jdbcType="VARCHAR" />
+    <result column="push_type" property="pushType" jdbcType="INTEGER" />
+    <result column="push_status" property="pushStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    push_id, user_id, push_content, push_type, push_status, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_push
+    where push_id = #{pushId,jdbcType=BIGINT}
+  </select>
+
+  <select id="getList" resultMap="resultMap" parameterType="com.soufang.base.search.push.PushSo" >
+    select
+    <include refid="Base_Column_List" />
+    from t_push
+    where user_id = #{userId,jdbcType=BIGINT}
+
+    <if test="limit != null and page != null ">
+      LIMIT #{page},#{limit}
+    </if>
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.push.PushSo" >
+    select
+    count(*)
+    from t_push
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_push
+    where push_id = #{pushId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soufang.model.Push" >
+    insert into t_push (push_id, user_id, push_content, 
+      push_type, push_status, create_time
+      )
+    values (#{pushId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{pushContent,jdbcType=VARCHAR}, 
+      #{pushType,jdbcType=INTEGER}, #{pushStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soufang.model.Push" >
+    insert into t_push
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pushId != null" >
+        push_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="pushContent != null" >
+        push_content,
+      </if>
+      <if test="pushType != null" >
+        push_type,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pushId != null" >
+        #{pushId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="pushContent != null" >
+        #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        #{pushType,jdbcType=INTEGER},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Push" >
+    update t_push
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="pushContent != null" >
+        push_content = #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        push_type = #{pushType,jdbcType=INTEGER},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where push_id = #{pushId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Push" >
+    update t_push
+    set user_id = #{userId,jdbcType=BIGINT},
+      push_content = #{pushContent,jdbcType=VARCHAR},
+      push_type = #{pushType,jdbcType=INTEGER},
+      push_status = #{pushStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where push_id = #{pushId,jdbcType=BIGINT}
+  </update>
+</mapper>
