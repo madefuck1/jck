@@ -195,8 +195,8 @@
         and favorite_target_type = #{favoriteTargetType} and user_id=#{userId}
     </select>
 
-    <select id="iSExistFavoriteId" parameterType="com.soufang.model.FootPrint" resultType="java.lang.Long">
-        select favoriteId from t_favorite
+    <select id="iSExistFavoriteId" parameterType="com.soufang.base.dto.favorite.FavoriteDto" resultType="java.lang.Long">
+        select favorite_id from t_favorite
         where user_id=#{userId}
         and favorite_target_id= #{favoriteTargetId}
         and favorite_target_name=#{favoriteTargetName}

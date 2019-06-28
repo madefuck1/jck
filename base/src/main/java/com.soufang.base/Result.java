@@ -30,7 +30,6 @@ public class Result {
         this.success = success;
         this.message = message;
     }
-
     public Result() {
         success = true;
     }

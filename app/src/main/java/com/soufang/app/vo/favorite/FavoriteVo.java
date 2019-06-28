@@ -12,6 +12,8 @@ package com.soufang.app.vo.favorite;
 
 import com.soufang.app.vo.AppVo;
 import com.soufang.base.dto.favorite.FavoriteDto;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -23,15 +25,9 @@ import java.util.List;
  * @create 2019/5/17
  * @since 1.0.0
  */
+@Getter
+@Setter
 public class FavoriteVo extends AppVo {
+    private boolean data;
 
-    private List<FavoriteDto> data;
-
-    public List<FavoriteDto> getData() {
-        return data;
-    }
-
-    public void setData(List<FavoriteDto> data) {
-        this.data = data;
-    }
 }

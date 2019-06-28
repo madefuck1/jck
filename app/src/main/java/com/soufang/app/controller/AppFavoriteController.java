@@ -120,16 +120,16 @@ public class AppFavoriteController extends AppBaseController{
             favoriteDto.setFavoriteTargetId(favoriteAddVo.getFavoriteTargetId());
             favoriteDto.setFavoriteTargetName(favoriteAddVo.getFavoriteTargetName());
             favoriteDto.setUserId(userInfo.getUserId());
-            long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
-            if("".equals(favoriteId)){
+            Long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
+            if("".equals(favoriteId)||favoriteId==null){
                 //新增
                 result = favoriteFeign.addFavorite(favoriteDto);
-                result.setSuccess(true);
+                result.setSuccess(false);
                 result.setMessage("收藏成功");
             }else{
                 //删除
                 result= favoriteFeign.removeFavorite(favoriteId);
-                result.setSuccess(false);
+                result.setSuccess(true);
                 result.setMessage("取消收藏");
             }
         }
@@ -140,9 +140,9 @@ public class AppFavoriteController extends AppBaseController{
         FavoriteVo FavoriteVo = new FavoriteVo();
         if(result.isSuccess()){
             FavoriteVo.setMessage(result.getMessage());
-            FavoriteVo.setSuccess(result.isSuccess());
+            FavoriteVo.setData(result.isSuccess());
         }else {
-            FavoriteVo.setSuccess(result.isSuccess());
+            FavoriteVo.setData(result.isSuccess());
             FavoriteVo.setMessage(result.getMessage());
         }
         return FavoriteVo;
@@ -154,7 +154,7 @@ public class AppFavoriteController extends AppBaseController{
      * @param reqVo
      * @return
      */
-    @AppMemberAccess
+  /*  @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "checkFavorite",method = RequestMethod.POST)
     public IsFavoriteVo isFavorite(HttpServletRequest request, @RequestBody FavoriteCReqVo reqVo ){
@@ -175,6 +175,35 @@ public class AppFavoriteController extends AppBaseController{
             appVo.setData(false);
         }
         return appVo;
+    }*/
+    /**
+     * 是否被收藏
+     * @param request
+     * @param favoriteAddVo
+     * @return
+     */
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "checkFavorite",method = RequestMethod.POST)
+    public FavoriteVo isFavorite(@RequestBody FavoriteAddVo favoriteAddVo, HttpServletRequest request){
+        Result result= new Result();
+        //获取用户信息
+        UserDto userInfo = this.getUserInfo(request);
+        favoriteAddVo.setUserId(userInfo.getUserId());
+        FavoriteDto favoriteDto = new FavoriteDto();
+        favoriteDto.setFavoriteTargetType(favoriteAddVo.getFavoriteTargetType());
+        favoriteDto.setFavoriteTargetId(favoriteAddVo.getFavoriteTargetId());
+        favoriteDto.setFavoriteTargetName(favoriteAddVo.getFavoriteTargetName());
+        favoriteDto.setUserId(userInfo.getUserId());
+        Long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
+        if("".equals(favoriteId)||favoriteId==null){
+            result.setSuccess(true);
+            result.setMessage("没有收藏");
+        }else{
+            result.setSuccess(false);
+            result.setMessage("已收藏");
+        }
+        return judgefavoeiteVo(result);
     }
 
 }

@@ -58,7 +58,28 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<ProductDto> products = productMapper.getList(dto);
         List<ProductDto> productDtos = new ArrayList<>();
         for (ProductDto productDto : products) {
-            productDto.setProductImage(productDto.getProductImage());
+            StringBuffer productImage = new StringBuffer();
+            if(StringUtils.isNotBlank(productDto.getProductImage())){
+                String[] imageArray = productDto.getProductImage().split(";");
+                for (int i = 0; i <imageArray.length ; i++) {
+                    productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                }
+            }else {
+                productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+            productDto.setProductImage(productImage.toString());
+
+            StringBuffer productDetail = new StringBuffer();
+            if(StringUtils.isNotBlank(productDto.getProductDetail())){
+                String[] imageArray = productDto.getProductDetail().split(";");
+                for (int i = 0; i <imageArray.length ; i++) {
+                    productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                }
+            }else {
+                productDetail.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+            productDto.setProductDetail(productDetail.toString());
+
             productDtos.add(productDto);
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
@@ -105,7 +126,27 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public ProductDto getDetail(ProductDto dto) {
-        return productMapper.getDetail(dto);
+        ProductDto productDto =  productMapper.getDetail(dto);
+        StringBuffer productImage = new StringBuffer();
+        if(StringUtils.isNotBlank(productDto.getProductImage())){
+            String[] imageArray = productDto.getProductImage().split(";");
+            for (int i = 0; i <imageArray.length ; i++) {
+                productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+            }
+        }else {
+            productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+        }
+        productDto.setProductImage(productImage.toString());
+
+        StringBuffer productDetail = new StringBuffer();
+        if(StringUtils.isNotBlank(productDto.getProductDetail())){
+            String[] imageArray = productDto.getProductDetail().split(";");
+            for (int i = 0; i <imageArray.length ; i++) {
+                productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+            }
+        }
+        productDto.setProductDetail(productDetail.toString());
+        return productDto;
     }
 
 
@@ -400,7 +441,16 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public List<ProductDto> getProductTop6(ProductDto dto) {
-        return productMapper.getProductTop6(dto);
+        List<ProductDto> productDtos = productMapper.getProductTop6(dto);
+        for (int i = 0; i < productDtos.size(); i++) {
+            if(StringUtils.isNotBlank(productDtos.get(i).getProductImage())){
+                String[] imageArray = productDtos.get(i).getProductImage().split(";");
+                productDtos.get(i).setUrl(PropertiesParam.file_pre+imageArray[0]);
+            }else {
+                productDtos.get(i).setUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+        }
+        return  productDtos;
     }
 
     @Override
@@ -415,6 +465,14 @@ public class ProductManageServiceImpl implements ProductManageService {
         } else {
             list = productMapper.getProductByAssortId2(productAssortDto);
             count = productMapper.getProductByAssortId2Count(productAssortDto);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if(StringUtils.isNotBlank(list.get(i).getProductImage())){
+                String[] imageArray = list.get(i).getProductImage().split(";");
+                list.get(i).setUrl(PropertiesParam.file_pre+imageArray[0]);
+            }else {
+                list.get(i).setUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
         }
         pageHelp.setCount(count);
         pageHelp.setData(list);
