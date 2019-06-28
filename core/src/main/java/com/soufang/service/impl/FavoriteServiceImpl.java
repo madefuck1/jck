@@ -67,9 +67,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     //判断是否收藏-返回收藏ID
     public Long iSExistFavoriteId(FavoriteDto dto) {
-        Favorite favorite = new Favorite();
-        BeanUtils.copyProperties(dto, favorite);
-        return favoriteMapper.iSExistFavoriteId(favorite);
+        return favoriteMapper.iSExistFavoriteId(dto);
     }
 
     /**
