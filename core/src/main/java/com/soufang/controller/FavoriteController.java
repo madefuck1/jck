@@ -69,8 +69,8 @@ public class FavoriteController {
      * @param dto
      * @return Result
      */
-    @RequestMapping(value = "isFavorite", method = RequestMethod.POST)
-    public Boolean isFavorite(@RequestBody FavoriteDto dto) {
+    @RequestMapping(value = "iSExistFavoriteId", method = RequestMethod.POST)
+    public Boolean iSExistFavoriteId(@RequestBody FavoriteDto dto) {
         return favoriteService.isFavorite(dto);
     }
 
