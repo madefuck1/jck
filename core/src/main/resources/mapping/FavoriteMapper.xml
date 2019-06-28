@@ -199,7 +199,9 @@
         select favorite_id from t_favorite
         where user_id=#{userId}
         and favorite_target_id= #{favoriteTargetId}
+        <if test="favoriteTargetName != null">
         and favorite_target_name=#{favoriteTargetName}
+        </if>
         and favorite_target_type=#{favoriteTargetType}
 
     </select>
