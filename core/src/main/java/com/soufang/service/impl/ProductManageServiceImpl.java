@@ -64,6 +64,8 @@ public class ProductManageServiceImpl implements ProductManageService {
                 for (int i = 0; i <imageArray.length ; i++) {
                     productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
                 }
+            }else {
+                productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
             }
             productDto.setProductImage(productImage.toString());
 
@@ -73,6 +75,8 @@ public class ProductManageServiceImpl implements ProductManageService {
                 for (int i = 0; i <imageArray.length ; i++) {
                     productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
                 }
+            }else {
+                productDetail.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
             }
             productDto.setProductDetail(productDetail.toString());
 
@@ -129,6 +133,8 @@ public class ProductManageServiceImpl implements ProductManageService {
             for (int i = 0; i <imageArray.length ; i++) {
                 productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
             }
+        }else {
+            productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
         }
         productDto.setProductImage(productImage.toString());
 
@@ -440,6 +446,8 @@ public class ProductManageServiceImpl implements ProductManageService {
             if(StringUtils.isNotBlank(productDtos.get(i).getProductImage())){
                 String[] imageArray = productDtos.get(i).getProductImage().split(";");
                 productDtos.get(i).setUrl(PropertiesParam.file_pre+imageArray[0]);
+            }else {
+                productDtos.get(i).setUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
             }
         }
         return  productDtos;
