@@ -466,6 +466,14 @@ public class ProductManageServiceImpl implements ProductManageService {
             list = productMapper.getProductByAssortId2(productAssortDto);
             count = productMapper.getProductByAssortId2Count(productAssortDto);
         }
+        for (int i = 0; i < list.size(); i++) {
+            if(StringUtils.isNotBlank(list.get(i).getProductImage())){
+                String[] imageArray = list.get(i).getProductImage().split(";");
+                list.get(i).setUrl(PropertiesParam.file_pre+imageArray[0]);
+            }else {
+                list.get(i).setUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+        }
         pageHelp.setCount(count);
         pageHelp.setData(list);
         return pageHelp;
