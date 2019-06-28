@@ -489,4 +489,6 @@ public class AppUserController extends AppBaseController {
         vo.setMessage(result.getMessage());
         return vo;
     }
+
+
 }
