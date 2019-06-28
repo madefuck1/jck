@@ -36,7 +36,7 @@ public interface FavoriteFeign {
      * @param dto
      * @return
      */
-    @RequestMapping(value = "core/favorite/iSExistFavoriteId",method = RequestMethod.POST)
+  @RequestMapping(value = "core/favorite/iSExistFavoriteId",method = RequestMethod.POST)
    long iSExistFavoriteId(FavoriteDto dto);
 
 }
