@@ -32,7 +32,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getById(Long id) {
         UserDto userDto = userMapper.getById(id);
-        userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+        if(userDto!=null){
+            userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+        }
         return userDto;
     }
 
