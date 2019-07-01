@@ -10,6 +10,27 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="ShopResultMap" type="com.soufang.base.dto.favorite.FavoriteDto">
+        <id column="favorite_id" property="favoriteId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="favorite_target_id" property="favoriteTargetId" jdbcType="BIGINT"/>
+        <result column="favorite_target_name" property="favoriteTargetName" jdbcType="VARCHAR"/>
+        <result column="favorite_target_type" property="favoriteTargetType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <collection property="shopDto" ofType="com.soufang.base.dto.shop.ShopDto">
+            <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="user_id" property="userId" jdbcType="BIGINT"/>
+            <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+            <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+            <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+            <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+            <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+            <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+            <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+            <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
     <resultMap id="DtoResultMap" type="com.soufang.base.dto.favorite.FavoriteDto">
         <id column="favorite_id" property="favoriteId" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="BIGINT"/>
@@ -75,7 +96,7 @@
         from t_favorite
         where favorite_id = #{favoriteId,jdbcType=BIGINT}
     </select>
-    <!--收藏列表查询-->
+    <!--收藏列表查询-产品-->
     <select id="getFavoriteList" parameterType="com.soufang.base.search.favorite.FavoriteSo" resultMap="DtoResultMap">
         select
           *
@@ -86,6 +107,13 @@
         where 1=1
         and tf.user_id =#{userId}
         and tf.favorite_target_type=#{favoriteTargetType}
+        ORDER BY tf.create_time LIMIT #{page},#{limit};
+    </select>
+    <!--收藏店铺查询-->
+    <select id="getFavoriteShopList" parameterType="com.soufang.base.search.favorite.FavoriteSo"  resultMap="ShopResultMap" >
+        select * from t_favorite tf
+        LEFT JOIN t_shop ts on tf.favorite_target_id=ts.shop_id
+         where tf.user_id =#{userId}
         ORDER BY tf.create_time LIMIT #{page},#{limit};
     </select>
 
