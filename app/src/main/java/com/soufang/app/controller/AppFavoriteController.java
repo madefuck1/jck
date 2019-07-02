@@ -124,12 +124,12 @@ public class AppFavoriteController extends AppBaseController{
             if("".equals(favoriteId)||favoriteId==null){
                 //新增
                 result = favoriteFeign.addFavorite(favoriteDto);
-                result.setSuccess(false);
+                result.setSuccess(true);
                 result.setMessage("收藏成功");
             }else{
                 //删除
                 result= favoriteFeign.removeFavorite(favoriteId);
-                result.setSuccess(true);
+                result.setSuccess(false);
                 result.setMessage("取消收藏");
             }
         }
@@ -197,10 +197,10 @@ public class AppFavoriteController extends AppBaseController{
         favoriteDto.setUserId(userInfo.getUserId());
         Long favoriteId= favoriteFeign.iSExistFavoriteId(favoriteDto);
         if("".equals(favoriteId)||favoriteId==null){
-            result.setSuccess(true);
+            result.setSuccess(false);
             result.setMessage("没有收藏");
         }else{
-            result.setSuccess(false);
+            result.setSuccess(true);
             result.setMessage("已收藏");
         }
         return judgefavoeiteVo(result);

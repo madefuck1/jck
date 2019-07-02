@@ -4,6 +4,7 @@ import com.soufang.base.PageBase;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.product.ProductStatisticsDto;
+import com.soufang.base.dto.shop.ShopDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,7 @@ public class FavoriteDto extends PageBase implements Serializable {
     private Date createTime;
 
     //收藏对象
+    private ShopDto shopDto;
     private ProductDto productDto;
     private ProductStatisticsDto productStatisticsDto;
     private ProductSpecDto productSpecDto;
@@ -122,6 +124,14 @@ public class FavoriteDto extends PageBase implements Serializable {
 
     public void setProductSpecDto(ProductSpecDto productSpecDto) {
         this.productSpecDto = productSpecDto;
+    }
+
+    public ShopDto getShopDto() {
+        return shopDto;
+    }
+
+    public void setShopDto(ShopDto shopDto) {
+        this.shopDto = shopDto;
     }
 }
 

@@ -23,6 +23,9 @@ public interface FavoriteMapper {
 
     //获取列表信息
     List<FavoriteDto> getFavoriteList(FavoriteSo favoriteSo);
+    //店铺查询
+    List<FavoriteDto> getFavoriteShopList(FavoriteSo favoriteSo);
+
 
     int getFavoriteCount(FavoriteSo favoriteSo);
 

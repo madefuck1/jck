@@ -206,7 +206,11 @@ public class MemberInterceptor extends HandlerInterceptorAdapter {
             } else {
                 userId = null;
             }
-            if (userId == null || userFeign.getUserById(userId) == null) {
+            if (userId == null) {
+                return null;
+            }
+            UserDto userDto=userFeign.getUserById(userId);
+            if("".equals(userDto)){
                 return null;
             }
             return userId;
