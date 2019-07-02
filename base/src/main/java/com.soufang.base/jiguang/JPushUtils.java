@@ -112,6 +112,6 @@ public class JPushUtils {
 
     public static void main(String[] args){
         //给标签为kefu的用户进行消息推送
-        JPushUtils.pushNotice("alias","4","你有新的任务，请及时处理");
+        JPushUtils.pushNotice("alias","yhkj_","你有新的任务，请及时处理");
     }
 }

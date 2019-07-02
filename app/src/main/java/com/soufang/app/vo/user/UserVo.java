@@ -2,15 +2,17 @@ package com.soufang.app.vo.user;
 
 import com.soufang.app.vo.AppVo;
 
+import java.util.Map;
+
 public class UserVo extends AppVo {
     private String code;
-    private String data;
+    private Map<String,Object> data;
 
-    public String getData() {
+    public Map<String, Object> getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Map<String, Object> data) {
         this.data = data;
     }
 
