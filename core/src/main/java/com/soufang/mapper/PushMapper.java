@@ -11,6 +11,8 @@ public interface PushMapper {
 
     int insert(Push record);
 
+    int insertList(List<Push> record);
+
     int insertSelective(Push record);
 
     Push selectByPrimaryKey(Long pushId);

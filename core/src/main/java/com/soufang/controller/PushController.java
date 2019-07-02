@@ -1,5 +1,6 @@
 package com.soufang.controller;
 
+import com.soufang.base.Result;
 import com.soufang.base.dto.push.PushDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.push.PushSo;
@@ -19,5 +20,11 @@ public class PushController {
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     PageHelp<PushDto> getList(@RequestBody PushSo pushSo){
         return pushService.getList(pushSo);
+    }
+
+    @RequestMapping(value = "addPush",method = RequestMethod.POST)
+    Result addPush(@RequestBody PushDto pushDto){
+        Result result = pushService.addPush(pushDto);
+        return result;
     }
 }

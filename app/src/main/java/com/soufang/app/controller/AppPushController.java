@@ -21,7 +21,7 @@ public class AppPushController {
     @Autowired
     AppPushFeign appPushFeign;
 
-    //获取消息列表
+    //获取推送列表
     @ResponseBody
     @RequestMapping(value = "getPurchaseList",method = RequestMethod.POST)
     public PushVo getPurchaseList(@RequestBody PushSo pushSo, HttpServletRequest request){

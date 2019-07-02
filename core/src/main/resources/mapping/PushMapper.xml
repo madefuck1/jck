@@ -51,12 +51,22 @@
     where push_id = #{pushId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.soufang.model.Push" >
-    insert into t_push (push_id, user_id, push_content, 
+    insert into t_push (push_id, user_id, push_content,
       push_type, push_status, create_time
       )
-    values (#{pushId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{pushContent,jdbcType=VARCHAR}, 
+    values (#{pushId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{pushContent,jdbcType=VARCHAR},
       #{pushType,jdbcType=INTEGER}, #{pushStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
       )
+  </insert>
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into t_push (user_id, push_content,
+      push_type, push_status, create_time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.userId,jdbcType=BIGINT}, #{item.pushContent,jdbcType=VARCHAR},
+      #{item.pushType,jdbcType=INTEGER}, #{item.pushStatus,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.soufang.model.Push" >
     insert into t_push
