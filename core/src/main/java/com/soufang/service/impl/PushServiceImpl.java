@@ -54,10 +54,10 @@ public class PushServiceImpl implements PushService {
             pushes.add(push);
             pushes.get(i).setUserId(users.get(i).getUserId());
         }*/
-        //广播形式发送推送
-        JPushUtils.pushNotice("","",pushDto.getPushContent());
-       /* //采用别名的方式推送
-        JPushUtils.pushNotice("alias","yhkj_"+3,pushDto.getPushContent());*/
+       /* //广播形式发送推送
+        JPushUtils.pushNotice("","",pushDto.getPushContent());*/
+        //采用别名的方式推送
+        JPushUtils.pushNotice("alias","yhkj_"+4,pushDto.getPushContent());
         int i = pushMapper.insertSelective(push);
         //int i = pushMapper.insertList(pushes);
         if(i > 0){

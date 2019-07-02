@@ -502,9 +502,9 @@ public class AppUserController extends AppBaseController {
         AppVo vo = new AppVo();
         UserDto userInfo = this.getUserInfo(request);
         UserDto userDto = new UserDto();
-        Result result ;
+        Result result = new Result();
         userDto.setUserId(userInfo.getUserId());
-        String code ;
+        String code = null ;
         if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
         } else {
