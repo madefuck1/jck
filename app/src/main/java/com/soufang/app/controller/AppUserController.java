@@ -493,7 +493,40 @@ public class AppUserController extends AppBaseController {
         vo.setMessage(result.getMessage());
         return vo;
     }
-    //个人资料中个人信息修改
+
+    //修改绑定的邮箱
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updateEmail",method = RequestMethod.POST)
+    public AppVo updateEmail(HttpServletRequest request,@RequestBody RegisterReqVo registerReqVo){
+        AppVo vo = new AppVo();
+        UserDto userInfo = this.getUserInfo(request);
+        UserDto userDto = new UserDto();
+        Result result ;
+        userDto.setUserId(userInfo.getUserId());
+        String code ;
+        if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
+            code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
+        } else {
+            vo.setMessage("验证码过期");
+            vo.setSuccess(false);
+            return vo;
+        }
+        if(code.equals(registerReqVo.getCode())){
+            userDto.setEmail(registerReqVo.getEmail());
+            result = appUserFeign.update(userDto);
+        }else {
+            vo.setMessage("验证码错误");
+            vo.setSuccess(false);
+            return vo;
+        }
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+
+
+    //修改密码
     @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "updatePassword",method = RequestMethod.POST)

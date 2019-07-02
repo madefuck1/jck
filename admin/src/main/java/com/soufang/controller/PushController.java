@@ -36,8 +36,8 @@ public class PushController {
         PushDto pushDto = new PushDto();
         pushDto.setPushContent(pushVo.getPushContent());
         pushDto.setPushType(pushVo.getPushType());
-        //发送推送
-        JPushUtils.pushNotice("alias","4",pushVo.getPushContent());
+        /*//发送推送
+        JPushUtils.pushNotice("alias","yhkj_",pushVo.getPushContent());*/
         Result result = pushFeign.addPush(pushDto);
         AdminVo vo = new AdminVo(result);
         return vo;

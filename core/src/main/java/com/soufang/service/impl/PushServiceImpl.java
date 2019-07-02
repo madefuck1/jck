@@ -2,6 +2,7 @@ package com.soufang.service.impl;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.push.PushDto;
+import com.soufang.base.jiguang.JPushUtils;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.push.PushSo;
 import com.soufang.base.utils.DateUtils;
@@ -47,13 +48,18 @@ public class PushServiceImpl implements PushService {
         BeanUtils.copyProperties(pushDto,push);
         push.setCreateTime(DateUtils.getToday());
         push.setPushStatus(1);
-        List<User> users = userMapper.getList(new User());
+        /*List<User> users = userMapper.getList(new User());
         List<Push> pushes = new ArrayList<>();
         for (int i=0; i<users.size(); i++){
             pushes.add(push);
             pushes.get(i).setUserId(users.get(i).getUserId());
-        }
-        int i = pushMapper.insertList(pushes);
+        }*/
+        //广播形式发送推送
+        JPushUtils.pushNotice("","",pushDto.getPushContent());
+       /* //采用别名的方式推送
+        JPushUtils.pushNotice("alias","yhkj_"+3,pushDto.getPushContent());*/
+        int i = pushMapper.insertSelective(push);
+        //int i = pushMapper.insertList(pushes);
         if(i > 0){
             result.setMessage("推送成功");
             result.setSuccess(true);
