@@ -3,10 +3,7 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
-import com.soufang.app.vo.user.Information;
-import com.soufang.app.vo.user.LoginReqVo;
-import com.soufang.app.vo.user.RegisterReqVo;
-import com.soufang.app.vo.user.UserVo;
+import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
@@ -485,6 +482,28 @@ public class AppUserController extends AppBaseController {
             result = appUserFeign.update(userDto);
         }
         AppVo vo = new AppVo();
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+    //个人资料中个人信息修改
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
+    public AppVo updateInformation(HttpServletRequest request, UpdatePassword updatePassword){
+        UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
+        UserDto userDto = new UserDto();
+        Result result;
+        userDto.setUserId(userInfo.getUserId());
+        if(!(MD5Utils.md5(updatePassword.getOldPassword()).equals(userInfo.getPassWord()))){
+            vo.setMessage("旧密码输入错误");
+            vo.setSuccess(false);
+            return vo;
+        }else {
+            userDto.setPassWord(MD5Utils.md5(updatePassword.getNewPassword()));
+            result = appUserFeign.updatePassword(userDto);
+        }
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;
