@@ -31,7 +31,7 @@
 							</div>
 
 							<div class="s-more-btn i-load-more-item" data-screen="0" id="more"><i class="am-icon-refresh am-icon-fw"></i>更多</div>
-							<div class="s-more-btn i-load-more-item" style="visibility:hidden;" data-screen="0" id="noMore"><i class="am-icon-refresh am-icon-fw"></i>没有更多数据</div>
+							<div class="s-more-btn i-load-more-item" style="display:none;" data-screen="0" id="noMore"><i class="am-icon-refresh am-icon-fw"></i>没有更多数据</div>
 						</div>
 
 					</div>
@@ -60,6 +60,11 @@
 			contentType: 'application/json; charset=UTF-8',
 			dataType : "json",
 			success : function(data) {
+				count=data.count;
+				if(count<limit){
+					document.getElementById("more").style.display="none";//隐藏
+					document.getElementById("noMore").style.display="block";//显示
+				}
                 if (data.count==0){
                     //没有数据
                     document.getElementById("noData").style.display="block";//显示
@@ -78,12 +83,11 @@
 	//赋值
     function liContent(v) {
         var productDto=v.productDto;
-        var productSpecDto = v.productSpecDto;
         var productStatisticsDto=v.productStatisticsDto;
         var favoriteId=v.favoriteId;
+        var productPrice=productStatisticsDto.productPrice;
 		var favoriteTargetName=v.favoriteTargetName;
-		var productImage=productDto.productImage;
-		var specNumber=productSpecDto.specNumber;
+		var productImage=productDto.url;
 		var dealNumber=productStatisticsDto.dealNumber;
 
         var li = $("<div class ='s-item-wrap'>"
@@ -95,8 +99,7 @@
             +"<div class='s-info'>"
             +"<div class='s-title' <a href='#' title='favoriteTargetName'>"+favoriteTargetName+"</a></div>"
             +"<div class='s-price-box'>"
-            +"<span class='s-price'><em class='s-price-sign'>¥</em><em class='s-value'>"+specNumber+"</em></span>"
-            +"<span class='s-history-price'><em class='s-price-sign'>¥</em><em class='s-value'>68.00</em></span>"
+            +"<span class='s-price'><em class='s-price-sign'>¥</em><em class='s-value'>"+productPrice+"</em></span>"
             +"</div><div class='s-extra-box'>"
             +"<span class='s-comment'>好评: 98.03%</span>"
             +"</div></div>"
@@ -118,9 +121,10 @@
         if(limit-count<=10){
             $("#allTables").html("");
             getList(limit);
+		}else{
+			document.getElementById("more").style.display="none";//隐藏
+			document.getElementById("noMore").style.display="block";//显示
 		}
-        document.getElementById("more").style.visibility="hidden";//隐藏
-        document.getElementById("noMore").style.visibility="visible";//显示
     });
 
 </script>

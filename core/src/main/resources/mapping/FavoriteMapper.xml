@@ -75,16 +75,6 @@
             <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
             <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
         </collection>
-        <collection property="productSpecDto" ofType="com.soufang.base.dto.product.ProductSpecDto">
-            <id column="product_spec_id" property="productSpecId" jdbcType="BIGINT"/>
-            <result column="product_id" property="productId" jdbcType="BIGINT"/>
-            <result column="spec_name" property="specName" jdbcType="VARCHAR"/>
-            <result column="price_secret" property="priceSecret" jdbcType="INTEGER"/>
-            <result column="min_number" property="minNumber" jdbcType="BIGINT"/>
-            <result column="max_number" property="maxNumber" jdbcType="BIGINT"/>
-            <result column="spec_number" property="specNumber" jdbcType="DECIMAL"/>
-            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        </collection>
     </resultMap>
     <sql id="Base_Column_List">
     favorite_id, user_id, favorite_target_id, favorite_target_name, favorite_target_type, 
@@ -103,7 +93,6 @@
         from t_favorite tf
         left join t_product tp on tf.favorite_target_id=tp.product_id
         left join t_product_statistics tps on tps.product_id=tp.product_id
-        left JOIN t_product_spec tpsp on tpsp.product_id = tp.product_id
         where 1=1
         and tf.user_id =#{userId}
         and tf.favorite_target_type=#{favoriteTargetType}

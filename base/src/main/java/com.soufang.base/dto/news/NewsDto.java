@@ -21,7 +21,16 @@ public class NewsDto {
     }
 
     public String getStrCreateTime() {
-        return DateUtils.date2String(createTime,DateUtils.format1);
+        if(createTime == null){
+            return null;
+        }else {
+            return DateUtils.date2String(createTime,DateUtils.format1);
+        }
+
+    }
+
+    public void setStrCreateTime(String strCreateTime) {
+        this.strCreateTime = strCreateTime;
     }
 
     public Long getId() {
@@ -49,7 +58,7 @@ public class NewsDto {
     }
 
     public Date getCreateTime() {
-        return createTime;
+       return createTime;
     }
 
     public void setCreateTime(Date createTime) {
@@ -79,5 +88,7 @@ public class NewsDto {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+
 
 }
