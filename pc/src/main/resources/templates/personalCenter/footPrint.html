@@ -58,7 +58,6 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
-                console.log(data);
                if (data.data.length==0){
                    document.getElementById("noData").style.display="block";//显示
 				}else{
@@ -82,13 +81,14 @@
 
     //动态加载数据
 	function liContentToDays(i,v){
+		var prodts= v.productDto;
         var footprintId=v.footprintId;
         var createTime=longFormatDate(v.createTime);
-        var productName=v.productDto.productName;
+        var productName=prodts.productName;
         var productPrice=v.productStatisticsDto.productPrice;
-        var productImage=v.productDto.url;
-        var productId=v.productDto.productId;
-        var isUpper=v.productDto.isUpper;
+        var productImage=prodts.url;
+        var productId=prodts.productId;
+        var isUpper=prodts.isUpper;
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
 		//截取年月日
@@ -147,13 +147,13 @@
 
     //动态加载数据
     function  liContent(i,v) {
-       	var prodts= v.productDto;
+		var prodts= v.productDto;
 		var footprintId=v.footprintId;
 		var createTime=longFormatDate(v.createTime);
 		var productName=prodts.productName;
 		var productPrice=v.productStatisticsDto.productPrice;
-        var productId=v.prodts.productId;
-		var productImage=prodts.productImage;
+        var productId=prodts.productId;
+		var productImage=prodts.url;
 		var isUpper=prodts.isUpper;
 		if(isUpper==1){
             isUpper=""

@@ -45,6 +45,7 @@ public class FavoriteServiceImpl implements FavoriteService {
                 FavoriteDto favoriteDto = lists.get(i);
                 ProductDto productDto = favoriteDto.getProductDto();
                 productDto.setProductImage(PropertiesParam.file_pre + productDto.getProductImage());
+                productDto.setUrl(productDto.getProductImage().split(";")[0]);
             }
         }else{
             lists=favoriteMapper.getFavoriteShopList(favoriteSo);
