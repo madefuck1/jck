@@ -770,8 +770,7 @@ public class PersonalCenterController extends BaseController {
     public String toSuggest() {
         return "/personalCenter/suggest";
     }
-
-
+    //提交反馈
     @ResponseBody
     @MemberAccess
     @RequestMapping(value = "saveSuggest", method = RequestMethod.POST)

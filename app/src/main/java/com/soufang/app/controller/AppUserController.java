@@ -3,11 +3,13 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
+import com.soufang.app.vo.suggest.SuggestVo;
 import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
@@ -46,16 +48,15 @@ public class AppUserController extends AppBaseController {
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
         Map<String,Object> map = new HashMap<>();
-        String loginName = loginReqVo.getPhone();
-        if(loginName == null){
+        if(StringUtils.isBlank(loginReqVo.getPhone()) || StringUtils.isBlank(loginReqVo.getEmail())){
             userVo.setMessage("用户名栏不能为空");
             userVo.setSuccess(false);
             return userVo;
         }
         if(StringUtils.isNotBlank(loginReqVo.getPassword())){
-            userDto.setPhone(loginName);
-            userDto.setEmail(loginName);
-            userDto.setUserName(loginName);
+            userDto.setPhone(loginReqVo.getPhone());
+            userDto.setEmail(loginReqVo.getEmail());
+            userDto.setUserName(loginReqVo.getLoginname());
             userDto.setPassWord(loginReqVo.getPassword());
         }
         Result result = appUserFeign.login(userDto);
@@ -494,7 +495,7 @@ public class AppUserController extends AppBaseController {
         return vo;
     }
 
-    //修改绑定的邮箱
+    //绑定邮箱
     @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "BindEmail",method = RequestMethod.POST)
@@ -554,5 +555,23 @@ public class AppUserController extends AppBaseController {
         return vo;
     }
 
+    //用户反馈
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "saveSuggest", method = RequestMethod.POST)
+    public Result saveSuggest(@RequestBody SuggestVo suggestVo, HttpServletRequest request) {;
+        Result result = new Result();
+        SuggestDto suggestDto = new SuggestDto();
+        suggestDto.setCreateTime(DateUtils.getToday());
+        suggestDto.setUserId(this.getUserInfo(request).getUserId());
+        if(StringUtils.isBlank(suggestVo.getContent())){
+            result.setSuccess(false);
+            result.setMessage("反馈内容不能为空");
+            return result;
+        }
+        suggestDto.setSugContent(suggestVo.getContent());
+        result = appUserFeign.addSuggest(suggestDto);
+        return result;
+    }
 
 }
