@@ -3,12 +3,14 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
+import com.soufang.app.vo.shop.DetailVo;
 import com.soufang.app.vo.suggest.SuggestVo;
 import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.sms.SmsSendResponse;
@@ -48,7 +50,7 @@ public class AppUserController extends AppBaseController {
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
         Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isBlank(loginReqVo.getPhone()) || StringUtils.isBlank(loginReqVo.getEmail())){
+        if(!(StringUtils.isNotBlank(loginReqVo.getPhone()) || StringUtils.isNotBlank(loginReqVo.getEmail()))){
             userVo.setMessage("用户名栏不能为空");
             userVo.setSuccess(false);
             return userVo;
@@ -572,6 +574,26 @@ public class AppUserController extends AppBaseController {
         suggestDto.setSugContent(suggestVo.getContent());
         result = appUserFeign.addSuggest(suggestDto);
         return result;
+    }
+
+    //用户反馈
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "isHaveShop", method = RequestMethod.POST)
+    public DetailVo isHaveShop(HttpServletRequest request) {;
+        DetailVo vo = new DetailVo();
+        ShopDto shopInfo = this.getShopInfo(request);
+        if(StringUtils.isNotBlank(shopInfo.getShopName())){
+            vo.setSuccess(true);
+            vo.setMessage("有相关的店铺信息");
+            vo.setData(shopInfo);
+            return vo;
+        }else {
+            vo.setSuccess(false);
+            vo.setMessage("没有相关的店铺信息");
+            vo.setData(null);
+            return vo;
+        }
     }
 
 }
