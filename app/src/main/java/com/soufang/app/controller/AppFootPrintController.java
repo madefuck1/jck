@@ -55,14 +55,14 @@ public class AppFootPrintController extends AppBaseController{
         footPrintDto.setLimit(footPrintSo.getLimit());
         footPrintDto.setPage(footPrintSo.getPage());
         PageHelp<FootPrintDto> pageHelp =footPrintFeign.getFootPrintList(footPrintDto);
+        footPrintVo.setSuccess(true);
         if(pageHelp.getData() != null && pageHelp.getCount() > 0){
             footPrintVo.setData(pageHelp.getData());
             footPrintVo.setMessage("登录成功");
-            footPrintVo.setSuccess(true);
+
         }else {
             footPrintVo.setData(null);
-            footPrintVo.setMessage("对不起！您没有相关的地址信息");
-            footPrintVo.setSuccess(false);
+            footPrintVo.setMessage("对不起！您没有相关的足迹信息");
         }
         return footPrintVo;
     }
