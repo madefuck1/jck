@@ -497,13 +497,18 @@ public class AppUserController extends AppBaseController {
     //修改绑定的邮箱
     @AppMemberAccess
     @ResponseBody
-    @RequestMapping(value = "updateEmail",method = RequestMethod.POST)
+    @RequestMapping(value = "BindEmail",method = RequestMethod.POST)
     public AppVo updateEmail(HttpServletRequest request,@RequestBody RegisterReqVo registerReqVo){
         AppVo vo = new AppVo();
         UserDto userInfo = this.getUserInfo(request);
         UserDto userDto = new UserDto();
         Result result = new Result();
         userDto.setUserId(userInfo.getUserId());
+        if(StringUtils.isBlank(userInfo.getPhone())){
+            vo.setMessage("请先完善个人信息，填写手机号");
+            vo.setSuccess(false);
+            return vo;
+        }
         String code = null ;
         if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
             code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());

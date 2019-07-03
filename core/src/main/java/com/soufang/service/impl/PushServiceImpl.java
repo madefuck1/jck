@@ -9,13 +9,11 @@ import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.PushMapper;
 import com.soufang.mapper.UserMapper;
 import com.soufang.model.Push;
-import com.soufang.model.User;
 import com.soufang.service.PushService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,10 +52,12 @@ public class PushServiceImpl implements PushService {
             pushes.add(push);
             pushes.get(i).setUserId(users.get(i).getUserId());
         }*/
-       /* //广播形式发送推送
-        JPushUtils.pushNotice("","",pushDto.getPushContent());*/
-        //采用别名的方式推送
-        JPushUtils.pushNotice("alias","yhkj_"+4,pushDto.getPushContent());
+        //广播形式发送推送
+        JPushUtils.pushNotice("","",pushDto.getPushContent());
+
+        /*//采用别名的方式推送
+        JPushUtils.pushNotice("alias","yhkj_"+4,pushDto.getPushContent());*/
+
         int i = pushMapper.insertSelective(push);
         //int i = pushMapper.insertList(pushes);
         if(i > 0){
