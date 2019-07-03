@@ -33,7 +33,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "sellerCenter")
@@ -62,6 +61,7 @@ public class SellerController extends BaseController {
             //map.put("noShopInfo","您还不是卖家，请填写公司信息");
             return "defaultPage/noCompanyInfo";
         }else {
+            map.put("userInfo", userInfo);
             return "sellerCenter/index";
         }
 
