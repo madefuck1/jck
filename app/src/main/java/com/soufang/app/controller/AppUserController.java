@@ -196,8 +196,8 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "registerByEmail",method = RequestMethod.POST)
     public UserVo registerByEmail(@RequestBody RegisterReqVo registerReqVo){
         UserVo userVo = new UserVo();
-        Map<String ,Object> map = new HashMap<>();
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             userDto.setEmail(registerReqVo.getEmail());
         }
