@@ -421,7 +421,6 @@ public class ProductController extends BaseController {
         List<String> resultImage = Arrays.asList(productDto.getProductImage().split(";"));
         List<String> productImages = new ArrayList<>();
         for (String temp : resultImage) {
-            temp = PropertiesParam.file_pre + temp;
             productImages.add(temp);
         }
         map.put("images", productImages);
@@ -430,7 +429,7 @@ public class ProductController extends BaseController {
         List<String> productDetail = Arrays.asList(productDto.getProductDetail().split(";"));
         List<String> productDetailTemp = new ArrayList<>();
         for (String temp : productDetail) {
-            productDetailTemp.add(PropertiesParam.file_pre + temp);
+            productDetailTemp.add(temp);
         }
         map.put("productDetail", productDetailTemp);
 
