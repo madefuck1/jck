@@ -57,7 +57,7 @@ public class FootPrintServiceImpl implements FootPrintService {
             ProductDto productDto = new ProductDto();
             BeanUtils.copyProperties(fp.getProduct(),productDto);
             //更改图片地址
-            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage());
+            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage().split(";")[0]);
             productDto.setUrl(productDto.getProductImage().split(";")[0]);
             //商店信息
             ShopDto shopDto =new ShopDto();
@@ -94,7 +94,7 @@ public class FootPrintServiceImpl implements FootPrintService {
             ProductDto productDto = new ProductDto();
             BeanUtils.copyProperties(fp.getProduct(),productDto);
             // 更改图片地址
-            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage());
+            productDto.setProductImage(PropertiesParam.file_pre+productDto.getProductImage().split(";")[0]);
             productDto.setUrl(productDto.getProductImage().split(";")[0]);
             //商店信息
             ShopDto shopDto =new ShopDto();
