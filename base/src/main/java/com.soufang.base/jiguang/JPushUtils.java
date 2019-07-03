@@ -18,8 +18,8 @@ import cn.jpush.api.push.model.notification.Notification;
 public class JPushUtils {
 
     //soufang
-    private static final String appKey   = "2d42f9b2bb30721ceeef57bd" ;
-    private static final String masterSecret = "c4a1102f3c218bafa313d009";
+    private static final String appKey   = "7b9136215eff9a4897a673ea" ;
+    private static final String masterSecret = "a6c0927d688716eca1d7973a";
 
     //两个参数分别填写你申请的masterSecret和appKey
     private static JPushClient jPushClient=new JPushClient(masterSecret,appKey);
@@ -112,6 +112,6 @@ public class JPushUtils {
 
     public static void main(String[] args){
         //给标签为kefu的用户进行消息推送
-        JPushUtils.pushNotice("alias","4","你有新的任务，请及时处理");
+        JPushUtils.pushNotice("alias","yhkj_","你有新的任务，请及时处理");
     }
 }

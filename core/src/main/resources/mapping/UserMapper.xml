@@ -299,7 +299,18 @@
         user_password = #{passWord,jdbcType=VARCHAR},
       </if>
     </set>
-    where user_email = #{email,jdbcType=BIGINT}
+    where user_email = #{email,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updatePassword" parameterType="com.soufang.base.dto.user.UserDto">
+    update t_user
+    <set >
+      <if test="passWord != null" >
+        user_password = #{passWord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id= #{userId,jdbcType=BIGINT}
   </update>
   <select id="getByShopId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select * from t_user

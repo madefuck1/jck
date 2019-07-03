@@ -28,7 +28,7 @@ public class JMessageUtils {
 
 
     public static void main(String[] args){
-        regPP1("egt_33","123456");
+        regPP1("egt_44","123456");
     }
 
 

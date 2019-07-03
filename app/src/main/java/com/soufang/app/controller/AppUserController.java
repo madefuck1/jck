@@ -3,10 +3,7 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
-import com.soufang.app.vo.user.Information;
-import com.soufang.app.vo.user.LoginReqVo;
-import com.soufang.app.vo.user.RegisterReqVo;
-import com.soufang.app.vo.user.UserVo;
+import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
@@ -48,6 +45,7 @@ public class AppUserController extends AppBaseController {
     public UserVo login(@RequestBody LoginReqVo loginReqVo){
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         String loginName = loginReqVo.getPhone();
         if(loginName == null){
             userVo.setMessage("用户名栏不能为空");
@@ -67,7 +65,9 @@ public class AppUserController extends AppBaseController {
             userVo.setSuccess(true);
             userVo.setMessage("登录成功");
             userVo.setCode("100");
-            userVo.setData(token);
+            map.put("token",token);
+            map.put("alias","yhkj_"+result.getMessage());
+            userVo.setData(map);
         } else {
             userVo.setMessage("登录失败:"+result.getMessage());
             userVo.setSuccess(false);
@@ -147,6 +147,7 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "registerByPhone",method = RequestMethod.POST)
     public UserVo registerByPhone(@RequestBody RegisterReqVo registerReqVo){
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         UserVo userVo = new UserVo();
         if(StringUtils.isNotBlank(registerReqVo.getPhone())){
             userDto.setPhone(registerReqVo.getPhone());
@@ -171,7 +172,8 @@ public class AppUserController extends AppBaseController {
                 userVo.setSuccess(true);
                 userVo.setCode("100");
                 userVo.setMessage("注册成功");
-                userVo.setData(token);
+                map.put("token",token);
+                userVo.setData(map);
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getPhone());
                 return userVo;
             }else {
@@ -193,6 +195,7 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "registerByEmail",method = RequestMethod.POST)
     public UserVo registerByEmail(@RequestBody RegisterReqVo registerReqVo){
         UserVo userVo = new UserVo();
+        Map<String ,Object> map = new HashMap<>();
         UserDto userDto = new UserDto();
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             userDto.setEmail(registerReqVo.getEmail());
@@ -218,7 +221,8 @@ public class AppUserController extends AppBaseController {
                 RedisUtils.setString(token, String.valueOf(result.getMessage()),register_time);
                 userVo.setSuccess(true);
                 userVo.setCode("100");
-                userVo.setData(token);
+                map.put("token",token);
+                userVo.setData(map);
                 userVo.setMessage("注册成功");//成功后删除键值
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getEmail());
                 return userVo;
@@ -485,6 +489,61 @@ public class AppUserController extends AppBaseController {
             result = appUserFeign.update(userDto);
         }
         AppVo vo = new AppVo();
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+
+    //修改绑定的邮箱
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updateEmail",method = RequestMethod.POST)
+    public AppVo updateEmail(HttpServletRequest request,@RequestBody RegisterReqVo registerReqVo){
+        AppVo vo = new AppVo();
+        UserDto userInfo = this.getUserInfo(request);
+        UserDto userDto = new UserDto();
+        Result result = new Result();
+        userDto.setUserId(userInfo.getUserId());
+        String code = null ;
+        if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
+            code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
+        } else {
+            vo.setMessage("验证码过期");
+            vo.setSuccess(false);
+            return vo;
+        }
+        if(code.equals(registerReqVo.getCode())){
+            userDto.setEmail(registerReqVo.getEmail());
+            result = appUserFeign.update(userDto);
+        }else {
+            vo.setMessage("验证码错误");
+            vo.setSuccess(false);
+            return vo;
+        }
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+
+
+    //修改密码
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
+    public AppVo updateInformation(HttpServletRequest request, @RequestBody UpdatePassword updatePassword){
+        UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
+        UserDto userDto = new UserDto();
+        Result result;
+        userDto.setUserId(userInfo.getUserId());
+        if(!(MD5Utils.md5(updatePassword.getOldPassword()).equals(userInfo.getPassWord()))){
+            vo.setMessage("旧密码输入错误");
+            vo.setSuccess(false);
+            return vo;
+        }else {
+            userDto.setPassWord(MD5Utils.md5(updatePassword.getNewPassword()));
+            result = appUserFeign.updatePassword(userDto);
+        }
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;

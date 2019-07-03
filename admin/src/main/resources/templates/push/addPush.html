@@ -9,7 +9,7 @@
 </@override>
 <@override name="body">
 
-<form style="">
+<form style="margin-left: 20%;margin-top: 30px">
     <div class="layui-form" >
         <div class="layui-form-item">
             <!--<div class="layui-inline">
@@ -19,7 +19,7 @@
                 </div>
             </div>-->
             <div class="layui-input-block">
-                <textarea  id="newsContent" name="newsContent" style="display: none;">此处推送内容###</textarea>
+                <textarea  id="pushContent" name="pushContent" style="width: 800px;height: 250px;">此处推送内容###</textarea>
             </div>
 
         </div>
@@ -57,7 +57,7 @@
 
 <@override name="js">
 <script>
-    var indexs;
+    /*var indexs;
     //建立编辑器
     var layedit;
     layui.use('layedit', function(){
@@ -76,22 +76,22 @@
                 height: 180 ,//设置文本域高度
                 tool: ['left', 'center', 'right', '|', 'face','image','strong','italic','del','help'],//设置文本工具
             });
-        /*indexs = layedit.build('sugContent');//建立编辑器*/
+        /!*indexs = layedit.build('sugContent');//建立编辑器*!/
 
         layedit.sync(indexs);
 
-    });
+    });*/
 
     layui.use('table', function(){
         var table = layui.table;
     });
 
     function submitForm(){
-        var myContent = layedit.getContent(indexs);
-       /* var picture=myContent.match(/src="(\S*)" alt=/)[1];*/
-        myContent = myContent.replace(/\"/g,"'");//将字符串中""全部替换成''
+        /*var myContent = layedit.getContent(indexs);
+       /!* var picture=myContent.match(/src="(\S*)" alt=/)[1];*!/
+        myContent = myContent.replace(/\"/g,"'");//将字符串中""全部替换成''*/
         var data = {
-            pushContent:myContent,
+            pushContent:$('#pushContent').val(),
             pushType:$('#news_origin').val()
         }
         $.ajax({
