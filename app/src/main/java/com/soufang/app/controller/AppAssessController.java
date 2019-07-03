@@ -34,13 +34,16 @@ public class AppAssessController extends AppBaseController{
     @ResponseBody
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public AssessVo getList(HttpServletRequest request,@RequestBody AssessSo assessSo ){
+        if(assessSo.getLimit() == null){
+            assessSo.setLimit(5);
+        }
         AssessVo vo = new AssessVo();
         //是否要先判断该用户是买家还是卖家，在去获取列表？暂时是只有卖家可以获取列表
-        ShopDto shopInfo = this.getShopInfo(request);
+        /*ShopDto shopInfo = this.getShopInfo(request);
         assessSo.setShopId(shopInfo.getShopId());
         if(assessSo.getType() == null || assessSo.getType() == 0 ){
             assessSo.setType(null);
-        }
+        }*/
         PageHelp<AssessDto> pageHelp = appAssessFeign.getList(assessSo);
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());
