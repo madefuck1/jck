@@ -5,6 +5,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.adminUser.AdminUserDto;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.user.UserSo;
@@ -58,4 +59,7 @@ public interface AppUserFeign {
 
     @RequestMapping(value = "/core/user/updatePassword",method = RequestMethod.POST)
     Result updatePassword(UserDto userDto);
+
+    @RequestMapping(value = "/core/suggest/addSuggest",method = RequestMethod.POST)
+    Result addSuggest(@RequestBody SuggestDto suggestDto);
 }
