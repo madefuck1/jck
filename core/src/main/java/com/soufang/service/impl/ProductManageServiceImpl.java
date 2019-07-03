@@ -59,14 +59,20 @@ public class ProductManageServiceImpl implements ProductManageService {
         List<ProductDto> productDtos = new ArrayList<>();
         for (ProductDto productDto : products) {
             StringBuffer productImage = new StringBuffer();
+            String productUrl = "";
             if(StringUtils.isNotBlank(productDto.getProductImage())){
                 String[] imageArray = productDto.getProductImage().split(";");
                 for (int i = 0; i <imageArray.length ; i++) {
+                    if(i == 0){
+                        productUrl = PropertiesParam.file_pre + imageArray[i] ;
+                    }
                     productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
                 }
             }else {
+                productUrl = PropertiesParam.file_pre+"/uploadProduct/product.jpg";
                 productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
             }
+            productDto.setProductUrl(productUrl);
             productDto.setProductImage(productImage.toString());
 
             StringBuffer productDetail = new StringBuffer();
@@ -257,7 +263,11 @@ public class ProductManageServiceImpl implements ProductManageService {
             if (StringUtils.isNotBlank(p.getProductImage())) {
                 img = p.getProductImage().split(";");
             }
-            p.setProductImage(PropertiesParam.file_pre + img[0]);
+            if(StringUtils.isNotBlank(img[0])){
+                p.setProductUrl(PropertiesParam.file_pre + img[0]);
+            }else {
+                p.setProductUrl(PropertiesParam.file_pre + "/uploadProduct/product.jpg");
+            }
         }
         PageHelp<ProductDto> pageHelp = new PageHelp<>();
         pageHelp.setData(products);

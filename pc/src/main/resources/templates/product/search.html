@@ -118,7 +118,7 @@
                         <input hidden id="productId" value="${item.productId}">
                         <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
                             <div style="height: 230px;">
-                                <img src="${item.url!}"/>
+                                <img src="${item.productUrl}"/>
                             </div>
                             <p class="title fl">${item.productName!}</p>
                             <p class="price fl">
@@ -143,8 +143,8 @@
             <li>
                 <div class="i-pic check">
                     <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
-                    <img src="${item.url!}"/>
-                    <p class="check-title">${item.productName!}</p>
+                    <img src="${item.productUrl}"/>
+                    <p class="check-title">${item.productName}</p>
                     <p class="price fl">
                         <b>¥</b>
                         <strong>${item.productStatisticsDto.productPrice}</strong>
