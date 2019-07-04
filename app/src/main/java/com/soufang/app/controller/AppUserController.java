@@ -472,10 +472,22 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
     public AppVo updateInformation(MultipartHttpServletRequest requestFile, HttpServletRequest request){
         UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
         UserDto userDto = new UserDto();
         Result result = new Result();
         userDto.setUserId(userInfo.getUserId());
-        userDto.setRealName(request.getParameter("realName"));
+        if(!StringUtils.isNotBlank(userInfo.getUserName())){
+            userDto.setRealName(request.getParameter("realName"));
+        }else {
+            vo.setSuccess(false);
+            vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
+            return vo;
+        }
+        if(appUserFeign.login(userDto).isSuccess()){
+            vo.setMessage("用户名已存在，请换个用户名！");
+            vo.setSuccess(false);
+            return vo;
+        }
         MultipartFile file = requestFile.getFile("userAvatar");
         Map<String,Object> map = new HashMap<>();
         if(file != null){
@@ -491,7 +503,7 @@ public class AppUserController extends AppBaseController {
         }else {
             result = appUserFeign.update(userDto);
         }
-        AppVo vo = new AppVo();
+
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;
@@ -576,11 +588,11 @@ public class AppUserController extends AppBaseController {
         return result;
     }
 
-    //用户反馈
+    //判断用户是否有店铺
     @AppMemberAccess
     @ResponseBody
     @RequestMapping(value = "isHaveShop", method = RequestMethod.POST)
-    public DetailVo isHaveShop(HttpServletRequest request) {;
+    public DetailVo isHaveShop(HttpServletRequest request) {
         DetailVo vo = new DetailVo();
         ShopDto shopInfo = this.getShopInfo(request);
         if(StringUtils.isNotBlank(shopInfo.getShopName())){
