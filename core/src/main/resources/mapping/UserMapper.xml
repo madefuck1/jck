@@ -105,6 +105,9 @@
     <if test="userName != null and userName != ''">
       and login_name = #{userName,jdbcType=VARCHAR}
     </if>
+    <if test="realName != null and realName != ''">
+      and login_name = #{userName,jdbcType=VARCHAR}
+    </if>
   </select>
 
   <delete id="deleteById" parameterType="java.lang.Long" >

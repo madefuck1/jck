@@ -3,12 +3,14 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
+import com.soufang.app.vo.shop.DetailVo;
 import com.soufang.app.vo.suggest.SuggestVo;
 import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.sms.SmsSendResponse;
@@ -48,7 +50,7 @@ public class AppUserController extends AppBaseController {
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
         Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isBlank(loginReqVo.getPhone()) || StringUtils.isBlank(loginReqVo.getEmail())){
+        if(!(StringUtils.isNotBlank(loginReqVo.getPhone()) || StringUtils.isNotBlank(loginReqVo.getEmail()))){
             userVo.setMessage("用户名栏不能为空");
             userVo.setSuccess(false);
             return userVo;
@@ -470,10 +472,23 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
     public AppVo updateInformation(MultipartHttpServletRequest requestFile, HttpServletRequest request){
         UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
         UserDto userDto = new UserDto();
         Result result = new Result();
         userDto.setUserId(userInfo.getUserId());
-        userDto.setRealName(request.getParameter("realName"));
+        if(!StringUtils.isNotBlank(userInfo.getUserName())){
+            userDto.setRealName(request.getParameter("realName"));
+        }else {
+            vo.setSuccess(false);
+            vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
+            return vo;
+        }
+        Result result1 = appUserFeign.login(userDto);
+        if(result1.isSuccess()){
+            vo.setMessage("用户名已存在，请换个用户名！");
+            vo.setSuccess(false);
+            return vo;
+        }
         MultipartFile file = requestFile.getFile("userAvatar");
         Map<String,Object> map = new HashMap<>();
         if(file != null){
@@ -489,7 +504,7 @@ public class AppUserController extends AppBaseController {
         }else {
             result = appUserFeign.update(userDto);
         }
-        AppVo vo = new AppVo();
+
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;
@@ -572,6 +587,26 @@ public class AppUserController extends AppBaseController {
         suggestDto.setSugContent(suggestVo.getContent());
         result = appUserFeign.addSuggest(suggestDto);
         return result;
+    }
+
+    //判断用户是否有店铺
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "isHaveShop", method = RequestMethod.POST)
+    public DetailVo isHaveShop(HttpServletRequest request) {
+        DetailVo vo = new DetailVo();
+        ShopDto shopInfo = this.getShopInfo(request);
+        if(StringUtils.isNotBlank(shopInfo.getShopName())){
+            vo.setSuccess(true);
+            vo.setMessage("有相关的店铺信息");
+            vo.setData(shopInfo);
+            return vo;
+        }else {
+            vo.setSuccess(false);
+            vo.setMessage("没有相关的店铺信息");
+            vo.setData(null);
+            return vo;
+        }
     }
 
 }
