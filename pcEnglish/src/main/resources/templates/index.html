@@ -1,5 +1,5 @@
 <@override name="title">
-进出口产品交易网
+Import and Export Product Trading Network
 </@override>
 
 <@override name="css">
@@ -17,38 +17,38 @@
 <div id="index_list">
     <div class="inquiry" id="enquiryList">
         <div class="padd title">
-            <div class="title_left">询价</div>
-            <div class="title_right" onclick="getAllEnquiry(1,10)">查看全部</div>
+            <div class="title_left">Inquiry</div>
+            <div class="title_right" onclick="getAllEnquiry(1,10)">view all</div>
         </div>
         <#list enquiryDtos as enquiry>
         <#list enquiry.enquiryProductDto as product>
             <div class="padd cloumn">
                 <div class="one">${product.productName}</div>
-                <div class="two">采购<span>${product.productNumber}</span>个</div>
-                <div class="three">剩余<span>${enquiry.effectiveTime}</span>天</div>
+                <div class="two">purchase<span>${product.productNumber}</span>one</div>
+                <div class="three">Remaining<span>${enquiry.effectiveTime}</span>date</div>
             </div>
         </#list>
         </#list>
 </div>
     <div class="inquiry inquiry2">
         <div class="padd title">
-            <div class="title_left">消息</div>
+            <div class="title_left">news</div>
             <!--<div class="title_right">查看全部</div>-->
         </div>
         <div class="padd cloumn" onclick="getMessageDetail(1)">
-            <div class="one">极限敏感词的发布要求</div>
+            <div class="one">Release requirements for extreme sensitive words</div>
             <div class="four">2019-5-17</div>
         </div>
         <div class="padd cloumn" onclick="getMessageDetail(2)">
-            <div class="one">发布产品为什么审核不通过</div>
+            <div class="one">Why does the release of the product fail</div>
             <div class="four">2019-4-01</div>
         </div>
         <div class="padd cloumn" onclick="getMessageDetail(3)">
-            <div class="one">重复信息处理规则</div>
+            <div class="one">Duplicate information processing rules</div>
             <div class="four">2019-3-20</div>
         </div>
         <div class="padd cloumn border" onclick="getMessageDetail(4)">
-            <div class="one">批量添加产品操作指南</div>
+            <div class="one">Add product operation guide</div>
             <div class="four">2019-3-15</div>
         </div>
     </div>
@@ -59,85 +59,99 @@
         <div class="shop_nav ">
             <div class="shop_title curr" onclick="getAssortProduct(1,1,8)">
                 <div><i class="iconfont iconjixie"></i></div>
-                <p>机械五金</p>
+                <p>Mechanical hardware
+                </p>
             </div>
         </div>
         <div class="shop_nav">
             <div class="shop_title" onclick="getAssortProduct(11,1,8)">
                 <div><i class="iconfont icongongyeshebei"></i></div>
-                <p>工业设备</p>
+                <p>Industrial equipment
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(21,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconjiazhuangjiancai"></i></div>
-                <p>家装建材</p>
+                <p>Home improvement building materials
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(33,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondianziyuanjian"></i></div>
-                <p>电子仪表</p>
+                <p>Electronic instrument
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(45,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondiangongdianqi"></i></div>
-                <p>电工电气</p>
+                <p>Electrician electrical
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(71,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconhuagong"></i></div>
-                <p>化工能源</p>
+                <p>Chemical energy
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(59,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconjiaotongyunshu"></i></div>
-                <p>交通汽摩</p>
+                <p>Traffic automobile and motorcycle
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(78,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconanfang"></i></div>
-                <p>安防照明 </p>
+                <p>Security lighting
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(85,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconriyongbaihuo"></i></div>
-                <p>日用百货</p>
+                <p>Daily necessities
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(92,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont icondiannaoshuma"></i></div>
-                <p>数码电子</p>
+                <p>Digital Electronics
+                </p>
             </div>
         </div>
         <div class="shop_nav">
             <div class="shop_title" onclick="getAssortProduct(99,1,8)">
                 <div><i class="iconfont iconxiuxianyule"></i></div>
-                <p>休闲娱乐 </p>
+                <p>Leisure and entertainment
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(106,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconfuzhuangpeishi"></i></div>
-                <p>服装纺织</p>
+                <p>Clothing textile
+                </p>
             </div>
         </div>
         <div class="shop_nav" onclick="getAssortProduct(115,1,8)">
             <div class="shop_title">
                 <div><i class="iconfont iconshipinnongye"></i></div>
-                <p>农业食品</p>
+                <p>Agricultural food
+                </p>
             </div>
         </div>
         <div class="shop_nav" style="margin-right: 0px">
             <div class="shop_title" onclick="getAssortProduct(122,1,8)">
                 <div><i class="iconfont iconxiangbao"></i></div>
-                <p>箱包配件</p>
+                <p>Bags and accessories
+                </p>
             </div>
         </div>
  </div>
