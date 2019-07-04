@@ -28,7 +28,7 @@ public class BannerController {
     @ResponseBody
     @RequestMapping(value = "uploadImg/{terminal}", method = RequestMethod.POST)
     AdminVo uploadImg(@RequestParam("file")MultipartFile file ,@PathVariable Integer terminal){
-        Map<String,Object> map = FtpClient.uploadImage(file,"/uploadProduct");
+        Map<String,Object> map = FtpClient.uploadImage(file,"/uploadBanner");
         AdminVo adminVo = new AdminVo();
         BannerDto bannerDto = new BannerDto();
         bannerDto.setBannerImage(map.get("uploadName").toString());

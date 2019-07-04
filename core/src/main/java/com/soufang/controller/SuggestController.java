@@ -56,10 +56,10 @@ public class SuggestController {
     Result addSuggest(@RequestBody SuggestDto suggestDto){
         Result result = new Result();
         if(suggestService.addSuggest(suggestDto) > 0 ){
-            result.setMessage("添加成功");
+            result.setMessage("反馈成功");
             result.setSuccess(true);
         }else {
-            result.setMessage("添加失败");
+            result.setMessage("反馈失败");
             result.setSuccess(false);
         }
         return result;
