@@ -1,0 +1,27 @@
+<!--卖家  头-->
+<div id="nav">
+    <div class="nav_in">
+        <div class="left" id="html_top">
+            <#if isLonIn?? && isLonIn != "N">
+            <p>欢迎您 &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+                &nbsp;<a href="#" target="_blank">消息(${pushInfoCount!0})</a>
+                <a href="/user/signOut">退出登录</a>
+                <!-- todo 消息跳转 -->
+            </p>
+            <#else>
+            <p>欢迎您 &nbsp;请<a href="/user/toLogin">登录</a> &nbsp;<a href="/user/toRegister">注册会员</a></p>
+        </#if>
+        </div>
+        <div class="right">
+            <p class="service">客服电话：400-860-0992</p>
+            <div class="order">
+                <a href="/orderManager/toOrderManager">我的订单</a>
+                <span class="icon icon1"></span>
+            </div>
+            <div class="shopping">
+                <a href="/shopCar/getList">购物车</a>
+                <a id="carCount" href="#">(${shopCarCount!0})</a>
+            </div>
+        </div>
+    </div>
+</div>

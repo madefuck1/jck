@@ -1,0 +1,245 @@
+<@override name="title">
+求购详情
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/sale/sale_detail.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/purchDetail.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
+</@override>
+
+<@override name="body">
+		<div id="purchaseDetail">
+			<div class="detail-left" id="productImage">
+			</div>
+			<div class="clearfixRight">
+				<div class="tb-detail-hd">
+					<h3 style="font-size: 16px; font-weight: bold" ><span id="productName"></span></h3>
+					<input type="hidden" id="enquiryProductId" value="${enquiryProductId}">
+					<input type="hidden" id="purchaseNumber">
+				</div>
+				<div class="clear-down">
+					<div class="cloum1">
+						<span class="am-u-sm-2">发布人：</span>
+						<span class="am-u-sm-10">
+							<span>昵称&nbsp;&nbsp;<span id="loginName"></span></span>
+							<span class=" cloum1-pic"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">编号：</span>
+						<span class="am-u-sm-10">
+							<span id="enquiryNumber"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">发布时间：</span>
+						<span class="am-u-sm-10">
+							<span id="strCreateTime"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">交付时间：</span>
+						<span class="am-u-sm-10">
+							<span id="strTakeDate"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">求购状态：</span>
+						<span class="am-u-sm-10">
+							<span id="statusMessage"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">求购数量：</span>
+						<span class="am-u-sm-10">
+							<span id="productNumber"><span id="productUnit"></span></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">交货地址：</span>
+						<span class="am-u-sm-10">
+							<span id="takeAddress"></span>
+						</span>
+
+					</div>
+					<div class="cloum1">
+						<span class="am-u-sm-2">描述：</span>
+						<span class="am-u-sm-10" style="line-height: 24px">
+							<span id="enquiryRemark"></span>
+						</span>
+
+					</div>
+
+
+				</div>
+			</div>
+			<div class="clear"></div>
+	
+		</div>
+
+
+<div class="clear_form">
+
+	<h4 style="margin-bottom: 10px">报价信息</h4>
+	<table class="am-table am-table-bordered">
+		<thead style="background: #e6e6e6;">
+		<tr>
+			<th>报价日期</th>
+			<th>单价</th>
+			<th>价格有效期</th>
+			<th>交货期</th>
+			<th>是否含税</th>
+			<th>备注</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td id="nowTime" ></td>
+			<td><input type="text" style="border: 1px solid #e6e6e6;padding: 5px 2px; width: 70px;" id="unitPrice" name="unitPrice">&nbsp;元</td>
+			<td id="strEndTime"></td>
+			<td>30天</td>
+			<td>
+				<input type="radio">是
+				<input type="radio">否
+			</td>
+			<td><input type="text" id="remark"/></td>
+		</tr>
+
+		</tbody>
+	</table>
+	<button class="am-btn am-btn-secondary" style="margin-left: 46%;margin-top: 60px;" onclick="PurchaseNow(this)">立即发布</button>
+</div>
+
+
+
+</@override>
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+<script>
+    $(function(){
+        var enquiryProductId= $("#enquiryProductId").val();
+        var str={enquiryProductId:enquiryProductId};
+        //默认加载数据  enquiryTableMessage
+        $.ajax({
+            url : "selEnquiryByNumber",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $("#loginName").html(data.loginName);
+                $("#enquiryNumber").html(data.enquiryNumber);
+                $("#enquiryNumber").val(data.enquiryNumber);
+                var str=data.enquiryProductDto[0].purchases[0].purchaseNumber;
+                if (str==null || str=="null" ||str ==""){
+                    $("#purchaseNumber").val(0);
+                }else{
+                    $("#purchaseNumber").val(str);
+				}
+                $("#strCreateTime").html(data.strCreateTime);
+                $("#strTakeDate").html(data.strTakeDate);
+                $("#statusMessage").html(data.statusMessage);
+                $("#productNumber").html(data.enquiryProductDto[0].productNumber);
+                $("#enquiryProductId").html(data.enquiryProductDto[0].enquiryProductId);
+                $("#productUnit").html(data.enquiryProductDto[0].productUnit);
+                $("#takeAddress").html(data.takeAddress);
+                $("#enquiryRemark").html(data.enquiryRemark);
+                $("#productName").html(data.enquiryProductDto[0].productName);
+                $("#productImage").html("<img src='"+data.enquiryProductDto[0].productImage+"' alt='' STYLE='width:400px;height:400px;'>");
+                var nowTime=getNowFormatDate();
+                $("#nowTime").html(nowTime);
+                $("#strEndTime").html(data.strEndTime);
+            }
+        });
+    });
+
+    //获取当前时间
+    function getNowFormatDate() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + "-" + month + "-" + strDate;
+        return currentdate;
+    }
+
+    function checkForm(){
+        if ($("input[name=unitPrice]").val() == '') {
+            return "报价价格不能为空";
+        }
+    }
+
+    //报价
+    function PurchaseNow(obj) {
+        var enquiryNumber=$("#enquiryNumber").val();
+        var enquiryProductId= $("#enquiryProductId").val();
+        //通过查询SHOP信息判断是否存在商铺信息-判断不是商家则不能报价
+		//如果是自己发布的不能报价
+		var str = {enquiryNumber:enquiryNumber,enquiryProductId:enquiryProductId};
+        var message = checkForm();
+        if (message != null) {
+            alert(message);
+        }else{
+        $.ajax({
+            url: "isOrNoShopUser",
+			data:JSON.stringify(str),
+            type: "post",
+            contentType: 'application/json; charset=UTF-8',
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.message=="可以报价"){
+                    if(confirm("请确认报价信息是否进行当前报价操作")){
+                        toSubmit(obj);
+                    }
+				}else if (data.message=="已经报价过"){
+                    if(confirm("已经报价过，请确认是否进行当前报价操作")){
+						toSubmit(obj);
+                    }
+				}else{
+                    alert("不是卖家或者自己的求购不能报价");
+				}
+			}
+        });
+        }
+
+    }
+
+    function toSubmit(obj) {
+		$(obj).prop("disabled",true);
+        var unitPrice=$("#unitPrice").val();
+        var enquiryProductId=$("#enquiryProductId").val();
+        var enquiryNumber=$("#enquiryNumber").val();
+        var remark=$("#remark").val();
+        var str={unitPrice:unitPrice,enquiryProductId:enquiryProductId,remark:remark,enquiryNumber:enquiryNumber};
+        $.ajax({
+            url: "purchase",
+            type: "post",
+            data: JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType: "json",
+            success: function (data) {
+                alert(data.message);
+                window.open("/enquiry/toMyQuote");
+            }
+        });
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

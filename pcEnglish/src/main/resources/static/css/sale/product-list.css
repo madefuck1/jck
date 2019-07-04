@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+.am-tab-up button{
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	border: 1px solid #e6e6e6;
+	background: #fff;
+}
+.am-tab-up{
+	margin:30px 0px 10px 0px;
+}
+.am-active .am-btn-default.am-dropdown-toggle, .am-btn-default.am-active, .am-btn-default:active{
+	background: #fff;
+	border: 1px solid #e6e6e6;
+}
+.am-dropdown-toggle span{
+	color: #999;
+}
+
+
+
+.order-top .th-item,.item-list .td-item{
+	width:  40%;
+}
+
+
+.item-list .td-price{
+	width: 15%;
+}
+
+.order-top .th-price{
+	width: 15%;
+}
+.item-list .td-number,.order-top .th-number{
+	width: 5%;
+	margin-left: 15px;
+}
+.td-number .item-number-margin{
+	margin-left: -42px;
+}
+
+.order-top .th-amount{
+	width: 5%;
+}
+
+.item-list .td-amount{
+	width: 5%;
+}
+
+.order-main{
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

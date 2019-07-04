@@ -1,0 +1,38 @@
+<div id="contain">
+    <div class="list">
+        <div class="list_in" style="position:relative">
+            <div class="list_up" style="position: relative;">
+                <div class="title" id="contain_title"><i class="iconfont iconhangyefenlei"></i>行业分类</div>
+                <div class="header">
+                    <ul>
+                        <li class="cur"><a href="/index">首页</a></li>
+                        <li><a href="/enquiry/toEnquiryList">求购信息</a></li>
+                        <li><a href="/exhibition/toExhibition">展会信息</a></li>
+                        <li><a href="/inform/toInform">纺织资讯</a></li>
+                        <!--<li><a href="">联系我们</a></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="list_down" hidden style="position: absolute;left: 0px;top: 40px;z-index: 9999999;">
+                <div class="list_left" id="contain_list_left">
+                    <#list assortList as assort>
+                    <div class="meu">
+                        <input type="hidden" value="${assort.assortId}">
+                        <div class="list_liftIn">
+                            <div class="list_cloum1">
+                                <i class="iconfont"></i>
+                                <span class="span1"
+                                      onclick="clickAssortName('A${assort.assortId}','${assort.assortName}');">${assort.assortName}</span>
+                            </div>
+                        </div>
+                    </div></#list>
+                </div>
+                <div class="list_right" style="display: none">
+                    <div class="list_con">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

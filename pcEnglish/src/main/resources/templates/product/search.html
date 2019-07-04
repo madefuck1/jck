@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<#assign staticPath=request.contextPath!/>
+<#assign contextPath=request.contextPath+"/static" />
+<head>
+    <#include "/common/includes/header.html"/>
+    <title>产品搜索页面</title>
+    <!-- css样式 -->
+    <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="${contextPath}/css/seastyle.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="${contextPath}/css/header.css">
+    <link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+    <link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+
+    <!-- 引入js -->
+    <script type="text/javascript" src="${contextPath}/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="${contextPath}/js/assort.click.js"></script>
+    <script type="text/javascript" src="${contextPath}/js/basic/quick_links.js"></script>
+    <script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+    <script type="text/javascript" src="/static/js/includes/include.contain.js"></script>
+
+    <style>
+        #contain, .list {
+            height: auto;
+        }
+    </style>
+
+</head>
+
+<body style="background: #fff">
+<!--顶部导航条 -->
+<#include "/common/includes/include.top.html"/>
+
+<!--悬浮搜索框-->
+<#include "/common/includes/include.search.html"/>
+
+<div class="search">
+    <div class="search-list">
+        <!-- 行业分类、首页~~ -->
+        <#include "/common/includes/include.contain.html"/>
+
+        <div class="am-g am-g-fixed">
+            <div class="am-u-sm-12 am-u-md-12">
+                <div class="theme-popover">
+                    <div class="searchAbout">
+                        <span class="font-pale">相关搜索：</span>
+                        <a title="纺织" href="#">纺织</a>
+                        <a title="衣服" href="#">衣服</a>
+                        <a title="印花" href="#">印花</a>
+
+                    </div>
+                    <ul class="select" name="select">
+                        <li class="select-result">
+                            <dl>
+                                <dt>已选</dt>
+                                <dd class="select-no"></dd>
+                                <p class="eliminateCriteria">清除</p>
+                            </dl>
+                        </li>
+                        <div class="clear"></div>
+                        <li class="select-list">
+                            <dl id="select1">
+                                <dt class="am-badge am-round">相关分类</dt>
+                                <div class="dd-conent">
+                                    <dd class="select-all selected"><a href="#">全部</a></dd>
+                                    <#list assortA as item>
+                                    <dd><a href="#">${item.assortName}<input hidden value="${item.assortId}"></a></dd>
+                                    </#list>
+                                </div>
+                            </dl>
+                        </li>
+                        <li name="select2-list" class="select-list" style="display: none;" >
+                            <dl id="select2">
+                            </dl>
+                        </li>
+                        <li name="select3-list" class="select-list" style="display: none;">
+                            <dl id="select3">
+                            </dl>
+                        </li>
+                    </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="search-content">
+            <div class="sort">
+                <li class="first">
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(1)" title="综合">综合排序</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(2)" title="销量">销量排序</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,1)" title=">价格">价格从低到高</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,2)" title=">价格">价格从高到低</a>
+                </li>
+                <!--                        <li>-->
+                <!--                            <select style="color:#F58022;height:35px;" onchange="searchAssortWithSort(3,this)">-->
+                <!--                                <option value="">价格优先</option>-->
+                <!--                                <option value="1">价格从低到高</option>-->
+                <!--                                <option value="2">价格从高到低</option>-->
+                <!--                            </select>-->
+                <!--                        </li>-->
+            </div>
+            <div class="clear"></div>
+
+            <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes" name="product_UL">
+
+                <#list productList as item>
+                <li>
+                    <div class="i-pic limit">
+                        <input hidden id="productId" value="${item.productId}">
+                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
+                            <div style="height: 230px;">
+                                <img src="${item.productUrl}"/>
+                            </div>
+                            <p class="title fl">${item.productName!}</p>
+                            <p class="price fl">
+                                <b>¥</b>
+                                <strong>${item.productStatisticsDto.productPrice}</strong>
+                            </p>
+                            <p class="number fl">
+                                销量<span>${item.productStatisticsDto.dealNumber}</span>
+                            </p>
+                        </a>
+                    </div>
+                </li>
+                </#list>
+            </ul>
+            <!--分页 -->
+            <div id="pagination-product" style="text-align: center"></div>
+        </div>
+        <div class="search-side">
+
+            <div class="side-title" style="font-weight: 600; color: #333;font-size: 16px;">热门推荐</div>
+            <#list HotProductList as item>
+            <li>
+                <div class="i-pic check">
+                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
+                    <img src="${item.productUrl}"/>
+                    <p class="check-title">${item.productName}</p>
+                    <p class="price fl">
+                        <b>¥</b>
+                        <strong>${item.productStatisticsDto.productPrice}</strong>
+                    </p>
+                    <p class="number fl">
+                        销量<span>${item.productStatisticsDto.dealNumber}</span>
+                    </p>
+                    </a>
+                </div>
+            </li>
+        </#list>
+
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+
+</div>
+<#include "/common/includes/include.footer.html"/>
+</div>
+<b class="line"></b>
+<!--菜单 -->
+<div class="theme-popover-mask"></div>
+</body>
+<script type="text/javascript">
+
+    $(function () {
+        if ("${assortNameA}" != "无") {
+            $('.select-list').find('#select1').find('a').each(function () {
+                if ($(this).text() == "${assortNameA}") {
+                    $(this).trigger('click');
+                }
+            });
+        }
+
+        if ("C"=="${assortLevel}"||"B"=="${assortLevel}") {
+            initAssort("#select2",${assortIdA},"${assortNameB}");
+        }
+        // pagination 分页插件
+        // $("#pagination").pagination(${productCount!0}, {   //total(一共多少条记录)不能少
+        //     callback: PageCallback,
+        //     prev_text: '上一页',
+        //     next_text: '下一页',
+        //     items_per_page: 40,             //每页显示最大条数
+        //     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+        //     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+        //     current_page: 0,
+        // });
+        Init(0);
+
+    });
+    function PageCallback(index, jq) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+        Init(index);
+    }
+    // dlId: 分类框，v1: 父级id，v2:对应assortName
+    function initAssort(dlId,v1,v2){
+        $.get("/pc/commonPullDown/getAssortAByParentId/" + v1, function (result) {
+            var html = "";
+            if (result.length != 0) {
+
+                html += '<div class="dd-conent">';
+                html += '<dd class="select-all selected"><a href="#">全部</a></dd>';
+                for (var i = 0; i < result.length; i++) {
+                    html += '<dd><a href="#">' + result[i].assortName + '<input hidden ' +
+                        'value="' + result[i].assortId + '"></a></dd>';
+                }
+                html += '</div>';
+            }
+            $(dlId).text("");
+            $(dlId).append(html);
+            switch (dlId) {
+                case "#select2":
+                    $("#select2").find("dd").click(function () {
+                        $(this).addClass("selected").siblings().removeClass("selected");
+                        if ($(this).hasClass("select-all")) {
+                            $("#selectB").remove();
+                            $("#selectC").remove();
+                            $("#select3").html("");
+                            searchAssortWithSort(0);
+                        } else {
+                            var copyThisB = $(this).clone();
+                            if ($("#selectB").length > 0) {
+                                $("#selectB").remove();
+                                copyThisB.attr("onclick", "selectB()");
+                                copyThisB.attr("id", "selectB");
+                                $(".select-result dl").append(copyThisB);
+                                getAssort(this, "#select3");
+                                $("#selectC").remove();
+                            } else {
+                                copyThisB.attr("onclick", "selectB()");
+                                copyThisB.attr("id", "selectB");
+                                $(".select-result dl").append(copyThisB);
+                                getAssort(this, "#select3");
+                                $("#selectC").remove();
+                            }
+                            setTimeout(function () {
+                                $("[name=select3-list]").css('display', 'block');
+                                searchAssortWithSort(0);
+
+                            }, 5)
+                        }
+                    });
+                    setTimeout(function () {
+                        $(dlId).find('a').each(function () {
+                            if ($(this).text() == v2) {
+                                $(this).click();
+                                if("C"=="${assortLevel}" ){
+                                    initAssort("#select3",${assortIdB},"${assortNameC}");
+                                }
+                            }
+                        })
+                    },1)
+                    break;
+                case "#select3":
+                    $("#select3 dd").click(function () {
+                        $(this).addClass("selected").siblings().removeClass("selected");
+                        if ($(this).hasClass("select-all")) {
+                            $("#selectC").remove();
+                            searchAssortWithSort(0);
+                        } else {
+                            var copyThisC = $(this).clone();
+                            if ($("#selectC").length > 0) {
+                                $("#selectC").remove();
+                                copyThisC.attr("onclick", "selectC()");
+                                copyThisC.attr("id", "selectC");
+                                $(".select-result dl").append(copyThisC);
+                            } else {
+                                copyThisC.attr("onclick", "selectC()");
+                                copyThisC.attr("id", "selectC");
+                                $(".select-result dl").append(copyThisC);
+                            }
+                            setTimeout(function () {
+                                searchAssortWithSort(0);
+
+                            }, 10)
+                        }
+                    });
+                    $(dlId).find('a').each(function () {
+                        if ($(this).text() == v2) {
+                            $(this).click();
+                        }
+                    });
+                    break;
+            }
+        });
+
+    }
+
+    var assortId = '', orderSort = '';
+
+    function searchAssortWithSort(type, obj) {
+        // 检索条件分类
+        assortId = getAssortId();
+        // 1:综合排序； 2：销量； 3：价格
+        switch (type) {
+            case 1:
+                orderSort = 1;
+                break;
+            case 2:
+                orderSort = 2;
+                break;
+            case 3:
+                if (obj == 1) {
+                    orderSort = 3;
+                } else {
+                    orderSort = 4;
+                }
+                break;
+            default:
+                orderSort = 0;
+                break;
+        }
+        Init(0);
+    }
+
+
+    function Init(pageIndex) {      //这个参数就是点击的那个分页的页数索引值，第一页为0，上面提到了，下面这部分就是AJAX传值了。
+
+        $.get("/product/searchAssortWithSort?searchProductName=" + $("#search_productName").val() + "&assortId="
+            + assortId + "&orderSort=" + orderSort + "&pageIndex=" + pageIndex, function (result) {
+            productListHtml(result);
+            // pagination 分页插件
+            $("#pagination-product").pagination(result.productCount, {   //total(一共多少条记录)不能少
+                callback: PageCallback,
+                prev_text: '上一页',
+                next_text: '下一页',
+                items_per_page: 40,             //每页显示最大条数
+                num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                current_page: pageIndex,
+            });
+        });
+    }
+
+    // 取消一级分类
+    function selectA() {
+        $("#selectA").remove();
+        $("#selectB").remove();
+        $("#selectC").remove();
+        $("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
+        $("#select2").html("");
+        $("#select3").html("");
+        $(".eliminateCriteria").hide();
+        $(".select-no").show();
+        $(".select-result").hide();
+        setTimeout(function () {
+            $("[name=select2-list]").css('display', 'none');
+            searchAssortWithSort(0)
+        }, 0);
+    }
+
+    // 取消二级分类
+    function selectB() {
+        $("#selectB").remove();
+        $("#selectC").remove();
+        $("#select2 .select-all").addClass("selected").siblings().removeClass("selected");
+        $("#select3").html("")
+        setTimeout(function () {
+            $("[name=select3-list]").css('display', 'none');
+            searchAssortWithSort(0)
+        }, 0);
+    }
+
+    // 取消三级分类
+    function selectC() {
+        $("#selectC").remove();
+        $("#select3 .select-all").addClass("selected").siblings().removeClass("selected");
+        setTimeout(searchAssortWithSort(0), 0);
+    }
+
+    function getAssortId() {
+
+        if (typeof ($('.select-result').find('#selectC').find('input').val()) != "undefined") {
+            return "C" + $("#selectC").find('input').val();
+        } else if (typeof ($('.select-result').find('#selectB').find('input').val()) != "undefined") {
+            return "B" + $("#selectB").find('input').val();
+        } else if (typeof ($('.select-result').find('#selectA').find('input').val()) != "undefined") {
+            return "A" + $("#selectA").find('input').val();
+        }
+    }
+
+    function productListHtml(data) {
+        var html = "";
+        $('[name=product_UL]').html("");
+
+        var productList = data.productList;
+        if (productList.length == 0) {
+            $('[name=product_UL]').html("");
+            $('#pagination').html("");
+            $('.mypage').hide();
+            $('[name=product_UL]').append("没有找到匹配的产品！");
+            $('[name=product_UL]').css("text-align", "center")
+        } else {
+            // 产品列表数据
+            for (var i = 0; i < productList.length; i++) {
+                html += '<li>';
+                html += '<div class="i-pic limit">';
+                html += '<input hidden id="productId" value="' + productList[i].productId + '">';
+                html += '<a href="javascript:void(0);" onclick="openProductDetail(' + productList[i].productId + ')">';
+                html += '<div style="height: 230px;">';
+                html += '<img src="' + productList[i].url + '"/>';
+                html += '</div>';
+                html += '<p class="title fl">' + productList[i].productName + '</p>';
+                html += '<p class="price fl" style="padding: 0px 10px;">';
+                html += '<b>¥</b>';
+                html += '<strong>' + productList[i].productStatisticsDto.productPrice + '</strong>';
+                html += '</p>';
+                html += '<p class="number fl" style="padding: 0px 10px;">';
+                html += '销量<span>' + productList[i].productStatisticsDto.dealNumber + '</span>';
+                html += '</p>';
+                html += '</a>';
+                html += '</div>';
+                html += '</li>';
+            }
+            $('[name=product_UL]').append(html);
+        }
+
+    }
+
+    function openProductDetail(value) {
+        window.location.href = "/product/toDetail?productId=" + value;
+    }
+
+    function getAssort(value, dlId) {
+        var val = $(value).find('input').val();
+        $.get("/pc/commonPullDown/getAssortAByParentId/" + val, function (result) {
+            var html = "";
+            if (result.length != 0) {
+
+                html += '<div class="dd-conent">';
+                html += '<dd class="select-all selected"><a href="#">全部</a></dd>';
+                for (var i = 0; i < result.length; i++) {
+                    html += '<dd><a href="#">' + result[i].assortName + '<input hidden ' +
+                        'value="' + result[i].assortId + '"></a></dd>';
+                }
+                html += '</div>';
+            }
+            $(dlId).text("");
+            $(dlId).append(html);
+            switch (dlId) {
+                case "#select2":
+                    $("#select2").find("dd").click(function () {
+                        $(this).addClass("selected").siblings().removeClass("selected");
+                        if ($(this).hasClass("select-all")) {
+                            $("#selectB").remove();
+                            $("#selectC").remove();
+                            $("#select3").html("");
+                            searchAssortWithSort(0);
+                        } else {
+                            var copyThisB = $(this).clone();
+                            if ($("#selectB").length > 0) {
+                                $("#selectB").remove();
+                                copyThisB.attr("onclick", "selectB()");
+                                copyThisB.attr("id", "selectB");
+                                $(".select-result dl").append(copyThisB);
+                                getAssort(this, "#select3");
+                                $("#selectC").remove();
+                            } else {
+                                copyThisB.attr("onclick", "selectB()");
+                                copyThisB.attr("id", "selectB");
+                                $(".select-result dl").append(copyThisB);
+                                getAssort(this, "#select3");
+                                $("#selectC").remove();
+                            }
+                            setTimeout(function () {
+                                $("[name=select3-list]").css('display', 'block');
+                                searchAssortWithSort(0);
+
+                            }, 1)
+                        }
+                    });
+                    break;
+                case "#select3":
+                    $("#select3 dd").click(function () {
+                        $(this).addClass("selected").siblings().removeClass("selected");
+                        if ($(this).hasClass("select-all")) {
+                            $("#selectC").remove();
+                            searchAssortWithSort(0);
+                        } else {
+                            var copyThisC = $(this).clone();
+                            if ($("#selectC").length > 0) {
+                                $("#selectC").remove();
+                                copyThisC.attr("onclick", "selectC()");
+                                copyThisC.attr("id", "selectC");
+                                $(".select-result dl").append(copyThisC);
+                            } else {
+                                copyThisC.attr("onclick", "selectC()");
+                                copyThisC.attr("id", "selectC");
+                                $(".select-result dl").append(copyThisC);
+                            }
+                            setTimeout(function () {
+                                searchAssortWithSort(0);
+
+                            }, 1)
+                        }
+                    });
+                    break;
+            }
+        });
+    }
+</script>
+</html>

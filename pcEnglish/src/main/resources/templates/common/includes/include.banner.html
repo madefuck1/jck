@@ -1,0 +1,53 @@
+
+<div data-am-widget="slider" class="ba[nner am-slider am-slider-default" data-am-slider='{}' >
+    <ul class="am-slides">
+        <#list bannerDtos as banner>
+        <li><img src="${banner.bannerImage}" alt=""></li>
+        </#list>
+    </ul>
+</div>
+<div class="down">
+    <div class="singer_in">
+        <div class="information">
+            <div class="left">
+                <div class="pic"></div>
+                <#if isLonIn?? && isLonIn != "N">
+                <p style="margin-top: 20px;"> 欢迎您 &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+
+                </p>
+                <#else>
+                <p>欢迎您 &nbsp;请<a href="/user/toLogin">登录</a> &nbsp;<a href="/user/toRegister">注册会员</a></p>
+            </#if>
+        </div>
+        <div class="center">
+            <a href="/enquiry/create">
+                <div class="center1">
+                    <div class="pic1" style="background: url(static/images/img/purchase.png);"></div>
+                    <p class="p1">发布求购</p>
+                </div>
+            </a>
+            <a href="/user/toSettle">
+                <div class="center2">
+                    <div class="pic2" style="background: url(static/images/img/openShop.png);"></div>
+                    <p class="p1">开通商铺</p>
+                </div>
+            </a>
+            <div class="center3">
+                <div class="pic3" style="background: url(static/images/img/pushInfo.png);"></div>
+                <p class="p1">发布信息</p>
+            </div>
+            <div class="center4">
+                <div class="pic4" style="background: url(static/images/img/noviceOnTheLoad.png);"></div>
+                <p class="p1">新手上路</p>
+            </div>
+        </div>
+        <div class="right" style="margin-top: 20px">
+            <div class="row_1 ">
+                <a href="/personalCenter/toEnquiryManage" class="backColor"
+                   style="font-size: 14px; color: #fff; padding: 6px 16px; background: #F58022;border-radius: 2px;">我的询盘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/orderManager/toOrderManager" class="backColor" style="font-size: 14px; color: #fff; padding: 6px 16px; background: #F58022;border-radius: 2px;">我的订单</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,24 @@
+<div id="search">
+    <div class="search_in">
+        <div class="logo" style="margin-top: 24px; cursor: pointer" onclick="javascript:window.open('/index');"href="#"><img style="width: 290px" src="${contextPath}/images/img/logo.png" alt=""></div>
+        <div class="sear">
+            <div class="tog">
+                <div class="tog_in">
+                    <a id="search_type_name" href="#">产品</a>
+                    <i class="iconfont iconxialajiantou"></i>
+                    <ul>
+                        <li onclick="changeV(this)"><a href="#">产品</a></li>
+                        <li onclick="changeV(this)"><a href="#">店铺</a></li>
+                    </ul>
+                </div>
+                <input id="search_type" hidden value="1">
+                <input id="search_productName" type="text" style="width: 100%;" placeholder="布料" value="${searchProductName!}" class="sousuo">
+            </div>
+
+
+            <button id="btn_search"  onclick="btn_search();" class="cont" style="color: #FFFFFF;">搜索</button>
+
+
+        </div>
+    </div>
+</div>
