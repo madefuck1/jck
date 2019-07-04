@@ -8,6 +8,7 @@ import com.soufang.app.feign.FavoriteFeign;
 import com.soufang.app.vo.productManage.ListProductVo;
 import com.soufang.app.vo.shop.*;
 import com.soufang.base.PageBase;
+import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.product.ProductDto;
@@ -140,7 +141,7 @@ public class AppShopController extends AppBaseController {
         if (StringUtils.isNotBlank(request.getParameter("mainProducts"))) {
             shopDto.setMainProducts(request.getParameter("mainProducts"));
         }
-        appShopFeign.updateShop(shopDto);
+        Result result = appShopFeign.updateShop(shopDto);
         CompanyDto companyDto = appUserFeign.companyInfo(shopDto.getUserId());
         if (StringUtils.isNotBlank(request.getParameter("compPhone"))) {
             companyDto.setCompPhone(request.getParameter("compPhone"));
@@ -151,6 +152,12 @@ public class AppShopController extends AppBaseController {
         appUserFeign.updateCompany(companyDto);
         ShopDto shopDetail = getShopInfo(request);
         vo.setData(shopDetail);
+        if(result.isSuccess()){
+            vo.setMessage("修改成功");
+        }else {
+            vo.setMessage("修改成功");
+            vo.setSuccess(false);
+        }
         return vo;
     }
 
