@@ -8,6 +8,7 @@ import com.soufang.app.feign.FavoriteFeign;
 import com.soufang.app.vo.productManage.ListProductVo;
 import com.soufang.app.vo.shop.*;
 import com.soufang.base.PageBase;
+import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.product.ProductDto;
@@ -110,6 +111,44 @@ public class AppShopController extends AppBaseController {
         }
         return vo;
     }
+    /**
+     * 获取自己的店铺详情
+     *
+     * @return
+     */
+    @RequestMapping(value = "getShopDetail", method = RequestMethod.POST)
+    public DetailStoreVo myselfShopDetail(HttpServletRequest request) {
+        ShopDto shopInfo = this.getShopInfo(request);
+        Long shopId = shopInfo.getShopId();
+        DetailStoreVo vo = new DetailStoreVo();
+        // 判断是否已经装修
+        /*Boolean exitStoreInfo = appStoreConstructionFeign.isExistStoreInfo(shopId);*/
+        // 已完成装修 返回具体信息
+        // 店铺信息
+        ShopDto shopDetail = appShopFeign.getShopDetail(shopId);//去设置店铺头像
+        ShopStatisticsDto shopStatisticsInfo = appShopFeign.getShopStatisticsInfo(shopId);
+        shopDetail.setShopStatisticsDto(shopStatisticsInfo);
+        //不用判断是否装修了
+        /*StoreConstructionDto storeInfo = appStoreConstructionFeign.getStoreInfo(shopId);
+        shopDetail.setLogoUrl(storeInfo.getStoreLogoUrl());*/
+        // 用户是否登录 登录查询是否已经收藏
+        UserDto userInfo = this.getUserInfo(request);
+        if (userInfo != null && userInfo.getUserId() != null) {
+            FavoriteDto favoriteDto = new FavoriteDto();
+            favoriteDto.setUserId(userInfo.getUserId());
+            favoriteDto.setFavoriteTargetType(2);
+            favoriteDto.setFavoriteTargetId(shopDetail.getShopId());
+            shopDetail.setCollection(favoriteFeign.isFavorite(favoriteDto));
+        } else {
+            shopDetail.setCollection(false);
+        }
+        // 店铺推荐产品 取销量前六个
+        List<ProductDto> productDtos = appProductManageFeign.getProductTop6(shopId);
+        shopDetail.setProductDtoList(productDtos);
+        vo.setData(shopDetail);
+
+        return vo;
+    }
 
 
     /**
@@ -140,7 +179,7 @@ public class AppShopController extends AppBaseController {
         if (StringUtils.isNotBlank(request.getParameter("mainProducts"))) {
             shopDto.setMainProducts(request.getParameter("mainProducts"));
         }
-        appShopFeign.updateShop(shopDto);
+        Result result = appShopFeign.updateShop(shopDto);
         CompanyDto companyDto = appUserFeign.companyInfo(shopDto.getUserId());
         if (StringUtils.isNotBlank(request.getParameter("compPhone"))) {
             companyDto.setCompPhone(request.getParameter("compPhone"));
@@ -151,6 +190,12 @@ public class AppShopController extends AppBaseController {
         appUserFeign.updateCompany(companyDto);
         ShopDto shopDetail = getShopInfo(request);
         vo.setData(shopDetail);
+        if(result.isSuccess()){
+            vo.setMessage("修改成功");
+        }else {
+            vo.setMessage("修改成功");
+            vo.setSuccess(false);
+        }
         return vo;
     }
 
