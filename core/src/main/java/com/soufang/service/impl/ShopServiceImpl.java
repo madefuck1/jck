@@ -172,6 +172,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public List<ProductDto> getShopProductManaList(ProductDto productDto) {
-        return productMapper.getShopProductManaList(productDto);
+        List<ProductDto> productDtos = productMapper.getShopProductManaList(productDto);
+        for (ProductDto p: productDtos) {
+            p.setProductDetail(PropertiesParam.file_pre+p.getProductDetail());
+        }
+        return productDtos;
     }
 }
