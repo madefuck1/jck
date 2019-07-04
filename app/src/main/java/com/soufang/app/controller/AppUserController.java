@@ -483,7 +483,8 @@ public class AppUserController extends AppBaseController {
             vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
             return vo;
         }
-        if(appUserFeign.login(userDto).isSuccess()){
+        Result result1 = appUserFeign.login(userDto);
+        if(result1.isSuccess()){
             vo.setMessage("用户名已存在，请换个用户名！");
             vo.setSuccess(false);
             return vo;
