@@ -3,7 +3,7 @@
 <head>
     <#include "/common/includes/header.html"/>
 
-    <title>店铺装修</title>
+    <title>Shop renovation</title>
     <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
     <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
     <link rel="stylesheet" href="/static/css/sale/base.css">
@@ -26,7 +26,7 @@
 
 <body style="background: #f5f5f5;">
 
-<!-- 店铺装修top-->
+<!-- Shop Renovation Top-->
 <#include "/sellerCenter/common/header.html"/>
 
 <div id="logo" style="height: 120px;">
@@ -35,9 +35,9 @@
 <div id="nav2" style="background: #F58022">
     <div class="nav_in">
         <ul>
-            <li class="cur" onclick="switchPage(this,1);"><a href="#">首页</a></li>
-            <li onclick="switchPage(this,2);"><a href="#">公司概况</a></li>
-            <!--            <li><a href="">视频中心</a></li>-->
+            <li class="cur" onclick="switchPage(this,1);"><a href="#">Home</a></li>
+            <li onclick="switchPage(this,2);"><a href="#">Company Profile</a></li>
+            <!--            <li><a href="">Video Center</a></li>-->
         </ul>
     </div>
 
@@ -48,33 +48,33 @@
             <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
                  data-am-slider='{"directionNav":false}'>
                 <ul class="am-slides" id="shop-chart-map">
-                    <!-- 图1 -->
+                    <!-- Figure 1 -->
                     <li><img src="../images/sale/shop2.png" alt=""></li>
                 </ul>
             </div>
         </div>
         <div class="right" id="right-company">
-            <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
+            <h4 id="companyName">Zhejiang Dejuren and Textileco Co., Ltd.</h4>
             <div class="Collection" style="cursor: pointer" onclick="collection();">
-                <!--                 <span class="coll1">收藏</span>-->
-                <!--                 <span class="coll2">已收藏</span>-->
+                <!--                 <span class="coll1">Collection</span>-->
+                <!--                 <span class="coll2">Favorites</span>-->
             </div>
             <div>
-                <span class="one">联系电话：</span>
+                <span class="one">Call：</span>
                 <span class="two" id="linkPhone">xxxx</span>
             </div>
             <div>
-                <span class="one">经营类目：</span>
+                <span class="one">Business category：</span>
                 <span class="two" id="mainProducts"
                       style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">xxxx</span>
             </div>
             <div>
-                <span class="one">联系地址：</span>
+                <span class="one">Contact address：</span>
                 <span class="two" id="companyAddress"
                       style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
             </div>
             <div>
-                <span class="one">公司介绍：</span>
+                <span class="one">About the company：</span>
                 <span class="two" id="companyInfo"
                       style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
             </div>
@@ -85,75 +85,75 @@
     <div class="product-in">
         <div class="product-title" id="product-title">
         </div>
-        <!-- 产品列表-->
+        <!-- List of products-->
         <div class="product" style="text-align: center" id="product">
         </div>
     </div>
 </div>
-<!--公司概况-->
+<!--Company Profile-->
 <div id="company" hidden>
-    <h4>工商注册信息</h4>
+    <h4>Business registration information</h4>
     <div class="company-left">
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">统一社会信用代码/注册号：</p>-->
+        <!--         <p class="left">Uniform social credit code/registration number：</p>-->
         <!--         <p class="right">91440300573137960X</p>-->
         <!--      </div>-->
         <div class="company-cloum1">
-            <p class="left">公司名称：</p>
+            <p class="left">Company name：</p>
             <p class="right" id="company_name"></p>
         </div>
         <div class="company-cloum1">
-            <p class="left">注册地址：</p>
+            <p class="left">Registered address：</p>
             <p class="right" id="company_address"></p>
         </div>
         <div class="company-cloum1">
-            <p class="left">法定代表人：</p>
+            <p class="left">Legal representative：</p>
             <p class="right" id="company_corporate"></p>
         </div>
         <div class="company-cloum1">
-            <p class="left">企业类型：</p>
+            <p class="left">Types of business：</p>
             <p class="right" id="company_type"></p>
         </div>
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">经营期限：</p>-->
-        <!--         <p class="right">2018-3-29~长期</p>-->
+        <!--         <p class="left">Duration of operation：</p>-->
+        <!--         <p class="right">March 29, 2018~Long</p>-->
         <!--      </div>-->
         <div class="company-cloum1">
-            <p class="left">经营范围：</p>
+            <p class="left">Scope of business：</p>
             <p class="right right1" id="business_scope"></p>
         </div>
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">年报/年检情况：</p>-->
-        <!--         <p class="right">2018年成立</p>-->
+        <!--         <p class="left">Annual Report/Annual Inspection：</p>-->
+        <!--         <p class="right">Established in 2018</p>-->
         <!--      </div>-->
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">成立日期：</p>-->
-        <!--         <p class="right">2018-03-29</p>-->
+        <!--         <p class="left">Date of establishment：</p>-->
+        <!--         <p class="right">29 March 2018</p>-->
         <!--      </div>-->
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">登记机关：</p>-->
-        <!--         <p class="right">绍兴市市场监督管理局</p>-->
+        <!--         <p class="left">Registration authority：</p>-->
+        <!--         <p class="right">Shaoxing Municipal Market Supervision Authority</p>-->
         <!--      </div>-->
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">申请人姓名：</p>-->
-        <!--         <p class="right">贾女士</p>-->
+        <!--         <p class="left">Applicant's name：</p>-->
+        <!--         <p class="right">Ms. Jia</p>-->
         <!--      </div>-->
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">申请人部门：</p>-->
-        <!--         <p class="right">销售部</p>-->
+        <!--         <p class="left">Applicant's Department：</p>-->
+        <!--         <p class="right">Sales</p>-->
         <!--      </div>-->
         <!--      <div class="company-cloum1">-->
-        <!--         <p class="left">申请人职位：</p>-->
-        <!--         <p class="right">经理</p>-->
+        <!--         <p class="left">Applicant's position：</p>-->
+        <!--         <p class="right">Manager</p>-->
         <!--      </div>-->
     </div>
     <div class="company-right">
         <img id="company_urls" src="" alt="" width="226px;" height="170px" style="background-size: cover;">
-        <p style="color: #999; text-align: center">营业执照</p>
+        <p style="color: #999; text-align: center">License</p>
     </div>
 </div>
 
-<!-- 页尾 -->
+<!-- End of page -->
 <#include "/sellerCenter/common/foot.html"/>
 
 <script type="text/javascript">
@@ -161,7 +161,7 @@
         initHtmlPage();
     })
 
-    // 初始化页面
+    // Initialize the page
     function initHtmlPage() {
 
         $.ajax({
@@ -171,13 +171,13 @@
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 var html = '';
-                //------------- 初始化公司信息-------------------
+                //------------- Initialize company information-------------------
                 if (res.isCollection) {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                    $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">收藏</span>')
+                    $('.Collection').append('<span class="coll1">Collection</span>')
                 }
                 $().html()
                 $('#companyName').html(res.companyDto.compName);
@@ -186,7 +186,7 @@
                 $('#companyAddress').html(res.companyDto.compAddress);
                 $('#companyInfo').html(res.companyDto.companyInfo);
 
-                //------------- 初始化公司概况-------------------
+                //------------- Initialization company overview-------------------
                 $('#company_name').html(res.companyDto.compName);
                 $('#company_address').html(res.companyDto.compAddress);
                 $('#company_corporate').html(res.companyDto.compCorporate);
@@ -194,7 +194,7 @@
                 $('#business_scope').html(res.shopDto.businessScope);
                 $('#company_urls').attr("src", res.companyDto.companyURL);
 
-                //------------- 初始化logo-------
+                //------------- Initialize logo-------
                 if (res.storeConstructionDto) {
                     var storeLogoUrl = res.storeConstructionDto.storeLogoUrl;
                     if (storeLogoUrl != '') {
@@ -204,14 +204,14 @@
                     }
 
 
-                    //------------- 初始首页/公司概况/视频中心化背景颜色----------------
+                    //------------- Initial Home/Company Profile/Video Centered Background Color----------------
                     var storeNavColor = res.storeConstructionDto.storeNavColor;
                     if (storeNavColor != null && storeNavColor != '') {
                         $('#nav2').css('background', storeNavColor);
                     } else {
                         // todo
                     }
-                    //------------- 初始化轮播图 -------------------
+                    //------------- Initialize the carousel chart -------------------
                     var storeCurouselMapDtoList = res.storeConstructionDto.storeCurouselMapDtoList;
                     if (storeCurouselMapDtoList.length > 0) {
                         for (var i = 0; i < storeCurouselMapDtoList.length; i++) {
@@ -223,14 +223,14 @@
                     } else {
                         // todo
                     }
-                    //------------- 初始化分类-------------
+                    //------------- Initialize classification-------------
                     html = '';
                     var storeExclusiveAssortDtoList = res.storeConstructionDto.storeExclusiveAssortDtoList;
                     if (storeExclusiveAssortDtoList.length > 0) {
                         for (var i = 0; i < storeExclusiveAssortDtoList.length; i++) {
                             if (i == 0) {
                                 html += '<a class="cur" onclick="clickAssortName(this)">' + storeExclusiveAssortDtoList[i].assortName + ' <input hidden name="exclusiveAssortId" value="' + storeExclusiveAssortDtoList[i].exclusiveAssortId + '"></a>';
-                                //------------- 初始化产品-------------
+                                //------------- Initialize the product-------------
                                 var param = {
                                     exclusiveAssortId: storeExclusiveAssortDtoList[i].exclusiveAssortId
                                 }
@@ -240,8 +240,8 @@
                             }
                         }
                         html += '<div class="product-search" id="product-search">\n' +
-                            '        <input id="searchPName" type="text" placeholder="店内搜索">\n' +
-                            '        <button type="button" class="am-btn am-btn-warning" onclick="searchP()">搜索</button>\n' +
+                            '        <input id="searchPName" type="text" placeholder="In-store search">\n' +
+                            '        <button type="button" class="am-btn am-btn-warning" onclick="searchP()">Search</button>\n' +
                             '    </div>';
 
                         $('#product-title').empty();
@@ -295,7 +295,7 @@
                     '    </dl>';
             }
         } else {
-            html += '<div style="padding-top: 25px">没有检索到相匹配的产品！</div>';
+            html += '<div style="padding-top: 25px">No matching products were retrieved！</div>';
         }
         $('#product').empty();
         $('#product').append(html);
@@ -328,10 +328,10 @@
             success: function (data) {
                 if (data) {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                    $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">收藏</span>')
+                    $('.Collection').append('<span class="coll1">Collection</span>')
                 }
             }
         });

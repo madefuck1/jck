@@ -1,5 +1,5 @@
 <@override name="title">
-结算
+Settlement
 </@override>
 
 <@override name="css">
@@ -105,34 +105,34 @@
 <div class="concent">
 
     <div class="paycont">
-        <!--地址 -->
+        <!--Address -->
         <div class="address">
-            <h3>确认收货地址 </h3>
+            <h3>Confirm the shipping address </h3>
             <div class="control">
-                <div class="tc-btn createAddr theme-login am-btn am-btn-danger" onclick="addAddress()">使用新地址</div>
+                <div class="tc-btn createAddr theme-login am-btn am-btn-danger" onclick="addAddress()">Use a new address</div>
             </div>
             <div class="clear"></div>
             <ul id="addressList">
             </ul>
             <div class="clear"></div>
         </div>
-        <!--订单 -->
+        <!--Order -->
         <div class="concent">
-            <h3>确认订单信息</h3>
+            <h3>Confirm order information</h3>
             <div class="cart-table-th">
                 <div class="wp">
 
                     <div class="th th-item">
-                        <div class="td-inner">商品信息</div>
+                        <div class="td-inner">Merchandise information</div>
                     </div>
                     <div class="th th-price">
-                        <div class="td-inner">单价</div>
+                        <div class="td-inner">Price</div>
                     </div>
                     <div class="th th-amount">
-                        <div class="td-inner">数量</div>
+                        <div class="td-inner">Number</div>
                     </div>
                     <div class="th th-sum">
-                        <div class="td-inner">金额</div>
+                        <div class="td-inner">Amount</div>
                     </div>
                 </div>
             </div>
@@ -165,8 +165,8 @@
                                     </li>
                                     <li class="td td-info">
                                         <div class="item-props">
-                                            <span class="sku-line">颜色：${product.productColor}</span>
-                                            <span class="sku-line">包装：${product.productSpec}</span>
+                                            <span class="sku-line">Color：${product.productColor}</span>
+                                            <span class="sku-line">Packaging：${product.productSpec}</span>
                                         </div>
                                     </li>
                                     <li class="td td-price">
@@ -180,7 +180,7 @@
                                 <li class="td td-amount">
                                     <div class="amount-wrapper ">
                                         <div class="item-amount ">
-                                            <span class="phone-title">购买数量</span>
+                                            <span class="phone-title">Number of purchases</span>
                                             <div class="sl">
                                                 <input class="text_box" disabled type="text" value="${product.productNumber}" style="width:30px;text-align: center;height: 32px" />
                                             </div>
@@ -206,10 +206,10 @@
                 <div class="order-extra">
                     <div class="order-user-info">
                         <div class="memo">
-                            <label>买家留言：</label>
-                            <input type="text" id="remark" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
+                            <label>Buyer's Message：</label>
+                            <input type="text" id="remark" title="Optional, description of the transaction (recommended to fill in the notes that have been agreed with the seller)" placeholder="Optional, suggested to fill in and the seller to agree on the instructions" class="memo-input J_MakePoint c2c-text-default memo-close">
                             <div class="msg hidden J-msg">
-                                <p class="error">最多输入500个字符</p>
+                                <p class="error">Enter up to 500 characters</p>
                             </div>
                         </div>
                     </div>
@@ -219,41 +219,41 @@
             <button type="submit" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 710, height: 550}" style="background: #fff">
                 <div class="am-checkbox">
                     <label>
-                        <input type="checkbox"> 开具发票
+                        <input type="checkbox"> Invoiced
                     </label>
                 </div>
             </button>
             <hr>
             <div class="am-modal am-modal-no-btn invoice" tabindex="-1" id="doc-modal-1">
                 <div class="am-modal-dialog">
-                    <div class="am-modal-hd invoice_title">填写发票信息
+                    <div class="am-modal-hd invoice_title">Fill in the invoice information
                         <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
                     </div>
                     <div class="am-tabs" data-am-tabs style="margin-top:10px ">
                         <ul class="am-tabs-nav am-nav am-nav-tabs">
-                            <li class="am-active"><a href="#tab1">普通发票</a></li>
-                            <li><a href="#tab2">增值税发票</a></li>
+                            <li class="am-active"><a href="#tab1">Free text invoices</a></li>
+                            <li><a href="#tab2">VAT invoice</a></li>
 
                         </ul>
                         <div class="am-tabs-bd" style="margin-top:10px;">
                             <div class="am-tab-panel am-fade am-in am-active" ">
                             <form class="am-form am-form-horizontal">
                                 <div class="am-form-group" style="margin-top: 10px">
-                                    <label  class="am-u-sm-3 am-form-label">名称：</label>
+                                    <label  class="am-u-sm-3 am-form-label">Name：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="输入名称">
+                                        <input type="text" placeholder="Enter a name">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label class="am-u-sm-3 am-form-label">纳税人识别号：</label>
+                                    <label class="am-u-sm-3 am-form-label">Taxpayer Identification Number：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="纳税人识别号">
+                                        <input type="text" placeholder="Taxpayer Identification Number">
                                     </div>
                                 </div>
                                 <div class="button" style="margin-top: 40px;">
-                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">确认</button>
-                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">取消</button>
+                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">Confirm</button>
+                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
                                 </div>
 
                             </form>
@@ -261,45 +261,45 @@
                         <div class="am-tab-panel am-fade" >
                             <form class="am-form am-form-horizontal">
                                 <div class="am-form-group" style="margin-top: 10px">
-                                    <label  class="am-u-sm-3 am-form-label">名称：</label>
+                                    <label  class="am-u-sm-3 am-form-label">Name：</label>
                                     <div class="am-u-sm-9" style="float: left">
                                         <input type="text"  placeholder="输入名称">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label  class="am-u-sm-3 am-form-label">纳税人识别号：</label>
+                                    <label  class="am-u-sm-3 am-form-label">axpayer Identification Number：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="纳税人识别号">
+                                        <input type="text" placeholder="axpayer Identification Number">
                                     </div>
                                 </div>
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label  class="am-u-sm-3 am-form-label">地址：</label>
+                                    <label  class="am-u-sm-3 am-form-label">Address：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="请输入地址">
+                                        <input type="text" placeholder="Please enter the address">
                                     </div>
                                 </div>
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label  class="am-u-sm-3 am-form-label">电话：</label>
+                                    <label  class="am-u-sm-3 am-form-label">Phone：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="请输入电话">
+                                        <input type="text" placeholder="Please enter your phone number">
                                     </div>
                                 </div>
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label  class="am-u-sm-3 am-form-label">开户行：</label>
+                                    <label  class="am-u-sm-3 am-form-label">Bank：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="请输入开户银行">
+                                        <input type="text" placeholder="Please enter the bank that opened the account">
                                     </div>
                                 </div>
                                 <div class="am-form-group" style="margin-top: 20px">
-                                    <label class="am-u-sm-3 am-form-label">开户账号：</label>
+                                    <label class="am-u-sm-3 am-form-label">Account opening account：</label>
                                     <div class="am-u-sm-9" style="float: left">
-                                        <input type="text" placeholder="请输入开户账号">
+                                        <input type="text" placeholder="Please enter the account number">
                                     </div>
                                 </div>
                                 <div class="button" style="margin-top: 40px;">
-                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">确认</button>
-                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">取消</button>
+                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">Confirm</button>
+                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -308,50 +308,50 @@
             </div>
             </div>
             <div class="paymeth">
-                <p>选择支付方式</p>
+                <p>Choose a payment method</p>
                 <div class="paymeth_all">
                     <div class="cloum1">
                         <div class="left am-u-sm-2">
-                            <p>支付方式：</p>
+                            <p>Payment method：</p>
                         </div>
                         <div class="right am-u-sm-10">
                             <select data-am-selected id="pay_select">
-                                <option value="a">请选择</option>
-                                <option value="b" class="pay_line">线上支付</option>
-                                <option value="o">线下交易</option>
+                                <option value="a">Please choose</option>
+                                <option value="b" class="pay_line">Online payments</option>
+                                <option value="o">Offline trading</option>
                             </select>
                         </div>
                     </div>
                     <div class="cloum2" id="cloum2">
                         <div class="left am-u-sm-2">
-                            <p style="margin-top: 20px">支付数量：</p>
-                            <p style="margin-top: 20px">合同：</p>
+                            <p style="margin-top: 20px">Number of payments：</p>
+                            <p style="margin-top: 20px">Contract：</p>
                         </div>
                         <div class="right am-u-sm-8">
                             <select data-am-selected >
-                                <option value="a">3成定金</option>
-                                <option value="b">4成定金</option>
-                                <option value="o">全款</option>
+                                <option value="a">30% deposit</option>
+                                <option value="b">40% deposit</option>
+                                <option value="o">Full</option>
                             </select>
                             <div class="button" style="margin-top: 26px">
-                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">下载合同</button>
-                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">上传合同</button>
+                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">Download the contract</button>
+                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">Upload a contract</button>
                             </div>
                             <div>
                                 <button
                                         type="button" style="margin-top: 20px"
                                         class="am-btn am-btn-warning"
                                         data-am-modal="{target: '#my-alert'}">
-                                    提交订单
+                                    Submit an order
                                 </button>
                                 <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
                                     <div class="am-modal-dialog">
-                                        <div class="am-modal-bd" style="font-size: 18px">您确定提交订单吗？</div>
+                                        <div class="am-modal-bd" style="font-size: 18px">Are you sure you are submitting an order?</div>
 
 
                                         <div class="button" style="margin-top: 20px;margin-bottom: 20px;">
-                                            <a href="../person/05-1 orderinfo-审核.html"><button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;" >确认</button></a>
-                                            <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">取消</button>
+                                            <a href="../person/05-1 orderinfo-审核.html"><button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;" >Confirm</button></a>
+                                            <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -361,19 +361,19 @@
                     <div class="cloum2" id="cloum3">
                         <div class="left am-u-sm-2">
                             <p style="margin-top: 20px"></p>
-                            <p style="margin-top: 20px">付款账号：</p>
+                            <p style="margin-top: 20px">Payment account number：</p>
                         </div>
                         <div class="right am-u-sm-8">
-                            <p>6222 8015 5232 1135 888（建设银行 绍兴马鞍支行）</p>
-                            <p style="color:#F58022;font-weight: 200">线下支付平台不提供担保，请与卖家仔细确认相关信息</p>
+                            <p>6222 8015 5232 1135 888（Construction Bank Shaoxing Saddle Branch）</p>
+                            <p style="color:#F58022;font-weight: 200">Offline payment platform does not provide guarantees, please check with the seller carefully about the information</p>
                         </div>
                         <div>
-                            <a href="../person/05-7 orderinfo-线下.html"><button type="button" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">提交订单</button></a>
+                            <a href="../person/05-7 orderinfo-线下.html"><button type="button" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">Submit an order</button></a>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <button type="button" onclick="submit()" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">提交订单</button>
+                    <button type="button" onclick="submit()" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">Submit an order</button>
                 </div>
             </div>
         </div>
@@ -383,43 +383,43 @@
     <div class="theme-popover-mask"></div>
     <div class="theme-popover" style="height:450px">
 
-        <!--标题 -->
+        <!--Title-->
         <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg title">新增地址</strong></div>
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg title">New address</strong></div>
         </div>
         <hr/>
         <div class="am-u-md-12">
             <form class="am-form am-form-horizontal">
                 <div class="am-form-group">
-                    <label  class="am-form-label">收货人</label>
+                    <label  class="am-form-label">Consignee</label>
                     <div class="am-form-content">
                         <input type="hidden" id="addressId" value="">
-                        <input type="text" id="linkName" placeholder="收货人">
+                        <input type="text" id="linkName" placeholder="Consignee">
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label class="am-form-label">手机号码</label>
+                    <label class="am-form-label">Mobile phone number</label>
                     <div class="am-form-content">
-                        <input type="text" id="linkPhone" placeholder="手机号必填" >
+                        <input type="text" id="linkPhone" placeholder="Mobile phone number required" >
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label class="am-form-label">国家</label>
+                    <label class="am-form-label">Countries</label>
                     <div class="am-form-content">
-                        <input type="text" class="" id="country" placeholder="输入国家">
+                        <input type="text" class="" id="country" placeholder="Enter the country">
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label class="am-form-label">详细地址</label>
+                    <label class="am-form-label">Detailed address</label>
                     <div class="am-form-content">
-                        <textarea class="" rows="3" id="detailAddress" placeholder="输入详细地址"></textarea>
-                        <small>100字以内写出你的详细地址...</small>
+                        <textarea class="" rows="3" id="detailAddress" placeholder="Enter a detailed address"></textarea>
+                        <small>Write your address in less than 100 words...</small>
                     </div>
                 </div>
                 <div class="am-form-group theme-poptit">
                     <div class="am-u-sm-9 am-u-sm-push-3">
-                        <div class="am-btn am-btn-danger" onclick="submitAddress()">保存</div>
-                        <div class="am-btn am-btn-danger close">取消</div>
+                        <div class="am-btn am-btn-danger" onclick="submitAddress()">Save</div>
+                        <div class="am-btn am-btn-danger close">Cancel</div>
                     </div>
                 </div>
             </form>
@@ -451,7 +451,7 @@
                 }
             });
         }else{
-            $(".title").html("新增地址");
+            $(".title").html("New address");
             var data = {country:$("#country").val(),detailAddress:$("#detailAddress").val(),linkName:$("#linkName").val(),linkPhone:$("#linkPhone").val()};
             $.ajax({
                 url: '/personalCenter/saveAddress',
@@ -536,13 +536,13 @@
                     addressHtml += '<span class="buy--address-detail"><span class="province">'+address.country+'</span>';
                     addressHtml += '<span class="street">'+address.detailAddress+'</span></span></span></div>';
                     if(address.isDefaultAddress == 1){
-                        addressHtml += '<ins class="deftip">默认地址</ins>';
+                        addressHtml += '<ins class="deftip">Default address</ins>';
                     }
                     addressHtml += '</div><div class="new-addr-btn">';
                     if(address.isDefaultAddress == 0){
-                        addressHtml += '<a onclick="setDefault('+address.addressId+')">设为默认</a><span class="new-addr-bar">|</span>';
+                        addressHtml += '<a onclick="setDefault('+address.addressId+')">Set as default</a><span class="new-addr-bar">|</span>';
                     }
-                    addressHtml += '<a onclick="update(this)">编辑</a><span class="new-addr-bar">|</span><a onclick="deleteAddress(this)">删除</a></div></li>';
+                    addressHtml += '<a onclick="update(this)">Edit</a><span class="new-addr-bar">|</span><a onclick="deleteAddress(this)">Delete</a></div></li>';
                 }
                 $("#addressList").append(addressHtml);
             }

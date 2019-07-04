@@ -1,5 +1,5 @@
 <@override name="title">
-购物车
+Shopping cart
 </@override>
 
 <@override name="css">
@@ -82,7 +82,7 @@
 <div class="center">
     <div class="col-main">
         <div class="main-wrap">
-            <!--购物车 -->
+            <!--Shopping cart -->
             <div class="concent">
                 <div id="cartTable">
                     <div class="cart-table-th">
@@ -92,19 +92,19 @@
                                 </div>
                             </div>
                             <div class="th th-item">
-                                <div class="td-inner">商品信息</div>
+                                <div class="td-inner">Commodity information</div>
                             </div>
                             <div class="th th-price">
-                                <div class="td-inner">单价</div>
+                                <div class="td-inner">The unit price</div>
                             </div>
                             <div class="th th-amount">
-                                <div class="td-inner">数量</div>
+                                <div class="td-inner">The number of</div>
                             </div>
                             <div class="th th-sum">
-                                <div class="td-inner">金额</div>
+                                <div class="td-inner">The amount of</div>
                             </div>
                             <div class="th th-op">
-                                <div class="td-inner">操作</div>
+                                <div class="td-inner">operation</div>
                             </div>
                         </div>
                     </div>
@@ -146,9 +146,9 @@
                                         </li>
                                         <li class="td td-info">
                                             <div class="item-props item-props-can" onclick="changeProduct(this)">
-                                                <span class="sku-line">颜色：<em class="productColor">${product.productColor}</em></span>
-                                                <span class="sku-line">规格：<em class="productSpec">${product.productSpec}</em></span>
-                                                <span tabindex="0" class="btn-edit-sku theme-login">修改</span>
+                                                <span class="sku-line">color：<em class="productColor">${product.productColor}</em></span>
+                                                <span class="sku-line">specifications：<em class="productSpec">${product.productSpec}</em></span>
+                                                <span tabindex="0" class="btn-edit-sku theme-login">Modify the</span>
                                                 <i class="theme-login am-icon-sort-desc"></i>
                                             </div>
                                         </li>
@@ -181,10 +181,10 @@
                                             <div class="td-inner">
                                                 <input type="hidden" class="shopCarProductId" value="${product.shopCarProductId}">
                                                 <input type="hidden" class="productId" value="${product.productId}">
-                                                <a title="移入收藏夹" class="btn-fav" onclick="toFavorite(this)">
-                                                    移入收藏夹</a>
+                                                <a title="Move to favorites" class="btn-fav" onclick="toFavorite(this)">
+                                                    Move to favorites</a>
                                                 <a class="delete" onclick="deleteProduct(this)">
-                                                    删除</a>
+                                                    delete</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -205,37 +205,37 @@
                         <span>全选</span>
                     </div>
                     <div class="operations">
-                        <a onclick="deleteCheck()" hidefocus="true" class="deleteAll">删除</a>
-                        <a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
+                        <a onclick="deleteCheck()" hidefocus="true" class="deleteAll">delete</a>
+                        <a href="#" hidefocus="true" class="J_BatchFav">Move to favorites</a>
                     </div>
                     <div class="float-bar-right">
                         <div class="amount-sum">
-                            <span class="txt">已选商品</span>
-                            <em class="sumNumber">0</em><span class="txt">件</span>
+                            <span class="txt">The selected items</span>
+                            <em class="sumNumber">0</em><span class="txt">a</span>
                             <div class="arrow-box">
                                 <span class="selected-items-arrow"></span>
                                 <span class="arrow"></span>
                             </div>
                         </div>
                         <div class="price-sum">
-                            <span class="txt">合计:</span>
+                            <span class="txt">A combined:</span>
                             <strong class="price">¥<em class="sumPrice">0.00</em></strong>
                         </div>
                         <div class="btn-area" onclick="toPay()">
-                            <a class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
-                                <span style="cursor: pointer">结&nbsp;算</span></a>
+                            <a class="submit-btn submit-btn-disabled" aria-label="Please note that if you do not select the baby, it will not be settled">
+                                <span style="cursor: pointer">settlement</span></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--操作页面-->
+            <!--Action page-->
         </div>
     </div>
     <div class="theme-popover-mask"></div>
     <div class="theme-popover">
         <div class="theme-span"></div>
         <div class="theme-poptit h-title">
-            <a onclick="closeTheme()" title="关闭" class="close">×</a>
+            <a onclick="closeTheme()" title="Shut down" class="close">×</a>
         </div>
         <div class="theme-popbod dform">
             <input type="hidden" class="theme-productId">
@@ -247,19 +247,19 @@
                 <li class="theme-options specList">
                 </li>
                 <div class="theme-options">
-                    <div class="cart-title number">数量:</div>
+                        <div class="cart-title number">Number:</div>
                     <dd>
                         <input class="min am-btn am-btn-default" name="" type="button" value="-" onclick="themeSub()"/>
                         <input class="text_box theme-productNumber" type="number" value="1" style="width:30px; text-align: center" onChange="themeChange()" />
                         <input class="add am-btn am-btn-default" name="" type="button" value="+" onclick="themeAdd()" />
-                        <span  class="tb-hidden">库存<span class="stock"></span>件</span>
+                        <span  class="tb-hidden">Inventory<span class="stock"></span>a</span>
                     </dd>
 
                 </div>
                 <div class="clear"></div>
                 <div class="btn-op">
-                    <div class="btn am-btn am-btn-warning" onclick="changeProductShopCar()">确认</div>
-                    <div class="btn close am-btn am-btn-warning" onclick="closeTheme()">取消</div>
+                    <div class="btn am-btn am-btn-warning" onclick="changeProductShopCar()">Confirm</div>
+                    <div class="btn close am-btn am-btn-warning" onclick="closeTheme()">Cancel</div>
                 </div>
             </div>
             <div class="theme-signin-right">
