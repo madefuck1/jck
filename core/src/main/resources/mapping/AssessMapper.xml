@@ -43,10 +43,10 @@
     <include refid="return_Column_List" />
     from t_assess
     where 1=1
-    <if test="shopId != null ">
+    <if test="shopId != null and shopId != 0 ">
       and shop_id = #{shopId,jdbcType=BIGINT}
     </if>
-    <if test="type != null ">
+    <if test="type != null and type != 0">
       and assess_type = #{type}
     </if>
     <if test="orderNumber != null and orderNumber != '' ">
