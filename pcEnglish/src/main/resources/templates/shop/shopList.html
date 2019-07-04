@@ -6,8 +6,8 @@
 <#assign contextPath=request.contextPath+"/static" />
 <head>
     <#include "/common/includes/header.html"/>
-    <title>店铺搜索页面</title>
-    <!-- css样式 -->
+    <title>Store search page</title>
+    <!-- css style -->
     <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
     <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
     <link href="${contextPath}/css/demo.css" rel="stylesheet" type="text/css"/>
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
     <link rel="stylesheet" href="${contextPath}/css/search-shop.css">
 
-    <!-- 引入js -->
+    <!-- Introduction of js -->
     <script type="text/javascript" src="${contextPath}/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
     <script type="text/javascript" src="/static/js/includes/include.search.js"></script>
@@ -33,13 +33,13 @@
 </head>
 
 <body style="background: #fff">
-<!--顶部导航条 -->
+<!--Top navigation bar -->
 <#include "/common/includes/include.top.html"/>
 
-<!--悬浮搜索框-->
+<!--Suspended search box-->
 <#include "/common/includes/include.search.html"/>
 
-<!-- 行业分类、首页~~ -->
+<!-- Industry Classification, Home~~ -->
 <div class="search-shop" style="padding-top:10px">
     <#include "/common/includes/include.contain.html"/>
     <div class="shop-down am-g am-g-fixed" id="shopList">
@@ -51,7 +51,7 @@
 <#include "/common/includes/include.footer.html"/>
 </div>
 <b class="line"></b>
-<!--菜单 -->
+<!--Menu -->
 <div class="theme-popover-mask"></div>
 </body>
 
@@ -59,7 +59,7 @@
     $(function () {
         var shopName = "${searchProductName!}";
         init(0, shopName);
-        $("#search_type_name").html("店铺");
+        $("#search_type_name").html("Shop");
         $("#search_type").val(2);
     })
 
@@ -83,27 +83,27 @@
                         '                <dd><h4>' + data.list[i].shopName + '</h4></dd>\n' +
                         '                <dd>\n' +
                         '                    <p>\n' +
-                        '                        <span>经营类目：</span>\n' +
+                        '                        <span>Business category：</span>\n' +
                         '                        <span style="width:200px; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">' + data.list[i].mainProducts + '</span>\n' +
                         '                    </p>\n' +
                         // '                    <p>\n' +
-                        // '                        <span>经营范围：</span>\n' +
+                        // '                        <span>Scope of business：</span>\n' +
                         // '                        <span>' + data.list[i].businessScope + '</span>\n' +
                         // '                    </p>\n' +
                         '                </dd>\n' +
-                        '                <dd><button onclick="openStore(' + data.list[i].shopId + ')">进入店铺</button></dd>\n' +
+                        '                <dd><button onclick="openStore(' + data.list[i].shopId + ')">Enter the store</button></dd>\n' +
                         '            </dl>\n' +
                         '        </div>';
                 }
                 $("#shopList").empty();
                 $("#shopList").append(html);
-                $("#pagination").pagination(data.count, {   //total(一共多少条记录)不能少
+                $("#pagination").pagination(data.count, {   //total(How many records in total) can't be less
                     callback: PageCallback,
-                    prev_text: '上一页',
-                    next_text: '下一页',
-                    items_per_page: 40,             //每页显示最大条数
-                    num_display_entries: 4,        //连续分页主体部分显示的分页条目数
-                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                    prev_text: 'Previous',
+                    next_text: 'Next',
+                    items_per_page: 40,             //The maximum number of bars displayed per page
+                    num_display_entries: 4,        //Number of paging entries displayed in the body section of a continuous paging
+                    num_edge_entries: 1,           //Number of entries on the first and last paginations displayed on both sides
                     current_page: page
                 });
             }
