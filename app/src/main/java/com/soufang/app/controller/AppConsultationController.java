@@ -1,6 +1,7 @@
 package com.soufang.app.controller;
 
 import com.soufang.app.feign.AppConsultationFeign;
+import com.soufang.app.vo.infromation.ConsultionDetailVo;
 import com.soufang.app.vo.infromation.ConsultionListVo;
 import com.soufang.app.vo.infromation.InformDetailVo;
 import com.soufang.base.dto.news.NewsDto;
@@ -10,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("app/consultation/")
@@ -32,7 +33,7 @@ public class AppConsultationController extends AppBaseController{
         newsSo.setPage(informDetailVo.getPage());
         newsSo.setId(informDetailVo.getId());
         //所有合集
-        List<NewsDto> allLists=new ArrayList<>();
+        Map map= new HashMap<>();
         //头条
         newsSo.setOrigin("1");
         PageHelp<NewsDto> headlinesLists = consultationFeign.getNews(newsSo);
@@ -49,13 +50,12 @@ public class AppConsultationController extends AppBaseController{
         newsSo.setOrigin("5");
         PageHelp<NewsDto> photoLists = consultationFeign.getNews(newsSo);
 
-        allLists.addAll(headlinesLists.getData());
-        allLists.addAll(industryLists.getData());
-        allLists.addAll(governmentLists.getData());
-        allLists.addAll(HotLists.getData());
-        allLists.addAll(photoLists.getData());
-
-        consultionListVo.setData(allLists);
+        map.put("headlinesLists",headlinesLists.getData());
+        map.put("industryLists",industryLists.getData());
+        map.put("governmentLists",governmentLists.getData());
+        map.put("HotLists",HotLists.getData());
+        map.put("photoLists",photoLists.getData());
+        consultionListVo.setData(map);
         consultionListVo.setSuccess(true);
         return consultionListVo;
     }
@@ -66,8 +66,8 @@ public class AppConsultationController extends AppBaseController{
      */
     @ResponseBody
     @RequestMapping(value = "selConsultionList/{id}",method = RequestMethod.POST)
-    public ConsultionListVo selInformList(@PathVariable String id){
-        ConsultionListVo consultionListVo=new ConsultionListVo();
+    public ConsultionDetailVo selInformList(@PathVariable String id){
+        ConsultionDetailVo consultionListVo=new ConsultionDetailVo();
         NewsSo newsSo =new NewsSo();
         newsSo.setId(Long.valueOf(id));
         PageHelp<NewsDto> pageHelp = consultationFeign.getNews(newsSo);
