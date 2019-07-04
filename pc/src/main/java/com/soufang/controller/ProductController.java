@@ -1,8 +1,8 @@
 package com.soufang.controller;
 
-import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
@@ -17,6 +17,7 @@ import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.AssessFeign;
 import com.soufang.feign.CommonPullDownFeign;
+import com.soufang.feign.FavoriteFeign;
 import com.soufang.feign.ProductFeign;
 import com.soufang.vo.product.ListProductVo;
 import com.soufang.vo.product.ListSpecReqVo;
@@ -43,6 +44,10 @@ public class ProductController extends BaseController {
 
     @Autowired
     AssessFeign assessFeign;
+
+    @Autowired
+    FavoriteFeign favoriteFeign;
+
 
     @Value("${upload.product}")
     private String productUrl;
@@ -466,6 +471,18 @@ public class ProductController extends BaseController {
         assessSo.setProductId(productId);
         Map<String, Integer> allCount = assessFeign.getCount(assessSo);
         map.put("allCount", allCount);
+        //收藏状态
+        FavoriteDto favoriteDto = new FavoriteDto();
+        favoriteDto.setUserId(userInfo.getUserId());
+        favoriteDto.setFavoriteTargetId(productId);
+        favoriteDto.setFavoriteTargetType(1);
+        boolean show =favoriteFeign.isCollect(favoriteDto);
+        if(show==true){
+            map.put("isShowNone", 1);
+        }else{
+            map.put("isShowNone", 0);
+        }
+
         return "product/productDetail";
     }
 
@@ -553,6 +570,33 @@ public class ProductController extends BaseController {
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());
         return vo;
+    }
+
+    /**
+     * 商品是否被收藏
+     *
+     * @param request
+     * @param productId
+     * @param type
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "isCollection", method = RequestMethod.GET)
+    public Boolean isCollection(HttpServletRequest request, Long productId, Integer type,String productName) {
+        UserDto userDto = getUserInfo(request);
+        FavoriteDto favoriteDto = new FavoriteDto();
+        favoriteDto.setUserId(userDto.getUserId());
+        favoriteDto.setFavoriteTargetId(productId);
+        favoriteDto.setFavoriteTargetType(type);
+        if(!favoriteFeign.isCollect(favoriteDto)){
+            favoriteDto.setFavoriteTargetName(productName);
+            favoriteFeign.addFavorite(favoriteDto);
+            return true;
+        }  else{
+            favoriteFeign.delFavorite(favoriteDto);
+            return false;
+        }
+
     }
 
 }
