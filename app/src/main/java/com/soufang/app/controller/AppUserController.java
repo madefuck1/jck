@@ -476,6 +476,8 @@ public class AppUserController extends AppBaseController {
         UserDto userDto = new UserDto();
         Result result = new Result();
         userDto.setUserId(userInfo.getUserId());
+        userDto.setPhone("121");
+        userDto.setEmail("121");
         if(!StringUtils.isNotBlank(userInfo.getUserName())){
             userDto.setRealName(request.getParameter("realName"));
         }else {

@@ -1,0 +1,68 @@
+<@override name="title">
+我的消息
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale-message.css">
+</@override>
+
+<@override name="body">
+
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="/sellerCenter/toIndex">卖家工作台</a></li>
+                <li><a href="/sellerCenter/toGetMyNews">我的消息</a></li>
+            </ol>
+            <div class="mesbutton">
+                <button>设为已读</button>
+                <button>删除</button>
+            </div>
+            <table class="am-table">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                        <span>全选</span>
+                    </th>
+                    <th style="text-align: center">主题</th>
+                    <th style="text-align: center">时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" checked></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本是一段消息文本这里是一段消息文本</a></td>
+                    <td>昨天19：32</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" checked></td>
+                    <td class="meslooked"><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本是一段消息文本这里是一段消息文本</a></td>
+                    <td class="meslooked">2019-05-21</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本是一段消息文本这里是一段消息文本</a></td>
+                    <td>昨天19：32</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本这里是一段消息文本是一段消息文本这里是一段消息文本</a></td>
+                    <td>昨天19：32</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</@override>
+
+<@override name="js">
+
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

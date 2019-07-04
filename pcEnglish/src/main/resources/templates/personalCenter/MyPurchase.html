@@ -1,0 +1,246 @@
+<@override name="title">
+我的求购
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+</@override>
+<@override name="body">
+		<div class="center">
+						<div class="col-main">
+									<div class="main-wrap">
+
+										<div class="user-order">
+						<!--标题 -->
+											<div class="am-cf am-padding">
+												<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的求购</strong></div>
+											</div>
+											<hr/>
+												<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+													<ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs listType">
+														<li class="am-active"><a href="javascript:void(0)"onclick="getPurchaseList(1,'')" >全部求购</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,1)">审核中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,3)">求购中</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,4)">已报价</a></li>
+														<li><a href="javascript:void(0)" onclick="getPurchaseList(1,5)">采购成功</a></li>
+													</ul>
+
+													<div class="am-tabs-bd">
+														<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+															<div class="order-top">
+																<div class="th th-item">
+																	<td class="td-inner">求购信息</td>
+																</div>
+																<div class="th th-price">
+																	<td class="td-inner">数量
+																	</td>
+																</div>
+																<div class="th th-number">
+																	<td class="td-inner">单位</td>
+																</div>
+																<div class="th th-operation">
+																	<td class="td-inner">发布/交付时间</td>
+																</div>
+																<!--<div class="th th-amount">
+																	<td class="td-inner">合计</td>
+																</div>-->
+																<div class="th th-status">
+																	<td class="td-inner">交易状态</td>
+																</div>
+																<div class="th th-change">
+																	<td class="td-inner">交易操作</td>
+																</div>
+															</div>
+
+															<div class="order-main">
+																<div class="order-list" id="order-list">
+																</div>
+															<div id="pagination" style="text-align: center;padding-top: 12px"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+										</div>
+						</div>
+
+			</div>
+			<!--左边菜单-->
+			<#include "/personalCenter/common/include.menu.html"/>
+		</div>
+
+
+</@override>
+<@override name="js">
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+<script>
+    $(".listType li a").bind("click",function () {
+        $(this).parents(".listType").find("li").removeClass("am-active");
+        $(this).parent().addClass("am-active");
+    })
+
+    // pagination 分页插件
+    function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+        getPurchaseList(index + 1, "");
+    }
+<!--默认加载-->
+$(function(){
+	getPurchaseList(1,"");
+});
+<!--获取求购数据列表-->
+function getPurchaseList(page,enquiryStatus){
+    var count;//总的数目
+    var allPage;//总页数
+    var pageData = 5;//每页显示的条数
+    	var enquiryStatus=enquiryStatus;
+		<!--求购状态-->
+		var str={enquiryStatus:enquiryStatus,
+                page:page,
+                limit:pageData
+		};
+		$.ajax({
+				url : "getEnquiryList",
+				type : "post",
+				data:JSON.stringify(str),
+				contentType: 'application/json; charset=UTF-8',
+				dataType : "json",
+				success : function(data) {
+                    count=data.count;
+                    allPage = (data.count % pageData == 0) ? (data.count / pageData) : ((parseInt(data.count / pageData)) + 1);
+                    if (allPage == 0) {
+                        allPage = 1;
+                    }
+                    $("#order-list").html("");
+					$.each(data.data, function (i, v) {
+                      var  whatever = liContent(v);
+                      $("#order-list").append(whatever);
+                    });
+                    $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                        current_page: page - 1,                  //当前页码
+                        callback: PageCallback,
+                        prev_text: '上一页',
+                        next_text: '下一页',
+                        items_per_page: 5,             //每页显示最大条数
+                        num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                        num_edge_entries: 1        //两侧显示的首尾分页的条目数
+                    });
+				}
+		});
+
+}
+
+
+function liContent(v) {
+    var enquiryNumber=v.enquiryNumber;
+		var enquiryTitle=v.enquiryTitle;
+		var takeDate=v.strTakeDate;
+		var createTime=v.strCreateTime;
+		var endTime=v.strEndTime;
+		var enquiryStatus=v.enquiryStatus;
+		var statusMessage=v.statusMessage;
+		var content = "";
+	var listProductDto=v.enquiryProductDto;
+    var proList="";
+   for(var i = 0 ; i<listProductDto.length; i++){
+       var productNumber=listProductDto[i].productNumber;
+       var assortName=listProductDto[i].assortName;
+       var productUnit=listProductDto[i].productUnit;
+       var productName=listProductDto[i].productName;
+       var productImage=listProductDto[i].productImage;
+       var enquiryProductId=listProductDto[i].enquiryProductId;
+       proList+="<ul class='item-list'>"
+           +"<li class='td td-item'>"
+           +"<div class='item-pic'>"
+           +"<a href='#' class='J_MakePoint'>"
+           +"<img src='"+productImage+"' class='itempic J_ItemImg'>"
+           +"</a>"
+           +"</div>"
+           +"<div class='item-info'>"
+           +"<div class='item-basic-info'>"
+           +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"'>"
+           +"<p>"+productName+"</p>"
+           +"<p class='info-little'>类别："+assortName
+           +"<br/>包装：裸装 </p>"
+           +"</a>"
+           +"</div>"
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-price'>"
+           +"<div class='item-price'>"
+           +productNumber
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-number'>"
+           +"<div class='item-number'>"
+           +"<span>"+productUnit+"</span>"
+           +"</div>"
+           +"</li>"
+           +"<li class='td td-operation'>"
+           +"<div class='item-operation'>"
+           +createTime
+           +"<p>"+takeDate+"</p>"
+           +"</div>"
+           +"</li>"
+           +"</ul>"
+   }
+    var upstr;
+    <!--只有审核不通过后才能编辑-->
+    if(enquiryStatus==2){
+        upstr="<p class='Mystatus'><a href='javascript:void(0);' id='updateEnquiry'  onclick='updateEnquiry(\""+enquiryNumber+"\",\""+1+"\")'>编辑</a></p>";
+    }else{
+        upstr="";
+	}
+
+				var li= $("<div class ='order-status5'>"
+						+"<div class='order-title'>"
+							+"<div class='dd-num'>订单编号：<a href='javascript:;'>"+enquiryNumber+"</a></div>"
+							+"<span>成交时间："+takeDate+"</span>"
+						+"</div>"
+						+"<div class='order-content'>"
+								+"<div class='order-left'>"
+										+proList
+								+"</div>"
+							+"<div class='order-right'>"
+									+"<li class='td td-amount'>"
+										+"<div class='item-amount'>"
+											+statusMessage
+										+"</div>"
+									+"</li>"
+									+"<div class='move-right'>"
+										+"<li class='td td-status'>"
+											+"<div class='item-status'>"
+											+upstr
+												+"<p class='order-info'><a href='javascript:void(0);' onclick='delEnquiry(\""+enquiryNumber+"\")'>删除</a></p>"
+											+"</div>"
+										+"</li>"
+									+"</div>"
+							+"</div>"
+						+"</div>"
+				+"</div>"
+		);
+	return li;
+}
+
+/*编辑/-带着编号跳转到修改页面 -将编号存入redis -  页面回显信息*/
+function updateEnquiry(enquiryNumber,isUpdate){
+            window.location.href="/enquiry/create?enquiryNumber="+enquiryNumber+"&isUpdate="+isUpdate;
+}
+<!--删除-->
+function delEnquiry(enquiryNumber){
+    var str={enquiryNumber:enquiryNumber}
+	$.ajax({
+			url : "delEnquiry",
+			type : "post",
+			data:JSON.stringify(str),
+			contentType: 'application/json; charset=UTF-8',
+			dataType : "json",
+			success : function(data) {
+				alert(data.message);
+				//需要弹框提示操作成功与否
+                window.location.href="/personalCenter/toEnquiryManage";
+            }
+		});
+}
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

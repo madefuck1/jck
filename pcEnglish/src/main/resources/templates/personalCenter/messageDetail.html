@@ -1,0 +1,96 @@
+<@override name="title">
+Message details
+</@override>
+
+<@override name="css">
+
+
+<style>
+
+    .mesdetail{
+        padding:50px 200px;
+    }
+    h3{
+        text-align: center;
+    }
+    #search,.tog,.sear .sousuo{
+        background: #fff;
+    }
+
+</style>
+</@override>
+
+<@override name="body">
+<div id="purch-center" style="width: 100%;margin: 0 auto; overflow: hidden;">
+    <div class="news_on" style="background: #fff;width: 1190px; margin: 0 auto;margin-top: 20px; min-height: 800px;">
+        <ol class="am-breadcrumb" style="padding:20px;">
+            <li><a href="/index">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li class="am-active">Message details</li>
+        </ol>
+
+        <div class="mesdetail">
+            <#if id==1>
+            <h3>Release requirements for extreme sensitive words</h3>
+            <p style="line-height: 26px">
+                1. National, world-class, top-level, best, first, only, first, best, precise, top, lowest, lowest, most, <br/>
+                cheapest, maximum, latest technology, most advanced science, country Level products, absolute, exclusive,  <br/>
+                first, latest, most advanced, first brand, gold medal, famous brand, most profitable, super earned, first,  <br/>
+                huge luxury, supreme, top enjoyment and other absolute terms (not introduced into "excellent, Senior, famous,"); <br/>
+                2, traditional characters, use foreign words alone, or a combination of Chinese and English; <br/>
+                3, well-known trademarks, goods have been registered well-known trademarks, etc. in various types of publicity  <br/>
+                use the words "well-known trademarks."
+            </p>
+            <p style="text-align: right;">2019-5-17</p>
+            <#elseif id==2>
+            <h3>Why does the release of the product fail</h3>
+            <p style="line-height: 26px">
+                1, due to your network speed problem, did not submit successfully;<br/>
+                2, repeat the information repeatedly, delete it directly;<br/>
+                3, infringement information, directly deleted;<br/>
+                4, the sale of information, directly delete;<br/>
+                5, the lack of corresponding proof, the audit failed;<br/>
+                6, is not the information set to expire in 3 days.
+            </p>
+            <p style="text-align: right;">2019-4-01</p>
+            <#elseif id==3>
+            <h3>Duplicate information processing rules</h3>
+            <p style="line-height: 26px">
+                1. Only product price, output, place of origin, delivery period, unit of measurement and total quantity of supply are different. <br/>
+                Other product information is the same or important product attributes and descriptions are the same;<br/>
+                2. Only product images are different, other product information is the same or important product attributes and descriptions are the same;<br/>
+                3. Add or stack non-critical fields (including aliases, modifiers, letters, symbols, etc.) and pictures in the title, keywords, attributes, <br/>
+                descriptions, etc., and the same or important product attributes and descriptions are the same for other product information;<br/>
+                4. Only arrange and combine the corresponding content in pictures, titles, keywords, attributes, descriptions, and the same or important<br/>
+                product attributes and descriptions of other product information;<br/>
+                5. Other domestic manufacturing network internal trade stations are scheduled to repeat information.
+            </p>
+            <p style="text-align: right;">2019-3-20</p>
+            <#elseif id==4>
+            <h3>Add product operation guide</h3>
+            <p style="line-height: 26px">
+                1. Open the seller center Click the New Product Type button to add the attribute type, or you can choose to add the attribute category to
+                add the attribute category.<br/>
+                2. Click on the attribute list to edit the item attributes, and select the item attribute type you want to add to add the item attributes;<br/>
+                3, attribute entry method is manual entry, you can customize the product attributes directly when adding goods;
+            </p>
+            <p style="text-align: right;">2019-3-15</p>
+            </#if>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</@override>
+
+
+<@override name="js">
+
+
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

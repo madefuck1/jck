@@ -1,0 +1,288 @@
+<@override name="title">
+订单管理
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/orstyle.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/myAlert/css/myAlert.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-order">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> </div>
+                </div>
+                <hr/>
+                <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+                    <ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs listType">
+                        <li class="am-active"><a data-status="1">所有订单</a></li>
+                        <li><a data-status="2">待付款</a></li>
+                        <li><a data-status="3">待发货</a></li>
+                        <li><a data-status="4">待收货</a></li>
+                        <li><a data-status="5">待评价</a></li>
+                        <li><a data-status="6">线下订单</a></li>
+                    </ul>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active">
+                            <div class="order-top">
+                                <div class="th th-item">
+                                    <td class="td-inner">商品</td>
+                                </div>
+                                <div class="th th-price">
+                                    <td class="td-inner">单价</td>
+                                </div>
+                                <div class="th th-number">
+                                    <td class="td-inner">数量</td>
+                                </div>
+                                <div class="th th-operation">
+                                    <td class="td-inner">商品合计</td>
+                                </div>
+                                <div class="th th-amount">
+                                    <td class="td-inner">订单合计</td>
+                                </div>
+                                <div class="th th-status">
+                                    <td class="td-inner">交易状态</td>
+                                </div>
+                                <div class="th th-change">
+                                    <td class="td-inner">交易操作</td>
+                                </div>
+                            </div>
+                            <div class="order-main">
+                                <div class="order-list">
+                                </div>
+                                <!--分页 -->
+                                <div id="pagination" style="text-align: center;padding-top: 12px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/myAlert/js/myAlert.js"></script>
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+
+    $(".listType li a").bind("click",function () {
+        $(this).parents(".listType").find("li").removeClass("am-active");
+        $(this).parent().addClass("am-active");
+        Init(0);
+    })
+
+    //去评价
+    function putAssess(orderNumber) {
+        window.location.href = '/personalCenter/toPutAssess/'+orderNumber;
+    };
+
+    $(function () {
+        Init(0);
+    });
+
+    function PageCallback(index) {
+        Init(index);
+    }
+
+    function Init(pageIndex) {
+        var data = $(".am-active").find("a").attr("data-status");
+        $.get("/orderManager/clickPage?data=" + data + "&pageIndex=" + pageIndex, function (result) {
+            loadOrderList(result);
+            // pagination 分页插件
+            $("#pagination").pagination(result.count, {   //total(一共多少条记录)不能少
+                callback: PageCallback,
+                prev_text: '上一页',
+                next_text: '下一页',
+                items_per_page: 5,             //每页显示最大条数
+                num_display_entries: 4,        //连续分页主体部分显示的分页条目数
+                num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                current_page:pageIndex
+            });
+        });
+    }
+
+
+    function cancelOrder(orderShopId) {
+        $.myConfirm({
+            title:"",
+            message:"确定取消订单吗！",
+            callback:function(){
+                var endPage = parseInt($('.endPage').children().text());
+                if(isNaN(endPage)){
+                    endPage= startPage;
+                }
+                var param = {
+                    status:0,
+                    orderShopId:orderShopId,
+
+                    //页面分页参数
+                    flag:2,
+                    startPage:parseInt($('.startPage').children().text()),
+                    endPage:endPage,
+                    number:number,
+                    orderStatus:orderStatus,
+                    hitPage: $(".mypage").find('.am-active').text(),
+                    orderType:orderType
+
+                }
+                $.ajax({
+                    url: '/orderManager/updStatus',
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(param),
+                    success: function (data) {
+                        if (data.success) {
+                            console.log(data);
+                            loadOrderList(data);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function delOrder(orderShopId) {
+        $.myConfirm({
+            title:"",
+            message:"确定要删除订单吗！",
+            callback:function(){
+                var endPage = parseInt($('.endPage').children().text());
+                if(isNaN(endPage)){
+                    endPage= startPage;
+                }
+
+                var param = {
+                    status:-1,
+                    orderShopId:orderShopId,
+
+
+                    //页面分页参数
+                    flag:2,
+                    startPage:parseInt($('.startPage').children().text()),
+                    endPage:endPage,
+                    number:number,
+                    orderStatus:orderStatus,
+                    hitPage: $(".mypage").find('.am-active').text(),
+                    orderType:orderType
+                }
+                $.ajax({
+                    url: '/orderManager/updStatus',
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(param),
+                    success: function (data) {
+                        if (data.success) {
+                            console.log(data);
+                            loadOrderList(data);
+                        }
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    // ajax 请求后，订单列表重新封装
+    function loadOrderList(data) {
+        var html = "";
+        var orderList = data.list;
+        for (var i = 0; i < orderList.length; i++) {
+            html += '<div class="order-status5">';
+            html += '<div class="order-title">';
+            html += '<div class="dd-num">订单编号：<a href="javascript:;">' + orderList[i].orderNumber + '</a></div>';
+            html += '<span>成交时间：' + orderList[i].createTimeString + '</span>';
+            html += '<span class="order_shop">' + orderList[i].shopName + '</span> </div>';
+            html += '<div class="order-content"><div class="order-left">';
+            var orderProductList = orderList[i].orderProducts;
+            for (var j = 0; j < orderProductList.length; j++) {
+                html += '<ul class="item-list">' +
+                    '<li class="td td-item">' +
+                    '<div class="item-pic">' ;
+                html += '<a class="J_MakePoint" onclick="javascript:window.open(\'/product/toDetail?productId=\'+'+orderProductList[j].productId+',\'_blank\');"href="#">';
+                html += '<img src="' + orderProductList[j].url + '" class="itempic">';
+                html += '</a>' +
+                    '</div>' +
+                    '<div class="item-info">' +
+                    '<div class="item-basic-info">' ;
+                html += '<a onclick="javascript:window.open(\'/product/toDetail?productId=\'+'+orderProductList[j].productId+',\'_blank\');"href="#">';
+                html += '<p>' + orderProductList[j].productName + '</p>' +
+                    '<p class="info-little">颜色：' + orderProductList[j].productColor +
+                    '<br>规格：' + orderProductList[j].productSpec + '</p>' +
+                    '</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>' +
+                    '<li class="td td-price">' +
+                    '<div class="item-price">' + Number(orderProductList[j].productPrice).toFixed(2) +
+                    '</div>' +
+                    '</li>' +
+                    '<li class="td td-number">' +
+                    '<div class="item-number">' +
+                    '<span>×</span>' + orderProductList[j].productNumber +
+                    '</div>' +
+                    '</li>' +
+                    '<li class="td td-operation">' +
+                    '<div class="item-operation">' + Number(orderProductList[j].productPrice * orderProductList[j].productNumber).toFixed(2) +
+                    '</div>' +
+                    '</li>' +
+                    '</ul>';
+            }
+            html += '<div class="order-right">' +
+                '<li class="td td-amount">' +
+                '<div class="item-amount">' +
+                '合计：' + Number(orderList[i].sumPrice).toFixed(2) ;
+            html += '</div>' +
+                '</li>' +
+                '<div class="move-right">' +
+                '<li class="td td-status">' +
+                '<div class="item-status">' +
+                '<p class="Mystatus">' + orderList[i].statusMessage + '</p>' +
+                '<p class="order-info"><a href="/orderManager/toDetail/' + orderList[i].orderShopId + '">订单详情</a></p>' +
+                '</div>' +
+                '</li>' +
+                '<li class="td td-change order_pay">';
+
+            if (orderList[i].orderShopStatus == 3 || orderList[i].orderShopStatus == 5) {
+                html += '<div class="am-btn am-btn-danger" onclick="onPay(' + orderList[i].orderShopId + ');">支付</div>';
+            }
+            if (orderList[i].orderShopStatus == 1 || orderList[i].orderShopStatus == 2 || orderList[i].orderShopStatus == 3) {
+                html += '<div class="am-btn am-btn-danger" onclick="cancelOrder(' + orderList[i].orderShopId + ');">取消</div>';
+            }
+            if (orderList[i].orderShopStatus == 0 || orderList[i].orderShopStatus == 9) {
+                html += '<div class="am-btn am-btn-danger" onclick="delOrder(' + orderList[i].orderShopId + ');">删除</div>';
+            }
+            html += '</li>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+
+        $('.order-list').html("");
+
+        $('.order-list').append(html);
+
+    }
+
+    function onPay(orderShopId) {
+        window.location.href="/orderManager/pay/"+orderShopId;
+    }
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

@@ -1,0 +1,109 @@
+<@override name="title">
+发布产品
+</@override>
+
+<@override name="css">
+    <link rel="stylesheet" href="${contextPath}/css/sale/sale-ReleaseP.css">
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="01 sale_index.html">卖家工作台</a></li>
+                <li><a href="01 sale_index.html">发布产品</a></li>
+            </ol>
+            <form class="am-form">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label style="font-size: 14px;">请选择产品类目：</label>
+                        <select multiple class="" id="assortOne">
+                        </select>
+                        <select multiple class="" id="assortTwo">
+                        </select>
+                        <select multiple class="" id="assortThree">
+                        </select>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="sale-down" style="overflow: hidden;">
+                <span  style="font-size: 14px; float: left;">已选类目：</span>
+                <span style="float: left;">
+                    <ol class="">
+                        <li><p style="color: blue" class="assortOne"></p></li>
+                        <li><p style="color: blue" class="assortTwo"></p></li>
+                        <li><p style="color: blue" class="assortThree"></p></li>
+                    </ol>
+                </span>
+            </div>
+            <div style="text-align: center">
+                <button type="button" onclick="checkAssort()" class="am-btn am-btn-secondary">下一步，发布产品</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    $(".item-operation").click(function(){
+        $(".modify").toggle();
+    });
+
+    $(function () {
+        $.get("/pc/commonPullDown/getAssortAByParentId/0",function (data) {
+            var html = initData(data);
+            $("#assortOne").append(html);
+            $("#assortOne option").bind("click",function () {
+                getTwoData($(this).val());
+                $(".assortOne").text($(this).text()+">");
+            })
+        })
+    })
+
+    function getTwoData(val){
+        $.get("/pc/commonPullDown/getAssortAByParentId/"+val,function (data) {
+            var html = initData(data);
+            $("#assortTwo").html("");
+            $("#assortThree").html("");
+            $("#assortTwo").append(html);
+            $("#assortTwo option").bind("click",function () {
+                getThreeData($(this).val());
+                $(".assortTwo").text($(this).text()+">");
+            })
+        })
+    }
+
+    function getThreeData(val) {
+        $.get("/pc/commonPullDown/getAssortAByParentId/"+val,function (data) {
+            var html = initData(data);
+            $("#assortThree").html("");
+            $("#assortThree").append(html);
+            $("#assortThree option").bind("click",function () {
+                $(".assortThree").text($(this).text());
+            });
+        })
+    }
+    
+    //拼装html
+    function initData(data){
+        var html = "";
+        for(var i=0 ; i <data.length ;i++){
+            html += '<option value="'+ data[i].assortId+'">'+ data[i].assortName+'</option>';
+        }
+        return html ;
+    }
+
+    function checkAssort() {
+        var assortId = $("#assortThree option:selected").val();
+        if(assortId == undefined){
+            alert("请先选择分类");
+        }else {
+            window.location.href = "/product/createProductTwo?assortId=" + assortId ;
+        }
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+<head>
+    <#include "/common/includes/header.html"/>
+
+    <title>店铺装修</title>
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/css/sale/base.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
+    <link rel="stylesheet" href="/static/css/sale/sale_header.css">
+
+    <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f5f5;">
+
+<!-- 店铺装修top-->
+<#include "/sellerCenter/common/header.html"/>
+
+<div id="publishi">
+    <div class="publish-in">
+        <select data-am-selected>
+            <option value="a" selected>首页</option>
+            <!--            <option value="c">视频中心</option>-->
+        </select>
+        <div class="pub-right">
+            <button id="btn-publish-preview" type="button" class="am-btn am-btn-default">预览</button>
+            <button id="btn-publish" type="button" class="am-btn am-btn-secondary" style="width: 190px">发布</button>
+        </div>
+    </div>
+</div>
+<div id="logo" style="height: 120px;">
+    <img src="../images/sale/shop1.png" alt="">
+</div>
+<div class="logo-mask" id="logo-mask">
+    <button type="button" class="am-btn am-btn-secondary button1" id="btn-logo-mask"
+            data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 1190, height: 272}">编辑
+    </button>
+    <div class="am-modal am-modal-no-btn" tabindex="1" id="doc-modal-1">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">招牌内容
+                <!--                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+            </div>
+            <div class="am-modal-bd">
+                <div class="mask-title am-u-sm-1">店招图片：</div>
+                <div class="mask-con am-u-sm-11">
+                    <p>
+                        <span>宽度为1920像素，高度为120像素，否则导航显示可能异常</span>
+                    <div class="am-form-group am-form-file">
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">选择要上传的文件</button>
+                        <input id="logoPic" type="file" onchange="changeLogoPic(this)" multiple>
+                    </div>
+                    </p>
+
+                    <div class="masklogo" id="masklogo"></div>
+                    <div class="button">
+                        <button id="btn-logo-save" type="button" class="am-btn am-btn-secondary" style="width: 140px">
+                            保存
+                        </button>
+                        <button id="btn-logo-cancel" type="button" class="am-btn am-btn-default" style="width: 140px">
+                            取消
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="nav2">
+    <div class="nav_in">
+        <ul>
+            <li class="cur"><a href="">首页</a></li>
+            <li><a href="">公司概况</a></li>
+            <!--            <li><a href="">视频中心</a></li>-->
+        </ul>
+    </div>
+
+</div>
+
+<div class="salenav-mask" id="salenav-mask">
+    <button type="button" class="am-btn am-btn-secondary button6" id="btn-salenav-mask"
+            data-am-modal="{target: '#doc-modal-5', closeViaDimmer: 0, width: 595, height:300}" style="height: 32px">编辑
+    </button>
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-5">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">导航背景颜色
+                <!--                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+            </div>
+            <div class="am-modal-bd salenav">
+                <select data-am-selected id="bgColor">
+                    <option value="red" class="red" selected>红色</option>
+                    <option value="orange" class="orange">橙色</option>
+                    <option value="blue" class="blue">蓝色</option>
+                    <option value="black" class="black">黑色</option>
+                    <option value="gray" class="gray">灰色</option>
+                    <option value="pink" class="pink">粉色</option>
+                    <option value="purple" class="purple">紫色</option>
+                </select>
+                <div class="button">
+                    <button id="btn-nav-save" type="button" class="am-btn am-btn-secondary" style="width: 140px">保存
+                    </button>
+                    <button id="btn-nav-cancel" type="button" class="am-btn am-btn-default" style="width: 140px">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="shop-chart">
+    <div class="chart_in">
+        <div class="left">
+            <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
+                 data-am-slider='{"directionNav":false}'>
+                <ul class="am-slides" id="shop-chart-map">
+                    <!-- 图1 -->
+                    <li><img src="../images/sale/shop2.png" alt=""></li>
+                </ul>
+            </div>
+            <div class="left-mask" id="left-mask">
+                <button type="button" class="am-btn am-btn-secondary button2" id="btn-left-mask"
+                        data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 1190,height: 760}">编辑
+                </button>
+                <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2"
+                     style="background: #fff; min-height: 600px; overflow: auto; margin-top: -420px;">
+                    <div class="am-modal-dialog" style="min-height: 760px;overflow: auto">
+                        <div class="am-modal-hd">轮播图
+                            <!--                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+                        </div>
+                        <div class="am-modal-bd left-maskHeight" style="width: auto;">
+                            <div class="mask-title am-u-sm-1">店招图片：</div>
+                            <div class="mask-con am-u-sm-11" id="mask-con-2">
+                                <p>
+                                    <span>您可以通过展示最多4张图片的方式引导用户点击图片跳转到您指定的链接。通常用于有店铺的最新单品、精彩活动或优惠推荐。</span>
+                                </p>
+                                <!-- 默认 -->
+                                <div class="upload upload-chart">
+                                    <div class="am-form-group am-form-file" hidden>
+                                        <input name="fileName" type="file" multiple onchange="changeValue(this)">
+                                    </div>
+                                    <div class="picload up-pic">
+                                        <a href="javascript: void(0)" onclick="uploadPic(this);">上传图片</a>
+                                    </div>
+                                    <div class="proload up-pic">
+                                        <a href="javascript: void(0)" onclick="selectProduct(this);">选择跳转链接</a>
+                                    </div>
+                                    <div class="icon">
+                                        <span onclick="upClick(this);" class="up" style="cursor: pointer"></span>
+                                        <span onclick="downClick(this);" class="down" style="cursor: pointer"></span>
+                                        <span onclick="delClick(this);" class="del" style="cursor: pointer"></span>
+                                    </div>
+                                </div>
+                                <div class="upload">
+                                    <button type="button" class="am-btn am-btn-xs am-btn-secondary"
+                                            style="width: 140px" onclick="addShopChart(this);">添加
+                                    </button>
+                                    <button id="btn-chart-save" type="button" class="am-btn am-btn-warning"
+                                            style="width: 140px">保存
+                                    </button>
+                                    <button id="btn-chart-cancel" type="button" class="am-btn am-btn-default"
+                                            style="width: 140px">取消
+                                    </button>
+                                </div>
+                                <!--点击选择跳转链接-->
+                                <div class="am-tabs pro" data-am-tabs hidden id="left-mask-tabs">
+                                    <ul class="am-tabs-nav am-nav am-nav-tabs" style="padding:0px 10px; ">
+                                        <li class="am-active"><a href="#tab1">产品</a></li>
+<!--                                        <li><a href="#tab2">页面</a></li>-->
+                                    </ul>
+
+                                    <div class="am-tabs-bd">
+                                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                            <div class="pro-top">
+                                                <select id="storeAssort" style="border: 1px solid #E6E6E6;">
+                                                </select>
+                                                <input id="productName" type="text" placeholder="关键词">
+                                                <button type="button" class="am-btn am-btn-secondary"
+                                                        id="btn-search-product"
+                                                        style="height: 40px; margin-left: 20px;">搜索
+                                                </button>
+                                            </div>
+                                            <div class="pro-down" id="tab1-pro-down" style="height: 280px;overflow: auto">
+                                            </div>
+                                        </div>
+<!--                                        <div class="am-tab-panel am-fade" id="tab2">-->
+<!--                                            <div class="page1" onclick="changeBackgroundColor(this);" ondblclick="dblclickP(this,2);">-->
+<!--                                                <input value="/">-->
+<!--                                                <a>公司概况</a>-->
+<!--                                                &lt;!&ndash;                                                <input type="radio" class="am-fr">&ndash;&gt;-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right" id="right-company">
+            <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
+            <!-- <div class="Collection">-->
+            <!--     <span class="coll1">收藏</span>-->
+            <!--     <span class="coll2">已收藏</span>-->
+            <!-- </div>-->
+            <div>
+                <span class="one">联系电话：</span>
+                <span class="two" id="linkPhone">xxxx</span>
+            </div>
+            <div>
+                <span class="one">经营类目：</span>
+                <span class="two" id="mainProducts">xxxx</span>
+            </div>
+            <div>
+                <span class="one">联系地址：</span>
+                <span class="two" id="companyAddress">xxxx</span>
+            </div>
+            <div>
+                <span class="one">公司介绍：</span>
+                <span class="two" style="line-height: 40px" id="companyInfo">xxxx</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="shop-product">
+    <div class="product-in">
+        <div class="product-title" id="product-title">
+             <a href="#" class="">未添加分类</a>
+            <!-- <a href="#">产品分类</a>-->
+            <!-- <a href="#">产品分类</a>-->
+            <!-- <a href="#">产品分类</a>-->
+            <!-- <a href="#">产品分类</a>-->
+            <!-- <div class="product-search" id="product-search">-->
+            <!--     <input type="text" placeholder="店内搜索">-->
+            <!--     <button type="button" class="am-btn am-btn-warning">搜索</button>-->
+            <!-- </div>-->
+        </div>
+        <div class="mask-productTitle" id="mask-productTitle">
+            <button type="button" class="am-btn am-btn-secondary button4" id="btn-mask-productTitle"
+                    data-am-modal="{target: '#doc-modal-4', closeViaDimmer: 0, width:1190,height: 510}">编辑
+            </button>
+            <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-4"
+                 style="background: #fff; min-height:510px; overflow: auto; margin-top: -420px;">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd">导航设置
+                        <!--                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+                    </div>
+                    <div class="mask-Lnav">
+                        <div class="am-u-sm-6">
+                            <div class="Lnav-r" id="store-assort-tab0">
+                                <!-- <div class="Lnav-r01">-->
+                                <!--     <p>分类名称2</p>-->
+                                <!--     <input hidden name="assortId" value="">-->
+                                <!--     <div class="icon">-->
+                                <!--         <span style="cursor: pointer" class="up"></span>-->
+                                <!--         <span style="cursor: pointer" class="down"></span>-->
+                                <!--         <span style="cursor: pointer" class="del"></span>-->
+                                <!--     </div>-->
+                                <!-- </div>-->
+                            </div>
+                        </div>
+                        <div class="am-u-sm-6 ">
+                            <div class="Lnav-r" id="store-assort-tab1">
+                                <!-- <div class="Lnav-r01">-->
+                                <!--     <input type="checkbox" name="checkbox">-->
+                                <!--     <p>分类名称1</p>-->
+                                <!--     <input hidden name="assortId">-->
+                                <!-- </div>-->
+                                <!-- <div class="Lnav-r01">-->
+                                <!--     <input type="checkbox">-->
+                                <!--     <p>分类名称1</p>-->
+                                <!--     <input hidden name="assortId">-->
+                                <!-- </div>-->
+                            </div>
+                            <button class="am-btn am-btn-warning" style="float: inherit;margin-top: 10px;"
+                                    id="addAssort">添加
+                            </button>
+                            <p style="color: #999;margin-top: 10px;text-align: left;cursor: pointer;">
+                                如果您想添加或删除分类，请前往分类管理页面。<span style="color:#40ADFB ">立即前往</span></p>
+                        </div>
+                        <div class="button">
+                            <button id="btn-storeA-save" type="button" class="am-btn am-btn-secondary"
+                                    style="width: 140px">保存
+                            </button>
+                            <button id="btn-storeA-cancel" type="button" class="am-btn am-btn-default"
+                                    style="width: 140px">取消
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- 产品列表-->
+        <div class="product" style="text-align: center" id="product">
+            <!-- 初始化图片 -->
+<!--            <img src="/static/images/sale/4842.png" style="padding-top: 80px">-->
+            <li style="padding-top: 10px;"><img src="../images/sale/515.png" alt=""></li>
+        </div>
+        <div class="mask-product" id="mask-product">
+            <button type="button" class="am-btn am-btn-secondary button7" id="btn-mask-product"
+                    data-am-modal="{target: '#doc-modal-10', closeViaDimmer: 0, width:595,height: 380}">编辑
+            </button>
+            <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-10"
+                 style="background: #fff; min-height:330px; overflow: hidden; margin-top: -420px; ">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd">产品排序
+                        <!--  <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+                    </div>
+                    <div class="mask-pro-select">
+                        <select data-am-selected="{btnWidth: 'auto'}" id="mask-pro-select1">
+
+                        </select>
+                    </div>
+                    <div class="mask-pro-select">
+                        <select data-am-selected="{btnWidth: 'auto'}" id="mask-pro-select2">
+                            <option value="1">收藏最多在前</option><!-- 1：order by collection_number desc -->
+                            <option value="2">成交最多在前</option><!-- 2：order by deal_number desc -->
+                            <option value="3">浏览量最多在前</option><!-- 3：order by browse_number desc -->
+                            <option value="4">价格最低在前</option><!-- 4：order by product_price desc -->
+                            <option value="5">价格最低在后</option><!-- 5：order by product_price -->
+                        </select>
+                        <div class="button">
+                            <button id="btn-mask-pro-save" type="button" class="am-btn am-btn-secondary"
+                                    style="width: 140px">保存
+                            </button>
+                            <button id="btn-mask-pro-cancel" type="button" class="am-btn am-btn-default"
+                                    style="width: 140px">关闭
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页尾 -->
+<#include "/sellerCenter/common/foot.html"/>
+
+<script type="text/javascript" src="/static/js/storeConstruction/storeConstruction.js"></script>
+
+</body>
+</html>

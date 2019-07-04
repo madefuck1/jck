@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+.sale_table{
+	background: #F58022;
+	height: 45px;
+	line-height: 45px;
+	
+}
+.sale{
+	width: 1190px;
+	margin: 0 auto;
+}
+.sale_table ul li{
+	width: 10%;
+	height: 45px;
+	
+	
+	float: left;
+	text-align: center;
+
+}
+.tb-detail-price{
+	padding-top: 20px;
+}
+.sale_table ul li a{
+	color: #fff;
+	font-size: 16px;
+}
+.sale .cur{
+
+	background: #f87003;
+	
+}
+
+.price_up .pri1{
+	color: #F58022;
+	font-size: 18px;
+}
+
+.price_up .pri2{
+	
+	font-size: 24px;
+}
+.price_down{
+	margin-top: 40px;
+}
+.freight dd{
+	line-height: 34px;
+	margin-left: 20px;
+}
+.freight dt{
+	text-indent: 12px;
+}
+
+.add{
+	width: 100%;
+	/*border-bottom: 1px solid #f1f1f1;*/
+}
+.clearfixRight .add2{
+	margin-top: 0px;
+}
+
+.tb-detail-price{
+	height: 86px;
+}
+
+.pri_all{
+	height: 68px;
+	margin-top: 20px;
+}
+
+.pri_all span{
+	font-size: 22px;
+	color: #F58022;
+	margin-left: 90px;
+	line-height: 40px;
+}
+
+.tb-btn a{
+	border: 1px solid #F58022;
+	background-color: none;
+	margin-right: 30px;
+	
+}
+
+.tb-detail-list{
+	margin-bottom: 14px;
+}
+.tb-btn-basket a{
+	background: #F58022;
+}
+.mt h2{
+	line-height: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

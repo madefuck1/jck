@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("app/consultation/")
 public class AppConsultationController extends AppBaseController{
@@ -28,8 +31,31 @@ public class AppConsultationController extends AppBaseController{
         newsSo.setLimit(informDetailVo.getLimit());
         newsSo.setPage(informDetailVo.getPage());
         newsSo.setId(informDetailVo.getId());
-        PageHelp<NewsDto> pageHelp = consultationFeign.getNews(newsSo);
-        consultionListVo.setData(pageHelp.getData());
+        //所有合集
+        List<NewsDto> allLists=new ArrayList<>();
+        //头条
+        newsSo.setOrigin("1");
+        PageHelp<NewsDto> headlinesLists = consultationFeign.getNews(newsSo);
+        //行业
+        newsSo.setOrigin("2");
+        PageHelp<NewsDto> industryLists = consultationFeign.getNews(newsSo);
+        //政府
+        newsSo.setOrigin("3");
+        PageHelp<NewsDto> governmentLists = consultationFeign.getNews(newsSo);
+        //热点
+        newsSo.setOrigin("4");
+        PageHelp<NewsDto> HotLists = consultationFeign.getNews(newsSo);
+        //图片
+        newsSo.setOrigin("5");
+        PageHelp<NewsDto> photoLists = consultationFeign.getNews(newsSo);
+
+        allLists.addAll(headlinesLists.getData());
+        allLists.addAll(industryLists.getData());
+        allLists.addAll(governmentLists.getData());
+        allLists.addAll(HotLists.getData());
+        allLists.addAll(photoLists.getData());
+
+        consultionListVo.setData(allLists);
         consultionListVo.setSuccess(true);
         return consultionListVo;
     }

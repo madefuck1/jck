@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+.addButon{
+	width: 100%;
+	height: 60px;
+	padding: 15px;
+}
+.addButon button{
+	width: 84px;
+	height: 30px;
+	
+	margin-right: 10px;
+	
+	font-size: 14px;
+	float: left;
+	
+}
+.addButon .am-btn-default{
+	background: #fff;
+	color: #333;
+	border: 1px solid #e6e6e6;
+}
+.sort_down{
+	padding: 0px 15px;
+}
+
+.sort_down th,.sort_down td{
+	font-size: 14px;
+	color: #333;
+	font-weight: 400;
+	
+}
+
+.sort_down thead tr{
+	background: #e6e6e6;	
+}
+
+.sort_down tbody td{
+	
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.sort_down input[type=text]{
+	width: 190px;
+	height: 40px;
+	padding: 0px 6px;
+	
+}
+
+.sort_down input[type=text]::-webkit-input-placeholder{
+	color: #333;
+}
+.sort_down .icon1{
+	width: 190px;
+	height: 40px;
+	
+}
+
+.sort_down a{
+	display: inline-block;
+	line-height: 40px;
+}
+.sort_down input[type=email]::-webkit-input-placeholder{
+	color: #999;
+}
+
+.sort_down input[type=email]{
+	width: 190px;
+	height: 40px;
+	padding: 0px 6px;
+	
+}
+
+.am-table>tbody>tr>td, .am-table>tbody>tr>th, .am-table>tfoot>tr>td, .am-table>tfoot>tr>th, .am-table>thead>tr>td, .am-table>thead>tr>th{
+	border-top: 0px;
+}
+
+
+
+
+
+
+
+
+

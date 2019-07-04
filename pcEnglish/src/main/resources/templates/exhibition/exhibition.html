@@ -1,0 +1,80 @@
+<@override name="title">
+展会
+</@override>
+<@override name="css">
+	<link rel="stylesheet" href="${contextPath}/css/expo.css">
+
+</@override>
+<@override name="body">
+	<div id="expo-down">
+		<div class="expo-title">
+			<span class="title"></span>
+			<p style="float: left;">展会信息</p>
+		</div>
+		<div class="expo-down">
+			<ul class="expo-ul01" id="showExpo">
+			</ul>
+		</div>
+	</div>
+</@override>
+<@override name="js">
+
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+
+<script>
+	//查询展会信息
+	$(function(){
+        selList("");
+    });
+
+	function selList(exhibitionId) {
+        var str={exhibitionId:exhibitionId,page:"0"};
+        $.ajax({
+            url : "selExhibitionList",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                    var whatever=liContent(v);
+                    $("#showExpo").append(whatever);
+                });
+            }
+        });
+    }
+
+	function liContent(v){
+	    var exhibitionId=v.exhibitionId;
+	    var strExhibitionEndTime = v.strExhibitionEndTime;
+		var strExhibitionStartTime = v.strExhibitionStartTime;
+		var assortName= v.assortDto.assortName;
+		var exhibitionPhoto= v.exhibitionPhoto;
+		var exhibitionTitle=v.exhibitionTitle;
+		var exhibitionName=v.exhibitionName;
+	var li=$("<li class='expo-img'>"
+		+"<a href='javascript:void(0);' onclick='toDetail("+exhibitionId+")'><img src='"+exhibitionPhoto+"'alt='' width='282'></a>"
+		+" <div class='expo0li01'>"
+	    +" <h3  style='text-overflow:ellipsis; white-space:nowrap; overflow:hidden;'>"+exhibitionTitle+"</h3>"
+		+"<p>"+assortName+"</p>"
+        +"<ul>"
+        +"<li>"
+        +"<i class='iconfont iconshijian'></i>"
+        +strExhibitionStartTime+"-"+strExhibitionEndTime
+        +"</li>"
+        +"<li>"
+        +"<i class='iconfont icondizhi'></i>"
+        +exhibitionName
+        +"</li></ul></div></li>"
+		)
+return li;
+	}
+
+	function toDetail(exhibitionId) {
+        window.location.href="/exhibition/toExhibitionDetail?exhibitionId="+exhibitionId;
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>
