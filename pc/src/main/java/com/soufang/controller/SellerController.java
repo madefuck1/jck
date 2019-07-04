@@ -74,7 +74,7 @@ public class SellerController extends BaseController {
         // 跳转先判定是否是有卖家权限，没有就直接跳转申请成为卖家页面
         UserDto userInfo = this.getUserInfo(request);
         ShopDto shopDto = shopFeign.getByUserId(userInfo.getUserId());
-        if(StringUtils.isBlank(shopDto.getShopName())){
+        if(shopDto == null || StringUtils.isBlank(shopDto.getShopName())){
             return "defaultPage/noCompanyInfo";
         }else {
 //        String idCard[] = userInfo.getIdCardUrl().split(";");
