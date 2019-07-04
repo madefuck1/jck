@@ -11,11 +11,10 @@
 package com.soufang.app.vo.infromation;
 
 import com.soufang.app.vo.AppVo;
-import com.soufang.base.dto.news.NewsDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -28,7 +27,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ConsultionListVo extends AppVo {
-    private List<NewsDto> data;
+    private Map data;
     private int page ;
     private int limit ;
 }
