@@ -1,5 +1,5 @@
 <@override name="title">
-商家入驻
+Merchants
 </@override>
 
 <@override name="css">
@@ -9,19 +9,19 @@
 <@override name="body">
 <div id="sale_center">
     <div class="sale_aside">
-        <!--引入左边菜单-->
+        <!--Introduce the menu on the left-->
         <div class="sale_con">
             <div class="openUp">
-                <p class="p1">开通商铺</p>
+                <p class="p1">Open shop</p>
                 <div class="turn">
                     <span class="blueCircle">1</span>
-                    <span>联系人信息</span>
+                    <span>Contact information</span>
                     <span class="turnBlue">————</span>
                     <span class="grayCircle">2</span>
-                    <span class="fzcolor">公司信息</span>
+                    <span class="fzcolor">Company information</span>
                     <span class="turnGray">————</span>
                     <span class="grayCircle">3</span>
-                    <span class="fzcolor">完成</span>
+                    <span class="fzcolor">Complete</span>
                 </div>
             </div>
             <form action="/user/settle" method="post">
@@ -29,49 +29,49 @@
                     <div class="am-tabs-bd">
                         <div data-tab-panel-0 class="am-tab-panel am-active sale_down">
                             <div class="sale_cloum1">
-                                <span class="am-u-sm-2 row1">联系人姓名：</span>
+                                <span class="am-u-sm-2 row1">Contact name：</span>
                                 <div class="am-form-group am-u-sm-4 row2">
-                                    <input type="text" name="realName" value="${userInfo.realName!}" class="am-form-field" required placeholder="联系人姓名">
+                                    <input type="text" name="realName" value="${userInfo.realName!}" class="am-form-field" required placeholder="Contact name">
                                 </div>
                                 <div class="am-u-sm-6 sale_fz">
                                     <label class="am-radio-inline">
-                                        <input type="radio"  value="" name="docInlineRadio"> 先生
+                                        <input type="radio"  value="" name="docInlineRadio"> Mr
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="docInlineRadio" checked> 女士
+                                        <input type="radio" name="docInlineRadio" checked> Lady
                                     </label>
                                 </div>
                             </div>
                             <div class="sale_cloum1">
-                                <span class="am-u-sm-2 row1">联系人电话：</span>
+                                <span class="am-u-sm-2 row1">Contact Phone：</span>
                                 <span class="am-u-sm-10 row2">
                                     <span>${userInfo.phone!}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 </span>
                             </div>
                             <div class="sale_cloum1">
-                                <span class="am-u-sm-2 row1">联系人邮箱：</span>
+                                <span class="am-u-sm-2 row1">Contact email：</span>
                                 <span class="am-u-sm-10 row2">
                                     <span>${userInfo.email!}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                     </span>
                             </div>
                             <div class="sale_cloum1">
-                                <span class="am-u-sm-2 row1">固定电话：</span>
+                                <span class="am-u-sm-2 row1">Landline：</span>
                                 <span class="am-u-sm-10 row3 row3 am-input-group">
-                                    <input type="text" name="faxCountry" class="am-form-field" placeholder="国家区号">
-                                    <input type="text" name="faxCity" class="am-form-field" placeholder="城市区号">
-                                    <input type="text" name="faxNumber" class="am-form-field" placeholder="固定号码">
+                                    <input type="text" name="faxCountry" class="am-form-field" placeholder="Country Code">
+                                    <input type="text" name="faxCity" class="am-form-field" placeholder="City Area Code">
+                                    <input type="text" name="faxNumber" class="am-form-field" placeholder="Fixed number">
                                 </span>
                             </div>
                             <div class="sale_cloum1">
-                                <span class="am-u-sm-2 row1">传真号码：</span>
+                                <span class="am-u-sm-2 row1">Fax number：</span>
                                 <span class="am-u-sm-10 row3 row3 am-input-group">
-                                    <input type="text" name="fixedCountry" class="am-form-field" placeholder="国家区号">
-                                    <input type="text" name="fixedCity" class="am-form-field" placeholder="城市区号">
-                                    <input type="text" name="fixedNumber" class="am-form-field" placeholder="传真号码">
+                                    <input type="text" name="fixedCountry" class="am-form-field" placeholder="Country Code">
+                                    <input type="text" name="fixedCity" class="am-form-field" placeholder="City Area Code">
+                                    <input type="text" name="fixedNumber" class="am-form-field" placeholder="Fixed number">
                                 </span>
                             </div>
                             <a style="margin-top: 20px; display: inline-block; text-align: center; width: 100%">
-                                <button type="submit" class="am-btn am-btn-secondary am-btn-lg button-size" onclick="return myfunction()" >下一步</button>
+                                <button type="submit" class="am-btn am-btn-secondary am-btn-lg button-size" onclick="return myfunction()" >Next</button>
                             </a>
                         </div>
                     </div>
@@ -93,14 +93,14 @@
         $("input[name=fixedCity]").val(fixedPhone[1]);
         $("input[name=fixedNumber]").val(fixedPhone[2]);
     })
-    //下一步弹框确认
+    //Next frame confirmation
     function myfunction()
     {
-        if(confirm("请确认当前信息是否进入下一步？")){
+        if(confirm("Please confirm that the current information is not going to the next step？")){
             document.update.submit();
         }
         else{
-            return false;//必须加！点击取消时才会保存之前的数据！
+            return false;//Must add! Click Cancel to save the previous data!
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <@override name="title">
-基本信息
+Basic information
 </@override>
 
 <@override name="css">
@@ -13,98 +13,98 @@
                 <#include "/sellerCenter/common/seller.menu.html"/>
                 <div class="sale_con">
                         <ol class="am-breadcrumb" id="subtitle">
-                                <li><a href="/sellerCenter/toIndex">卖家工作台</a></li>
-                                <li><a href="/sellerCenter/toSellerCenter">基本信息</a></li>
+                                <li><a href="/sellerCenter/toIndex">Seller's workbench</a></li>
+                                <li><a href="/sellerCenter/toSellerCenter">Basic information</a></li>
                         </ol>
                         <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
                                 <ul class="am-tabs-nav am-cf">
-                                        <li class="am-active"><a href="[data-tab-panel-0]">联系人信息</a></li>
-                                        <li class=""><a href="[data-tab-panel-1]">公司信息</a></li>
+                                        <li class="am-active"><a href="[data-tab-panel-0]">Contact information</a></li>
+                                        <li class=""><a href="[data-tab-panel-1]">Company information</a></li>
 
                                 </ul>
                                 <div class="am-tabs-bd">
                                         <div data-tab-panel-0 class="am-tab-panel am-active sale_down" id="userInformation">
                                                 <div class="sale_cloum1">
-                                                        <span class="am-u-sm-2 row1">联系人姓名：</span>
+                                                        <span class="am-u-sm-2 row1">Contact name：</span>
                                                         <span class="am-u-sm-10 row2">
-                                <span>${(userInfo.userName)!"没有填写真实姓名"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>${(userInfo.userName)!"No real name filled in"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                             </span>
                                                 </div>
                                                 <div class="sale_cloum1">
-                                                        <span class="am-u-sm-2 row1">联系人电话：</span>
+                                                        <span class="am-u-sm-2 row1">Contact Phone：</span>
                                                         <span class="am-u-sm-10 row2">
-                                <span>${(userInfo.phone)!"没有绑定电话号码"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>${(userInfo.phone)!"No bound phone number"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                             </span>
                                                 </div>
                                                 <div class="sale_cloum1">
-                                                        <span class="am-u-sm-2 row1">联系人邮箱：</span>
+                                                        <span class="am-u-sm-2 row1">Contact email：</span>
                                                         <span class="am-u-sm-10 row2">
-                                <span>${(userInfo.email)!"没有绑定邮箱"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>${(userInfo.email)!"No bound mailbox"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                             </span>
                                                 </div>
-                                                <button type="button" onclick="updateInformation()" class="am-btn am-btn-secondary am-btn-lg button-size">修&nbsp;&nbsp;&nbsp;改</button>
+                                                <button type="button" onclick="updateInformation()" class="am-btn am-btn-secondary am-btn-lg button-size">Modify</button>
                                         </div>
                                         <div data-tab-panel-1 class="am-tab-panel " >
                                                 <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
                                                         <div class="am-tabs-bd">
                                                                 <div data-tab-panel-0 class="am-tab-panel am-active sale_down">
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">公司名称：</span>
+                                                                                <span class="am-u-sm-2 row1">Company name：</span>
                                                                                 <span class="am-u-sm-10 row2" id="companyName">
 
-                                            <span >${(userInfo.companyDto.compName)!"没有名称信息"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.compName)!"No name information"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">公司简介：</span>
+                                                                                <span class="am-u-sm-2 row1">Company Profile：</span>
                                                                                 <span class="am-u-sm-10 row2" id="companyInfo">
-                                            <textarea class="" rows="1" id="doc-ta-1" style="border: 1px solid #E6E6E6; width: 58%" readonly>${(userInfo.companyDto.companyInfo)!"没有简介信息"}</textarea>
+                                            <textarea class="" rows="1" id="doc-ta-1" style="border: 1px solid #E6E6E6; width: 58%" readonly>${(userInfo.companyDto.companyInfo)!"No briefing information"}</textarea>
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">详细地址：</span>
+                                                                                <span class="am-u-sm-2 row1">Detailed address：</span>
                                                                                 <span class="am-u-sm-10 row2" id="compAddress">
-                                            <span >${(userInfo.companyDto.compAddress)!"没有地址信息"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.compAddress)!"No address information"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span>
+                                                                                <span class="am-u-sm-2 row1">Longitude：</span>
                                                                                 <span class="am-u-sm-10 row2" id="longitude">
-                                            <span >${(userInfo.companyDto.longitude)?default("没有经度信息")}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.longitude)?default("No longitude information")}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">纬&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span>
+                                                                                <span class="am-u-sm-2 row1">Dimensions：</span>
                                                                                 <span class="am-u-sm-10 row2" id="latitude">
-                                            <span >${(userInfo.companyDto.latitude)!"没有纬度信息"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.latitude)!"No latitude information"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">银行卡号：</span>
+                                                                                <span class="am-u-sm-2 row1">Bank card number：</span>
                                                                                 <span class="am-u-sm-10 row2" id="bankNumber">
-                                            <span >${(userInfo.companyDto.bankNumber)!"没有银行卡号信息"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.bankNumber)!"No bank card number information"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1" >
-                                                                                <span class="am-u-sm-2 row1">开户银行：</span>
+                                                                                <span class="am-u-sm-2 row1">Open a bank：</span>
                                                                                 <span class="am-u-sm-10 row2" id="bank">
-                                            <span >${(userInfo.companyDto.bank)!"没有银行信息"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span >${(userInfo.companyDto.bank)!"No bank information."}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                          </span>
                                                                         </div>
                                                                         <div class="sale_cloum1">
-                                                                                <span class="am-u-sm-2 row1">身份证照片：</span>
+                                                                                <span class="am-u-sm-2 row1">ID photo：</span>
                                                                                 <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                                                                        <span ><img class="sale_pic1" src='${(userInfo.idCardUrl)!"没有身份证信息"}'></span>
-                                                                                        <span ><img class="sale_pic2" src='${(userInfo.rIdCardUrl)!"没有身份证信息"}'></span>
+                                                                                        <span ><img class="sale_pic1" src='${(userInfo.idCardUrl)!"No ID information"}'></span>
+                                                                                        <span ><img class="sale_pic2" src='${(userInfo.rIdCardUrl)!"No ID information"}'></span>
                                                                                 </div>
                                                                         </div>
                                                                         <div class="sale_cloum1">
-                                                                                <span class="am-u-sm-2 row1">营业执照：</span>
+                                                                                <span class="am-u-sm-2 row1">License：</span>
                                                                                 <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                                                                        <span  ><img class="sale_pic3" src='${(userInfo.companyDto.compUrls)!"没有身份证信息"}'></span>
+                                                                                        <span  ><img class="sale_pic3" src='${(userInfo.companyDto.compUrls)!"No ID information"}'></span>
                                                                                 </div>
                                                                         </div>
-                                                                        <a id="buttonUp"><button type="button" onclick="toUpdateCompany()" class="am-btn am-btn-secondary am-btn-lg button-size">修&nbsp;&nbsp;&nbsp;改</button></a>
+                                                                        <a id="buttonUp"><button type="button" onclick="toUpdateCompany()" class="am-btn am-btn-secondary am-btn-lg button-size">Modify</button></a>
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -126,9 +126,9 @@
             type: 'post',
             success:function (data) {
                 $("#subtitle").empty();
-                var subtitleContent = '<li><a href="/sellerCenter/toIndex">卖家工作台</a></li>\n' +
-                    '                <li><a href="/sellerCenter/toSellerCenter">基本信息</a></li>\n' +
-                    '                <li class="am-active"><a href="#">修改公司信息</a></li>';
+                var subtitleContent = '<li><a href="/sellerCenter/toIndex">Seller\'s workbench</a></li>\n' +
+                    '                <li><a href="/sellerCenter/toSellerCenter">Basic information</a></li>\n' +
+                    '                <li class="am-active"><a href="#">Modifying company information</a></li>';
                 $("#subtitle").append(subtitleContent);
                 $("#companyName").empty();
                 $("#companyInfo").empty();
@@ -148,11 +148,11 @@
                 $("#bankNumber").append('<input type="text" id="name7" class="am-form-field" value='+data.companyDto.bankNumber+' style="width: 200px">' );
 
                 $("#name2").val(data.companyDto.companyInfo);
-                $("#buttonUp").append('<button type="button" onclick="updateCompany()" class="am-btn am-btn-secondary am-btn-lg button-size">保&nbsp;&nbsp;&nbsp;存</button>');
+                $("#buttonUp").append('<button type="button" onclick="updateCompany()" class="am-btn am-btn-secondary am-btn-lg button-size">Save</button>');
 
             },
             error:function () {
-                alert("请求发送失败");
+                alert("Request sent failed");
             }
         });
     }
@@ -173,12 +173,12 @@
             contentType:"application/json",
             success:function (data) {
                 if(data.success){
-                    alert("修改成功");
+                    alert("The modification was successful");
                     window.location.href = '/sellerCenter/toSellerCenter';
                 }
             },
             error:function () {
-                alert("修改请求发送失败");
+                alert("Modification request sent failed");
             }
         });
     }
@@ -189,35 +189,35 @@
             type: 'post',
             success: function (data) {
                 $("#subtitle").empty();
-                var subtitleContent = '<li><a href="/sellerCenter/toIndex">卖家工作台</a></li>\n' +
-                    '                <li><a href="/sellerCenter/toSellerCenter">基本信息</a></li>\n' +
-                    '                <li class="am-active"><a href="#">修改联系人信息</a></li>';
+                var subtitleContent = '<li><a href="/sellerCenter/toIndex">Seller\'s workbench</a></li>\n' +
+                    '                <li><a href="/sellerCenter/toSellerCenter">Basic information</a></li>\n' +
+                    '                <li class="am-active"><a href="#">Modify contact information</a></li>';
                 $("#subtitle").append(subtitleContent);
 
                 $("#userInformation").empty();
                 var userInformation = '<div class="sale_cloum1">\n' +
-                    '                            <span class="am-u-sm-2 row1">联系人姓名：</span>\n' +
+                    '                            <span class="am-u-sm-2 row1">Contact name：</span>\n' +
                     '                            <span class="am-u-sm-10 row2">\n' +
                     '                                <input type="text" id="username" class="am-form-field" value='+data.userName+' style="width: 200px">\n' +
                     '                            </span>\n' +
                     '                        </div>\n' +
                     '                        <div class="sale_cloum1">\n' +
-                    '                            <span class="am-u-sm-2 row1">联系人电话：</span>\n' +
+                    '                            <span class="am-u-sm-2 row1">Contact Phone：</span>\n' +
                     '                            <span class="am-u-sm-10 row2">\n' +
                     '                                <input type="text" id="userPhone" class="am-form-field" value='+data.phone+' style="width: 200px">\n' +
                     '                            </span>\n' +
                     '                        </div>\n' +
                     '                        <div class="sale_cloum1">\n' +
-                    '                            <span class="am-u-sm-2 row1">联系人邮箱：</span>\n' +
+                    '                            <span class="am-u-sm-2 row1">Contact email：</span>\n' +
                     '                            <span class="am-u-sm-10 row2">\n' +
                     '                                <input type="text" id="userEmail" class="am-form-field" value='+(data.email)+' style="width: 200px">\n' +
                     '                            </span>\n' +
                     '                        </div>\n' +
-                    '                        <button type="button" onclick="saveInformation()" class="am-btn am-btn-secondary am-btn-lg button-size">保&nbsp;&nbsp;&nbsp;存</button>';
+                    '                        <button type="button" onclick="saveInformation()" class="am-btn am-btn-secondary am-btn-lg button-size">Save</button>';
                 $("#userInformation").append(userInformation);
             },
             error:function () {
-                alert("获取个人信息失败！")
+                alert("Failed to obtain personal information！")
             }
         });
     }
@@ -240,7 +240,7 @@
                 }
             },
             error:function () {
-                alert("修改信息请求发送失败");
+                alert("Failed to modify information request sent");
             }
         });
     }
