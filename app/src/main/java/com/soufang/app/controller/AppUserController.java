@@ -55,6 +55,9 @@ public class AppUserController extends AppBaseController {
             userVo.setSuccess(false);
             return userVo;
         }
+        if(StringUtils.isBlank(loginReqVo.getPhone())){
+            userDto.setPhone("121");
+        }
         if(StringUtils.isNotBlank(loginReqVo.getPassword())){
             userDto.setPhone(loginReqVo.getPhone());
             userDto.setEmail(loginReqVo.getEmail());
@@ -198,8 +201,8 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "registerByEmail",method = RequestMethod.POST)
     public UserVo registerByEmail(@RequestBody RegisterReqVo registerReqVo){
         UserVo userVo = new UserVo();
-        Map<String ,Object> map = new HashMap<>();
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             userDto.setEmail(registerReqVo.getEmail());
         }
@@ -479,7 +482,7 @@ public class AppUserController extends AppBaseController {
         userDto.setPhone("121");
         userDto.setEmail("121");
         if(!StringUtils.isNotBlank(userInfo.getUserName())){
-            userDto.setRealName(request.getParameter("realName"));
+            userDto.setUserName(request.getParameter("realName"));
         }else {
             vo.setSuccess(false);
             vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
@@ -491,6 +494,8 @@ public class AppUserController extends AppBaseController {
             vo.setSuccess(false);
             return vo;
         }
+        userDto.setPhone(null);
+        userDto.setEmail(null);
         MultipartFile file = requestFile.getFile("userAvatar");
         Map<String,Object> map = new HashMap<>();
         if(file != null){
