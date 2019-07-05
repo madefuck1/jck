@@ -1,5 +1,5 @@
 <@override name="title">
-已卖出的产品     （订单列表）
+Products sold   （List of orders）
 </@override>
 
 <@override name="css">
@@ -19,75 +19,75 @@
         <#include "/sellerCenter/common/seller.menu.html"/>
         <div class="sale_con">
             <ol class="am-breadcrumb">
-                <li><a href="/sellerCenter/toIndex">卖家工作台</a></li>
-                <li><a href="/sellerCenter/toSoldProduct">已卖出的产品</a></li>
+                <li><a href="/sellerCenter/toIndex">Seller's workbench</a></li>
+                <li><a href="/sellerCenter/toSoldProduct">Products sold</a></li>
             </ol>
             <div class="sale_down">
                 <div class="cloum1">
                     <form class="am-form am-form-horizontal am-u-sm-6">
-                        <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">订单编号：</label>
+                        <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">Order No：</label>
                         <div class="am-form-group am-u-sm-9">
-                            <input type="text" id="doc-ipt-3" placeholder="请输入订单编号">
+                            <input type="text" id="doc-ipt-3" placeholder="Please enter the order number">
                         </div>
                     </form>
                     <form class="am-form am-form-horizontal am-u-sm-6">
-                        <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">更新时间：</label>
+                        <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">Updatetimed：</label>
                         <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
                             <span class="am-input-group-btn am-datepicker-add-on">
-                                <input type="text"id="doc-ipt-4" class="am-form-field"  placeholder="请选择起始时间" style="position: absolute;width: 130px;">
+                                <input type="text"id="doc-ipt-4" class="am-form-field"  placeholder="Please select the start time" style="position: absolute;width: 130px;">
                             </span>
                         </div>
                         <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="margin-left:26.5%;width: 260px;position: absolute;">
                             <span class="am-input-group-btn am-datepicker-add-on">
-                                <input type="text" id="doc-ipt-5"class="am-form-field" placeholder="请选择结束时间" style="width: 130px;margin-left: 140px;">
+                                <input type="text" id="doc-ipt-5"class="am-form-field" placeholder="Please select the end time" style="width: 130px;margin-left: 140px;">
                             </span>
                         </div>
                     </form>
                 </div>
             <div class="cloum1">
-                <button type="button" onclick="search()" class="am-btn am-btn-secondary" style="margin-left: 13.5%; width:140px">搜&nbsp;&nbsp;&nbsp;索</button>
+                <button type="button" onclick="search()" class="am-btn am-btn-secondary" style="margin-left: 13.5%; width:140px">Search</button>
             </div>
 
                 <!--全部的订单-->
                 <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs >
                     <!--头部-->
                     <ul class="am-avg-sm-8 am-tabs-nav am-nav am-nav-tabs">
-                        <li class="am-active"><a onclick="changeData(null,1,null,null,null,null)">全部</a></li>
-                        <li ><a onclick="changeData(null,1,3,null,null,null)">等待买家付款</a></li><!--暂时表示付定金-->
-                        <li ><a onclick="changeData(null,1,6,null,null,null)">等待发货</a></li>
-                        <li><a onclick="changeData(null,1,7,null,null,null)">已发货</a></li>
-                        <li><a onclick="changeData(null,1,5,null,null,null)">退款中</a></li><!--取消订单  暂时认为是尾款待付-->
-                        <li><a onclick="changeData(null,1,8,null,null,null)">需要评价</a></li><!--待评价-->
-                        <li><a onclick="changeData(null,1,9,null,null,null)">成功的订单</a></li><!--已完成-->
-                        <li><a onclick="changeData(null,1,0,null,null,null)">关闭的订单</a></li><!--审核失败-->
+                        <li class="am-active"><a onclick="changeData(null,1,null,null,null,null)">All</a></li>
+                        <li ><a onclick="changeData(null,1,3,null,null,null)">Waiting for a buyer to pay</a></li><!--暂时表示付定金-->
+                        <li ><a onclick="changeData(null,1,6,null,null,null)">Waiting for shipment</a></li>
+                        <li><a onclick="changeData(null,1,7,null,null,null)">Shipped</a></li>
+                        <li><a onclick="changeData(null,1,5,null,null,null)">Refunds</a></li><!--取消订单  暂时认为是尾款待付-->
+                        <li><a onclick="changeData(null,1,8,null,null,null)">Need to evaluate</a></li><!--待评价-->
+                        <li><a onclick="changeData(null,1,9,null,null,null)">Successful orders</a></li><!--已完成-->
+                        <li><a onclick="changeData(null,1,0,null,null,null)">Closed orders</a></li><!--审核失败-->
                     </ul>
                     <div class="am-tabs-bd" id="orderContent">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <div class="order-top">
                                 <div class="th th-item">
-                                    <td class="td-inner">商品</td>
+                                    <td class="td-inner">Commodity</td>
                                 </div>
                                 <div class="th th-price">
-                                    <td class="td-inner">单价</td>
+                                    <td class="td-inner">Price</td>
                                 </div>
                                 <div class="th th-number">
-                                    <td class="td-inner">数量</td>
+                                    <td class="td-inner">Number</td>
                                 </div>
 
                                 <div class="th th-amount">
-                                    <td class="td-inner">买家</td>
+                                    <td class="td-inner">Buyers</td>
                                 </div>
                                 <div class="th th-price">
-                                    <td class="td-i nner">实收款</td>
+                                    <td class="td-i nner">Actual receipts</td>
                                 </div>
                                 <!--<div class="th th-operation">
                                     <td class="td-inner">商品操作</td>
                                 </div>-->
                                 <div class="th th-status">
-                                    <td class="td-inner">交易状态</td>
+                                    <td class="td-inner">Trading status</td>
                                 </div>
                                 <div class="th th-change">
-                                    <td class="td-inner">评价</td>
+                                    <td class="td-inner">Evaluation</td>
                                 </div>
                             </div>
 
@@ -161,41 +161,41 @@
                 var orderContent = '<div class="am-tab-panel am-fade am-in am-active" >\n' +
                     '                            <div class="order-top">\n' +
                     '                                <div class="th th-item">\n' +
-                    '                                    <td class="td-inner">商品</td>\n' +
+                    '                                    <td class="td-inner">Commodity</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-price">\n' +
-                    '                                    <td class="td-inner">单价</td>\n' +
+                    '                                    <td class="td-inner">Price</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-number">\n' +
-                    '                                    <td class="td-inner">数量</td>\n' +
+                    '                                    <td class="td-inner">Number</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-amount">\n' +
-                    '                                    <td class="td-inner">买家</td>\n' +
+                    '                                    <td class="td-inner">Buyers</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-price">\n' +
-                    '                                    <td class="td-i nner">实收款</td>\n' +
+                    '                                    <td class="td-i nner">Actual receipts</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-operation">\n' +
-                    '                                    <td class="td-inner">商品操作</td>\n' +
+                    '                                    <td class="td-inner">Merchandise operations</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-status">\n' +
-                    '                                    <td class="td-inner">交易状态</td>\n' +
+                    '                                    <td class="td-inner">Trading status</td>\n' +
                     '                                </div>\n' +
                     '                                <div class="th th-change">\n' +
-                    '                                    <td class="td-inner">评价</td>\n' +
+                    '                                    <td class="td-inner">Evaluation</td>\n' +
                     '                                </div>\n' +
                     '                            </div>\n' +
                     '                            <div class="order-main" id="orderList">\n' +
                     '                                <div class="order-list">';
                                                 if(data.length == 0){
-                                                    orderContent += '<h1>您当前没有该类订单信息!!!</h1>';
+                                                    orderContent += '<h1>You do not currently have such order information!!!</h1>';
                                                 }
                                                 for(var i = 0; i< data.data.length; i++){
                                                     var orderNumber = data.data[i].orderNumber;
                                                     orderContent += '<div class="order-status1">\n' +
                             '                                        <div class="order-title">\n' +
-                            '                                            <div class="dd-num">订单编号：<a href="javascript:;">'+data.data[i].orderNumber+'</a></div>\n' +
-                            '                                            <span>创建时间：'+data.data[i].createTimeString+'</span>\n' +
+                            '                                            <div class="dd-num">Order No：<a href="javascript:;">'+data.data[i].orderNumber+'</a></div>\n' +
+                            '                                            <span>Creation time：'+data.data[i].createTimeString+'</span>\n' +
                             '                                        </div>\n' +
                             '                                        <div class="order-content">\n' +
                             '                                            <div class="order-left">';
@@ -211,8 +211,8 @@
                     '                                                            <div class="item-basic-info">\n' +
                     '                                                                <a href="#">\n' +
                     '                                                                    <p>'+data.data[i].orderProducts[j].productName+'</p>\n' +
-                    '                                                                    <p class="info-little">颜色：'+data.data[i].orderProducts[j].productColor+'\n' +
-                    '                                                                        <br/>规格：'+data.data[i].orderProducts[j].productSpec+' </p>\n' +
+                    '                                                                    <p class="info-little">Color：'+data.data[i].orderProducts[j].productColor+'\n' +
+                    '                                                                        <br/>Specifications：'+data.data[i].orderProducts[j].productSpec+' </p>\n' +
                     '                                                                </a>\n' +
                     '                                                            </div>\n' +
                     '                                                        </div>\n' +
@@ -246,7 +246,7 @@
                 '                                                    <li class="td td-status">\n' +
                 '                                                        <div class="item-status">\n' +
                 '                                                            <p class="Mystatus">'+data.data[i].statusMessage+'</p><!--订单状态-->\n' +
-                                                                        '<p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">详情</a></p>\n' +
+                                                                        '<p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">Details</a></p>\n' +
                 '                                                        </div>\n' +
                 '                                                    </li>';
                                                     }
@@ -254,13 +254,13 @@
                                                         orderContent += '<li class="td td-operation">\n' +
                 '                                                        <div class="item-operation">\n' +
                 '                                                           <button type="button"  class="am-btn am-btn-success"  id="doc-prompt-toggle" >' +
-                                                            '<a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">去发货</a></button>\n' +
+                                                            '<a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">To ship</a></button>\n' +
                 '                                                           </div>\n' +
                 '                                                    </li>\n' +
                 '                                                    <li class="td td-status">\n' +
                 '                                                        <div class="item-status">\n' +
                 '                                                            <p class="Mystatus">'+data.data[i].statusMessage+'</p><!--订单状态-->\n' +
-                                                                '            <p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">详情</a></p>\n' +
+                                                                '            <p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">Details</a></p>\n' +
                 '                                                        </div>\n' +
                 '                                                    </li>';
                                                     }
@@ -269,7 +269,7 @@
                     '                                                    <li class="td td-status">\n' +
                     '                                                        <div class="item-status">\n' +
                     '                                                            <p class="Mystatus">'+data.data[i].statusMessage+'</p><!--订单状态-->\n' +
-                    '                                                            <p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">详情</a></p>\n' +
+                    '                                                            <p><a href="/sellerCenter/toDetail/'+data.data[i].orderShopId+'">Details</a></p>\n' +
                     '                                                        </div>\n' +
                     '                                                    </li>';
                                                     }
@@ -286,15 +286,15 @@
                 $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
                     current_page:page-1,                  //当前页码
                     callback: PageCallback,
-                    prev_text: '上一页',
-                    next_text: '下一页',
+                    prev_text: 'Previous',
+                    next_text: 'Next',
                     items_per_page: 5,             //每页显示最大条数
                     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
                 });
             },
             error:function () {
-                alert("请求失败");
+                alert("Request failed");
             }
         });
 

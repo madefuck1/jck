@@ -1,5 +1,5 @@
 <@override name="title">
-发布产品
+Launch products
 </@override>
 
 <@override name="css">
@@ -12,13 +12,13 @@
         <#include "/sellerCenter/common/seller.menu.html"/>
         <div class="sale_con">
             <ol class="am-breadcrumb">
-                <li><a href="01 sale_index.html">卖家工作台</a></li>
-                <li><a href="01 sale_index.html">发布产品</a></li>
+                <li><a href="01 sale_index.html">Seller's workbench</a></li>
+                <li><a href="01 sale_index.html">Launch products</a></li>
             </ol>
             <form class="am-form">
                 <fieldset>
                     <div class="am-form-group">
-                        <label style="font-size: 14px;">请选择产品类目：</label>
+                        <label style="font-size: 14px;">Please select the product category：</label>
                         <select multiple class="" id="assortOne">
                         </select>
                         <select multiple class="" id="assortTwo">
@@ -29,7 +29,7 @@
                 </fieldset>
             </form>
             <div class="sale-down" style="overflow: hidden;">
-                <span  style="font-size: 14px; float: left;">已选类目：</span>
+                <span  style="font-size: 14px; float: left;">Selected category：</span>
                 <span style="float: left;">
                     <ol class="">
                         <li><p style="color: blue" class="assortOne"></p></li>
@@ -39,7 +39,7 @@
                 </span>
             </div>
             <div style="text-align: center">
-                <button type="button" onclick="checkAssort()" class="am-btn am-btn-secondary">下一步，发布产品</button>
+                <button type="button" onclick="checkAssort()" class="am-btn am-btn-secondary">Next，Launch products</button>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
     function checkAssort() {
         var assortId = $("#assortThree option:selected").val();
         if(assortId == undefined){
-            alert("请先选择分类");
+            alert("Please select the category first");
         }else {
             window.location.href = "/product/createProductTwo?assortId=" + assortId ;
         }
