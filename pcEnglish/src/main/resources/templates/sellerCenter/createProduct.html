@@ -1,6 +1,6 @@
 
 <@override name="title">
-发布产品
+Launch products
 </@override>
 
 <@override name="css">
@@ -32,18 +32,18 @@
 <div id="sale_center">
     <div class="sale-center">
         <ol class="am-breadcrumb">
-            <li><a href="#">首页</a></li>
-            <li><a href="#">分类</a></li>
-            <li class="am-active">内容</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Classification</a></li>
+            <li class="am-active">Content</li>
         </ol>
         <form action="/product/create" method="post" id="createForm">
             <div class="base">
-                <h4>基础信息</h4>
+                <h4>Basic information</h4>
                 <div class="base-on">
                     <span class="base-cloum1">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
-                            <span>当前类目：</span>
+                            <span>Current class：</span>
                         </span>
                         <span class="am-u-sm-10">
                             <span class="base-on-con">${assortOne.assortName} > ${assortTwo.assortName}  > ${assortThree.assortName} </span>
@@ -52,20 +52,20 @@
                     <span class="base-cloum1">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
-                            <span>产品标题：</span>
+                            <span>Product title：</span>
                         </span>
                         <span class="am-u-sm-10 am-form">
-                             <input type="text" required name="productName" class="" placeholder="请输入">
+                             <input type="text" required name="productName" class="" placeholder="Please enter">
                              <input type="hidden" name="assortId" value="${assortThree.assortId?c}">
                         </span>
                     </span>
                     <div class="base-cloum1 base-cloum3">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
-                            <span>产品属性：</span>
+                            <span>Product attributes：</span>
                         </span>
                         <span class="am-u-sm-10 am-form">
-                            <p class="base-on-con">错误填写产品属性，可能会引起产品下架或搜索流量减少，影响您的正常销售，请认真准确填写！</p>
+                            <p class="base-on-con">Incorrectfilling of product attributes, may cause productoff off-shelf or search traffic reduction, affecting your normal sales, please fill in carefully and accurately！</p>
                             <div class="attr">
                                 <div class="attr-cloum1">
                                     <#if assortThree.key1??>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
-                                            <input name="key1Value" required  type="text" class="" placeholder="请输入">
+                                            <input name="key1Value" required  type="text" class="" placeholder="Please enter">
                                         </span>
                                     </div>
                                     </#if>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
-                                            <input name="key2Value" required type="text" class="" placeholder="请输入">
+                                            <input name="key2Value" required type="text" class="" placeholder="Please enter">
                                         </span>
                                     </div>
                                     </#if>
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
-                                            <input name="key3Value" required type="text" class="" placeholder="请输入">
+                                            <input name="key3Value" required type="text" class="" placeholder="Please enter">
                                         </span>
                                     </div>
                                 </#if>
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
-                                            <input name="key4Value" required type="text" class="" placeholder="请输入">
+                                            <input name="key4Value" required type="text" class="" placeholder="Please enter">
                                         </span>
                                     </div>
                                     </#if>
@@ -133,25 +133,25 @@
                                     </div>
                                     <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
-                                            <input name="key5Value" required type="text" class="" placeholder="请输入">
+                                            <input name="key5Value" required type="text" class="" placeholder="Please enter">
                                         </span>
                                     </div>
                                 </#if>
                                 </div>
                             </div>
-                            <a style="color: #40ADFB; cursor: pointer" onclick="addParamHtml()">+自定义属性</a>
+                            <a style="color: #40ADFB; cursor: pointer" onclick="addParamHtml()">+Custom properties</a>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="specList">
                 <div id="spec0" class="base1">
-                    <h4>产品规格1</h4>
+                    <h4>Product Specification 1</h4>
                     <div class="base1-on">
                         <div class="base-cloum1">
                                     <span class="am-u-sm-2  attr-row1">
                                         <span style="color: red">*</span>
-                                        <span>计量单位：</span>
+                                        <span>Unit of measure：</span>
                                     </span>
                             <span class="am-u-sm-10 am-form">
                                 <input type="text" class="" name="productUnit" placeholder="请输入" onchange="changeUnit(this)">
@@ -159,36 +159,36 @@
                         </div>
                         <span class="base-cloum1">
                             <span class="am-u-sm-2">
-                                <span>规格：</span>
+                                <span>Specifications：</span>
                             </span>
                             <span class="am-u-sm-10 am-form">
-                                 <input type="text" class="specName" placeholder="请输入">
+                                 <input type="text" class="specName" placeholder="Please enter">
                             </span>
                         </span>
                         <div class="colorList">
                             <span class="base-cloum1">
                                 <span class="am-u-sm-2">
-                                    <span>子规格：</span>
+                                    <span>Sub-specs：</span>
                                 </span>
                                 <span class="am-u-sm-10 am-form">
-                                     <input type="text" class="productColor" name="productColorDtoList[0].productColor" placeholder="请输入子规格">
+                                     <input type="text" class="productColor" name="productColorDtoList[0].productColor" placeholder="Please enter sub-specs">
                                 </span>
                             </span>
                         </div>
-                        <a style="color: #40ADFB;padding-left: 45px; cursor: pointer" onclick="addColorHtml(this)">+添加子规格</a>
+                        <a style="color: #40ADFB;padding-left: 45px; cursor: pointer" onclick="addColorHtml(this)">+Add sub-specs</a>
 
                         <div class="attr-cloum1">
                             <div class="attr-row1 am-u-sm-2">
                                     <span class="">
-                                        <span>价格：</span>
+                                        <span>Price：</span>
                                     </span>
                             </div>
                             <div class="attr-row2 am-u-sm-4 am-form-group">
                                 <div class="attr1">
                                     <div class="priceInput attr1-on am-u-sm-6">
                                         <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
-                                            <span class="am-u-sm-6">产品单价（元）</span>
+                                            <span class="am-u-sm-6">Number of purchases（<span class="productUnit"></span>）</span>
+                                            <span class="am-u-sm-6">Product unit price (RMB)</span>
                                         </div>
                                         <div class="attr1-cloum2">
                                             <div class="am-u-sm-6">
@@ -203,12 +203,12 @@
                                         </div>
                                     </div>
                                     <div class="attr1-on am-u-sm-1 attr-price">
-                                        价格预览
+                                        Price Preview
                                     </div>
                                     <div class="priceShow attr1-on am-u-sm-5">
                                         <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
-                                            <span class="am-u-sm-6">产品单价（元）</span>
+                                            <span class="am-u-sm-6">Number of purchases（<span class="productUnit"></span>）</span>
+                                            <span class="am-u-sm-6">Product unit price (RMB)）</span>
                                         </div>
                                         <div class="attr1-cloum2 attr1-right">
                                             <div class="am-u-sm-6">
@@ -220,14 +220,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a onclick="addPriceHtml(this)" style="color: #40ADFB; margin-top: 20px;  cursor: pointer ;display: inline-block;">+添加价格区间</a>
+                                <a onclick="addPriceHtml(this)" style="color: #40ADFB; margin-top: 20px;  cursor: pointer ;display: inline-block;">+Add a price range</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="base2">
-                <h4><span style="color:#40ADFB ; cursor: pointer " onclick="addSpecHtml()">+增加</span> 产品规格</h4>
+                <h4><span style="color:#40ADFB ; cursor: pointer " onclick="addSpecHtml()">+Increase</span> Product specifications</h4>
             </div>
             <div class="base3">
                 <h4>图文详情</h4>
@@ -235,10 +235,10 @@
                     <div class="base-title">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
-                            <span>产品主图：</span>
+                            <span>Product master map：</span>
                         </span>
                         <span class="am-u-sm-10">
-                            <p>    宝贝主图大小不能超过3MB；400 以上图片上传后宝贝详情页自动提供放大镜功能。
+                            <p>    Baby master image size can not exceed 3MB;The baby detailpage automatically provides a magnifying glass after the image is uploaded.
                             </p>
                             <div class="Master-pic">
                                 <div class="mpic-1">
@@ -265,20 +265,20 @@
                     <div class="base-title">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
-                            <span>详情：</span>
+                            <span>Details：</span>
                         </span>
                         <span class="am-u-sm-10">
-                            <p>    图片还可以上传10240KB。这是总容量，随着图片上传而减少。
+                            <p>    The image can also be uploaded at 10240KB. This is the total capacity, which decreases as the image is uploaded.
                             </p>
                             <div class="Master-pic1 Master-pic2">
-                                <p class="imageDetail" style="cursor: pointer">上传图片</p>
+                                <p class="imageDetail" style="cursor: pointer">Upload an image</p>
                                 <input type="file" onchange="imageDetail(this)" style="display: none">
                             </div>
                         </span>
                     </div>
                 </div>
                 <div class="base-footer">
-                    <button id="submit-product" type="button" onclick="createForm()" class="am-btn am-btn-secondary am-radius">提交</button>
+                    <button id="submit-product" type="button" onclick="createForm()" class="am-btn am-btn-secondary am-radius">Submit</button>
                  </div>
             </div>
         </form>
