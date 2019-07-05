@@ -11,17 +11,17 @@
                     <div class="avatar_box">
                         <p class="avatar_imgbox"><img src="${loginAvatar!}" /></p>
                         <ul class="user_info">
-                            <li>用户名：${loginName!''}</li>
-                            <li>级&nbsp;别：${loginLevel!''}</li>
+                            <li>userName：${loginName!''}</li>
+                            <li>Level：${loginLevel!''}</li>
                         </ul>
                     </div>
                     <div class="login_btnbox">
-                        <a href="/orderManager/toOrderManager" class="login_order">我的订单</a>
-                        <a href="/personalCenter/toFavoriteManage" class="login_favorite">我的收藏</a>
+                        <a href="/orderManager/toOrderManager" class="login_order">My Orders</a>
+                        <a href="/personalCenter/toFavoriteManage" class="login_favorite">My Collection</a>
                     </div>
                     <i class="icon_arrow_white"></i>
                     <#else>
-                    <p>未登录 &nbsp;请先<a href="/user/toLogin">登录</a></p>
+                    <p>Not logged in &nbsp;Please<a href="/user/toLogin">sign in</a></p>
                     </#if>
                 </div>
 
@@ -31,7 +31,7 @@
                     <span class="message"></span>
                 </a>
                 <p>
-                    购物车
+                    Shopping Cart
                 </p>
                 <p class="cart_num">${shopCarCount!0}</p>
             </div>
@@ -40,7 +40,7 @@
                     <span class="zuji"></span>
                 </a>
                 <div class="mp_tooltip">
-                    我的足迹
+                    My Tracks
                     <i class="icon_arrow_right_black"></i>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="quick_toggle">
                 <li class="qtitem">
                     <a href="#"><span class="kfzx"></span></a>
-                    <div class="mp_tooltip">客服中心<i class="icon_arrow_right_black"></i></div>
+                    <div class="mp_tooltip">Customer Service Center<i class="icon_arrow_right_black"></i></div>
                 </li>
                 <li class="qtitem">
                     <a href="#top" class="return_top"><span class="top"></span></a>

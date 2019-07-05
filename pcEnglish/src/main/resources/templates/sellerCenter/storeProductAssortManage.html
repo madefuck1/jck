@@ -1,5 +1,5 @@
 <@override name="title">
-产品分类
+Product classification
 </@override>
 <@override name="css">
 <link rel="stylesheet" href="${contextPath}/css/sale/sale_order.css">
@@ -36,8 +36,8 @@
         <#include "/sellerCenter/common/seller.menu.html"/>
         <div class="sale_con">
             <ol class="am-breadcrumb">
-                <li><a href="">卖家工作台</a></li>
-                <li><a href="">产品分类</a></li>
+                <li><a href="">Seller's workbench</a></li>
+                <li><a href="">Product classification</a></li>
             </ol>
             <div class="sale_down">
                 <!--全部的订单-->
@@ -45,18 +45,18 @@
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active">
                             <div class="topSearch">
-                                <input type="text" placeholder="输入产品名称" id="product-name">
-                                <span style="margin-left: 20px;">价格：</span>
+                                <input type="text" placeholder="Enter the product name" id="product-name">
+                                <span style="margin-left: 20px;">Price：</span>
                                 <input type="email" id="min-price">
                                 <span>-</span>
                                 <input type="email" id="max-price">
                                 <select data-am-selected id="assort-type">
-                                    <option value="0">全部</option>
-                                    <option value="1">未分类</option>
-                                    <option value="2">已分类</option>
+                                    <option value="0">All</option>
+                                    <option value="1">Unclassified</option>
+                                    <option value="2">Classified</option>
                                 </select>
                                 <button id="store-product-search" class="am-btn am-btn-secondary"
-                                        style="height: 40px;margin-left: 20px;">搜索
+                                        style="height: 40px;margin-left: 20px;">Search
                                 </button>
                             </div>
                             <div class="am-tab-up">
@@ -70,16 +70,16 @@
                                 <!--                                    <td class="td-inner">全选</td>-->
                                 <!--                                </div>-->
                                 <div class="th th-item">
-                                    <td class="td-inner">产品名称</td>
+                                    <td class="td-inner">Product name</td>
                                 </div>
                                 <div class="th th-operation">
-                                    <td class="td-inner">价格</td>
+                                    <td class="td-inner">Price</td>
                                 </div>
                                 <div class="th th-amount">
-                                    <td class="td-inner">所属分类</td>
+                                    <td class="td-inner">Category</td>
                                 </div>
                                 <div class="th th-operation">
-                                    <td class="td-inner">操作</td>
+                                    <td class="td-inner">Operation</td>
                                 </div>
                             </div>
 
@@ -149,16 +149,16 @@
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2"
      style="background: #fff; min-height: auto; overflow: auto; width: 540px">
     <div class="am-modal-dialog">
-        <div class="am-modal-hd" style="font-size: 14px" name="title-assort">分类</div>
+        <div class="am-modal-hd" style="font-size: 14px" name="title-assort">Classification</div>
         <div class="sale_cloum1" style="padding-top: 20px" name="store-assort">
             <!-- 显示所有分类多选择-->
         </div>
         <div class="button" style="text-align: center;padding-top: 30px;">
             <button onclick="saveAssort();" type="button" class="am-btn am-btn-sm am-btn-secondary"
-                    style="width: 100px;float: none;">保存
+                    style="width: 100px;float: none;">Save
             </button>
             <button onclick="closeModal()" type="button" class="am-btn am-btn-sm am-btn-default"
-                    style="width: 100px;float: none;">取消
+                    style="width: 100px;float: none;">Cancel
             </button>
         </div>
     </div>
@@ -168,11 +168,11 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd"></div>
         <div class="am-modal-bd">
-            确定要删除吗？
+            Are you sure you want to delete it?？
         </div>
         <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+            <span class="am-modal-btn" data-am-modal-cancel>Cancel</span>
+            <span class="am-modal-btn" data-am-modal-confirm>Are you sure</span>
         </div>
     </div>
 </div>
@@ -269,7 +269,7 @@
                             assortNames = assortNames.substring(1);
                             html += '<p>' + assortNames + '</p>';
                         } else {
-                            html += '<p>暂无分类</p>';
+                            html += '<p>No classification</p>';
                         }
                         html += '                        </div>' +
                             '                    </li>' +
@@ -277,7 +277,7 @@
                             '                        <div class="item-operation">' +
                             '                            <button onclick="openAssort(this);"' +
                             '                                    class="am-btn am-btn-primary am-round am-btn-xs">' +
-                            '                                添加分类' +
+                            '                                Add a category' +
                             '                            </button>' +
                             '                        </div>' +
                             '                    </li>' +
@@ -287,7 +287,7 @@
                             '    </div>';
                     }
                 } else {
-                    html += '无数据';
+                    html += 'No data';
                 }
                 $('#init-product').empty();
                 $('#init-product').append(html);
@@ -295,8 +295,8 @@
                 // pagination 分页插件
                 $("#pagination").pagination(result.count, {   //total(一共多少条记录)不能少
                     callback: PageCallback,
-                    prev_text: '上一页',
-                    next_text: '下一页',
+                    prev_text: 'Previous',
+                    next_text: 'Next',
                     items_per_page: 8,             //每页显示最大条数
                     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
@@ -343,7 +343,7 @@
                     $('[name=store-assort]').append(html);
                     $('#doc-modal-2').modal('open');
                 } else {
-                    $('#message-content').html("暂还没有分类,请先添加分类名称")
+                    $('#message-content').html("No classification yet, please add the category name first")
                     $('#my-message').modal('open');
                 }
             }
@@ -364,7 +364,7 @@
             }
         })
         if (exclusiveAssortIds == "") {
-            $('#message-content').html("请选择分类！")
+            $('#message-content').html("Please select a category！")
             $('#my-message').modal('open');
             return;
         }
@@ -385,7 +385,7 @@
                     $('.selectOne').removeClass('selectOne');
                     closeModal();
                 } else {
-                    $('#message-content').html("保存失败！")
+                    $('#message-content').html("Saved failed！")
                     $('#my-message').modal('open');
                 }
             }

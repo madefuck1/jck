@@ -1,5 +1,5 @@
 <@override name="title">
-报价详情
+Quote details
 </@override>
 
 <@override name="css">
@@ -18,9 +18,9 @@
 <@override name="body">
 <div id="up">
     <ol class="am-breadcrumb am-breadcrumb-slash">
-        <li><a href="/sellerCenter/toIndex">首页</a></li>
-        <li><a href="#">分类</a></li>
-        <li class="am-active">内容</li>
+        <li><a href="/sellerCenter/toIndex">Home</a></li>
+        <li><a href="#">Classification</a></li>
+        <li class="am-active">Content</li>
     </ol>
 
     <div class="scoll">
@@ -47,7 +47,7 @@
         <div class="clearfixLeft" id="clearcontent">
             <div class="box">
                 <div class="tb-booth tb-pic tb-s310">
-                    <a href="#"><img src='${enquiryDetail.enquiryProductDto[0].productImage}' alt="细节展示放大镜特效"  class="jqzoom" /></a>
+                    <a href="#"><img src='${enquiryDetail.enquiryProductDto[0].productImage}' alt="Details show magnifying glass effects"  class="jqzoom" /></a>
                 </div>
             </div>
         </div>
@@ -58,50 +58,50 @@
             </div>
             <div class="clear-down">
                 <div class="cloum1">
-                    <span class="am-u-sm-2">发布人：</span>
+                    <span class="am-u-sm-2">Publisher：</span>
                     <span class="am-u-sm-10">
-                        <span>买家昵称&nbsp;&nbsp;${enquiryDetail.loginName}</span>
+                        <span>Buyer's Nickname&nbsp;&nbsp;${enquiryDetail.loginName}</span>
                         <span class=" cloum1-pic"></span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">编号：</span>
+                    <span class="am-u-sm-2">Number：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.enquiryProductDto[0].purchases[0].purchaseNumber}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">发布时间：</span>
+                    <span class="am-u-sm-2">Release time：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.strCreateTime}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">交付时间：</span>
+                    <span class="am-u-sm-2">Delivery time：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.enquiryProductDto[0].purchases[0].strOfferTime}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">求购状态：</span>
+                    <span class="am-u-sm-2">Purchase status：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.strEnquiryStatus}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">求购数量：</span>
+                    <span class="am-u-sm-2">Number of purchases：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.enquiryProductDto[0].productNumber}/${enquiryDetail.enquiryProductDto[0].productUnit}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">交货地址：</span>
+                    <span class="am-u-sm-2">Delivery address：</span>
                     <span class="am-u-sm-10">
                         <span>${enquiryDetail.takeAddress}</span>
                     </span>
                 </div>
                 <div class="cloum1">
-                    <span class="am-u-sm-2">描述：</span>
+                    <span class="am-u-sm-2">Describe：</span>
                     <span class="am-u-sm-10" style="line-height: 24px">
                         <span>${enquiryDetail.enquiryRemark}</span>
                     </span>
@@ -112,15 +112,15 @@
 </div>
 
 <div class="clear_form">
-    <h4>确认订单信息</h4>
+    <h4>Confirm order information</h4>
     <table class="am-table am-table-bordered">
         <thead style="background: #e6e6e6;">
         <tr>
-            <th>日期</th>
-            <th>状态</th>
-            <th>报价</th>
-            <th>备注</th>
-            <th>操作</th>
+            <th>Date</th>
+            <th>State</th>
+            <th>Quote</th>
+            <th>Note</th>
+            <th>Operation</th>
         </tr>
         </thead>
         <tbody>
@@ -130,7 +130,7 @@
             <td id="quote"><p>${enquiryDetail.enquiryProductDto[0].purchases[0].unitPrice}/${enquiryDetail.enquiryProductDto[0].productUnit}</p></td>
             <td>${enquiryDetail.enquiryRemark}</td>
             <#if enquiryDetail.strEnquiryStatus != "采购成功">
-            <td style="color: #40ADFB"><button id="myBT">修改价格</button>
+            <td style="color: #40ADFB"><button id="myBT">Change the price</button>
             </td>
             </#if>
             <#if enquiryDetail.strEnquiryStatus == "采购成功">
@@ -142,13 +142,13 @@
     </table>
     <div  id="updatePrice" class="hideThis" style="margin-left: 85%">
         <div >
-            <span style="display: block;width: 160px;height: 50px;">请输入价格:
+            <span style="display: block;width: 160px;height: 50px;">Please enter the price:
                 <input style="display: block;width: 100px;height: 30px;"type="text" id="unitPrice" />
             </span>
         </div>
         <div style="margin-top:4px;width: 100Px;display:block;">
-            <button type="button" id="confirm" onclick="updatePrice()">确认</button>
-            <button type="button" id="cancel">取消</button>
+            <button type="button" id="confirm" onclick="updatePrice()">Confirm</button>
+            <button type="button" id="cancel">Cancel</button>
         </div>
     </div>
 </div>
@@ -223,7 +223,7 @@
                 }
             },
             error:function () {
-                alert("请求发送失败");
+                alert("Request sent failed");
             }
         });
     }
