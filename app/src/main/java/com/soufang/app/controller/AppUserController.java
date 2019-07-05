@@ -478,22 +478,26 @@ public class AppUserController extends AppBaseController {
         AppVo vo = new AppVo();
         UserDto userDto = new UserDto();
         Result result = new Result();
+        String username = request.getParameter("realName");
         userDto.setUserId(userInfo.getUserId());
         userDto.setPhone("121");
         userDto.setEmail("121");
         if(!StringUtils.isNotBlank(userInfo.getUserName())){
-            userDto.setUserName(request.getParameter("realName"));
+            if(StringUtils.isNotBlank(username)){
+                Result result1 = appUserFeign.login(userDto);
+                if(result1.isSuccess()){
+                    vo.setMessage("用户名已存在，请换个用户名！");
+                    vo.setSuccess(false);
+                    return vo;
+                }
+                userDto.setUserName(username);
+            }
         }else {
             vo.setSuccess(false);
             vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
             return vo;
         }
-        Result result1 = appUserFeign.login(userDto);
-        if(result1.isSuccess()){
-            vo.setMessage("用户名已存在，请换个用户名！");
-            vo.setSuccess(false);
-            return vo;
-        }
+
         userDto.setPhone(null);
         userDto.setEmail(null);
         MultipartFile file = requestFile.getFile("userAvatar");
