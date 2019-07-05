@@ -544,11 +544,11 @@
                 <choose>
                     <when test="sort != 0">
                         order by
-                        St.browseNumber desc
+                        St.browse_number desc
                     </when>
                     <otherwise>
                         order by
-                        St.browseNumber
+                        St.browse_number
                     </otherwise>
                 </choose>
             </when>
@@ -556,7 +556,7 @@
                 <choose>
                     <when test="sort != 0">
                         order by
-                        St.productPrice desc
+                        St.product_price desc
                     </when>
                     <otherwise>
                         order by
