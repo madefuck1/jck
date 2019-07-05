@@ -22,7 +22,7 @@
     <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
     <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
     <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
-    <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+    <result column="shop_avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
     <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
     <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
     <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
