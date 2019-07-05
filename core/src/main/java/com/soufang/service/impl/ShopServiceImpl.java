@@ -155,6 +155,7 @@ public class ShopServiceImpl implements ShopService {
         List<ShopDto> shopDtos = new ArrayList<>();
         for (Shop shop: shopList) {
             ShopDto shopDto = new ShopDto();
+            shopDto.setAvatarUrl(shop.getShopAvatarUrl());
             BeanUtils.copyProperties(shop,shopDto);
             if(StringUtils.isNotBlank(shopDto.getAvatarUrl())){
                 shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());

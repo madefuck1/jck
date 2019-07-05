@@ -1,5 +1,5 @@
 <@override name="title">
-我的足迹
+My footprint
 </@override>
 
 <@override name="css">
@@ -16,7 +16,7 @@
 						<div class="user-foot">
 						<!--标题 -->
 								<div class="am-cf am-padding">
-									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的足迹</strong></div>
+									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">My footprint</strong></div>
 								</div>
 							<div id="noData" style="display:none;">
 							<#include "/noData.html"/>
@@ -95,13 +95,13 @@
         var productId=prodts.productId;
         var isUpper=prodts.isUpper;
         if(isUpper==1){ isUpper=""
-        }else{ isUpper="宝贝已下架"; }
+        }else{ isUpper="Goods have been removed"; }
 		//截取年月日
         var content = "";
         var ToDaystableHead;
         if(i==0){
             ToDaystableHead= "<div class='goods-date' data-date='"+createTime+"'>"
-                +"<span><i class='month-lite'>"+createTime.substring(0,4)+"</i>.<i class='day-lite'>"+createTime.substring(4,6)+"</i><i class='date-desc'>今天</i></span>"
+                +"<span><i class='month-lite'>"+createTime.substring(0,4)+"</i>.<i class='day-lite'>"+createTime.substring(4,6)+"</i><i class='date-desc'>today</i></span>"
                 +"<del class='am-icon-trash'></del>"
                 +"<s class='line'></s>"
                 +"</div>"
@@ -163,7 +163,7 @@
 		if(isUpper==10){
             isUpper=""
 		}else{
-            isUpper="宝贝已下架";
+            isUpper="Goods have been removed";
 		}
         var content = "";
         //针对第一行数据表头
@@ -171,7 +171,7 @@
 
         if(a==10){
             tableHead= "<div class='goods-date' data-date='"+createTime+"'>"
-                +"<span><i class='month-lite'></i><i class='day-lite'></i><i class='date-desc'>一周内</i></span>"
+                +"<span><i class='month-lite'></i><i class='day-lite'></i><i class='date-desc'>within a week</i></span>"
                 +"<del class='am-icon-trash'></del>"
                 +"<s class='line'></s>"
                 +"</div>"
@@ -205,8 +205,8 @@
         +"<div class='clear'></div>"
             +"<div class='goods-num'>"
             +"<div class='match-recom'>"
-            +"<a href='#' class='match-recom-item'>找相似</a>"
-            +"<a href='#' class='match-recom-item'>找搭配</a>"
+            +"<a href='#' class='match-recom-item'>Find similar</a>"
+            +"<a href='#' class='match-recom-item'>Looking for a match</a>"
             +"<i><em></em><span></span></i>"
         +"</div>"
         +"</div> </div></div></div>"

@@ -1,5 +1,5 @@
 <@override name="title">
-询盘详情
+Inquiry details
 </@override>
 
 <@override name="css">
@@ -19,64 +19,62 @@
 				</div>
 				<div class="clear-down">
 					<div class="cloum1">
-						<span class="am-u-sm-2">发布人：</span>
+						<span class="am-u-sm-2">publisher：</span>
 						<span class="am-u-sm-10">
-							<span>昵称&nbsp;&nbsp;<span id="loginName"></span></span>
+							<span>nickname&nbsp;&nbsp;<span id="loginName"></span></span>
 							<span class=" cloum1-pic"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">编号：</span>
+						<span class="am-u-sm-2">Numbering：</span>
 						<span class="am-u-sm-10">
 							<span id="enquiryNumber"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">发布时间：</span>
+						<span class="am-u-sm-2">release time：</span>
 						<span class="am-u-sm-10">
 							<span id="strCreateTime"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">交付时间：</span>
+						<span class="am-u-sm-2">Due time：</span>
 						<span class="am-u-sm-10">
 							<span id="strTakeDate"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">求购状态：</span>
+						<span class="am-u-sm-2">Purchase status：</span>
 						<span class="am-u-sm-10">
 							<span id="statusMessage"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">求购数量：</span>
+						<span class="am-u-sm-2">Purchase quantity：</span>
 						<span class="am-u-sm-10">
 							<span id="productNumber"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">交货地址：</span>
+						<span class="am-u-sm-2">Delivery Address：</span>
 						<span class="am-u-sm-10">
 							<span id="takeAddress"></span>
 						</span>
 
 					</div>
 					<div class="cloum1">
-						<span class="am-u-sm-2">描述：</span>
+						<span class="am-u-sm-2">description：</span>
 						<span class="am-u-sm-10" style="line-height: 24px">
 							<span id="enquiryRemark"></span>
 						</span>
 
 					</div>
-
-
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -84,15 +82,15 @@
 		</div>
 	
 		<div class="clear_form">
-		<h4 style="margin-bottom: 10px">订单报价信息</h4>
+		<h4 style="margin-bottom: 10px">Order quotation information</h4>
 		<table class="am-table am-table-bordered" id="purchaseTables">
 			<thead style="background: #e6e6e6;">
 				<tr>
-					<th>报价日期</th>
-					<th>报价公司</th>
-					<th>报价</th>
-					<th>备注</th>
-					<th>操作</th>
+					<th>Quote date</th>
+					<th>Quotation company</th>
+					<th>Quote</th>
+					<th>Remarks</th>
+					<th>operating</th>
 				</tr>
 			</thead>
 			<tbody id="contant" >
@@ -147,7 +145,7 @@
 			for(var i = 0 ;i< purchases.length ; i++) {
                 if(purchases[i].purchaseNumber==null||purchases[i].purchaseNumber==""){
                     li=$("<tr>"
-                        +"<td colspan='5'>当前没有报价信息</td>"
+                        +"<td colspan='5'>There is currently no quote information\n</td>"
                         +"</tr>"
                     )
                 }else{
@@ -157,17 +155,17 @@
                     var productUnit = v.productUnit;
                     var remark = purchases[i].remark;
                     if (remark==null||remark==""){
-                        remark="无";
+                        remark="no";
 					}
                     var purchaseNumber = purchases[i].purchaseNumber;
                     console.log();
-                    if ($("#statusMessage").val()!="已报价"){
-                            doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
+                    if ($("#statusMessage").val()!="Quoted"){
+                            doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>use</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>Refuse</a></td>"
                     }else{
                         if (purchases[i].offerStatus==2) {
-                            doThis = "<td style='color: #40ADFB'>已接收</td>"
+                            doThis = "<td style='color: #40ADFB'>Received</td>"
                         }else{
-                            doThis="<td style='color: #40ADFB'>已拒绝</td>"
+                            doThis="<td style='color: #40ADFB'>rejected</td>"
 						}
 
 
@@ -195,8 +193,8 @@
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
             success: function (data) {
-                if (data.message=="报价成功"){
-                    alert("操作成功");
+                if (data.message=="Successful bid\n	"){
+                    alert("Successful operation");
                     window.location.href="/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId;
 				}
             }

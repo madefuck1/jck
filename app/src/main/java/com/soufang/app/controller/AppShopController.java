@@ -163,6 +163,7 @@ public class AppShopController extends AppBaseController {
     public DetailVo updateInfo(HttpServletRequest request, MultipartFile avatarUrl) {
         DetailVo vo = new DetailVo();
         ShopDto shopDto = getShopInfo(request);
+        ShopDto shopInfo = new ShopDto();
         if (avatarUrl != null) {
             Map<String, Object> map = FtpClient.uploadImage(avatarUrl, companyUrl);
             if ((boolean) map.get("success")) {
