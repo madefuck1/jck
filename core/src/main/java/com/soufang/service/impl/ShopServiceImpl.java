@@ -176,6 +176,12 @@ public class ShopServiceImpl implements ShopService {
         List<ProductDto> productDtos = productMapper.getShopProductManaList(productDto);
         for (ProductDto p: productDtos) {
             p.setProductDetail(PropertiesParam.file_pre+p.getProductDetail());
+            if(StringUtils.isNotBlank(p.getProductImage())){
+                String[] list = p.getProductImage().split(";");
+                p.setProductUrl(PropertiesParam.file_pre+list[0]);
+            }else {
+                p.setProductUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
         }
         return productDtos;
     }
