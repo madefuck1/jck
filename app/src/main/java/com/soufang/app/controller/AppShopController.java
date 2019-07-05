@@ -146,46 +146,6 @@ public class AppShopController extends AppBaseController {
         List<ProductDto> productDtos = appProductManageFeign.getProductTop6(shopId);
         shopDetail.setProductDtoList(productDtos);
         vo.setData(shopDetail);
-
-        return vo;
-    }
-
-    /**
-     * 获取自己的店铺详情
-     *
-     * @return
-     */
-    @RequestMapping(value = "getShopDetail", method = RequestMethod.POST)
-    public DetailStoreVo myselfShopDetail(HttpServletRequest request) {
-        ShopDto shopInfo = this.getShopInfo(request);
-        Long shopId = shopInfo.getShopId();
-        DetailStoreVo vo = new DetailStoreVo();
-        // 判断是否已经装修
-        /*Boolean exitStoreInfo = appStoreConstructionFeign.isExistStoreInfo(shopId);*/
-        // 已完成装修 返回具体信息
-        // 店铺信息
-        ShopDto shopDetail = appShopFeign.getShopDetail(shopId);//去设置店铺头像
-        ShopStatisticsDto shopStatisticsInfo = appShopFeign.getShopStatisticsInfo(shopId);
-        shopDetail.setShopStatisticsDto(shopStatisticsInfo);
-
-        StoreConstructionDto storeInfo = appStoreConstructionFeign.getStoreInfo(shopId);
-        shopDetail.setLogoUrl(storeInfo.getStoreLogoUrl());
-        // 用户是否登录 登录查询是否已经收藏
-        UserDto userInfo = this.getUserInfo(request);
-        if (userInfo != null && userInfo.getUserId() != null) {
-            FavoriteDto favoriteDto = new FavoriteDto();
-            favoriteDto.setUserId(userInfo.getUserId());
-            favoriteDto.setFavoriteTargetType(2);
-            favoriteDto.setFavoriteTargetId(shopDetail.getShopId());
-            shopDetail.setCollection(favoriteFeign.isFavorite(favoriteDto));
-        } else {
-            shopDetail.setCollection(false);
-        }
-        // 店铺推荐产品 取销量前六个
-        List<ProductDto> productDtos = appProductManageFeign.getProductTop6(shopId);
-        shopDetail.setProductDtoList(productDtos);
-        vo.setData(shopDetail);
-
         return vo;
     }
 
