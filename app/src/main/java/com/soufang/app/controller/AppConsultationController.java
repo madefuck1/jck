@@ -26,7 +26,7 @@ public class AppConsultationController extends AppBaseController{
      */
     @ResponseBody
     @RequestMapping(value = "selConsultionList",method = RequestMethod.POST)
-    public ConsultionListVo selInformList(@RequestBody InformDetailVo informDetailVo){
+    public ConsultionListVo selConsultionList(@RequestBody InformDetailVo informDetailVo){
         ConsultionListVo consultionListVo=new ConsultionListVo();
         NewsSo newsSo =new NewsSo();
         newsSo.setLimit(informDetailVo.getLimit());
@@ -61,12 +61,33 @@ public class AppConsultationController extends AppBaseController{
     }
 
     /**
+     * 纺织资讯
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getConsultionList",method = RequestMethod.POST)
+    public ConsultionDetailVo getConsultionList(@RequestBody InformDetailVo informDetailVo){
+        ConsultionDetailVo consultionListVo=new ConsultionDetailVo();
+        NewsSo newsSo =new NewsSo();
+        newsSo.setId(informDetailVo.getId());
+        PageHelp<NewsDto> pageHelp = consultationFeign.getNews(newsSo);
+        consultionListVo.setData(pageHelp.getData());
+        consultionListVo.setSuccess(true);
+        consultionListVo.setMessage("提交审核");
+        return consultionListVo;
+    }
+
+    /**
+     * 纺织资讯详情
+    }
+
+    /**
      * 纺织资讯详情
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "selConsultionList/{id}",method = RequestMethod.POST)
-    public ConsultionDetailVo selInformList(@PathVariable String id){
+    public ConsultionDetailVo selConsultionList(@PathVariable String id){
         ConsultionDetailVo consultionListVo=new ConsultionDetailVo();
         NewsSo newsSo =new NewsSo();
         newsSo.setId(Long.valueOf(id));
