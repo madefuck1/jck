@@ -172,6 +172,8 @@ public class AppShopController extends AppBaseController {
                 vo.setMessage("图片上传失败");
                 return vo;
             }
+        }else {
+            shopDto.setAvatarUrl(null);
         }
         if (StringUtils.isNotBlank(request.getParameter("shopIntroduce"))) {
             shopDto.setShopIntroduce(request.getParameter("shopIntroduce"));
