@@ -60,7 +60,9 @@ public class AppShopController extends AppBaseController {
     public ListShopVo getList(@RequestBody ListShopReqVo reqVo) {
         //  封装数据
         ShopSo so = new ShopSo();
-        so.setShopName(reqVo.getShopName());
+        if(StringUtils.isNotBlank(reqVo.getShopName())){
+            so.setShopName(reqVo.getShopName());
+        }
         so.setPage(reqVo.getPage());
         so.setLimit(reqVo.getLimit());
         // 查询数据
