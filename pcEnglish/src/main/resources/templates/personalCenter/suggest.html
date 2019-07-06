@@ -1,10 +1,10 @@
 <@override name="title">
-个人资料
+Feedback
 </@override>
 
 <@override name="css">
 
-<link href="../css/infstyle.css" rel="stylesheet" type="text/css">
+<link href="../css/infstyle.css" rel="stylesheet"  type="text/css">
 
 </@override>
 
@@ -15,35 +15,35 @@
         <div class="main-wrap">
             <!--标题 -->
             <div class="am-cf am-padding">
-                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">意见反馈</strong></div>
+                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Feedback</strong></div>
             </div>
             <hr/>
             <div class="suggestmain">
-                <p>请留下您的宝贵意见：</p>
+                <p>Please leave your valuable comments：</p>
                 <div class="suggestlist">
                     <select data-am-selected id="typeQuestion">
-                        <option value="a" selected>请选择意见类型</option>
-                        <option value="b">产品问题</option>
-                        <option value="c">促销问题</option>
-                        <option value="d">支付问题</option>
-                        <option value="e">退款问题</option>
-                        <option value="f">配送问题</option>
-                        <option value="g">售后问题</option>
-                        <option value="h">发票问题</option>
-                        <option value="o">退换货</option>
-                        <option value="m">其他</option>
+                        <option value="a" selected>Please select a comment type</option>
+                        <option value="b">product problem</option>
+                        <option value="c">Promotional issue</option>
+                        <option value="d">Payment issues</option>
+                        <option value="e">Refund issue</option>
+                        <option value="f">Delivery problem</option>
+                        <option value="g">after sales question</option>
+                        <option value="h">Invoice problem</option>
+                        <option value="o">Return</option>
+                        <option value="m">other</option>
                     </select>
                 </div>
                 <form id="form" action="/personalCenter/saveSuggest" method="post">
                     <div class="suggestDetail">
-                        <p>描述问题：</p>
+                        <p>Describe the problem：</p>
                         <blockquote class="textArea">
-                            <textarea name="sugContent" id="say_some" cols="60" rows="5" autocomplete="off" placeholder="在此描述您的意见具体内容"></textarea>
+                            <textarea name="sugContent" id="say_some" cols="60" rows="5" autocomplete="off" placeholder="Describe your comments here"></textarea>
                             <div class="fontTip"><i class="cur">0</i> / <i>200</i></div>
                         </blockquote>
                     </div>
-                    <div class="am-btn am-btn-danger anniu submitButton">提交</div>
-                    <p class="suggestTel"><i class="am-icon-phone"></i>客服电话：400-007-1234</p>
+                    <div class="am-btn am-btn-danger anniu submitButton">submit</div>
+                    <p class="suggestTel"><i class="am-icon-phone"></i>consumer hotline：400-007-1234</p>
                 </form>
             </div>
         </div>
@@ -62,12 +62,12 @@
         var value1 = key1.options[key1.selectedIndex].value;
         console.log(value1);
         if(value1=="a"){
-            alert("请选择意见类型");
+            alert("Please select a comment type");
             return ;
         }
         var texts = $("#say_some").val();
         if(texts==null || texts==""){
-            alert("请输入意见内容");
+            alert("Please enter your comments");
             return ;
         }
         var form = $("#form");
@@ -76,7 +76,7 @@
             type: 'post',
             success: function (data) {
                 if(data.success){
-                    alert("意见已反馈");
+                    alert("Feedback has been feedback");
                     window.location.href='/personalCenter/toPersonalCenter';
                 }else {
                     alert(data.message);

@@ -1,5 +1,5 @@
 <@override name="title">
-评价商品
+Evaluation product
 </@override>
 
 <@override name="css">
@@ -15,7 +15,7 @@
             <div class="user-comment">
                 <!--标题 -->
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发表评论</strong></div>
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Comment</strong></div>
                 </div>
                 <hr/>
                 <div class="comment-main">
@@ -35,17 +35,17 @@
                             </div>
                             <div class="item-info">
                                 <div class="info-little">
-                                    <span class="productColor">颜色：${product.productColor}</span><br/>
-                                    <span class="productSpec">包装：${product.productSpec}</span>
+                                    <span class="productColor">color：${product.productColor}</span><br/>
+                                    <span class="productSpec">package：${product.productSpec}</span>
                                 </div>
                                 <div class="item-price">
-                                    价格：<strong>${product.productPrice}</strong>
+                                    price：<strong>${product.productPrice}</strong>
                                 </div>
                             </div>
                         </div>
                         <div class="clear"></div>
                         <div class="item-comment">
-                            <textarea class="assessContent" style="min-height: 75px" placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
+                            <textarea class="assessContent" style="min-height: 75px" placeholder="Please write down the feelings of the baby, and help others very much!"></textarea>
                         </div>
                         <!--<div class="filePic">
                             <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
@@ -53,15 +53,15 @@
                             <img src="../images/image.jpg" alt="">
                         </div>-->
                         <div class="item-opinion">
-                            <li ><i class="op1" data-value="3"></i>好评</li>
-                            <li><i class="op2" data-value="2"></i>中评</li>
-                            <li><i class="op3" data-value="1"></i>差评</li>
+                            <li ><i class="op1" data-value="3"></i>Praise</li>
+                            <li><i class="op2" data-value="2"></i>Average</li>
+                            <li><i class="op3" data-value="1"></i>Bad review</li>
                         </div>
                     </div>
                     <hr/>
                     </#list>
                 <div class="info-btn">
-                    <div class="am-btn am-btn-warning" onclick="submitAssess()">发表评论</div>
+                    <div class="am-btn am-btn-warning" onclick="submitAssess()">Comment</div>
                 </div>
             </div>
             </div>

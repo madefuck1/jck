@@ -1,5 +1,5 @@
 <@override name="title">
-新建询盘
+New inquiry
 </@override>
 
 <@override name="css">
@@ -20,14 +20,14 @@
                 <div class="info-main">
                     <form class="am-form am-form-horizontal">
                         <div class="am-form-group">
-                            <label class="am-form-label">求购标题</label>
+                            <label class="am-form-label">Buying title</label>
                             <div class="am-form-content">
-                                <input type="text" id="enquiryTitle" placeholder="求购标题" autocomplete="off">
-                                <small>标题不能超过40个汉字</small>
+                                <input type="text" id="enquiryTitle" placeholder="Buying title" autocomplete="off">
+                                <small>Title cannot exceed 40 Chinese characters</small>
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">编号</label>
+                            <label class="am-form-label">Numbering</label>
                             <div class="am-form-content">
                                 <p>${enquiryNumber}</p>
                                 <input type="hidden" id="isUpdate" value="${isUpdate}">
@@ -35,26 +35,26 @@
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">发布时间</label>
+                            <label class="am-form-label">release time</label>
                             <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
                                 <span class="am-input-group-btn am-datepicker-add-on">
-                                    <input type="text" id="createTime"autocomplete="off" class="am-form-field"  placeholder="请选择发布时间">
+                                    <input type="text" id="createTime"autocomplete="off" class="am-form-field"  placeholder="Please select the release time">
                                 </span>
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">交付时间</label>
+                            <label class="am-form-label">Due time</label>
                             <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
                                 <span class="am-input-group-btn am-datepicker-add-on">
-                                    <input type="text" id="takeDate"autocomplete="off" class="am-form-field"  placeholder="请选择交付时间">
+                                    <input type="text" id="takeDate"autocomplete="off" class="am-form-field"  placeholder="Please select delivery time">
                                 </span>
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">报价截止</label>
+                            <label class="am-form-label">Quotation deadline</label>
                             <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
                                 <span class="am-input-group-btn am-datepicker-add-on">
-                                    <input type="text" id="endTime" autocomplete="off" class="am-form-field"  placeholder="请选择报价截止时间">
+                                    <input type="text" id="endTime" autocomplete="off" class="am-form-field"  placeholder="Please select the quote deadline">
                                 </span>
                             </div>
                         </div>
@@ -65,14 +65,14 @@
                             </div>
                         </div>-->
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">产品名称</label>
+                            <label class="am-form-label">product name</label>
                             <div class="am-form-content">
-                                <input id="productName" placeholder="如无纺布等" type="text">
+                                <input id="productName" placeholder="Such as nonwovens" type="text">
                                 <input   type="hidden" id="enquiryProductId" autocomplete="off" name="enquiryProductId"  />
                             </div>
                         </div>
                         <div class="sale_cloum1" style="height: 110px;">
-                            <label class="am-form-label" >求购图片</label>
+                            <label class="am-form-label" >Buying pictures</label>
                             <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
                                 <img class="sale_pic4" onclick="company(this)">
                                 <input type="file" id="file" style="display: none" onchange="showCompany(this)">
@@ -80,26 +80,26 @@
                         </div>
                         <div id="showPhoto"></div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">求购量</label>
+                            <label class="am-form-label">Purchase amount</label>
                             <div class="am-form-content">
-                                <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="请填写数量">
+                                <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="Please fill in the quantity">
                                 <select id="productUnit" style="width:150px;padding: 5px;">
-                                    <option value="米">米</option>
-                                    <option value="公斤" >公斤</option>
-                                    <option value="千克" selected>千克</option>
-                                    <option value="公升" >公升</option>
-                                    <option value="箱" >箱</option>
-                                    <option value="包" >个</option>
-                                    <option value="包" >台</option>
-                                    <option value="包" >件</option>
+                                    <option value="米">Meter</option>
+                                    <option value="公斤" >kg</option>
+                                    <option value="千克" selected>kilogram</option>
+                                    <option value="公升" >liter</option>
+                                    <option value="箱" >box</option>
+                                    <option value="包" >One</option>
+                                    <option value="包" >station</option>
+                                    <option value="包" >Piece</option>
                                 </select>
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">产品分类</label>
+                            <label class="am-form-label">Product Categories</label>
                             <div class="am-form-content">
                                 <select id="productSort1"  style="width:150px;padding: 5px;float: left;" onchange="toFindSort(1)">
-                                    <option value="" selected>请选择</option>
+                                    <option value="" selected>please choose</option>
                                 </select>
                                 <select id="productSort2"  style="width:150px;padding: 5px;float: left;margin-left:5px;" onchange="toFindSort(2)">
                                 </select>
@@ -109,19 +109,19 @@
                         </div>
 
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">详细地址</label>
+                            <label class="am-form-label">Address</label>
                             <div class="am-form-content">
-                                <input id="detailStreet" placeholder="如街道，门牌号等"autocomplete="off" type="text">
+                                <input id="detailStreet" placeholder="Such as streets, house numbers, etc."autocomplete="off" type="text">
                             </div>
                         </div>
                         <div class="am-form-group pur_height">
-                            <label class="am-form-label">描述</label>
+                            <label class="am-form-label">description</label>
                             <div class="am-form-content">
-                                <textarea class="disp" rows="5" id="enquiryRemark"autocomplete="off" placeholder="如格型、循环尺寸、成分、克重、门幅、色牢度、环保标准等等"></textarea>
+                                <textarea class="disp" rows="5" id="enquiryRemark"autocomplete="off" placeholder="Such as grid type, cycle size, composition, gram weight, width, color fastness, environmental standards, etc."></textarea>
                             </div>
                         </div>
                         <div class="info-btn">
-                            <div class="am-btn am-btn-warning" id="save">保存</div>
+                            <div class="am-btn am-btn-warning" id="save">save</div>
                         </div>
                     </form>
                 </div>
@@ -142,10 +142,10 @@
         var enquiryNumber= $("#enquiryNumber").val();
        if(isUpdate==null||isUpdate==""){
            //新增
-           $("#titleName").html("发布求购");
+           $("#titleName").html("Post purchase");
        }else{
            //修改
-           $("#titleName").html("修改求购");
+           $("#titleName").html("Modify purchase\n");
            //查询详情信息
            details(enquiryNumber);
        }
@@ -213,7 +213,7 @@
         if (fileType == '.gif' || fileType == '.jpeg' || fileType == '.jpg' || fileType == '.png' || fileType == '.bmp') {
 
         } else {
-            alert('文件类型不正确');
+            alert('File type is incorrect');
         }
     });
     $("#save").click(function (){
@@ -243,31 +243,31 @@
 
            var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
            if(enquiryTitle==null|enquiryTitle==""){
-               alert("请输入求购标题");
+               alert("Please enter the purchase title");
                return ;
            }else if(len>80){
-               alert("求购标题不得超过40个汉字");
+               alert("The title of the purchase must not exceed 40 Chinese characters");
                return;
            }
 
            if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
-               alert("交付时间必须大于发起求购时间");
+               alert("Delivery time must be greater than the time of initiating purchase");
                return;
            }else if(takeDate==""||takeDate==null){
-               alert("请选择交付时间");
+               alert("Please select delivery time");
                return;
            }
            var re = /^[1-9]+[0-9]*]*$/;
            if(!re.test(productNumber)){
-               alert("求购数量只能输入数字");
+               alert("Purchase quantity can only enter numbers");
                return;
            }
         if(value1==null|value1==""){
-            alert("请选择分类信息");
+            alert("Please select category information");
             return ;
         }
            if (detailStreet==null || detailStreet==""){
-               alert("请输入详细地址细心");
+               alert("Please enter the detailed address carefully");
                return;
            }
            formData = new FormData()
@@ -385,7 +385,7 @@
                                +"<div class='goods-pic-box'>"
                                    +"<img src='"+productImage+"' class='goods-img' style='height: 200px;width: 300px;'>"
                                +"</div>"
-                               +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'>删除</i></a>"
+                               +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'>delete</i></a>"
                             +"</div> " +
                            "</div>" +
                        "</div>"
@@ -490,7 +490,7 @@
                                console.log(data);
                                for (var i = 0 ; i<key1.length;i++){
                                    if (parentAssortId2==key1.options[i].value){
-                                       console.log("第二次赋值");
+                                       console.log("Second assignment");
                                        console.log("1");
                                        key1.options[i].selected = true;
                                        toFindSort(1);
@@ -504,9 +504,6 @@
                    }
                }
            });
-
-
-
        }
 </script>
 </@override>

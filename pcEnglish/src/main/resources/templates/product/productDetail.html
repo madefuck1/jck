@@ -82,14 +82,14 @@
     <div class="sale_table">
         <div class="sale">
             <ul>
-                <li class="cur"><a href="/index">首页</a></li>
-                <li><a href="/enquiry/toEnquiryList">求购信息</a></li>
-                <li><a href="/exhibition/toExhibition">展会信息</a></li>
+                <li class="cur"><a href="/index">Home</a></li>
+                <li><a href="/enquiry/toEnquiryList">Purchase information</a></li>
+                <li><a href="/exhibition/toExhibition">Exhibition information</a></li>
             </ul>
         </div>
     </div>
     <ol class="am-breadcrumb am-breadcrumb-slash">
-        <li><a href="/index">首页</a></li>
+        <li><a href="/index">Home</a></li>
         <!--跳转到搜索页面-->
         <li><a>${detail.assortName}</a></li>
         <li class="am-active">${detail.productName}</li>
@@ -116,7 +116,7 @@
         <div class="clearfixLeft" id="clearcontent">
             <div class="box">
                 <div class="tb-booth tb-pic tb-s310">
-                    <a href="${images[0]!''}"><img src="${images[0]!''}" alt="细节展示放大镜特效"
+                    <a href="${images[0]!''}"><img src="${images[0]!''}" alt="Details show magnifying glass effects"
                                                 rel="${images[0]!''}" class="jqzoom"/></a>
                 </div>
                 <ul class="tb-thumb" id="thumblist">
@@ -152,7 +152,7 @@
                 <div class="tb-detail-price">
                     <div class="price_up">
                         <div class="am-u-sm-2">
-                            <span>价格:</span>
+                            <span>Price:</span>
                         </div>
                         <#list detail.specDtoList as item>
                         <#if item_index==0>
@@ -162,13 +162,13 @@
                                                                                 </#if>
                                                                                 </#list>
                 <div class="Collection" style="cursor: pointer;float: right;" onclick="collection();">
-                    <span class="coll1">收藏</span>
+                    <span class="coll1">Collection</span>
                     <!--                 <span class="coll2">已收藏</span>-->
                 </div>
                     </div>
                     <div class="price_down">
                         <div class="am-u-sm-2">
-                            <span>数量:</span>
+                            <span>Number:</span>
                         </div>
                         <#list detail.specDtoList as item>
                         <#if item_index==0>
@@ -183,19 +183,19 @@
 
             <!--地址-->
             <dl class="iteminfo_parameter freight add">
-                <dt>发货地点:</dt>
+                <dt>Place of shipment:</dt>
                 <dd>${detail.productSendProvince!''}${detail.productSendCity!''}</dd>
             </dl>
             <dl class="iteminfo_parameter freight add2" style="margin-top: 6px">
-                <dt>产品状态:</dt>
-                <dd name="productStatus">现货</dd>
+                <dt>Product status:</dt>
+                <dd name="productStatus">Spot</dd>
             </dl>
             <div class="clear"></div>
 
             <!--各种规格-->
             <div class="iteminfo_parameter sys_item_specpara">
                 <dt class="theme-login">
-                    <div class="cart-title">可选规格<span class="am-icon-angle-right"></span></div>
+                    <div class="cart-title">Optional specs<span class="am-icon-angle-right"></span></div>
                 </dt>
                 <dd>
                     <!--操作页面-->
@@ -203,13 +203,13 @@
                     <div class="theme-popover">
                         <div class="theme-span"></div>
                         <div class="theme-poptit">
-                            <a href="javascript:;" title="关闭" class="close">×</a>
+                            <a href="javascript:;" title="Shut down" class="close">×</a>
                         </div>
                         <div class="theme-popbod dform">
                             <form class="theme-signin" name="loginform" action="" method="post">
                                 <div class="theme-signin-left">
                                     <div class="theme-options">
-                                        <div class="cart-title">产品颜色:</div>
+                                        <div class="cart-title">Color of the product:</div>
                                         <ul id="productColor">
                                             <#list detail.productColorDtoList as item>
                                             <#if item_index==0>
@@ -227,7 +227,7 @@
                                         </ul>
                                     </div>
                                     <div class="theme-options">
-                                        <div class="cart-title">产品规格:</div>
+                                        <div class="cart-title">Product specifications:</div>
                                         <ul id="productSpec">
                                             <#list detail.specDtoList as item>
                                             <#if item_index==0>
@@ -241,7 +241,7 @@
                                         </ul>
                                     </div>
                                     <div class="theme-options">
-                                        <div class="cart-title number">产品数量:</div>
+                                        <div class="cart-title number">Number of products:</div>
                                         <div style="margin-top: 20px">
                                             <input id="productSubtract" class="am-btn am-btn-default am-disabled"
                                                    name="" type="button"
@@ -253,8 +253,8 @@
                                             <input id="productAdd" class="am-btn am-btn-default" name=""
                                                    type="button"
                                                    value="+"/>
-                                            <span id="spock" class="tb-hidden">库存<span name="productSpock"
-                                                                                       class="stock">${detail.productColorDtoList[0].spock!''?replace(',','')}</span>件</span>
+                                            <span id="spock" class="tb-hidden">Inventory<span name="productSpock"
+                                                                                       class="stock">${detail.productColorDtoList[0].spock!''?replace(',','')}</span>Pieces</span>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
@@ -269,21 +269,21 @@
 
             <div class="pay">
                 <div class="pay-opt">
-                    <a><span class="am-icon-heart am-icon-fw">收藏</span></a>
+                    <a><span class="am-icon-heart am-icon-fw">Collection</span></a>
                 </div>
                 <li>
                     <div class="clearfix tb-btn tb-btn-buy theme-login">
-                        <a id="LikBuy" onclick="toBuy()">立即购买</a>
+                        <a id="LikBuy" onclick="toBuy()">Buy now</a>
                     </div>
                 </li>
                 <li>
                     <div class="clearfix tb-btn tb-btn-basket theme-login">
-                        <a id="LikBasket" onclick="addShopCar()"><i></i>加入购物车</a>
+                        <a id="LikBasket" onclick="addShopCar()"><i></i>Add to the shopping cart</a>
                     </div>
                 </li>
                 <li>
                     <div class="clearfix tb-btn tb-btn-basket theme-login">
-                        <a onclick="openStore()" style="background: red"><i></i>进入店铺</a>
+                        <a onclick="openStore()" style="background: red"><i></i>Enter the store</a>
                     </div>
                 </li>
             </div>
@@ -320,7 +320,7 @@
             <ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
                 <li class="am-active">
                     <a href="#">
-                        <span class="index-needs-dt-txt">宝贝详情</span></a>
+                        <span class="index-needs-dt-txt">Baby Details</span></a>
                 </li>
                 <!--                    <li>-->
                 <!--                        <a href="#">-->
@@ -335,7 +335,7 @@
                 <div class="am-tab-panel am-fade am-in am-active">
                     <div class="J_Brand">
                         <div class="attr-list-hd tm-clear">
-                            <h4>产品参数：</h4></div>
+                            <h4>Product parameters：</h4></div>
                         <div class="clear"></div>
                         <ul id="J_AttrUL">
                             <#list productJson as item>
@@ -346,7 +346,7 @@
                     </div>
                     <div class="details">
                         <div class="attr-list-hd after-market-hd">
-                            <h4>商品细节</h4>
+                            <h4>Product details</h4>
                         </div>
                         <div class="twlistNews">
                             <#list productDetail as item >
@@ -503,10 +503,10 @@
        var isShowNone = ${isShowNone};
                 if (isShowNone==1) {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                    $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">收藏</span>')
+                    $('.Collection').append('<span class="coll1">Collection</span>')
                 }
 
         $('.flexslider').flexslider({
@@ -569,7 +569,7 @@
                         '                                <header class="am-comment-hd">\n' +
                         '                                    <div class="am-comment-meta">\n' +
                         '                                        <a href="#link-to-user" class="am-comment-author">' + data.data[i].loginName + '</a>\n' +
-                        '                                        评论于\n' +
+                        '                                        Comments on\n' +
                         '                                        <time datetime="">' + data.data[i].strCreateTime + '</time>\n' +
                         '                                    </div>\n' +
                         '                                </header>\n' +
@@ -579,7 +579,7 @@
                         '                                            ' + data.data[i].assessContent + '\n' +
                         '                                        </div>\n' +
                         '                                        <div class="tb-r-act-bar">\n' +
-                        '                                            颜色分类：' + data.data[i].productColor + '&nbsp;&nbsp;尺码：S\n' +
+                        '                                            Color classification：' + data.data[i].productColor + '&nbsp;&nbsp;Size：S\n' +
                         '                                        </div>\n' +
                         '                                    </div>\n' +
                         '                                </div>\n' +
@@ -598,7 +598,7 @@
                 });
             },
             error: function () {
-                alert("请求发送失败");
+                alert("Request sent failed");
             }
         });
 
@@ -609,9 +609,9 @@
     function selectColor(value, spock, isSpot) {
         $(value).parent().find('li').removeClass("selected");
         if (isSpot == 0) {
-            $('[name=productStatus]').val("非现货");
+            $('[name=productStatus]').val("Off-stock");
         } else if (isSpot == 1) {
-            $('[name=productStatus]').val("现货");
+            $('[name=productStatus]').val("Spot");
         }
 
         $('[name=productSpock]').text(spock);
@@ -654,7 +654,7 @@
                 html += '<div class="tb-detail-price">';
                 html += '<div class="price_up">';
                 html += '<div class="am-u-sm-2">';
-                html += '<span>价格:</span>';
+                html += '<span>Price:</span>';
                 html += '</div>';
                 html += '<div class="am-u-sm-10">';
                 html += html_price;
@@ -662,7 +662,7 @@
                 html += '</div>';
                 html += '<div class="price_down">';
                 html += '<div class="am-u-sm-2">';
-                html += '<span>数量:</span>';
+                html += '<span>Number:</span>';
                 html += '</div>';
                 html += '<div class="am-u-sm-10">';
                 html += html_number;
@@ -705,14 +705,14 @@
     $('#productNum').on("focusout", function () {
         var number = $(this).val();
         if (Number(number) < Number(minNumber)) {
-            $.sendWarning('亲，您选的数量太小了，已为您填写为商品最小数量！', 2000, function () {
+            $.sendWarning('Yes, the quantity you selected is too small, has been filled in for you as the minimum quantity of goods！', 2000, function () {
                 $('#productNum').val(1);
                 $('#productSubtract').addClass("am-disabled");
                 $('#productAdd').removeClass("am-disabled");
                 $('#productAdd').removeAttr("disabled");
             });
         } else if (Number(number) > Number($('[name=productSpock]').text())) {
-            $.sendWarning('亲，您选的数量超过最大库存了，已为您填写为商品最大数量！', 2000, function () {
+            $.sendWarning('Yes, the quantity you selected exceeds the maximum inventory, has been filled in for you the maximum quantity of goods！', 2000, function () {
                 $('#productNum').val($('[name=productSpock]').text());
                 $('#productAdd').addClass("am-disabled");
                 $('#productSubtract').removeClass("am-disabled");

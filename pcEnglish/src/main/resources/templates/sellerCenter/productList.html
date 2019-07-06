@@ -1,5 +1,5 @@
 <@override name="title">
-产品列表
+List of products
 </@override>
 
 <@override name="css">
@@ -17,47 +17,47 @@
         <#include "/sellerCenter/common/seller.menu.html"/>
         <div class="sale_con">
             <ol class="am-breadcrumb">
-                <li><a href="/sellerCenter/toIndex">卖家工作台</a></li>
-                <li><a href="/sellerCenter/toProductList">产品列表</a></li>
+                <li><a href="/sellerCenter/toIndex">Seller's workbench</a></li>
+                <li><a href="/sellerCenter/toProductList">List of products</a></li>
             </ol>
             <div class="sale_down">
                 <!--全部的订单-->
                 <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
                     <!--头部-->
                     <ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
-                        <li class="am-active"><a onclick="changeData(1,null)">全部产品</a></li>
-                        <li><a onclick="changeData(1,1)">出售中的产品</a></li>
-                        <li><a onclick="changeData(1,0)">仓库中的产品</a></li>
+                        <li class="am-active"><a onclick="changeData(1,null)">All products</a></li>
+                        <li><a onclick="changeData(1,1)">Products on sale</a></li>
+                        <li><a onclick="changeData(1,0)">Products in the warehouse</a></li>
 
                     </ul>
                     <div class="cloum1">
                         <form class="am-form am-form-horizontal am-u-sm-6">
-                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">产品名称：</label>
+                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">Product name：</label>
                             <div class="am-form-group am-u-sm-9">
-                                <input type="text" id="doc-ipt-3" placeholder="请输入产品名称">
+                                <input type="text" id="doc-ipt-3" placeholder="Please enter the product name">
                             </div>
                         </form>
                         <form class="am-form am-form-horizontal am-u-sm-6">
-                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">更新时间：</label>
+                            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label">Updatetimed：</label>
                             <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}"
                                  style="margin-left:26.5%;width: 260px;position: absolute;">
                                         <span class="am-input-group-btn am-datepicker-add-on">
                                             <input type="text" id="doc-ipt-4" class="am-form-field"
-                                                   placeholder="请选择起始时间" style="position: absolute;width: 130px;">
+                                                   placeholder="Please select the start time" style="position: absolute;width: 130px;">
                                         </span>
                             </div>
                             <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}"
                                  style="margin-left:26.5%;width: 260px;position: absolute;">
                                         <span class="am-input-group-btn am-datepicker-add-on">
                                             <input type="text" id="doc-ipt-5" class="am-form-field"
-                                                   placeholder="请选择结束时间" style="width: 130px;margin-left: 140px;">
+                                                   placeholder="Please select the end time" style="width: 130px;margin-left: 140px;">
                                         </span>
                             </div>
                         </form>
                     </div>
                     <div class="cloum1">
                         <button type="button" class="am-btn am-btn-secondary" style="width:140px"
-                                onclick="changeData(1,null)">搜&nbsp;&nbsp;&nbsp;索
+                                onclick="changeData(1,null)">Search
                         </button>
                     </div>
                     <div class="am-tab-panel am-active">
@@ -70,25 +70,25 @@
                                     <label>
                                         <input type="checkbox" id="quanxuan">
                                     </label>
-                                    <td class="td-inner">全选</td>
+                                    <td class="td-inner">Full selection</td>
                                 </div>
                                 <div class="th th-item">
-                                    <td class="td-inner">产品信息</td>
+                                    <td class="td-inner">Product information</td>
                                 </div>
                                 <div class="th th-price">
-                                    <td class="td-inner">单价</td>
+                                    <td class="td-inner">Price</td>
                                 </div>
                                 <div class="th th-amount">
-                                    <td class="td-inner">库存</td>
+                                    <td class="td-inner">Inventory</td>
                                 </div>
                                 <div class="th th-amount">
-                                    <td class="td-inner">销量</td>
+                                    <td class="td-inner">Sales</td>
                                 </div>
                                 <div class="th th-price">
-                                    <td class="td-inner">创建时间</td>
+                                    <td class="td-inner">Creation time</td>
                                 </div>
                                 <div class="th th-operation">
-                                    <td class="td-inner">操作</td>
+                                    <td class="td-inner">Operation</td>
                                 </div>
                             </div>
                             <div class="order-main">
@@ -167,16 +167,16 @@
                 $("#smallMenu").empty();
                 var smallMenu = '';
                 if (productIsUp == null) {
-                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">上架</button>' +
-                        '                    <button type="button" onclick="getDown(pageNo,isUp)">下架</button>' +
-                        '                    <button type="button" onclick="getValue(pageNo,isUp)">发布</button>' +
-                        '                    <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>';
+                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">Shelves</button>' +
+                        '                    <button type="button" onclick="getDown(pageNo,isUp)">Off the shelf</button>' +
+                        '                    <button type="button" onclick="getValue(pageNo,isUp)">Release</button>' +
+                        '                    <button type="button" onclick="deleteProduct(pageNo,isUp)">Delete</button>';
                 } else if (productIsUp == 1) {
-                    smallMenu += '<button type="button" onclick="getDown(pageNo,isUp)">下架</button>' +
-                        '                             <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>';
+                    smallMenu += '<button type="button" onclick="getDown(pageNo,isUp)">Off the shelf</button>' +
+                        '                             <button type="button" onclick="deleteProduct(pageNo,isUp)">Delete</button>';
                 } else {
-                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">上架</button>' +
-                        '                         <button type="button" onclick="deleteProduct(pageNo,isUp)">删除</button>';
+                    smallMenu += '<button type="button" onclick="putUp(pageNo,isUp)">Shelves</button>' +
+                        '                         <button type="button" onclick="deleteProduct(pageNo,isUp)">Delete</button>';
                 }
                 $("#smallMenu").append(smallMenu);
 
@@ -224,26 +224,26 @@
                         productList += '<li class="td td-price">' +
                             '                                           <div class="item-price">' +
                             '                                           <p>' + data.data[i].createTimeString + '</p>' +
-                            '                                           <p style="color:#40ADFB;line-height: 30px; ">出售中</p>' +
+                            '                                           <p style="color:#40ADFB;line-height: 30px; ">Under sale</p>' +
                             '                                           </div>' +
                             '                                       </li>' +
                             '                                       <li class="td td-operation">' +
                             '                                            <div class="item-operation">' +
-                            '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">产品详情</p>' +
-                            '                                                 <p style="line-height: 30px;" onclick="getDownNow(' + data.data[i].productId + ',pageNo,isUp)">立即下架</p>' +
+                            '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">Product details</p>' +
+                            '                                                 <p style="line-height: 30px;" onclick="getDownNow(' + data.data[i].productId + ',pageNo,isUp)">Get off the shelf now</p>' +
                             '                                            </div>' +
                             '                                        </li>';
                     } else {
                         productList += '<li class="td td-price">' +
                             '                                           <div class="item-price">' +
                             '                                                <p>' + data.data[i].createTimeString + '</p>' +
-                            '                                                <p style="color:#40ADFB;line-height: 30px; ">仓库中</p>' +
+                            '                                                <p style="color:#40ADFB;line-height: 30px; ">In the warehouse</p>' +
                             '                                           </div>' +
                             '                                        </li>' +
                             '                                        <li class="td td-operation">' +
                             '                                            <div class="item-operation">' +
-                            '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">产品详情</p>' +
-                            '                                                 <p style="line-height: 30px;"onclick="putUpNow(' + data.data[i].productId + ',pageNo,isUp)">立即上架</p>' +
+                            '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">Product details</p>' +
+                            '                                                 <p style="line-height: 30px;"onclick="putUpNow(' + data.data[i].productId + ',pageNo,isUp)">Get on the shelf now</p>' +
                             '                                            </div>' +
                             '                                        </li>';
                     }
@@ -254,8 +254,8 @@
                 $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
                     current_page: page - 1,                  //当前页码
                     callback: PageCallback,
-                    prev_text: '上一页',
-                    next_text: '下一页',
+                    prev_text: 'Previous',
+                    next_text: 'Next',
                     items_per_page: 5,             //每页显示最大条数
                     num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                     num_edge_entries: 1,           //两侧显示的首尾分页的条目数
@@ -263,7 +263,7 @@
 
             },
             error: function () {
-                alert("请求发送失败");
+                alert("Request sent failed");
             }
         })
     };
@@ -297,7 +297,7 @@
                 }
             },
             error: function () {
-                alert("请求发送失败")
+                alert("Request sent failed")
             },
         });
     };
@@ -324,7 +324,7 @@
                 }
             },
             error: function () {
-                alert("请求发送失败")
+                alert("Request sent failed")
             },
         });
     };
@@ -356,7 +356,7 @@
                 }
             },
             error: function () {
-                alert("请求发送失败")
+                alert("Request sent failed")
             },
         });
     };
@@ -388,7 +388,7 @@
                 }
             },
             error: function () {
-                alert("请求发送失败")
+                alert("Request sent failed")
             },
         });
     };
@@ -420,7 +420,7 @@
                 }
             },
             error: function () {
-                alert("请求发送失败")
+                alert("Request sent failed")
             },
         });
     };

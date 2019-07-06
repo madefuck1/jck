@@ -478,21 +478,28 @@ public class AppUserController extends AppBaseController {
         AppVo vo = new AppVo();
         UserDto userDto = new UserDto();
         Result result = new Result();
+        String username = request.getParameter("realName");
         userDto.setUserId(userInfo.getUserId());
         userDto.setPhone("121");
         userDto.setEmail("121");
-        if(!StringUtils.isNotBlank(userInfo.getUserName())){
-            userDto.setUserName(request.getParameter("realName"));
-        }else {
-            vo.setSuccess(false);
-            vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
-            return vo;
-        }
-        Result result1 = appUserFeign.login(userDto);
-        if(result1.isSuccess()){
-            vo.setMessage("用户名已存在，请换个用户名！");
-            vo.setSuccess(false);
-            return vo;
+        //判断是否要修改用户名
+        if(StringUtils.isNotBlank(username)){
+            //如果有，判断是否是第一次修改用户名
+            if(!StringUtils.isNotBlank(userInfo.getUserName())){
+                //如果是，判断用户名是否存在
+                userDto.setUserName(username);
+                Result result1 = appUserFeign.login(userDto);
+                if(result1.isSuccess()){
+                    vo.setMessage("用户名已存在，请换个用户名！");
+                    vo.setSuccess(false);
+                    return vo;
+                }
+            }else {
+                //用户名已存在，必须换名
+                vo.setSuccess(false);
+                vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
+                return vo;
+            }
         }
         userDto.setPhone(null);
         userDto.setEmail(null);
@@ -508,10 +515,7 @@ public class AppUserController extends AppBaseController {
                 result.setMessage("头像上传失败");
                 result.setSuccess(false);
             }
-        }else {
-            result = appUserFeign.update(userDto);
         }
-
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;

@@ -1,5 +1,5 @@
 <@override name="title">
-订单管理
+Order management
 </@override>
 
 <@override name="css">
@@ -16,41 +16,41 @@
             <div class="user-order">
                 <!--标题 -->
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> </div>
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Order management</strong> </div>
                 </div>
                 <hr/>
                 <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
                     <ul class="am-avg-sm-6 am-tabs-nav am-nav am-nav-tabs listType">
-                        <li class="am-active"><a data-status="1">所有订单</a></li>
-                        <li><a data-status="2">待付款</a></li>
-                        <li><a data-status="3">待发货</a></li>
-                        <li><a data-status="4">待收货</a></li>
-                        <li><a data-status="5">待评价</a></li>
-                        <li><a data-status="6">线下订单</a></li>
+                        <li class="am-active"><a data-status="1">all order</a></li>
+                        <li><a data-status="2">Pending payment</a></li>
+                        <li><a data-status="3">to be delivered</a></li>
+                        <li><a data-status="4">Pending receipt</a></li>
+                        <li><a data-status="5">comment</a></li>
+                        <li><a data-status="6">Offline order</a></li>
                     </ul>
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active">
                             <div class="order-top">
                                 <div class="th th-item">
-                                    <td class="td-inner">商品</td>
+                                    <td class="td-inner">product</td>
                                 </div>
                                 <div class="th th-price">
-                                    <td class="td-inner">单价</td>
+                                    <td class="td-inner">price</td>
                                 </div>
                                 <div class="th th-number">
-                                    <td class="td-inner">数量</td>
+                                    <td class="td-inner">number</td>
                                 </div>
                                 <div class="th th-operation">
-                                    <td class="td-inner">商品合计</td>
+                                    <td class="td-inner">Total product</td>
                                 </div>
                                 <div class="th th-amount">
-                                    <td class="td-inner">订单合计</td>
+                                    <td class="td-inner">Order total</td>
                                 </div>
                                 <div class="th th-status">
-                                    <td class="td-inner">交易状态</td>
+                                    <td class="td-inner">trading status</td>
                                 </div>
                                 <div class="th th-change">
-                                    <td class="td-inner">交易操作</td>
+                                    <td class="td-inner">Transaction operation</td>
                                 </div>
                             </div>
                             <div class="order-main">
@@ -117,7 +117,7 @@
     function cancelOrder(orderShopId) {
         $.myConfirm({
             title:"",
-            message:"确定取消订单吗！",
+            message:"Are you sure to cancel the order?！",
             callback:function(){
                 var endPage = parseInt($('.endPage').children().text());
                 if(isNaN(endPage)){
@@ -157,7 +157,7 @@
     function delOrder(orderShopId) {
         $.myConfirm({
             title:"",
-            message:"确定要删除订单吗！",
+            message:"Are you sure you want to delete the order?！",
             callback:function(){
                 var endPage = parseInt($('.endPage').children().text());
                 if(isNaN(endPage)){
@@ -204,8 +204,8 @@
         for (var i = 0; i < orderList.length; i++) {
             html += '<div class="order-status5">';
             html += '<div class="order-title">';
-            html += '<div class="dd-num">订单编号：<a href="javascript:;">' + orderList[i].orderNumber + '</a></div>';
-            html += '<span>成交时间：' + orderList[i].createTimeString + '</span>';
+            html += '<div class="dd-num">order number：<a href="javascript:;">' + orderList[i].orderNumber + '</a></div>';
+            html += '<span>Transaction time：' + orderList[i].createTimeString + '</span>';
             html += '<span class="order_shop">' + orderList[i].shopName + '</span> </div>';
             html += '<div class="order-content"><div class="order-left">';
             var orderProductList = orderList[i].orderProducts;
@@ -221,7 +221,7 @@
                     '<div class="item-basic-info">' ;
                 html += '<a onclick="javascript:window.open(\'/product/toDetail?productId=\'+'+orderProductList[j].productId+',\'_blank\');"href="#">';
                 html += '<p>' + orderProductList[j].productName + '</p>' +
-                    '<p class="info-little">颜色：' + orderProductList[j].productColor +
+                    '<p class="info-little">color：' + orderProductList[j].productColor +
                     '<br>规格：' + orderProductList[j].productSpec + '</p>' +
                     '</a>' +
                     '</div>' +
@@ -252,19 +252,19 @@
                 '<li class="td td-status">' +
                 '<div class="item-status">' +
                 '<p class="Mystatus">' + orderList[i].statusMessage + '</p>' +
-                '<p class="order-info"><a href="/orderManager/toDetail/' + orderList[i].orderShopId + '">订单详情</a></p>' +
+                '<p class="order-info"><a href="/orderManager/toDetail/' + orderList[i].orderShopId + '">order details</a></p>' +
                 '</div>' +
                 '</li>' +
                 '<li class="td td-change order_pay">';
 
             if (orderList[i].orderShopStatus == 3 || orderList[i].orderShopStatus == 5) {
-                html += '<div class="am-btn am-btn-danger" onclick="onPay(' + orderList[i].orderShopId + ');">支付</div>';
+                html += '<div class="am-btn am-btn-danger" onclick="onPay(' + orderList[i].orderShopId + ');">Pay</div>';
             }
             if (orderList[i].orderShopStatus == 1 || orderList[i].orderShopStatus == 2 || orderList[i].orderShopStatus == 3) {
-                html += '<div class="am-btn am-btn-danger" onclick="cancelOrder(' + orderList[i].orderShopId + ');">取消</div>';
+                html += '<div class="am-btn am-btn-danger" onclick="cancelOrder(' + orderList[i].orderShopId + ');">cancel</div>';
             }
             if (orderList[i].orderShopStatus == 0 || orderList[i].orderShopStatus == 9) {
-                html += '<div class="am-btn am-btn-danger" onclick="delOrder(' + orderList[i].orderShopId + ');">删除</div>';
+                html += '<div class="am-btn am-btn-danger" onclick="delOrder(' + orderList[i].orderShopId + ');">delete</div>';
             }
             html += '</li>' +
                 '</div>' +

@@ -3,7 +3,7 @@
 <head>
     <#include "/common/includes/header.html"/>
 
-    <title>店铺装修</title>
+    <title>Shop renovation</title>
     <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
     <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
     <link rel="stylesheet" href="/static/css/sale/base.css">
@@ -31,12 +31,12 @@
 <div id="publishi">
     <div class="publish-in">
         <select data-am-selected>
-            <option value="a" selected>首页</option>
+            <option value="a" selected>Home</option>
             <!--            <option value="c">视频中心</option>-->
         </select>
         <div class="pub-right">
-            <button id="btn-publish-preview" type="button" class="am-btn am-btn-default">预览</button>
-            <button id="btn-publish" type="button" class="am-btn am-btn-secondary" style="width: 190px">发布</button>
+            <button id="btn-publish-preview" type="button" class="am-btn am-btn-default">Preview</button>
+            <button id="btn-publish" type="button" class="am-btn am-btn-secondary" style="width: 190px">Release</button>
         </div>
     </div>
 </div>
@@ -45,20 +45,20 @@
 </div>
 <div class="logo-mask" id="logo-mask">
     <button type="button" class="am-btn am-btn-secondary button1" id="btn-logo-mask"
-            data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 1190, height: 272}">编辑
+            data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 1190, height: 272}">Edit
     </button>
     <div class="am-modal am-modal-no-btn" tabindex="1" id="doc-modal-1">
         <div class="am-modal-dialog">
-            <div class="am-modal-hd">招牌内容
+            <div class="am-modal-hd">Signboard content
                 <!--                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
             </div>
             <div class="am-modal-bd">
-                <div class="mask-title am-u-sm-1">店招图片：</div>
+                <div class="mask-title am-u-sm-1">Shop picture：</div>
                 <div class="mask-con am-u-sm-11">
                     <p>
-                        <span>宽度为1920像素，高度为120像素，否则导航显示可能异常</span>
+                        <span>1920 pixels wide and 120 pixels high, otherwise navigation display may be abnormal</span>
                     <div class="am-form-group am-form-file">
-                        <button type="button" class="am-btn am-btn-default am-btn-sm">选择要上传的文件</button>
+                        <button type="button" class="am-btn am-btn-default am-btn-sm">Select the files you want to upload</button>
                         <input id="logoPic" type="file" onchange="changeLogoPic(this)" multiple>
                     </div>
                     </p>
@@ -66,10 +66,10 @@
                     <div class="masklogo" id="masklogo"></div>
                     <div class="button">
                         <button id="btn-logo-save" type="button" class="am-btn am-btn-secondary" style="width: 140px">
-                            保存
+                            Save
                         </button>
                         <button id="btn-logo-cancel" type="button" class="am-btn am-btn-default" style="width: 140px">
-                            取消
+                            Cancel
                         </button>
                     </div>
 
@@ -81,8 +81,8 @@
 <div id="nav2">
     <div class="nav_in">
         <ul>
-            <li class="cur"><a href="">首页</a></li>
-            <li><a href="">公司概况</a></li>
+            <li class="cur"><a href="">Home</a></li>
+            <li><a href="">Company Profile</a></li>
             <!--            <li><a href="">视频中心</a></li>-->
         </ul>
     </div>
@@ -91,27 +91,27 @@
 
 <div class="salenav-mask" id="salenav-mask">
     <button type="button" class="am-btn am-btn-secondary button6" id="btn-salenav-mask"
-            data-am-modal="{target: '#doc-modal-5', closeViaDimmer: 0, width: 595, height:300}" style="height: 32px">编辑
+            data-am-modal="{target: '#doc-modal-5', closeViaDimmer: 0, width: 595, height:300}" style="height: 32px">Edit
     </button>
     <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-5">
         <div class="am-modal-dialog">
-            <div class="am-modal-hd">导航背景颜色
+            <div class="am-modal-hd">Navigate the background color
                 <!--                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
             </div>
             <div class="am-modal-bd salenav">
                 <select data-am-selected id="bgColor">
-                    <option value="red" class="red" selected>红色</option>
-                    <option value="orange" class="orange">橙色</option>
-                    <option value="blue" class="blue">蓝色</option>
-                    <option value="black" class="black">黑色</option>
-                    <option value="gray" class="gray">灰色</option>
-                    <option value="pink" class="pink">粉色</option>
-                    <option value="purple" class="purple">紫色</option>
+                    <option value="red" class="red" selected>Red</option>
+                    <option value="orange" class="orange">Orange</option>
+                    <option value="blue" class="blue">Blue</option>
+                    <option value="black" class="black">Black</option>
+                    <option value="gray" class="gray">Grey</option>
+                    <option value="pink" class="pink">Pink</option>
+                    <option value="purple" class="purple">Purple</option>
                 </select>
                 <div class="button">
-                    <button id="btn-nav-save" type="button" class="am-btn am-btn-secondary" style="width: 140px">保存
+                    <button id="btn-nav-save" type="button" class="am-btn am-btn-secondary" style="width: 140px">Save
                     </button>
-                    <button id="btn-nav-cancel" type="button" class="am-btn am-btn-default" style="width: 140px">取消
+                    <button id="btn-nav-cancel" type="button" class="am-btn am-btn-default" style="width: 140px">Cancel
                     </button>
                 </div>
             </div>
@@ -130,19 +130,19 @@
             </div>
             <div class="left-mask" id="left-mask">
                 <button type="button" class="am-btn am-btn-secondary button2" id="btn-left-mask"
-                        data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 1190,height: 760}">编辑
+                        data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 1190,height: 760}">Edit
                 </button>
                 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2"
                      style="background: #fff; min-height: 600px; overflow: auto; margin-top: -420px;">
                     <div class="am-modal-dialog" style="min-height: 760px;overflow: auto">
-                        <div class="am-modal-hd">轮播图
+                        <div class="am-modal-hd">Carousel
                             <!--                            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
                         </div>
                         <div class="am-modal-bd left-maskHeight" style="width: auto;">
-                            <div class="mask-title am-u-sm-1">店招图片：</div>
+                            <div class="mask-title am-u-sm-1">Shop picture：</div>
                             <div class="mask-con am-u-sm-11" id="mask-con-2">
                                 <p>
-                                    <span>您可以通过展示最多4张图片的方式引导用户点击图片跳转到您指定的链接。通常用于有店铺的最新单品、精彩活动或优惠推荐。</span>
+                                    <span>You can direct users to click on the image to jump to the link you specify by showing up to 4 images. Usually used for the latest items, events or offers in stores。</span>
                                 </p>
                                 <!-- 默认 -->
                                 <div class="upload upload-chart">
@@ -150,10 +150,10 @@
                                         <input name="fileName" type="file" multiple onchange="changeValue(this)">
                                     </div>
                                     <div class="picload up-pic">
-                                        <a href="javascript: void(0)" onclick="uploadPic(this);">上传图片</a>
+                                        <a href="javascript: void(0)" onclick="uploadPic(this);">Upload an image</a>
                                     </div>
                                     <div class="proload up-pic">
-                                        <a href="javascript: void(0)" onclick="selectProduct(this);">选择跳转链接</a>
+                                        <a href="javascript: void(0)" onclick="selectProduct(this);">Select a jump link</a>
                                     </div>
                                     <div class="icon">
                                         <span onclick="upClick(this);" class="up" style="cursor: pointer"></span>
@@ -163,19 +163,19 @@
                                 </div>
                                 <div class="upload">
                                     <button type="button" class="am-btn am-btn-xs am-btn-secondary"
-                                            style="width: 140px" onclick="addShopChart(this);">添加
+                                            style="width: 140px" onclick="addShopChart(this);">Add to
                                     </button>
                                     <button id="btn-chart-save" type="button" class="am-btn am-btn-warning"
-                                            style="width: 140px">保存
+                                            style="width: 140px">Save
                                     </button>
                                     <button id="btn-chart-cancel" type="button" class="am-btn am-btn-default"
-                                            style="width: 140px">取消
+                                            style="width: 140px">Cancel
                                     </button>
                                 </div>
                                 <!--点击选择跳转链接-->
                                 <div class="am-tabs pro" data-am-tabs hidden id="left-mask-tabs">
                                     <ul class="am-tabs-nav am-nav am-nav-tabs" style="padding:0px 10px; ">
-                                        <li class="am-active"><a href="#tab1">产品</a></li>
+                                        <li class="am-active"><a href="#tab1">Products</a></li>
 <!--                                        <li><a href="#tab2">页面</a></li>-->
                                     </ul>
 
@@ -187,7 +187,7 @@
                                                 <input id="productName" type="text" placeholder="关键词">
                                                 <button type="button" class="am-btn am-btn-secondary"
                                                         id="btn-search-product"
-                                                        style="height: 40px; margin-left: 20px;">搜索
+                                                        style="height: 40px; margin-left: 20px;">Search
                                                 </button>
                                             </div>
                                             <div class="pro-down" id="tab1-pro-down" style="height: 280px;overflow: auto">
@@ -210,25 +210,25 @@
         </div>
 
         <div class="right" id="right-company">
-            <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
+            <h4 id="companyName">Zhejiang Dejuren and Textileco Co., Ltd.</h4>
             <!-- <div class="Collection">-->
             <!--     <span class="coll1">收藏</span>-->
             <!--     <span class="coll2">已收藏</span>-->
             <!-- </div>-->
             <div>
-                <span class="one">联系电话：</span>
+                <span class="one">Call：</span>
                 <span class="two" id="linkPhone">xxxx</span>
             </div>
             <div>
-                <span class="one">经营类目：</span>
+                <span class="one">Business category：</span>
                 <span class="two" id="mainProducts">xxxx</span>
             </div>
             <div>
-                <span class="one">联系地址：</span>
+                <span class="one">Contact address：</span>
                 <span class="two" id="companyAddress">xxxx</span>
             </div>
             <div>
-                <span class="one">公司介绍：</span>
+                <span class="one">About the company：</span>
                 <span class="two" style="line-height: 40px" id="companyInfo">xxxx</span>
             </div>
         </div>
@@ -237,7 +237,7 @@
 <div id="shop-product">
     <div class="product-in">
         <div class="product-title" id="product-title">
-             <a href="#" class="">未添加分类</a>
+             <a href="#" class="">No categories added</a>
             <!-- <a href="#">产品分类</a>-->
             <!-- <a href="#">产品分类</a>-->
             <!-- <a href="#">产品分类</a>-->
@@ -249,12 +249,12 @@
         </div>
         <div class="mask-productTitle" id="mask-productTitle">
             <button type="button" class="am-btn am-btn-secondary button4" id="btn-mask-productTitle"
-                    data-am-modal="{target: '#doc-modal-4', closeViaDimmer: 0, width:1190,height: 510}">编辑
+                    data-am-modal="{target: '#doc-modal-4', closeViaDimmer: 0, width:1190,height: 510}">Edit
             </button>
             <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-4"
                  style="background: #fff; min-height:510px; overflow: auto; margin-top: -420px;">
                 <div class="am-modal-dialog">
-                    <div class="am-modal-hd">导航设置
+                    <div class="am-modal-hd">Navigation settings
                         <!--                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
                     </div>
                     <div class="mask-Lnav">
@@ -285,17 +285,17 @@
                                 <!-- </div>-->
                             </div>
                             <button class="am-btn am-btn-warning" style="float: inherit;margin-top: 10px;"
-                                    id="addAssort">添加
+                                    id="addAssort">Add to
                             </button>
                             <p style="color: #999;margin-top: 10px;text-align: left;cursor: pointer;">
-                                如果您想添加或删除分类，请前往分类管理页面。<span style="color:#40ADFB ">立即前往</span></p>
+                                If you would like to add or remove a category, go to the Category Management page。<span style="color:#40ADFB ">Go now</span></p>
                         </div>
                         <div class="button">
                             <button id="btn-storeA-save" type="button" class="am-btn am-btn-secondary"
-                                    style="width: 140px">保存
+                                    style="width: 140px">Save
                             </button>
                             <button id="btn-storeA-cancel" type="button" class="am-btn am-btn-default"
-                                    style="width: 140px">取消
+                                    style="width: 140px">Cancel
                             </button>
                         </div>
                     </div>
@@ -312,12 +312,12 @@
         </div>
         <div class="mask-product" id="mask-product">
             <button type="button" class="am-btn am-btn-secondary button7" id="btn-mask-product"
-                    data-am-modal="{target: '#doc-modal-10', closeViaDimmer: 0, width:595,height: 380}">编辑
+                    data-am-modal="{target: '#doc-modal-10', closeViaDimmer: 0, width:595,height: 380}">Edit
             </button>
             <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-10"
                  style="background: #fff; min-height:330px; overflow: hidden; margin-top: -420px; ">
                 <div class="am-modal-dialog">
-                    <div class="am-modal-hd">产品排序
+                    <div class="am-modal-hd">Product sorting
                         <!--  <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
                     </div>
                     <div class="mask-pro-select">
@@ -327,18 +327,18 @@
                     </div>
                     <div class="mask-pro-select">
                         <select data-am-selected="{btnWidth: 'auto'}" id="mask-pro-select2">
-                            <option value="1">收藏最多在前</option><!-- 1：order by collection_number desc -->
-                            <option value="2">成交最多在前</option><!-- 2：order by deal_number desc -->
-                            <option value="3">浏览量最多在前</option><!-- 3：order by browse_number desc -->
-                            <option value="4">价格最低在前</option><!-- 4：order by product_price desc -->
-                            <option value="5">价格最低在后</option><!-- 5：order by product_price -->
+                            <option value="1">Favorites most in front</option><!-- 1：order by collection_number desc -->
+                            <option value="2">Most deals in front</option><!-- 2：order by deal_number desc -->
+                            <option value="3">Most views in the front</option><!-- 3：order by browse_number desc -->
+                            <option value="4">Lowest price in the top</option><!-- 4：order by product_price desc -->
+                            <option value="5">Lowest price at the back</option><!-- 5：order by product_price -->
                         </select>
                         <div class="button">
                             <button id="btn-mask-pro-save" type="button" class="am-btn am-btn-secondary"
-                                    style="width: 140px">保存
+                                    style="width: 140px">Save
                             </button>
                             <button id="btn-mask-pro-cancel" type="button" class="am-btn am-btn-default"
-                                    style="width: 140px">关闭
+                                    style="width: 140px">Shut down
                             </button>
                         </div>
                     </div>

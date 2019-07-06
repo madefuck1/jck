@@ -6,7 +6,7 @@
 <#assign contextPath=request.contextPath+"/static" />
 <head>
     <#include "/common/includes/header.html"/>
-    <title>产品搜索页面</title>
+    <title>Product search page</title>
     <!-- css样式 -->
     <link href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
     <link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
@@ -49,26 +49,26 @@
             <div class="am-u-sm-12 am-u-md-12">
                 <div class="theme-popover">
                     <div class="searchAbout">
-                        <span class="font-pale">相关搜索：</span>
-                        <a title="纺织" href="#">纺织</a>
-                        <a title="衣服" href="#">衣服</a>
-                        <a title="印花" href="#">印花</a>
+                        <span class="font-pale">Related searches：</span>
+                        <a title="纺织" href="#">Textile</a>
+                        <a title="衣服" href="#">Clothes</a>
+                        <a title="印花" href="#">Printing</a>
 
                     </div>
                     <ul class="select" name="select">
                         <li class="select-result">
                             <dl>
-                                <dt>已选</dt>
+                                <dt>Selected</dt>
                                 <dd class="select-no"></dd>
-                                <p class="eliminateCriteria">清除</p>
+                                <p class="eliminateCriteria">Clear</p>
                             </dl>
                         </li>
                         <div class="clear"></div>
                         <li class="select-list">
                             <dl id="select1">
-                                <dt class="am-badge am-round">相关分类</dt>
+                                <dt class="am-badge am-round">Related categories</dt>
                                 <div class="dd-conent">
-                                    <dd class="select-all selected"><a href="#">全部</a></dd>
+                                    <dd class="select-all selected"><a href="#">All</a></dd>
                                     <#list assortA as item>
                                     <dd><a href="#">${item.assortName}<input hidden value="${item.assortId}"></a></dd>
                                     </#list>
@@ -89,16 +89,16 @@
         <div class="search-content">
             <div class="sort">
                 <li class="first">
-                    <a href="javascript:void(0);" onclick="searchAssortWithSort(1)" title="综合">综合排序</a>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(1)" title="Comprehensive">Comprehensive sorting</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" onclick="searchAssortWithSort(2)" title="销量">销量排序</a>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(2)" title="Sales">Sales order</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,1)" title=">价格">价格从低到高</a>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,1)" title=">Price">Prices from low to high</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,2)" title=">价格">价格从高到低</a>
+                    <a href="javascript:void(0);" onclick="searchAssortWithSort(3,2)" title=">Price">Prices from high to low</a>
                 </li>
                 <!--                        <li>-->
                 <!--                            <select style="color:#F58022;height:35px;" onchange="searchAssortWithSort(3,this)">-->
@@ -138,7 +138,7 @@
         </div>
         <div class="search-side">
 
-            <div class="side-title" style="font-weight: 600; color: #333;font-size: 16px;">热门推荐</div>
+            <div class="side-title" style="font-weight: 600; color: #333;font-size: 16px;">Top Recommendations</div>
             <#list HotProductList as item>
             <li>
                 <div class="i-pic check">
@@ -329,8 +329,8 @@
             // pagination 分页插件
             $("#pagination-product").pagination(result.productCount, {   //total(一共多少条记录)不能少
                 callback: PageCallback,
-                prev_text: '上一页',
-                next_text: '下一页',
+                prev_text: 'Previous',
+                next_text: 'Next',
                 items_per_page: 40,             //每页显示最大条数
                 num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                 num_edge_entries: 1,           //两侧显示的首尾分页的条目数
@@ -395,7 +395,7 @@
             $('[name=product_UL]').html("");
             $('#pagination').html("");
             $('.mypage').hide();
-            $('[name=product_UL]').append("没有找到匹配的产品！");
+            $('[name=product_UL]').append("No matching products found！");
             $('[name=product_UL]').css("text-align", "center")
         } else {
             // 产品列表数据
@@ -435,7 +435,7 @@
             if (result.length != 0) {
 
                 html += '<div class="dd-conent">';
-                html += '<dd class="select-all selected"><a href="#">全部</a></dd>';
+                html += '<dd class="select-all selected"><a href="#">All </a></dd>';
                 for (var i = 0; i < result.length; i++) {
                     html += '<dd><a href="#">' + result[i].assortName + '<input hidden ' +
                         'value="' + result[i].assortId + '"></a></dd>';

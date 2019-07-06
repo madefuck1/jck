@@ -1,5 +1,5 @@
 <@override name="title">
-注册
+Registered
 </@override>
 
 <@override name="css">
@@ -11,7 +11,7 @@
 
 <div class="login-boxtitle">
     <div class="logo" style="margin-top: 24px; cursor: pointer" onclick="javascript:window.open('/index');"href="#"><img src="${contextPath}/images/img/logo.png" alt=""></div>
-    <span class="login_in">已有账号，去<a href="/user/toLogin">登陆</a></span>
+    <span class="login_in">Existing account,go<a href="/user/toLogin">Landing</a></span>
 </div>
 
 <div class="res-banner">
@@ -21,8 +21,8 @@
 
             <div class="am-tabs" id="doc-my-tabs">
                 <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-                    <li class="am-active"><a href="">邮箱注册</a></li>
-                    <li><a href="">手机号注册</a></li>
+                    <li class="am-active"><a href="">Email registration</a></li>
+                    <li><a href="">Mobile number registration</a></li>
                 </ul>
 
                 <div class="am-tabs-bd">
@@ -31,32 +31,32 @@
 
                             <div class="user-email">
                                 <label for="email"><i class="am-icon-envelope-o"></i></label>
-                                <input type="email" name="" id="email" placeholder="请输入邮箱账号">
+                                <input type="email" name="" id="email" placeholder="Please enter your email account number">
                             </div>
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
-                                <input type="tel" name="" id="code" placeholder="请输入验证码">
+                                <input type="tel" name="" id="code" placeholder="Please enter the verification code">
                                 <a class="btn" href="javascript:void(0);" id="sendEmailCode" >
-                                    <span id="dyEmailButton" style="width: 100px">获取</span></a>
+                                    <span id="dyEmailButton" style="width: 100px">Get</span></a>
                             </div>
                             <div class="user-pass">
                                 <label for="password"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="password" placeholder="设置密码">
+                                <input type="password" name="" id="password" placeholder="Set a password">
                             </div>
                             <div class="user-pass">
                                 <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
+                                <input type="password" name="" id="passwordRepeat" placeholder="Confirm your password">
                             </div>
 
                         </form>
 
                         <div class="login-links">
                             <label for="reader-me">
-                                <input id="reader-mep" type="checkbox"> 点击表示您同意商城《服务协议》
+                                <input id="reader-mep" type="checkbox"> By clicking, you agree to the Marketplace Service Agreement
                             </label>
                         </div>
                         <div class="am-cf">
-                            <input type="submit" id="submitEmail" value="注册" class="am-btn am-btn-warning am-btn-sm am-fl">
+                            <input type="submit" id="submitEmail" value="Registered" class="am-btn am-btn-warning am-btn-sm am-fl">
                         </div>
 
                     </div>
@@ -65,30 +65,30 @@
                         <form method="post">
                             <div class="user-phone">
                                 <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-                                <input type="tel" name="" id="phone" placeholder="请输入手机号">
+                                <input type="tel" name="" id="phone" placeholder="Please enter your phone number">
                             </div>
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
-                                <input type="tel" name="" id="codeP" placeholder="请输入验证码">
+                                <input type="tel" name="" id="codeP" placeholder="Please enter the verification code">
                                 <a class="btn" href="javascript:void(0);"  id="sendMobileCode">
-                                    <span id="dyMobileButton" style="width: 100px">获取</span></a>
+                                    <span id="dyMobileButton" style="width: 100px">Get</span></a>
                             </div>
                             <div class="user-pass">
                                 <label for="password"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="passwordP" placeholder="设置密码">
+                                <input type="password" name="" id="passwordP" placeholder="Set a password">
                             </div>
                             <div class="user-pass">
                                 <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="passwordRepeatP" placeholder="确认密码">
+                                <input type="password" name="" id="passwordRepeatP" placeholder="Confirm your password">
                             </div>
                         </form>
                         <div class="login-links">
                             <label for="reader-me">
-                                <input id="reader-me" type="checkbox" > 点击表示您同意商城《服务协议》
+                                <input id="reader-me" type="checkbox" > By clicking, you agree to the Marketplace Service Agreement
                             </label>
                         </div>
                         <div class="am-cf">
-                            <input type="submit" id="submitPhone" value="注册" class="am-btn am-btn-warning am-btn-sm am-fl">
+                            <input type="submit" id="submitPhone" value="Registered" class="am-btn am-btn-warning am-btn-sm am-fl">
                         </div>
 
                         <!--	<hr>-->
@@ -100,7 +100,7 @@
     </div>
 
     <div class="footer">
-        <p>Copyright 2015-2019 绍兴远恒互联网络科技有限公司 版权所有 浙ICP备19009440号-4</p>
+        <p>Copyright 2015-2019 Shaoxing Yuanheng Internet Technology Co., Ltd. Copyright Zhejiang ICP 19009440 No.4</p>
     </div>
 </@override>
 
@@ -120,7 +120,7 @@
         $(this).attr("disabled",true);
         var data = '{"phone":"'+$("#phone").val()+'"}' ;
         if(flag){
-            alert("验证码已发送，请查收！");
+            alert("The verification code has been sent, please check！");
             var timer = setInterval(function () {
                 if(time == 120 && flag){
                     flag = false;
@@ -133,7 +133,7 @@
                         success : function(data) {
                             if(data.success){
                                 //vercode = data.data;
-                                $("#dyMobileButton").html("已发送");
+                                $("#dyMobileButton").html("Sent");
                             }else {
                                 alert(data.message);
                                 flag = true;
@@ -144,7 +144,7 @@
                     });
                 }else if(time == 0){
                     $("#dyMobileButton").removeAttr("disabled");
-                    $("#dyMobileButton").html("获取");
+                    $("#dyMobileButton").html("Get");
                     clearInterval(timer);
                     time = 120;
                     flag = true;
@@ -160,7 +160,7 @@
         $(this).attr("disabled",true);
         var data = '{"email":"'+$("#email").val()+'"}' ;
         if(flag){
-            alert("验证码已发送，请查收");
+            alert("The verification code has been sent, please check");
             var timer = setInterval(function () {
                 if(time == 120 && flag){
                     flag = false;
@@ -173,7 +173,7 @@
                         success : function(data) {
                             if(data.success){
                                 //vercode = data.data;
-                                $("#dyEmailButton").html("已发送");
+                                $("#dyEmailButton").html("Sent");
                             }else {
                                 alert(data.message);
                                 flag = true;
@@ -184,7 +184,7 @@
                     });
                 }else if(time == 0){
                     $("#dyEmailButton").removeAttr("disabled");
-                    $("#dyEmailButton").html("获取");
+                    $("#dyEmailButton").html("Get");
                     clearInterval(timer);
                     time = 120;
                     flag = true;
@@ -203,17 +203,17 @@
         var submitBtnE = document.getElementById("submitEmail");
         submitBtnP.onclick = function () {
             if(!document.getElementById("reader-me").checked){
-                alert("请勾选协议");
+                alert("Please check the agreement");
                 return false;
             }else {
                 var password = $("#passwordP").val();
                 var passwordP = $("#passwordRepeatP").val();
                 if(password == "" || password == null || password == undefined){
-                    alert("密码不能为空");
+                    alert("Password cannot be empty");
                     return false;
                 }
                 if(passwordP != password){
-                    alert("两次密码输入不一致");
+                    alert("Two password entry inconsistencies");
                     return false;
                 }else {
                     registerByPhone();
@@ -222,17 +222,17 @@
         };
         submitBtnE.onclick = function () {
             if(!document.getElementById("reader-mep").checked){
-                alert("请勾选协议");
+                alert("Please check the agreement");
                 return false;
             }else {
                 var password = $("#password").val();
                 var passwordP = $("#passwordRepeat").val();
                 if(password == "" || password == null || password == undefined){
-                    alert("密码不能为空");
+                    alert("Password cannot be empty");
                     return false;
                 }
                 if(passwordP != password){
-                    alert("两次密码输入不一致");
+                    alert("Two password entry inconsistencies");
                     return false;
                 } else {
                     registerByEmail();

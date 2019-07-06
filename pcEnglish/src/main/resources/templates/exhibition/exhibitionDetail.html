@@ -1,5 +1,5 @@
 <@override name="title">
-展会详情
+Exhibition details
 </@override>
 <@override name="css">
 	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
@@ -8,45 +8,45 @@
 <@override name="body">
 	<div id="expoDetail">
 		<ol class="am-breadcrumb">
-		  <li><a href="/exhibition/toExhibition">展会</a></li>
-		  <li><a href="#">详情</a></li>
+		  <li><a href="/exhibition/toExhibition">Exhibition</a></li>
+		  <li><a href="#">Details</a></li>
 		</ol>
 		<div class="expo-table01">
-			<h3>基本信息</h3>
+			<h3>Basic Information</h3>
 			<div class="table01-in">
 				<table>
 				<tbody>
 				<input type="hidden" id="exhibitionId" value="${exhibitionId}">
 					<tr>
-						<th>组织机构:</th>
+						<th>organization:</th>
 						<td id="exhibitionOrganization"></td>
 					</tr>
 					<tr>
-						<th>展期:</th>
+						<th>Extension:</th>
 						<td><span id="exhibitionStartTime"></span><span id="exhibitionEndTime"></span></td>
 					</tr>
 					<tr>
-						<th>展馆名称:</th>
+						<th>Exhibition hall name:</th>
 						<td id="exhibitionName"></td>
 					</tr>
 					<tr>
-						<th>地区:</th>
+						<th>area:</th>
 						<td id="exhibitionArea"></td>
 					</tr>
 					<tr>
-						<th>联系人:</th>
+						<th>Contact:</th>
 						<td id="exhibitionContact"></td>
 					</tr>
 					<tr>
-						<th>电子邮箱:</th>
+						<th>E-mail:</th>
 						<td id="exhibitionEmail"></td>
 					</tr>
 					<tr>
-						<th>电话:</th>
+						<th>phone:</th>
 						<td id="exhibitionPhone"></td>
 					</tr>
 					<tr>
-						<th>传真:</th>
+						<th>fax:</th>
 						<td id="exhibitionFax"></td>
 					</tr>
 					
@@ -54,21 +54,21 @@
 
 			</table>
 			</div>
-			<h3>展会信息</h3>
+			<h3>Show information</h3>
 			<div class="table01-in">
 				<table>
 				<tbody>
 					<tr>
-						<th>展会主页:</th>
+						<th>Exhibition homepage:</th>
 						<td id="exhibitionIndexUrl"></td>
 					</tr>
 					<tr>
-						<th>所属行业:</th>
+						<th>Industry:</th>
 						<td id="assortName">
 						</td>
 					</tr>
 					<tr>
-						<th>展会介绍:</th>
+						<th>Exhibition introduction:</th>
 						<td id="exhibitionIntroduce">
 						</td>
 					</tr>
@@ -106,7 +106,7 @@
                 $("#exhibitionFax").html(v.exhibitionFax);
                 $("#assortName").html(v.assortDto.assortName);
                 $("#exhibitionIntroduce").html(v.exhibitionIntroduce);
-                $("#exhibitionIndexUrl").html( "<a href='"+v.exhibitionIndexUrl+"'>访问官方网址</a>");
+                $("#exhibitionIndexUrl").html( "<a href='"+v.exhibitionIndexUrl+"'>Visit the official website</a>");
                 });
                 }
 

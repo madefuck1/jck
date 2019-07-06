@@ -1,5 +1,5 @@
 <@override name="title">
-订单详情
+order details
 </@override>
 
 <@override name="css">
@@ -40,7 +40,7 @@
             <div class="user-orderinfo">
                 <!--标题 -->
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单详情</strong></div>
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">order details</strong></div>
                 </div>
                 <hr/>
                 <!--进度条-->
@@ -49,27 +49,27 @@
                         <span class="step-1 step">
                            <em class="u-progress-stage-bg"></em>
                            <i class="u-stage-icon-inner">1<em class="bg"></em></i>
-                           <p class="stage-name">审核</p>
+                           <p class="stage-name">Review</p>
                         </span>
                         <span class="step-2 step">
                            <em class="u-progress-stage-bg"></em>
                            <i class="u-stage-icon-inner">2<em class="bg"></em></i>
-                           <p class="stage-name">付款</p>
+                           <p class="stage-name">payment</p>
                         </span>
                         <span class="step-3 step">
                            <em class="u-progress-stage-bg"></em>
                            <i class="u-stage-icon-inner">3<em class="bg"></em></i>
-                           <p class="stage-name">收货</p>
+                           <p class="stage-name">Receipt</p>
                         </span>
                         <span class="step-4 step">
                            <em class="u-progress-stage-bg"></em>
                            <i class="u-stage-icon-inner">4<em class="bg"></em></i>
-                           <p class="stage-name">评价</p>
+                           <p class="stage-name">Evaluation</p>
                         </span>
                         <span class="step-5 step">
                            <em class="u-progress-stage-bg"></em>
                            <i class="u-stage-icon-inner">5<em class="bg"></em></i>
-                           <p class="stage-name">完成</p>
+                           <p class="stage-name">carry out</p>
                         </span>
                         <span class="u-progress-placeholder"></span>
                     </div>
@@ -79,34 +79,34 @@
                 </div>
 
                 <div class="info">
-                    <h3>订单信息</h3>
+                    <h3>order information</h3>
                     <div class=" am-u-sm-7">
                         <div class="am-u-sm-3 info_left">
-                            <p>订单号：</p>
-                            <p>收货人：</p>
-                            <p>收货地址：</p>
-                            <p>联系方式：</p>
-                            <p>支付方式：</p>
-                            <p>发票信息：</p>
-                            <p>补充说明：</p>
+                            <p>order number：</p>
+                            <p>Receiver：</p>
+                            <p>Shipping address：</p>
+                            <p>Contact information：</p>
+                            <p>payment method：</p>
+                            <p>Invoice Information：</p>
+                            <p>Supplementary explanation：</p>
                         </div>
                         <div class="am-u-sm-9 info_right">
                             <p>${order.orderNumber}</p>
                             <p>${order.orderDto.takeName}</p>
                             <p>${order.orderDto.takeAddress}</p>
                             <p>${order.orderDto.takePhone}</p>
-                            <p><#if order.orderDto.orderType == 2>线上支付<#else>线下支付</#if></p>
-                            <p>普通发票</p>
+                            <p><#if order.orderDto.orderType == 2>Online payment<#else>Offline payments</#if></p>
+                            <p>General invoice</p>
                             <p>${order.orderDto.orderRemark!}</p>
                         </div>
 
                     </div>
                     <div class=" am-u-sm-5">
                         <div class="am-u-sm-4 info_left">
-                            <p>供应商：</p>
-                            <p>登录名：</p>
-                            <p>联系方式：</p>
-                            <p>订单合同：</p>
+                            <p>supplier：</p>
+                            <p>log-in name：</p>
+                            <p>Contact information：</p>
+                            <p>Order contract：</p>
 
                         </div>
                         <div class="am-u-sm-8 info_right">
@@ -116,15 +116,15 @@
                             <p>${user.userName}</p>
                             <p>${user.phone}</p>
                             <#if order.orderDto.orderType == 2>
-                            <p><#if order.orderShopStatus == 1> 未提交
-                                <#elseif order.orderShopStatus ==2> 审核中
-                                <#elseif order.orderShopStatus ==10> 审核失败
+                            <p><#if order.orderShopStatus == 1> unsubmitted
+                                <#elseif order.orderShopStatus ==2> under review
+                                <#elseif order.orderShopStatus ==10> Audit failure
                                 <#else> 审核成功</#if>
                             </p>
-                            <div class="am-btn am-btn-warning" onclick="downContract(${order.orderShopId?c})">下载合同</div>
+                            <div class="am-btn am-btn-warning" onclick="downContract(${order.orderShopId?c})">Download contract</div>
                             <input type="hidden" class="orderNumber" value="${order.orderNumber}">
                             <input type="hidden" class="orderShopId" value="${order.orderShopId?c}">
-                            <input type="file" id="image" class="am-btn am-btn-warning" onchange="uploadContract()"/>上传合同
+                            <input type="file" id="image" class="am-btn am-btn-warning" onchange="uploadContract()"/>Upload contract
                             </#if>
                         </div>
                     </div>
@@ -133,16 +133,16 @@
                 <div class="order-infomain">
                     <div class="order-top">
                         <div class="th th-item">
-                            <td class="td-inner">商品</td>
+                            <td class="td-inner">product</td>
                         </div>
                         <div class="th th-price">
-                            <td class="td-inner">单价</td>
+                            <td class="td-inner">unit price</td>
                         </div>
                         <div class="th th-number">
-                            <td class="td-inner">数量</td>
+                            <td class="td-inner">number</td>
                         </div>
                         <div class="th th-amount">
-                            <td class="td-inner">小计</td>
+                            <td class="td-inner">Subtotal</td>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                                                 <div class="item-basic-info">
                                                     <a href="#">
                                                         <p>${orderProduct.productName}</p>
-                                                        <p class="info-little">颜色：${orderProduct.productColor}
+                                                        <p class="info-little">color：${orderProduct.productColor}
                                                             <br>规格：${orderProduct.productSpec} </p>
                                                     </a>
                                                 </div>
@@ -194,10 +194,10 @@
 
                     <div class="order_pri">
                         <div class="left am-u-sm-6">
-                            <p>商品总价：</p>
-                            <p>订单总价：</p>
-                            <p>订金：</p>
-                            <p>尾款：</p>
+                            <p>Total price of goods：</p>
+                            <p>Total order price：</p>
+                            <p>Deposit：</p>
+                            <p>Tail：</p>
                         </div>
                         <div class="right am-u-sm-6">
                             <p>￥${order.sumPrice?string('0.00')}</p>
@@ -208,21 +208,21 @@
                             </#if>
                         </div>
                         <#if order.orderShopStatus == 2>
-                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">订单审核中</button>
+                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">Order review</button>
                         <#elseif order.orderShopStatus == 3 || order.orderShopStatus == 5>
-                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="selectPayType(${order.orderShopId?c})">去支付</button>
+                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="selectPayType(${order.orderShopId?c})">To pay</button>
                         <#elseif order.orderShopStatus == 4>
-                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">商品准备中</button>
+                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">Commodity preparation</button>
                         <#elseif order.orderShopStatus == 6>
-                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">待发货</button>
+                            <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">to be delivered</button>
                         <#elseif order.orderShopStatus == 7>
-                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;">收货</button>
+                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;">Receipt</button>
                         <#elseif order.orderShopStatus == 8>
-                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="putAssess('${order.orderNumber}')">评价</button>
+                            <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" onclick="putAssess('${order.orderNumber}')">Evaluation</button>
                         <#elseif order.orderDto.orderType == 3>
-                        <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" >已完成</button>
+                        <button type="button" class="am-btn am-btn-default" style="margin:20px 170px;" >completed</button>
                     </#if>
-                        <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">订单审核中</button>
+                        <button type="button" class="am-btn am-btn-default" disabled="disabled" style="margin:20px 170px;">Order review</button>
                     </div>
                 </div>
             </div>
