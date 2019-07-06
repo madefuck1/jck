@@ -1,5 +1,5 @@
 <@override name="title">
-求购列表
+Buying list
 </@override>
 <@override name="css">
 	<link rel="stylesheet" href="${contextPath}/css/purchList.css">
@@ -32,14 +32,14 @@
 <@override name="body">
 <div id="purch-center">
 	<p style="line-height: 40px;">
-		<span style="font-weight: bold">求购信息</span>
-		<span>(共找到<span style="color: red; font-size: 12px" id="purchaseLength"></span>条求购信息)</span>
+		<span style="font-weight: bold">Buying information</span>
+		<span>(Found<span style="color: red; font-size: 12px" id="purchaseLength"></span>article Buying Information)</span>
 		<button type="submit" class="purbutton">
-			<a href="/enquiry/create">发布询价单</a></button>
+			<a href="/enquiry/create">Publish inquiry</a></button>
 	</p>
 	<div class="pur-list2">
 						<ul id="showAssort">
-							<li style="margin-left: 0px;"><a style="cursor:pointer;" onclick="tablieList(1,0,'',1)">查看全部</a></li>
+							<li style="margin-left: 0px;"><a style="cursor:pointer;" onclick="tablieList(1,0,'',1)">view all</a></li>
 							<div id="showMoreAssort">
 							</div>
 						</ul>
@@ -57,14 +57,14 @@
 		<div class="plist-down">
 			<div class="ptitle">
 				<p>
-					<span>报价截至日期</span>
+					<span>Quotation deadline</span>
 					<a href="javascript:void(0);" onclick="endTimeSort(0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;">
 					</a>
 					<a href="javascript:void(0);" onclick="endTimeSort(1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;">
 					</a>
 				</p>
 				<p>
-					<span>发布日期</span>
+					<span>Release date</span>
 					<a href="javascript:void(0);" onclick="tablieList(1,0,'',0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;"></a>
 					<a href="javascript:void(0);" onclick="tablieList(1,0,'',1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;"></a>
 				</p>
@@ -73,11 +73,11 @@
 				<table class="am-table">
 					<thead>
 					<tr>
-						<th>标题</th>
-						<th>采购量</th>
-						<th>报价截至时间</th>
-						<th>采购商信息</th>
-						<th>操作</th>
+						<th>title</th>
+						<th>Purchase quantity</th>
+						<th>Quotation deadline</th>
+						<th>Buyer Information</th>
+						<th>operating</th>
 					</tr>
 					</thead>
 					<tbody id="showMoreAssorts">
@@ -184,7 +184,7 @@ function liContentAssort(v,assortLevel) {
                 var whatever="";
                 if(data.count==0){
                     $("#showMoreAssorts").html("");
-                    var noData=$("<tr><th colspan='5'>暂无相关数据</th></tr>");
+                    var noData=$("<tr><th colspan='5'>No relevant data yet</th></tr>");
                     //$("#showMoreAssorts").html("暂无相关数据");
                     $("#showMoreAssorts").append(noData);
                     $("#purchaseLength").html(0);
@@ -233,7 +233,7 @@ function liContent(v){
     var shopDto=v.shopDto;
     var shopName=shopDto.shopName;
     if (shopName==null||shopName==""){
-        shopName="无采购信息";
+        shopName="No purchase information";
     }
 
 
@@ -241,20 +241,20 @@ function liContent(v){
     var li=$("<tr>"
         +"<td>"
         +"<p style='color:#0066cc'>"+productName+"</p>"
-        +"<p>发布日期："+createTime+"</p>"
+        +"<p>Release date："+createTime+"</p>"
         +"</td>"
         +"<td>"+productNumber+productUnit
         +"</td>"
         +"<td>"
         +"<p>"+endTime+"</p>"
-        +"<p>剩余<span style='color: #F58022'>"+distanceDate+"</span>天</p>"
+        +"<p>Remaining<span style='color: #F58022'>"+distanceDate+"</span>day</p>"
         +"</td>"
         +"<td>"
         +"<p>"+shopName+"</p>"
         +"</td>"
         +"<td>"
-        +"<button class='am-btn am-btn-danger am-radius' onclick='toPurchase(\""+enquiryProductId+"\")'>立即报价</button>"
-        +"<p >已有<span style='color: #F58022'>"+purchaseLength+"</span>人报价</p>"
+        +"<button class='am-btn am-btn-danger am-radius' onclick='toPurchase(\""+enquiryProductId+"\")'>Quote now</button>"
+        +"<p >Already<span style='color: #F58022'>"+purchaseLength+"</span>person quote</p>"
         +"</td>"
         +"</tr>"
 
