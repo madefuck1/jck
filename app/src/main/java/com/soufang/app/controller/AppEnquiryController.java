@@ -139,8 +139,8 @@ public class AppEnquiryController extends  AppBaseController{
      */
     @AppMemberAccess
     @ResponseBody
-    @RequestMapping(value = "getgetDetailPurchase/{enquiryNumber}",method = RequestMethod.POST)
-    public EnquiryGetDetailVo getgetDetailPurchase(@PathVariable String enquiryNumber,HttpServletRequest request){
+    @RequestMapping(value = "getDetailPurchase/{enquiryNumber}",method = RequestMethod.POST)
+    public EnquiryGetDetailVo getDetailPurchase(@PathVariable String enquiryNumber,HttpServletRequest request){
         UserDto userInfo = this.getUserInfo(request);
         EnquiryGetDetailVo enquiryGetDetailVo = new EnquiryGetDetailVo();
         EnquirySo enquirySo= new EnquirySo();
