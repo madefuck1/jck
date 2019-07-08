@@ -64,7 +64,16 @@ public class EnquiryServiceImpl implements EnquiryService {
             for (Purchase purchase : enquiryProduct.getPurchases()) {
                 if(StringUtils.isNotBlank(purchase.getPurchaseNumber())){
                     PurchaseDto purchaseDto = new PurchaseDto();
-                    BeanUtils.copyProperties(purchase, purchaseDto);
+                    //对SHOPID判断
+                    if(enquirySo.getShopId()==null||"".equals(enquirySo.getShopId())){
+                        //报价信息包含所有
+                        BeanUtils.copyProperties(purchase, purchaseDto);
+                    }else{
+                        //只有当前商铺报价信息
+                        if(enquirySo.getShopId()==purchase.getShopId()){
+                            BeanUtils.copyProperties(purchase, purchaseDto);
+                        }
+                    }
                     if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
                         Shop shop= purchase.getShop();
                         if("".equals(shop.getShopName())||null==shop.getShopName()){
