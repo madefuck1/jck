@@ -107,7 +107,8 @@ form,.am-cf,.partner{max-width:640px;margin:20px auto ;}
 		max-width: 360px;
 		height: 430px;
 		position: absolute;
-		margin-top: 20px;
+		top: 50%;
+		margin-top: -215px;
 		margin-left: 0px;
 		background: #f8f8f8;
 		right: 2%;
@@ -130,13 +131,14 @@ form,.am-cf,.partner{max-width:640px;margin:20px auto ;}
 
 	.login-banner, .res-banner {
 		width: 100%;
-		height: 470px;
-		background: #fd7a72;
+		height: 696px;
+		background: url(../images/loadingBanner.jpg) no-repeat center;
+		background-size: cover;
 	}
 
 	.login-main, .res-main {
 		max-width: 1000px;
-		height: 470px;
+		height: 696px;
 		margin: 0px auto;
 		position: relative;
 	}
@@ -155,6 +157,7 @@ form,.am-cf,.partner{max-width:640px;margin:20px auto ;}
 	.login-banner-bg {
 		display: block;
 		float: left;
+		margin-top: 94px;
 	}
 
 	.am-btn-primary {

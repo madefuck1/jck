@@ -146,16 +146,13 @@
     left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
     LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
     LEFT JOIN t_assort ta on ta.assort_id=tep.product_assort
-    LEFT JOIN t_shop ts ON ts.shop_id=tp.shop_id
+    left join t_shop ts on ts.shop_id=tp.shop_id
     where 1=1
     <if test="enquiryNumber != null and enquiryNumber != ''">
       and te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
     </if>
     <if test="enquiryProductId != null and enquiryProductId != ''">
       and tep.enquiry_product_id=#{enquiryProductId}
-    </if>
-    <if test="shopId != null and shopId != '' ">
-      and tp.shop_id = #{shopId}
     </if>
   </select>
 

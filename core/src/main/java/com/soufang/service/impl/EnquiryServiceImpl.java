@@ -69,16 +69,29 @@ public class EnquiryServiceImpl implements EnquiryService {
             for (Purchase purchase : enquiryProduct.getPurchases()) {
                 if(StringUtils.isNotBlank(purchase.getPurchaseNumber())){
                     PurchaseDto purchaseDto = new PurchaseDto();
-                    BeanUtils.copyProperties(purchase, purchaseDto);
+                    //对SHOPID判断
+                    if(enquirySo.getShopId()==null||"".equals(enquirySo.getShopId())){
+                        //报价信息包含所有
+                        BeanUtils.copyProperties(purchase, purchaseDto);
+                    }else{
+                        //只有当前商铺报价信息
+                        if(enquirySo.getShopId()==purchase.getShopId()){
+                            BeanUtils.copyProperties(purchase, purchaseDto);
+                        }
+
+                    }
                     if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
                         Shop shop= purchase.getShop();
-                        if("".equals(shop.getShopName())||null==shop.getShopName()){
-                            purchaseDto.setShopName("没有商铺信息");
-                        }else{
-                            purchaseDto.setShopName(shop.getShopName());
+                        if(null!=purchaseDto.getPurchaseNumber()){
+                            if("".equals(shop.getShopName())||null==shop.getShopName()){
+                                purchaseDto.setShopName("没有商铺信息");
+                            }else{
+                                purchaseDto.setShopName(shop.getShopName());
+                            }
+                            purchaseDtos.add(purchaseDto);
                         }
                     }
-                    purchaseDtos.add(purchaseDto);
+
                 }
             }
             enquiryProductDto.setPurchases(purchaseDtos);
@@ -93,13 +106,13 @@ public class EnquiryServiceImpl implements EnquiryService {
         //页面默认加载赋值
         enquirySo.setPage((enquirySo.getPage() - 1) * 5);
         //当没有用户信息则是查询我的报价信息
-        if(!("".equals(enquirySo.getShopId())||enquirySo.getShopId()==null)){
+        /*if(!("".equals(enquirySo.getShopId())||enquirySo.getShopId()==null)){
             //查询SHOP信息通过用户ID
             ShopDto shop =shopMapper.getByUserId(enquirySo.getUserId());
             //加入SHOPID
             enquirySo.setShopId(shop.getShopId());
             enquirySo.setUserId(null);
-        }
+        }*/
         List<Enquiry> list = enquiryMapper.getList(enquirySo);
         List<EnquiryDto> listDto = new ArrayList<>();
         //询盘
