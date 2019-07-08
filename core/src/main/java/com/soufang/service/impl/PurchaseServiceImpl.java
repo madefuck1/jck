@@ -83,15 +83,12 @@ public class PurchaseServiceImpl implements PurchaseService {
             PurchaseDto purchaseDto = new PurchaseDto();
             //转移报价信息
             BeanUtils.copyProperties(purchase, purchaseDto);
-
             //转移商铺信息
             ShopDto shopDto = new ShopDto();
             Shop shop = purchase.getShop();
             BeanUtils.copyProperties(shop, shopDto);
             purchaseDto.setShopDto(shopDto);
-
             purchaseDtos.add(purchaseDto);
-
         }
 
         return purchaseDtos;

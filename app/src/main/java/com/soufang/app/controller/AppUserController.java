@@ -480,8 +480,8 @@ public class AppUserController extends AppBaseController {
         Result result = new Result();
         String username = request.getParameter("realName");
         userDto.setUserId(userInfo.getUserId());
-        userDto.setPhone("121");
-        userDto.setEmail("121");
+        userDto.setPhone("phone_");
+        userDto.setEmail("email_");
         //判断是否要修改用户名
         if(StringUtils.isNotBlank(username)){
             //如果有，判断是否是第一次修改用户名

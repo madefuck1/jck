@@ -242,7 +242,7 @@ function addOne(obj){
     var numberInput = $(obj).parent().find("input[type=number]");
     var number = $(numberInput).val();
     var max=$(numberInput).attr("max");
-    if(parseInt(number)-parseInt(max) < 0){
+    if(parseInt(max) > parseInt(number)){
         $(numberInput).val(parseInt(number)+1);
         changeNumber(numberInput);
     }else {
@@ -259,8 +259,7 @@ function changeNumber(obj) {
         return false;
     }
     var max=$(obj).attr("max");
-    if(number > max){
-    }else {
+    if(number >= max){
         alert("不能再大了");
         return false;
     }
