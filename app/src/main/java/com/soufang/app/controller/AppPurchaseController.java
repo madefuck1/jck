@@ -19,6 +19,7 @@ import com.soufang.app.vo.purchase.PurchaseVo;
 import com.soufang.app.vo.purchase.addPurchaseVo;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
@@ -56,9 +57,9 @@ public class AppPurchaseController extends AppBaseController{
     @ResponseBody
     @RequestMapping(value = "getPurchaseList",method = RequestMethod.POST)
     public EnquiryVo getPurchaseList(@RequestBody EnquirySo enquirySo, HttpServletRequest request){
-        UserDto userDto=this.getUserInfo(request);
+        ShopDto shopDto=this.getShopInfo(request);
         //卖家要通过SHOPID查询报价信息
-        enquirySo.setShopId(userDto.getShopDto().getShopId());
+        enquirySo.setShopId(shopDto.getShopId());
         PageHelp<EnquiryDto> pageHelps =appEnquiryFeign.getList(enquirySo);
         EnquiryVo enquiryVo = new EnquiryVo();
         enquiryVo.setData(pageHelps.getData());
