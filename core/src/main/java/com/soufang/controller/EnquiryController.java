@@ -5,6 +5,7 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.enquiry.EnquiryReviewSo;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,28 @@ public class EnquiryController {
     }
 */
 
+    /**
+     * 审核通过
+     * @param enqNum
+     * @return
+     */
+    @RequestMapping(value = "/passed")
+    Result passed(@RequestBody String enqNum){
+        Result result = enquiryService.passed(enqNum);
+        return result;
+    }
+
+    /**
+     * 审核失败
+     * @param so
+     * @return
+     */
+    @RequestMapping(value = "refuse")
+    Result refuse(@RequestBody EnquiryReviewSo so){
+
+        return enquiryService.refuse(so);
+    }
+
     //商品编号
     @RequestMapping(value = "toGetEqNumber",method = RequestMethod.POST)
     public String toGetEqNumber(){
@@ -126,8 +149,6 @@ public class EnquiryController {
         String enquiryNumber = "EN"+sysParamService.getOrderNumber();
         return enquiryNumber;
     }
-
-
 
     /**
      * 添加询盘信息

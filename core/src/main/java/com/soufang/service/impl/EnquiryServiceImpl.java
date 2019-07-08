@@ -2,18 +2,19 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
+import com.soufang.base.jiguang.JPushUtils;
+import com.soufang.base.search.enquiry.EnquiryReviewSo;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
-import com.soufang.mapper.EnquiryMapper;
-import com.soufang.mapper.EnquiryProductMapper;
-import com.soufang.mapper.PurchaseMapper;
-import com.soufang.mapper.ShopMapper;
+import com.soufang.base.utils.DateUtils;
+import com.soufang.mapper.*;
 import com.soufang.model.*;
 import com.soufang.service.EnquiryService;
 import org.apache.commons.lang.StringUtils;
@@ -42,6 +43,10 @@ public class EnquiryServiceImpl implements EnquiryService {
     PurchaseMapper purchaseMapper;
     @Autowired
     ShopMapper shopMapper;
+    @Autowired
+    MessageMapper messageMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public EnquiryDto getByEnqNum(EnquirySo enquirySo) {
@@ -167,6 +172,56 @@ public class EnquiryServiceImpl implements EnquiryService {
             listDto.add(enquiryDto);
         }
         return  listDto;
+    }
+
+    //审核通过
+    @Override
+    public Result passed(String enquiryNumber) {
+        Result result = new Result();
+        int i = enquiryMapper.passed(enquiryNumber);
+        if(i > 0){
+            result.setMessage("审核成功");
+            result.setSuccess(true);
+        }else {
+            result.setSuccess(false);
+            result.setMessage("审核失败");
+        }
+        return result;
+    }
+
+    //审核失败
+    @Override
+    public Result refuse(EnquiryReviewSo so) {
+        EnquirySo enquirySo = new EnquirySo();
+        enquirySo.setEnquiryNumber(so.getEnquiryNumber());
+        Enquiry enquiry = enquiryMapper.getByEnqNum(enquirySo);
+        Result result = new Result();
+        //修改询盘状态为审核失败
+        int i = enquiryMapper.refuse(so.getEnquiryNumber());
+        Message message = new Message();
+        message.setPhone(userMapper.getById(enquiry.getUserId()).getPhone());
+        message.setCreateTime(DateUtils.getToday());
+        message.setMesType(1);
+        message.setMesStatus(0);
+        message.setContent(so.getReason());
+        //保存信息于信息表
+        messageMapper.addMessage(message);
+        Push push = new Push();
+        push.setUserId(enquiry.getUserId());
+        push.setCreateTime(DateUtils.getToday());
+        push.setPushStatus(1);
+        push.setPushContent(so.getReason());
+        push.setPushType(6);
+        //以推送的形式告诉发布询盘的用户
+        JPushUtils.pushNotice("alias","yhkj_"+enquiry.getUserId(),so.getReason());
+        if(i>0){
+            result.setMessage("操作完成");
+            result.setSuccess(true);
+        }else {
+            result.setSuccess(false);
+            result.setMessage("操作失败");
+        }
+        return result;
     }
 
     /**

@@ -85,4 +85,8 @@ public interface EnquiryMapper {
     List<Enquiry>  enquiryTableCount(EnquirySo EnquirySo);
 
     Long selUserIdByEnquiryNumber(String enquiryNumber);
+
+    int passed(String enquiryNumber);
+
+    int refuse(String enquiryNumber);
 }

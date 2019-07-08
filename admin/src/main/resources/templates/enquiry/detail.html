@@ -4,7 +4,12 @@
 
 <@override name="css">
 <style>
-
+    .refuse{
+        display: none;
+    }
+    .refuseClike{
+        display: block;
+    }
 </style>
 </@override>
 <@override name="body">
@@ -100,7 +105,7 @@
         </div>-->
     </div>
 </div>
-
+</#list>
 <br>
 <br>
 <br>
@@ -108,11 +113,16 @@
 <div class="layui-input-block" >
     <!--<button class="layui-btn" lay-submit type="button" onclick="viewProduct(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">查看商品信息</button>-->
     <button class="layui-btn" lay-submit type="button" onclick="passed(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">审核通过</button>
-    <button class="layui-btn" lay-submit type="button" onclick="refuse(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">审核失败</button>
+    <button class="layui-btn" lay-submit type="button" id="refuse">
+        <input id="refuseNumber" type="hidden" value="${enquiryDto.enquiryNumber}">审核失败</button>
     <button class="layui-btn" lay-submit type="button" onclick="returnBack()">返回上一页</button>
 
 </div>
-</#list>
+<div class="refuse" id="reason" style="margin-top: 30px;">
+<textarea id="textReason" placeholder="请输入理由" style="width: 400px;height: 200px;margin-left: 10%">
+</textarea>
+<button class="layui-btn" onclick="refuse()">提交</button>
+</div>
 </@override>
 <@override name="js">
 <script type="text/javascript">
@@ -129,14 +139,14 @@
     //审核通过
     function passed(obj) {
         var enqNum = $(obj).find("input:hidden").val();
-        var data = '{"enqNum":"'+enqNum+'"}' ;
+        var data =enqNum;
         $.ajax({
             url: "passed",
             data:  data,
             type: "post",
             contentType: "application/json",
             success: function (data) {
-                if(data.code == 100){
+                if(data.code == 0){
                     layer.open({
                         type: 1
                         ,area:["20%","40%"]
@@ -156,9 +166,44 @@
         });
         return false ;
     }
-    function refuse(obj) {
-        var enqNum = $(obj).find("input:hidden").val();
-        window.location.href = "viewProduct/"+enqNum
+    $(document).ready(function() {
+        $("#refuse").click(function() {
+            $("#reason").removeClass("refuse");
+            $("#reason").addClass("refuseClike");
+        });
+    })
+    function refuse() {
+        var enqNum = $("#refuseNumber").val();
+        var reason  = $("#textReason").val();
+        var data = {
+            enquiryNumber:enqNum,
+            reason:reason
+        };
+        $.ajax({
+            url: "refuse",
+            data:  JSON.stringify(data),
+            type: "post",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.code == 0){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = "/admin/enquiry/enquiryDetail/"+enqNum;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
     }
 
     function returnBack() {

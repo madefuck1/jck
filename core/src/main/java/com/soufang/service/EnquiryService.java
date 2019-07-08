@@ -1,6 +1,8 @@
 package com.soufang.service;
 
+import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.search.enquiry.EnquiryReviewSo;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.model.Enquiry;
@@ -77,4 +79,8 @@ public interface EnquiryService {
     Long selUserIdByEnquiryNumber(String enquiryNumber);
 
     List<EnquiryDto> getIndexEnquiryList(EnquirySo enquirySo);
+
+    Result passed(String enqNum);
+
+    Result refuse(EnquiryReviewSo so);
 }
