@@ -1,0 +1,568 @@
+<@override name="title">
+Settlement
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
+<link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+<link href="${contextPath}/css/demo.css" rel="stylesheet" type="text/css"/>
+<link href="${contextPath}/css/cartstyle.css" rel="stylesheet" type="text/css"/>
+<link href="${contextPath}/css/jsstyle.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="/static/css/demo.dialog.css">
+<link rel="stylesheet" href="/static/css/dialog.css">
+<style>
+    body {
+        background: #fff;
+    }
+
+    .memo-close {
+        border: none;
+    }
+
+    .paymeth {
+        width: 64%;
+        height: 200px;
+        padding: 10px;
+
+    }
+
+    .paymeth p {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        line-height: 40px;
+    }
+
+    .paymeth_all .left {
+        text-align: left;
+        padding: 0px;
+    }
+
+    .paymeth_all .right {
+        text-align: left;
+        padding: 0px;
+
+    }
+
+    .am-selected {
+        width: 200px;
+        border: 1px solid #E6E6E6;
+    }
+
+    .paymeth_all .cloum1 {
+
+        height: 50px;
+    }
+
+    .paymeth_all .cloum2 {
+        height: 300px;
+    }
+
+    .paymeth_all .cloum2 .right {
+        float: left;
+        margin-top: 20px;
+    }
+
+    .cloum2 {
+        display: none;
+    }
+
+    .invoice_title {
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+        margin: 0px 20px;
+
+    }
+
+    .am-tabs-nav li {
+        margin-left: 20px;
+    }
+
+    .am-form-label {
+        width: 21%;
+    }
+
+    .invoice_fl {
+        float: left;
+    }
+
+    .am-nav-tabs > li.am-active {
+        border-bottom: 2px solid #F58022;
+    }
+
+    .am-nav-tabs > li.am-active a {
+        color: #333;
+    }
+
+    .concent h3, .logistics h3 {
+        border-bottom: 1px solid #F1F1F1;
+    }
+
+    .am-modal {
+
+    }
+
+    .am-modal-dialog {
+        height: 180px;
+    }
+
+    .am-modal-bd {
+        border: none;
+        padding: 34px 10px;
+    }
+
+    .sear {
+        width: auto;
+    }
+
+    .footer {
+        border-top: none;
+    }
+
+    .theme-popover {
+        height: 460px;
+    }
+</style>
+</@override>
+
+<@override name="body">
+<div class="concent">
+
+    <div class="paycont">
+        <!--地址 -->
+        <div class="address">
+            <h3>Confirm the shipping address </h3>
+            <div class="control">
+                <div class="tc-btn createAddr theme-login am-btn am-btn-danger" onclick="addAddress()">Use a new address</div>
+            </div>
+            <div class="clear"></div>
+            <ul id="addressList">
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <!--订单 -->
+        <div class="concent">
+            <h3>Confirm order information</h3>
+            <div class="cart-table-th">
+                <div class="wp">
+
+                    <div class="th th-item">
+                        <div class="td-inner">Merchandise information</div>
+                    </div>
+                    <div class="th th-price">
+                        <div class="td-inner">Price</div>
+                    </div>
+                    <div class="th th-amount">
+                        <div class="td-inner">Number</div>
+                    </div>
+                    <div class="th th-sum">
+                        <div class="td-inner">Amount</div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="orderProduct">
+                <tr class="item-list">
+                    <div class="bundle  bundle-last">
+                        <div class="bundle-hd">
+                            <div class="bd-promos">
+                                <div class="bd-has-promo">${productDto.shopName}</div>
+                            </div>
+                        </div>
+                        <div class="bundle-main">
+                            <ul class="item-content clearfix">
+                                <div class="pay-phone">
+                                    <input hidden name="productId" value="${productDto.productId}">
+                                    <li class="td td-item">
+                                        <div class="item-pic">
+                                            <a href="#" class="J_MakePoint">
+                                                <img src="${productDto.url!''}" class="itempic J_ItemImg"></a>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="item-basic-info">
+                                                <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">${productDto.productName!''}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="td td-info">
+                                        <div class="item-props">
+                                            <span class="sku-line" name = "productColor">${productColor!''}</span>
+                                            <span class="sku-line">&nbsp;&nbsp;</span>
+                                            <span class="sku-line" name = "productSpecName">${productDto.productSpecDto.specName!''}</span>
+                                        </div>
+                                    </li>
+                                    <li class="td td-price">
+                                        <div class="item-price price-promo-promo">
+                                            <div class="price-content">
+                                                <em class="J_Price price-now">${productDto.productSpecDto.specNumber!0?string('0.00')}/${productDto.productUnit!''}</em>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                                <li class="td td-amount">
+                                    <div class="amount-wrapper ">
+                                        <div class="item-amount ">
+                                            <span class="phone-title">Number of purchases</span>
+                                            <div class="sl">
+                                                <input name = "productNumber" class="text_box" disabled type="text" value="${productNumber?c}"
+                                                       style="width:50px;text-align: center;height: 32px"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="td td-sum">
+                                    <div class="td-inner">
+                                        <em tabindex="0" class="J_ItemSum number">${(productNumber *
+                                            productDto.productSpecDto.specNumber!0)?string('0.00')}</em>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </tr>
+                <div class="clear"></div>
+            </div>
+            <div class="pay-total">
+                <!--留言-->
+                <div class="order-extra">
+                    <div class="order-user-info">
+                        <div class="memo">
+                            <label>Buyer's Message：</label>
+                            <input type="text" id="remark" title="Optional, description of the transaction (recommended to fill in the notes that have been agreed with the seller)"
+                                   placeholder="Optional, suggested to fill in and the seller to agree on the instructions"
+                                   class="memo-input J_MakePoint c2c-text-default memo-close">
+                            <div class="msg hidden J-msg">
+                                <p class="error">Enter up to 500 characters</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paymeth">
+                <p>Choose a payment method</p>
+                <div class="paymeth_all">
+                    <div class="cloum1">
+                        <div class="left am-u-sm-2">
+                            <p>Payment method：</p>
+                        </div>
+                        <div class="right am-u-sm-10">
+                            <select data-am-selected id="pay_select">
+                                <option value="a">Please choose</option>
+                                <option value="b" class="pay_line">Online payments</option>
+                                <option value="o">Offline trading</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cloum2" id="cloum2">
+                        <div class="right am-u-sm-8">
+                            <div class="button" style="margin-top: 8px">
+                                <p style="color:#F58022;font-weight: 200">The contract can also be submitted after the seller has revised the price</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cloum2" id="cloum3">
+                        <div class="right am-u-sm-8">
+                            <p style="color:#F58022;font-weight: 200">Offline payment platform does not provide guarantees, please check with the seller carefully about the information</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" onclick="submitOrder()" class="am-btn am-btn-warning am-btn-xl"
+                        name ="submitOrder" style=" margin-left:16.6%">Submit an order
+                </button>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="theme-popover-mask"></div>
+    <div class="theme-popover" style="width: 600px;height: 400px">
+        <!--标题 -->
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg addressTitle"></strong></div>
+        </div>
+        <hr/>
+        <div class="am-u-md-12" style="padding-top: 10px">
+            <form class="am-form am-form-horizontal">
+                <input type="hidden" id="addressId" value="">
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">Consignee </label>
+                    <div class="am-u-sm-9">
+                        <input type="text" id="linkName" placeholder="收货人">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">Mobile phone number</label>
+                    <div class="am-u-sm-9">
+                        <input placeholder="手机号必填" id="linkPhone" type="text">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">Countries</label>
+                    <div class="am-u-sm-9">
+                        <input placeholder="国家" id="country" type="text">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label">Detailed address</label>
+                    <div class="am-u-sm-9">
+                        <textarea class="" rows="3" id="detailAddress" placeholder="Enter a detailed address"></textarea>
+                        <small>Write your address in less than 100 words...</small>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label"></label>
+                    <div class="am-u-sm-9">
+                           <span class="new-option-r" onclick="newDefault(this)">
+                               <i id="isDefaultAddress" class="am-icon-circle-o"></i>Set as default</span>
+                    </div>
+                </div>
+
+                <div class="am-form-group theme-poptit">
+                    <div class="am-u-sm-9 am-u-sm-push-3">
+                        <div class="am-btn am-btn-danger" onclick="saveOrUpdateAddress()">Save</div>
+                        <div class="am-btn am-btn-danger" onclick="closeThemePopover()">Cancel</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <form action="/orderManager/submitOrder" id="toPay" method="post">
+    </form>
+</div>
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="/static/js/jquery.dialog.js"></script>
+<script type="text/javascript">
+
+    function submitOrder() {
+        $("[name=submitOrder]").prop("disabled",true);
+        var type = 0;  //0线下，1线上
+        if ($('#pay_select').val() == "b") {
+            type = 1;
+        }
+
+        var html = "";
+        html += '<input type="hidden" name="productId" value="' + $("[name=productId]").val() + '">'
+        html += '<input type="hidden" name="productColor" value="' + $("[name=productColor]").text() + '">'
+        html += '<input type="hidden" name="productSpecName" value="' + $("[name=productSpecName]").text() + '">'
+        html += '<input type="hidden" name="productNumber" value="' + $("[name=productNumber]").val() + '">'
+        html += '<input type="hidden" name="addressId" value="' + $(".defaultAddr").parents(".address-detail").find(".addressId").val() + '">';
+        html += '<input type="hidden" name="payType" value="' + type + '">';
+        html += '<input type="hidden" name="remark" value="' + $("#remark").val() + '">';
+        $("#toPay").html("");
+        $("#toPay").append(html);
+        $("#toPay").submit();
+    }
+
+    //新增，或更新地址
+    function saveOrUpdateAddress() {
+        var addressId = $("#addressId").val();
+        var linkName = $("#linkName").val();
+        var linkPhone = $("#linkPhone").val();
+        var country = $("#country").val();
+        var detailAddress = $("#detailAddress").val();
+        var isDefaultAddress = 0;
+
+        //check
+        if (linkName == "" || linkName == null) {
+
+        }
+
+
+        if ($("#isDefaultAddress").hasClass("am-icon-circle")) {
+            isDefaultAddress = 1;
+        }
+        var json = {
+            addressId: addressId,
+            linkName: linkName,
+            linkPhone: linkPhone,
+            country: country,
+            detailAddress: detailAddress,
+            isDefaultAddress: isDefaultAddress
+        };
+        if (addressId == "") {
+            //新增地址
+            $.ajax({
+                url: '/personalCenter/saveAddress',
+                dataType: 'json',
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    if (data.success) {
+                        closeThemePopover();
+                        $.sendMsg("新增成功", 0, function () {
+                            cleanAddress();
+                            initAddress();
+                        });
+                    }
+                }
+            });
+        } else {
+            //更新地址
+            $.ajax({
+                url: '/personalCenter/toUpdateAddress/update',
+                dataType: 'json',
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    if (data.success) {
+                        closeThemePopover();
+                        $.sendMsg("The modification was successful", 0, function () {
+                            cleanAddress();
+                            initAddress();
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    //清空数据
+    function cleanAddress() {
+        $("#addressId").val("");
+        $("#linkName").val("");
+        $("#linkPhone").val("");
+        $("#country").val("");
+        $("#detailAddress").val("");
+        $("#isDefaultAddress").addClass("am-icon-circle-o").removeClass("am-icon-circle");
+    }
+
+    $(function () {
+        initAddress();
+    });
+
+    //初始化地址
+    function initAddress() {
+        var addressHtml = "";
+        $("#addressList").html("");
+        $.ajax({
+            url: '/personalCenter/getAddressList',
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i = 0; i < data.data.length; i++) {
+                    var address = data.data[i];
+                    addressHtml += '<div class="address-detail"><div class="per-border"><input type="hidden" class="addressId" value="' + address.addressId + '"/></div>';
+                    if (address.isDefaultAddress == 1) {
+                        addressHtml += '<li class="user-addresslist defaultAddr" onclick="checkAddress(this)">';
+                    } else {
+                        addressHtml += '<li class="user-addresslist" onclick="checkAddress(this)">';
+                    }
+                    addressHtml += '<div class="address-left"><div class="user DefaultAddr">';
+                    addressHtml += '<span class="buy-address-detail">';
+                    addressHtml += '<span class=\"buy-user\">' + address.linkName + '</span>';
+                    addressHtml += '<span>&nbsp;&nbsp;</span>';
+                    addressHtml += '<span class=\"buy-phone\">' + address.linkPhone + '</span></span></div>';
+                    addressHtml += '<div class="default-address DefaultAddr"><span class="buy-line-title buy-line-title-type">Shipping address：</span>';
+                    addressHtml += '<span class="buy--address-detail"><span class="country">' + address.country + '</span>';
+                    addressHtml += '<span class="detail">' + address.detailAddress + '</span></span></div>';
+                    if (address.isDefaultAddress == 1) {
+                        addressHtml += '<ins class="deftip">Default address</ins>';
+                    }
+                    addressHtml += '</div><div class="new-addr-btn">';
+                    if (address.isDefaultAddress == 0) {
+                        addressHtml += '<a onclick="setDefault(' + address.addressId + ')" style="cursor: pointer">Set as default</a><span class="new-addr-bar">|</span>';
+                    }
+                    addressHtml += '<a onclick="updateAddress(this)" style="cursor: pointer">Edit</a><span class="new-addr-bar"></span></div></li></div>';
+                }
+                $("#addressList").append(addressHtml);
+            }
+        });
+    }
+
+    //更新地址 渲染
+    function updateAddress(obj) {
+        var div = $(obj).parents(".address-detail");
+        $("#addressId").val($(div).find(".addressId").val());
+        $("#linkName").val($(div).find(".buy-user").html());
+        $("#linkPhone").val($(div).find(".buy-phone").html());
+        $("#country").val($(div).find(".country").html());
+        $("#detailAddress").val($(div).find(".detail").html());
+        if ($(div).find(".user-addresslist").hasClass("defaultAddr")) {
+            $("#isDefaultAddress").addClass("am-icon-circle").removeClass("am-icon-circle-o");
+        } else {
+            $("#isDefaultAddress").addClass("am-icon-circle-o").removeClass("am-icon-circle");
+        }
+        addAddress();
+        $(".addressTitle").html("Modifying the address");
+    }
+
+    //选中地址
+    function checkAddress(obj) {
+        $(obj).parents("ul").find(".user-addresslist").each(function () {
+            $(this).removeClass("defaultAddr");
+        })
+        $(obj).addClass("defaultAddr");
+    }
+
+    function setDefault(addressId) {
+        $.ajax({
+            url: '/personalCenter/default/' + addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                initAddress();
+            }
+        });
+    }
+
+    function newDefault(obj) {
+        if ($(obj).find("i").hasClass("am-icon-circle-o")) {
+            $(obj).find("i").removeClass("am-icon-circle-o");
+            $(obj).find("i").addClass("am-icon-circle");
+        } else {
+            $(obj).find("i").removeClass("am-icon-circle");
+            $(obj).find("i").addClass("am-icon-circle-o");
+        }
+    }
+
+    function closeThemePopover() {
+        $(".theme-popover").hide();
+        $(".theme-popover-mask").hide();
+    }
+
+    //弹出地址编辑
+    function addAddress() {
+        $(".addressTitle").html("New address");
+        $(".theme-popover-mask").show();
+        $(".theme-popover").show();
+    }
+
+    $(".theme-popover-mask").bind("click", function () {
+
+        $(".theme-popover").hide();
+        $(".theme-popover-mask").hide();
+    })
+
+    //支付方式
+    $('#pay_select').change(function () {
+        if ($('#pay_select').val() == "b") {
+            $("#cloum2").show();
+            $('#cloum3').hide();
+        } else if ($('#pay_select').val() == "o") {
+            $("#cloum2").hide();
+            $('#cloum3').show();
+
+        } else {
+            $("#cloum2").hide();
+            $('#cloum3').hide();
+        }
+
+    });
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

@@ -40,8 +40,8 @@ public class BannerController {
      * @return
      */
     @RequestMapping(value = "getList",method = RequestMethod.POST)
-    List<BannerDto> getList(){
-        return bannerService.getList();
+    List<BannerDto> getList(@RequestBody Integer terminal){
+        return bannerService.getList(terminal);
     }
 
     /**

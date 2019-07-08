@@ -1,5 +1,6 @@
 package com.soufang.base.dto.storeConstruction;
 
+import com.soufang.base.PageBase;
 import com.soufang.base.dto.product.ProductDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Setter
 @Getter
-public class StoreProductAssortDto {
+public class StoreProductAssortDto extends PageBase {
     private Long storeProductAssortId;
 
     private Long exclusiveAssortId;

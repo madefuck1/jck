@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+    <#include "/common/includes/header.html"/>
+
+    <title>Shop renovation</title>
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/css/sale/base.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-company.css">
+    <link rel="stylesheet" href="/static/css/sale/sale_header.css">
+
+    <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f5f5;">
+
+<!-- 店铺装修top-->
+<#include "/sellerCenter/common/header.html"/>
+
+<div id="logo" style="height: 120px;">
+    <img src="../images/sale/shop1.png" alt="">
+</div>
+<div id="nav2">
+    <div class="nav_in">
+        <ul>
+            <li class="cur" onclick="switchPage(this,1);"><a href="#">Home</a></li>
+            <li onclick="switchPage(this,2);"><a href="#">Company Profile</a></li>
+            <!--            <li><a href="">视频中心</a></li>-->
+        </ul>
+    </div>
+
+</div>
+<div id="shop-chart">
+    <div class="chart_in">
+        <div class="left">
+            <div data-am-widget="slider" class="am-slider am-slider-a1 side-left" id="side-left"
+                 data-am-slider='{"directionNav":false}'>
+                <ul class="am-slides" id="shop-chart-map">
+                    <!-- 图1 -->
+                    <li><img src="../images/sale/shop2.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right" id="right-company">
+            <h4 id="companyName">Zhejiang Dejuren and Textileco Co., Ltd.</h4>
+            <!-- <div class="Collection">-->
+            <!--     <span class="coll1">收藏</span>-->
+            <!--     <span class="coll2">已收藏</span>-->
+            <!-- </div>-->
+            <div>
+                <span class="one">Call：</span>
+                <span class="two" id="linkPhone">xxxx</span>
+            </div>
+            <div>
+                <span class="one">Business category：</span>
+                <span class="two" id="mainProducts"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">xxxx</span>
+            </div>
+            <div>
+                <span class="one">Contact address：</span>
+                <span class="two" id="companyAddress"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
+            </div>
+            <div>
+                <span class="one">About the company：</span>
+                <span class="two" id="companyInfo"
+                      style="line-height: 40px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;">xxxx</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="shop-product">
+    <div class="product-in">
+        <div class="product-title" id="product-title">
+        </div>
+        <!-- 产品列表-->
+        <div class="product" style="text-align: center" id="product">
+        </div>
+    </div>
+</div>
+<!--公司概况-->
+<div id="company" hidden>
+    <h4>Business registration information</h4>
+    <div class="company-left">
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">统一社会信用代码/注册号：</p>-->
+        <!--         <p class="right">91440300573137960X</p>-->
+        <!--      </div>-->
+        <div class="company-cloum1">
+            <p class="left">Company name：</p>
+            <p class="right" id="company_name"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">Registered address：</p>
+            <p class="right" id="company_address"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">Legal representative：</p>
+            <p class="right" id="company_corporate"></p>
+        </div>
+        <div class="company-cloum1">
+            <p class="left">Types of business：</p>
+            <p class="right" id="company_type"></p>
+        </div>
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">经营期限：</p>-->
+        <!--         <p class="right">2018-3-29~长期</p>-->
+        <!--      </div>-->
+        <div class="company-cloum1">
+            <p class="left">Scope of business：</p>
+            <p class="right right1" id="business_scope"></p>
+        </div>
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">年报/年检情况：</p>-->
+        <!--         <p class="right">2018年成立</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">成立日期：</p>-->
+        <!--         <p class="right">2018-03-29</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">登记机关：</p>-->
+        <!--         <p class="right">绍兴市市场监督管理局</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人姓名：</p>-->
+        <!--         <p class="right">贾女士</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人部门：</p>-->
+        <!--         <p class="right">销售部</p>-->
+        <!--      </div>-->
+        <!--      <div class="company-cloum1">-->
+        <!--         <p class="left">申请人职位：</p>-->
+        <!--         <p class="right">经理</p>-->
+        <!--      </div>-->
+    </div>
+    <div class="company-right">
+        <img id="company_urls" src="" alt="">
+        <p style="color: #999; text-align: center">License</p>
+    </div>
+</div>
+
+<!-- 页尾 -->
+<#include "/sellerCenter/common/foot.html"/>
+
+<script type="text/javascript" src="/static/js/storeConstruction/storeConstruction.preview.js"></script>
+
+</body>
+</html>

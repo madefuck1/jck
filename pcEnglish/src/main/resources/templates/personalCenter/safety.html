@@ -1,0 +1,151 @@
+<@override name="title">
+account security
+</@override>
+
+<@override name="css">
+
+<link href="../css/infstyle.css" rel="stylesheet" type="text/css">
+
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+
+            <!--标题 -->
+            <div class="user-safety">
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">account security</strong>
+                    </div>
+                </div>
+                <hr/>
+
+                <!--头像 -->
+                <div class="user-infoPic">
+
+                    <div class="filePic">
+                        <img class="am-circle am-img-thumbnail" src="../images/getAvatar.do.jpg" alt=""/>
+                    </div>
+
+                    <p class="am-form-help">Avatar</p>
+
+                    <div class="info-m">
+                        <div><b>username：<i>小叮当</i></b></div>
+                        <div class="safeText">
+                            <a href="safety.html">account security:<em style="margin-left:20px ;">60</em>分</a>
+                            <div class="progressBar"><span style="left: -95px;" class="progress"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="check">
+                    <ul>
+                        <li>
+                            <i class="i-safety-lock"></i>
+                            <div class="m-left">
+                                <div class="fore1">login password</div>
+                                <div class="fore2">
+                                    <small>To keep your shopping safe, we recommend that you change your password periodically to protect your account.</small>
+                                </div>
+                            </div>
+                            <div class="fore3" >
+                                <a href="password.html">
+                                    <div class="am-btn am-btn-warning">modify</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="i-safety-wallet"></i>
+                            <div class="m-left">
+                                <div class="fore1">Payment password</div>
+                                <div class="fore2">
+                                    <small>Enable the payment password feature to add security to your asset account.</small>
+                                </div>
+                            </div>
+                            <div class="fore3">
+                                <a href="setpay.html">
+                                    <div class="am-btn am-btn-warning">Enable now</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="i-safety-iphone"></i>
+                            <div class="m-left">
+                                <div class="fore1">Phone verification</div>
+                                <div class="fore2">
+                                    <small>Your verified mobile phone: 186XXXXXXXX If it has been lost or disabled, please replace it immediately</small>
+                                </div>
+                            </div>
+                            <div class="fore3">
+                                <a href="bindphone.html">
+                                    <div class="am-btn am-btn-warning">Change tie</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="i-safety-mail"></i>
+                            <div class="m-left">
+                                <div class="fore1">E-mail verification</div>
+                                <div class="fore2">
+                                    <small>Your verified email address: 5831XXX@qq.com can be used to quickly retrieve your login password.</small>
+                                </div>
+                            </div>
+                            <div class="fore3">
+                                <a href="email.html">
+                                    <div class="am-btn am-btn-warning">Change tie</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="i-safety-idcard"></i>
+                            <div class="m-left">
+                                <div class="fore1">Verified</div>
+                                <div class="fore2">
+                                    <small>It is used to improve the security and trust level of an account. After authentication, the authentication information cannot be modified.</small>
+                                </div>
+                            </div>
+                            <div class="fore3">
+                                <a href="idcard.html">
+                                    <div class="am-btn am-btn-warning">Certification</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="i-safety-security"></i>
+                            <div class="m-left">
+                                <div class="fore1">safe question</div>
+                                <div class="fore2">
+                                    <small>One of the tools to secure your account and verify your identity.</small>
+                                </div>
+                            </div>
+                            <div class="fore3">
+                                <a href="question.html">
+                                    <div class="am-btn am-btn-warning">Certification</div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

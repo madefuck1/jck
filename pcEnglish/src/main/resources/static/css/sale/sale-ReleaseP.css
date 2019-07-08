@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* CSS Document */
+
+option{
+	padding: 6px;
+	font-size: 14px;
+}
+.am-form select[multiple]{
+	width: 18%;
+	margin-right: 5%;
+	height: 204px;
+}
+.sale_con label{
+	float: left;
+}
+.sale_con select{
+	float: left;
+}
+.am-form{
+	margin-top: 26px;
+}
+
+.am-form select{
+	border: 1px solid #E6E6E6;
+}
+
+
+.sale-down{
+	width: 100%;
+	height: 30px;
+	margin-left: 130px;
+}
+
+.sale-down ol{
+	border-bottom: 0px;
+	font-size: 100%;
+	
+	text-align: center;
+	
+}
+.sale-down li a{
+	color: #40ADFB;
+	
+}
+.sale-down span{
+	float: left;
+	line-height:30px;
+}
+.sale-down li{
+	float: left;
+	line-height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

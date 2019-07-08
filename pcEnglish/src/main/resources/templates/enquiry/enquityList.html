@@ -1,0 +1,277 @@
+<@override name="title">
+Buying list
+</@override>
+<@override name="css">
+	<link rel="stylesheet" href="${contextPath}/css/purchList.css">
+	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
+	<link rel="stylesheet" href="/static/Pagination/css/jquery.pagination.css">
+<style type="text/css">
+	.pur-list2{
+
+		min-height: 100px;
+	}
+
+	.pur-list2 ul li{
+
+		float: left;
+		margin-left: 30px;
+	}
+	.pur-list2 ul li a{
+		line-height: 30px;
+	}
+	.pur-list2 ul{
+		padding: 6px 20px;
+		overflow: hidden;
+		border: 2px solid #e6e6e6;
+	}
+	.pur-list2 ul li a:link {color: black; text-decoration:none;}
+	.pur-list2 ul li a:hover {background-color: coral;}
+
+</style>
+</@override>
+<@override name="body">
+<div id="purch-center">
+	<p style="line-height: 40px;">
+		<span style="font-weight: bold">Buying information</span>
+		<span>(Found<span style="color: red; font-size: 12px" id="purchaseLength"></span>article Buying Information)</span>
+		<button type="submit" class="purbutton">
+			<a href="/enquiry/create">Publish inquiry</a></button>
+	</p>
+	<div class="pur-list2">
+						<ul id="showAssort">
+							<li style="margin-left: 0px;"><a style="cursor:pointer;" onclick="tablieList(1,0,'',1)">view all</a></li>
+							<div id="showMoreAssort">
+							</div>
+						</ul>
+						<div style="border:1px; display: none;" id="sma2">
+							<ul>
+							<div id="showMoreAssort2">
+							</div>
+							</ul>
+						</div>
+						<div style="border:1px;display: none;" id="sma3">
+							<ul>
+							<div id="showMoreAssort3">
+							</div></ul>
+						</div>
+		<div class="plist-down">
+			<div class="ptitle">
+				<p>
+					<span>Quotation deadline</span>
+					<a href="javascript:void(0);" onclick="endTimeSort(0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;">
+					</a>
+					<a href="javascript:void(0);" onclick="endTimeSort(1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;">
+					</a>
+				</p>
+				<p>
+					<span>Release date</span>
+					<a href="javascript:void(0);" onclick="tablieList(1,0,'',0)" class="iconfont iconshangyi" style="width: 24px; display: inline-block;border-right: 1px solid #e6e6e6;"></a>
+					<a href="javascript:void(0);" onclick="tablieList(1,0,'',1)" class="iconfont iconxiayi" style="width: 24px; display: inline-block;"></a>
+				</p>
+			</div>
+			<div class="ptitle1">
+				<table class="am-table">
+					<thead>
+					<tr>
+						<th>title</th>
+						<th>Purchase quantity</th>
+						<th>Quotation deadline</th>
+						<th>Buyer Information</th>
+						<th>operating</th>
+					</tr>
+					</thead>
+					<tbody id="showMoreAssorts">
+					</tbody>
+				</table>
+				<div id="pageManage">
+					<div id="pagination" style="text-align: center"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
+<script>// pagination 分页插件
+function PageCallback(index) {     //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+    tablieList(index + 1, 0,"",1);
+}
+
+function showSortList(assortId,assortLevel) {
+    //默认加载数据--产品分类	getIdName
+    $.get("/pc/commonPullDown/selUnderAssort/"+assortId,function (data) {
+        if (assortLevel==1){
+            $("#showMoreAssort2").html("");
+            $("#showMoreAssort3").html("");
+            document.getElementById('sma3').style.display='none';
+            document.getElementById('sma2').style.display='block';
+        }else if (assortLevel ==2){
+            $("#showMoreAssort3").html("");
+            document.getElementById('sma3').style.display='block';
+        }else if(assortLevel==""){
+            $("#showMoreAssort").html("");
+            $("#showMoreAssort2").html("");
+            $("#showMoreAssort3").html("");
+        }
+        $.each(data, function (i, v) {
+            var whatever = liContentAssort(v,assortLevel);
+            if (assortLevel ==""){
+                $("#showMoreAssort").append(whatever);
+            }else if (assortLevel==1){
+                $("#showMoreAssort2").append(whatever);
+			}
+            else if (assortLevel ==2){
+                $("#showMoreAssort3").append(whatever);
+            }
+        });
+    });
+}
+//分类展示
+function liContentAssort(v,assortLevel) {
+    var li;
+    if (assortLevel == 2){
+        li=$(
+            "<li><a href='javascript:void(0);' onclick='tablieList(\""+1+"\",\""+v.assortId+"\",\""+''+"\",\""+1+"\")' >"+v.assortName+"</a> </li>"
+        );
+	}else{
+        li=$(
+            "<li><a href='javascript:void(0);' onclick='showSortList("+v.assortId+","+v.assortLevel+")' >"+v.assortName+"</a> </li>"
+        );
+	}
+    return li;
+}
+
+	$(function(){
+        tablieList(1,0,"",1);
+        showSortList(0,"");
+	});
+	//截止时间查询
+	function endTimeSort(index,orderType) {
+	    var assortId=0;
+	    var endTimeSort="endTimeSort";
+        tablieList(1,assortId,endTimeSort,orderType);
+    }
+
+    //数据加载
+	function tablieList(page,assortId,endTimeSort,orderType) {
+        $("#showMoreAssorts").html("");
+        var count;//总的数目
+        var allPage;//总页数
+        var pageData = 10;//每页显示的条数
+        var orderType=orderType;
+        if (orderType ==0){
+            orderType="asc";
+        }else if (orderType==1){
+            orderType="desc";
+        }
+        var str={page:page,limit:pageData,
+            assortId:assortId,
+            enquiryStatus:3,
+            endTimeSort:endTimeSort,
+            orderType:orderType
+        };
+        //默认加载数据 --询盘列表
+        $.ajax({
+            url : "getEnquiryList",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                count=data.count;
+                var whatever="";
+                if(data.count==0){
+                    $("#showMoreAssorts").html("");
+                    var noData=$("<tr><th colspan='5'>No relevant data yet</th></tr>");
+                    //$("#showMoreAssorts").html("暂无相关数据");
+                    $("#showMoreAssorts").append(noData);
+                    $("#purchaseLength").html(0);
+                }else {
+                    $("#purchaseLength").html(count);
+                    $.each(data.data, function (i, v) {
+                        whatever=liContent(v);
+                        $("#showMoreAssorts").append(whatever);
+                    });
+                }
+                $("#pagination").pagination(count, {   //total(一共多少条记录)不能少
+                    current_page: page-1,                  //当前页码
+                    callback: PageCallback,
+                    prev_text: '上一页',
+                    next_text: '下一页',
+                    items_per_page: 10,             //每页显示最大条数
+                    num_display_entries: 10,        //连续分页主体部分显示的分页条目数
+                    num_edge_entries: 1,           //两侧显示的首尾分页的条目数
+                });
+            }
+        });
+    }
+
+//列表展示
+function liContent(v){
+    var enquiryTitle=v.enquiryTitle;
+    var createTime=v.strCreateTime;
+    var enquiryNumber=v.enquiryNumber;
+    //报价截至日期
+    var endTime=v.strEndTime;
+    var date1 = new Date();
+    var date2 = new Date(endTime);
+    var date = date2.getTime()-date1.getTime();
+    var distanceDate = Math.floor(date/(24*3600*1000));
+    var productDto=v.enquiryProductDto;
+    for(var i = 0 ; i<productDto.length; i++){
+        var productNumber=productDto[i].productNumber;
+        var productName=productDto[i].productName;
+        var productUnit=productDto[i].productUnit;
+        var enquiryProductId=productDto[i].enquiryProductId;
+        var purchaseLength=0;
+        if (productDto[i].purchases[i].purchaseNumber!=undefined){
+            purchaseLength=productDto[i].purchases.length;
+        }
+    }
+    var shopDto=v.shopDto;
+    var shopName=shopDto.shopName;
+    if (shopName==null||shopName==""){
+        shopName="No purchase information";
+    }
+
+
+
+    var li=$("<tr>"
+        +"<td>"
+        +"<p style='color:#0066cc'>"+productName+"</p>"
+        +"<p>Release date："+createTime+"</p>"
+        +"</td>"
+        +"<td>"+productNumber+productUnit
+        +"</td>"
+        +"<td>"
+        +"<p>"+endTime+"</p>"
+        +"<p>Remaining<span style='color: #F58022'>"+distanceDate+"</span>day</p>"
+        +"</td>"
+        +"<td>"
+        +"<p>"+shopName+"</p>"
+        +"</td>"
+        +"<td>"
+        +"<button class='am-btn am-btn-danger am-radius' onclick='toPurchase(\""+enquiryProductId+"\")'>Quote now</button>"
+        +"<p >Already<span style='color: #F58022'>"+purchaseLength+"</span>person quote</p>"
+        +"</td>"
+        +"</tr>"
+
+		)
+	return  li;
+    }
+
+    //跳转报价页面
+    function toPurchase(enquiryProductId){
+        window.location.href="/enquiry/toPurchaseDetails?enquiryProductId="+enquiryProductId;
+	}
+
+
+	//加载更多
+	function toLoadMore() {
+        document.getElementById("showMoreAssort2").style.display = "block";
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

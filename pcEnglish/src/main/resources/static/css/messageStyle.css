@@ -1,0 +1,16 @@
+.showMessage {
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+    color: #ffffff;
+}
+
+.showMessageSuccess {
+    background-color: #00B7EE;
+}
+
+.showMessageError {
+    background-color: #ff0000;
+}

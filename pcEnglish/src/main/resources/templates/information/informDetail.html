@@ -1,0 +1,58 @@
+<@override name="title">
+Industry Information - Details
+</@override>
+<@override name="css">
+	<style>
+		.tog,#search,.sear .sousuo,#contain{
+		background: #fff!important;
+		}
+		#newDetail{
+			width: 1190px;
+			min-height: 900px;
+			overflow: hidden;
+			background: #fff;
+			margin: 20px auto;
+			padding: 10px;
+		}
+		.am-breadcrumb a{
+			color: #333;
+		}
+	</style>
+</@override>
+
+<@override name="body">
+	<div id="contain">
+	<div id="newDetail">
+		<ol class="am-breadcrumb">
+		  <li><a href="/inform/toInform">Industry Information</a></li>
+		  <li><a href="#">Information details</a></li>
+			<input type="hidden" id="id" value="${id}">
+		</ol>
+		<div id="contains"></div>
+	</div>
+	</div>
+</@override>
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+<script>
+    $(function(){
+        var id=$("#id").val();
+        var str={id:id};
+        $.ajax({
+            url : "selInformList",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                    $("#contains").append(v.content);
+                });
+    		}
+   	 	});
+    });
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

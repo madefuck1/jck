@@ -1,0 +1,116 @@
+@charset "utf-8";
+/* CSS Document */
+a{
+	color: #333;
+}
+#search a:hover{
+	color: #40ADFB;
+}
+#nav a:hover{
+	color: #40ADFB;
+}
+#sale_center{
+	width: 100%;
+	
+	margin: 0 auto;
+	background: #F5F5F5;
+	overflow: hidden;
+	
+	
+	
+}
+.sale_aside{
+	width: 1190px;
+	overflow: hidden;
+	margin: 20px auto;
+	
+	
+}
+.sale_aside ul li a	{
+	font-size: 16px
+}
+.sale_menu{
+	width: 14%;
+	float: left;
+	background: #fff;
+	
+}
+.sale_menuL{
+	width: 14%;
+
+
+	float: left;
+	background: #fff;
+}
+
+.sale_menu ul .aside_one{
+	padding: 10px 0px;
+}
+.am-list>li{
+	border: none;
+}
+.admin-sidebar-sub li:first-child{
+	border: none;
+}
+.am-panel{
+	-webkit-box-shadow:none;
+}
+.admin-sidebar-sub{
+	background: #fff;
+	box-shadow:none;
+}
+
+
+a:hover{
+	color: #40ADFB;
+}
+
+.admin-sidebar-list li a:hover{
+	color: #40ADFB;
+}
+
+
+.admin-sidebar-list li a:focus{
+	color: #40ADFB;
+}
+.sale_aside ul li ul a{
+	font-size: 14px;
+}
+.sale_con{
+	float: right;
+	width: 85%;
+	min-height: 1000px;
+	background: #fff;
+	padding: 0px 8px;
+	
+	
+}
+.am-tabs-d2 .am-tabs-nav{
+	background: #fff;
+}
+
+[data-am-widget=tabs] .am-tabs-nav{
+	width: 25%;
+}
+
+.am-tabs-bd{
+	border: none;
+}
+.am-breadcrumb{
+	margin-bottom: 0px;
+	line-height: 30px;
+	border-bottom: 1px solid #E6E6E6;
+    
+}
+/**/
+
+
+
+
+
+
+
+
+
+
+

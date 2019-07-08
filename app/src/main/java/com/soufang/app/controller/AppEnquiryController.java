@@ -29,6 +29,7 @@ import com.soufang.app.vo.enquiry.EnquiryVo;
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
@@ -113,7 +114,7 @@ public class AppEnquiryController extends  AppBaseController{
     }
 
     /**
-     * 想看询盘详情
+     * 想看询盘详情-所有报价信息
      * 需要判断该用户是否能发布报价信息--返回字段信息
      * @param enquiryNumber
      * @return
@@ -131,6 +132,28 @@ public class AppEnquiryController extends  AppBaseController{
         enquiryGetDetailVo.setMessage("提交审核");
         return  enquiryGetDetailVo;
     }
+
+    /**
+     * 想看询盘详情-只有当前商铺报价信息
+     * @param enquiryNumber
+     * @return
+     */
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "getDetailPurchase/{enquiryNumber}",method = RequestMethod.POST)
+    public EnquiryGetDetailVo getDetailPurchase(@PathVariable String enquiryNumber,HttpServletRequest request){
+        ShopDto shopDto = this.getShopInfo(request);
+        EnquiryGetDetailVo enquiryGetDetailVo = new EnquiryGetDetailVo();
+        EnquirySo enquirySo= new EnquirySo();
+        enquirySo.setShopId(shopDto.getShopId());
+        enquirySo.setEnquiryNumber(enquiryNumber);
+        EnquiryDto enquiryDto = appEnquiryFeign.selEnquiryByNumber(enquirySo);
+        enquiryGetDetailVo.setData(enquiryDto);
+        enquiryGetDetailVo.setSuccess(true);
+        enquiryGetDetailVo.setMessage("提交审核");
+        return  enquiryGetDetailVo;
+    }
+
 
     /**
      * 发布询盘

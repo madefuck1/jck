@@ -17,7 +17,7 @@ public interface AdminBannerFeign {
     Result addImg(@RequestBody BannerDto bannerDto);
 
     @RequestMapping(value = "/core/banner/getList",method = RequestMethod.POST)
-    List<BannerDto> getList();
+    List<BannerDto> getList(@RequestBody Integer terminal);
 
     @RequestMapping(value = "/core/banner/deleteById",method = RequestMethod.POST)
     Result deleteById(@RequestBody Long id);

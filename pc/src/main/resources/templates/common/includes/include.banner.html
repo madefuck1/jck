@@ -1,10 +1,9 @@
 
-<div class="banner am-slider am-slider-default " data-am-flexslider>
+<div data-am-widget="slider" class="ba[nner am-slider am-slider-default" data-am-slider='{}' >
     <ul class="am-slides">
-        <li><img src="${contextPath}/images/banner1.png" alt=""></li>
-        <li><img src="${contextPath}/images/banner2.jpg" alt=""></li>
-        <li><img src="${contextPath}/images/banner3.png" alt=""></li>
-        <li><img src="${contextPath}/images/banner4.jpg" alt=""></li>
+        <#list bannerDtos as banner>
+        <li><img src="${banner.bannerImage}" alt=""></li>
+        </#list>
     </ul>
 </div>
 <div class="down">

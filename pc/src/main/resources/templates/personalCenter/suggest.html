@@ -21,7 +21,7 @@
             <div class="suggestmain">
                 <p>请留下您的宝贵意见：</p>
                 <div class="suggestlist">
-                    <select data-am-selected>
+                    <select data-am-selected id="typeQuestion">
                         <option value="a" selected>请选择意见类型</option>
                         <option value="b">产品问题</option>
                         <option value="c">促销问题</option>
@@ -57,6 +57,19 @@
 <script src="${contextPath}/js/jquery.form.js"></script>
 <script type="text/javascript">
     $(".submitButton").bind("click",function () {
+        //验证意见类型
+        var key1 = document.getElementById("typeQuestion");
+        var value1 = key1.options[key1.selectedIndex].value;
+        console.log(value1);
+        if(value1=="a"){
+            alert("请选择意见类型");
+            return ;
+        }
+        var texts = $("#say_some").val();
+        if(texts==null || texts==""){
+            alert("请输入意见内容");
+            return ;
+        }
         var form = $("#form");
         var options = {
             url: '/personalCenter/saveSuggest',

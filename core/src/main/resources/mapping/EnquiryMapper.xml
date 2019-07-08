@@ -146,7 +146,7 @@
     left JOIN t_enquiry_product tep on tep.enquiry_number=te.enquiry_number
     LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
     LEFT JOIN t_assort ta on ta.assort_id=tep.product_assort
-    LEFT JOIN t_shop ts ON ts.shop_id=tp.shop_id
+    left join t_shop ts on ts.shop_id=tp.shop_id
     where 1=1
     <if test="enquiryNumber != null and enquiryNumber != ''">
       and te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
@@ -265,7 +265,7 @@
   </update>
 
   <update id="regainQuote" parameterType="java.lang.String">
-    update t_enquiry set enquiry_status = 0 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+    update t_enquiry set enquiry_status = 1 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>
 
   <update id="delEnquiry" parameterType="com.soufang.base.search.enquiry.EnquirySo">

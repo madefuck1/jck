@@ -133,14 +133,14 @@
                                                 <input class="check itemCheck" type="checkbox" style="margin-top: 40px;">
                                             </div>
                                         </li>
-                                        <li class="td td-item" onclick="toDetail('${product.productId}')">
+                                        <li class="td td-item">
                                             <div class="item-pic">
                                                 <a href="#" target="_blank">
                                                     <img src="${product.productUrl}"></a>
                                             </div>
                                             <div class="item-info">
                                                 <div class="item-basic-info">
-                                                    <a href="#" target="_blank" class="item-title">${product.productName}</a>
+                                                    <a  onclick="toDetail('${product.productId}')" target="_blank" class="item-title">${product.productName}</a>
                                                 </div>
                                             </div>
                                         </li>

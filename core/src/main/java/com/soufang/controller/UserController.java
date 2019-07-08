@@ -175,4 +175,16 @@ public class UserController {
         }
         return result;
     }
+
+    @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
+    Result updatePassword(@RequestBody UserDto userDto){
+        Result result = new Result();
+        try{
+            result = userService.updatePassword(userDto);
+        }catch (BusinessException e){
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
+        }
+        return result;
+    }
 }

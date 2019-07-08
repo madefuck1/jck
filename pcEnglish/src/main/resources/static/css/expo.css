@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tog,#search,.sear .sousuo,#contain{
+	background: #fff!important;
+	
+}
+#expo-down{
+	width: 1210px;
+	min-height: 900px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.expo-title{
+	width: 1210px;
+	height: 60px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 60px;
+	margin-left: 20px;
+}
+.expo-title .title{
+	float: left;
+	width: 4px;
+	height: 16px;
+	background: red;
+	margin-right: 6px;
+	margin-top: 22px;
+	
+}
+.expo-title p{
+	margin: 0px
+}
+.expo-down{
+	width: 1210px;
+	min-height: 900px;
+	overflow: hidden;
+}
+.expo-down .expo-ul01{
+	width: 1210px;
+	min-height: 900px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+.expo-img{
+	float: left;
+	width: 282px;
+	height: 320px;
+	margin: 0 0px 20px 20px;
+	background: #fff;
+}
+.expo0li01 h3{
+	font-size: 16px;
+	margin: 0px;
+	line-height: 30px;
+	
+}
+.expo0li01 p{
+	margin: 0px;
+	line-height: 30px;
+	color: #666;
+}
+.expo0li01{
+	padding: 18px 17px 10px;
+}
+.expo-ul01 ul{
+	padding: 0px;
+	
+}
+
+.expo-ul01 ul li{
+	font-size: 12px;
+	color: #999;
+}
+.expo-img a{
+	display: table-cell;
+	width: 282px;
+	height: 179px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.expo-img a img{
+	vertical-align: middle;
+	max-height: 179px;
+	max-width: 282px;
+}
+
+
+.tog_in ul{
+	padding-left: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

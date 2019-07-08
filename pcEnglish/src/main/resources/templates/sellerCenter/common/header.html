@@ -1,0 +1,31 @@
+<!--Head -->
+<div id="nav">
+	<div class="nav_in">
+		<div class="left" id="html_top">
+			<#if isLonIn?? && isLonIn != "N">
+			<p>Welcome to you &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+				&nbsp;<a href="#" target="_blank">消息(${pushInfoCount!0})</a>
+				<!-- todo Message Jump -->
+			</p>
+			<#else>
+			<p>Welcome to<a href="/user/toLogin">Login</a> &nbsp;<a href="/user/toRegister">Registered member</a></p>
+		</#if>
+	</div>
+	<div class="right">
+		<p class="service"><a href="#">Customer service phone：400-xxx-xxxx</a></p>
+		<div class="order">
+			<a href="/sellerCenter/toSoldProduct">My order</a>
+			<span class="icon icon1"></span>
+		</div>
+		<div class="seller">
+			<a href="/sellerCenter/toIndex">Seller Center</a>
+			<span class="icon icon1"></span>
+		</div>
+		<div class="shopping">
+			<a href="/shopCar/getList">Shopping cart</a>
+			<a id="carCount" href="#">(${shopCarCount!0})</a>
+		</div>
+	</div>
+</div>
+</div>
+

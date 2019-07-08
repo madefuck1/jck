@@ -26,12 +26,13 @@ public class BannerController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "uploadImg", method = RequestMethod.POST)
-    AdminVo uploadImg(@RequestParam("file")MultipartFile file){
-        Map<String,Object> map = FtpClient.uploadImage(file,"/product");
+    @RequestMapping(value = "uploadImg/{terminal}", method = RequestMethod.POST)
+    AdminVo uploadImg(@RequestParam("file")MultipartFile file ,@PathVariable Integer terminal){
+        Map<String,Object> map = FtpClient.uploadImage(file,"/uploadBanner");
         AdminVo adminVo = new AdminVo();
         BannerDto bannerDto = new BannerDto();
         bannerDto.setBannerImage(map.get("uploadName").toString());
+        bannerDto.setTerminal(terminal);
         Result result = adminBannerFeign.addImg(bannerDto);
         if(result.isSuccess()){
             if((boolean)map.get("success")){
@@ -45,10 +46,10 @@ public class BannerController {
 
     @RequestMapping(value = "toList", method = RequestMethod.GET)
     public String toList(ModelMap model){
-        List<BannerDto> list = adminBannerFeign.getList();
-        for(int i = 0; i < list.size(); i++){
-            model.put("bannerDto"+i,list.get(i));
-        }
+        List<BannerDto> list = adminBannerFeign.getList(0);
+        /*for(int i = 0; i < list.size(); i++){
+            list.get(i).getBannerImage().replace(";"," ");
+        }*/
         model.put("bannerDto",list);
         return "/banner/banner";
     }

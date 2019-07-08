@@ -1,0 +1,240 @@
+<@override name="title">
+行业资讯
+</@override>
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
+<link rel="stylesheet" href="${contextPath}/css/new.css">
+</@override>
+<@override name="body">
+	<div id="new-up">
+		<div class="new01">
+			<h3>进出口产品交易头条</h3>
+			<div class="newleft">
+				<div class="banner am-slider am-slider-default " data-am-flexslider>
+					<ul class="am-slides">
+					<#list newsPhotos as news>
+						<li><img src="${news.picture}" alt=""></li>
+					</#list>
+					</ul>
+				</div>
+			</div>
+			<div class="newright" id="headlines">
+			</div>
+		</div>
+		<div class="new02">
+			<div class="new02-left" style="margin-right: 20px">
+				<h3>行业资讯</h3>
+				<div class="pic">
+					<dl class="dl01" id="d101">
+					</dl>
+					<div id="d101mores" class="pic"></div>
+				</div>
+			</div>
+			<div class="new02-left new02-right">
+				<h3>政府要闻</h3>
+				<div class="pic">
+					<dl class="dl01" id="governNews">
+					</dl>
+					<div id="governNewsTexts" class="pic"></div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="new02 new03">
+			<div class="new02-left">
+				<h3>热点精选</h3>
+				<div class="pic" >
+					<div id="hotNews"></div>
+					<div id="hotNews2" style="display: none;"></div>
+					<button class="am-btn am-btn-block More" id="lookMoreNews"  onclick="lookMoreNews()">查看更多</button>
+					<button class="am-btn am-btn-block More" id="noLookMoreNews" style="display: none;">没有更多</button>
+				</div>
+				
+			</div>
+			<div class="new02-left new03-right">
+				<h3>图片资讯</h3>
+				<div  id='newPic'></div>
+			</div>
+		</div>
+	</div>
+</@override>
+<@override name="js">
+<script type="text/javascript" src="/static/js/includes/include.contain.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.search.js"></script>
+<script type="text/javascript" src="/static/js/includes/include.top.js"></script>
+<script type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+<script>
+    $(function(){
+        informList("");
+    });
+
+    function informList(id) {
+        var str={id:id};
+        var num2=1;
+        var num3=1;
+        var num4=0;
+        $.ajax({
+            url : "selInformList",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                    if (v.origin==1){
+                        var whatever1=liContent1(v);
+                        $("#headlines").append(whatever1);
+					}else if(v.origin==2){
+                        //行业资讯
+                        if (num2==1){
+                            var valueInt=0;
+                            var conts=v.content.split("</p>");
+                            for(var i = 0 ;i<conts.length;i++){
+                                if (conts[i].indexOf("img")==-1){
+                                    valueInt=i;
+                                    break;
+                                }
+                            }
+                            var str2= "<dt><img style='width:190px;height:107px;' src='"+v.picture+"'  alt=''></dt><dd><h4>"+v.title+"</h4></dd><dd><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+conts[valueInt]+"</a></p></dd>"
+							$("#d101").html(str2);
+                            num2++;
+                        }else{
+                            var whatever2=liContent2(v);
+                            $("#d101mores").append(whatever2);
+						}
+
+					}else if(v.origin==3){
+                        var conts=v.content.split("</p>");
+                        //政府要闻
+                        if(num3==1){
+                            var valueInt=0;
+                            var conts=v.content.split("</p>");
+                            for(var i = 0 ;i<conts.length;i++){
+                                if (conts[i].indexOf("img")==-1){
+                                    valueInt=i;
+                                    break;
+                                }
+                            }
+                            var str3= "<dt><img style='width:190px;height:107px;' src='"+v.picture+"' alt=''></dt><dd><h4>"+v.title+"</h4></dd><dd><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+conts[valueInt]+"</a></p></dd>"
+                            $("#governNews").html(str3);
+						}else{
+                            var whatever3=liContent2(v);
+                            $("#governNewsTexts").append(whatever3);
+						}
+                        num3++;
+					}else if(v.origin==4){
+                        //热点精选
+                        var whatever4=liContent4(v);
+						if (num4<6){
+                            $("#hotNews").append(whatever4);
+						}else{
+                            $("#hotNews2").append(whatever4);
+						}
+                        num4++;
+                    }else{
+                        var whatever5=liContent5(i,v);
+                        $("#newPic").append(whatever5);
+                    }
+
+                });
+            }
+        });
+    }
+    //e广通头条-标题
+    function liContent1(v) {
+		var li=$("<p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>");
+		return li;
+    }
+	//行业资讯-政府要闻
+    function liContent2(v) {
+		var li=$("<p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>");
+		return li;
+    }
+    //热点精选
+    function liContent4(v) {
+        var valueInt=0;
+        var conts=v.content.split("</p>");
+        for(var i = 0 ;i<conts.length;i++){
+            if (conts[i].indexOf("img")==-1){
+                valueInt=i;
+                break;
+            }
+        }
+		var li=$(
+		    "<dl class='dl01'>"
+            +"<dt><img src='"+v.picture+"' alt=''  style='width:190px;height:107px;'></dt>"
+            +"<dd><h4>"+v.title+"</h4></dd>"
+        +"<dd><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+conts[valueInt]+"</a></p></dd>"
+        +"</dl></div>"
+		);
+		return li;
+    }
+	//图片资讯
+    function liContent5(i,v) {
+        var li="";
+        if((i+1) % 2 == 0){
+            li=$("<div class='new03-pic'style='margin-right: 10px;' >"
+                +"<img src='"+v.picture+"' alt='' style='width:175px;height:98px;'><p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>"
+                +"</div>");
+        }else{
+            li=$("<div class='new03-pic' >"
+                +"<img src='"+v.picture+"' alt='' style='width:175px;height:98px;'><p><a href='javascript:void(0);' onclick='toDetail("+v.id+")'>"+v.title+"</a></p>"
+				+"</div>");
+        }
+		return li;
+
+    }
+
+    //查看更过
+	function lookMoreNews(){
+    	document.getElementById("hotNews2").style.display="block";
+        document.getElementById("noLookMoreNews").style.display="block";
+        document.getElementById("lookMoreNews").style.display="none";
+	}
+    //查看详情
+    function toDetail(id) {
+        window.location.href="/inform/toInformDetail?id="+id;
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,14 +3,15 @@ package com.soufang.app.controller;
 
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
-import com.soufang.app.vo.user.Information;
-import com.soufang.app.vo.user.LoginReqVo;
-import com.soufang.app.vo.user.RegisterReqVo;
-import com.soufang.app.vo.user.UserVo;
+import com.soufang.app.vo.shop.DetailVo;
+import com.soufang.app.vo.suggest.SuggestVo;
+import com.soufang.app.vo.user.*;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
+import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
@@ -48,16 +49,19 @@ public class AppUserController extends AppBaseController {
     public UserVo login(@RequestBody LoginReqVo loginReqVo){
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
-        String loginName = loginReqVo.getPhone();
-        if(loginName == null){
+        Map<String,Object> map = new HashMap<>();
+        if(!(StringUtils.isNotBlank(loginReqVo.getPhone()) || StringUtils.isNotBlank(loginReqVo.getEmail()))){
             userVo.setMessage("用户名栏不能为空");
             userVo.setSuccess(false);
             return userVo;
         }
+        if(StringUtils.isBlank(loginReqVo.getPhone())){
+            userDto.setPhone("121");
+        }
         if(StringUtils.isNotBlank(loginReqVo.getPassword())){
-            userDto.setPhone(loginName);
-            userDto.setEmail(loginName);
-            userDto.setUserName(loginName);
+            userDto.setPhone(loginReqVo.getPhone());
+            userDto.setEmail(loginReqVo.getEmail());
+            userDto.setUserName(loginReqVo.getLoginname());
             userDto.setPassWord(loginReqVo.getPassword());
         }
         Result result = appUserFeign.login(userDto);
@@ -67,7 +71,9 @@ public class AppUserController extends AppBaseController {
             userVo.setSuccess(true);
             userVo.setMessage("登录成功");
             userVo.setCode("100");
-            userVo.setData(token);
+            map.put("token",token);
+            map.put("alias","yhkj_"+result.getMessage());
+            userVo.setData(map);
         } else {
             userVo.setMessage("登录失败:"+result.getMessage());
             userVo.setSuccess(false);
@@ -147,6 +153,7 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "registerByPhone",method = RequestMethod.POST)
     public UserVo registerByPhone(@RequestBody RegisterReqVo registerReqVo){
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         UserVo userVo = new UserVo();
         if(StringUtils.isNotBlank(registerReqVo.getPhone())){
             userDto.setPhone(registerReqVo.getPhone());
@@ -171,7 +178,8 @@ public class AppUserController extends AppBaseController {
                 userVo.setSuccess(true);
                 userVo.setCode("100");
                 userVo.setMessage("注册成功");
-                userVo.setData(token);
+                map.put("token",token);
+                userVo.setData(map);
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getPhone());
                 return userVo;
             }else {
@@ -194,6 +202,7 @@ public class AppUserController extends AppBaseController {
     public UserVo registerByEmail(@RequestBody RegisterReqVo registerReqVo){
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
+        Map<String,Object> map = new HashMap<>();
         if(StringUtils.isNotBlank(registerReqVo.getEmail())){
             userDto.setEmail(registerReqVo.getEmail());
         }
@@ -218,7 +227,8 @@ public class AppUserController extends AppBaseController {
                 RedisUtils.setString(token, String.valueOf(result.getMessage()),register_time);
                 userVo.setSuccess(true);
                 userVo.setCode("100");
-                userVo.setData(token);
+                map.put("token",token);
+                userVo.setData(map);
                 userVo.setMessage("注册成功");//成功后删除键值
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getEmail());
                 return userVo;
@@ -465,10 +475,34 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
     public AppVo updateInformation(MultipartHttpServletRequest requestFile, HttpServletRequest request){
         UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
         UserDto userDto = new UserDto();
         Result result = new Result();
+        String username = request.getParameter("realName");
         userDto.setUserId(userInfo.getUserId());
-        userDto.setRealName(request.getParameter("realName"));
+        userDto.setPhone("phone_");
+        userDto.setEmail("email_");
+        //判断是否要修改用户名
+        if(StringUtils.isNotBlank(username)){
+            //如果有，判断是否是第一次修改用户名
+            if(!StringUtils.isNotBlank(userInfo.getUserName())){
+                //如果是，判断用户名是否存在
+                userDto.setUserName(username);
+                Result result1 = appUserFeign.login(userDto);
+                if(result1.isSuccess()){
+                    vo.setMessage("用户名已存在，请换个用户名！");
+                    vo.setSuccess(false);
+                    return vo;
+                }
+            }else {
+                //用户名已存在，必须换名
+                vo.setSuccess(false);
+                vo.setMessage("当前用户名已被修改过，不能再次修改！！！");
+                return vo;
+            }
+        }
+        userDto.setPhone(null);
+        userDto.setEmail(null);
         MultipartFile file = requestFile.getFile("userAvatar");
         Map<String,Object> map = new HashMap<>();
         if(file != null){
@@ -481,12 +515,109 @@ public class AppUserController extends AppBaseController {
                 result.setMessage("头像上传失败");
                 result.setSuccess(false);
             }
-        }else {
-            result = appUserFeign.update(userDto);
         }
-        AppVo vo = new AppVo();
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
         return vo;
     }
+
+    //绑定邮箱
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "BindEmail",method = RequestMethod.POST)
+    public AppVo updateEmail(HttpServletRequest request,@RequestBody RegisterReqVo registerReqVo){
+        AppVo vo = new AppVo();
+        UserDto userInfo = this.getUserInfo(request);
+        UserDto userDto = new UserDto();
+        Result result = new Result();
+        userDto.setUserId(userInfo.getUserId());
+        if(StringUtils.isBlank(userInfo.getPhone())){
+            vo.setMessage("请先完善个人信息，填写手机号");
+            vo.setSuccess(false);
+            return vo;
+        }
+        String code = null ;
+        if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
+            code = RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail());
+        } else {
+            vo.setMessage("验证码过期");
+            vo.setSuccess(false);
+            return vo;
+        }
+        if(code.equals(registerReqVo.getCode())){
+            userDto.setEmail(registerReqVo.getEmail());
+            result = appUserFeign.update(userDto);
+        }else {
+            vo.setMessage("验证码错误");
+            vo.setSuccess(false);
+            return vo;
+        }
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+
+
+    //修改密码
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
+    public AppVo updateInformation(HttpServletRequest request, @RequestBody UpdatePassword updatePassword){
+        UserDto userInfo = this.getUserInfo(request);
+        AppVo vo = new AppVo();
+        UserDto userDto = new UserDto();
+        Result result;
+        userDto.setUserId(userInfo.getUserId());
+        if(!(MD5Utils.md5(updatePassword.getOldPassword()).equals(userInfo.getPassWord()))){
+            vo.setMessage("旧密码输入错误");
+            vo.setSuccess(false);
+            return vo;
+        }else {
+            userDto.setPassWord(MD5Utils.md5(updatePassword.getNewPassword()));
+            result = appUserFeign.updatePassword(userDto);
+        }
+        vo.setSuccess(result.isSuccess());
+        vo.setMessage(result.getMessage());
+        return vo;
+    }
+
+    //用户反馈
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "saveSuggest", method = RequestMethod.POST)
+    public Result saveSuggest(@RequestBody SuggestVo suggestVo, HttpServletRequest request) {;
+        Result result = new Result();
+        SuggestDto suggestDto = new SuggestDto();
+        suggestDto.setCreateTime(DateUtils.getToday());
+        suggestDto.setUserId(this.getUserInfo(request).getUserId());
+        if(StringUtils.isBlank(suggestVo.getContent())){
+            result.setSuccess(false);
+            result.setMessage("反馈内容不能为空");
+            return result;
+        }
+        suggestDto.setSugContent(suggestVo.getContent());
+        result = appUserFeign.addSuggest(suggestDto);
+        return result;
+    }
+
+    //判断用户是否有店铺
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "isHaveShop", method = RequestMethod.POST)
+    public DetailVo isHaveShop(HttpServletRequest request) {
+        DetailVo vo = new DetailVo();
+        ShopDto shopInfo = this.getShopInfo(request);
+        if(StringUtils.isNotBlank(shopInfo.getShopName())){
+            vo.setSuccess(true);
+            vo.setMessage("有相关的店铺信息");
+            vo.setData(shopInfo);
+            return vo;
+        }else {
+            vo.setSuccess(false);
+            vo.setMessage("没有相关的店铺信息");
+            vo.setData(null);
+            return vo;
+        }
+    }
+
 }

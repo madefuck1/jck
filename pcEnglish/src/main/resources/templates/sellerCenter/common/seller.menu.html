@@ -1,0 +1,54 @@
+<!--Seller Left menu-->
+<div class="sale_menu">
+    <ul class="am-list admin-sidebar-list" id="collapase-nav-1">
+        <!--<li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/sellerCenter/toIndex"> First
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page</a>
+        </li>-->
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/sellerCenter/toSellerCenter">
+                First
+            </a>
+        </li>
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#product-nav'}">
+                Transaction management<i class="am-icon-angle-down am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="product-nav">
+                <li><a href="/sellerCenter/toSoldProduct"> Products sold </a></li>
+                <li><a href="/sellerCenter/toAssessManagement">Evaluation management </a></li>
+            </ul>
+        </li>
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#company-nav'}">
+                Product management <i class="am-icon-angle-down am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="company-nav">
+                <li><a href="/product/createProduct">Launch products </a></li>
+                <li><a href="/sellerCenter/toProductList"> List of products </a></li>
+            </ul>
+        </li>
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#store-const'}">
+                Shop renovation <i class="am-icon-angle-right am-fr am-icon-angle-down"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="store-const">
+                <li><a href="#" onclick="window.open('/sellerCenter/toStoreConstruction')"><span class="am-margin-left-sm"></span>Computer-side decoration </a></li>
+                <li><a href="/sellerCenter/toStoreAssortManage"><span class="am-margin-left-sm"></span>Classification management</a></li>
+                <li><a href="/sellerCenter/toStoreProductAssortManage"><span class="am-margin-left-sm"></span>Product classification</a></li>
+            </ul>
+        </li>
+        <li class="am-panel active">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" href="/enquiry/toMyQuote"> My offer</a>
+        </li>
+        <li class="am-panel">
+            <a data-am-collapse="{parent: '#collapase-nav-1', target: '#role-nav'}">
+                Message management <i class="am-icon-angle-down am-fr am-margin-right"></i>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub" id="role-nav">
+                <li><a href="/sellerCenter/toGetMyNews">My message </a></li>
+                <!--<li><a href="/03-2产品列表.html"> List of products </a></li>-->
+            </ul>
+        </li>
+    </ul>
+</div>

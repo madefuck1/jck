@@ -9,7 +9,6 @@
 
     <link href="/static/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
     <link href="/static/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
-
     <link href="/static/css/demo.css" rel="stylesheet" type="text/css"/>
     <link type="text/css" href="/static/css/optstyle.css" rel="stylesheet"/>
     <link type="text/css" href="/static/css/style.css" rel="stylesheet"/>
@@ -17,6 +16,37 @@
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/sale.css">
 
+    <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+<style>
+     .Collection {
+        width: 90px !important;
+        height: 40px;
+        border-radius: 20px 0px 0px 20px;
+        background: #F58022;
+        color: #fff;
+        text-indent: 8px;
+        line-height: 40px;
+        overflow: hidden;
+        position: absolute;
+        top: 14px;
+        right: 0px;
+    }
+
+    .Collection .coll1 {
+        width: 90px;
+        text-align: left;
+        display: inline-block;
+        background: url(../../images/sale/shop4.png) no-repeat 40px center;
+    }
+
+    .coll2 {
+
+        width: 90px;
+        text-align: left;
+        display: inline-block;
+        background: url(../../images/sale/shop3.png) no-repeat 50px center;
+    }
+</style>
 
     <script type="text/javascript" src="/static/js/basic/quick_links.js"></script>
     <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
@@ -55,8 +85,6 @@
                 <li class="cur"><a href="/index">首页</a></li>
                 <li><a href="/enquiry/toEnquiryList">求购信息</a></li>
                 <li><a href="/exhibition/toExhibition">展会信息</a></li>
-                <li><a href="">纺织咨询</a></li>
-                <li><a href="">联系我们</a></li>
             </ul>
         </div>
     </div>
@@ -133,6 +161,10 @@
                         </div>
                                                                                 </#if>
                                                                                 </#list>
+                <div class="Collection" style="cursor: pointer;float: right;" onclick="collection();">
+                    <span class="coll1">收藏</span>
+                    <!--                 <span class="coll2">已收藏</span>-->
+                </div>
                     </div>
                     <div class="price_down">
                         <div class="am-u-sm-2">
@@ -467,8 +499,16 @@
 </body>
 <script type="text/javascript">
     var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber!'1'}";
-
     $(function () {
+       var isShowNone = ${isShowNone};
+                if (isShowNone==1) {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                } else {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll1">收藏</span>')
+                }
+
         $('.flexslider').flexslider({
             animation: "slide",
             start: function (slider) {
@@ -756,7 +796,24 @@
     function openStore() {
         window.open("/shop/toStoreIndex?shopId=${detail.productId}")
     }
-
+    //收藏
+    function collection() {
+        $.ajax({
+            url: '/product/isCollection?productId=${detail.productId!}&type=1&productName=${detail.productName}',
+            dataType: 'json',
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data) {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                } else {
+                    $('.Collection').empty();
+                    $('.Collection').append('<span class="coll1">收藏</span>')
+                }
+            }
+        });
+    }
 
 </script>
 </html>

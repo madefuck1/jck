@@ -1,5 +1,6 @@
 package com.soufang.service;
 
+import com.soufang.base.Result;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.search.user.UserSo;
 
@@ -98,4 +99,7 @@ public interface UserService {
     int update(UserDto userDto);
 
     void updateUserInfo(UserDto userDto);
+
+    //修改密码
+    Result updatePassword(UserDto userDto);
 }

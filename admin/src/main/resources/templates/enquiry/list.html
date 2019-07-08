@@ -61,7 +61,7 @@
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'enquiryTitle',  title: '询盘标题'}
                 ,{field:'strEnquiryType',  title: '类型'}
-                ,{field:'strEnquiryStatus', title: '状态' }
+                ,{field:'statusMessage', title: '状态' }
                 ,{field:'strTakeDate', title: '采购日期' }
                 ,{field:'takeAddress', title: '收货地址' }
                 ,{field:'strCreateTime', title: '询盘发布日期' }
@@ -70,9 +70,9 @@
                     templet: function (e) {
                         var html;
                         html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="enquiryDetail(this)"><input type="hidden" value="'+e.enquiryNumber+'">询盘详情</a >';
-                        if(e.strEnquiryStatus != "禁止报价"){
+                        if(e.statusMessage != "禁止报价"){
                             html += '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="banQuote(this)"><input type="hidden" value="'+e.enquiryNumber+'">禁止报价</a >';
-                        }else if(e.strEnquiryStatus == "禁止报价"){
+                        }else if(e.statusMessage == "禁止报价"){
                             html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="regainQuote(this)"><input type="hidden" value="'+e.enquiryNumber+'">恢复询盘报价</a >';
                         }
                         else {

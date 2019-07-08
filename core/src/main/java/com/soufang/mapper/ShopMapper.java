@@ -73,7 +73,7 @@ public interface ShopMapper {
      */
     List<Map<String, Object>> getShopIdAndNameOption();
 
-    Shop getByUserId(Long userId);
+    ShopDto getByUserId(Long userId);
 
     /**
      * app 获取店铺列表
@@ -88,4 +88,7 @@ public interface ShopMapper {
     int updateByPrimaryKeySelective(Shop record);
 
     int updateByPrimaryKey(Shop record);
+
+    //获取热门店铺
+    List<Shop> getHotShop();
 }

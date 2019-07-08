@@ -39,6 +39,9 @@
     <if test="origin != null">
       and news_origin like concat(concat('%',#{origin}),'%')
     </if>
+    <if test="id != null">
+      and news_id=#{id}
+    </if>
     order by create_time desc
   </select>
 

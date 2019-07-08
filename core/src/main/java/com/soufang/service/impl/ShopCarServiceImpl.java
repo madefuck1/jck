@@ -136,7 +136,8 @@ public class ShopCarServiceImpl implements ShopCarService {
                 shopCarProductMapper.updateByPrimaryKeySelective(shopCarProduct);
             } else {
                 //  存在 删除当前修改的购物车产品信息
-                shopCarProductMapper.deleteByPrimaryKey(dto.getShopCarProductId());
+                shopCarProduct.setProductNumber(dto.getProductNumber());
+                shopCarProductMapper.updateByPrimaryKeySelective(shopCarProduct);
             }
         } catch (Exception e) {
             logger.info("编辑失败：" + e.getMessage());

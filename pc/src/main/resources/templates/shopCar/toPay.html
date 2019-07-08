@@ -469,6 +469,12 @@
         }
     }
 
+    $(".close").bind("click",function () {
+        $(".theme-popover").hide();
+        $(".theme-popover-mask").hide();
+        cleanInput();
+    })
+
     function cleanInput(){
         $("#addressId").val("");
         $("#country").val("");

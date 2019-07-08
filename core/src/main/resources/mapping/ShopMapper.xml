@@ -22,7 +22,7 @@
     <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
     <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
     <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
-    <result column="shop_avatar_url" property="shopAvatarUrl" jdbcType="VARCHAR"/>
+    <result column="shop_avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
     <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
     <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
     <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
@@ -66,7 +66,21 @@
     where shop_id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="getByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <resultMap id="ShopAndProductCountMap" type="com.soufang.base.dto.shop.ShopDto">
+        <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_level" property="shopLevel" jdbcType="INTEGER"/>
+        <result column="shop_introduce" property="shopIntroduce" jdbcType="VARCHAR"/>
+        <result column="shop_avatar_url" property="avatarUrl" jdbcType="VARCHAR"/>
+        <result column="business_scope" property="businessScope" jdbcType="VARCHAR"/>
+        <result column="main_products" property="mainProducts" jdbcType="VARCHAR"/>
+        <result column="shop_status" property="shopStatus" jdbcType="INTEGER"/>
+        <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+  <select id="getByUserId" resultMap="ShopAndProductCountMap" parameterType="java.lang.Long" >
     select * from t_shop
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
@@ -253,4 +267,11 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where shop_id = #{shopId,jdbcType=BIGINT}
   </update>
+
+
+    <select id="getHotShop" resultMap="BaseResultMap"  >
+    select * from t_shop
+    order BY  shop_level DESC  LIMIT 0,10
+  </select>
+
 </mapper>

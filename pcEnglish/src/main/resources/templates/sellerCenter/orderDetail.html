@@ -1,0 +1,351 @@
+<@override name="title">
+Seller Order Details
+</@override>
+
+<@override name="css">
+    <link rel="stylesheet" href="${contextPath}/css/sale/sale-orstyle.css">
+    <link rel="stylesheet" href="${contextPath}/css/sale/sale_personal.css">
+    <link rel="stylesheet" href="${contextPath}/css/sale/saleorder_detail.css">
+
+<style>
+.process_success {background-image: url(${contextPath}/images/sprite.png);background-position: -103px -135px;width: 19px;height: 19px;}
+
+.process_ing {background-image: url(${contextPath}/images/sprite.png);background-position: -79px -135px;width: 19px;height: 19px;}
+
+.process_fail{background-image: url(${contextPath}/images/sprite.png);background-position: -142px -133px;width: 19px;height: 19px;}
+.tail {color: 	#fff;width: 290px;height: 40px;line-height: 40px;background: #40ADFB;margin-left: 42%;text-align: center;}
+
+.ship_info{color: 	#fff;width: 120px;height: 40px;line-height: 40px;background: #40ADFB;margin-left: 42%;text-align: center;}
+
+.process_fail_info{color: 	red;margin-left: 30%;width: 15%;}
+
+
+  .updatePrice{
+      display: block;
+  }
+.hideThis{
+    display: none;
+}
+
+</style>
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="/sellerCenter/toIndex">Seller's workbench</a></li>
+                <li><a href="#">Order details</a></li>
+            </ol>
+            <div class="m-progress" id="orderStatusList">
+                <div class="m-progress-list">
+                    <span class="step-1 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">1<em class="bg"></em></i>
+                       <p class="stage-name">Submit an order</p>
+                    </span>
+                    <span class="step-2 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">2<em class="bg"></em></i>
+                       <p class="stage-name">Audit</p>
+                    </span>
+                    <span class="step-3 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">3<em class="bg"></em></i>
+                       <p class="stage-name">Buyer's payment</p>
+                    </span>
+                    <span class="step-4 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">4<em class="bg"></em></i>
+                       <p class="stage-name">Delivery</p>
+                    </span>
+                    <span class="step-5 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">5<em class="bg"></em></i>
+                       <p class="stage-name">Confirm receipt</p>
+                    </span>
+                    <span class="step-6 step">
+                       <em class="u-progress-stage-bg"></em>
+                       <i class="u-stage-icon-inner">6<em class="bg"></em></i>
+                       <p class="stage-name">Evaluation</p>
+                    </span>
+                    <span class="u-progress-placeholder"></span>
+                </div>
+                <#if order.orderShopStatus == 5>
+                <div class="tail">After production is complete, please click here to inform the buyer of the end payment</div>
+                <#elseif order.orderShopStatus == 6>
+                <div class="ship_info">Delivery</div>
+                <#elseif order.orderShopStatus == 10>
+                <div class="process_fail_info">Audit fails, buyer fills out the contract is not clear。</div>
+                </#if>
+            </div>
+            <div class="info">
+                <h3>Order information</h3>
+                <div class=" am-u-sm-7">
+                    <div class="am-u-sm-3 info_left">
+                        <p>Order No：</p>
+                        <p>Consignee：</p>
+                        <p>Shipping address：</p>
+                        <p>Contact：</p>
+                        <p>Payment method：</p>
+                        <p>Invoice information：</p>
+                        <p>Additional notes：</p>
+                    </div>
+                    <div class="am-u-sm-9 info_right">
+                        <p>${order.orderNumber}</p>
+                        <p>${order.orderDto.takeName}</p>
+                        <p>${order.orderDto.takeAddress}</p>
+                        <p>${order.orderDto.takePhone}</p>
+                        <p><#if order.orderDto.orderType == 2>Online payments<#else>Offline payments</#if></p>
+                        <p>Free text invoices</p>
+                        <p>${(order.orderDto.orderRemark)!"No comment sym"}</p>
+                    </div>
+                </div>
+                <div class=" am-u-sm-5">
+                    <div class="am-u-sm-4 info_left">
+                        <p>Order No：</p>
+                        <p>Submit time：</p>
+                    </div>
+                    <div class="am-u-sm-8 info_right">
+                        <p>${order.orderNumber}</p>
+                        <p>${order.createTimeString}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-infomain">
+                <div class="order-top">
+                    <div class="th th-item">
+                        <td class="td-inner">Merchandise information</td>
+                    </div>
+                    <div class="th th-price">
+                        <td class="td-inner">Price</td>
+                    </div>
+                    <div class="th th-number">
+                        <td class="td-inner">Number</td>
+                    </div>
+                    <div class="th th-amount">
+                        <td class="td-inner">Subtotal</td>
+                    </div>
+                </div>
+
+                <div class="order-main">
+                    <#list order.orderProducts as orderProduct>
+                    <div class="order-status3">
+                        <div class="order-content">
+                            <div class="order-left">
+                                <ul class="item-list">
+                                    <li class="td td-item">
+                                        <div class="item-pic">
+                                            <a href="#" class="J_MakePoint">
+                                                <img src="${orderProduct.productImage}" class="itempic J_ItemImg">
+                                            </a>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="item-basic-info">
+                                                <a href="#">
+                                                    <p>${orderProduct.productName}</p>
+                                                    <p class="info-little">Color：${orderProduct.productColor}
+                                                        <br/>Specifications：${orderProduct.productSpec} </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="td td-price">
+                                        <div class="item-price">
+                                            ${orderProduct.productPrice?string('0.00')}
+                                        </div>
+                                    </li>
+                                    <li class="td td-number">
+                                        <div class="item-number">
+                                            <span>×</span>${orderProduct.productNumber}
+                                        </div>
+                                    </li>
+                                    <li class="td td-operation">
+                                        <div class="item-operation">
+                                            ${(orderProduct.productPrice*orderProduct.productNumber)?string('0.00')}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </#list>
+                </div>
+
+                <div class="order_pri" >
+                    <div class="left am-u-sm-6">
+                        <p>Total price of goods：</p>
+                        <p id="order_actual">Total order price：</p>
+                        <div class="item-operation" style="color:  #40ADFB" >
+                            <p id="myBT" style="margin-right:10px">Change the price</p>
+                        </div>
+                        <p>Deposit：</p>
+                        <p>Tail：</p>
+                    </div>
+                    <div class="right am-u-sm-6">
+                        <p>${order.sumPrice}</p>
+                        <p id="order_actualPrice">${order.actualPrice}</p>
+                        <p>
+                        <div  id="updatePrice" class="hideThis" style="margin-left: 35%">
+                            <input style="display: block;width: 100px;margin-left:-32px;height: 30px;"type="text" id="actualPrice" />
+                            <button type="button" id="confirm" onclick="changeSumPrice()" style="margin-left: -18px">Confirm</button>
+                            <button type="button" id="cancel" style="margin-left: 12px">Cancel</button>
+                        </div>
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>${order.frontPrice}</p>
+                        <p>${order.sumPrice-order.frontPrice}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</@override>
+<@override name="js" >
+<script type="text/javascript">
+    $(".item-operation").click(function(){
+        $(".modify").toggle();
+    });
+
+    $(document).ready(function() {
+        $("#myBT").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+    $(document).ready(function() {
+        $("#confirm").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+    $(document).ready(function() {
+        $("#cancel").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+
+    function changeSumPrice(){
+        var orderNumber = "${order.orderNumber}" ;
+        var actualPrice = $("#actualPrice").val();
+        var data = {
+            actualPrice:actualPrice,
+            orderNumber:orderNumber,
+        }
+        $.ajax({
+            url: '/sellerCenter/updateSumPrice',
+            type: 'post',
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                if(data.success){
+                    alert("Successful change of price");
+                    $("#order_actualPrice").empty();
+                    $("#order_actual").empty();
+                    /*var changPrice = '<span>更改价格:</span>\n' +
+'                                      <input type="text" id="sumPrice">\n' +
+'                                      <div style="margin-top:4px">\n' +
+'                                         <button type="button" class="am-btn am-btn-secondary" onclick="changeSumPrice()">确认</button>\n' +
+'                                         <button type="button" class="am-btn am-btn-default">取消</button>\n' +
+'                                      </div>';
+                    $("#changPrice").append(changPrice);*/
+                    var order_actual = '<p id="order_actual">Total order price：</p>';
+                    var order_actualPrice = '<p id="order_actualPrice">'+actualPrice+'</p>';
+                    $("#order_actual").append(order_actual);
+                    $("#order_actualPrice").append(order_actualPrice);
+                }else {
+                    alert(data.message);
+                }
+            },
+            error:function () {
+                alert("Request sent failed");
+            }
+        })
+    }
+
+
+    //控制进度条
+    $(function () {
+        var orderStatus = "${order.orderShopStatus}" ;
+        var frontPrice = "${order.frontPrice}";
+        var sumPrice = "${order.sumPrice}";
+        if(orderStatus == "1" ){
+            $(".step-1").find(".bg").addClass("process_ing");//未提交合同
+        }else if(orderStatus == "2"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_ing");//审核中
+        } else if(orderStatus == "10"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_fail");//审核失败
+            //$(".step-3").find(".bg").addClass("process_fail_info")
+        }
+        else if(orderStatus == "3" || orderStatus == "5" ){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_ing");//买家付款
+        }else if((orderStatus == "3" || orderStatus == "5") && frontPrice > 0 && frontPrice <sumPrice){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_ing");//买家没付尾款
+            //$(".step-3").find(".bg").addClass("tail")
+        }else if(orderStatus == "6"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_success");
+            $(".step-4").find(".bg").addClass("process_ing");//待发货
+            //$(".step-3").find(".bg").addClass("ship_info")
+        }else if(orderStatus == "7"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_success");
+            $(".step-4").find(".bg").addClass("process_success");
+            $(".step-5").find(".bg").addClass("process_ing");//待收货
+
+        } else if(orderStatus == "8"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_success");
+            $(".step-4").find(".bg").addClass("process_success");
+            $(".step-5").find(".bg").addClass("process_success");
+            $(".step-6").find(".bg").addClass("process_ing");//待评价
+        }else if(orderStatus == "9"){
+            $(".step-1").find(".bg").addClass("process_success");
+            $(".step-2").find(".bg").addClass("process_success");
+            $(".step-3").find(".bg").addClass("process_success");
+            $(".step-4").find(".bg").addClass("process_success");
+            $(".step-5").find(".bg").addClass("process_success");
+            $(".step-6").find(".bg").addClass("process_success");
+        }
+    });
+
+</script>
+
+</@override>
+
+<@extends name="/common/layout/base.sellerCenter.html"/>

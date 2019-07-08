@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+.nav{
+	width: 100%;
+	height: auto;
+	border-bottom: 2px solid #F58022;
+}
+.login-boxtitle{
+	width: 1190px;
+	height: 100px;
+	margin: 0 auto;
+}
+.login-boxtitle .logo{
+	float: left;
+}
+.login-boxtitle span a{
+	color: #F58022;
+}
+
+.user-name, .user-pass{
+	height: 50px;
+	}
+
+.logo{
+	width: 100px;
+	height: 60px;
+	}
+.login_name{
+	line-height: 150px;
+	font-size: 28px;
+	font-weight: 400;
+	letter-spacing: 4px;
+	color: #666;
+}
+.login_in{
+	float: right;
+	margin-top: 70px;
+}
+
+/*center*/
+
+.center{
+	width: 1190px;
+	height: auto;
+	margin: 50px auto;
+	box-shadow:0px 3px 13px 0px rgba(4,0,0,0.14);
+	overflow: hidden;
+}
+
+.center_in{
+	margin:60px auto;
+	width: 800px;
+	height: auto;
+}
+
+
+	.code{
+		
+		margin:0 auto;
+	}
+	.input-val{
+		width: 295px;
+		background: #ffffff;
+		height: 2.8rem;
+		padding: 0 2%;
+		border-radius: 5px;
+		border: none;
+		border: 1px solid rgba(0,0,0,.2);
+		font-size: 1.0625rem;
+	}
+	#canvas{
+	
+		display: inline-block;
+		border:1px solid #ccc;
+		border-radius: 5px;
+		cursor: pointer;
+		float: left;
+	}
+
+
+
+.personal_check .am-ucheck-icons{
+	line-height: 36px;
+}
+
+
+.center_top{
+	margin-top: 26px;
+	overflow: hidden;
+}
+.up_pic{
+	margin-bottom: 0px;
+	height: 36px;
+	line-height: 36px;
+	margin-left: 150px;
+	overflow: hidden;
+	margin-top: -4px;
+}
+
+.footer{
+	margin: 30px 180px;
+}
+
+
+
+

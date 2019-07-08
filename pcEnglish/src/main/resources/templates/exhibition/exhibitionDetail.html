@@ -1,0 +1,117 @@
+<@override name="title">
+Exhibition details
+</@override>
+<@override name="css">
+	<link rel="stylesheet" href="${contextPath}/css/iconfont1.css">
+	<link rel="stylesheet" href="${contextPath}/css/expodetail.css">
+</@override>
+<@override name="body">
+	<div id="expoDetail">
+		<ol class="am-breadcrumb">
+		  <li><a href="/exhibition/toExhibition">Exhibition</a></li>
+		  <li><a href="#">Details</a></li>
+		</ol>
+		<div class="expo-table01">
+			<h3>Basic Information</h3>
+			<div class="table01-in">
+				<table>
+				<tbody>
+				<input type="hidden" id="exhibitionId" value="${exhibitionId}">
+					<tr>
+						<th>organization:</th>
+						<td id="exhibitionOrganization"></td>
+					</tr>
+					<tr>
+						<th>Extension:</th>
+						<td><span id="exhibitionStartTime"></span><span id="exhibitionEndTime"></span></td>
+					</tr>
+					<tr>
+						<th>Exhibition hall name:</th>
+						<td id="exhibitionName"></td>
+					</tr>
+					<tr>
+						<th>area:</th>
+						<td id="exhibitionArea"></td>
+					</tr>
+					<tr>
+						<th>Contact:</th>
+						<td id="exhibitionContact"></td>
+					</tr>
+					<tr>
+						<th>E-mail:</th>
+						<td id="exhibitionEmail"></td>
+					</tr>
+					<tr>
+						<th>phone:</th>
+						<td id="exhibitionPhone"></td>
+					</tr>
+					<tr>
+						<th>fax:</th>
+						<td id="exhibitionFax"></td>
+					</tr>
+					
+				</tbody>
+
+			</table>
+			</div>
+			<h3>Show information</h3>
+			<div class="table01-in">
+				<table>
+				<tbody>
+					<tr>
+						<th>Exhibition homepage:</th>
+						<td id="exhibitionIndexUrl"></td>
+					</tr>
+					<tr>
+						<th>Industry:</th>
+						<td id="assortName">
+						</td>
+					</tr>
+					<tr>
+						<th>Exhibition introduction:</th>
+						<td id="exhibitionIntroduce">
+						</td>
+					</tr>
+					
+				</tbody>
+
+			</table>
+			</div>
+		</div>
+		
+	</div>
+</@override>
+<@override name="js">
+<script>
+	$(function(){
+	  	//exhibitionId
+		var exhibitionId=$("#exhibitionId").val();
+		var str={exhibitionId:exhibitionId};
+        $.ajax({
+            url : "selExhibitionList",
+            type : "post",
+			data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                $("#exhibitionOrganization").html(v.exhibitionOrganization);
+                $("#exhibitionStartTime").html(v.exhibitionStartTime);
+                $("#exhibitionEndTime").html(v.exhibitionEndTime);
+                $("#exhibitionName").html(v.exhibitionName);
+                $("#exhibitionArea").html(v.exhibitionArea);
+                $("#exhibitionEmail").html(v.exhibitionEmail);
+                $("#exhibitionContact").html(v.exhibitionContact);
+                $("#exhibitionPhone").html(v.exhibitionPhone);
+                $("#exhibitionFax").html(v.exhibitionFax);
+                $("#assortName").html(v.assortDto.assortName);
+                $("#exhibitionIntroduce").html(v.exhibitionIntroduce);
+                $("#exhibitionIndexUrl").html( "<a href='"+v.exhibitionIndexUrl+"'>Visit the official website</a>");
+                });
+                }
+
+        });
+	})
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

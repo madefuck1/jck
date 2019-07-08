@@ -1,0 +1,285 @@
+<@override name="title">
+My footprint
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/footstyle.css" rel="stylesheet" type="text/css">
+
+</@override>
+<@override name="body">
+<b class="line"></b>
+		<div class="center">
+				<div class="col-main">
+					<div class="main-wrap">
+
+						<div class="user-foot">
+						<!--标题 -->
+								<div class="am-cf am-padding">
+									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">My footprint</strong></div>
+								</div>
+							<div id="noData" style="display:none;">
+							<#include "/noData.html"/>
+							</div>
+
+								<hr/>
+								<!--足迹列表 /今天-->
+								<div id="tableFoot"></div>
+								<div class="clear"></div>
+									<!--一周以内-->
+								<div id="oneWeekTable" ></div>
+					</div>
+				</div>
+
+				</div>
+				<!--左边菜单-->
+				<#include "/personalCenter/common/include.menu.html"/>
+		</div>
+
+
+</@override>
+<@override name="js">
+<script>
+	$(function(){
+	   //默认加载
+        selFootPrint()
+	});
+
+	//查询列表
+	function  selFootPrint() {
+        $("#tableFoot").html("");
+        $("#oneWeekTable").html("");
+	    var str={page:1,limit:10};
+        //查询产品列表方法
+        $.ajax({
+            url : "selFootPrintOneWeek",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+               if (data.data.length==0){
+                   document.getElementById("noData").style.display="block";//显示
+				}else{
+				   var a=0;
+                   $.each(data.data, function (i, v) {
+                       //当天数据-当数据卫当日-则添加到列表
+                       if(longFormatDate(v.createTime)==newTimes()){
+                           //当天数据
+						   if(a<10){
+							   var toDays=liContentToDays(i,v);
+							   a++;
+						   }
+                       }else{
+                           //一周以内
+                           var oneWeedEver = liContent(a,v);
+						   a++;
+                       }
+                       $("#tableFoot").append(toDays);
+                       $("#oneWeekTable").append(oneWeedEver);
+                   });
+			   }
+
+            }
+        });
+    }
+
+    //动态加载数据
+	function liContentToDays(i,v){
+		var prodts= v.productDto;
+        var footprintId=v.footprintId;
+        var createTime=longFormatDate(v.createTime);
+        var productName=prodts.productName;
+        var productPrice=v.productStatisticsDto.productPrice;
+        var productImage=prodts.url;
+        var productId=prodts.productId;
+        var isUpper=prodts.isUpper;
+        if(isUpper==1){ isUpper=""
+        }else{ isUpper="Goods have been removed"; }
+		//截取年月日
+        var content = "";
+        var ToDaystableHead;
+        if(i==0){
+            ToDaystableHead= "<div class='goods-date' data-date='"+createTime+"'>"
+                +"<span><i class='month-lite'>"+createTime.substring(0,4)+"</i>.<i class='day-lite'>"+createTime.substring(4,6)+"</i><i class='date-desc'>today</i></span>"
+                +"<del class='am-icon-trash'></del>"
+                +"<s class='line'></s>"
+                +"</div>"
+        }else{
+            ToDaystableHead="<div class='goods-date' data-date='"+createTime+"'>"
+                +"<s class='line'></s>"
+                +"</div>"
+        }
+
+        var li = $("<div class='goods'>"
+            +ToDaystableHead
+            +"<div class='goods-box first-box'>"
+            +"<div class='goods-pic'>"
+            +"<div class='goods-pic-box'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")' title='"+productName+"'  class='goods-pic-link' target='_blank'>"
+
+            +"<img src='"+productImage+"' class='goods-img'></a>"
+            +"</div>"
+            +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
+            +"<div class='goods-status goods-status-show'><span class='desc'>"+isUpper+"</span></div>"
+            +"</div>"
+
+            +"<div class='goods-attr'>"
+            +"<div class='good-title'>"
+            +"<a class='title' href='#' target='_blank'>"+productName+"</a>"
+            +"</div>"
+            +"<div class='goods-price'>"
+            +"<span class='g_price'>"
+            +"<span>¥</span><strong>"+productPrice+"</strong>"
+            +"</span>"
+            /*+"<span class='g_price g_price-original'>"
+            +"<span>¥</span><strong>142</strong>"
+            +"</span>"*/
+            +"</div>"
+            +"<div class='clear'></div>"
+            +"<div class='goods-num'>"
+            +"<div class='match-recom'>"
+            // +"<a href='#' class='match-recom-item'>找相似</a>"
+            // +"<a href='#' class='match-recom-item'>找搭配</a>"
+            +"<i><em></em><span></span></i>"
+            +"</div>"
+            +"</div> </div></div></div>"
+        );
+        return li;
+
+	}
+
+
+    //动态加载数据
+    function  liContent(a,v) {
+		var prodts= v.productDto;
+		var footprintId=v.footprintId;
+		var createTime=longFormatDate(v.createTime);
+		var productName=prodts.productName;
+		var productPrice=v.productStatisticsDto.productPrice;
+        var productId=prodts.productId;
+		var productImage=prodts.url;
+		var isUpper=prodts.isUpper;
+		if(isUpper==10){
+            isUpper=""
+		}else{
+            isUpper="Goods have been removed";
+		}
+        var content = "";
+        //针对第一行数据表头
+		var tableHead;
+
+        if(a==10){
+            tableHead= "<div class='goods-date' data-date='"+createTime+"'>"
+                +"<span><i class='month-lite'></i><i class='day-lite'></i><i class='date-desc'>within a week</i></span>"
+                +"<del class='am-icon-trash'></del>"
+                +"<s class='line'></s>"
+                +"</div>"
+		}else{
+            tableHead="<div class='goods-date' data-date='"+createTime+"'>"
+                +"<s class='line'></s>"
+                +"</div>"
+		}
+
+    	var li = $("<div class='goods'>"
+				+tableHead
+            +"<div class='goods-box first-box'>"
+           	+"<div class='goods-pic'>"
+            +"<div class='goods-pic-box'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")'title='"+productName+"'  class='goods-pic-link' target='_blank'>"
+            +"<img src='"+productImage+"' class='goods-img'></a>"
+            +"</div>"
+            +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
+        +"<div class='goods-status goods-status-show'><span class='desc'>"+isUpper+"</span></div>"
+        +"</div>"
+
+        +"<div class='goods-attr'>"
+           +"<div class='good-title'>"
+            +"<a class='title' href='#' target='_blank'>"+productName+"</a>"
+        +"</div>"
+        +"<div class='goods-price'>"
+            +"<span class='g_price'>"
+            +"<span>¥</span><strong>"+productPrice+"</strong>"
+        +"</span>"
+        +"</div>"
+        +"<div class='clear'></div>"
+            +"<div class='goods-num'>"
+            +"<div class='match-recom'>"
+            +"<a href='#' class='match-recom-item'>Find similar</a>"
+            +"<a href='#' class='match-recom-item'>Looking for a match</a>"
+            +"<i><em></em><span></span></i>"
+        +"</div>"
+        +"</div> </div></div></div>"
+        );
+	    return li;
+    }
+
+	//删除
+    function delFootPrint(footprintId){
+	    //唯一标识
+	    var str = {footprintId:footprintId};
+        $.ajax({
+            url : "delFootPrintById",
+            type : "post",
+            data:JSON.stringify(str),
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                //操作完成
+                alert(data.message);
+                window.location.href = "/personalCenter/toFootPrintManage";
+            }
+        });
+	}
+
+    function openProductDetail(value) {
+        window.location.href = "/product/toDetail?productId=" + value;
+    }
+
+	// 获取当前时间
+	function newTimes(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var nowDate = year + month   + day;
+        return nowDate;
+	}
+
+	//将LONG时间转为DATA
+    function longFormatDate(longTypeDate) {
+        var datetimeType = "";
+        var date = new Date();
+        date.setTime(longTypeDate);
+        datetimeType+= date.getFullYear();   //年  
+        datetimeType+=getMonth(date); //月   
+        datetimeType+=getDay(date);   //日  
+        return datetimeType;
+    }
+    //返回月   
+    function getMonth(date){
+        var month = "";
+        month = date.getMonth() + 1;
+        if(month<10){
+            month = "0" + month;
+        }
+        return month;
+    }
+    //返回日 
+    function getDay(date){
+        var day = "";
+        day = date.getDate();
+        if(day<10){
+            day = "0" + day;
+        }
+        return day;
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

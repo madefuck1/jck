@@ -5,6 +5,7 @@ import com.soufang.Vo.AdminVo;
 import com.soufang.Vo.news.NewsReqVo;
 import com.soufang.Vo.news.NewsVo;
 import com.soufang.Vo.news.UpNewsReqVo;
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.dto.news.NewsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.news.NewsSo;
@@ -14,17 +15,21 @@ import com.soufang.base.utils.FtpClient;
 import com.soufang.feign.AdminNewsFeign;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.crypto.Data;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/news")
 public class NewsController {
-
+    @Value("${upload.news}")
+    private String newsUrl;
     @Autowired
     AdminNewsFeign adminNewsFeign;
 
@@ -70,6 +75,12 @@ public class NewsController {
         return "/news/addNews";
     }
 
+
+    /**
+     * 新增新闻资讯
+     * @param newsReqVo
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "addNews", method = RequestMethod.POST)
     public AdminVo addNews(@RequestBody NewsReqVo newsReqVo){
@@ -79,6 +90,7 @@ public class NewsController {
         newsDto.setContent(newsReqVo.getContent());
         newsDto.setOrigin(newsReqVo.getOrigin());
         newsDto.setCreateTime(DateUtils.getToday());
+        newsDto.setPicture(newsReqVo.getPicture());
         Result result = adminNewsFeign.addNews(newsDto);
         AdminVo adminVo = new AdminVo(result);
         return adminVo;
@@ -113,8 +125,28 @@ public class NewsController {
         return adminVo;
     }
 
+    /**
+     * 新闻资讯新增时上传图片
+     * @param file
+     */
+    @ResponseBody
     @RequestMapping(value = "addNewsImg", method = RequestMethod.POST)
-    public void addNewsImg(@RequestParam("file")MultipartFile file){
-        Map<String,Object> map = FtpClient.uploadImage(file,"/news");
+    public Object addNewsImg(@RequestParam("file")MultipartFile file) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> map = FtpClient.uploadImage(file, newsUrl);
+        if ((boolean) map.get("success")) {
+            Map<String, Object> result2 = new HashMap<String, Object>();
+            String uploadNameUrl = String.valueOf(map.get("uploadName"));
+            result2.put("src", PropertiesParam.file_pre+uploadNameUrl);
+            result2.put("title",StringUtils.substringAfterLast(uploadNameUrl,"/"));
+            result.put("code", 0);    //0表示上传成功
+            result.put("msg", "上传成功"); //提示消息
+            result.put("data",result2);
+        } else {
+            result.put("code", 1);
+            result.put("msg", "上传失败");
+        }
+        return result;
     }
+
 }

@@ -49,7 +49,7 @@
 	function  selFootPrint() {
         $("#tableFoot").html("");
         $("#oneWeekTable").html("");
-	    var str={page:1,limit:5};
+	    var str={page:1,limit:10};
         //查询产品列表方法
         $.ajax({
             url : "selFootPrintOneWeek",
@@ -58,18 +58,22 @@
             contentType: 'application/json; charset=UTF-8',
             dataType : "json",
             success : function(data) {
-                console.log(data);
                if (data.data.length==0){
                    document.getElementById("noData").style.display="block";//显示
 				}else{
+				   var a=0;
                    $.each(data.data, function (i, v) {
                        //当天数据-当数据卫当日-则添加到列表
                        if(longFormatDate(v.createTime)==newTimes()){
                            //当天数据
-                           var toDays=liContentToDays(i,v);
+						   if(a<10){
+							   var toDays=liContentToDays(i,v);
+							   a++;
+						   }
                        }else{
                            //一周以内
-                           var oneWeedEver = liContent(i,v);
+                           var oneWeedEver = liContent(a,v);
+						   a++;
                        }
                        $("#tableFoot").append(toDays);
                        $("#oneWeekTable").append(oneWeedEver);
@@ -82,14 +86,14 @@
 
     //动态加载数据
 	function liContentToDays(i,v){
+		var prodts= v.productDto;
         var footprintId=v.footprintId;
         var createTime=longFormatDate(v.createTime);
-        var productName=v.productDto.productName;
+        var productName=prodts.productName;
         var productPrice=v.productStatisticsDto.productPrice;
-        var productImage=v.productDto.url;
-        var productId=v.productDto.productId;
-        console.log(productId);
-        var isUpper=v.productDto.isUpper;
+        var productImage=prodts.url;
+        var productId=prodts.productId;
+        var isUpper=prodts.isUpper;
         if(isUpper==1){ isUpper=""
         }else{ isUpper="宝贝已下架"; }
 		//截取年月日
@@ -128,9 +132,9 @@
             +"<span class='g_price'>"
             +"<span>¥</span><strong>"+productPrice+"</strong>"
             +"</span>"
-            +"<span class='g_price g_price-original'>"
+            /*+"<span class='g_price g_price-original'>"
             +"<span>¥</span><strong>142</strong>"
-            +"</span>"
+            +"</span>"*/
             +"</div>"
             +"<div class='clear'></div>"
             +"<div class='goods-num'>"
@@ -147,17 +151,16 @@
 
 
     //动态加载数据
-    function  liContent(i,v) {
-       	var prodts= v.productDto;
-       	console.log(prodts);
+    function  liContent(a,v) {
+		var prodts= v.productDto;
 		var footprintId=v.footprintId;
 		var createTime=longFormatDate(v.createTime);
 		var productName=prodts.productName;
 		var productPrice=v.productStatisticsDto.productPrice;
-		var enquiryProductId=prodts.enquiryProductId;
-		var productImage=prodts.productImage;
+        var productId=prodts.productId;
+		var productImage=prodts.url;
 		var isUpper=prodts.isUpper;
-		if(isUpper==1){
+		if(isUpper==10){
             isUpper=""
 		}else{
             isUpper="宝贝已下架";
@@ -165,7 +168,8 @@
         var content = "";
         //针对第一行数据表头
 		var tableHead;
-        if(i==0){
+
+        if(a==10){
             tableHead= "<div class='goods-date' data-date='"+createTime+"'>"
                 +"<span><i class='month-lite'></i><i class='day-lite'></i><i class='date-desc'>一周内</i></span>"
                 +"<del class='am-icon-trash'></del>"
@@ -176,12 +180,13 @@
                 +"<s class='line'></s>"
                 +"</div>"
 		}
+
     	var li = $("<div class='goods'>"
 				+tableHead
             +"<div class='goods-box first-box'>"
            	+"<div class='goods-pic'>"
             +"<div class='goods-pic-box'>"
-            +"<a href='/enquiry/toEnquiryDetails?enquiryProductId="+enquiryProductId+"' title='"+productName+"'  class='goods-pic-link' target='_blank'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")'title='"+productName+"'  class='goods-pic-link' target='_blank'>"
             +"<img src='"+productImage+"' class='goods-img'></a>"
             +"</div>"
             +"<a class='goods-delete' href='javascript:void(0);'  onclick='delFootPrint(\""+footprintId+"\")'><i class='am-icon-trash'></i></a>"
@@ -195,9 +200,6 @@
         +"<div class='goods-price'>"
             +"<span class='g_price'>"
             +"<span>¥</span><strong>"+productPrice+"</strong>"
-        +"</span>"
-        +"<span class='g_price g_price-original'>"
-            +"<span>¥</span><strong>142</strong>"
         +"</span>"
         +"</div>"
         +"<div class='clear'></div>"

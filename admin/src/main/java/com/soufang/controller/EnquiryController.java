@@ -62,9 +62,39 @@ public class EnquiryController {
         UserDto userDto = adminEnquiryFeign.getByEnquiryNumber(enqNum);
         model.put("enquiryDto",enquiryDto);
         model.put("userDto",userDto);
+        //获取产品列表
+        List<EnquiryProductDto> list = adminEnquiryFeign.getEPD(enqNum);
+        List<EnquiryProductDto> listEPD = new ArrayList<>();
+        for (EnquiryProductDto e:list) {
+            EnquiryProductDto ePDto = new EnquiryProductDto();
+            AssortDto assortDto = adminEnquiryFeign.getAssort(e.getProductAssort());
+            BeanUtils.copyProperties(e,ePDto);
+            ePDto.setAssortName(assortDto.getAssortName());
+            listEPD.add(ePDto);
+        }
+        model.put("enqProDtoList",listEPD);
         return "/enquiry/detail";
     }
+    //审核通过
+    @ResponseBody
+    @RequestMapping(value = "enquiryDetail/passed", method = RequestMethod.POST)
+    public AdminVo passed(@RequestBody String enqNum,ModelMap model){
+        AdminVo vo = new AdminVo();
+        vo.setMsg("审核成功");
+        vo.setCode("100");
+        return vo;
+    }
+    //审核失败
+    @ResponseBody
+    @RequestMapping(value = "enquiryDetail/refuse", method = RequestMethod.POST)
+    public AdminVo refuse(@RequestBody String enqNum,ModelMap model){
+        AdminVo vo = new AdminVo();
+        vo.setMsg("审核成功");
+        vo.setCode("100");
+        return vo;
+    }
 
+    //报价产品列表
     @RequestMapping(value = "enquiryDetail/viewProduct/{enqNum}", method = RequestMethod.GET)
     public String getProduct(@PathVariable String enqNum,ModelMap model){
         List<EnquiryProductDto> list = adminEnquiryFeign.getEPD(enqNum);
@@ -79,6 +109,7 @@ public class EnquiryController {
         model.put("enqProDtoList",listEPD);
         return "/enquiry/productDetail";
     }
+    //获取商品报价
     @RequestMapping(value = "enquiryDetail/viewProduct/checkvalue/{id}", method = RequestMethod.GET)
     public String getPurchase(@PathVariable Long id,ModelMap model){
         List<PurchaseDto> list = adminEnquiryFeign.getPurList(id);
@@ -92,6 +123,7 @@ public class EnquiryController {
         return "/enquiry/getPurchase";
     }
 
+    //禁止报价
     @ResponseBody
     @RequestMapping(value = "banQuote/{enqNum}", method = RequestMethod.GET)
     public AdminVo banQuote(@PathVariable String enqNum){
@@ -100,6 +132,7 @@ public class EnquiryController {
         return adminVo;
     }
 
+    //恢复报价
     @ResponseBody
     @RequestMapping(value = "regainQuote/{enqNum}", method = RequestMethod.GET)
     public AdminVo regainQuote(@PathVariable String enqNum){
@@ -110,7 +143,6 @@ public class EnquiryController {
 
     @RequestMapping(value = "toAddEnquiry", method = RequestMethod.GET)
     public String toAddEnquiry( ModelMap model){
-
         return "/enquiry/addEnquiry";
     }
 

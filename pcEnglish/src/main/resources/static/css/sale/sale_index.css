@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+/*sale_con*/
+body{
+	background: #f5f5f5;
+}
+.sale_fz{
+	font-size: 16px;
+}
+input{
+	padding: 0px;
+	border:  1px solid #E6E6E6;
+	font-size: 14px;
+}
+.am-form input[type=number], .am-form input[type=search], .am-form input[type=text], .am-form input[type=password], .am-form input[type=datetime], .am-form input[type=datetime-local], .am-form input[type=date], .am-form input[type=month], .am-form input[type=time], .am-form input[type=week], .am-form input[type=email], .am-form input[type=url], .am-form input[type=tel], .am-form input[type=color], .am-form select, .am-form textarea, .am-form-field{
+	border:  1px solid #E6E6E6;
+}
+.am-active .am-btn-default.am-dropdown-toggle, .am-btn-default.am-active, .am-btn-default:active{
+	background: #fff;
+}
+.am-active .am-btn-default.am-dropdown-toggle, .am-btn-default.am-active, .am-btn-default:active, .am-btn-default:focus, .am-btn-default:hover{
+	border:  1px solid #E6E6E6;
+}
+
+.sale_down:first-child{
+	line-height: 60px;
+}
+.sale_down .row2 span:nth-of-type(1){
+	color: #999999;
+	
+}
+.am-tabs-d2 .am-tabs-nav li a{
+	font-size: 16px;
+}
+
+.am-breadcrumb li a{
+	font-size: 14px;
+}
+.button-size{
+	
+	height: 40px;
+	margin: 10px 46%;
+}
+.sale_cloum1{
+	width: 100%;
+	overflow: hidden;
+	
+}
+
+.sale_down .row2{
+	float: left;
+	margin-bottom: 0px;
+}
+.sale_down .row2 input{
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+.sale_cloum1 .row3 input{
+	width: 15%;
+	float: left;
+	margin-right: 1%;
+	margin-top: 10px;
+}
+
+.am-active>.am-dropdown-content{
+	display: block;
+}
+
+.sale_down{
+	
+}
+
+.row1{
+	text-align: right;
+}
+
+.sale_pic1{
+	margin-top: 10px;
+	display: inline-block;
+	width: 190px;
+	height: 90px;
+	background: url(../../images/sale/IdCard／positive.png);
+	margin-right: 10px;
+	cursor: pointer;
+}
+.sale_pic2{
+	margin-top: 10px;
+	display: inline-block;
+	width: 190px;
+	height: 90px;
+	background: url(../../images/sale/IdCard／negative.png);
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.sale_pic3{
+	
+	display: inline-block;
+	width: 190px;
+	height: 90px;
+	background: url(../../images/sale/businessLicense.png);
+	margin-right: 10px;
+	cursor: pointer;
+}
+.sale_pic4{
+
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	background: url(../../images/sale/01.png);
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+#sale_center{
+	width: 100%;
+	min-height:  900px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.sale_aside{
+	width: 1190px;
+	
+	margin: 0 auto;
+	
+}
+
+.sale_con{
+	float: right;
+	background: #fff;
+	width: 85%;
+	min-height:  900px;
+	overflow: hidden;
+	padding: 0 8px;
+}
+
+.am-tabs-bd{
+	border: none;
+}
+
+.am-breadcrumb{
+	padding: 10px;
+	margin: 0px;
+}
+
+.am-tabs-d2 .am-tabs-nav{
+	background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

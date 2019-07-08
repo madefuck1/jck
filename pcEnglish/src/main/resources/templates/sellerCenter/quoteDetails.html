@@ -1,0 +1,232 @@
+<@override name="title">
+Quote details
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_style.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_detail.css">
+
+<style type="text/css">
+    .updatePrice{
+        display: block;
+    }
+    .hideThis{
+        display: none;
+    }
+</style>
+</@override>
+<@override name="body">
+<div id="up">
+    <ol class="am-breadcrumb am-breadcrumb-slash">
+        <li><a href="/sellerCenter/toIndex">Home</a></li>
+        <li><a href="#">Classification</a></li>
+        <li class="am-active">Content</li>
+    </ol>
+
+    <div class="scoll">
+        <section class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <img src="${contextPath}/images/product1.jpg" title="pic" />
+                    </li>
+                    <li>
+                        <img src="${contextPath}/images/product1.jpg" />
+                    </li>
+                    <li>
+                        <img src="${contextPath}/images/03.jpg" />
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!--放大镜-->
+
+    <div class="item-inform">
+        <div class="clearfixLeft" id="clearcontent">
+            <div class="box">
+                <div class="tb-booth tb-pic tb-s310">
+                    <a href="#"><img src='${enquiryDetail.enquiryProductDto[0].productImage}' alt="Details show magnifying glass effects"  class="jqzoom" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfixRight">
+            <div class="tb-detail-hd">
+                <!--询盘标题-->
+                <h3 style="font-size: 16px;">${enquiryDetail.enquiryTitle}</h3>
+            </div>
+            <div class="clear-down">
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Publisher：</span>
+                    <span class="am-u-sm-10">
+                        <span>Buyer's Nickname&nbsp;&nbsp;${enquiryDetail.loginName}</span>
+                        <span class=" cloum1-pic"></span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Number：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.enquiryProductDto[0].purchases[0].purchaseNumber}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Release time：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.strCreateTime}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Delivery time：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.enquiryProductDto[0].purchases[0].strOfferTime}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Purchase status：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.strEnquiryStatus}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Number of purchases：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.enquiryProductDto[0].productNumber}/${enquiryDetail.enquiryProductDto[0].productUnit}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Delivery address：</span>
+                    <span class="am-u-sm-10">
+                        <span>${enquiryDetail.takeAddress}</span>
+                    </span>
+                </div>
+                <div class="cloum1">
+                    <span class="am-u-sm-2">Describe：</span>
+                    <span class="am-u-sm-10" style="line-height: 24px">
+                        <span>${enquiryDetail.enquiryRemark}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear_form">
+    <h4>Confirm order information</h4>
+    <table class="am-table am-table-bordered">
+        <thead style="background: #e6e6e6;">
+        <tr>
+            <th>Date</th>
+            <th>State</th>
+            <th>Quote</th>
+            <th>Note</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr >
+            <td>${enquiryDetail.strCreateTime}</td>
+            <td>${enquiryDetail.strEnquiryStatus}</td>
+            <td id="quote"><p>${enquiryDetail.enquiryProductDto[0].purchases[0].unitPrice}/${enquiryDetail.enquiryProductDto[0].productUnit}</p></td>
+            <td>${enquiryDetail.enquiryRemark}</td>
+            <#if enquiryDetail.strEnquiryStatus != "采购成功">
+            <td style="color: #40ADFB"><button id="myBT">Change the price</button>
+            </td>
+            </#if>
+            <#if enquiryDetail.strEnquiryStatus == "采购成功">
+            <td >
+            </td>
+            </#if>
+        </tr>
+        </tbody>
+    </table>
+    <div  id="updatePrice" class="hideThis" style="margin-left: 85%">
+        <div >
+            <span style="display: block;width: 160px;height: 50px;">Please enter the price:
+                <input style="display: block;width: 100px;height: 30px;"type="text" id="unitPrice" />
+            </span>
+        </div>
+        <div style="margin-top:4px;width: 100Px;display:block;">
+            <button type="button" id="confirm" onclick="updatePrice()">Confirm</button>
+            <button type="button" id="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+</@override>
+
+<@override name="js">
+<script src="${contextPath}/js/jquery.imagezoom.min.js"></script>
+<script src="${contextPath}/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#myBT").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+    $(document).ready(function() {
+        $("#confirm").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+    $(document).ready(function() {
+        $("#cancel").click(function() {
+            var o = $("#updatePrice");
+            if(o.hasClass("updatePrice")){
+                o.removeClass("updatePrice");
+                o.hide();
+            }else {
+                o.removeClass("hideThis");
+                o.addClass("updatePrice");
+                o.show();
+            }
+        });
+    });
+
+    function updatePrice() {
+        var unit = '${enquiryDetail.enquiryProductDto[0].productUnit}';
+        var purchaseNumber = '${enquiryDetail.enquiryProductDto[0].purchases[0].purchaseNumber}';
+        var unitPrice = $("#unitPrice").val();
+        var data = {
+            unitPrice:unitPrice,
+            purchaseNumber:purchaseNumber,
+        }
+        $.ajax({
+            url: '/enquiry/updatePrice',
+            type: 'post',
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                if(data.success){
+                    alert(data.message);
+                    $("#quote").empty();
+                    var quote = '<p>'+unitPrice+'/'+unit+'</P>';
+                    $("#quote").append(quote);
+                }else {
+                    alert(data.message);
+                }
+            },
+            error:function () {
+                alert("Request sent failed");
+            }
+        });
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

@@ -1,0 +1,116 @@
+<@override name="title">
+Evaluation product
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/appstyle.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-comment">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Comment</strong></div>
+                </div>
+                <hr/>
+                <div class="comment-main">
+                    <#list orderShop.orderProducts as product>
+                    <div class="comment-list">
+                        <input type="hidden" class="productId" value="${product.productId}">
+                        <div class="item-pic">
+                            <a href="#" class="J_MakePoint">
+                                <img src='${product.image}' class="itempic">
+                            </a>
+                        </div>
+                        <div class="item-title">
+                            <div class="item-name">
+                                <a href="#">
+                                    <p class="item-basic-info">${product.productName}</p>
+                                </a>
+                            </div>
+                            <div class="item-info">
+                                <div class="info-little">
+                                    <span class="productColor">color：${product.productColor}</span><br/>
+                                    <span class="productSpec">package：${product.productSpec}</span>
+                                </div>
+                                <div class="item-price">
+                                    price：<strong>${product.productPrice}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="item-comment">
+                            <textarea class="assessContent" style="min-height: 75px" placeholder="Please write down the feelings of the baby, and help others very much!"></textarea>
+                        </div>
+                        <!--<div class="filePic">
+                            <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
+                            <span>晒照片(0/5)</span>
+                            <img src="../images/image.jpg" alt="">
+                        </div>-->
+                        <div class="item-opinion">
+                            <li ><i class="op1" data-value="3"></i>Praise</li>
+                            <li><i class="op2" data-value="2"></i>Average</li>
+                            <li><i class="op3" data-value="1"></i>Bad review</li>
+                        </div>
+                    </div>
+                    <hr/>
+                    </#list>
+                <div class="info-btn">
+                    <div class="am-btn am-btn-warning" onclick="submitAssess()">Comment</div>
+                </div>
+            </div>
+            </div>
+            </div>
+
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+<form action="/personalCenter/putAssess" id="assessForm" method="post">
+
+</form>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript" src="${contextPath}/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    function submitAssess(){
+        var orderNumber = "${orderShop.orderNumber}";
+        var shopId = "${orderShop.shopId}";
+        var html = "<input type='hidden' name='orderNumber' value='"+ orderNumber+"'>";
+         html += "<input type='hidden' name='shopId' value='"+ shopId+"'>";
+        var i = 0;
+        $(".comment-list").each(function () {
+            var productId = $(this).find(".productId").val();
+            var assessContent = $(this).find(".assessContent").val();
+            var assessType = $(this).find(".item-opinion").find(".active").attr("data-value");
+            var productColor = $(this).find(".productColor").html();
+            var productSpec = $(this).find(".productSpec").html();
+            html += "<input type='hidden' name='list["+i+"].productId' value='"+ productId+"'>";
+            html += "<input type='hidden' name='list["+i+"].assessContent' value='"+ assessContent+"'>";
+            html += "<input type='hidden' name='list["+i+"].assessType' value='"+ assessType+"'>";
+            html += "<input type='hidden' name='list["+i+"].productColor' value='"+ productColor+"'>";
+            html += "<input type='hidden' name='list["+i+"].productSpec' value='"+ productSpec+"'>";
+            i++;
+        })
+        $("#assessForm").append(html);
+        $("#assessForm").submit();
+    }
+
+    $(document).ready(function() {
+        $(".comment-list .item-opinion li").click(function() {
+            $(this).prevAll().children('i').removeClass("active");
+            $(this).nextAll().children('i').removeClass("active");
+            $(this).children('i').addClass("active");
+        });
+    })
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

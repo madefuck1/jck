@@ -1,0 +1,29 @@
+<@override name="title">
+login
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/main.css" rel="stylesheet" type="text/css">
+</@override>
+
+<@override name="body">
+<#include "/common/includes/include.chat.html"/>
+
+</@override>
+
+<@override name="js">
+<script src="${contextPath}/js/Jmessage/jmessage-sdk-web.2.6.0.min.js"></script>
+<script src="${contextPath}/js/zUI.js"></script>
+<script src="${contextPath}/js/wechat.js"></script>
+<script type="text/javascript">
+    var JIM = new JMessage();
+
+    $(function () {
+        init("${jMessage.appkey}","${jMessage.randomStr}","${jMessage.signature}",${jMessage.timestamp?c});
+    })
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.login.html"/>

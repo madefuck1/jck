@@ -1,0 +1,306 @@
+<@override name="title">
+Registered
+</@override>
+
+<@override name="css">
+    <link href="${contextPath}/css/dlstyle.css" rel="stylesheet" type="text/css">
+</@override>
+
+
+<@override name="body">
+
+<div class="login-boxtitle">
+    <div class="logo" style="margin-top: 24px; cursor: pointer" onclick="javascript:window.open('/index');"href="#"><img src="${contextPath}/images/img/logo.png" alt=""></div>
+    <span class="login_in">Existing account,go<a href="/user/toLogin">Landing</a></span>
+</div>
+
+<div class="res-banner">
+    <div class="res-main">
+        <div class="login-banner-bg"><span></span><img src="${contextPath}/images/big.jpg" /></div>
+        <div class="login-box">
+
+            <div class="am-tabs" id="doc-my-tabs">
+                <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                    <li class="am-active"><a href="">Email registration</a></li>
+                    <li><a href="">Mobile number registration</a></li>
+                </ul>
+
+                <div class="am-tabs-bd">
+                    <div class="am-tab-panel am-active">
+                        <form method="post">
+
+                            <div class="user-email">
+                                <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                <input type="email" name="" id="email" placeholder="Please enter your email account number">
+                            </div>
+                            <div class="verification">
+                                <label for="code"><i class="am-icon-code-fork"></i></label>
+                                <input type="tel" name="" id="code" placeholder="Please enter the verification code">
+                                <a class="btn" href="javascript:void(0);" id="sendEmailCode" >
+                                    <span id="dyEmailButton" style="width: 100px">Get</span></a>
+                            </div>
+                            <div class="user-pass">
+                                <label for="password"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="" id="password" placeholder="Set a password">
+                            </div>
+                            <div class="user-pass">
+                                <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="" id="passwordRepeat" placeholder="Confirm your password">
+                            </div>
+
+                        </form>
+
+                        <div class="login-links">
+                            <label for="reader-me">
+                                <input id="reader-mep" type="checkbox"> By clicking, you agree to the Marketplace Service Agreement
+                            </label>
+                        </div>
+                        <div class="am-cf">
+                            <input type="submit" id="submitEmail" value="Registered" class="am-btn am-btn-warning am-btn-sm am-fl">
+                        </div>
+
+                    </div>
+
+                    <div class="am-tab-panel">
+                        <form method="post">
+                            <div class="user-phone">
+                                <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
+                                <input type="tel" name="" id="phone" placeholder="Please enter your phone number">
+                            </div>
+                            <div class="verification">
+                                <label for="code"><i class="am-icon-code-fork"></i></label>
+                                <input type="tel" name="" id="codeP" placeholder="Please enter the verification code">
+                                <a class="btn" href="javascript:void(0);"  id="sendMobileCode">
+                                    <span id="dyMobileButton" style="width: 100px">Get</span></a>
+                            </div>
+                            <div class="user-pass">
+                                <label for="password"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="" id="passwordP" placeholder="Set a password">
+                            </div>
+                            <div class="user-pass">
+                                <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="" id="passwordRepeatP" placeholder="Confirm your password">
+                            </div>
+                        </form>
+                        <div class="login-links">
+                            <label for="reader-me">
+                                <input id="reader-me" type="checkbox" > By clicking, you agree to the Marketplace Service Agreement
+                            </label>
+                        </div>
+                        <div class="am-cf">
+                            <input type="submit" id="submitPhone" value="Registered" class="am-btn am-btn-warning am-btn-sm am-fl">
+                        </div>
+
+                        <!--	<hr>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Copyright 2015-2019 Shaoxing Yuanheng Internet Technology Co., Ltd. Copyright Zhejiang ICP 19009440 No.4</p>
+    </div>
+</@override>
+
+
+<@override name="js">
+
+<script type="text/javascript">
+    $(function() {
+        $('#doc-my-tabs').tabs();
+    })
+    var vercode	 = 0;
+    var time = 120;
+    var flag = true;   //设置点击标记，防止60内再次点击生效
+
+    //发送验证码
+    $('#dyMobileButton').click(function(){
+        $(this).attr("disabled",true);
+        var data = '{"phone":"'+$("#phone").val()+'"}' ;
+        if(flag){
+            alert("The verification code has been sent, please check！");
+            var timer = setInterval(function () {
+                if(time == 120 && flag){
+                    flag = false;
+                    $.ajax({
+                        type : 'post',
+                        async : false,
+                        url : 'sendCode',
+                        data : data,
+                        contentType:'application/json',
+                        success : function(data) {
+                            if(data.success){
+                                //vercode = data.data;
+                                $("#dyMobileButton").html("Sent");
+                            }else {
+                                alert(data.message);
+                                flag = true;
+                                time = 120;
+                                clearInterval(timer);
+                            }
+                        }
+                    });
+                }else if(time == 0){
+                    $("#dyMobileButton").removeAttr("disabled");
+                    $("#dyMobileButton").html("Get");
+                    clearInterval(timer);
+                    time = 120;
+                    flag = true;
+                }else {
+                    $("#dyMobileButton").html(time + "s");
+                    time--;
+                }
+            },1000);
+        }
+    });
+    //发送验证码
+    $('#dyEmailButton').click(function(){
+        $(this).attr("disabled",true);
+        var data = '{"email":"'+$("#email").val()+'"}' ;
+        if(flag){
+            alert("The verification code has been sent, please check");
+            var timer = setInterval(function () {
+                if(time == 120 && flag){
+                    flag = false;
+                    $.ajax({
+                        type : 'post',
+                        async : false,
+                        url : 'sendCode',
+                        data : data,
+                        contentType:'application/json',
+                        success : function(data) {
+                            if(data.success){
+                                //vercode = data.data;
+                                $("#dyEmailButton").html("Sent");
+                            }else {
+                                alert(data.message);
+                                flag = true;
+                                time = 120;
+                                clearInterval(timer);
+                            }
+                        }
+                    });
+                }else if(time == 0){
+                    $("#dyEmailButton").removeAttr("disabled");
+                    $("#dyEmailButton").html("Get");
+                    clearInterval(timer);
+                    time = 120;
+                    flag = true;
+                }else {
+                    $("#dyEmailButton").html(time + "s");
+                    time--;
+                }
+            },1000);
+        }
+    });
+
+
+    //注册时判断是否勾选服务协议以及两次密码是否一致
+    window.onload = function (){
+        var submitBtnP = document.getElementById("submitPhone");
+        var submitBtnE = document.getElementById("submitEmail");
+        submitBtnP.onclick = function () {
+            if(!document.getElementById("reader-me").checked){
+                alert("Please check the agreement");
+                return false;
+            }else {
+                var password = $("#passwordP").val();
+                var passwordP = $("#passwordRepeatP").val();
+                if(password == "" || password == null || password == undefined){
+                    alert("Password cannot be empty");
+                    return false;
+                }
+                if(passwordP != password){
+                    alert("Two password entry inconsistencies");
+                    return false;
+                }else {
+                    registerByPhone();
+                }
+            }
+        };
+        submitBtnE.onclick = function () {
+            if(!document.getElementById("reader-mep").checked){
+                alert("Please check the agreement");
+                return false;
+            }else {
+                var password = $("#password").val();
+                var passwordP = $("#passwordRepeat").val();
+                if(password == "" || password == null || password == undefined){
+                    alert("Password cannot be empty");
+                    return false;
+                }
+                if(passwordP != password){
+                    alert("Two password entry inconsistencies");
+                    return false;
+                } else {
+                    registerByEmail();
+                }
+            }
+        };
+    }
+
+    //邮箱注册
+    function registerByEmail() {
+        var data = {
+            phone:$("#email").val(),
+            email:$("#email").val(),
+            password:$("#password").val(),
+            code:$("#code").val(),
+            passwordRepeat:$("#passwordRepeat").val()
+        }
+        console.log(data)
+        $.ajax({
+            url: 'register',
+            data:  JSON.stringify(data),
+            type:'post',
+            contentType:'application/json',
+            success:function (data) {
+                if(typeof (data) == 'string'){
+                    data = JSON.parse(data)
+                }
+                if(data.success){
+                    alert(data.message)
+                    window.location.href = '/user/toAddInformation';
+                }else {
+                    alert(data.message)
+                }
+            }
+        });
+        return false;
+    }
+
+    //手机号注册
+    function registerByPhone() {
+        var data = {
+            phone:$("#phone").val(),
+            password:$("#passwordP").val(),
+            code:$("#codeP").val(),
+            passwordRepeat:$("#passwordRepeatP").val()
+
+        }
+        console.log(data)
+        $.ajax({
+            url: 'register',
+            data:  JSON.stringify(data),
+            type:'post',
+            contentType:'application/json',
+            success:function (data) {
+                if(typeof (data) == 'string'){
+                    data = JSON.parse(data)
+                }
+                if(data.success){
+                    alert(data.message)
+                    window.location.href = '/user/toAddInformation';
+                }else {
+                    alert(data.message)
+                }
+            }
+        });
+        return false;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.login.html"/>

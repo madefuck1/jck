@@ -1,0 +1,618 @@
+<@override name="title">
+Settlement
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${contextPath}/css/header.css">
+<link rel="stylesheet" href="${contextPath}/css/iconfont.css">
+<link href="${contextPath}/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="${contextPath}/css/cartstyle.css" rel="stylesheet" type="text/css" />
+<link href="${contextPath}/css/jsstyle.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+        background: #fff;
+    }
+    .memo-close{
+        border: none;
+    }
+    .paymeth{
+        width: 64%;
+        height: 350px;
+
+        padding: 10px;
+
+    }
+    .paymeth p{
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        line-height: 40px;
+    }
+    .paymeth_all .left{
+        text-align: left;
+        padding: 0px;
+    }
+    .paymeth_all .right{
+        text-align: left;
+        padding: 0px;
+
+    }
+    .am-selected{
+        width: 200px;
+        border: 1px solid #E6E6E6;
+    }
+    .paymeth_all .cloum1{
+
+        height: 50px;
+    }
+    .paymeth_all .cloum2{
+        height: 300px;
+    }
+    .paymeth_all .cloum2 .right{
+        float: left;
+        margin-top: 20px;
+    }
+
+    .cloum2{
+        display: none;
+    }
+    .invoice_title{
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+        margin: 0px 20px;
+
+    }
+    .am-tabs-nav li{
+        margin-left: 20px;
+    }
+    .am-form-label{
+        width: 21%;
+    }
+    .invoice_fl{
+        float: left;
+    }
+    .am-nav-tabs > li.am-active{
+        border-bottom:  2px solid #F58022;
+    }
+    .am-nav-tabs > li.am-active a{
+        color: #333;
+    }
+    .concent h3, .logistics h3{
+        border-bottom: 1px solid #F1F1F1;
+    }
+    .am-modal{
+
+    }
+    .am-modal-dialog{
+        height: 180px;
+    }
+    .am-modal-bd{
+        border: none;
+        padding: 34px 10px;
+    }
+    .sear{
+        width: auto;
+    }
+    .footer{
+        border-top: none;
+    }
+</style>
+</@override>
+
+<@override name="body">
+<div class="concent">
+
+    <div class="paycont">
+        <!--Address -->
+        <div class="address">
+            <h3>Confirm the shipping address </h3>
+            <div class="control">
+                <div class="tc-btn createAddr theme-login am-btn am-btn-danger" onclick="addAddress()">Use a new address</div>
+            </div>
+            <div class="clear"></div>
+            <ul id="addressList">
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <!--Order -->
+        <div class="concent">
+            <h3>Confirm order information</h3>
+            <div class="cart-table-th">
+                <div class="wp">
+
+                    <div class="th th-item">
+                        <div class="td-inner">Merchandise information</div>
+                    </div>
+                    <div class="th th-price">
+                        <div class="td-inner">Price</div>
+                    </div>
+                    <div class="th th-amount">
+                        <div class="td-inner">Number</div>
+                    </div>
+                    <div class="th th-sum">
+                        <div class="td-inner">Amount</div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <#list list as shopCar>
+            <div class="shopCar">
+            <tr class="item-list">
+                <input type="hidden" class="shopCarId" value="${shopCar.shopCarId?c}">
+                <div class="bundle  bundle-last">
+                    <div class="bundle-hd">
+                        <div class="bd-promos">
+                            <div class="bd-has-promo">${shopCar.shopName}</div>
+                        </div>
+                    </div>
+                    <#list shopCar.shopCarProductDtoList as product>
+                        <div class="bundle-main">
+                            <ul class="item-content clearfix">
+                                <input type="hidden" class="shopCarProductId" value="${product.shopCarProductId?c}">
+                                <div class="pay-phone">
+                                    <li class="td td-item">
+                                        <div class="item-pic">
+                                            <a href="#" class="J_MakePoint">
+                                                <img src="${product.productUrl}" class="itempic J_ItemImg" width="80px" height="80px" style="background-size: cover;"></a>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="item-basic-info">
+                                                <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">${product.productName}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="td td-info">
+                                        <div class="item-props">
+                                            <span class="sku-line">Color：${product.productColor}</span>
+                                            <span class="sku-line">Packaging：${product.productSpec}</span>
+                                        </div>
+                                    </li>
+                                    <li class="td td-price">
+                                        <div class="item-price price-promo-promo">
+                                            <div class="price-content">
+                                                <em class="J_Price price-now">${product.productPrice?string('0.00')}/${product.productUnit}</em>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                                <li class="td td-amount">
+                                    <div class="amount-wrapper ">
+                                        <div class="item-amount ">
+                                            <span class="phone-title">Number of purchases</span>
+                                            <div class="sl">
+                                                <input class="text_box" disabled type="text" value="${product.productNumber}" style="width:30px;text-align: center;height: 32px" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="td td-sum">
+                                    <div class="td-inner">
+                                        <em tabindex="0" class="J_ItemSum number">${(product.productNumber * product.productPrice)?string('0.00')}</em>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </#list>
+                </div>
+            </tr>
+            <div class="clear"></div>
+            </div>
+            </#list>
+            <div class="pay-total">
+                <!--留言-->
+                <div class="order-extra">
+                    <div class="order-user-info">
+                        <div class="memo">
+                            <label>Buyer's Message：</label>
+                            <input type="text" id="remark" title="Optional, description of the transaction (recommended to fill in the notes that have been agreed with the seller)" placeholder="Optional, suggested to fill in and the seller to agree on the instructions" class="memo-input J_MakePoint c2c-text-default memo-close">
+                            <div class="msg hidden J-msg">
+                                <p class="error">Enter up to 500 characters</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 710, height: 550}" style="background: #fff">
+                <div class="am-checkbox">
+                    <label>
+                        <input type="checkbox"> Invoiced
+                    </label>
+                </div>
+            </button>
+            <hr>
+            <div class="am-modal am-modal-no-btn invoice" tabindex="-1" id="doc-modal-1">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd invoice_title">Fill in the invoice information
+                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                    </div>
+                    <div class="am-tabs" data-am-tabs style="margin-top:10px ">
+                        <ul class="am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">Free text invoices</a></li>
+                            <li><a href="#tab2">VAT invoice</a></li>
+
+                        </ul>
+                        <div class="am-tabs-bd" style="margin-top:10px;">
+                            <div class="am-tab-panel am-fade am-in am-active" ">
+                            <form class="am-form am-form-horizontal">
+                                <div class="am-form-group" style="margin-top: 10px">
+                                    <label  class="am-u-sm-3 am-form-label">Name：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Enter a name">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label class="am-u-sm-3 am-form-label">Taxpayer Identification Number：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Taxpayer Identification Number">
+                                    </div>
+                                </div>
+                                <div class="button" style="margin-top: 40px;">
+                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">Confirm</button>
+                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="am-tab-panel am-fade" >
+                            <form class="am-form am-form-horizontal">
+                                <div class="am-form-group" style="margin-top: 10px">
+                                    <label  class="am-u-sm-3 am-form-label">Name：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text"  placeholder="输入名称">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label  class="am-u-sm-3 am-form-label">axpayer Identification Number：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="axpayer Identification Number">
+                                    </div>
+                                </div>
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label  class="am-u-sm-3 am-form-label">Address：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Please enter the address">
+                                    </div>
+                                </div>
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label  class="am-u-sm-3 am-form-label">Phone：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Please enter your phone number">
+                                    </div>
+                                </div>
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label  class="am-u-sm-3 am-form-label">Bank：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Please enter the bank that opened the account">
+                                    </div>
+                                </div>
+                                <div class="am-form-group" style="margin-top: 20px">
+                                    <label class="am-u-sm-3 am-form-label">Account opening account：</label>
+                                    <div class="am-u-sm-9" style="float: left">
+                                        <input type="text" placeholder="Please enter the account number">
+                                    </div>
+                                </div>
+                                <div class="button" style="margin-top: 40px;">
+                                    <button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;">Confirm</button>
+                                    <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="paymeth">
+                <p>Choose a payment method</p>
+                <div class="paymeth_all">
+                    <div class="cloum1">
+                        <div class="left am-u-sm-2">
+                            <p>Payment method：</p>
+                        </div>
+                        <div class="right am-u-sm-10">
+                            <select data-am-selected id="pay_select">
+                                <option value="a">Please choose</option>
+                                <option value="b" class="pay_line">Online payments</option>
+                                <option value="o">Offline trading</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cloum2" id="cloum2">
+                        <div class="left am-u-sm-2">
+                            <p style="margin-top: 20px">Number of payments：</p>
+                            <p style="margin-top: 20px">Contract：</p>
+                        </div>
+                        <div class="right am-u-sm-8">
+                            <select data-am-selected >
+                                <option value="a">30% deposit</option>
+                                <option value="b">40% deposit</option>
+                                <option value="o">Full</option>
+                            </select>
+                            <div class="button" style="margin-top: 26px">
+                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">Download the contract</button>
+                                <button type="button" class="am-btn" style="width: 200px; background: #fff;border: 1px solid #E6E6E6">Upload a contract</button>
+                            </div>
+                            <div>
+                                <button
+                                        type="button" style="margin-top: 20px"
+                                        class="am-btn am-btn-warning"
+                                        data-am-modal="{target: '#my-alert'}">
+                                    Submit an order
+                                </button>
+                                <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                                    <div class="am-modal-dialog">
+                                        <div class="am-modal-bd" style="font-size: 18px">Are you sure you are submitting an order?</div>
+
+
+                                        <div class="button" style="margin-top: 20px;margin-bottom: 20px;">
+                                            <a href="../person/05-1 orderinfo-审核.html"><button type="button" class="am-btn am-btn-warning am-radius" style="margin-right: 50px; width: 100px;" >Confirm</button></a>
+                                            <button type="button" class="am-btn am-btn-default am-radius" style="width: 100px;">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cloum2" id="cloum3">
+                        <div class="left am-u-sm-2">
+                            <p style="margin-top: 20px"></p>
+                            <p style="margin-top: 20px">Payment account number：</p>
+                        </div>
+                        <div class="right am-u-sm-8">
+                            <p>6222 8015 5232 1135 888（Construction Bank Shaoxing Saddle Branch）</p>
+                            <p style="color:#F58022;font-weight: 200">Offline payment platform does not provide guarantees, please check with the seller carefully about the information</p>
+                        </div>
+                        <div>
+                            <a href="../person/05-7 orderinfo-线下.html"><button type="button" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">Submit an order</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" onclick="submit()" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:16.6%">Submit an order</button>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="theme-popover-mask"></div>
+    <div class="theme-popover" style="height:450px">
+
+        <!--Title-->
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg title">New address</strong></div>
+        </div>
+        <hr/>
+        <div class="am-u-md-12">
+            <form class="am-form am-form-horizontal">
+                <div class="am-form-group">
+                    <label  class="am-form-label">Consignee</label>
+                    <div class="am-form-content">
+                        <input type="hidden" id="addressId" value="">
+                        <input type="text" id="linkName" placeholder="Consignee">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label">Mobile phone number</label>
+                    <div class="am-form-content">
+                        <input type="text" id="linkPhone" placeholder="Mobile phone number required" >
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label">Countries</label>
+                    <div class="am-form-content">
+                        <input type="text" class="" id="country" placeholder="Enter the country">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label">Detailed address</label>
+                    <div class="am-form-content">
+                        <textarea class="" rows="3" id="detailAddress" placeholder="Enter a detailed address"></textarea>
+                        <small>Write your address in less than 100 words...</small>
+                    </div>
+                </div>
+                <div class="am-form-group theme-poptit">
+                    <div class="am-u-sm-9 am-u-sm-push-3">
+                        <div class="am-btn am-btn-danger" onclick="submitAddress()">Save</div>
+                        <div class="am-btn am-btn-danger close">Cancel</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<form action="/shopCar/submitOrder" id="toPay" method="post">
+</form>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    function submitAddress(){
+        if($("#addressId").val() != ""){
+            $(".title").html("修改地址");
+            var data = {addressId:$("#addressId").val(),country:$("#country").val(),detailAddress:$("#detailAddress").val(),linkName:$("#linkName").val(),linkPhone:$("#linkPhone").val()};
+            $.ajax({
+                url: '/personalCenter/toUpdateAddress/update',
+                dataType: 'json',
+                type: 'post',
+                data:JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    initAddress();
+                    $(".theme-popover").hide();
+                    $(".theme-popover-mask").hide();
+                    cleanInput();
+                }
+            });
+        }else{
+            $(".title").html("New address");
+            var data = {country:$("#country").val(),detailAddress:$("#detailAddress").val(),linkName:$("#linkName").val(),linkPhone:$("#linkPhone").val()};
+            $.ajax({
+                url: '/personalCenter/saveAddress',
+                dataType: 'json',
+                type: 'post',
+                data:JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    initAddress();
+                    $(".theme-popover").hide();
+                    $(".theme-popover-mask").hide();
+                    cleanInput();
+                }
+            });
+        }
+    }
+
+    $(".close").bind("click",function () {
+        $(".theme-popover").hide();
+        $(".theme-popover-mask").hide();
+        cleanInput();
+    })
+
+    function cleanInput(){
+        $("#addressId").val("");
+        $("#country").val("");
+        $("#detailAddress").val("");
+        $("#linkName").val("");
+        $("#linkPhone").val("");
+    }
+
+    function submit(){
+        var html = "";
+        var i = 0 ;
+        $(".shopCar").each(function () {
+            var flag = true ;
+            html += '<input type="hidden" name="list['+i+'].shopCarId" value="'+$(this).find(".shopCarId").val()+'">' ;
+            var j = 0 ;
+            $(this).find(".item-content").each(function () {
+                html += '<input type="hidden" name="list['+i+'].shopCarProductIds['+j+']" value="'+$(this).find(".shopCarProductId").val()+'">' ;
+                j++;
+            })
+            i++;
+        })
+        var type = 0;  //0线下，1线上
+        if ($('#pay_select').val() == "b") {
+            type = 1;
+        }
+        html += '<input type="hidden" name="addressId" value="' + $(".defaultAddr").find(".addressId").val() + '">';
+        html += '<input type="hidden" name="payType" value="' + type + '">';
+        html += '<input type="hidden" name="remark" value="' + $("#remark").val() + '">';
+        $("#toPay").append(html);
+        $("#toPay").submit();
+    }
+
+    $(function () {
+        initAddress();
+    });
+
+    function initAddress(){
+        var addressHtml = "";
+        $("#addressList").html("");
+        $.ajax({
+            url: '/personalCenter/getAddressList',
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for(var i = 0 ; i<data.data.length ; i++){
+                    var address =data.data[i];
+                    addressHtml += '<div class="per-border"></div>';
+                    if(address.isDefaultAddress == 1){
+                        addressHtml += '<li class="user-addresslist defaultAddr" onclick="checkAddress(this)"><input type="hidden" class="addressId" value="' + address.addressId + '"/>';
+                    }else{
+                        addressHtml += '<li class="user-addresslist" onclick="checkAddress(this)">';
+                    }
+                    addressHtml += '<div class="address-left"><div class="user DefaultAddr">';
+                    addressHtml += '<span class="buy-address-detail">';
+                    addressHtml += '<span class=\"buy-user\">' + address.linkName + '</span>';
+                    addressHtml += '<span class=\"buy-phone\">' + address.linkPhone + '</span></span></div>';
+                    addressHtml += '<div class="default-address DefaultAddr"><span class="buy-line-title buy-line-title-type">收货地址：</span>';
+                    addressHtml += '<span class="buy--address-detail"><span class="province">'+address.country+'</span>';
+                    addressHtml += '<span class="street">'+address.detailAddress+'</span></span></span></div>';
+                    if(address.isDefaultAddress == 1){
+                        addressHtml += '<ins class="deftip">Default address</ins>';
+                    }
+                    addressHtml += '</div><div class="new-addr-btn">';
+                    if(address.isDefaultAddress == 0){
+                        addressHtml += '<a onclick="setDefault('+address.addressId+')">Set as default</a><span class="new-addr-bar">|</span>';
+                    }
+                    addressHtml += '<a onclick="update(this)">Edit</a><span class="new-addr-bar">|</span><a onclick="deleteAddress(this)">Delete</a></div></li>';
+                }
+                $("#addressList").append(addressHtml);
+            }
+        });
+    }
+
+    function update(obj){
+        var addressId = $(obj).parents(".user-addresslist").find('.addressId').val();
+        $.ajax({
+            url: '/personalCenter/updateAddress/'+addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#addressId").val(data.addressId);
+                $("#country").val(data.country);
+                $("#detailAddress").val(data.detailAddress);
+                $("#linkName").val(data.linkName);
+                $("#linkPhone").val(data.linkPhone);
+                $(".theme-popover-mask").show();
+                $(".theme-popover").show();
+            }
+        });
+    }
+
+
+    function deleteAddress(obj){
+        var addressId = $(obj).parents(".user-addresslist").find('.addressId').val();
+        $.ajax({
+            url: '/personalCenter/delete/'+addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                initAddress();
+            }
+        });
+    }
+
+    function checkAddress(obj){
+        $(obj).parents("ul").find(".user-addresslist").each(function () {
+            $(this).removeClass("defaultAddr");
+        })
+        $(obj).addClass("defaultAddr");
+    }
+
+
+    function setDefault(addressId){
+        $.ajax({
+            url: '/personalCenter/default/'+addressId,
+            dataType: 'json',
+            type: 'get',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                initAddress();
+            }
+        });
+    }
+
+
+    function addAddress(){
+        $(".theme-popover-mask").show();
+        $(".theme-popover").show();
+    }
+
+    $(".theme-popover-mask").bind("click",function () {
+        $(".theme-popover").hide();
+        $(".theme-popover-mask").hide();
+    })
+</script>
+</@override>
+
+<@extends name="/common/layout/base.html"/>

@@ -1,0 +1,32 @@
+<!--头 -->
+<div id="nav">
+    <div class="nav_in">
+        <div class="left" id="html_top">
+            <#if isLonIn?? && isLonIn != "N">
+            <p>Welcome &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+                &nbsp;<a href="#" target="_blank">messages(${pushInfoCount!0})</a>
+                <a href="/user/signOut">Sign out</a>
+                <!-- todo 消息跳转 -->
+            </p>
+            <#else>
+            <p>Welcome &nbsp;Please<a href="/user/toLogin">Sign in</a> &nbsp;<a href="/user/toRegister">register</a></p>
+            </#if>
+        </div>
+        <div class="right">
+            <p class="service">customer service telephone numbers：400-860-0992</p>
+            <div class="order">
+                <a href="/orderManager/toOrderManager">My Orders</a>
+                <!--<span class="icon icon1"></span>-->
+            </div>
+            <div class="seller">
+                <a href="/sellerCenter/toSellerCenter">Seller Center</a>
+                <!--<span class="icon icon1"></span>-->
+            </div>
+            <div class="shopping">
+                <a href="/shopCar/getList">Shopping Cart</a>
+                <a id="carCount" href="#">(${shopCarCount!0})</a>
+            </div>
+        </div>
+    </div>
+</div>
+

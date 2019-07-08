@@ -1,0 +1,299 @@
+<@override name="title">
+Address management
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/addstyle.css" rel="stylesheet" type="text/css">
+</@override>
+
+<@override name="body">
+<div class="login-boxtitle">
+    <a href="home.html"><img src=""/></a>
+</div>
+
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-address">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Address management
+                    </strong>
+                    </div>
+                </div>
+                <hr/>
+                <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+                    <#if !addressList??>
+                        <p>You don't currently have address information, go
+                            <a href="/personalCenter/saveAddress">to add</a></p>
+                    </#if>
+                    <#list addressList as address>
+                    <#if address.isDefaultAddress == 1>
+                    <li class="user-addresslist defaultAddr">
+                        <span class="new-option-r"><i class="am-icon-check-circle"></i>default address</span>
+                        <p class="new-tit new-p-re">
+                            <span class="new-txt">${address.linkName}</span>
+                            <span class="new-txt-rd2">${address.linkPhone}</span>
+                        </p>
+                        <div class="new-mu_l2a new-p-re">
+                            <p class="new-mu_l2cw">
+                                <span class="title">address：</span>
+                                <span class="province">${address.country}</span>
+                                <span class="street">${address.detailAddress}</span></p>
+                        </div>
+                        <div class="new-addr-btn">
+                            <a href="/personalCenter/toUpdateAddress/${address.addressId}" ><i class="am-icon-edit"></i>edit</a>
+                            <span class="new-addr-bar">|</span>
+                            <a href="javascript:void(0);" onclick="deleteAddress(${address.addressId});"><i class="am-icon-trash"></i>delete</a>
+                        </div>
+                    </li>
+                    </#if>
+                    <#if address.isDefaultAddress == 0>
+                    <li class="user-addresslist">
+                        <input type="hidden" id="addressId" value="${address.addressId}">
+                        <span class="new-option-r" onclick="setDefault(${address.addressId})"><i class="am-icon-check-circle"></i>set as Default</span>
+                        <p class="new-tit new-p-re">
+                            <span class="new-txt">${address.linkName}</span>
+                            <span class="new-txt-rd2">${address.linkPhone}</span>
+                        </p>
+                        <div class="new-mu_l2a new-p-re">
+                            <p class="new-mu_l2cw">
+                                <span class="title">address：</span>
+                                <span class="province">${address.country}</span>
+                                <span class="street">${address.detailAddress}</span></p>
+                        </div>
+                        <div class="new-addr-btn">
+                            <a href="/personalCenter/toUpdateAddress/${address.addressId}"><i class="am-icon-edit"></i>edit</a>
+                            <span class="new-addr-bar">|</span>
+                            <a href="javascript:void(0);" onclick="deleteAddress(${address.addressId});"><i class="am-icon-trash"></i>delete</a>
+                        </div>
+                    </li>
+                    </#if>
+                    </#list>
+                </ul>
+        <#if !addressDto.linkName ?? >
+        <div class="clear"></div>
+        <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">add new address</a>
+        <!--例子-->
+        <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+            <div class="add-dress">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">add address</strong>
+                    </div>
+                </div>
+                <hr/>
+                <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-form-label">Receiver</label>
+                            <div class="am-form-content">
+                                <input type="text" id="user-name" placeholder="Receiver">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-form-label">phone number</label>
+                            <div class="am-form-content">
+                                <input id="user-phone" placeholder="Mobile phone number is required" type="email">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-address" class="am-form-label">Country</label>
+                            <div class="am-form-content">
+                                <input id="user-address" placeholder="Required in the country" type="email">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-form-label">full address</label>
+                            <div class="am-form-content">
+                                <textarea class="" rows="3" id="user-intro" placeholder="Input full address"></textarea>
+                                <small>Write your full address within 100 words...
+                                </small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <a class="am-btn am-btn-danger" onclick="addAddress()">save</a>
+                                <a href="javascript: void(0)" onclick="resetMyForm(this)" class="am-close am-btn am-btn-danger">cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </#if>
+    <#if addressDto.linkName ?? >
+        <div class="clear"></div>
+        <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">update address</a>
+        <!--例子-->
+        <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+        <div class="add-dress">
+            <!--标题 -->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">update address</strong>
+                </div>
+            </div>
+            <hr/>
+            <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
+                <form class="am-form am-form-horizontal">
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-form-label">Receiver</label>
+                        <div class="am-form-content">
+                            <input type="text" id="user-nameNew" placeholder="Receiver" value="${addressDto.linkName}">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-phone" class="am-form-label">phone number</label>
+                        <div class="am-form-content">
+                            <input id="user-phoneNew" placeholder="Mobile phone number is required" type="email" value="${addressDto.linkPhone}">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-address" class="am-form-label">Country</label>
+                        <div class="am-form-content">
+                            <input id="user-addressNew" placeholder="Required in the country" type="email" value="${addressDto.country}">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-intro" class="am-form-label">full address</label>
+                        <div class="am-form-content">
+                            <textarea class="" rows="3" id="user-introNew" placeholder="Input full address">${addressDto.detailAddress}</textarea>
+                            <small>Write your full address within 100 words...</small>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <a class="am-btn am-btn-danger" onclick="updateAddress(${addressDto.addressId})">save</a>
+                            <a href="javascript: void(0)" onclick="resetMyForm(this)" class="am-close am-btn am-btn-danger">cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </#if>
+</div>
+<div class="clear"></div>
+
+        </div>
+    </div>
+
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".new-option-r").click(function () {
+            $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+        });
+
+        var $ww = $(window).width();
+        if ($ww > 640) {
+            $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+        }
+    })
+    //编辑地址
+    function updateAddress(val) {
+        var data = {
+            country:$("#user-addressNew").val(),
+            detailAddress:$("#user-introNew").val(),
+            linkName:$("#user-nameNew").val(),
+            linkPhone:$("#user-phoneNew").val(),
+            isDefaultAddress:0,
+            addressId:val,
+        };
+        $.ajax({
+            url:"update",
+            type:"post",
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                if(data.success){
+                    alert(data.message)
+                    window.location.href = '/personalCenter/toAddress';
+                }else {
+                    alert(data.message)
+                }
+            }
+        })
+        return false;
+    }
+
+    //表单数据重置
+    function resetMyForm(obj) {
+        var form = $(obj).parents("form");
+        $(form)[0].reset();
+    }
+    //新增地址
+    function addAddress() {
+        var data = {
+            country:$("#user-address").val(),
+            detailAddress:$("#user-intro").val(),
+            linkName:$("#user-name").val(),
+            linkPhone:$("#user-phone").val(),
+            isDefaultAddress:0,
+        };
+        $.ajax({
+           url:"saveAddress",
+           type:"post",
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                if(data.success){
+                    alert(data.message);
+                    window.location.href = '/personalCenter/toAddress';
+                }else {
+                    alert(data.message);
+                }
+            }
+        });
+        return false;
+    }
+    //设为默认地址
+    function setDefault(val) {
+        var data = {
+            addressId:val,
+        };
+        $.ajax({
+            url: "default/"+val,
+            type: "get",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.success){
+                    /*setCookie("token",data.msg);*/
+                    alert("Successful operation");
+                    window.location.href = '/personalCenter/toAddress';
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+        return false ;
+    }
+    //删除地址
+    function deleteAddress(val) {
+        $.ajax({
+            url: "delete/"+val,
+            type: "get",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.success){
+                    /*setCookie("token",data.msg);*/
+                    alert("Successful operation");
+                    window.location.href = '/personalCenter/toAddress';
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+        return false ;
+    }
+</script>
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

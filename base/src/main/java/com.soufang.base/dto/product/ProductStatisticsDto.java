@@ -26,6 +26,9 @@ public class ProductStatisticsDto {
 
     private String productStock;
 
+    // 月销量
+    private Long monthSellCount;
+
     // type{1：收藏；2：交易；3：浏览 }
     private int type;
 }

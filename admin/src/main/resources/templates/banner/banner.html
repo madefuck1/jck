@@ -15,11 +15,9 @@
 
 <div class="layui-carousel" id="test1" lay-filter="">
     <div carousel-item="">
-        <div><img src="http://${bannerDto1.bannerImage}"></div>
-        <div><img src="http://${bannerDto2.bannerImage}"></div>
-        <div><img src="http://${bannerDto3.bannerImage}"></div>
-        <div><img src="http://${bannerDto4.bannerImage}"></div>
-        <div><img src="http://${bannerDto5.bannerImage}"></div>
+        <#list bannerDto as banner>
+        <div><img src="${banner.bannerImage}"></div>
+        </#list>
     </div>
 </div>
 

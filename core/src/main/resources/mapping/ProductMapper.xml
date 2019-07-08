@@ -140,7 +140,6 @@
         </collection>
     </resultMap>
 
-
     <sql id="Base_Column_List">
     product_id, shop_id, shop_name, product_name, is_upper, assort_id, product_json, 
     product_unit, product_detail, product_image, product_level, product_send_country,
@@ -545,11 +544,11 @@
                 <choose>
                     <when test="sort != 0">
                         order by
-                        St.browseNumber desc
+                        St.browse_number desc
                     </when>
                     <otherwise>
                         order by
-                        St.browseNumber
+                        St.browse_number
                     </otherwise>
                 </choose>
             </when>
@@ -557,7 +556,7 @@
                 <choose>
                     <when test="sort != 0">
                         order by
-                        St.productPrice desc
+                        St.product_price desc
                     </when>
                     <otherwise>
                         order by
@@ -703,6 +702,162 @@
         order by tp.create_time LIMIT #{page},#{limit}
     </select>
 
+    <resultMap id="ProductAndProStatistics" type="com.soufang.base.dto.product.ProductDto">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
+        <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assortName" property="assortName" jdbcType="VARCHAR"/>
+        <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
+        <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
+        <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="product_level" property="productLevel" jdbcType="INTEGER"/>
+        <result column="product_send_country" property="productSendCountry" jdbcType="VARCHAR"/>
+        <result column="product_send_province" property="productSendProvince" jdbcType="VARCHAR"/>
+        <result column="product_send_city" property="productSendCity" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="key1" property="key1" jdbcType="VARCHAR"/>
+        <result column="key1_value" property="key1Value" jdbcType="VARCHAR"/>
+        <result column="key2" property="key2" jdbcType="VARCHAR"/>
+        <result column="key2_value" property="key2Value" jdbcType="VARCHAR"/>
+        <result column="key3" property="key3" jdbcType="VARCHAR"/>
+        <result column="key3_value" property="key3Value" jdbcType="VARCHAR"/>
+        <result column="key4" property="key4" jdbcType="VARCHAR"/>
+        <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
+        <result column="key5" property="key5" jdbcType="VARCHAR"/>
+        <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="kv1" property="kv1" jdbcType="VARCHAR"/>
+        <result column="kv2" property="kv2" jdbcType="VARCHAR"/>
+        <result column="kv3" property="kv3" jdbcType="VARCHAR"/>
+        <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
+        <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
+        <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
+
+        <collection property="productStatisticsDto" ofType="com.soufang.base.dto.product.ProductStatisticsDto">
+            <id column="product_statistics_id" property="productStatisticsId" jdbcType="BIGINT"/>
+            <result column="product_id" property="productId" jdbcType="BIGINT"/>
+            <result column="collection_number" property="collectionNumber" jdbcType="BIGINT"/>
+            <result column="browse_number" property="browseNumber" jdbcType="BIGINT"/>
+            <result column="deal_number" property="dealNumber" jdbcType="BIGINT"/>
+            <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+            <result column="product_stock" property="productStock" jdbcType="VARCHAR"/>
+            <result column="month_sell_count" property="monthSellCount" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
+    <select id="getProductByAssortId1" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultMap="ProductAndProStatistics">
+        SELECT
+            T2.*,T3.*
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_store_product_assort
+                WHERE
+                    shop_id = #{shopId}
+                    <if test="exclusiveAssortId!=null and exclusiveAssortId!=0">
+                        and exclusive_assort_id = #{exclusiveAssortId}
+                    </if>
+            ) T1
+        JOIN t_product T2 ON T1.product_id = T2.product_id
+        <if test="productName !=null and productName !=''">
+            and T2.product_name  like concat(concat('%',#{productName}),'%')
+        </if>
+        JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getProductByAssortId1Count" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+        (
+            SELECT
+                *
+            FROM
+                t_store_product_assort
+            WHERE
+                shop_id = #{shopId}
+                <if test="exclusiveAssortId!=null and exclusiveAssortId!=0">
+                    and exclusive_assort_id = #{exclusiveAssortId}
+                </if>
+        ) T1
+        JOIN t_product T2 ON T1.product_id = T2.product_id
+        <if test="productName !=null and productName !=''">
+            and T2.product_name  like concat(concat('%',#{productName}),'%')
+        </if>
+        JOIN t_product_statistics T3 ON T2.product_id = T3.product_id
+    </select>
+
+    <select id="getProductByAssortId2" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultMap="ProductAndProStatistics">
+        SELECT
+            T1.*,T3.*
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_product
+                WHERE
+                    product_id IN (
+                        SELECT DISTINCT
+                            product_id
+                        FROM
+                            t_store_product_assort
+                        WHERE
+                            t_store_product_assort.shop_id = #{shopId}
+                    )
+                <if test="productName !=null and productName !=''">
+                    and product_name  like concat(concat('%',#{productName}),'%')
+                </if>
+            ) T1
+        JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getProductByAssortId2Count" parameterType="com.soufang.base.dto.storeConstruction.StoreProductAssortDto" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    t_product
+                WHERE
+                    product_id IN (
+                        SELECT DISTINCT
+                            product_id
+                        FROM
+                            t_store_product_assort
+                        WHERE
+                            t_store_product_assort.shop_id = #{shopId}
+                    )
+                <if test="productName !=null and productName !=''">
+                    and product_name  like concat(concat('%',#{productName}),'%')
+                </if>
+            ) T1
+        JOIN t_product_statistics T3 ON T1.product_id = T3.product_id
+    </select>
+
+    <select id="getShopProductManaList" parameterType="com.soufang.base.dto.product.ProductDto"
+            resultMap="ProductAndProStatistics">
+        select tp.*,tps.*,GetShopProductMonthSellCount(tp.product_id) month_sell_count
+        from t_product tp left join t_product_statistics tps on tp.product_id = tps.product_id
+        where 1 = 1 and tp.is_upper != -1
+        <if test="shopId != null">
+            and tp.shop_id = #{shopId}
+        </if>
+        <if test="sort != null and sort !=0 ">
+            order by tp.create_time desc
+        </if>
+        limit #{page},#{limit}
+    </select>
+
     <select id="getShopProductCount" parameterType="com.soufang.base.search.product.ProductManageSo"
             resultType="java.lang.Integer">
         SELECT COUNT(*)
@@ -732,6 +887,7 @@
             </when>
         </choose>
     </select>
+
     <select id="getAssortProduct" parameterType="com.soufang.base.dto.product.ProductDto"
             resultMap="DtoResultMap">
         select product_id,product_name,product_image
@@ -746,7 +902,6 @@
         limit #{page},#{limit}
     </select>
 
-
     <select id="getIndexFootProduct" resultMap="DtoResultMap">
         select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
         from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
@@ -754,4 +909,16 @@
         order by t_product_statistics.browse_number desc
         limit 0,16;
     </select>
+
+
+    <select id="getProductTop6" parameterType="com.soufang.base.dto.product.ProductDto" resultMap="DtoResultMap">
+        select tp.*,tps.*
+        from t_product tp LEFT JOIN t_product_statistics tps on tp.product_id = tps.product_id
+        where 1 = 1 and tp.is_upper != -1
+        <if test="shopId != null">
+            and tp.shop_id = #{shopId,jdbcType=BIGINT}
+        </if>
+        order by tps.deal_number desc LIMIT 0,6
+    </select>
+
 </mapper>

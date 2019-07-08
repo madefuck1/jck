@@ -26,8 +26,11 @@
       #{sort,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP})
   </insert>
 
-  <select id="getList" resultMap="BannerDtoMap" >
+  <select id="getList" resultMap="BannerDtoMap" parameterType="com.soufang.model.Banner" >
     select * from t_banner where 1=1
+    <if test="terminal != null and terminal != 0">
+      and terminal = #{terminal,jdbcType=INTEGER}
+    </if>
     order by create_time desc
   </select>
 

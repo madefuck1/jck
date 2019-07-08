@@ -1,0 +1,129 @@
+<@override name="title">
+My message
+</@override>
+
+<@override name="css">
+
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-news">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">My message</strong> /
+                        <small>News</small>
+                    </div>
+                </div>
+                <hr/>
+                <div class="am-tabs am-tabs-d2" data-am-tabs>
+                    <ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="#tab1">Mall event</a></li>
+                        <!--<li><a href="#tab2">物流助手</a></li>-->
+                        <li><a href="#tab3">Consulting feedback</a></li>
+                    </ul>
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <div class="news-day">
+                                <div class="goods-date" data-date="2015-12-21">
+                                    <span><i class="month-lite">12</i>.<i class="day-lite">21</i>	<i
+                                            class="date-desc">today</i></span>
+                                </div>
+                                <!--消息 -->
+                                <div class="s-msg-item s-msg-temp i-msg-downup">
+                                    <h6 class="s-msg-bar"><span class="s-name">Daily new things</span></h6>
+                                    <div class="s-msg-content i-msg-downup-wrap">
+                                        <div class="i-msg-downup-con">
+                                            <a class="i-markRead" target="_blank" href="blog.html">
+                                                <img src="../images/TB102.jpg">
+                                                <p class="s-main-content">
+                                                    The most distinctive Hubei New Year is here! Come and see the new year!
+                                                </p>
+                                                <p class="s-row s-main-content">
+                                                    <a href="blog.html">
+                                                        Read the full story <i class="am-icon-angle-right"></i>
+                                                    </a>
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a class="i-btn-forkout" href="#"><i class="am-icon-close am-icon-fw"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab2">
+                            <!--消息 -->
+                            <div class="s-msg-item s-msg-temp i-msg-downup">
+                                <h6 class="s-msg-bar"><span class="s-name">Order has been signed</span></h6>
+                                <div class="s-msg-content i-msg-downup-wrap">
+                                    <div class="i-msg-downup-con">
+                                        <a class="i-markRead" target="_blank" href="logistics.html">
+                                            <div class="m-item">
+                                                <div class="item-pic">
+                                                    <img src="../images/kouhong.jpg_80x80.jpg"
+                                                         class="itempic J_ItemImg">
+                                                </div>
+                                                <div class="item-info">
+                                                    You have purchased the Meikang powder drunk beauty lipstick has been signed,
+                                                    Express delivery number: 373269427868
+                                                </div>
+                                            </div>
+                                            <p class="s-row s-main-content">
+                                                see details <i class="am-icon-angle-right"></i>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="i-btn-forkout" href="#"><i class="am-icon-close am-icon-fw"></i></a>
+                            </div>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab3">
+                            <!--消息 -->
+                            <div class="s-msg-item s-msg-temp i-msg-downup">
+                                <h6 class="s-msg-bar"><span class="s-name">Seller has refunded&nbsp;¥12.90yuan</span></h6>
+                                <div class="s-msg-content i-msg-downup-wrap">
+                                    <div class="i-msg-downup-con">
+                                        <a class="i-markRead" target="_blank" href="record.html">
+                                            <div class="m-item">
+                                                <div class="item-pic">
+                                                    <img src="../images/kouhong.jpg_80x80.jpg"
+                                                         class="itempic J_ItemImg">
+                                                </div>
+                                                <div class="item-info">
+                                                    <p class="item-comment">Your purchase of Meikang drunken beauty lipstick seller has been refunded</p>
+                                                    <p class="item-time">2015-12-21&nbsp;17:38:29</p>
+                                                </div>
+
+                                            </div>
+
+                                            <p class="s-row s-main-content">
+                                                <a href="record.html">Money going</a> <i class="am-icon-angle-right"></i>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="i-btn-forkout" href="#"><i class="am-icon-close am-icon-fw"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--底部-->
+        <#include "/common/includes/include.footer.html"/>
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    // js 内容
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

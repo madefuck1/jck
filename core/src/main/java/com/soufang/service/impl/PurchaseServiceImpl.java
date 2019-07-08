@@ -83,15 +83,12 @@ public class PurchaseServiceImpl implements PurchaseService {
             PurchaseDto purchaseDto = new PurchaseDto();
             //转移报价信息
             BeanUtils.copyProperties(purchase, purchaseDto);
-
             //转移商铺信息
             ShopDto shopDto = new ShopDto();
             Shop shop = purchase.getShop();
             BeanUtils.copyProperties(shop, shopDto);
             purchaseDto.setShopDto(shopDto);
-
             purchaseDtos.add(purchaseDto);
-
         }
 
         return purchaseDtos;
@@ -117,7 +114,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public int purchase(PurchaseDto purchaseDto){
         Result result = new Result();
         //查询SHOP信息通过用户ID
-        Shop shop =shopMapper.getByUserId(purchaseDto.getUserId());
+        ShopDto shop =shopMapper.getByUserId(purchaseDto.getUserId());
         //加入SHOPID
         purchaseDto.setShopId(shop.getShopId());
         //查询产品ID根据询盘编号

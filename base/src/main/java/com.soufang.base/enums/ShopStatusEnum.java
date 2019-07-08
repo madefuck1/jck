@@ -7,9 +7,9 @@ package com.soufang.base.enums;
  */
 public enum ShopStatusEnum {
 
-    success(0, "审核通过"),
-    ing(2, "审核中"),
-    fail(3, "审核失败");
+    success(0, "店铺审核已通过,请前往个人中心切换；"),
+    ing(2, "店铺正在审核中,请耐心等待"),
+    fail(3, "店铺审核失败,详情请咨询400-860-0992");
 
     private Integer value;
     private String message;

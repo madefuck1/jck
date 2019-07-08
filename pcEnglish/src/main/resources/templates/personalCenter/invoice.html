@@ -1,0 +1,402 @@
+<@override name="title">
+Invoice management
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/addstyle.css" rel="stylesheet" type="text/css">
+
+<style>
+    .am-thumbnails{
+        margin: 10px 20px;
+        margin-bottom: 0px;
+    }
+    .new-txt,.new-txt-rd2,.user-address li.user-addresslist,.user-address li.user-addresslist.defaultAddr{
+        background: none;
+    }
+    .user-address li.user-addresslist{
+        width: 48%;
+        height: 240px;
+        border: 1px solid #e6e6e6;
+    }
+    .new-tit{
+        height: 30px;
+
+    }
+    .new-tit span:nth-of-type(1){
+        text-align: right;
+    }
+    .new-txt-rd2{
+        padding-top: 0px;
+        padding-left: 30px;
+    }
+    .new-addr-btn{
+        margin-top: 16px;
+    }
+    .user-addresslist.defaultAddr .new-option-r{
+        background: #F58022;
+    }
+    .user-addresslist .new-option-r{
+        background: #F58022;
+    }
+    .am-form-label{
+        width: 106px;
+    }
+    .am-form select, .am-form textarea, .am-form input[type="text"], .am-form input[type="password"], .am-form input[type="datetime"], .am-form input[type="datetime-local"], .am-form input[type="date"], .am-form input[type="month"], .am-form input[type="time"], .am-form input[type="week"], .am-form input[type="number"], .am-form input[type="email"], .am-form input[type="url"], .am-form input[type="search"], .am-form input[type="tel"], .am-form input[type="color"], .am-form-field{
+        width: 99%;
+    }
+</style>
+</@override>
+
+<@override name="body">
+
+<!--头 -->
+
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+
+            <div class="user-address">
+                <!--标题 -->
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Invoice management</strong></div>
+                </div>
+                <hr/>
+                <ul class="am-thumbnails" id="InvoiceList">
+
+                </ul>
+                <div class="clear"></div>
+
+                <!--例子-->
+                <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+                    <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">Add a new invoice</a>
+                    <div class="add-dress">
+                        <input type="hidden" id="invoiceId" />
+                        <div class="am-cf am-padding">
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Add invoice information</strong></div>
+                        </div>
+                        <hr/>
+                        <div class="am-u-md-12 am-u-lg-8" style="margin: 20px;">
+                            <form class="am-form am-form-horizontal" id="invoiceInfo">
+
+                                <div class="am-form-group">
+                                    <label class="am-form-label"><span style="color: #FA4D46">*</span>name：</label>
+                                    <div class="am-form-content">
+                                        <input type="text" id="invoiceHead" placeholder="Please enter a name">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label"><span style="color: #FA4D46">*</span>Taxpayer Identification Number：</label>
+                                    <div class="am-form-content">
+                                        <input id="taxNumber" placeholder="Taxpayer Identification Number" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-form-label">address：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceAddress" placeholder="Please enter the address" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">phone：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoicePhone" placeholder="Please enter the phone" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">Bank：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceBank" placeholder="Please enter the bank of deposit" type="email">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label  class="am-form-label">Account opening account：</label>
+                                    <div class="am-form-content">
+                                        <input id="invoiceNumber" placeholder="Please enter an account opening account" type="email">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <a class="am-btn am-btn-danger" onclick="addInvoice()">save</a>
+                                        <a href="javascript: void(0)" onclick="resetMyForm(this)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+</@override>
+
+
+<@override name="js">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".new-option-r").click(function() {
+                $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+            });
+
+            var $ww = $(window).width();
+            if($ww>640) {
+                $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+            }
+
+        })
+
+        //表单数据重置
+        function resetMyForm(obj) {
+            var form = $(obj).parents("form");
+            $(form)[0].reset();
+        }
+        function resetinvoiceInfo() {
+            var form = document.getElementById("invoiceInfo");
+            $(form)[0].reset();
+        }
+
+        function addInvoice() {
+            var data = {
+                invoiceHead:$("#invoiceHead").val(),
+                taxNumber:$("#taxNumber").val(),
+                invoiceAddress:$("#invoiceAddress").val(),
+                invoicePhone:$("#invoicePhone").val(),
+                invoiceBank:$("#invoiceBank").val(),
+                invoiceNumber:$("#invoiceNumber").val(),
+            };
+            $.ajax({
+                url:"saveInvoice",
+                type:"post",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                success:function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                        resetinvoiceInfo();
+                    }else {
+                        alert(data.message);
+                    }
+                }
+            });
+            return false;
+        }
+        function setDefault(id){
+            $.ajax({
+                url:'/personalCenter/defaultInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }
+                },
+                error:function () {
+                    alert("Send request error！！！")
+                }
+            });
+        }
+
+        function deleteInvoice(id){
+            $.ajax({
+                url:'/personalCenter/deleteInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }
+                },
+                error:function () {
+                    alert("Send request error！！！")
+                }
+            });
+        }
+
+        function getInvoice(id){
+            $.ajax({
+                url:'/personalCenter/getInvoice/'+id,
+                type:'post',
+                success: function (data) {
+                        $("#doc-modal-1").empty();
+
+                    var invoice = '<a class="new-abtn-type" data-am-modal="{target: \'#doc-modal-1\', closeViaDimmer: 0}">Edit personal invoice</a>\n' +
+                        '                    <div class="add-dress">\n' +
+                        '                        <input type="hidden" id ="InvoiceId" value='+data.invoiceId+' />\n' +
+                        '                        <div class="am-cf am-padding">\n' +
+                        '                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Edit personal invoice</strong></div>\n' +
+                        '                        </div>\n' +
+                        '                        <hr/>\n' +
+                        '                        <div class="am-u-md-12 am-u-lg-8" style="margin: 20px;">\n' +
+                        '                            <form class="am-form am-form-horizontal">\n' +
+                        '\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-name" class="am-form-label"><span style="color: #FA4D46">*</span>'+"name："+'</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input type="text" id="invoiceHead" value='+data.invoiceHead+' placeholder="company name">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label"><span style="color: #FA4D46">*</span>Taxpayer Identification Number：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="taxNumber" placeholder="Taxpayer Identification Number" value='+data.taxNumber+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">address：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceAddress" placeholder="Please enter the address" value='+data.invoiceAddress+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">phone：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoicePhone" placeholder="Please enter the phone" value='+data.invoicePhone+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">Bank：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceBank" placeholder="Please enter the bank of deposit" value='+data.invoiceBank+' type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <label for="user-phone" class="am-form-label">Account opening account：</label>\n' +
+                        '                                    <div class="am-form-content">\n' +
+                        '                                        <input id="invoiceNumber" placeholder="Please enter an account opening account" value='+data.invoiceNumber+'  type="email">\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '\n' +
+                        '                                <div class="am-form-group">\n' +
+                        '                                    <div class="am-u-sm-9 am-u-sm-push-3">\n' +
+                        '                                        <a class="am-btn am-btn-danger" onclick="updateInvoice('+data.invoiceId+')">save</a>\n' +
+                        '                                        <a href="javascript: void(0)" onclick="addInvoice()" class="am-close am-btn am-btn-danger" data-am-modal-close>add</a>\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                            </form>\n' +
+                        '                        </div>\n' +
+                        '                    </div>'
+                    $("#doc-modal-1").append(invoice);
+
+                },
+                error:function () {
+                    alert("Send request error！！！")
+                }
+            });
+
+        }
+        //修改发票信息
+        function updateInvoice(id){
+            var data = {
+                invoiceId:id,
+                invoiceHead:$("#invoiceHead").val(),
+                taxNumber:$("#taxNumber").val(),
+                invoiceAddress:$("#invoiceAddress").val(),
+                invoicePhone:$("#invoicePhone").val(),
+                invoiceBank:$("#invoiceBank").val(),
+                invoiceNumber:$("#invoiceNumber").val(),
+            };
+            $.ajax({
+                url:"updateInvoice",
+                type:"post",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                success:function (data) {
+                    if(data.success){
+                        alert(data.message);
+                        initData();
+                    }else {
+                        alert(data.message);
+                    }
+                }
+            });
+
+            return false;
+        }
+
+
+        $(function () {
+            initData();
+        });
+        //初始化页面发票信息
+        function initData(){
+            $.ajax({
+                url:'/personalCenter/getInvoiceList',
+                type:'post',
+                success: function (data) {
+                    if(data.success){
+                        /*alert(data.message);*/
+                        $("#InvoiceList").empty();
+                        var defaultInvoice;
+                        for(i = 0; i< data.data.length;i++){
+                            var invoiceId = data.data[i].invoiceId;
+                            var invoiceHead = data.data[i].invoiceHead;
+                            var taxNumber = data.data[i].taxNumber;
+                            var invoiceAddress = data.data[i].invoiceAddress;
+                            var invoicePhone = data.data[i].invoicePhone;
+                            var invoiceBank = data.data[i].invoiceBank;
+                            var invoiceNumber = data.data[i].invoiceNumber;
+                            if(data.data[i].invoiceDefault == 1){
+                                defaultInvoice = '<li class="user-addresslist defaultAddr" ><span class="new-option-r"><i class="am-icon-check-circle"></i>'+"Default invoice"+'</span>';
+                            }else {
+                                defaultInvoice = '<li class="user-addresslist" ><span class="new-option-r" onclick="setDefault('+invoiceId+')"><i class="am-icon-check-circle"></i>'+"Set as default invoice"+'</span>';
+                            }
+                            defaultInvoice += '<p class="new-tit new-p-re">\n' +
+                                '                   <span class="new-txt am-u-sm-4">'+"name:"+'</span>\n' +
+                                '                   <span class="new-txt-rd2 am-u-sm-8">'+invoiceHead+'</span>\n' +
+                                '               </p> ' +
+                                '               <p class="new-tit new-p-re">\n' +
+                                '                    <span class="new-txt am-u-sm-4">'+"Taxpayer Identification Number:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+taxNumber+'</span>\n' +
+                                '               </p>\n' +
+                                '                    <p class="new-tit new-p-re">\n' +
+                                '                    <span class="new-txt am-u-sm-4">'+"address:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+invoiceAddress+'</span>\n' +
+                                '                </p>\n' +
+                                '                    <p class="new-tit new-p-re">\n' +
+                                '                <span class="new-txt am-u-sm-4">'+"phone:"+'</span>\n' +
+                                '                    <span class="new-txt-rd2 am-u-sm-8">'+invoicePhone+'</span>\n' +
+                                '                </p>\n' +
+                                '                <p class="new-tit new-p-re">\n' +
+                                '                     <span class="new-txt am-u-sm-4">'+"Bank:"+'</span>\n' +
+                                '                      <span class="new-txt-rd2 am-u-sm-8">'+invoiceBank+'</span>\n' +
+                                '                 </p>\n' +
+                                '                 <p class="new-tit new-p-re">\n' +
+                                '                      <span class="new-txt am-u-sm-4">'+"Account opening account:"+'</span>\n' +
+                                '                      <span class="new-txt-rd2 am-u-sm-8">'+invoiceNumber+'</span>\n' +
+                                '                 </p>\n' +
+                                '                 <div class="new-addr-btn">\n' +
+                                '                        <a href="javascript:void(0);" onclick="getInvoice('+invoiceId+');"><i class="am-icon-edit"  ></i>edit</a>\n' +
+                                '                        <span class="new-addr-bar">|</span>\n' +
+                                '                         <a href="javascript:void(0);" onclick="deleteInvoice('+invoiceId+');"><i class="am-icon-trash"></i>delete</a>\n' +
+                                '                  </div>\n' +
+                                '                   </li>'
+
+                            $("#InvoiceList").append(defaultInvoice);
+                        }
+
+                    }else {
+                        defaultInvoice = "You do not have invoice information.";
+                        $("#InvoiceList").append(defaultInvoice);
+                     /*alert(data.message);*/
+                    }
+                },
+                error: function (data) {
+                    alert("You have no relevant invoice information.")
+                }
+            });
+
+        }
+
+</script>
+
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

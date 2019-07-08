@@ -1,0 +1,91 @@
+<@override name="title">
+Feedback
+</@override>
+
+<@override name="css">
+
+<link href="../css/infstyle.css" rel="stylesheet"  type="text/css">
+
+</@override>
+
+<@override name="body">
+<div class="center">
+
+    <div class="col-main">
+        <div class="main-wrap">
+            <!--标题 -->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">Feedback</strong></div>
+            </div>
+            <hr/>
+            <div class="suggestmain">
+                <p>Please leave your valuable comments：</p>
+                <div class="suggestlist">
+                    <select data-am-selected id="typeQuestion">
+                        <option value="a" selected>Please select a comment type</option>
+                        <option value="b">product problem</option>
+                        <option value="c">Promotional issue</option>
+                        <option value="d">Payment issues</option>
+                        <option value="e">Refund issue</option>
+                        <option value="f">Delivery problem</option>
+                        <option value="g">after sales question</option>
+                        <option value="h">Invoice problem</option>
+                        <option value="o">Return</option>
+                        <option value="m">other</option>
+                    </select>
+                </div>
+                <form id="form" action="/personalCenter/saveSuggest" method="post">
+                    <div class="suggestDetail">
+                        <p>Describe the problem：</p>
+                        <blockquote class="textArea">
+                            <textarea name="sugContent" id="say_some" cols="60" rows="5" autocomplete="off" placeholder="Describe your comments here"></textarea>
+                            <div class="fontTip"><i class="cur">0</i> / <i>200</i></div>
+                        </blockquote>
+                    </div>
+                    <div class="am-btn am-btn-danger anniu submitButton">submit</div>
+                    <p class="suggestTel"><i class="am-icon-phone"></i>consumer hotline：400-007-1234</p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+<!--左边菜单-->
+<#include "/personalCenter/common/include.menu.html"/>
+</div>
+</@override>
+<@override name="js">
+<script src="${contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript">
+    $(".submitButton").bind("click",function () {
+        //验证意见类型
+        var key1 = document.getElementById("typeQuestion");
+        var value1 = key1.options[key1.selectedIndex].value;
+        console.log(value1);
+        if(value1=="a"){
+            alert("Please select a comment type");
+            return ;
+        }
+        var texts = $("#say_some").val();
+        if(texts==null || texts==""){
+            alert("Please enter your comments");
+            return ;
+        }
+        var form = $("#form");
+        var options = {
+            url: '/personalCenter/saveSuggest',
+            type: 'post',
+            success: function (data) {
+                if(data.success){
+                    alert("Feedback has been feedback");
+                    window.location.href='/personalCenter/toPersonalCenter';
+                }else {
+                    alert(data.message);
+                }
+            }
+        };
+        form.ajaxSubmit(options);
+    })
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

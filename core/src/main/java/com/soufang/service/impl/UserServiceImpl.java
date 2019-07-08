@@ -1,6 +1,8 @@
 package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PropertiesParam;
+import com.soufang.base.Result;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.enums.UserLevelEnum;
 import com.soufang.base.search.user.UserSo;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getById(Long id) {
         UserDto userDto = userMapper.getById(id);
+        if(userDto!=null){
+            userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+        }
         return userDto;
     }
 
@@ -203,4 +208,19 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("更新用户出错");
         }
     }
+
+    @Override
+    public Result updatePassword(UserDto userDto) {
+        Result result = new Result();
+        int i = userMapper.updatePassword(userDto);
+        if(i > 0){
+            result.setSuccess(true);
+            result.setMessage("更新密码成功");
+        }else {
+            result.setMessage("更新密码失败");
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
 }

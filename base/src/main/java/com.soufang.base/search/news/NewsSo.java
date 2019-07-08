@@ -1,7 +1,7 @@
 package com.soufang.base.search.news;
 
 public class NewsSo {
-
+    private Long id;
     private String title;
     private String content;
     private String origin;
@@ -55,5 +55,13 @@ public class NewsSo {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

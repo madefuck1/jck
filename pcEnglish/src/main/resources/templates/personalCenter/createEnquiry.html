@@ -1,0 +1,510 @@
+<@override name="title">
+New inquiry
+</@override>
+
+<@override name="css">
+<link href="${contextPath}/css/purch.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+<link href="${contextPath}/css/infstyle.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_index.css">
+</@override>
+<@override name="body">
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="user-info">
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg"><span id="titleName"></span></strong></div>
+                </div>
+                <hr/>
+                <div class="info-main">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label class="am-form-label">Buying title</label>
+                            <div class="am-form-content">
+                                <input type="text" id="enquiryTitle" placeholder="Buying title" autocomplete="off">
+                                <small>Title cannot exceed 40 Chinese characters</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Numbering</label>
+                            <div class="am-form-content">
+                                <p>${enquiryNumber}</p>
+                                <input type="hidden" id="isUpdate" value="${isUpdate}">
+                                <input type="hidden" id="enquiryNumber" value="${enquiryNumber}">
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">release time</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="createTime"autocomplete="off" class="am-form-field"  placeholder="Please select the release time">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Due time</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="takeDate"autocomplete="off" class="am-form-field"  placeholder="Please select delivery time">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Quotation deadline</label>
+                            <div class="am-form-content am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}" style="width: 250px">
+                                <span class="am-input-group-btn am-datepicker-add-on">
+                                    <input type="text" id="endTime" autocomplete="off" class="am-form-field"  placeholder="Please select the quote deadline">
+                                </span>
+                            </div>
+                        </div>
+                       <!-- <div class="am-form-group pur_height">
+                            <label class="am-form-label">求购状态</label>
+                            <div class="am-form-content">
+                                <input id="enquiryStatus" style="border: 0px;outline:none;cursor: pointer;margin-top: 8px" value="待审核" readonly="readonly" />
+                            </div>
+                        </div>-->
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">product name</label>
+                            <div class="am-form-content">
+                                <input id="productName" placeholder="Such as nonwovens" type="text">
+                                <input   type="hidden" id="enquiryProductId" autocomplete="off" name="enquiryProductId"  />
+                            </div>
+                        </div>
+                        <div class="sale_cloum1" style="height: 110px;">
+                            <label class="am-form-label" >Buying pictures</label>
+                            <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
+                                <img class="sale_pic4" onclick="company(this)">
+                                <input type="file" id="file" style="display: none" onchange="showCompany(this)">
+                            </div>
+                        </div>
+                        <div id="showPhoto"></div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Purchase amount</label>
+                            <div class="am-form-content">
+                                <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="Please fill in the quantity">
+                                <select id="productUnit" style="width:150px;padding: 5px;">
+                                    <option value="米">Meter</option>
+                                    <option value="公斤" >kg</option>
+                                    <option value="千克" selected>kilogram</option>
+                                    <option value="公升" >liter</option>
+                                    <option value="箱" >box</option>
+                                    <option value="包" >One</option>
+                                    <option value="包" >station</option>
+                                    <option value="包" >Piece</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Product Categories</label>
+                            <div class="am-form-content">
+                                <select id="productSort1"  style="width:150px;padding: 5px;float: left;" onchange="toFindSort(1)">
+                                    <option value="" selected>please choose</option>
+                                </select>
+                                <select id="productSort2"  style="width:150px;padding: 5px;float: left;margin-left:5px;" onchange="toFindSort(2)">
+                                </select>
+                                <select id="productSort3"  style="width:150px;padding: 5px;float: left;margin-left:5px;">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">Address</label>
+                            <div class="am-form-content">
+                                <input id="detailStreet" placeholder="Such as streets, house numbers, etc."autocomplete="off" type="text">
+                            </div>
+                        </div>
+                        <div class="am-form-group pur_height">
+                            <label class="am-form-label">description</label>
+                            <div class="am-form-content">
+                                <textarea class="disp" rows="5" id="enquiryRemark"autocomplete="off" placeholder="Such as grid type, cycle size, composition, gram weight, width, color fastness, environmental standards, etc."></textarea>
+                            </div>
+                        </div>
+                        <div class="info-btn">
+                            <div class="am-btn am-btn-warning" id="save">save</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+
+</@override>
+<@override name="js">
+<script>
+    $(function(){
+        var isUpdate= $("#isUpdate").val();
+        var enquiryNumber= $("#enquiryNumber").val();
+       if(isUpdate==null||isUpdate==""){
+           //新增
+           $("#titleName").html("Post purchase");
+       }else{
+           //修改
+           $("#titleName").html("Modify purchase\n");
+           //查询详情信息
+           details(enquiryNumber);
+       }
+        findSort(0,0);
+    });
+
+    //对类别下拉框赋值-初始化
+    function  findSort(sortNum,sortName) {
+        $.get("/pc/commonPullDown/getAssortAByParentId/"+sortNum,function (data) {
+                $("#productSort2").html("");
+                $("#productSort3").html("");
+            $.each(data, function (i, v) {
+                var whatever = liContentSort(v);
+                    $("#productSort1").append(whatever);
+
+            });
+        });
+    }
+
+    //下拉框发生变化获取对应数据
+    function toFindSort(selectNum) {
+        var key;
+        var sortNum;
+        if (selectNum==1){
+             key = document.getElementById("productSort1");
+             sortNum = key.options[key.selectedIndex].value;
+        }else{
+             key = document.getElementById("productSort2");
+             sortNum = key.options[key.selectedIndex].value;
+        }
+        findMoreSort(sortNum,selectNum);
+    }
+    //对类别下拉框赋值
+    function  findMoreSort(sortNum,sortName) {
+        $.get("/pc/commonPullDown/selUnderAssort/"+sortNum,function (data) {
+           if (sortName==1){
+               $("#productSort2").html("");
+                $("#productSort3").html("");
+            }else if(sortName==2){
+               $("#productSort3").html("");
+           }
+            $.each(data, function (i, v) {
+                var whatever = liContentSort(v);
+                if(sortName==1){
+                    $("#productSort2").append(whatever);
+                    toFindSort(2);
+                }else if (sortName==2){
+                    $("#productSort3").append(whatever);
+                }
+            });
+        });
+    }
+
+    //插入HTML下拉框类别
+    function liContentSort(v) {
+        var li=$("<option value='"+v.assortId+"'> "+v.assortName+"</option>");
+        return li;
+    }
+
+    var file;
+    $('#file').on('change', function () {
+        file = this.files[0];
+        var fileName = file.name;
+        var fileType = fileName.substr(fileName.length - 4, fileName.length);
+        if (fileType == '.gif' || fileType == '.jpeg' || fileType == '.jpg' || fileType == '.png' || fileType == '.bmp') {
+
+        } else {
+            alert('File type is incorrect');
+        }
+    });
+    $("#save").click(function (){
+        var enquiryTitle = $("#enquiryTitle").val();
+        var createTime = $("#createTime").val();
+        var takeDate = $("#takeDate").val();
+        var isUpdate= $("#isUpdate").val();
+        var productNumber = $("#productNumber").val();
+        var detailStreet=$("#detailStreet").val();
+
+        //获取下拉框类别的值
+       var key1 = document.getElementById("productSort1");
+        var value1 = key1.options[key1.selectedIndex].value;
+
+        var obj=document.getElementById("productSort2");
+        for(var i=0;i<obj.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj[i].selected==true) {
+                var value2=obj[i].value;//获取当前选择项的值.
+            }
+        }
+        var obj3=document.getElementById("productSort3");
+        for(var i=0;i<obj3.length;i++) {//下拉框的长度就是它的选项数.
+            if(obj3[i].selected==true) {
+                var value3=obj3[i].value;//获取当前选择项的值.
+            }
+        }
+
+           var len = enquiryTitle.match(/[^ -~]/g) == null ? enquiryTitle.length : enquiryTitle.length + enquiryTitle.match(/[^ -~]/g).length;
+           if(enquiryTitle==null|enquiryTitle==""){
+               alert("Please enter the purchase title");
+               return ;
+           }else if(len>80){
+               alert("The title of the purchase must not exceed 40 Chinese characters");
+               return;
+           }
+
+           if ((new Date(takeDate.replace(/-/g,"\/"))) < (new Date(createTime.replace(/-/g,"\/")))){
+               alert("Delivery time must be greater than the time of initiating purchase");
+               return;
+           }else if(takeDate==""||takeDate==null){
+               alert("Please select delivery time");
+               return;
+           }
+           var re = /^[1-9]+[0-9]*]*$/;
+           if(!re.test(productNumber)){
+               alert("Purchase quantity can only enter numbers");
+               return;
+           }
+        if(value1==null|value1==""){
+            alert("Please select category information");
+            return ;
+        }
+           if (detailStreet==null || detailStreet==""){
+               alert("Please enter the detailed address carefully");
+               return;
+           }
+           formData = new FormData()
+           formData.append("file", file);
+           formData.append("enquiryTitle", $("#enquiryTitle").val());
+           formData.append("enquiryNumber", $("#enquiryNumber").val());
+           formData.append("createTime", $("#createTime").val());
+           formData.append("takeDate", $("#takeDate").val());
+           formData.append("productName", $("#productName").val());
+           formData.append("productUnit", $("#productUnit").val());
+           formData.append("detailStreet", $("#detailStreet").val());
+           formData.append("enquiryRemark", $("#enquiryRemark").val());
+           formData.append("productName", $("#productName").val());
+           formData.append("productNumber",$("#productNumber").val());
+           formData.append("enquiryProductId",$("#enquiryProductId").val());
+           formData.append("endTime",$("#endTime").val());
+
+        if (value3 != null | value3!=undefined){
+            formData.append("productAssort",value3);
+        }else if (value2 != null |value2 !=undefined){
+            formData.append("productAssort",value2);
+        }else{
+            formData.append("productAssort",value1);
+        }
+           if(isUpdate==""||isUpdate==null){
+               //新增
+              createEnquiry(formData);
+           }else{
+               //修改
+               updateSubmit(formData)
+           }
+       });
+
+       //修改
+       function updateSubmit(formData){
+           $.ajax({
+               url: "updateEnquiryAndProduct",
+               type: "post",
+               cache: false,
+               data: formData,
+               dataType: "json",
+               processData: false,
+               contentType: false,
+               success: function (data) {
+                   //需要弹框操作失败与否
+                   //需要返回列表页面
+                   alert(data.message);
+                   window.location.href="/personalCenter/toEnquiryManage";
+               }
+           });
+       }
+
+       //新增
+       function createEnquiry(formData){
+           $.ajax({
+               url: "createEnquiry",
+               type: "post",
+               cache: false,
+               data: formData,
+               dataType: "json",
+               processData: false,
+               contentType: false,
+               success: function (data) {
+                   //上传成功的处理
+                   if (data.success==true) {
+                       alert(data.message);
+                       window.location.href="/personalCenter/toEnquiryManage";
+                   } else {
+                   }
+               }
+           });
+       }
+
+       //查询详情信息并-赋值表单
+       function details(enquiryNumber){
+           var str={enquiryNumber:enquiryNumber};
+           $.ajax({
+               url : "selEnquiryByNumber",
+               type : "post",
+               data:JSON.stringify(str),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   $("#enquiryTitle").val(data.enquiryTitle);
+                   $("#enquiryNumber").val(data.enquiryNumber);
+                   $("#createTime").val(longFormatDate(data.createTime));
+                   $("#takeDate").val(longFormatDate(data.takeDate));
+                   $("#endTime").val(longFormatDate(data.endTime));
+                   $("#detailStreet").val(data.takeAddress);
+                   $("#enquiryRemark").val(data.enquiryRemark);
+                   $("#enquiryStatus").val(data.statusMessage);
+                   $.each(data.enquiryProductDto, function (i, v) {
+                       //需要循环插入产品
+                       var whatever = liContent(v);
+                       $("#showPhoto").append(whatever)
+                   });
+               }
+           });
+       }
+
+       function liContent(v){
+           var productImage= v.productImage;
+           var productName=v.productName;
+           var enquiryProductId = v.enquiryProductId;
+           var productAssort=v.productAssort;
+           giveAssortValue(productAssort);
+           $("#enquiryProductId").val(enquiryProductId);
+           $("#productNumber").val(v.productNumber);
+           $("#productName").val(productName);
+           $("#productUnit").val(v.productUnit);
+
+           var li=$("<div class='goods'>"
+                       +"<div class='goods-box first-box'>"
+                           +"<div class='goods-pic'>"
+                               +"<div class='goods-pic-box'>"
+                                   +"<img src='"+productImage+"' class='goods-img' style='height: 200px;width: 300px;'>"
+                               +"</div>"
+                               +"<a class='goods-delete' href='javascript:void(0);'  onclick='delEnProImgUrl(\""+enquiryProductId+"\")'><i class='am-icon-trash'>delete</i></a>"
+                            +"</div> " +
+                           "</div>" +
+                       "</div>"
+           );
+               return li;
+       }
+
+       //删除照片地址-删除照片
+       function delEnProImgUrl(enquiryProductId){
+           var str={enquiryProductId:enquiryProductId};
+           $.ajax({
+               url : "delEnProImgUrl",
+               type : "post",
+               data:JSON.stringify(str),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   alert(data.message);
+                   //需要提示删除成功-更新页面数据
+               }
+           });
+       }
+
+       function longFormatDate(longTypeDate) {
+           var datetimeType = "";
+           var date = new Date();
+           date.setTime(longTypeDate);
+           datetimeType+= date.getFullYear();   //年  
+           datetimeType+= "-" + getMonth(date); //月   
+           datetimeType+= "-" + getDay(date);   //日  
+           return datetimeType;
+       }
+       //返回月   
+       function getMonth(date){
+           var month = "";
+           month = date.getMonth() + 1;
+           if(month<10){
+               month = "0" + month;
+           }
+           return month;
+       }
+       //返回日 
+       function getDay(date){
+           var day = "";
+           day = date.getDate();
+           if(day<10){
+               day = "0" + day;
+           }
+           return day;
+       }
+       function company(obj){
+           $(obj).parent().find("input[type=file]").click();
+       }
+
+       function showCompany(obj){
+           var reads= new FileReader();
+           var file=obj.files[0];
+           reads.readAsDataURL(file);
+           reads.onload = function (e) {
+               $(obj).parent().find("img").first().attr("src",this.result);
+           };
+       }
+
+       function giveAssortValue(productAssort) {
+           var productAssort=productAssort;
+           var key1 = document.getElementById("productSort1");
+           var obj=document.getElementById("productSort2");
+           var obj3=document.getElementById("productSort3");
+           var stepSon=0;
+            var parentAssortId;
+           var str2={productAssort:productAssort};
+           $.ajax({
+               url : "selParentIdByAssortId",
+               type : "post",
+               data:JSON.stringify(str2),
+               contentType: 'application/json; charset=UTF-8',
+               dataType : "json",
+               success : function(data) {
+                   parentAssortId=data;
+                   console.log(parentAssortId);
+                   for (var i = 0 ; i<key1.options.length;i++){
+                       if (parentAssortId==key1.options[i].value){
+                           key1.options[i].selected = true;
+                           toFindSort(1);
+                           toFindSort(2);
+                           stepSon=1;
+                           console.log("1");
+                           break;
+                       }
+                   }
+                   if (stepSon!=1){
+                       var strs={productAssort:parentAssortId};
+                       var  parentAssortId2;
+                       $.ajax({
+                           url : "selParentIdByAssortId",
+                           type : "post",
+                           data:JSON.stringify(strs),
+                           contentType: 'application/json; charset=UTF-8',
+                           dataType : "json",
+                           success : function(data) {
+                                parentAssortId2=data;
+                               console.log(data);
+                               for (var i = 0 ; i<key1.length;i++){
+                                   if (parentAssortId2==key1.options[i].value){
+                                       console.log("Second assignment");
+                                       console.log("1");
+                                       key1.options[i].selected = true;
+                                       toFindSort(1);
+                                       toFindSort(2);
+                                       break;
+                                   }
+                               }
+
+                           }
+                       });
+                   }
+               }
+           });
+       }
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

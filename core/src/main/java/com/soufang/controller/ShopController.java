@@ -4,7 +4,9 @@ package com.soufang.controller;
 import com.github.pagehelper.PageHelper;
 import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
@@ -165,4 +167,24 @@ public class ShopController {
         shopService.updateShop(shopDto);
         return result;
     }
+
+    @RequestMapping(value = "getHotShop",method = RequestMethod.POST)
+    public List<ShopDto> getHotShop(){
+        List<ShopDto> shopDtos = shopService.getHotShop();
+        return shopDtos;
+    }
+
+
+    @RequestMapping(value = "getShopStatisticsInfo",method = RequestMethod.POST)
+    public  ShopStatisticsDto getShopStatisticsInfo(@RequestBody Long shopId){
+        return shopService.getShopStatisticsInfo(shopId);
+    }
+
+    @RequestMapping(value = "getShopProductManaList",method = RequestMethod.POST)
+    public List<ProductDto> getShopProductManaList(@RequestBody ProductDto productDto){
+        return shopService.getShopProductManaList(productDto);
+    }
+
+
+
 }

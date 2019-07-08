@@ -1,0 +1,109 @@
+<@override name="title">
+Merchants
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale_index.css">
+<link rel="stylesheet" href="${contextPath}/css/sale/openShop.css">
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--Introduce the menu on the left-->
+        <div class="sale_con">
+            <div class="openUp">
+                <p class="p1">Open shop</p>
+                <div class="turn">
+                    <span class="blueCircle">1</span>
+                    <span>Contact information</span>
+                    <span class="turnBlue">————</span>
+                    <span class="grayCircle">2</span>
+                    <span class="fzcolor">Company information</span>
+                    <span class="turnGray">————</span>
+                    <span class="grayCircle">3</span>
+                    <span class="fzcolor">Complete</span>
+                </div>
+            </div>
+            <form action="/user/settle" method="post">
+                <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+                    <div class="am-tabs-bd">
+                        <div data-tab-panel-0 class="am-tab-panel am-active sale_down">
+                            <div class="sale_cloum1">
+                                <span class="am-u-sm-2 row1">Contact name：</span>
+                                <div class="am-form-group am-u-sm-4 row2">
+                                    <input type="text" name="realName" value="${userInfo.realName!}" class="am-form-field" required placeholder="Contact name">
+                                </div>
+                                <div class="am-u-sm-6 sale_fz">
+                                    <label class="am-radio-inline">
+                                        <input type="radio"  value="" name="docInlineRadio"> Mr
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="docInlineRadio" checked> Lady
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="sale_cloum1">
+                                <span class="am-u-sm-2 row1">Contact Phone：</span>
+                                <span class="am-u-sm-10 row2">
+                                    <span>${userInfo.phone!}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                            </div>
+                            <div class="sale_cloum1">
+                                <span class="am-u-sm-2 row1">Contact email：</span>
+                                <span class="am-u-sm-10 row2">
+                                    <span>${userInfo.email!}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                            </div>
+                            <div class="sale_cloum1">
+                                <span class="am-u-sm-2 row1">Landline：</span>
+                                <span class="am-u-sm-10 row3 row3 am-input-group">
+                                    <input type="text" name="faxCountry" class="am-form-field" placeholder="Country Code">
+                                    <input type="text" name="faxCity" class="am-form-field" placeholder="City Area Code">
+                                    <input type="text" name="faxNumber" class="am-form-field" placeholder="Fixed number">
+                                </span>
+                            </div>
+                            <div class="sale_cloum1">
+                                <span class="am-u-sm-2 row1">Fax number：</span>
+                                <span class="am-u-sm-10 row3 row3 am-input-group">
+                                    <input type="text" name="fixedCountry" class="am-form-field" placeholder="Country Code">
+                                    <input type="text" name="fixedCity" class="am-form-field" placeholder="City Area Code">
+                                    <input type="text" name="fixedNumber" class="am-form-field" placeholder="Fixed number">
+                                </span>
+                            </div>
+                            <a style="margin-top: 20px; display: inline-block; text-align: center; width: 100%">
+                                <button type="submit" class="am-btn am-btn-secondary am-btn-lg button-size" onclick="return myfunction()" >Next</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    $(function () {
+        var fax = "${userInfo.faxNumber!}".split("-");
+        $("input[name=faxCountry]").val(fax[0]);
+        $("input[name=faxCity]").val(fax[1]);
+        $("input[name=faxNumber]").val(fax[2]);
+        var fixedPhone = "${userInfo.fixedPhone!}".split("-");
+        $("input[name=fixedCountry]").val(fixedPhone[0]);
+        $("input[name=fixedCity]").val(fixedPhone[1]);
+        $("input[name=fixedNumber]").val(fixedPhone[2]);
+    })
+    //Next frame confirmation
+    function myfunction()
+    {
+        if(confirm("Please confirm that the current information is not going to the next step？")){
+            document.update.submit();
+        }
+        else{
+            return false;//Must add! Click Cancel to save the previous data!
+        }
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>
+

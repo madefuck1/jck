@@ -1,0 +1,23 @@
+<@override name="title">
+Pay
+</@override>
+<@override name="css">
+</@override>
+
+<@override name="body">
+<form id="aliPay" action="/alipay/pay" method=post>
+    <input name="payNumber" value="${payNumber}" />
+    <input name="orderName" value="${orderName}"/>
+    <input name="payMoney" value="${payMoney?c}"/>
+    <input name="productMessage" value="${productMessage}" />
+</form>
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+    $(function(){
+        $("#aliPay").submit();
+    });
+</script>
+</@override>
+<@extends name="/common/layout/base.html"/>

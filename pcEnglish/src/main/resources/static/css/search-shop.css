@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+.tog,.sear .sousuo{
+	background: #fff!important;
+}
+#search-shop{
+	width: 1190px;
+	min-height: 900px;
+	margin: 20px auto;
+}
+.shop-up{
+	width: 1190px;
+	min-height: 40px;
+	background: #fff;
+	overflow: hidden;
+}
+.shop-up ul{
+	width: 1190px;
+	float: left;
+	height: 40px;
+	/*border-bottom: 1px solid #e6e6e6;*/
+	padding: 0px 60px;
+}
+.shop-up ul li{
+	float: left;
+	margin-right: 4rem;
+	line-height: 40px;
+}
+.shop-up .first a{
+	color: #F58022;
+}
+
+.shop-down{
+	width: 1190px;
+	min-height: 800px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.shop-down1{
+	width: 390px;
+	height: 170px;
+	background: #fff;
+	padding: 10px 5px;
+	float: left;
+	margin-right: 10px;
+	margin-top: 10px
+}
+
+.shop-down1 h4{
+	font-size: 16px;
+	color: #333;
+	line-height: 40px;
+}
+.shop-down1 dl{
+	height: 150px;
+	
+	
+	
+}
+.shop-down1 p{
+	line-height: 24px;
+	font-size: 12px;
+	color: #999;
+}
+
+dl dt{
+	float: left;
+	width: 86px;
+	
+	
+}
+dl dd{
+	
+	
+}
+.shop-down1 dt{
+	margin-top: 10px;
+	height: 130px
+}
+
+.shop-down1 dd{
+	margin-top: 4px;
+}
+.shop-down1 button{
+	padding: 5px 10px;
+	border: 1px solid #e6e6e6;
+	text-align: center;
+	font-size: 12px;
+	background: #fff;
+	margin-top: 10px;
+}
+
+
+
+
+

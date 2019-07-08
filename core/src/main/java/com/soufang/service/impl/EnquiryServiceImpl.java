@@ -16,6 +16,7 @@ import com.soufang.mapper.PurchaseMapper;
 import com.soufang.mapper.ShopMapper;
 import com.soufang.model.*;
 import com.soufang.service.EnquiryService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -61,17 +62,32 @@ public class EnquiryServiceImpl implements EnquiryService {
             BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
             List<PurchaseDto> purchaseDtos = new ArrayList<>();
             for (Purchase purchase : enquiryProduct.getPurchases()) {
-                PurchaseDto purchaseDto = new PurchaseDto();
-                BeanUtils.copyProperties(purchase, purchaseDto);
-                if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
-                    Shop shop= purchase.getShop();
-                    if("".equals(shop.getShopName())||null==shop.getShopName()){
-                        purchaseDto.setShopName("没有商铺信息");
+                if(StringUtils.isNotBlank(purchase.getPurchaseNumber())){
+                    PurchaseDto purchaseDto = new PurchaseDto();
+                    //对SHOPID判断
+                    if(enquirySo.getShopId()==null||"".equals(enquirySo.getShopId())){
+                        //报价信息包含所有
+                        BeanUtils.copyProperties(purchase, purchaseDto);
                     }else{
-                        purchaseDto.setShopName(shop.getShopName());
+                        //只有当前商铺报价信息
+                        if(enquirySo.getShopId()==purchase.getShopId()){
+                            BeanUtils.copyProperties(purchase, purchaseDto);
+                        }
+
                     }
+                    if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
+                        Shop shop= purchase.getShop();
+                        if(null!=purchaseDto.getPurchaseNumber()){
+                            if("".equals(shop.getShopName())||null==shop.getShopName()){
+                                purchaseDto.setShopName("没有商铺信息");
+                            }else{
+                                purchaseDto.setShopName(shop.getShopName());
+                            }
+                            purchaseDtos.add(purchaseDto);
+                        }
+                    }
+
                 }
-                purchaseDtos.add(purchaseDto);
             }
             enquiryProductDto.setPurchases(purchaseDtos);
             enquiryProductDtos.add(enquiryProductDto);
@@ -85,13 +101,13 @@ public class EnquiryServiceImpl implements EnquiryService {
         //页面默认加载赋值
         enquirySo.setPage((enquirySo.getPage() - 1) * 5);
         //当没有用户信息则是查询我的报价信息
-        if(!("".equals(enquirySo.getShopId())||enquirySo.getShopId()==null)){
+        /*if(!("".equals(enquirySo.getShopId())||enquirySo.getShopId()==null)){
             //查询SHOP信息通过用户ID
-            Shop shop =shopMapper.getByUserId(enquirySo.getUserId());
+            ShopDto shop =shopMapper.getByUserId(enquirySo.getUserId());
             //加入SHOPID
             enquirySo.setShopId(shop.getShopId());
             enquirySo.setUserId(null);
-        }
+        }*/
         List<Enquiry> list = enquiryMapper.getList(enquirySo);
         List<EnquiryDto> listDto = new ArrayList<>();
         //询盘
@@ -99,7 +115,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             Enquiry enquiry = list.get(i);
             EnquiryDto enquiryDto = new EnquiryDto();
             //状态-获取对应枚举
-            enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
+             enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
             // 格式化时间
             SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy MM dd" );
             Date date= new Date();
@@ -109,7 +125,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             ShopDto shopDto = new ShopDto();
             Shop shop= enquiry.getShop();
             BeanUtils.copyProperties(shop, shopDto);
-            enquiryDto.setShopDto(shopDto);
+             enquiryDto.setShopDto(shopDto);
             List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
             for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
                 EnquiryProductDto enquiryProductDto = new EnquiryProductDto();

@@ -1,0 +1,68 @@
+<@override name="title">
+My message
+</@override>
+
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sale-message.css">
+</@override>
+
+<@override name="body">
+
+<div id="sale_center">
+    <div class="sale_aside">
+        <!--引入左边菜单-->
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="/sellerCenter/toIndex">Seller's workbench</a></li>
+                <li><a href="/sellerCenter/toGetMyNews">My message</a></li>
+            </ol>
+            <div class="mesbutton">
+                <button>Set to Read</button>
+                <button>Delete</button>
+            </div>
+            <table class="am-table">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                        <span>Full selection</span>
+                    </th>
+                    <th style="text-align: center">Theme</th>
+                    <th style="text-align: center">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" checked></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text here is a message text is a message text here is a message text Here is a message text Here is a message text</a></td>
+                    <td>Yesterday 19:32</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" checked></td>
+                    <td class="meslooked"><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text here is a message text is a message text here is a message text Here is a message text Here is a message text</a></td>
+                    <td class="meslooked">2019-05-21</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text here is a message text is a message text here is a message text Here is a message text Here is a message text</a></td>
+                    <td>Yesterday 19:32</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><a href="#" style="display: inline-block;width: 740px; white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text Here is a message text here is a message text is a message text here is a message text Here is a message text Here is a message text</a></td>
+                    <td>Yesterday 19:32</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</@override>
+
+<@override name="js">
+
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

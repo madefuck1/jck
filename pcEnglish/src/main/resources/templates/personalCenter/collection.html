@@ -1,0 +1,132 @@
+<@override name="title">
+my collection
+</@override>
+
+<@override name="css">
+		<link href="${contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/css/colstyle.css" rel="stylesheet" type="text/css">
+</@override>
+<@override name="body">
+			<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-collection">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">my collection</strong> </div>
+						</div>
+						<hr/>
+						<div class="you-like">
+							<div class="s-bar">
+								my collection
+								<a class="am-badge am-btn-warning am-round">Price reduction</a>
+								<a class="am-badge am-btn-warning am-round">Obtained</a>
+							</div>
+							<div id="noData" style="display:none;">
+								<#include "/noData.html"/>
+							</div>
+							<div class="s-content" id="allTables" >
+							</div>
+
+							<div class="s-more-btn i-load-more-item" data-screen="0" id="more"><i class="am-icon-refresh am-icon-fw"></i>More</div>
+							<div class="s-more-btn i-load-more-item" style="display:none;" data-screen="0" id="noMore"><i class="am-icon-refresh am-icon-fw"></i>No more data</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+			<#include "/personalCenter/common/include.menu.html"/>
+		</div>
+</@override>
+<@override name="js">
+<script>
+	var limit=10;
+	var count="";
+    //默认加载收藏产品列表
+    $(function(){
+        getList(limit);
+    });
+    //查询收藏数据
+	function getList(limit){
+		var str={page:1,limit:limit,favoriteTargetType:1};
+		$.ajax({
+			url : "getFavoriteList",
+			type : "post",
+			data:JSON.stringify(str),
+			contentType: 'application/json; charset=UTF-8',
+			dataType : "json",
+			success : function(data) {
+				count=data.count;
+				if(count<limit){
+					document.getElementById("more").style.display="none";//隐藏
+					document.getElementById("noMore").style.display="block";//显示
+				}
+                if (data.count==0){
+                    //没有数据
+                    document.getElementById("noData").style.display="block";//显示
+                    document.getElementById("more").style.display="none";//显示
+				}else{
+                    $.each(data.data, function (i, v) {
+                        var whatever = liContent(v);
+                        $("#allTables").append(whatever);
+                    });
+				}
+
+			}
+		});
+	}
+
+	//赋值
+    function liContent(v) {
+        var productDto=v.productDto;
+        var productStatisticsDto=v.productStatisticsDto;
+        var favoriteId=v.favoriteId;
+        var productPrice=productStatisticsDto.productPrice;
+		var favoriteTargetName=v.favoriteTargetName;
+		var productImage=productDto.url;
+		var dealNumber=productStatisticsDto.dealNumber;
+
+        var li = $("<div class ='s-item-wrap'>"
+            +"<div class='s-item'>"
+            +"<div class='s-pic'>"
+            +"<a href='#' class='s-pic-link'>"
+            +"<img src='"+productImage+"' alt='"+favoriteTargetName+"' title='"+favoriteTargetName+"' class='s-pic-img s-guess-item-img'>"
+            +"</a></div>"
+            +"<div class='s-info'>"
+            +"<div class='s-title' <a href='#' title='favoriteTargetName'>"+favoriteTargetName+"</a></div>"
+            +"<div class='s-price-box'>"
+            +"<span class='s-price'><em class='s-price-sign'>¥</em><em class='s-value'>"+productPrice+"</em></span>"
+            +"</div><div class='s-extra-box'>"
+            +"<span class='s-comment'>Praise: 98.03%</span>"
+            +"</div></div>"
+            +"<div class='s-tp'>"
+            +"<span class='ui-btn-loading-before'>Find similar\n</span>"
+            +"<i class='am-icon-shopping-cart'></i>"
+            +"<span class='ui-btn-loading-before buy'>add to Shopping Cart\n</span>"
+            +"<p>"
+            +"<a href='javascript:void(0);' onclick='removeFavorite("+favoriteId+")' class='c-nodo J_delFav_btn'>Cancel collection\n</a>"
+            +"</p></div></div>"
+            +"</div>"
+        );
+        return li;
+    }
+//查看更多
+    $("#more").click(function (){
+        //判断查询数量大于数据数量则没有更多
+        limit=limit+10;
+        if(limit-count<=10){
+            $("#allTables").html("");
+            getList(limit);
+		}else{
+			document.getElementById("more").style.display="none";//隐藏
+			document.getElementById("noMore").style.display="block";//显示
+		}
+    });
+
+</script>
+</@override>
+<@extends name="/common/layout/base.personalCenter.html"/>

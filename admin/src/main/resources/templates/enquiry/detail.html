@@ -75,11 +75,44 @@
         <textarea  class="layui-textarea">${enquiryDto.enquiryRemark}</textarea>
     </div>
 </div>
+<br>
+<br>
+<br>
+
+<h3>商品列表</h3>
+<#list enqProDtoList as enqProduct>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">商品名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.productName}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">商品类别：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.assortName}" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">商品数量：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" value="${enqProduct.productNumber}${enqProduct.productUnit}" class="layui-input" readonly>
+        </div>
+        <!--<div class="layui-input-inline" style="margin-left: 50px">
+            <button class="layui-btn" lay-submit type="button" onclick="checkvalue(${enqProduct.enquiryProductId})">查看商家报价</button>
+        </div>-->
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
 <div class="layui-input-block" >
-    <button class="layui-btn" lay-submit type="button" onclick="viewProduct(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">查看商品信息</button>
+    <!--<button class="layui-btn" lay-submit type="button" onclick="viewProduct(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">查看商品信息</button>-->
+    <button class="layui-btn" lay-submit type="button" onclick="passed(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">审核通过</button>
+    <button class="layui-btn" lay-submit type="button" onclick="refuse(this)"><input type="hidden" value="${enquiryDto.enquiryNumber}">审核失败</button>
     <button class="layui-btn" lay-submit type="button" onclick="returnBack()">返回上一页</button>
 
 </div>
+</#list>
 </@override>
 <@override name="js">
 <script type="text/javascript">
@@ -87,7 +120,43 @@
         var element = layui.element;
         var layer = layui.layer;
     });
-    function viewProduct(obj) {
+    //获取产品列表
+    /*function viewProduct(obj) {
+        var enqNum = $(obj).find("input:hidden").val();
+        window.location.href = "viewProduct/"+enqNum
+    }*/
+
+    //审核通过
+    function passed(obj) {
+        var enqNum = $(obj).find("input:hidden").val();
+        var data = '{"enqNum":"'+enqNum+'"}' ;
+        $.ajax({
+            url: "passed",
+            data:  data,
+            type: "post",
+            contentType: "application/json",
+            success: function (data) {
+                if(data.code == 100){
+                    layer.open({
+                        type: 1
+                        ,area:["20%","40%"]
+                        ,content:'<div>'+ data.msg +'</div>'
+                        ,btn: '关闭全部'
+                        ,btnAlign: 'c' //按钮居中
+                        ,shade: 0 //不显示遮罩
+                        ,yes: function(){
+                            layer.closeAll();
+                            window.parent.location.href = "/admin/enquiry/enquiryDetail/"+enqNum;
+                        }
+                    });
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        return false ;
+    }
+    function refuse(obj) {
         var enqNum = $(obj).find("input:hidden").val();
         window.location.href = "viewProduct/"+enqNum
     }

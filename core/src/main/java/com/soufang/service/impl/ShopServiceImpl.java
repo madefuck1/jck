@@ -2,17 +2,24 @@ package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
+import com.soufang.base.dto.company.CompanyDto;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
+import com.soufang.base.dto.shop.ShopStatisticsDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.mapper.CompanyMapper;
+import com.soufang.mapper.ProductMapper;
 import com.soufang.mapper.ShopMapper;
+import com.soufang.mapper.ShopStatisticsMapper;
+import com.soufang.model.Company;
 import com.soufang.model.Shop;
 import com.soufang.service.ShopService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +34,26 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     ShopMapper shopMapper;
 
+    @Autowired
+    ShopStatisticsMapper shopStatisticsMapper;
+
+    @Autowired
+    ProductMapper productMapper;
+
+    @Autowired
+    CompanyMapper companyMapper;
+
+
     @Override
     public ShopDto getById(Long id) {
         Shop shop = shopMapper.getById(id);
         ShopDto shopDto = new ShopDto();
         BeanUtils.copyProperties(shop, shopDto);
+        shopDto.setAvatarUrl(PropertiesParam.file_pre+ shop.getShopAvatarUrl());
+        Company company = companyMapper.getByUserId(shop.getUserId());
+        CompanyDto companyDto = new CompanyDto();
+        BeanUtils.copyProperties(company,companyDto);
+        shopDto.setCompanyDto(companyDto);
         return shopDto;
     }
 
@@ -94,12 +116,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopDto getByUserId(Long userId) {
-        Shop shop = shopMapper.getByUserId(userId);
-        ShopDto shopDto = new ShopDto();
-        if (shop == null) {
-            return new ShopDto();
-        }
-        BeanUtils.copyProperties(shop, shopDto);
+        ShopDto shopDto = shopMapper.getByUserId(userId);
+        shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
         return shopDto;
     }
 
@@ -109,6 +127,14 @@ public class ShopServiceImpl implements ShopService {
         List<ShopDto> list = shopMapper.appGetList(shopSo);
         for (int i = 0; i < list.size() ; i++) {
             list.get(i).setAvatarUrl(PropertiesParam.file_pre+list.get(i).getAvatarUrl());
+            for(int j = 0 ; j < list.get(i).getProductDtoList().size() ; j++){
+                if(StringUtils.isNotBlank(list.get(i).getProductDtoList().get(j).getProductImage())){
+                    String[] imageArray = list.get(i).getProductDtoList().get(j).getProductImage().split(";");
+                    list.get(i).getProductDtoList().get(j).setProductUrl(PropertiesParam.file_pre+imageArray[0]);
+                }else {
+                    list.get(i).getProductDtoList().get(j).setProductUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+                }
+            }
         }
         pageHelp.setData(list);
         pageHelp.setCount(shopMapper.appGetCount(shopSo));
@@ -119,6 +145,45 @@ public class ShopServiceImpl implements ShopService {
     public void updateShop(ShopDto shopDto) {
         Shop shop = new Shop();
         BeanUtils.copyProperties(shopDto,shop);
+        shop.setShopAvatarUrl(shopDto.getAvatarUrl());
         shopMapper.updateByPrimaryKeySelective(shop);
+    }
+
+    @Override
+    public List<ShopDto> getHotShop(){
+        List<Shop > shopList = shopMapper.getHotShop();
+        List<ShopDto> shopDtos = new ArrayList<>();
+        for (Shop shop: shopList) {
+            ShopDto shopDto = new ShopDto();
+            shopDto.setAvatarUrl(shop.getShopAvatarUrl());
+            BeanUtils.copyProperties(shop,shopDto);
+            if(StringUtils.isNotBlank(shopDto.getAvatarUrl())){
+                shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
+            }else {
+                shopDto.setAvatarUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+            shopDtos.add(shopDto);
+        }
+        return shopDtos;
+    }
+
+    @Override
+    public ShopStatisticsDto getShopStatisticsInfo(Long shopId) {
+        return shopStatisticsMapper.getInfoByShopId(shopId);
+    }
+
+    @Override
+    public List<ProductDto> getShopProductManaList(ProductDto productDto) {
+        List<ProductDto> productDtos = productMapper.getShopProductManaList(productDto);
+        for (ProductDto p: productDtos) {
+            p.setProductDetail(PropertiesParam.file_pre+p.getProductDetail());
+            if(StringUtils.isNotBlank(p.getProductImage())){
+                String[] list = p.getProductImage().split(";");
+                p.setProductUrl(PropertiesParam.file_pre+list[0]);
+            }else {
+                p.setProductUrl(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            }
+        }
+        return productDtos;
     }
 }

@@ -1,0 +1,51 @@
+<@override name="title">
+Account Balance
+</@override>
+
+<@override name="css">
+
+</@override>
+
+<@override name="body">
+
+<div class="center">
+    <div class="col-main">
+        <div class="main-wrap">
+            <!--标题 -->
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong  class="am-text-danger am-text-lg">Account Balance</strong> /
+                    <small>Account&nbsp;Balance</small>
+                </div>
+            </div>
+            <hr/>
+            <div class="finance">
+                <div class="financeText">
+                    <p>Available Balance:<span>¥0.0</span></p>
+                    <a href="safety.html">Security Center: Protecting Account Asset Security</a>
+                </div>
+                <div class="financeTip">
+                    <img src="../images/Balance.png"/>
+                    <a href="walletlist.html">View account details</a>
+                    <p>Tip: The balance is an account in your shopping mall. If there is money in the account, <br>
+                        you can directly check the use when you place the order, offset part of the total amount,<br>
+                        which is convenient, safe and efficient.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--左边菜单-->
+    <#include "/personalCenter/common/include.menu.html"/>
+</div>
+
+</@override>
+
+<@override name="js">
+<script type="text/javascript">
+
+
+</script>
+</@override>
+
+<@extends name="/common/layout/base.personalCenter.html"/>

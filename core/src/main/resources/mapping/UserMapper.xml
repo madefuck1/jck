@@ -105,6 +105,7 @@
     <if test="userName != null and userName != ''">
       and login_name = #{userName,jdbcType=VARCHAR}
     </if>
+
   </select>
 
   <delete id="deleteById" parameterType="java.lang.Long" >
@@ -299,7 +300,18 @@
         user_password = #{passWord,jdbcType=VARCHAR},
       </if>
     </set>
-    where user_email = #{email,jdbcType=BIGINT}
+    where user_email = #{email,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updatePassword" parameterType="com.soufang.base.dto.user.UserDto">
+    update t_user
+    <set >
+      <if test="passWord != null" >
+        user_password = #{passWord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id= #{userId,jdbcType=BIGINT}
   </update>
   <select id="getByShopId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select * from t_user
@@ -309,5 +321,6 @@
     select * from t_user
     where user_id = (select user_id from t_enquiry where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR})
   </select>
+
 
 </mapper>

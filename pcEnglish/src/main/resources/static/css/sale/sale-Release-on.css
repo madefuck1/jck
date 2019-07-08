@@ -1,0 +1,303 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	font-size: 14px;
+	
+}
+.sale-center{
+	width: 1190px;
+	background: #fff;
+	min-height: 1200px;
+	margin: 0 auto;
+	padding: 10px 20px;
+	overflow: hidden;
+}
+#sale_center{
+	background:#F5F5F5; 
+	overflow: hidden;
+}
+ h4{
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 40px;
+	margin: 0px;
+	margin-top: 20px;
+	
+}
+.am-breadcrumb li a{
+	font-size: 14px;
+}
+
+.am-breadcrumb{
+	font-size: 100%;
+	margin-bottom: 0px;
+	padding: 0px;
+}
+
+.base-on{
+	padding: 10px;
+}
+.base-on-con{
+	color:#999999; 
+}
+.base-on-attr{
+	color: #40ADFB;
+	margin-left: 16px;
+}
+.base{
+	min-height: 500px;
+}
+
+.base-cloum1{
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	width: 100%;
+}
+.am-u-sm-2{
+	width: 9%;
+}
+.am-u-sm-10{
+	width: 91%;
+	float: left;
+}
+
+[class*=am-u-]{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.base-cloum1 .am-u-sm-10 input{
+	width: 790px;
+	border: 1px solid #E6E6E6;
+}
+.base-cloum3 .attr{
+	min-height: 240px;
+	background: #FAFAFA;
+	width: 990px;
+	padding: 30px 20px;
+}
+.base-cloum3 .attr-row2 input{
+	width: 80%;
+}
+.am-u-sm-4{
+	width: 41%;
+}
+.attr-cloum1,.attr-cloum4{
+	width: 100%;
+	height: 40px;
+	margin-bottom: 30px;
+}
+.attr-row1{
+	text-align: right;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+}
+
+.am-form-group .am-checkbox-inline input{
+	width: auto;
+	margin-left: 0px;
+	margin-right: 10px;
+}
+
+.am-form-group .am-checkbox-inline{
+	margin-left: 0px;
+	margin-right: 10px;
+	padding-left: 0px
+}
+
+.attr-cloum2{
+	height: 80px;
+}
+
+.attr-row2 .am-btn-default{
+	background: #FFF;
+}
+
+.attr-row2 .am-selected{
+	width: 80%;
+}
+.attr-cloum1 .attr-row2{
+	float: left !important;
+}
+
+.attr-cloum4 .attr-row1 input{
+	width: auto;
+	width: 90%;
+
+
+}
+
+.attr-row2{
+	
+}
+
+#Workbench div{
+	padding-left: 0px;
+}
+.base1 .am-fl{
+	float: left !important;
+}
+
+input,select{
+	border:1px solid #E6E6E6;
+}
+.base1-on{
+	padding: 10px;
+}
+.base1 .am-u-sm-2{
+	text-align: right;
+}
+.base1 .am-u-sm-10{
+	width: 19%;
+	float: left !important;
+}
+.base1 .am-u-sm-10 input{
+	width: 94%;
+}
+
+.base1 .base-cloum1{
+	height: 60px;
+}
+
+input,select{
+	font-size: 14px!important;
+	height: 36px;
+}
+
+label{
+	line-height: 40px!important;
+}
+
+.attr1{
+	width: 990px;
+	min-height: 236px;
+	padding: 30px;
+	background: #fafafa;
+	overflow: hidden;
+}
+
+.attr1-cloum1,.attr1-cloum2{
+	height: 40px;
+}
+.attr1-pic{
+	display: inline-block;
+	width: 40px;
+	height: 22px;
+	background: url(../../images/sale/dete.png) no-repeat 0px 5px;
+	
+}
+.attr1-cloum2 p{
+	font-weight: bold;
+	line-height: 35px;
+	margin: 0px;
+}
+.attr1-right{
+	height: 40px;
+	background: #fff;
+	margin-bottom: 10px;
+	padding-left: 10px
+}
+.attr-price{
+	word-wrap: break-word;
+	width: 20px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+.attr1-cloum2{
+	margin-bottom: 10px;
+}
+
+.attr1-cloum2 .am-u-sm-6{
+	margin-bottom: 10px;
+}
+.base1{
+	min-height: 262px;
+	overflow: hidden;
+}
+
+.base2{
+	min-height: 40px;
+	overflow: hidden;
+}
+.base3{
+	min-height: 200px;
+	overflow: hidden;
+}
+.base3-pic{
+	padding: 10px;
+	overflow: hidden;
+}
+.base-title{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+}
+
+.base-title span p{
+	color: #999;
+}
+
+.base3 .am-u-sm-2{
+	text-align: right;
+}
+
+.Master-pic{
+	height: 90px;	
+
+}
+.mpic-1{
+	width: 90px;
+	height: 90px;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+	position: relative;
+
+}
+.Master-pic .mpic-1 p{
+	width: 90px;
+	height: 28px;
+	font-size: 12px;
+	color: #fff;
+	background: #000;
+	opacity: 0.5;
+	position: absolute;
+	left: 0px;
+	bottom: -18px;
+	line-height: 28px;
+	text-align: center;
+	z-index: 9999;
+}
+
+.base3-pic .Master-pic2 p{
+	width: 790px;
+	height: 40px;
+	background: #e6e6e6;
+	color: #333;
+	text-align: center;
+	line-height: 40px;
+	position: absolute;
+	left: 0px;
+	top: 419px;
+}
+
+.Master-pic1{
+	height: 400px;
+	overflow-y: auto;
+	width: 790px;
+	overflow-x: hidden;
+}
+	
+.base-footer button{
+	margin: 20px 40px;
+	padding: 10px 60px;
+}
+
+.base-footer{
+	text-align: center;
+}
+
+

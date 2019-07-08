@@ -1,0 +1,173 @@
+<@override name="title">
+Classification management
+</@override>
+<@override name="css">
+<link rel="stylesheet" href="${contextPath}/css/sale/sort1.css">
+</@override>
+<@override name="body">
+<div id="sale_center">
+    <div class="sale_aside">
+        <#include "/sellerCenter/common/seller.menu.html"/>
+        <div class="sale_con">
+            <ol class="am-breadcrumb">
+                <li><a href="">Seller's workbench</a></li>
+                <li><a href="">Classification management</a></li>
+            </ol>
+            <div class="addButon">
+                <button type="button" class="am-btn am-btn-secondary" id="btn-add-assort">Add a category</button>
+            </div>
+            <div class="sort_down">
+                <table class="am-table am-table-striped am-table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <span>Category name</span>
+                        </th>
+                        <th>Creation time</th>
+                        <th>Operation</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-assort">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加和编辑页面-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2"
+     style="background: #fff; min-height: 200px; overflow: auto; width: 540px">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd" style="font-size: 14px" name="title-assort">Classification</div>
+        <div class="sale_cloum1" style="padding-top: 20px">
+            <span class="am-u-sm-4 row1" style="line-height: 37px;">Category name：</span>
+            <span class="am-u-sm-8 row2">
+            <input type="text" id="assort_name" class="am-form-field" style="width: 200px">
+            <input type="hidden" id="exclusive_assort_id" class="am-form-field" style="width: 200px">
+            </span>
+        </div>
+        <div class="button" style="text-align: center;padding-top: 30px;">
+            <button onclick="saveAssort();" type="button" class="am-btn am-btn-sm am-btn-secondary"
+                    style="width: 100px;float: none;">Save
+            </button>
+            <button onclick="closeModal()" type="button" class="am-btn am-btn-sm am-btn-default"
+                    style="width: 100px;float: none;">Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<!--消息提醒框-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="my-message">
+    <div class="am-modal-dialog" style="background: #a5d8a5">
+        <div class="am-modal-hd">
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd" id="message-content">
+        </div>
+    </div>
+</div>
+</@override>
+<@override name="js">
+<script type="text/javascript">
+    $(function () {
+        initAssort()
+    })
+
+    function initAssort() {
+        $.ajax({
+            url: '/store/storeAssort/0',
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var html = '';
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += ' <td style="vertical-align: middle;" name="assort_name">' + data[i].assortName + '</td>\n' +
+                            '     <td style="vertical-align: middle;" name="create_time">' + data[i].createTimeString + '</td>\n' +
+                            '     <td style="vertical-align: middle;">\n' +
+                            '         <input hidden name="exclusive_assort_id" value="' + data[i].exclusiveAssortId + '">\n' +
+                            '         <span style="background: #23ccfe"><a onclick="delAssort(this);" style="cursor: pointer;padding: 5px">Delete</a></span>\n' +
+                            '         <span style="background: #23ccfe"><a onclick="editAssort(this);" style="cursor: pointer;padding: 5px">Modify</a></span>\n' +
+                            '     </td>';
+                        html += '</tr>';
+                    }
+                } else {
+                    html += 'No data';
+                }
+                $('#table-assort').empty();
+                $('#table-assort').append(html);
+            }
+        });
+    }
+
+    $('#btn-add-assort').click(function () {
+        $('#doc-modal-2').modal('open');
+        $('#assort_name').val("");
+        $('#exclusive_assort_id').val("");
+    });
+
+    function delAssort(obj) {
+        var url = '/store/delAssort/' + $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
+        if(confirm("Do you really want to delete the classification?？")){
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.success) {
+                        initAssort();
+                    }
+                }
+            })
+        }else{
+
+        }
+
+    }
+
+    function editAssort(obj) {
+        $('#doc-modal-2').modal('open');
+        var exclusive_assort_id = $(obj).parents('tr').find('[name=exclusive_assort_id]').val();
+        var assort_name = $(obj).parents('tr').find('[name=assort_name]').html();
+        $('#assort_name').val(assort_name);
+        $('#exclusive_assort_id').val(exclusive_assort_id);
+    }
+
+    function saveAssort() {
+        if ($('#assort_name').val() == '') {
+            $('#message-content').html("Category name cannot be empty！");
+            $('#my-message').modal('open');
+            return;
+        }
+        var param = {
+            assortName: $('#assort_name').val(),
+            exclusiveAssortId: $('#exclusive_assort_id').val()
+        }
+        $.ajax({
+            url: '/store/addOrUpd/',
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(param),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.success) {
+                    closeModal();
+                    initAssort();
+                } else {
+                    $('#my-message').modal('open');
+                }
+            }
+        })
+    }
+
+    function closeModal() {
+        $('#doc-modal-2').modal({
+            closable: false
+        });
+    }
+</script>
+</@override>
+<@extends name="/common/layout/base.sellerCenter.html"/>

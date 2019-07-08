@@ -1,0 +1,53 @@
+
+<div data-am-widget="slider" class="ba[nner am-slider am-slider-default" data-am-slider='{}' >
+    <ul class="am-slides">
+        <#list bannerDtos as banner>
+        <li><img src="${banner.bannerImage}" alt=""></li>
+        </#list>
+    </ul>
+</div>
+<div class="down">
+    <div class="singer_in">
+        <div class="information">
+            <div class="left">
+                <div class="pic"></div>
+                <#if isLonIn?? && isLonIn != "N">
+                <p style="margin-top: 20px;"> Welcome  &nbsp;<a href="/personalCenter/toPersonalCenter" target="_blank">${loginPhone!}</a>
+
+                </p>
+                <#else>
+                <p>Welcome &nbsp;please<a href="/user/toLogin">sign in </a> &nbsp;<a href="/user/toRegister">register</a></p>
+            </#if>
+        </div>
+        <div class="center">
+            <a href="/enquiry/create">
+                <div class="center1">
+                    <div class="pic1" style="background: url(static/images/img/purchase.png);"></div>
+                    <p class="p1">Publish inquiries</p>
+                </div>
+            </a>
+            <a href="/user/toSettle">
+                <div class="center2">
+                    <div class="pic2" style="background: url(static/images/img/openShop.png);"></div>
+                    <p class="p1">Open shop</p>
+                </div>
+            </a>
+            <div class="center3">
+                <div class="pic3" style="background: url(static/images/img/pushInfo.png);"></div>
+                <p class="p1">Publish information</p>
+            </div>
+            <div class="center4">
+                <div class="pic4" style="background: url(static/images/img/noviceOnTheLoad.png);"></div>
+                <p class="p1">Novice on the road</p>
+            </div>
+        </div>
+        <div class="right" style="margin-top: 20px">
+            <div class="row_1 ">
+                <a href="/personalCenter/toEnquiryManage" class="backColor"
+                   style="font-size: 14px; color: #fff; padding: 6px 16px; background: #F58022;border-radius: 2px;">My inquiries</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/orderManager/toOrderManager" class="backColor" style="font-size: 14px; color: #fff; padding: 6px 16px; background: #F58022;border-radius: 2px;">My orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -34,6 +34,7 @@ public class Exhibition {
 
     //分类
     private String assortid;
+    private String exhibitionScope;
     //地址
     private String exhibitionArea;
     //图片
@@ -195,5 +196,13 @@ public class Exhibition {
 
     public void setExhibitionIntroduce(String exhibitionIntroduce) {
         this.exhibitionIntroduce = exhibitionIntroduce;
+    }
+
+    public String getExhibitionScope() {
+        return exhibitionScope;
+    }
+
+    public void setExhibitionScope(String exhibitionScope) {
+        this.exhibitionScope = exhibitionScope;
     }
 }
