@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public enum EnquiryStatusEnum {
+    to_forbid(-1,"禁止报价"),
     //新增完
     to_auditing(1,"审核中"),
     //审核失败

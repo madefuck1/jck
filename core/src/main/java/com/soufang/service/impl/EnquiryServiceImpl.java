@@ -99,7 +99,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             Enquiry enquiry = list.get(i);
             EnquiryDto enquiryDto = new EnquiryDto();
             //状态-获取对应枚举
-            enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
+             enquiry.setStatusMessage(EnquiryStatusEnum.getByKey(enquiry.getEnquiryStatus()).getMessage());
             // 格式化时间
             SimpleDateFormat sdf1 =new SimpleDateFormat("yyyy MM dd" );
             Date date= new Date();
@@ -109,7 +109,7 @@ public class EnquiryServiceImpl implements EnquiryService {
             ShopDto shopDto = new ShopDto();
             Shop shop= enquiry.getShop();
             BeanUtils.copyProperties(shop, shopDto);
-            enquiryDto.setShopDto(shopDto);
+             enquiryDto.setShopDto(shopDto);
             List<EnquiryProductDto> enquiryProductDtos = new ArrayList<>();
             for (EnquiryProduct enquiryProduct : enquiry.getEnquiryProducts()) {
                 EnquiryProductDto enquiryProductDto = new EnquiryProductDto();

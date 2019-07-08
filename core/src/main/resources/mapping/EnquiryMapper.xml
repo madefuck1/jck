@@ -265,7 +265,7 @@
   </update>
 
   <update id="regainQuote" parameterType="java.lang.String">
-    update t_enquiry set enquiry_status = 0 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+    update t_enquiry set enquiry_status = 1 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>
 
   <update id="delEnquiry" parameterType="com.soufang.base.search.enquiry.EnquirySo">
