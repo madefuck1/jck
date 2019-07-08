@@ -168,8 +168,10 @@ public class AppEnquiryController extends  AppBaseController{
             enquiryProductDto.setProductName(request.getParameter("productName"));
             enquiryProductDto.setProductUnit(request.getParameter("productUnit"));
             //获取product_assort-根据name去获取getAssortIdByName
-            enquiryProductDto.setAssortName(request.getParameter("assortName"));
-            enquiryProductDto.setProductAssort(assortFeign.getAssortIdByName(request.getParameter("assortName")));
+            // enquiryProductDto.setAssortName(request.getParameter("assortName"));
+            // enquiryProductDto.setProductAssort(assortFeign.getAssortIdByName(request.getParameter("assortName")));
+            //类别
+            enquiryProductDto.setProductAssort(Long.valueOf(request.getParameter("assortId")));
             enquiryProductDto.setEnquiryNumber(enquiryDto.getEnquiryNumber());
             //对文件判断
             if(file != null) {
