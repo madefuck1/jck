@@ -116,7 +116,7 @@
                 <li>
                     <div class="i-pic limit">
                         <input hidden id="productId" value="${item.productId}">
-                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
+                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');">
                             <div style="height: 230px;">
                                 <img src="${item.productUrl}"/>
                             </div>
@@ -142,7 +142,7 @@
             <#list HotProductList as item>
             <li>
                 <div class="i-pic check">
-                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');"href="#">
+                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');">
                     <img src="${item.productUrl}"/>
                     <p class="check-title">${item.productName}</p>
                     <p class="price fl">
@@ -405,7 +405,7 @@
                 html += '<input hidden id="productId" value="' + productList[i].productId + '">';
                 html += '<a href="javascript:void(0);" onclick="openProductDetail(' + productList[i].productId + ')">';
                 html += '<div style="height: 230px;">';
-                html += '<img src="' + productList[i].url + '"/>';
+                html += '<img src="' + productList[i].productUrl + '"/>';
                 html += '</div>';
                 html += '<p class="title fl">' + productList[i].productName + '</p>';
                 html += '<p class="price fl" style="padding: 0px 10px;">';
