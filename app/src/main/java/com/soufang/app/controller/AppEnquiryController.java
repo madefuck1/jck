@@ -29,6 +29,7 @@ import com.soufang.app.vo.enquiry.EnquiryVo;
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
@@ -141,10 +142,10 @@ public class AppEnquiryController extends  AppBaseController{
     @ResponseBody
     @RequestMapping(value = "getDetailPurchase/{enquiryNumber}",method = RequestMethod.POST)
     public EnquiryGetDetailVo getDetailPurchase(@PathVariable String enquiryNumber,HttpServletRequest request){
-        UserDto userInfo = this.getUserInfo(request);
+        ShopDto shopDto = this.getShopInfo(request);
         EnquiryGetDetailVo enquiryGetDetailVo = new EnquiryGetDetailVo();
         EnquirySo enquirySo= new EnquirySo();
-        enquirySo.setShopId(userInfo.getShopDto().getShopId());
+        enquirySo.setShopId(shopDto.getShopId());
         enquirySo.setEnquiryNumber(enquiryNumber);
         EnquiryDto enquiryDto = appEnquiryFeign.selEnquiryByNumber(enquirySo);
         enquiryGetDetailVo.setData(enquiryDto);
