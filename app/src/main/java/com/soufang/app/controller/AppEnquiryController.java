@@ -113,7 +113,7 @@ public class AppEnquiryController extends  AppBaseController{
     }
 
     /**
-     * 想看询盘详情
+     * 想看询盘详情-所有报价信息
      * 需要判断该用户是否能发布报价信息--返回字段信息
      * @param enquiryNumber
      * @return
@@ -131,6 +131,28 @@ public class AppEnquiryController extends  AppBaseController{
         enquiryGetDetailVo.setMessage("提交审核");
         return  enquiryGetDetailVo;
     }
+
+    /**
+     * 想看询盘详情-只有当前商铺报价信息
+     * @param enquiryNumber
+     * @return
+     */
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "getgetDetailPurchase/{enquiryNumber}",method = RequestMethod.POST)
+    public EnquiryGetDetailVo getgetDetailPurchase(@PathVariable String enquiryNumber,HttpServletRequest request){
+        UserDto userInfo = this.getUserInfo(request);
+        EnquiryGetDetailVo enquiryGetDetailVo = new EnquiryGetDetailVo();
+        EnquirySo enquirySo= new EnquirySo();
+        enquirySo.setShopId(userInfo.getShopDto().getShopId());
+        enquirySo.setEnquiryNumber(enquiryNumber);
+        EnquiryDto enquiryDto = appEnquiryFeign.selEnquiryByNumber(enquirySo);
+        enquiryGetDetailVo.setData(enquiryDto);
+        enquiryGetDetailVo.setSuccess(true);
+        enquiryGetDetailVo.setMessage("提交审核");
+        return  enquiryGetDetailVo;
+    }
+
 
     /**
      * 发布询盘

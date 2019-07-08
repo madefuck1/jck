@@ -154,6 +154,9 @@
     <if test="enquiryProductId != null and enquiryProductId != ''">
       and tep.enquiry_product_id=#{enquiryProductId}
     </if>
+    <if test="shopId != null and shopId != '' ">
+      and tp.shop_id = #{shopId}
+    </if>
   </select>
 
   <select id="enquiryTableCount" resultMap="ResultMap" parameterType="com.soufang.base.search.enquiry.EnquirySo">
