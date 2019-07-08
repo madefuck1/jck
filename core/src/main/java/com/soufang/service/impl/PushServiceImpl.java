@@ -58,8 +58,9 @@ public class PushServiceImpl implements PushService {
         //广播形式发送推送
         JPushUtils.pushNotice("","",pushDto.getPushContent());
 
-        /*//采用别名的方式推送
-        JPushUtils.pushNotice("alias","yhkj_"+4,pushDto.getPushContent());*/
+        //采用别名的方式推送
+        /*JPushUtils.pushNotice("alias","yhkj_"+4,pushDto.getPushContent());
+        push.setUserId(4L);*/
         int i = pushMapper.insertSelective(push);
         //int i = pushMapper.insertList(pushes);
         if(i > 0){

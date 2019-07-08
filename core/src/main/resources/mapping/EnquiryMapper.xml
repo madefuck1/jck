@@ -260,6 +260,14 @@
     and end_time > (select now())
   </select>
 
+  <update id="passed" parameterType="java.lang.String">
+    update t_enquiry set enquiry_status = 3 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+
+  <update id="refuse" parameterType="java.lang.String">
+    update t_enquiry set enquiry_status = 2 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
+  </update>
+
   <update id="banQuote" parameterType="java.lang.String">
     update t_enquiry set enquiry_status = -1 where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR}
   </update>

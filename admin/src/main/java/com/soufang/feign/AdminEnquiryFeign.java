@@ -1,5 +1,6 @@
 package com.soufang.feign;
 
+import com.soufang.Vo.enquiry.EnquiryReviewVo;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
@@ -9,6 +10,7 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.enquiry.EnquiryReviewSo;
 import com.soufang.base.search.enquiry.EnquirySo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,4 +64,10 @@ public interface AdminEnquiryFeign {
 
     @RequestMapping(value = "/core/enquiry/addEnquiryProduct")
     Result addEnquiryProduct(@RequestBody List<EnquiryProductDto> listDto);
+
+    @RequestMapping(value = "/core/enquiry/passed")
+    Result passed(@RequestBody String enqNum);
+
+    @RequestMapping(value = "/core/enquiry/refuse")
+    Result refuse(@RequestBody EnquiryReviewSo reviewVo);
 }

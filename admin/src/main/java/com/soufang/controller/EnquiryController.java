@@ -2,6 +2,7 @@ package com.soufang.controller;
 
 import com.soufang.Vo.AdminVo;
 import com.soufang.Vo.enquiry.EnquiryReqVo;
+import com.soufang.Vo.enquiry.EnquiryReviewVo;
 import com.soufang.Vo.enquiry.EnquiryVo;
 import com.soufang.Vo.enquiryProduct.EnqProReqVo;
 import com.soufang.base.Result;
@@ -12,6 +13,7 @@ import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
+import com.soufang.base.search.enquiry.EnquiryReviewSo;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.feign.AdminEnquiryFeign;
 import org.apache.commons.lang.StringUtils;
@@ -78,19 +80,19 @@ public class EnquiryController {
     //审核通过
     @ResponseBody
     @RequestMapping(value = "enquiryDetail/passed", method = RequestMethod.POST)
-    public AdminVo passed(@RequestBody String enqNum,ModelMap model){
-        AdminVo vo = new AdminVo();
-        vo.setMsg("审核成功");
-        vo.setCode("100");
+    public AdminVo passed(@RequestBody String enqNum){
+        Result result = adminEnquiryFeign.passed(enqNum);
+        AdminVo vo = new AdminVo(result);
         return vo;
     }
     //审核失败
     @ResponseBody
     @RequestMapping(value = "enquiryDetail/refuse", method = RequestMethod.POST)
-    public AdminVo refuse(@RequestBody String enqNum,ModelMap model){
-        AdminVo vo = new AdminVo();
-        vo.setMsg("审核成功");
-        vo.setCode("100");
+    public AdminVo refuse(@RequestBody EnquiryReviewVo reviewVo){
+        EnquiryReviewSo so = new EnquiryReviewSo();
+        BeanUtils.copyProperties(reviewVo,so);
+        Result result = adminEnquiryFeign.refuse(so);
+        AdminVo vo = new AdminVo(result);
         return vo;
     }
 

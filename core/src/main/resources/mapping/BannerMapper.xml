@@ -31,7 +31,7 @@
     <if test="terminal != null and terminal != 0">
       and terminal = #{terminal,jdbcType=INTEGER}
     </if>
-    order by create_time desc
+    order by create_time ASC
   </select>
 
   <delete id="deleteById" parameterType="java.lang.Long" >
