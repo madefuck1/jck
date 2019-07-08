@@ -2,6 +2,8 @@ package com.soufang.controller;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
+import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.service.*;
@@ -47,12 +49,13 @@ public class EnquiryController {
         return pageHelp;
     }*/
 
-   /* @RequestMapping(value = "getByNum",method = RequestMethod.POST)
+    @RequestMapping(value = "getByNum",method = RequestMethod.POST)
     EnquiryDto getByNum(@RequestBody String enquiryNumber){
-        return enquiryService.getByEnqNum(enquiryNumber);
+        EnquirySo enquirySo = new EnquirySo();
+        enquirySo.setEnquiryNumber(enquiryNumber);
+        return enquiryService.getByEnqNum(enquirySo);
     }
-*/
-    /*@RequestMapping(value = "getByEnquiryNumber",method = RequestMethod.POST)
+    @RequestMapping(value = "getByEnquiryNumber",method = RequestMethod.POST)
     UserDto getByEnquiryNumber(@RequestBody String enquiryNumber){
          UserDto userDto = userService.getByEnquiryNumber(enquiryNumber);
         return userDto;
@@ -60,7 +63,7 @@ public class EnquiryController {
     @RequestMapping(value = "getEPD",method = RequestMethod.POST)
     List<EnquiryProductDto> getEPD(@RequestBody String enquiryNumber){
         return enquiryProductService.getByEnquiryNumber(enquiryNumber);
-    }*/
+    }
     /*@RequestMapping(value = "banQuote",method = RequestMethod.POST)
     Result banQuote(@RequestBody String enquiryNumber){
         Result result = new Result();
