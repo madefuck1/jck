@@ -155,7 +155,7 @@
       and tep.enquiry_product_id=#{enquiryProductId}
     </if>
     <if test="shopId != null and shopId != '' ">
-      and tp.shop_id = #{shopId}
+      and ts.shop_id = #{shopId}
     </if>
   </select>
 
