@@ -16,6 +16,7 @@ import com.soufang.mapper.PurchaseMapper;
 import com.soufang.mapper.ShopMapper;
 import com.soufang.model.*;
 import com.soufang.service.EnquiryService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -61,17 +62,19 @@ public class EnquiryServiceImpl implements EnquiryService {
             BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
             List<PurchaseDto> purchaseDtos = new ArrayList<>();
             for (Purchase purchase : enquiryProduct.getPurchases()) {
-                PurchaseDto purchaseDto = new PurchaseDto();
-                BeanUtils.copyProperties(purchase, purchaseDto);
-                if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
-                    Shop shop= purchase.getShop();
-                    if("".equals(shop.getShopName())||null==shop.getShopName()){
-                        purchaseDto.setShopName("没有商铺信息");
-                    }else{
-                        purchaseDto.setShopName(shop.getShopName());
+                if(StringUtils.isNotBlank(purchase.getPurchaseNumber())){
+                    PurchaseDto purchaseDto = new PurchaseDto();
+                    BeanUtils.copyProperties(purchase, purchaseDto);
+                    if(!(purchase.getShopId()==null||"".equals(purchase.getShopId()))){
+                        Shop shop= purchase.getShop();
+                        if("".equals(shop.getShopName())||null==shop.getShopName()){
+                            purchaseDto.setShopName("没有商铺信息");
+                        }else{
+                            purchaseDto.setShopName(shop.getShopName());
+                        }
                     }
+                    purchaseDtos.add(purchaseDto);
                 }
-                purchaseDtos.add(purchaseDto);
             }
             enquiryProductDto.setPurchases(purchaseDtos);
             enquiryProductDtos.add(enquiryProductDto);
