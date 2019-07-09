@@ -417,9 +417,6 @@ public class PersonalCenterController extends BaseController {
     @RequestMapping(value = "/toInformation", method = RequestMethod.GET)
     public String informationHtml(ModelMap map, HttpServletRequest request) {
         UserDto userInfo = this.getUserInfo(request);
-        if (StringUtils.isNotBlank(userInfo.getUserAvatar())) {
-            userInfo.setUserAvatar(PropertiesParam.file_pre + userInfo.getUserAvatar());
-        }
         map.put("userInfo", userInfo);
         return "personalCenter/information";
     }
