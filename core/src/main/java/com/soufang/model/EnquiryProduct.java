@@ -21,7 +21,18 @@ public class EnquiryProduct {
 
     private List<Purchase> purchases ;
 
+    //单位
+    private Dictionary dictionary;
+
     private Assort assort;
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
 
     public List<Purchase> getPurchases() {
         return purchases;

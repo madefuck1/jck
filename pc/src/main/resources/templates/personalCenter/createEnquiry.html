@@ -84,14 +84,7 @@
                             <div class="am-form-content">
                                 <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="请填写数量">
                                 <select id="productUnit" style="width:150px;padding: 5px;">
-                                    <option value="米">米</option>
-                                    <option value="公斤" >公斤</option>
-                                    <option value="千克" selected>千克</option>
-                                    <option value="公升" >公升</option>
-                                    <option value="箱" >箱</option>
-                                    <option value="包" >个</option>
-                                    <option value="包" >台</option>
-                                    <option value="包" >件</option>
+                                    <option selected="selected" value="0">请选择单位 </option>
                                 </select>
                             </div>
                         </div>
@@ -138,6 +131,20 @@
 <@override name="js">
 <script>
     $(function(){
+        //默认单位加载
+        $.ajax({
+            url : "getListByDictKey",
+            type : "post",
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+               $.each(data.data, function (i, v) {
+                    var str="<option value='"+v.dictId+"'>"+v.dictVDescription+"</option>"
+                    $("#productUnit").append(str);
+                });
+            }
+        });
+
         var isUpdate= $("#isUpdate").val();
         var enquiryNumber= $("#enquiryNumber").val();
        if(isUpdate==null||isUpdate==""){

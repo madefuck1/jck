@@ -1,10 +1,9 @@
 package com.soufang.controller;
 
 import com.soufang.base.Result;
-import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.dictionary.DictionaryDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
-import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
@@ -14,16 +13,12 @@ import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
-import com.soufang.feign.AssortFeign;
-import com.soufang.feign.EnquiryFeign;
-import com.soufang.feign.EnquiryProductFeign;
-import com.soufang.feign.PurchaseFeign;
+import com.soufang.feign.*;
 import com.soufang.vo.Enquiry.EnquiryAddVo;
 import com.soufang.vo.Enquiry.EnquiryDetailsVo;
-import com.soufang.vo.Enquiry.EnquiryUpdateVo;
 import com.soufang.vo.Enquiry.EnquiryVo;
+import com.soufang.vo.dictionary.DictionaryVo;
 import com.soufang.vo.enquiryProduct.EnquiryProductUpdateVo;
-import com.soufang.vo.favorite.FavoriteAddVo;
 import com.soufang.vo.purchase.PurchseUseRefusedVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +50,8 @@ public class EnquiryPurchaseController extends BaseController{
     PurchaseFeign purchaseFeign;
     @Autowired
     AssortFeign assortFeign ;
-
+    @Autowired
+    PcDictionaryFeign pcDictionaryFeign ;
 
     @Value("${upload.enquiry}")
     private String uploadUrl;
@@ -75,6 +71,21 @@ public class EnquiryPurchaseController extends BaseController{
         }
         return "/personalCenter/createEnquiry";
     }
+
+    /**
+     * 获取产品单位信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getListByDictKey",method = RequestMethod.POST)
+    public DictionaryVo getListByDictKey(){
+        String dictKey="enquiryUnit";
+        List<DictionaryDto> dictionaryDtos=pcDictionaryFeign.getListByDictKey(dictKey);
+        DictionaryVo dictionaryVo= new DictionaryVo();
+        dictionaryVo.setData(dictionaryDtos);
+        return dictionaryVo;
+    }
+
 
     /**
      * 新增

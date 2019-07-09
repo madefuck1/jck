@@ -4,8 +4,6 @@ import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.EnquiryStatusEnum;
 import com.soufang.base.dto.purchase.PurchaseDto;
-import com.soufang.base.enums.EnquiryStatusEnum;
-import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.utils.DateUtils;
 
 import java.util.Date;

@@ -4,6 +4,7 @@ import com.soufang.base.BusinessException;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.dictionary.DictionaryDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
@@ -64,6 +65,12 @@ public class EnquiryServiceImpl implements EnquiryService {
             Assort assort =enquiryProduct.getAssort();
             BeanUtils.copyProperties(assort, assortDto);
             enquiryProductDto.setAssortDtos(assortDto);
+
+            Dictionary dictionary= enquiryProduct.getDictionary();
+            DictionaryDto dictionaryDto=new DictionaryDto();
+            BeanUtils.copyProperties(dictionary, dictionaryDto);
+            enquiryProductDto.setDictionaryDto(dictionaryDto);
+
             BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
             List<PurchaseDto> purchaseDtos = new ArrayList<>();
             for (Purchase purchase : enquiryProduct.getPurchases()) {
@@ -136,6 +143,12 @@ public class EnquiryServiceImpl implements EnquiryService {
                 EnquiryProductDto enquiryProductDto = new EnquiryProductDto();
                 //更改图片地址
                 enquiryProduct.setProductImage(PropertiesParam.file_pre+enquiryProduct.getProductImage());
+
+                Dictionary dictionary= enquiryProduct.getDictionary();
+                DictionaryDto dictionaryDto=new DictionaryDto();
+                BeanUtils.copyProperties(dictionary, dictionaryDto);
+                enquiryProductDto.setDictionaryDto(dictionaryDto);
+
                 BeanUtils.copyProperties(enquiryProduct, enquiryProductDto);
                 List<PurchaseDto> purchaseDtos = new ArrayList<>();
                 for (Purchase purchase : enquiry.getEnquiryProducts().get(0).getPurchases()) {
