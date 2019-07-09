@@ -213,6 +213,7 @@ h2 {
 .am-slider-default .am-direction-nav a{
     width: 60px;
     height: 60px;
+    z-index: 999;
 }
 .am-slider-default .am-direction-nav a:before{
     font-size: 60px!important;
