@@ -212,7 +212,6 @@ function liContentAssort(v,assortLevel) {
 function liContent(v){
     var enquiryTitle=v.enquiryTitle;
     var createTime=v.strCreateTime;
-    var enquiryNumber=v.enquiryNumber;
     //报价截至日期
     var endTime=v.strEndTime;
     var date1 = new Date();
@@ -222,7 +221,6 @@ function liContent(v){
     var productDto=v.enquiryProductDto;
     for(var i = 0 ; i<productDto.length; i++){
         var productNumber=productDto[i].productNumber;
-        var productName=productDto[i].productName;
         var productUnit=productDto[i].productUnit;
         var enquiryProductId=productDto[i].enquiryProductId;
         var purchaseLength=0;
@@ -240,7 +238,7 @@ function liContent(v){
 
     var li=$("<tr>"
         +"<td>"
-        +"<p style='color:#0066cc'>"+productName+"</p>"
+        +"<p style='color:#0066cc'>"+enquiryTitle+"</p>"
         +"<p>发布日期："+createTime+"</p>"
         +"</td>"
         +"<td>"+productNumber+productUnit
