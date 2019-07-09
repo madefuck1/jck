@@ -221,7 +221,7 @@ function liContent(v){
     var productDto=v.enquiryProductDto;
     for(var i = 0 ; i<productDto.length; i++){
         var productNumber=productDto[i].productNumber;
-        var productUnit=productDto[i].productUnit;
+        var productUnit=productDto[i].dictionaryDto.dictVDescription;
         var enquiryProductId=productDto[i].enquiryProductId;
         var purchaseLength=0;
         if (productDto[i].purchases[i].purchaseNumber!=undefined){
