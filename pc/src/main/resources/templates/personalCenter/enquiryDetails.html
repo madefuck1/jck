@@ -116,7 +116,6 @@
             dataType : "json",
             success : function(data) {
                 $("#loginName").html(data.loginName);
-                $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
@@ -124,7 +123,6 @@
                 $("#statusMessage").val(data.statusMessage);
                 $("#productNumber").html(data.enquiryProductDto[0].productNumber);
                 $("#enquiryProductId").html(data.enquiryProductDto[0].enquiryProductId);
-                $("#productUnit").html(data.enquiryProductDto[0].productUnit);
                 $("#takeAddress").html(data.takeAddress);
                 $("#enquiryRemark").html(data.enquiryRemark);
                 $("#productName").html(data.enquiryProductDto[0].productName);
@@ -140,7 +138,6 @@
 	});
         function liContent(v){
             var purchases=v.purchases;
-            console.log(purchases);
             var li="";
             var doThis;
 
@@ -154,7 +151,7 @@
                     var offerTime = purchases[i].strOfferTime;
                     var shopName=purchases[i].shopName;
                     var unitPrice = purchases[i].unitPrice;
-                    var productUnit = v.productUnit;
+                    var productUnit = v.dictionaryDto.dictVDescription;
                     var remark = purchases[i].remark;
                     if (remark==null||remark==""){
                         remark="无";
@@ -163,7 +160,6 @@
                     if (purchases[i].offerStatus==1){
                             doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
                     }else{
-						console.log(purchases[i].offerStatus);
                         if (purchases[i].offerStatus==2) {
                             doThis = "<td style='color: #40ADFB'>已接收</td>"
                         }else{
@@ -186,7 +182,6 @@
         }
     function isUseRejused(purchaseNumber,offStatus){
 		var enquiryNumber= $("#enquiryNumber").val();
-		console.log(enquiryProductId);
 		var str ={purchaseNumber:purchaseNumber,offerStatus:offStatus,enquiryNumber:enquiryNumber,enquiryProductId:enquiryProductId};
        $.ajax({
             url: "acceptPurchase",
