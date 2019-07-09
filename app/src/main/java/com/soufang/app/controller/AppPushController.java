@@ -3,6 +3,7 @@ package com.soufang.app.controller;
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppPushFeign;
 import com.soufang.app.vo.push.PushVo;
+import com.soufang.base.Result;
 import com.soufang.base.dto.push.PushDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
@@ -23,6 +24,22 @@ public class AppPushController extends AppBaseController{
     @Autowired
     AppPushFeign appPushFeign;
 
+    //查看消息
+    @ResponseBody
+    @AppMemberAccess
+    @RequestMapping(value = "getUnread",method = RequestMethod.POST)
+    public PushVo getUnread(@RequestBody PushSo pushSo, HttpServletRequest request){
+        UserDto userInfo = this.getUserInfo(request);
+        pushSo.setUserId(userInfo.getUserId());
+        pushSo.setPushStatus(1);
+        pushSo.setPage(0);
+        pushSo.setLimit(0);
+        PageHelp<PushDto> pageHelp = appPushFeign.getList(pushSo);
+        PushVo vo = new PushVo();
+        vo.setCount(pageHelp.getCount());
+        vo.setData(pageHelp.getData());
+        return vo;
+    }
     //获取推送列表
     @ResponseBody
     @AppMemberAccess
@@ -34,6 +51,9 @@ public class AppPushController extends AppBaseController{
         PushVo vo = new PushVo();
         vo.setCount(pageHelp.getCount());
         vo.setData(pageHelp.getData());
+        //TODO 查看玩所有消息后，将消息状态改为已读
+        Result result = appPushFeign.changeIsRead(pushSo);
+        vo.setSuccess(result.isSuccess());
         return vo;
     }
 

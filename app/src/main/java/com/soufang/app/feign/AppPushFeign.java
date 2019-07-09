@@ -1,6 +1,7 @@
 package com.soufang.app.feign;
 
 
+import com.soufang.base.Result;
 import com.soufang.base.dto.push.PushDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.push.PushSo;
@@ -15,4 +16,6 @@ public interface AppPushFeign {
     @RequestMapping(value = "/core/push/getList",method = RequestMethod.POST)
     PageHelp<PushDto> getList(@RequestBody PushSo pushSo);
 
+    @RequestMapping(value = "/core/push/changeIsRead",method = RequestMethod.POST)
+    Result changeIsRead(@RequestBody PushSo pushSo);
 }

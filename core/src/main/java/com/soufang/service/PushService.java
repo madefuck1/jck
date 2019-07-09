@@ -17,4 +17,6 @@ public interface PushService {
     PageHelp<PushDto> getList(PushSo pushSo);
 
     Result addPush(PushDto pushDto);
+
+    Result changeIsRead(PushSo pushSo);
 }
