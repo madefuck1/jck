@@ -17,7 +17,7 @@ import java.util.List;
 public interface AppDictionaryFeign {
 
 
-    @RequestMapping(value = "/app/dictionary/getListByDictKey",method = RequestMethod.POST)
+    @RequestMapping(value = "/core/dictionary/getListByDictKey",method = RequestMethod.POST)
     List<DictionaryDto> getListByDictKey(@RequestBody String dictKey);
 
 }
