@@ -118,7 +118,6 @@
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
-                $("#purchaseNumber").val(data.enquiryProductDto[0].purchases[0].purchaseNumber);
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
                 $("#statusMessage").html(data.statusMessage);
@@ -144,13 +143,14 @@
             console.log(purchases);
             var li="";
             var doThis;
+
+            if(purchases.length==0){
+				li=$("<tr>"
+						+"<td colspan='5'>当前没有报价信息</td>"
+						+"</tr>"
+				)
+			}else{
 			for(var i = 0 ;i< purchases.length ; i++) {
-                if(purchases[i].purchaseNumber==null||purchases[i].purchaseNumber==""){
-                    li=$("<tr>"
-                        +"<td colspan='5'>当前没有报价信息</td>"
-                        +"</tr>"
-                    )
-                }else{
                     var offerTime = purchases[i].strOfferTime;
                     var shopName=purchases[i].shopName;
                     var unitPrice = purchases[i].unitPrice;
