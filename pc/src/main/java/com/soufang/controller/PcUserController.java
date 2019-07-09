@@ -172,8 +172,12 @@ public class PcUserController extends BaseController {
         BaseVo baseVo = new BaseVo();
         if (code == null) {
             baseVo.setSuccess(false);
+            baseVo.setMessage("验证码过期");
+        }else if(reCode == null){
+            baseVo.setSuccess(false);
             baseVo.setMessage("验证码不能为空");
-        } else if (!code.equals(reCode)) {
+        }
+        else if (!code.equals(reCode)) {
             baseVo.setSuccess(false);
             baseVo.setMessage("验证码错误");
         }
