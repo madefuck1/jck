@@ -1,5 +1,6 @@
 package com.soufang.app.controller;
 
+import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppPushFeign;
 import com.soufang.app.vo.push.PushVo;
 import com.soufang.base.dto.push.PushDto;
@@ -24,6 +25,7 @@ public class AppPushController extends AppBaseController{
 
     //获取推送列表
     @ResponseBody
+    @AppMemberAccess
     @RequestMapping(value = "getList",method = RequestMethod.POST)
     public PushVo getPurchaseList(@RequestBody PushSo pushSo, HttpServletRequest request){
         UserDto userInfo = this.getUserInfo(request);
