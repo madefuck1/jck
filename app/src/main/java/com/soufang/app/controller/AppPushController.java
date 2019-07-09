@@ -3,6 +3,7 @@ package com.soufang.app.controller;
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.feign.AppPushFeign;
 import com.soufang.app.vo.push.PushVo;
+import com.soufang.app.vo.push.UnReadPushVo;
 import com.soufang.base.Result;
 import com.soufang.base.dto.push.PushDto;
 import com.soufang.base.dto.user.UserDto;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("app/push/")
@@ -28,16 +31,19 @@ public class AppPushController extends AppBaseController{
     @ResponseBody
     @AppMemberAccess
     @RequestMapping(value = "getUnread",method = RequestMethod.POST)
-    public PushVo getUnread(@RequestBody PushSo pushSo, HttpServletRequest request){
+    public UnReadPushVo getUnread(@RequestBody PushSo pushSo, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
         UserDto userInfo = this.getUserInfo(request);
         pushSo.setUserId(userInfo.getUserId());
         pushSo.setPushStatus(1);
         pushSo.setPage(0);
         pushSo.setLimit(0);
         PageHelp<PushDto> pageHelp = appPushFeign.getList(pushSo);
-        PushVo vo = new PushVo();
-        vo.setCount(pageHelp.getCount());
-        vo.setData(pageHelp.getData());
+        UnReadPushVo vo = new UnReadPushVo();
+        pageHelp.getData().get(0).setCount(pageHelp.getCount());
+        map.put("System",pageHelp.getData().get(0));
+        vo.setData(map);
+        //TODO 获取店铺的消息可以在此处添加
         return vo;
     }
     //获取推送列表
