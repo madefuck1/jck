@@ -173,12 +173,16 @@ public class PcUserController extends BaseController {
         if (code == null) {
             baseVo.setSuccess(false);
             baseVo.setMessage("验证码过期");
-        } else if (!code.equals(reCode)) {
+        }else if(reCode == null){
+            baseVo.setSuccess(false);
+            baseVo.setMessage("验证码不能为空");
+        }
+        else if (!code.equals(reCode)) {
             baseVo.setSuccess(false);
             baseVo.setMessage("验证码错误");
         }
         //TODO 开发阶段注释验证码
-        baseVo.setSuccess(true);
+       /* baseVo.setSuccess(true);*/
         return baseVo;
     }
 
@@ -246,7 +250,7 @@ public class PcUserController extends BaseController {
     @RequestMapping(value = "toSettle", method = RequestMethod.GET)
     public String toSettle(ModelMap map, HttpServletRequest request) {
         map.put("userInfo", getUserInfo(request));
-        if (getShopInfo(request) == null) {
+        if (getShopInfo(request) != null) {
             //已经是商家，不能再入驻
             return "404";
         } else {

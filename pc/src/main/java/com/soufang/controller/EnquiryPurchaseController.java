@@ -321,7 +321,7 @@ public class EnquiryPurchaseController extends BaseController{
         UserDto userInfo = getUserInfo(request);
         //查询当前商铺信息
         ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
-        if("".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
+        if(shopInfo == null || "".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
             result.setMessage("不可以报价");
         }else{
         if(shopInfo.getShopStatus()==0){

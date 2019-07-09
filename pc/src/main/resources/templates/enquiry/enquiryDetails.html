@@ -17,7 +17,6 @@
 				<div class="tb-detail-hd">
 					<h3 style="font-size: 16px; font-weight: bold" ><span id="productName"></span></h3>
 					<input type="hidden" id="enquiryProductId" value="${enquiryProductId}">
-					<input type="hidden" id="purchaseNumber">
 				</div>
 				<div class="clear-down">
 					<div class="cloum1">
@@ -140,12 +139,6 @@
                 $("#loginName").html(data.loginName);
                 $("#enquiryNumber").html(data.enquiryNumber);
                 $("#enquiryNumber").val(data.enquiryNumber);
-                var str=data.enquiryProductDto[0].purchases[0].purchaseNumber;
-                if (str==null || str=="null" ||str ==""){
-                    $("#purchaseNumber").val(0);
-                }else{
-                    $("#purchaseNumber").val(str);
-				}
                 $("#strCreateTime").html(data.strCreateTime);
                 $("#strTakeDate").html(data.strTakeDate);
                 $("#statusMessage").html(data.statusMessage);
