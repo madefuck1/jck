@@ -31,9 +31,10 @@ public class AppPushController extends AppBaseController{
     @ResponseBody
     @AppMemberAccess
     @RequestMapping(value = "getUnread",method = RequestMethod.POST)
-    public UnReadPushVo getUnread(@RequestBody PushSo pushSo, HttpServletRequest request){
+    public UnReadPushVo getUnread(HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         UserDto userInfo = this.getUserInfo(request);
+        PushSo pushSo = new PushSo();
         pushSo.setUserId(userInfo.getUserId());
         pushSo.setPushStatus(1);
         pushSo.setPage(0);
