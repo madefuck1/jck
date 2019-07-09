@@ -160,10 +160,10 @@
                         remark="无";
 					}
                     var purchaseNumber = purchases[i].purchaseNumber;
-                    console.log();
-                    if ($("#statusMessage").val()!="已报价"){
+                    if (purchases[i].offerStatus==1){
                             doThis="<td style='color: #40ADFB'>" + "<a href='javascript:void(0);' onclick='isUseRejused(\"" + purchaseNumber + "\",2" + ")'>采用</a>" + " " + "<a href='javascript:void(0);' onclick='isUseRejused(\""+ purchaseNumber + "\",3" + ")'>拒绝</a></td>"
                     }else{
+						console.log(purchases[i].offerStatus);
                         if (purchases[i].offerStatus==2) {
                             doThis = "<td style='color: #40ADFB'>已接收</td>"
                         }else{
