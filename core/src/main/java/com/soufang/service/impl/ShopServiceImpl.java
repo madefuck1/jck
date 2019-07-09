@@ -117,7 +117,9 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public ShopDto getByUserId(Long userId) {
         ShopDto shopDto = shopMapper.getByUserId(userId);
-        shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
+        if(shopDto != null){
+            shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
+        }
         return shopDto;
     }
 
