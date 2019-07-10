@@ -41,8 +41,12 @@ public class AppPushController extends AppBaseController{
         pushSo.setLimit(0);
         PageHelp<PushDto> pageHelp = appPushFeign.getList(pushSo);
         UnReadPushVo vo = new UnReadPushVo();
-        pageHelp.getData().get(0).setCount(pageHelp.getCount());
-        map.put("System",pageHelp.getData().get(0));
+        if(pageHelp.getData() != null && pageHelp.getData().size() > 0 ){
+            pageHelp.getData().get(0).setCount(pageHelp.getCount());
+            map.put("System",pageHelp.getData().get(0));
+        }else {
+            map.put("System",null);
+        }
         vo.setData(map);
         //TODO 获取店铺的消息可以在此处添加
         return vo;
