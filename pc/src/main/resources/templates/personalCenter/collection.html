@@ -68,7 +68,8 @@
                 if (data.count==0){
                     //没有数据
                     document.getElementById("noData").style.display="block";//显示
-                    document.getElementById("more").style.display="none";//显示
+                    document.getElementById("more").style.display="none";//
+					document.getElementById("noMore").style.display="none";
 				}else{
                     $.each(data.data, function (i, v) {
                         var whatever = liContent(v);
