@@ -45,4 +45,12 @@ public class PayServiceImpl implements PayService {
         pay.setPayStatus(PayStatusEnum.success.getValue());
         payMapper.updateByPrimaryKey(pay);
     }
+
+    @Override
+    public PayDto getByPayNumber(String payNumber) {
+        Pay pay = payMapper.selectByPayNumber(payNumber);
+        PayDto payDto = new PayDto();
+        BeanUtils.copyProperties(pay,payDto);
+        return payDto;
+    }
 }

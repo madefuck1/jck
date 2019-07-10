@@ -45,5 +45,9 @@ public interface OrderFeign {
     @RequestMapping(value = "/core/contract/upload", method = RequestMethod.POST)
     Result upload(@RequestBody ContractDto contractDto);
 
+    @RequestMapping(value = "/core/order/paySuccess", method = RequestMethod.POST)
+    Result paySuccess(@RequestBody PayDto payDto);
 
+    @RequestMapping(value = "/core/pay/getByPayNumber", method = RequestMethod.POST)
+    PayDto getByPayNumber(@RequestBody String payNumber);
 }

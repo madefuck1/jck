@@ -38,4 +38,9 @@ public class PayController {
         payService.createPay(payDto);
         return payDto ;
     }
+
+    @RequestMapping(value = "getByPayNumber", method = RequestMethod.POST)
+    public PayDto getByPayNumber(@RequestBody String payNumber){
+        return payService.getByPayNumber(payNumber);
+    }
 }

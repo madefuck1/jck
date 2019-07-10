@@ -1,14 +1,18 @@
 package com.soufang.controller;
 
-/*import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.soufang.base.AliPayConfig;
+import com.soufang.base.dto.pay.PayDto;
+import com.soufang.feign.OrderFeign;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,31 +22,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-*//***/
-
-/*
-import com.soufang.base.AliPayConfig;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-*/
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @Controller
 @RequestMapping("alipay")
 public class AliPayController {
 
+    @Autowired
+    OrderFeign orderFeign;
+
     /**
      * 跳到支付页面
-     *//*
+     */
     @RequestMapping(value = "pay",method = RequestMethod.POST)
     public void doPost(HttpServletRequest request   ,
                        HttpServletResponse httpResponse) throws ServletException, IOException {
@@ -77,12 +66,12 @@ public class AliPayController {
         httpResponse.getWriter().close();
     }
 
-    *//**
+    /**
      * 异步
      *
      * @param request
      * @return
-     *//*
+     */
     @RequestMapping(value = "notify", method = RequestMethod.POST)
     public String notify(HttpServletRequest request) {
         try {
@@ -118,7 +107,11 @@ public class AliPayController {
                 String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
                //处理业务
-
+                if ((trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS")) && app_id.equals(AliPayConfig.app_id) && seller_id.equals(AliPayConfig.SELLER_ID)) {
+                    PayDto payDto = orderFeign.getByPayNumber(out_trade_no);
+                    payDto.setUnitPayNumber(trade_no);
+                    orderFeign.paySuccess(payDto);
+                }
             } else {//验证失败
                 return "fail";
             }
@@ -126,56 +119,56 @@ public class AliPayController {
             return "fail";
         }
         return "success";
-    }*/
+    }
 
-    //    /**
-//     * 同步,返回到支付成功页面
-//     *
-//     * @param request
-//     * @return
-//     */
-//    @ResponseBody
-//    @RequestMapping(value = "return", method = RequestMethod.GET)
-//    public String returnUrl(HttpServletRequest request) {
-//        try {
-//            Map<String, String> params = new HashMap<String, String>();
-//            Map<String, String[]> requestParams = request.getParameterMap();
-//            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-//                String name = (String) iter.next();
-//                String[] values = (String[]) requestParams.get(name);
-//                String valueStr = "";
-//                for (int i = 0; i < values.length; i++) {
-//                    valueStr = (i == values.length - 1) ? valueStr + values[i]
-//                            : valueStr + values[i] + ",";
-//                }
-//                //乱码解决，这段代码在出现乱码时使用
-//                valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-//                params.put(name, valueStr);
-//            }
-//
-//            boolean signVerified = AlipaySignature.rsaCheckV1(params, AliPayConfig.alipay_public_key, AliPayConfig.charset, AliPayConfig.sign_type); //调用SDK验证签名
-//
-//            //——请在这里编写您的程序（以下代码仅作参考）——
-//            if (signVerified) {
-//                //商户订单号
-//                String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-//
-//                //支付宝交易号
-//                String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
-//
-//                //付款金额
-//                String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
-//
-//                //out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
-//                return "true";
-//            } else {
-//                //out.println("验签失败");
-//                return "false";
-//            }
-//        } catch (Exception e) {
-//
-//        }
-//        return "false";
-//    }
+    /**
+     * 同步,返回到支付成功页面
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "return", method = RequestMethod.GET)
+    public String returnUrl(HttpServletRequest request) {
+        try {
+            Map<String, String> params = new HashMap<String, String>();
+            Map<String, String[]> requestParams = request.getParameterMap();
+            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+                String name = (String) iter.next();
+                String[] values = (String[]) requestParams.get(name);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i]
+                            : valueStr + values[i] + ",";
+                }
+                //乱码解决，这段代码在出现乱码时使用
+                valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+                params.put(name, valueStr);
+            }
+
+            boolean signVerified = AlipaySignature.rsaCheckV1(params, AliPayConfig.alipay_public_key, AliPayConfig.CHARSET, AliPayConfig.sign_type); //调用SDK验证签名
+
+            //——请在这里编写您的程序（以下代码仅作参考）——
+            if (signVerified) {
+                //商户订单号
+                String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
+
+                //支付宝交易号
+                String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
+
+                //付款金额
+                String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
+
+                //out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
+                return "true";
+            } else {
+                //out.println("验签失败");
+                return "false";
+            }
+        } catch (Exception e) {
+
+        }
+        return "false";
+    }
 
 }
