@@ -12,4 +12,6 @@ public interface PayService {
     PayDto createPay(PayDto payDto);
 
     void paySuccess(PayDto payDto);
+
+    PayDto getByPayNumber(String payNumber);
 }

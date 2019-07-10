@@ -18,4 +18,6 @@ public interface PayMapper {
     int updateByPrimaryKey(Pay record);
 
     List<Pay> selectByOrderNumberAndStatus(Pay pay);
+
+    Pay selectByPayNumber(String payNumber);
 }

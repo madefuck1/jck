@@ -276,7 +276,19 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public List<ProductDto> getFootPrintList(ProductDto dto) {
-        return productMapper.getFootPrintList(dto);
+        List<ProductDto> list = productMapper.getFootPrintList(dto);
+        for (ProductDto p : list) {
+            String[] img = new String[10];
+            if (StringUtils.isNotBlank(p.getProductImage())) {
+                img = p.getProductImage().split(";");
+            }
+            if(StringUtils.isNotBlank(img[0])){
+                p.setProductUrl(PropertiesParam.file_pre + img[0]);
+            }else {
+                p.setProductUrl(PropertiesParam.file_pre + "/uploadProduct/product.jpg");
+            }
+        }
+        return list ;
     }
 
 
