@@ -22,6 +22,12 @@ public class PushController {
         return pushService.getList(pushSo);
     }
 
+    @RequestMapping(value = "changeIsRead",method = RequestMethod.POST)
+    Result changeIsRead(@RequestBody PushSo pushSo){
+        return pushService.changeIsRead(pushSo);
+    }
+
+
     @RequestMapping(value = "addPush",method = RequestMethod.POST)
     Result addPush(@RequestBody PushDto pushDto){
         Result result = pushService.addPush(pushDto);

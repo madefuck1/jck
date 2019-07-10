@@ -19,6 +19,8 @@ public class PushDto {
 
     private String strCreateTime;
 
+    private Integer count;
+
     public String getStrCreateTime() {
         if(createTime == null){
             return null;
@@ -73,5 +75,13 @@ public class PushDto {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

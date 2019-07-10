@@ -9,7 +9,6 @@ import com.soufang.base.utils.DateUtils;
 import com.soufang.mapper.PushMapper;
 import com.soufang.mapper.UserMapper;
 import com.soufang.model.Push;
-import com.soufang.model.User;
 import com.soufang.service.PushService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,11 @@ public class PushServiceImpl implements PushService {
         }
         List<PushDto> list = pushMapper.getList(pushSo);
         int count = pushMapper.getCount(pushSo);
+        //没有未读的消息
+        if(count == 0){
+            pushSo.setPushStatus(null);
+            list = pushMapper.getList(pushSo);
+        }
         pageHelp.setData(list);
         pageHelp.setCount(count);
         return pageHelp;
@@ -43,7 +47,6 @@ public class PushServiceImpl implements PushService {
 
     @Override
     public Result addPush(PushDto pushDto) {
-        Result result = new Result();
         Push push = new Push();
         BeanUtils.copyProperties(pushDto,push);
         push.setCreateTime(DateUtils.getToday());
@@ -63,6 +66,19 @@ public class PushServiceImpl implements PushService {
         push.setUserId(4L);*/
         int i = pushMapper.insertSelective(push);
         //int i = pushMapper.insertList(pushes);
+
+        return getResult(i);
+    }
+
+    @Override
+    public Result changeIsRead(PushSo pushSo) {
+        int i = pushMapper.changeIsRead(pushSo);
+        return getResult(i);
+    }
+
+
+    Result getResult(int i){
+        Result result = new Result();
         if(i > 0){
             result.setMessage("推送成功");
             result.setSuccess(true);

@@ -32,6 +32,7 @@
         <result column="product_name" property="productName" jdbcType="VARCHAR"/>
         <result column="is_upper" property="isUpper" jdbcType="INTEGER"/>
         <result column="assort_id" property="assortId" jdbcType="BIGINT"/>
+        <result column="assortName" property="assortName" jdbcType="BIGINT"/>
         <result column="product_json" property="productJson" jdbcType="VARCHAR"/>
         <result column="product_unit" property="productUnit" jdbcType="VARCHAR"/>
         <result column="product_detail" property="productDetail" jdbcType="VARCHAR"/>
@@ -50,7 +51,7 @@
         <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
         <result column="key5" property="key5" jdbcType="VARCHAR"/>
         <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
-        <result column="product_price" property="productPrice" jdbcType="VARCHAR"/>
+        <result column="productPrice" property="productPrice" jdbcType="VARCHAR"/>
     </collection>
   </resultMap>
 
@@ -200,7 +201,7 @@
             concat(P.key3, '：', P.key3_value) as kv3,
             concat(P.key4, '：', P.key4_value) as kv4,
             concat(P.key5, '：', P.key5_value) as kv5,
-            GetMinPriceByProductId(P.product_id) from t_product P
+            GetMinPriceByProductId(P.product_id) as productPrice from t_product P
     )t_product on t_shop.shop_id = t_product.shop_id
     where
       t_shop.shop_status = 0

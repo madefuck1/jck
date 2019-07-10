@@ -24,4 +24,7 @@ public interface PushMapper {
     List<PushDto> getList(PushSo pushSo);
 
     int getCount(PushSo pushSo);
+
+    int changeIsRead(PushSo pushSo);
+
 }

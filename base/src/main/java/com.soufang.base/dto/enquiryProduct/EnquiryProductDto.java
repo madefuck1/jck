@@ -1,9 +1,9 @@
 package com.soufang.base.dto.enquiryProduct;
 
 import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.dictionary.DictionaryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class EnquiryProductDto {
@@ -26,6 +26,16 @@ public class EnquiryProductDto {
 
     private String productImage;
     private List<PurchaseDto> purchases ;
+    //单位
+    private DictionaryDto dictionaryDto;
+
+    public DictionaryDto getDictionaryDto() {
+        return dictionaryDto;
+    }
+
+    public void setDictionaryDto(DictionaryDto dictionaryDto) {
+        this.dictionaryDto = dictionaryDto;
+    }
 
     public List<PurchaseDto> getPurchases() {
         return purchases;

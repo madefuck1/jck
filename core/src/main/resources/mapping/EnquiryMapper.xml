@@ -54,6 +54,9 @@
       <result column="product_number" property="productNumber" jdbcType="BIGINT" />
       <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
       <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+      <collection property="dictionary" ofType="com.soufang.model.Dictionary">
+        <result column="dict_v_description" property="dictVDescription" jdbcType="VARCHAR" />
+      </collection>
       <collection property="purchases" ofType="com.soufang.model.Purchase">
         <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
         <result column="shop_id" property="shopId" jdbcType="BIGINT" />
@@ -105,6 +108,9 @@
       <result column="product_number" property="productNumber" jdbcType="BIGINT" />
       <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
       <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+      <collection property="dictionary" ofType="com.soufang.model.Dictionary">
+        <result column="dict_v_description" property="dictVDescription" jdbcType="VARCHAR" />
+      </collection>
       <collection property="purchases" ofType="com.soufang.model.Purchase">
         <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
         <result column="shop_id" property="shopId" jdbcType="BIGINT" />
@@ -117,7 +123,7 @@
         <collection property="shop" ofType="com.soufang.model.Shop">
         <id column="shop_id" property="shopId" jdbcType="BIGINT"/>
         <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
-      </collection>
+        </collection>
       </collection>
       <collection property="assort" ofType="com.soufang.model.Assort">
         <id column="assort_id" property="assortId" jdbcType="BIGINT"/>
@@ -147,6 +153,7 @@
     LEFT JOIN t_purchase tp on tp.enquiry_product_id = tep.enquiry_product_id
     LEFT JOIN t_assort ta on ta.assort_id=tep.product_assort
     left join t_shop ts on ts.shop_id=tp.shop_id
+    left join t_dictionary td on td.dict_id=tep.product_unit
     where 1=1
     <if test="enquiryNumber != null and enquiryNumber != ''">
       and te.enquiry_number=#{enquiryNumber,jdbcType=VARCHAR}
@@ -185,6 +192,7 @@
       LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
       LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
       LEFT JOIN t_shop ts on ts.user_id=te.user_id
+      left join t_dictionary td on td.dict_id=tep.product_unit
     where
       te.enquiry_status!=0 and te.end_time > (select now())
     <if test="userId != null and userId !=''">

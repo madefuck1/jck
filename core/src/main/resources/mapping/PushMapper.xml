@@ -33,8 +33,12 @@
     <include refid="Base_Column_List" />
     from t_push
     where user_id = #{userId,jdbcType=BIGINT}
-
-    <if test="limit != null and page != null ">
+    and push_status != 0
+    <if test="pushStatus != null ">
+      and push_status = #{pushStatus,jdbcType=INTEGER}
+    </if>
+    ORDER BY create_time DESC
+    <if test="limit != null and page != null and limit != 0 and page != 0">
       LIMIT #{page},#{limit}
     </if>
   </select>
@@ -44,6 +48,10 @@
     count(*)
     from t_push
     where user_id = #{userId,jdbcType=BIGINT}
+    and push_status != 0
+    <if test="pushStatus != null ">
+      and push_status = #{pushStatus,jdbcType=INTEGER}
+    </if>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -131,6 +139,12 @@
       </if>
     </set>
     where push_id = #{pushId,jdbcType=BIGINT}
+  </update>
+
+  <update id="changeIsRead" parameterType="com.soufang.model.Push" >
+    update t_push
+    set   push_status = 2
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.soufang.model.Push" >
     update t_push
