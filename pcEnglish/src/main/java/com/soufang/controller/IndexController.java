@@ -52,7 +52,6 @@ public class IndexController extends BaseController {
         //首页Banner图
         List<BannerDto> bannerList = bannerFeign.getList(1000);
         map.put("bannerDtos",bannerList);
-
         map.put("productDtos1",list);
         map.put("productDtos1",list.subList(0,5));
         map.put("productDtos2",list.subList(5,10));

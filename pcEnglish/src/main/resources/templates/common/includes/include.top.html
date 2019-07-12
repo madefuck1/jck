@@ -9,13 +9,13 @@
                 <!-- todo 消息跳转 -->
             </p>
             <#else>
-            <p>Welcome &nbsp;Please<a href="/user/toLogin">Sign in</a> &nbsp;<a href="/user/toRegister">register</a></p>
+            <p>Welcome &nbsp;Please<a href="/user/toLogin">&nbsp;Sign in</a> &nbsp;or &nbsp;<a href="/user/toRegister">register</a></p>
             </#if>
         </div>
         <div class="right">
-            <p class="service">customer service telephone numbers：400-860-0992</p>
+            <p class="service">Tel：400-860-0992</p>
             <div class="order">
-                <a href="/orderManager/toOrderManager">My Orders</a>
+                <a href="/orderManager/toOrderManager">Orders</a>
                 <!--<span class="icon icon1"></span>-->
             </div>
             <div class="seller">
@@ -23,7 +23,7 @@
                 <!--<span class="icon icon1"></span>-->
             </div>
             <div class="shopping">
-                <a href="/shopCar/getList">Shopping Cart</a>
+                <a href="/shopCar/getList">Cart</a>
                 <a id="carCount" href="#">(${shopCarCount!0})</a>
             </div>
         </div>
