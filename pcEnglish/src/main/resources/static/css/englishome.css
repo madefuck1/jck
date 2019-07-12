@@ -233,13 +233,12 @@ a:hover{
 
 
 .contain-r{
-	width: 230px;
+	width: 180px;
 	float: right;
 	height: 400px;
 	margin-top: 38px;
 	padding: 0px 10px;
 	overflow: hidden;
-	margin-right: 400px;
 }
 
 .contain-row1,.contain-row2,.contain-row4{
