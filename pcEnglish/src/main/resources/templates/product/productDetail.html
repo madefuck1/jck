@@ -268,9 +268,6 @@
             </div>
 
             <div class="pay">
-                <div class="pay-opt">
-                    <a><span class="am-icon-heart am-icon-fw">Collection</span></a>
-                </div>
                 <li>
                     <div class="clearfix tb-btn tb-btn-buy theme-login">
                         <a id="LikBuy" onclick="toBuy()">Buy now</a>
@@ -500,15 +497,6 @@
 <script type="text/javascript">
     var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber!'1'}";
     $(function () {
-       var isShowNone = ${isShowNone};
-                if (isShowNone==1) {
-                    $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">Favorites</span>')
-                } else {
-                    $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">Collection</span>')
-                }
-
         $('.flexslider').flexslider({
             animation: "slide",
             start: function (slider) {
@@ -804,12 +792,12 @@
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                if (data) {
+                if (data.success=="true") {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">已收藏</span>')
+                    $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">收藏</span>')
+                    $('.Collection').append('<span class="coll1">Collection</span>')
                 }
             }
         });

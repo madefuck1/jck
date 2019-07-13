@@ -7,6 +7,7 @@ import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
+import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.FavoriteFeign;
 import com.soufang.feign.ShopFeign;
 import com.soufang.feign.StoreConstructionFeign;
@@ -98,6 +99,7 @@ public class ShopController extends BaseController {
      * @return
      */
     @ResponseBody
+    @MemberAccess
     @RequestMapping(value = "isCollection", method = RequestMethod.GET)
     public Boolean isCollection(HttpServletRequest request, Long shopId, Integer type) {
         UserDto userDto = getUserInfo(request);
