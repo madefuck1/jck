@@ -5,6 +5,7 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.config.interceptor.MemberAccess;
@@ -73,7 +74,11 @@ public class EnquiryController extends BaseController {
         BaseVo vo = new BaseVo();
         Result result = enquiryFeign.updateUnitPrice(purchaseDto);
         vo.setSuccess(result.isSuccess());
-        vo.setMessage(result.getMessage());
+        if(result.isSuccess()){
+            vo.setMessage(ErrorEnum.updatePrice_true.getMessage());
+        }else {
+            vo.setMessage(ErrorEnum.updatePrice_error.getMessage());
+        }
         return vo;
     }
 

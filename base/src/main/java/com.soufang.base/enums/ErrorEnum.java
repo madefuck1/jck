@@ -16,12 +16,16 @@ public enum ErrorEnum {
     updatePassword_error(100004,"Password change failed"),
     //删除失败
     delete_error(100005,"failed to delete"),
+    //删除成功
+    delete_true(100006,"successfully deleted"),
     //编辑失败
     update_error(100006,"Edit failed"),
     //取消失败
     cancel_error(100007,"Cancel failure"),
     //操作成功
     success(100008,"Successful operation"),
+    //操作失败
+    failed(100009,"operation failed"),
     //添加反馈失败
     addSuggest_error(200001,"Add feedback failed"),
     //添加反馈成功
@@ -54,7 +58,6 @@ public enum ErrorEnum {
     delivery_error(700004,"Delivery failed"),
     //没有店铺信息
     noSHopInfo_error(700005,"No store information"),
-
     //填写信息错误
     inputInfo_error(700003,"Fill in the wrong information"),
     //订单生成失败
@@ -63,6 +66,8 @@ public enum ErrorEnum {
     createOrder_true(800002,"Order generated successfully"),
     //订单支付失败
     orderPay_error(800003,"Order payment failed"),
+    //修改订单失败
+    updateOrder_error(800006,"修改订单失败"),
     //卖家确认订单报错
     orderInfo_error(800004,"Order information error"),
     //订单状态不对
@@ -80,10 +85,9 @@ public enum ErrorEnum {
     //修改询盘产品失败
     updateEnquiryProduct_error(120003,"Modifying the inquiry product failed"),
     //添加公司报错
-    addCompany_error(130001,"Add company error");
-
-
-
+    addCompany_error(130001,"Add company error"),
+    //图片上传失败
+    uploadPicture_error(130002,"Image upload failed");
 
 
     private Integer value;

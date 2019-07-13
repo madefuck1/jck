@@ -7,6 +7,7 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
@@ -64,7 +65,7 @@ public class PcUserController extends BaseController {
         UserDto userDto = new UserDto();
         String loginName = loginReqVo.getLoginName();
         if (loginName == null) {
-            baseVo.setMessage("用户名栏不能为空");
+            baseVo.setMessage("Username field cannot be empty");
             baseVo.setSuccess(false);
             return baseVo;
         }
@@ -77,9 +78,9 @@ public class PcUserController extends BaseController {
         Result result = pcUserFeign.login(userDto);
         if (result.isSuccess()) {
             setToken(Long.valueOf(result.getMessage()), response);
-            baseVo.setMessage("登录成功");
+            baseVo.setMessage("login successful");
         } else {
-            baseVo.setMessage("登录失败:" + result.getMessage());
+            baseVo.setMessage("Login failed" /*+ result.getMessage()*/ );
             baseVo.setSuccess(false);
         }
         return baseVo;
@@ -121,14 +122,14 @@ public class PcUserController extends BaseController {
             result = pcUserFeign.addMessage(messageDto);
             RedisUtils.setString(RedisConstants.verfity_code + email, VerCode, code_time);
         } else {
-            baseVo.setMessage("请输入手机号或邮箱");
+            baseVo.setMessage("Please enter your mobile number or email address");
             baseVo.setSuccess(false);
             return baseVo;
         }
         if (result.isSuccess()) {
-            baseVo.setMessage("发送成功");
+            baseVo.setMessage("Sent successfully");
         } else {
-            baseVo.setMessage("发送失败");
+            baseVo.setMessage("Failed to send");
             baseVo.setSuccess(false);
         }
         return baseVo;
@@ -156,11 +157,11 @@ public class PcUserController extends BaseController {
             result = pcUserFeign.register(userDto);
             if (result.isSuccess()) {
                 this.setToken(Long.valueOf(result.getMessage()), response);
-                baseVo.setMessage("注册成功");
+                baseVo.setMessage("registration success");
                 return baseVo;
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("注册失败:" + result.getMessage());
+                baseVo.setMessage("registration failed" /*+ result.getMessage()*/ );
                 return baseVo;
             }
         } else {
@@ -172,10 +173,10 @@ public class PcUserController extends BaseController {
         BaseVo baseVo = new BaseVo();
         if (code == null) {
             baseVo.setSuccess(false);
-            baseVo.setMessage("验证码过期");
+            baseVo.setMessage("Verification code expired");
         } else if (!code.equals(reCode)) {
             baseVo.setSuccess(false);
-            baseVo.setMessage("验证码错误");
+            baseVo.setMessage("Verification code error");
         }
         //TODO 开发阶段注释验证码
         baseVo.setSuccess(true);
@@ -217,20 +218,20 @@ public class PcUserController extends BaseController {
                     result = pcUserFeign.addCompany(companyDto);
                 } else {
                     baseVo.setSuccess(false);
-                    baseVo.setMessage("营业执照上传失败");
+                    baseVo.setMessage("Business license upload failed");
                     return baseVo;
                 }
             }
             if (result.isSuccess()) {
-                baseVo.setMessage("注册成功");
+                baseVo.setMessage("registration success");
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("注册失败");
+                baseVo.setMessage("registration failed");
             }
             return baseVo;
         } catch (Exception e) {
             baseVo.setSuccess(false);
-            baseVo.setMessage("请先登录,才能注册店铺");
+            baseVo.setMessage("Please login first to register the store");
             return baseVo;
         }
     }
@@ -311,7 +312,8 @@ public class PcUserController extends BaseController {
                 companyDto.setCompUrls(companyResult.get("uploadName").toString());
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("图片上传失败");
+                //图片上传失败
+                baseVo.setMessage(ErrorEnum.uploadPicture_error.getMessage());
                 return baseVo;
             }
         }
@@ -323,7 +325,8 @@ public class PcUserController extends BaseController {
                     idCards += companyResult.get("uploadName").toString() + ";";
                 } else {
                     baseVo.setSuccess(false);
-                    baseVo.setMessage("图片上传失败");
+                    //图片上传失败
+                    baseVo.setMessage(ErrorEnum.uploadPicture_error.getMessage());
                     return baseVo;
                 }
             }
@@ -338,7 +341,7 @@ public class PcUserController extends BaseController {
         shopDto.setShopIntroduce(companyDto.getCompanyInfo());
         userDto.setShopDto(shopDto);
         pcUserFeign.settleShop(userDto);
-        baseVo.setMessage("添加成功");
+        baseVo.setMessage("Added successfully");
         baseVo.setSuccess(true);
         return baseVo;
     }
