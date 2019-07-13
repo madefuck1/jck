@@ -3,60 +3,29 @@ Import and Export Product Trading Network
 </@override>
 
 <@override name="css">
-<link rel="stylesheet" href="${contextPath}/css/home.css">
-<link rel="stylesheet" href="${contextPath}/css/header.css">
-
 <link rel="stylesheet" href="${contextPath}/css/englishome.css">
 <link rel="stylesheet" href="${contextPath}/css/iconfont2.css">
-<link rel="stylesheet" href="${contextPath}/css/ft-carousel.css" />
+<link rel="stylesheet" href="${contextPath}/css/engLishheader.css">
 </@override>
 <style>
     .search_in ul{
         z-index: 999;
     }
+    #contain {
+        width: 100%;
+        min-height: 500px;
+        margin: 0 auto;
+        position: absolute;
+        z-index: 99;
+    }
+    .list_down {
+        height: 438px;
+
+    }
 </style>
 <@override name="body">
 <#include "/common/includes/include.contain2.html"/>
 <#include "/common/includes/include.banner.html"/>
-<div id="index_list">
-    <div class="inquiry" id="enquiryList">
-        <div class="padd title">
-            <div class="title_left">Inquiry</div>
-            <div class="title_right" onclick="getAllEnquiry(1,10)">view all</div>
-        </div>
-        <#list enquiryDtos as enquiry>
-        <#list enquiry.enquiryProductDto as product>
-            <div class="padd cloumn">
-                <div class="one">${product.productName}</div>
-                <div class="two">purchase<span>${product.productNumber}</span>one</div>
-                <div class="three">Remaining<span>${enquiry.effectiveTime}</span>date</div>
-            </div>
-        </#list>
-        </#list>
-</div>
-    <div class="inquiry inquiry2">
-        <div class="padd title">
-            <div class="title_left">news</div>
-            <!--<div class="title_right">查看全部</div>-->
-        </div>
-        <div class="padd cloumn" onclick="getMessageDetail(1)">
-            <div class="one">Release requirements for extreme sensitive words</div>
-            <div class="four">2019-5-17</div>
-        </div>
-        <div class="padd cloumn" onclick="getMessageDetail(2)">
-            <div class="one">Why does the release of the product fail</div>
-            <div class="four">2019-4-01</div>
-        </div>
-        <div class="padd cloumn" onclick="getMessageDetail(3)">
-            <div class="one">Duplicate information processing rules</div>
-            <div class="four">2019-3-20</div>
-        </div>
-        <div class="padd cloumn border" onclick="getMessageDetail(4)">
-            <div class="one">Add product operation guide</div>
-            <div class="four">2019-3-15</div>
-        </div>
-    </div>
-</div>
 
 <div id="shop">
     <div class="shop_in">
@@ -158,35 +127,16 @@ Import and Export Product Trading Network
                 </p>
             </div>
         </div>
- </div>
+    </div>
     <div class="pro" id="pro">
 
     </div>
 </div>
+
 <div id="middleBanner">
-    <a href=""><img src="${contextPath}/images/middle-banner.png" alt=""></a>
+    <a href=""><img src="image/middle-banner.png" alt=""></a>
 </div>
 
-<!--<div id="vedio">
-    <h3>视频中心</h3>
-    <div class="vedio_down">
-        <div class="vedio_left">
-            <p class="vedio_cur"><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
-            <p><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
-            <p><a href="">潜水推流器，潜水曝气机优质厂家  </a></p>
-            <p><a href="">潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
-            <p><a href="">3D展台 潜水搅拌机，潜水推流器，潜水曝气机优质厂家 </a></p>
-            <p><a href="">3D展台 潜水搅拌机，潜水推流器 </a></p>
-            <p><a href="">3D展台 潜水搅拌机，潜水推流器 </a></p>
-        </div>
-        <div class="vedio_right">
-            <div class="vedio_one"></div>
-        </div>
-    </div>
-</div>-->
-<div id="bottomBanner">
-    <a href=""><img src="${contextPath}/images/banner-bottom.png" alt=""></a>
-</div>
 
 <div id="Recommend">
     <div class="Recommend_row1 row2">
@@ -200,22 +150,22 @@ Import and Export Product Trading Network
                 <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
             </dl>
         </div>
-        </#if>
-        <#if product_index == 4>
-        <div class="rec last">
-            <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
-                <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
-                <dd>${product.productName}</dd>
-                <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
-            </dl>
-        </div>
-        <#break>
-        </#if>
-        </#list>
-        </#if>
+    </#if>
+    <#if product_index == 4>
+    <div class="rec last">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+        </dl>
     </div>
+    <#break>
+</#if>
+</#list>
+</#if>
+</div>
 
-    <div class="Recommend_row1 row2">
+<div class="Recommend_row1 row2">
     <#if productDtos2??>
     <#list productDtos2 as product>
     <#if product_index < 4 >
@@ -226,20 +176,20 @@ Import and Export Product Trading Network
             <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
         </dl>
     </div>
-    </#if>
-    <#if product_index == 4>
-    <div class="rec last">
+</#if>
+<#if product_index == 4>
+<div class="rec last">
     <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
         <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
         <dd>${product.productName}</dd>
         <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
     </dl>
-    </div>
-    <#break>
-    </#if>
-    </#list>
-    </#if>
-    </div>
+</div>
+<#break>
+</#if>
+</#list>
+</#if>
+</div>
 <div class="Recommend_row1 row2">
     <#if productDtos3??>
     <#list productDtos3 as product>
@@ -266,7 +216,6 @@ Import and Export Product Trading Network
 </#if>
 </div>
 </div>
-
 </@override>
 
 <@override name="js">
@@ -300,6 +249,7 @@ Import and Export Product Trading Network
 
     //获取某个类别的产品
     function getAssortProduct(assortId,page,limit) {
+        console.log("111");
         var data = {
             assortId:assortId,
             isUpper:1,
@@ -319,48 +269,48 @@ Import and Export Product Trading Network
                 $("#pro").empty();
                 var pro = '<div class="pro_left" onclick="getProductInfo('+data.data[0].productId+')" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
                 pro+='<div class="pro_right">\n' +
-            '            <div class="pro_top">\n' +
-            '                <dl class="pro_top1 one" onclick="getProductInfo('+data.data[0].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[0].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[0].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1 " onclick="getProductInfo('+data.data[1].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[1].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[1].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[2].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[2].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[2].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[3].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[3].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[3].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '            </div>\n' +
-            '            <div class="pro_top pro_down" onclick="getProductInfo('+data.data[4].productId+')">\n' +
-            '                <dl class="pro_top1 one">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[4].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[4].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[5].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[5].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[5].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1" onclick="getProductInfo('+data.data[6].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[6].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[6].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[7].productId+')">\n' +
-            '                    <dt style="background-size: cover!important;background: url('+data.data[7].productImage+');"></dt>\n' +
-            '                    <dd>'+data.data[7].productName+'</dd>\n' +
-            '                </dl>\n' +
-            '            </div>\n' +
-            '        </div>';
+                    '            <div class="pro_top">\n' +
+                    '                <dl class="pro_top1 one" onclick="getProductInfo('+data.data[0].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[0].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[0].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1 " onclick="getProductInfo('+data.data[1].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[1].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[1].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1" onclick="getProductInfo('+data.data[2].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[2].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[2].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[3].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[3].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[3].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '            </div>\n' +
+                    '            <div class="pro_top pro_down" onclick="getProductInfo('+data.data[4].productId+')">\n' +
+                    '                <dl class="pro_top1 one">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[4].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[4].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1" onclick="getProductInfo('+data.data[5].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[5].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[5].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1" onclick="getProductInfo('+data.data[6].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[6].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[6].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '                <dl class="pro_top1 last" onclick="getProductInfo('+data.data[7].productId+')">\n' +
+                    '                    <dt style="background-size: cover!important;background: url('+data.data[7].productImage+');"></dt>\n' +
+                    '                    <dd>'+data.data[7].productName+'</dd>\n' +
+                    '                </dl>\n' +
+                    '            </div>\n' +
+                    '        </div>';
                 $("#pro").append(pro);
             },
-           /* error:function () {
-                alert("请求发送失败");
-            }*/
+            /* error:function () {
+                 alert("请求发送失败");
+             }*/
         });
     };
 
@@ -370,14 +320,7 @@ Import and Export Product Trading Network
         window.open('/product/toDetail?productId='+productId,'_blank');
 
     }
-    //查看全部询盘
-    function getAllEnquiry(page,limit) {
-        window.location.href = '/enquiry/toEnquiryList';
-    }
 
-    function getMessageDetail(id) {
-        window.location.href = '/index/getMessageDetail/'+id;
-    }
 
 </script>
 
