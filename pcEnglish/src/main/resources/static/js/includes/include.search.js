@@ -1,12 +1,11 @@
 function changeV(v) {
     var text = $(v).text();
     $("#search_type_name").html(text);
-
     switch (text) {
-        case "产品":
+        case "shop":
             $("#search_type").val(1);
             break;
-        case "店铺":
+        case "Product":
             $("#search_type").val(2);
             break;
     }
@@ -16,9 +15,9 @@ function changeV(v) {
 function btn_search(){
     var searchType = $("#search_type").val();
     var searchProductName = $("#search_productName").val();
-    if (searchType == 1) {
+    if (searchType == 2) {
         window.location.href = "/product/search?&searchProductName=" + searchProductName;
-    } else if (searchType == 2) {
+    } else if (searchType == 1) {
         window.location.href = "/shop/getList?&shopName=" + searchProductName;
     }
 }
