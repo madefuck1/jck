@@ -13,6 +13,7 @@ import com.soufang.base.dto.order.OrderProductDto;
 import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.favorite.FavoriteSo;
@@ -278,10 +279,10 @@ public class PersonalCenterController extends BaseController {
         BaseVo vo = new BaseVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.success.getMessage());
         } else {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.failed.getMessage());
         }
         return vo;
     }
@@ -330,11 +331,11 @@ public class PersonalCenterController extends BaseController {
         if (listDto != null && listDto.size() > 0) {
             invoiceVo.setSuccess(true);
             invoiceVo.setData(listDto);
-            invoiceVo.setMessage("查询成功");
+            invoiceVo.setMessage("search successful");
         } else {
             invoiceVo.setData(null);
             invoiceVo.setSuccess(false);
-            invoiceVo.setMessage("对不起！您没有相关的发票信息");
+            invoiceVo.setMessage("You have no relevant invoice information");
         }
         model.put("invoiceVo", invoiceVo);
         return invoiceVo;
@@ -445,7 +446,7 @@ public class PersonalCenterController extends BaseController {
                 result = pcUserFeign.update(userDto);
             } else {
                 result.setSuccess(false);
-                result.setMessage("头像上传失败");
+                result.setMessage("Avatar upload failed");
             }
         } else {
             result = pcUserFeign.update(userDto);
@@ -524,9 +525,9 @@ public class PersonalCenterController extends BaseController {
         FavoeiteVo vo = new FavoeiteVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.success.getMessage());
         } else {
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.failed.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -606,9 +607,9 @@ public class PersonalCenterController extends BaseController {
         FootPrintVo vo = new FootPrintVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.success.getMessage());
         } else {
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.failed.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -694,7 +695,8 @@ public class PersonalCenterController extends BaseController {
                 result = enquiryFeign.addEnquiry(enquiryDto);
             } else {
                 result.setSuccess(false);
-                result.setMessage("图片上传失败");
+                //图片上传失败
+                result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
             }
         } else {
             result = enquiryFeign.addEnquiry(enquiryDto);
@@ -756,9 +758,9 @@ public class PersonalCenterController extends BaseController {
         EnquiryVo vo = new EnquiryVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.success.getMessage());
         } else {
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.failed.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -778,6 +780,12 @@ public class PersonalCenterController extends BaseController {
         suggestDto.setCreateTime(DateUtils.getToday());
         suggestDto.setUserId(getUserInfo(request).getUserId());
         Result result = pcUserFeign.addSuggest(suggestDto);
+        if(result.isSuccess()){
+            result.setMessage(ErrorEnum.success.getMessage());
+        }
+        else {
+            result.setMessage(ErrorEnum.failed.getMessage());
+        }
         return result;
     }
 

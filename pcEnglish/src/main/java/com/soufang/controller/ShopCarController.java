@@ -71,10 +71,10 @@ public class ShopCarController extends BaseController {
         // 删除用户选中的购车产品
         Result result = shopCarFeign.delete(dto);
         if (result.isSuccess()) {
-            vo.setMessage("删除成功！");
+            vo.setMessage("successfully deleted！");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("删除失败！");
+            vo.setMessage("failed to delete！");
         }
         return vo;
     }
@@ -158,10 +158,10 @@ public class ShopCarController extends BaseController {
         // 购物车添加产品
         Result result = shopCarFeign.addToShopCar(dto);
         if (result.isSuccess()) {
-            vo.setMessage("添加成功！");
+            vo.setMessage("add successfully！");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("添加失败！");
+            vo.setMessage("add failed！");
         }
         return vo;
     }
@@ -183,10 +183,10 @@ public class ShopCarController extends BaseController {
         Result result = shopCarFeign.update(shopCarProductDto);
         if (result.isSuccess()) {
             vo.setSuccess(true);
-            vo.setMessage("更新成功");
+            vo.setMessage("update completed");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("更新失败！");
+            vo.setMessage("update failed！");
         }
         return vo;
     }

@@ -8,6 +8,7 @@ import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
@@ -119,7 +120,7 @@ public class EnquiryPurchaseController extends BaseController{
                     result= enquiryFeign.addEnquiry(enquiryDto);
                 } else {
                     result.setSuccess(false);
-                    result.setMessage("图片上传失败");
+                    result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
                 }
             }else {
                 result= enquiryFeign.addEnquiry(enquiryDto);
@@ -177,7 +178,7 @@ public class EnquiryPurchaseController extends BaseController{
                 result= enquiryFeign.updateEnquiryAndProduct(enquiryDto);
             } else {
                 result.setSuccess(false);
-                result.setMessage("图片上传失败");
+                result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
             }
         }else {
             result=enquiryFeign.updateEnquiryAndProduct(enquiryDto);
@@ -207,6 +208,11 @@ public class EnquiryPurchaseController extends BaseController{
     @RequestMapping(value = "delEnProImgUrl",method = RequestMethod.POST)
     public Result delEnProImgUrl(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo){
         Result result = enquiryProductFeign.delEnProImgUrl(enquiryProductUpdateVo);
+        if(result.isSuccess()){
+            result.setMessage(ErrorEnum.delete_true.getMessage());
+        }else {
+            result.setMessage(ErrorEnum.delete_error.getMessage());
+        }
         return  result;
     }
 
@@ -244,9 +250,11 @@ public class EnquiryPurchaseController extends BaseController{
         purchaseSo.setEnquiryProductId(purchseUseRefusedVo.getEnquiryProductId());
         int i = purchaseFeign.acceptPurchasePc(purchaseSo);
         if(i>0){
-            result.setMessage("报价成功");
+            //报价成功
+            result.setMessage("Successful bid");
         }else{
-            result.setMessage("报价异常");
+            //报价异常
+            result.setMessage("Abnormal offer");
         }
         return result;
     }
@@ -322,28 +330,31 @@ public class EnquiryPurchaseController extends BaseController{
         //查询当前商铺信息
         ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
         if("".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
-            result.setMessage("不可以报价");
+            //不可以报价
+            result.setMessage("Can't quote");
         }else{
         if(shopInfo.getShopStatus()==0){
             //是商家 且询盘产品不是自己
             //查询当前产品所属询盘用户信息
             Long userId=enquiryFeign.selUserIdByEnquiryNumber(enquirySo.getEnquiryNumber());
             if(!(userInfo.getUserId().equals(userId))){
-                //相等则是统一商家
-                result.setMessage("可以报价");
+                //相等则是统一商家   可以报价
+                result.setMessage("Can quote");
                 //还要判断当前用户有没有对该询盘报价过
                 PurchaseSo purchaseSo =new PurchaseSo();
                 purchaseSo.setEnquiryProductId(enquirySo.getEnquiryProductId());
                 purchaseSo.setShopId(shopInfo.getShopId());
                int userPumber= purchaseFeign.userPurchaseNumber(purchaseSo);
                if(userPumber > 0 ){
-                   result.setMessage("已经报价过");
+                   //已经报价过
+                   result.setMessage("Already quoted");
                }
             }else{
-                result.setMessage("不可以报价");
+                //不可以报价
+                result.setMessage("Can't quote");
             }
         }else{
-            result.setMessage("不可以报价");
+            result.setMessage("Can't quote");
         }
         }
         return result;
@@ -363,10 +374,10 @@ public class EnquiryPurchaseController extends BaseController{
         Result result= new Result();
        if(enquiryFeign.purchase(purchaseDto)>0){
            result.setSuccess(true);
-           result.setMessage("报价成功");
+           result.setMessage("Successful bid");
        }else {
            result.setSuccess(false);
-           result.setMessage("报价异常，请联系服务人员");
+           result.setMessage("Abnormal offer");
        }
        return result;
     }
@@ -377,9 +388,9 @@ public class EnquiryPurchaseController extends BaseController{
         EnquiryVo vo = new EnquiryVo();
         if(result.isSuccess()){
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.success.getMessage());
         }else {
-            vo.setMessage(result.getMessage());
+            vo.setMessage(ErrorEnum.failed.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
