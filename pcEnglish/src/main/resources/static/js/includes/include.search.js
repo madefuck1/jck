@@ -1,16 +1,15 @@
 function changeV(v) {
     var text = $(v).text();
     $("#search_type_name").html(text);
-
     switch (text) {
-        case "产品":
-            $("#search_type").val(1);
-            break;
-        case "店铺":
+        case "Shop":
             $("#search_type").val(2);
             break;
+        case "Product":
+            $("#search_type").val(1);
+            break;
     }
-    $('#search_productName').focus()
+    $('#search_productName').focus();
 }
 
 function btn_search(){

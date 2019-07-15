@@ -11,13 +11,21 @@
         </div>
         <div class="contain-r">
             <div class="contain-row4">
-                <div class="person"></div>
+                <#if isLonIn?? && isLonIn != "N">
+                <div ><img src="${loginAvatar}" style="width: 70px;height: 70px;border-radius: 35px;float: left;"></div>
+                <div class="row4-r-r">
+                    <p style="margin-bottom: 6px">Welcome</p>
+                    <button type="button" style="color: #666;"><a href="/personalCenter/toPersonalCenter" target="_blank"  >${loginPhone!}</a></button>
+                    <button type="button" style="color: #666;"><a href="/user/signOut" target="_blank"  >sign out</a></button>
+                </div>
+                <#else>
+                <div class="person" ></div>
                 <div class="row4-r">
                     <p style="margin-bottom: 6px">Welcome</p>
                     <button type="button" class="btn-1" style="margin-bottom: 6px">login</button>
                     <button type="button" class="btn-1">Register</button>
                 </div>
-
+                </#if>
             </div>
             <div class="contain-row1">
                 <a href="/enquiry/create">
@@ -44,9 +52,13 @@
                 </div>
             </div>
             <div class="contain-row3">
-                <button type="button" class="btn-1" style="margin-right: 6px;">My Inquiry</button>
+                <a href="/personalCenter/toEnquiryManage">
+                <button onclick="toEnquiry()" type="button" class="btn-1" style="margin-right: 6px;">My Enquiry</button>
+                </a>
                <!-- <button type="button" class="btn-1">Order Inquiry</button>-->
+                <a href="/orderManager/toOrderManager">
                 <button type="button" class="btn-1" style="margin-right: 6px;">All Inquiries</button>
+                </a>
                <!-- <button type="button" class="btn-1">Message</button>-->
             </div>
         </div>
