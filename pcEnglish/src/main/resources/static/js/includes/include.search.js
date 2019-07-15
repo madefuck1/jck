@@ -2,22 +2,22 @@ function changeV(v) {
     var text = $(v).text();
     $("#search_type_name").html(text);
     switch (text) {
-        case "shop":
-            $("#search_type").val(1);
-            break;
-        case "Product":
+        case "Shop":
             $("#search_type").val(2);
             break;
+        case "Product":
+            $("#search_type").val(1);
+            break;
     }
-    $('#search_productName').focus()
+    $('#search_productName').focus();
 }
 
 function btn_search(){
     var searchType = $("#search_type").val();
     var searchProductName = $("#search_productName").val();
-    if (searchType == 2) {
+    if (searchType == 1) {
         window.location.href = "/product/search?&searchProductName=" + searchProductName;
-    } else if (searchType == 1) {
+    } else if (searchType == 2) {
         window.location.href = "/shop/getList?&shopName=" + searchProductName;
     }
 }
