@@ -55,9 +55,6 @@ public class AppUserController extends AppBaseController {
             userVo.setSuccess(false);
             return userVo;
         }
-        if(StringUtils.isBlank(loginReqVo.getPhone())){
-            userDto.setPhone("121");
-        }
         if(StringUtils.isNotBlank(loginReqVo.getPassword())){
             userDto.setPhone(loginReqVo.getPhone());
             userDto.setEmail(loginReqVo.getEmail());

@@ -210,7 +210,9 @@ public class AppOrderController extends AppBaseController {
         orderProductDto.setProductName(productDto.getProductName());
         orderProductDto.setProductNumber(new BigDecimal(reqVo.getProductNumber()));
         orderProductDto.setProductUnit(productDto.getProductUnit());
+
         orderProductDto.setProductPrice(productDto.getProductSpecDto().getSpecNumber());
+
         orderProductDto.setProductColor(reqVo.getProductColor());
         orderProductDto.setProductSpec(reqVo.getProductSpecName());
         sumMoney = sumMoney.add(orderProductDto.getProductNumber().multiply(orderProductDto.getProductPrice()));

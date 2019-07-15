@@ -309,10 +309,23 @@ a:hover{
 	float: left;
 	background: url(../images/5.jpg) center;
 }
+.contain-row4 .person-r{
+	width: 70px;
+	height: 70px;
+	border-radius: 35px;
+	float: left;
+	background: url(${loginAvatar}) center;
+}
 
 .row4-r{
 	float: left;
 	margin-left: 16px
+}
+
+.row4-r-r{
+	float: left;
+	margin-left: 86px;
+	margin-top: -60px
 }
 
 .row4-r .btn-1{

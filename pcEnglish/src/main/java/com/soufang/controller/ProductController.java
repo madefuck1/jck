@@ -587,8 +587,8 @@ public class ProductController extends BaseController {
      * @param type
      * @return
      */
-    @ResponseBody
     @MemberAccess
+    @ResponseBody
     @RequestMapping(value = "isCollection", method = RequestMethod.GET)
     public Boolean isCollection(HttpServletRequest request, Long productId, Integer type,String productName) {
         UserDto userDto = getUserInfo(request);

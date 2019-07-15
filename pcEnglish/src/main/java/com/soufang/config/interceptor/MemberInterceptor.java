@@ -89,7 +89,7 @@ public class MemberInterceptor extends HandlerInterceptorAdapter {
                         // 用户级别
                         modelAndView.addObject("loginLevel", UserLevelEnum.getByKey(userinfo.getUserLevel()));
                         // 用户头像
-                        modelAndView.addObject("loginAvatar", PropertiesParam.file_pre + userinfo.getUserAvatar());
+                        modelAndView.addObject("loginAvatar", userinfo.getUserAvatar());
                         // 购物车数量
                         modelAndView.addObject("shopCarCount", shopCarFeign.getShopCarCountByUserId(userId));
                         // 消息数量 todo 获取消息数量
