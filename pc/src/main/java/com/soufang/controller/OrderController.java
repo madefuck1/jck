@@ -217,9 +217,11 @@ public class OrderController extends BaseController {
             //付定金，重新生成订单
             orderFeign.payOrder(orderShopDto);
             orderShopDto = orderFeign.getDetail(orderShopId);
-            model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.3")));
+            //model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.3")));
+            model.put("payMoney", "0.01");
         } else if (orderShopDto.getOrderShopStatus() == OrderStatusEnum.to_pay_last.getValue()) {
-            model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.7")));
+            //model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.7")));
+            model.put("payMoney", "0.01");
         } else {
             return "404";
         }

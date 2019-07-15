@@ -38,7 +38,7 @@ public class AppPushController extends AppBaseController{
         pushSo.setUserId(userInfo.getUserId());
         pushSo.setPushStatus(1);
         pushSo.setPage(0);
-        pushSo.setLimit(0);
+        pushSo.setLimit(10);
         PageHelp<PushDto> pageHelp = appPushFeign.getList(pushSo);
         UnReadPushVo vo = new UnReadPushVo();
         if(pageHelp.getData() != null && pageHelp.getData().size() > 0 ){
