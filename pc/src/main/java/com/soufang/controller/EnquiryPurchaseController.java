@@ -255,8 +255,10 @@ public class EnquiryPurchaseController extends BaseController{
         purchaseSo.setEnquiryProductId(purchseUseRefusedVo.getEnquiryProductId());
         int i = purchaseFeign.acceptPurchasePc(purchaseSo);
         if(i>0){
+            result.setSuccess(true);
             result.setMessage("报价成功");
         }else{
+            result.setSuccess(false);
             result.setMessage("报价异常");
         }
         return result;

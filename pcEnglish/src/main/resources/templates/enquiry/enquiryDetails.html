@@ -235,8 +235,13 @@ Purchase details
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
             success: function (data) {
-                alert(data.message);
-                window.open("/enquiry/toMyQuote");
+            	if(data.success==true){
+					alert("The quote was successful");
+					window.open("/enquiry/toMyQuote");
+				}else{
+            		alert("Unusual quote");
+				}
+
             }
         });
     }
