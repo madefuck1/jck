@@ -12,7 +12,6 @@ package com.soufang.vo.exhibition;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 /**
  * 〈一句话功能简述〉<br> 

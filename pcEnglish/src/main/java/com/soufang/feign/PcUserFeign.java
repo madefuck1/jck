@@ -27,7 +27,7 @@ public interface PcUserFeign {
     Result register(@RequestBody UserDto userDto);
 
     @RequestMapping(value = "/core/user/update",method = RequestMethod.POST)
-    Result update (@RequestBody UserDto userDto);
+    Result update(@RequestBody UserDto userDto);
 
     @RequestMapping(value = "/core/company/addCompany",method = RequestMethod.POST)
     Result addCompany(@RequestBody CompanyDto companyDto);

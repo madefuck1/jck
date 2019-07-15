@@ -84,14 +84,7 @@ New inquiry
                             <div class="am-form-content">
                                 <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="Please fill in the quantity">
                                 <select id="productUnit" style="width:150px;padding: 5px;">
-                                    <option value="米">Meter</option>
-                                    <option value="公斤" >kg</option>
-                                    <option value="千克" selected>kilogram</option>
-                                    <option value="公升" >liter</option>
-                                    <option value="箱" >box</option>
-                                    <option value="包" >One</option>
-                                    <option value="包" >station</option>
-                                    <option value="包" >Piece</option>
+                                    <option selected="selected" value="0">Please select the unit </option>
                                 </select>
                             </div>
                         </div>
@@ -138,6 +131,19 @@ New inquiry
 <@override name="js">
 <script>
     $(function(){
+        //默认单位加载
+        $.ajax({
+            url : "getListByDictKey",
+            type : "post",
+            contentType: 'application/json; charset=UTF-8',
+            dataType : "json",
+            success : function(data) {
+                $.each(data.data, function (i, v) {
+                    var str="<option value='"+v.dictId+"'>"+v.dictVDescription+"</option>"
+                    $("#productUnit").append(str);
+                });
+            }
+        });
         var isUpdate= $("#isUpdate").val();
         var enquiryNumber= $("#enquiryNumber").val();
        if(isUpdate==null||isUpdate==""){
@@ -333,9 +339,10 @@ New inquiry
                success: function (data) {
                    //上传成功的处理
                    if (data.success==true) {
-                       alert(data.message);
+                       alert("Published successfully");
                        window.location.href="/personalCenter/toEnquiryManage";
                    } else {
+                       alert("Publishing exceptions");
                    }
                }
            });

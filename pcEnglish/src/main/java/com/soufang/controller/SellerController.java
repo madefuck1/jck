@@ -9,7 +9,6 @@ import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.assess.AssessSo;
 import com.soufang.base.search.order.OrderSo;
@@ -143,10 +142,10 @@ public class SellerController extends BaseController {
         BaseVo vo = new BaseVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         } else {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
         }
         return vo;
     }
@@ -199,19 +198,13 @@ public class SellerController extends BaseController {
         BaseVo vo = new BaseVo();
         OrderShopDto shopDto = new OrderShopDto();
         if (StringUtils.isBlank(String.valueOf(upActualPrice.getActualPrice()))) {
-            //请输入价格
-            vo.setMessage("Please enter the price");
+            vo.setMessage("请输入价格");
             vo.setSuccess(false);
             return vo;
         }
         BeanUtils.copyProperties(upActualPrice, shopDto);
         Result result = pcUserFeign.updateActualPrice(shopDto);
-        if(result.isSuccess()){
-            vo.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
-        }
+        vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }
@@ -270,12 +263,7 @@ public class SellerController extends BaseController {
     public BaseVo getDown(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.getDown(ids);
-        if(result.isSuccess()){
-            vo.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
-        }
+        vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }
@@ -287,12 +275,7 @@ public class SellerController extends BaseController {
     public BaseVo putUp(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.putUp(ids);
-        if(result.isSuccess()){
-            vo.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
-        }
+        vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }
@@ -304,12 +287,7 @@ public class SellerController extends BaseController {
     public BaseVo deleteProduct(String[] ids) {
         BaseVo vo = new BaseVo();
         Result result = productFeign.deleteProduct(ids);
-        if(result.isSuccess()){
-            vo.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
-        }
+        vo.setMessage(result.getMessage());
         vo.setSuccess(result.isSuccess());
         return vo;
     }

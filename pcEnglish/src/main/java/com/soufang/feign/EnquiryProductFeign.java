@@ -1,8 +1,6 @@
 package com.soufang.feign;
 
 import com.soufang.base.Result;
-import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
-import com.soufang.base.page.PageHelp;
 import com.soufang.vo.enquiryProduct.EnquiryProductUpdateVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

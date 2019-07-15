@@ -13,7 +13,6 @@ import com.soufang.base.dto.order.OrderProductDto;
 import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.favorite.FavoriteSo;
@@ -39,7 +38,6 @@ import com.soufang.vo.footPrint.FootPrintVo;
 import com.soufang.vo.invoice.InvoiceAddVo;
 import com.soufang.vo.invoice.InvoiceVo;
 import com.soufang.vo.invoice.UpdateInvoiceVo;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -279,10 +277,10 @@ public class PersonalCenterController extends BaseController {
         BaseVo vo = new BaseVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         } else {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
         }
         return vo;
     }
@@ -331,11 +329,11 @@ public class PersonalCenterController extends BaseController {
         if (listDto != null && listDto.size() > 0) {
             invoiceVo.setSuccess(true);
             invoiceVo.setData(listDto);
-            invoiceVo.setMessage("search successful");
+            invoiceVo.setMessage("查询成功");
         } else {
             invoiceVo.setData(null);
             invoiceVo.setSuccess(false);
-            invoiceVo.setMessage("You have no relevant invoice information");
+            invoiceVo.setMessage("对不起！您没有相关的发票信息");
         }
         model.put("invoiceVo", invoiceVo);
         return invoiceVo;
@@ -418,9 +416,6 @@ public class PersonalCenterController extends BaseController {
     @RequestMapping(value = "/toInformation", method = RequestMethod.GET)
     public String informationHtml(ModelMap map, HttpServletRequest request) {
         UserDto userInfo = this.getUserInfo(request);
-        if (StringUtils.isNotBlank(userInfo.getUserAvatar())) {
-            userInfo.setUserAvatar(PropertiesParam.file_pre + userInfo.getUserAvatar());
-        }
         map.put("userInfo", userInfo);
         return "personalCenter/information";
     }
@@ -446,7 +441,7 @@ public class PersonalCenterController extends BaseController {
                 result = pcUserFeign.update(userDto);
             } else {
                 result.setSuccess(false);
-                result.setMessage("Avatar upload failed");
+                result.setMessage("头像上传失败");
             }
         } else {
             result = pcUserFeign.update(userDto);
@@ -525,9 +520,9 @@ public class PersonalCenterController extends BaseController {
         FavoeiteVo vo = new FavoeiteVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         } else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -607,9 +602,9 @@ public class PersonalCenterController extends BaseController {
         FootPrintVo vo = new FootPrintVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         } else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -695,8 +690,7 @@ public class PersonalCenterController extends BaseController {
                 result = enquiryFeign.addEnquiry(enquiryDto);
             } else {
                 result.setSuccess(false);
-                //图片上传失败
-                result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
+                result.setMessage("图片上传失败");
             }
         } else {
             result = enquiryFeign.addEnquiry(enquiryDto);
@@ -758,9 +752,9 @@ public class PersonalCenterController extends BaseController {
         EnquiryVo vo = new EnquiryVo();
         if (result.isSuccess()) {
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         } else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;
@@ -780,12 +774,6 @@ public class PersonalCenterController extends BaseController {
         suggestDto.setCreateTime(DateUtils.getToday());
         suggestDto.setUserId(getUserInfo(request).getUserId());
         Result result = pcUserFeign.addSuggest(suggestDto);
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
-        }
         return result;
     }
 

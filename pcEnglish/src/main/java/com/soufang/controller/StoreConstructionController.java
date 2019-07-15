@@ -6,7 +6,6 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.storeConstruction.*;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.enums.StoreConstructionSortEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.utils.FtpClient;
@@ -74,7 +73,7 @@ public class StoreConstructionController extends BaseController {
                     vo.setSuccess(true);
                 } else {
                     vo.setSuccess(false);
-                    vo.setMessage("Replace the logo failed, please replace it.");
+                    vo.setMessage("logo更换失败，请重新更换！");
                 }
             } else {
                 dto.setStoreLogo(map.get("uploadName").toString());
@@ -84,12 +83,12 @@ public class StoreConstructionController extends BaseController {
                     vo.setSuccess(true);
                 } else {
                     vo.setSuccess(false);
-                    vo.setMessage("Replace the logo failed, please replace it.");
+                    vo.setMessage("logo更换失败，请重新更换！");
                 }
             }
         } else {
             vo.setSuccess(false);
-            vo.setMessage("Logo upload failed");
+            vo.setMessage("logo图片上传失败");
             return vo;
         }
         return vo;
@@ -123,7 +122,7 @@ public class StoreConstructionController extends BaseController {
                 baseVo.setSuccess(true);
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("The background color replacement failed. Please replace it.");
+                baseVo.setMessage("背景色更换失败，请重新更换！");
             }
         } else {
             storeInfo.setStoreNavColor(background);
@@ -133,7 +132,7 @@ public class StoreConstructionController extends BaseController {
                 baseVo.setSuccess(true);
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("The background color replacement failed. Please replace it.");
+                baseVo.setMessage("背景色更换失败，请重新更换！");
             }
         }
         return baseVo;
@@ -342,12 +341,6 @@ public class StoreConstructionController extends BaseController {
     public Result publish(HttpServletRequest request) {
         ShopDto shop = getShopInfo(request);
         Result result = storeConstructionFeign.publish(shop.getShopId());
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
-        }
         return result;
     }
 
@@ -364,12 +357,6 @@ public class StoreConstructionController extends BaseController {
     public Result delAssortByKey(HttpServletRequest request, @PathVariable Long assortId) {
         // 封装数据
         Result result = storeConstructionFeign.delAssortByKey(assortId);
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
-        }
         return result;
     }
 
@@ -406,12 +393,6 @@ public class StoreConstructionController extends BaseController {
             storeExclusiveAssortDto.setExclusiveAssortId(reqVo.getExclusiveAssortId());
             storeExclusiveAssortDto.setAssortName(reqVo.getAssortName());
             result = storeConstructionFeign.updAssort(storeExclusiveAssortDto);
-        }
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
         }
         return result;
     }
@@ -461,14 +442,8 @@ public class StoreConstructionController extends BaseController {
             List<String> ids = Arrays.asList(split);
             productAssortDto.setExclusiveAssortIds(ids);
         }
-        Result result = storeConstructionFeign.saveProductAssort(productAssortDto);
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
-        }
-        return result;
+        return storeConstructionFeign.saveProductAssort(productAssortDto);
+
     }
 
 

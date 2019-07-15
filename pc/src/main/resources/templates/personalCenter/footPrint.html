@@ -18,11 +18,11 @@
 								<div class="am-cf am-padding">
 									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的足迹</strong></div>
 								</div>
-							<div id="noData" style="display:none;">
-							<#include "/noData.html"/>
-							</div>
-
 								<hr/>
+							<div id="noData" style="display:none;">
+								<!--<img src="../static/images/no/11.png" alt="">-->
+								<p align="center">当前没有足迹信息</p>
+							</div>
 								<!--足迹列表 /今天-->
 								<div id="tableFoot"></div>
 								<div class="clear"></div>
@@ -59,7 +59,7 @@
             dataType : "json",
             success : function(data) {
                if (data.data.length==0){
-                   document.getElementById("noData").style.display="block";//显示
+                  document.getElementById("noData").style.display="block";//显示
 				}else{
 				   var a=0;
                    $.each(data.data, function (i, v) {

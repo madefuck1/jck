@@ -2,7 +2,10 @@ package com.soufang.feign;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
-import com.soufang.base.dto.storeConstruction.*;
+import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
+import com.soufang.base.dto.storeConstruction.StoreCurouselMapList;
+import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
+import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

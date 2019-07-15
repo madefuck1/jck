@@ -269,7 +269,7 @@ public class OrderController extends BaseController {
                 baseVo.setMessage(PropertiesParam.file_pre + resultMap.get("uploadName").toString());
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("Fail, try again.");
+                baseVo.setMessage("失败，再试一次吧");
             }
         }
         return baseVo;
@@ -298,11 +298,11 @@ public class OrderController extends BaseController {
                 orderFeign.updateOrderStatus(orderShopDto);
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("Fail, try again.");
+                baseVo.setMessage("失败，再试一次吧");
             }
         } else {
             baseVo.setSuccess(false);
-            baseVo.setMessage("Please download the contract first");
+            baseVo.setMessage("请先下载合同");
         }
         return baseVo;
     }

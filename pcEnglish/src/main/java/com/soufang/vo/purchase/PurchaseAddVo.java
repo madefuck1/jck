@@ -10,8 +10,6 @@
  */
 package com.soufang.vo.purchase;
 
-import com.soufang.base.dto.shop.ShopDto;
-
 import java.math.BigDecimal;
 import java.util.Date;
 

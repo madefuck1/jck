@@ -1,37 +1,34 @@
 package com.soufang.controller;
 
 import com.soufang.base.Result;
-import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.dictionary.DictionaryDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
-import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
-import com.soufang.feign.AssortFeign;
-import com.soufang.feign.EnquiryFeign;
-import com.soufang.feign.EnquiryProductFeign;
-import com.soufang.feign.PurchaseFeign;
+import com.soufang.feign.*;
 import com.soufang.vo.Enquiry.EnquiryAddVo;
 import com.soufang.vo.Enquiry.EnquiryDetailsVo;
-import com.soufang.vo.Enquiry.EnquiryUpdateVo;
 import com.soufang.vo.Enquiry.EnquiryVo;
+import com.soufang.vo.dictionary.DictionaryVo;
 import com.soufang.vo.enquiryProduct.EnquiryProductUpdateVo;
-import com.soufang.vo.favorite.FavoriteAddVo;
 import com.soufang.vo.purchase.PurchseUseRefusedVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +53,8 @@ public class EnquiryPurchaseController extends BaseController{
     PurchaseFeign purchaseFeign;
     @Autowired
     AssortFeign assortFeign ;
-
+    @Autowired
+    PcDictionaryFeign pcDictionaryFeign ;
 
     @Value("${upload.enquiry}")
     private String uploadUrl;
@@ -76,6 +74,21 @@ public class EnquiryPurchaseController extends BaseController{
         }
         return "/personalCenter/createEnquiry";
     }
+
+    /**
+     * 获取产品单位信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getListByDictKey",method = RequestMethod.POST)
+    public DictionaryVo getListByDictKey(){
+        String dictKey="enquiryUnit";
+        List<DictionaryDto> dictionaryDtos=pcDictionaryFeign.getListByDictKey(dictKey);
+        DictionaryVo dictionaryVo= new DictionaryVo();
+        dictionaryVo.setData(dictionaryDtos);
+        return dictionaryVo;
+    }
+
 
     /**
      * 新增
@@ -120,7 +133,7 @@ public class EnquiryPurchaseController extends BaseController{
                     result= enquiryFeign.addEnquiry(enquiryDto);
                 } else {
                     result.setSuccess(false);
-                    result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
+                    result.setMessage("图片上传失败");
                 }
             }else {
                 result= enquiryFeign.addEnquiry(enquiryDto);
@@ -178,7 +191,7 @@ public class EnquiryPurchaseController extends BaseController{
                 result= enquiryFeign.updateEnquiryAndProduct(enquiryDto);
             } else {
                 result.setSuccess(false);
-                result.setMessage(ErrorEnum.uploadPicture_error.getMessage());
+                result.setMessage("图片上传失败");
             }
         }else {
             result=enquiryFeign.updateEnquiryAndProduct(enquiryDto);
@@ -208,11 +221,6 @@ public class EnquiryPurchaseController extends BaseController{
     @RequestMapping(value = "delEnProImgUrl",method = RequestMethod.POST)
     public Result delEnProImgUrl(@RequestBody EnquiryProductUpdateVo enquiryProductUpdateVo){
         Result result = enquiryProductFeign.delEnProImgUrl(enquiryProductUpdateVo);
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.delete_true.getMessage());
-        }else {
-            result.setMessage(ErrorEnum.delete_error.getMessage());
-        }
         return  result;
     }
 
@@ -250,11 +258,9 @@ public class EnquiryPurchaseController extends BaseController{
         purchaseSo.setEnquiryProductId(purchseUseRefusedVo.getEnquiryProductId());
         int i = purchaseFeign.acceptPurchasePc(purchaseSo);
         if(i>0){
-            //报价成功
-            result.setMessage("Successful bid");
+            result.setMessage("报价成功");
         }else{
-            //报价异常
-            result.setMessage("Abnormal offer");
+            result.setMessage("报价异常");
         }
         return result;
     }
@@ -329,32 +335,29 @@ public class EnquiryPurchaseController extends BaseController{
         UserDto userInfo = getUserInfo(request);
         //查询当前商铺信息
         ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
-        if("".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
-            //不可以报价
-            result.setMessage("Can't quote");
+        if(shopInfo == null || "".equals(shopInfo.getShopStatus())|| null==shopInfo.getShopStatus()) {
+            result.setMessage("不可以报价");
         }else{
         if(shopInfo.getShopStatus()==0){
             //是商家 且询盘产品不是自己
             //查询当前产品所属询盘用户信息
             Long userId=enquiryFeign.selUserIdByEnquiryNumber(enquirySo.getEnquiryNumber());
             if(!(userInfo.getUserId().equals(userId))){
-                //相等则是统一商家   可以报价
-                result.setMessage("Can quote");
+                //相等则是统一商家
+                result.setMessage("可以报价");
                 //还要判断当前用户有没有对该询盘报价过
                 PurchaseSo purchaseSo =new PurchaseSo();
                 purchaseSo.setEnquiryProductId(enquirySo.getEnquiryProductId());
                 purchaseSo.setShopId(shopInfo.getShopId());
                int userPumber= purchaseFeign.userPurchaseNumber(purchaseSo);
                if(userPumber > 0 ){
-                   //已经报价过
-                   result.setMessage("Already quoted");
+                   result.setMessage("已经报价过");
                }
             }else{
-                //不可以报价
-                result.setMessage("Can't quote");
+                result.setMessage("不可以报价");
             }
         }else{
-            result.setMessage("Can't quote");
+            result.setMessage("不可以报价");
         }
         }
         return result;
@@ -374,10 +377,10 @@ public class EnquiryPurchaseController extends BaseController{
         Result result= new Result();
        if(enquiryFeign.purchase(purchaseDto)>0){
            result.setSuccess(true);
-           result.setMessage("Successful bid");
+           result.setMessage("报价成功");
        }else {
            result.setSuccess(false);
-           result.setMessage("Abnormal offer");
+           result.setMessage("报价异常，请联系服务人员");
        }
        return result;
     }
@@ -388,9 +391,9 @@ public class EnquiryPurchaseController extends BaseController{
         EnquiryVo vo = new EnquiryVo();
         if(result.isSuccess()){
             vo.setSuccess(result.isSuccess());
-            vo.setMessage(ErrorEnum.success.getMessage());
+            vo.setMessage(result.getMessage());
         }else {
-            vo.setMessage(ErrorEnum.failed.getMessage());
+            vo.setMessage(result.getMessage());
             vo.setSuccess(result.isSuccess());
         }
         return vo;

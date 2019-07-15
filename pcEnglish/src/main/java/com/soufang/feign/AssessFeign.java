@@ -1,11 +1,9 @@
 package com.soufang.feign;
 
-import com.soufang.base.Result;
 import com.soufang.base.dto.assess.AssessDto;
 import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.assess.AssessSo;
-import com.soufang.vo.assess.AddAssessVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

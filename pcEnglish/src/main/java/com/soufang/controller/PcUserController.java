@@ -7,7 +7,6 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
@@ -65,7 +64,7 @@ public class PcUserController extends BaseController {
         UserDto userDto = new UserDto();
         String loginName = loginReqVo.getLoginName();
         if (loginName == null) {
-            baseVo.setMessage("Username field cannot be empty");
+            baseVo.setMessage("用户名栏不能为空");
             baseVo.setSuccess(false);
             return baseVo;
         }
@@ -78,9 +77,9 @@ public class PcUserController extends BaseController {
         Result result = pcUserFeign.login(userDto);
         if (result.isSuccess()) {
             setToken(Long.valueOf(result.getMessage()), response);
-            baseVo.setMessage("login successful");
+            baseVo.setMessage("登录成功");
         } else {
-            baseVo.setMessage("Login failed" /*+ result.getMessage()*/ );
+            baseVo.setMessage("登录失败:" + result.getMessage());
             baseVo.setSuccess(false);
         }
         return baseVo;
@@ -122,14 +121,14 @@ public class PcUserController extends BaseController {
             result = pcUserFeign.addMessage(messageDto);
             RedisUtils.setString(RedisConstants.verfity_code + email, VerCode, code_time);
         } else {
-            baseVo.setMessage("Please enter your mobile number or email address");
+            baseVo.setMessage("请输入手机号或邮箱");
             baseVo.setSuccess(false);
             return baseVo;
         }
         if (result.isSuccess()) {
-            baseVo.setMessage("Sent successfully");
+            baseVo.setMessage("发送成功");
         } else {
-            baseVo.setMessage("Failed to send");
+            baseVo.setMessage("发送失败");
             baseVo.setSuccess(false);
         }
         return baseVo;
@@ -157,11 +156,11 @@ public class PcUserController extends BaseController {
             result = pcUserFeign.register(userDto);
             if (result.isSuccess()) {
                 this.setToken(Long.valueOf(result.getMessage()), response);
-                baseVo.setMessage("registration success");
+                baseVo.setMessage("注册成功");
                 return baseVo;
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("registration failed" /*+ result.getMessage()*/ );
+                baseVo.setMessage("注册失败:" + result.getMessage());
                 return baseVo;
             }
         } else {
@@ -173,13 +172,17 @@ public class PcUserController extends BaseController {
         BaseVo baseVo = new BaseVo();
         if (code == null) {
             baseVo.setSuccess(false);
-            baseVo.setMessage("Verification code expired");
-        } else if (!code.equals(reCode)) {
+            baseVo.setMessage("验证码过期");
+        }else if(reCode == null){
             baseVo.setSuccess(false);
-            baseVo.setMessage("Verification code error");
+            baseVo.setMessage("验证码不能为空");
+        }
+        else if (!code.equals(reCode)) {
+            baseVo.setSuccess(false);
+            baseVo.setMessage("验证码错误");
         }
         //TODO 开发阶段注释验证码
-        baseVo.setSuccess(true);
+       /* baseVo.setSuccess(true);*/
         return baseVo;
     }
 
@@ -218,20 +221,20 @@ public class PcUserController extends BaseController {
                     result = pcUserFeign.addCompany(companyDto);
                 } else {
                     baseVo.setSuccess(false);
-                    baseVo.setMessage("Business license upload failed");
+                    baseVo.setMessage("营业执照上传失败");
                     return baseVo;
                 }
             }
             if (result.isSuccess()) {
-                baseVo.setMessage("registration success");
+                baseVo.setMessage("注册成功");
             } else {
                 baseVo.setSuccess(false);
-                baseVo.setMessage("registration failed");
+                baseVo.setMessage("注册失败");
             }
             return baseVo;
         } catch (Exception e) {
             baseVo.setSuccess(false);
-            baseVo.setMessage("Please login first to register the store");
+            baseVo.setMessage("请先登录,才能注册店铺");
             return baseVo;
         }
     }
@@ -247,7 +250,7 @@ public class PcUserController extends BaseController {
     @RequestMapping(value = "toSettle", method = RequestMethod.GET)
     public String toSettle(ModelMap map, HttpServletRequest request) {
         map.put("userInfo", getUserInfo(request));
-        if (getShopInfo(request) == null) {
+        if (getShopInfo(request) != null) {
             //已经是商家，不能再入驻
             return "404";
         } else {
@@ -312,8 +315,7 @@ public class PcUserController extends BaseController {
                 companyDto.setCompUrls(companyResult.get("uploadName").toString());
             } else {
                 baseVo.setSuccess(false);
-                //图片上传失败
-                baseVo.setMessage(ErrorEnum.uploadPicture_error.getMessage());
+                baseVo.setMessage("图片上传失败");
                 return baseVo;
             }
         }
@@ -325,8 +327,7 @@ public class PcUserController extends BaseController {
                     idCards += companyResult.get("uploadName").toString() + ";";
                 } else {
                     baseVo.setSuccess(false);
-                    //图片上传失败
-                    baseVo.setMessage(ErrorEnum.uploadPicture_error.getMessage());
+                    baseVo.setMessage("图片上传失败");
                     return baseVo;
                 }
             }
@@ -341,7 +342,7 @@ public class PcUserController extends BaseController {
         shopDto.setShopIntroduce(companyDto.getCompanyInfo());
         userDto.setShopDto(shopDto);
         pcUserFeign.settleShop(userDto);
-        baseVo.setMessage("Added successfully");
+        baseVo.setMessage("添加成功");
         baseVo.setSuccess(true);
         return baseVo;
     }

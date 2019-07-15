@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,10 +70,10 @@ public class ShopCarController extends BaseController {
         // 删除用户选中的购车产品
         Result result = shopCarFeign.delete(dto);
         if (result.isSuccess()) {
-            vo.setMessage("successfully deleted！");
+            vo.setMessage("删除成功！");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("failed to delete！");
+            vo.setMessage("删除失败！");
         }
         return vo;
     }
@@ -158,10 +157,10 @@ public class ShopCarController extends BaseController {
         // 购物车添加产品
         Result result = shopCarFeign.addToShopCar(dto);
         if (result.isSuccess()) {
-            vo.setMessage("add successfully！");
+            vo.setMessage("添加成功！");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("add failed！");
+            vo.setMessage("添加失败！");
         }
         return vo;
     }
@@ -183,10 +182,10 @@ public class ShopCarController extends BaseController {
         Result result = shopCarFeign.update(shopCarProductDto);
         if (result.isSuccess()) {
             vo.setSuccess(true);
-            vo.setMessage("update completed");
+            vo.setMessage("更新成功");
         } else {
             vo.setSuccess(false);
-            vo.setMessage("update failed！");
+            vo.setMessage("更新失败！");
         }
         return vo;
     }

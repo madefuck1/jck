@@ -8,7 +8,6 @@ import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
-import com.soufang.base.enums.ErrorEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.assess.AssessSo;
 import com.soufang.base.search.assort.AssortSo;
@@ -87,12 +86,6 @@ public class ProductController extends BaseController {
     public Result createProduct(@ModelAttribute ProductDto productDto, HttpServletRequest request) {
         productDto = init(productDto, request);
         Result result = productFeign.createProductFirst(productDto);
-        if(result.isSuccess()){
-            result.setMessage(ErrorEnum.success.getMessage());
-        }
-        else {
-            result.setMessage(ErrorEnum.failed.getMessage());
-        }
         return result;
     }
 
@@ -410,18 +403,18 @@ public class ProductController extends BaseController {
                 ProductDto temp = new ProductDto();
                 temp.setUserId(userInfo.getUserId());
                 List<ProductDto> footPrintList = productFeign.getFootPrintList(temp);
-                map.put("leftName", "Browse record");
+                map.put("leftName", "浏览记录");
                 map.put("leftList", footPrintList);
             } else {
                 // 推荐列表
                 PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
-                map.put("leftName", "Hot products");
+                map.put("leftName", "热门产品");
                 map.put("leftList", hotProductList.getData());
             }
         } catch (NumberFormatException e) {
             // 推荐列表
             PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
-            map.put("leftName", "Hot products");
+            map.put("leftName", "热门产品");
             map.put("leftList", hotProductList.getData());
         }
         ProductDto dto = new ProductDto();

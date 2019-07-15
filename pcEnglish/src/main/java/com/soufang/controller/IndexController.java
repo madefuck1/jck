@@ -2,7 +2,6 @@ package com.soufang.controller;
 
 import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
-import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.jiguang.JMessageDto;
 import com.soufang.base.jiguang.JMessageUtils;
@@ -11,9 +10,7 @@ import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.BannerFeign;
 import com.soufang.feign.EnquiryFeign;
-import com.soufang.feign.EnquiryProductFeign;
 import com.soufang.feign.ProductFeign;
-import com.soufang.vo.banner.BannerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

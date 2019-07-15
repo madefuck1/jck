@@ -13,7 +13,6 @@ package com.soufang.controller;
 import com.soufang.base.dto.exhibition.ExhibitionDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.exhibition.ExhibitionSo;
-import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.ExhibitionFeign;
 import com.soufang.vo.exhibition.ExhibitionDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,7 @@
 package com.soufang.feign;
 
-import com.soufang.base.dto.exhibition.ExhibitionDto;
 import com.soufang.base.dto.news.NewsDto;
 import com.soufang.base.page.PageHelp;
-import com.soufang.base.search.exhibition.ExhibitionSo;
 import com.soufang.base.search.news.NewsSo;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

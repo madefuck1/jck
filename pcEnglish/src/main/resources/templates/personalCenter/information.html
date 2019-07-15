@@ -129,7 +129,7 @@ personal information
             success: function (data) {
                 //上传成功的处理
                 if (data.success) {
-                    alert(data.message)
+                    alert("Edit successful")
                     window.location.href = "/personalCenter/toInformation";
                 } else {
                     alert("Edit failed:" + data.message)
