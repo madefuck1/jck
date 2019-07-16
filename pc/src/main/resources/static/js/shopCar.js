@@ -62,7 +62,9 @@ function changeProduct(obj){
         specListHtml += '</ul>';
         $(".specList").html("");
         $(".specList").append(specListHtml);
-        $(".theme-product").attr("src",data.productUrl);
+        var detail=data.productDetail;
+        var url = detail.substring(0, detail.length - 1);
+        $(".theme-product").attr("src",url);
         $(".theme-productNumber").val(productNumber);
         $(".theme-productNumber").attr("min",min);
         $(".theme-productNumber").attr("max",max);
@@ -281,21 +283,20 @@ function changeNumber(obj) {
 
 //遮罩层修改价格 + -
 function themeAdd() {
-    var number = $(".theme-popover").find(".theme-product").val();
-
-    var max=$(".theme-popover").find(".theme-product").attr("max");
-    if(parseInt(number)+1 > max){
-        $(".theme-popover").find(".theme-product").val(parseInt(number)+1);
+    var number = $(".theme-popover").find(".theme-productNumber").val();
+    var max=99999;
+    if(max > parseInt(number)){
+        $(".theme-popover").find(".theme-productNumber").val(parseInt(number)+1);
     }else {
         alert("不能再大了");
     }
 }
 
 function themeSub() {
-    var number = $(".theme-popover").find(".theme-product").val();
-    var min=$(".theme-popover").find(".theme-product").attr("min");
-    if(parseInt(number)-1 < min){
-        $(".theme-popover").find(".theme-product").val(parseInt(number)-1);
+    var number = $(".theme-popover").find(".theme-productNumber").val();
+    var min=1;
+    if(parseInt(number)- min> 0){
+        $(".theme-popover").find(".theme-productNumber").val(parseInt(number)-1);
     }else {
         alert("不能再小了");
     }
