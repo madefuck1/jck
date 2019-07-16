@@ -5,7 +5,7 @@
 <#assign contextPath=request.contextPath+"/static" />
 <head>
     <#include "/common/includes/header.html"/>
-    <title>${detail.productName}</title>
+    <title>product details</title>
 
     <link href="/static/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css"/>
     <link href="/static/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
@@ -36,7 +36,7 @@
         width: 90px;
         text-align: left;
         display: inline-block;
-        background: url(../../images/sale/shop4.png) no-repeat 40px center;
+        background: url(../../images/sale/shop4.png) no-repeat 54px center;
     }
 
     .coll2 {
@@ -162,7 +162,7 @@
                                                                                 </#if>
                                                                                 </#list>
                 <div class="Collection" style="cursor: pointer;float: right;" onclick="collection();">
-                    <span class="coll1">Collection</span>
+                    <span class="coll1">Collect</span>
                     <!--                 <span class="coll2">已收藏</span>-->
                 </div>
                     </div>
@@ -275,12 +275,12 @@
                 </li>
                 <li>
                     <div class="clearfix tb-btn tb-btn-basket theme-login">
-                        <a id="LikBasket" onclick="addShopCar()"><i></i>Add to the shopping cart</a>
+                        <a id="LikBasket" onclick="addShopCar()"><i></i>Add to Cart</a>
                     </div>
                 </li>
                 <li>
                     <div class="clearfix tb-btn tb-btn-basket theme-login">
-                        <a onclick="openStore()" style="background: red"><i></i>Enter the store</a>
+                        <a onclick="openStore()" style="background: red"><i></i>store</a>
                     </div>
                 </li>
             </div>
@@ -497,6 +497,15 @@
 <script type="text/javascript">
     var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber!'1'}";
     $(function () {
+        var isShowNone = ${isShowNone};
+        if (isShowNone==1) {
+            $('.Collection').empty();
+            $('.Collection').append('<span class="coll2">favorites</span>')
+        } else {
+            $('.Collection').empty();
+            $('.Collection').append('<span class="coll1">Collect</span>')
+        }
+
         $('.flexslider').flexslider({
             animation: "slide",
             start: function (slider) {
@@ -792,12 +801,15 @@
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                if (data.success=="true") {
+                console.log(data);
+                if (data==true) {
+                    console.log("1");
                     $('.Collection').empty();
                     $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
+                    console.log("2");
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">Collection</span>')
+                    $('.Collection').append('<span class="coll1">Collect</span>')
                 }
             }
         });
