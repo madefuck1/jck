@@ -172,7 +172,6 @@ public class AppOrderController extends AppBaseController {
     @AppMemberAccess
     @RequestMapping(value = "directBuy", method = RequestMethod.POST)
     public AppVo directBuy(@RequestBody OrderSubmitReqVo reqVo, HttpServletRequest request) {
-
         OrderDto orderDto = new OrderDto();
         UserDto userInfo = getUserInfo(request);
 

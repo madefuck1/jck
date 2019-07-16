@@ -98,18 +98,28 @@ public class PcUserController extends BaseController {
         Result result;
         String VerCode = GetRandomUtils.getRandom();
         if (StringUtils.isNotBlank(registerReqVo.getPhone())) {
+            MessageDto messageDto = new MessageDto();
             //发送手机验证码
             String phone = registerReqVo.getPhone();
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易】验证码：" + VerCode, phone);
-            if (smsSendResponse.getCode().equals("0")) {
-                //短信发送后，将信息保存在数据库t_message
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易网】验证码：" + VerCode, phone);
+            if(smsSendResponse == null || smsSendResponse.getCode() == null){
+                baseVo.setMessage("网络错误");
+                baseVo.setSuccess(false);
+                return baseVo;
+            }else if(smsSendResponse.getCode().equals("4")){
+                baseVo.setMessage("手机号无效");
+                baseVo.setSuccess(false);
+                return baseVo;
+            }else if (smsSendResponse.getCode().equals("0")) {
+                //发送成功保存code的值
                 RedisUtils.setString(RedisConstants.verfity_code + phone, VerCode, code_time);
-            }
-            MessageDto messageDto;
-            if (!"".equals(smsSendResponse.getCode()) && smsSendResponse.getCode() != null) {
-                messageDto = new MessageDto(phone, VerCode, Integer.valueOf(smsSendResponse.getCode()), DateUtils.getToday(), 1);
-            } else {
                 messageDto = new MessageDto(phone, VerCode, 0, DateUtils.getToday(), 1);
+            }else {
+                //发送失败
+                messageDto = new MessageDto(phone, VerCode, Integer.valueOf(smsSendResponse.getCode()), DateUtils.getToday(), 1);
+                baseVo.setMessage("验证码发送失败");
+                baseVo.setSuccess(false);
+                return baseVo;
             }
             result = pcUserFeign.addMessage(messageDto);
         } else if (StringUtils.isNotBlank(registerReqVo.getEmail())) {

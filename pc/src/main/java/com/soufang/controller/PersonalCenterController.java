@@ -233,7 +233,7 @@ public class PersonalCenterController extends BaseController {
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "updateAddress/{addressId}", method = RequestMethod.GET)
-    public AddressDto updateAddress(@PathVariable long addressId,HttpServletRequest request) {
+    public AddressDto updateAddress(@PathVariable long addressId) {
         AddressDto addressDto = pcAddressFeign.getAddressById(addressId);
         return addressDto;
     }

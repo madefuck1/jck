@@ -56,7 +56,7 @@ public class AddressServiceImpl implements AddressService {
     public int updateByPrimaryKeySelective(AddressDto addressDto) {
         Address address = new Address();
         BeanUtils.copyProperties(addressDto,address);
-        //判断新增的地址类型，如果是默认地址，则将原来的默认地址改为非默认地址
+        //如果是默认地址，则将原来的默认地址改为非默认地址
         if(address.getIsDefaultAddress() == 1){
             addressMapper.updatedNoDefaultAddressByUserId(address.getUserId());
         }
