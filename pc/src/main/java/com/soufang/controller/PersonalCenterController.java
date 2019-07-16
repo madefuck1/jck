@@ -140,7 +140,7 @@ public class PersonalCenterController extends BaseController {
         userMap.put("userName", userInfo.getUserName());
         // 用户头像
         if (userInfo.getUserAvatar() != null) {
-            userMap.put("avatar", PropertiesParam.file_pre + userInfo.getUserAvatar());
+            userMap.put("avatar", userInfo.getUserAvatar());
         } else {
             userMap.put("avatar", null);
         }
