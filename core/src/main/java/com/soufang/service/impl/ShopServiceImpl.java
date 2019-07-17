@@ -119,6 +119,8 @@ public class ShopServiceImpl implements ShopService {
         ShopDto shopDto = shopMapper.getByUserId(userId);
         if(shopDto != null){
             shopDto.setAvatarUrl(PropertiesParam.file_pre+shopDto.getAvatarUrl());
+        }else {
+            shopDto = new ShopDto();
         }
         return shopDto;
     }
