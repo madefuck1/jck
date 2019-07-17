@@ -83,7 +83,6 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "sendCodeByPhone",method = RequestMethod.POST)
     public UserVo sendCodeByPhone(@RequestBody RegisterReqVo registerReqVo){
         String VerCode = GetRandomUtils.getRandom();
-        Result result = new Result();
         UserVo userVo = new UserVo();
         String phone = registerReqVo.getPhone();
         MessageDto messageDto = new MessageDto();
@@ -105,20 +104,22 @@ public class AppUserController extends AppBaseController {
                 messageDto.setMesStatus(0);//发送成功
                 messageDto.setMesType(1);//公司
                 messageDto.setCreateTime(DateUtils.getToday());
-                result =  appUserFeign.addMessage(messageDto);
+                appUserFeign.addMessage(messageDto);
                 RedisUtils.setString(RedisConstants.verfity_code +phone,VerCode,code_time);
+                userVo.setSuccess(true);
+                userVo.setCode("100");
+                userVo.setMessage("发送成功");
+                return userVo;
+            }else {
+                userVo.setMessage("发送失败");
+                userVo.setSuccess(false);
+                return userVo;
             }
-        }
-        if(result.isSuccess()){
-            userVo.setSuccess(true);
-            userVo.setCode("100");
-            userVo.setMessage("发送成功");
         }else {
-            userVo.setMessage("发送失败");
+            userVo.setMessage("手机号不能为空");
             userVo.setSuccess(false);
-            userVo.setCode("1");
+            return userVo;
         }
-        return userVo;
     }
 
     //发送邮箱验证码
@@ -126,7 +127,7 @@ public class AppUserController extends AppBaseController {
     @RequestMapping(value = "sendCodeByEmail",method = RequestMethod.POST)
     public UserVo sendCodeByEmail(@RequestBody RegisterReqVo registerReqVo){
         String VerCode = GetRandomUtils.getRandom();
-        Result result = new Result();
+        Result result ;
         UserVo userVo = new UserVo();
         String email = registerReqVo.getEmail();
         if(email != null && email != ""){
@@ -141,17 +142,22 @@ public class AppUserController extends AppBaseController {
             messageDto.setCreateTime(DateUtils.getToday());
             result =  appUserFeign.addMessage(messageDto);
             RedisUtils.setString(RedisConstants.verfity_code+email,VerCode,code_time);
-        }
-        if(result.isSuccess()){
-            userVo.setSuccess(true);
-            userVo.setCode("100");
-            userVo.setMessage("发送成功");
+            if(result.isSuccess()){
+                userVo.setSuccess(true);
+                userVo.setCode("100");
+                userVo.setMessage("发送成功");
+            }else {
+                userVo.setSuccess(false);
+                userVo.setMessage("发送失败");
+                userVo.setCode("1");
+            }
+            return userVo;
         }else {
             userVo.setSuccess(false);
-            userVo.setMessage("发送失败");
+            userVo.setMessage("邮箱不能为空");
             userVo.setCode("1");
+            return userVo;
         }
-        return userVo;
     }
     //手机注册
     @ResponseBody
