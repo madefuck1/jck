@@ -86,12 +86,20 @@ public class AppUserController extends AppBaseController {
         Result result = new Result();
         UserVo userVo = new UserVo();
         String phone = registerReqVo.getPhone();
+        MessageDto messageDto = new MessageDto();
         if(StringUtils.isNotBlank(phone)){
             //发送短信验证码
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("验证码："+VerCode,phone);
-            if(smsSendResponse.getCode().equals("0")){
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易网】验证码："+VerCode,phone);
+            if(smsSendResponse == null || smsSendResponse.getCode() == null){
+                userVo.setMessage("网络错误");
+                userVo.setSuccess(false);
+                return userVo;
+            }else if(smsSendResponse.getCode().equals("4")){
+                userVo.setMessage("手机号无效");
+                userVo.setSuccess(false);
+                return userVo;
+            }else if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
-                MessageDto messageDto = new MessageDto();
                 messageDto.setPhone(phone);
                 messageDto.setContent(VerCode);
                 messageDto.setMesStatus(0);//发送成功
@@ -181,7 +189,7 @@ public class AppUserController extends AppBaseController {
                 return userVo;
             }else {
                 userVo.setSuccess(false);
-                userVo.setMessage("注册失败");
+                userVo.setMessage("注册失败："+result.getMessage());
                 userVo.setCode("1");
                 return userVo;
             }
@@ -318,7 +326,7 @@ public class AppUserController extends AppBaseController {
         String phone = registerReqVo.getPhone();
         if(StringUtils.isNotBlank(phone)){
             //发送短信验证码
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("验证码："+VerCode,phone);
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易】验证码："+VerCode,phone);
             if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
                 MessageDto messageDto = new MessageDto();
