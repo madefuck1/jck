@@ -67,14 +67,14 @@ New inquiry
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">product name</label>
                             <div class="am-form-content">
-                                <input id="productName" placeholder="Such as nonwovens" type="text">
+                                <input id="productName" placeholder="Such as nonwovens" type="text" style="margin-left: 53px;width: 92%;">
                                 <input   type="hidden" id="enquiryProductId" autocomplete="off" name="enquiryProductId"  />
                             </div>
                         </div>
                         <div class="sale_cloum1" style="height: 110px;">
                             <label class="am-form-label" >Buying pictures</label>
                             <div class="company am-form-group am-u-sm-10 row2" style="width: 50%;float: left;">
-                                <img class="sale_pic4" onclick="company(this)">
+                                <img class="sale_pic4" onclick="company(this)" src="../../static/images/sale/01.png">
                                 <input type="file" id="file" style="display: none" onchange="showCompany(this)">
                             </div>
                         </div>
@@ -82,7 +82,7 @@ New inquiry
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">Purchase amount</label>
                             <div class="am-form-content">
-                                <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" placeholder="Please fill in the quantity">
+                                <input type="text" id="productNumber"class="pur_enquirm"autocomplete="off" style="margin-left: 16px;" placeholder="Please fill in the quantity">
                                 <select id="productUnit" style="width:150px;padding: 5px;">
                                     <option selected="selected" value="0">Please select the unit </option>
                                 </select>
@@ -91,7 +91,7 @@ New inquiry
                         <div class="am-form-group pur_height">
                             <label class="am-form-label">Product Categories</label>
                             <div class="am-form-content">
-                                <select id="productSort1"  style="width:150px;padding: 5px;float: left;" onchange="toFindSort(1)">
+                                <select id="productSort1"  style="width:150px;padding: 5px;float: left;margin-left: 6px;" onchange="toFindSort(1)" >
                                     <option value="" selected>please choose</option>
                                 </select>
                                 <select id="productSort2"  style="width:150px;padding: 5px;float: left;margin-left:5px;" onchange="toFindSort(2)">
