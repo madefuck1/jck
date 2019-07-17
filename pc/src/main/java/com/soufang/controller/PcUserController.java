@@ -101,7 +101,7 @@ public class PcUserController extends BaseController {
             MessageDto messageDto = new MessageDto();
             //发送手机验证码
             String phone = registerReqVo.getPhone();
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易网】验证码：" + VerCode, phone);
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("验证码：" + VerCode, phone);
             if(smsSendResponse == null || smsSendResponse.getCode() == null){
                 baseVo.setMessage("网络错误");
                 baseVo.setSuccess(false);

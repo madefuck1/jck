@@ -88,7 +88,7 @@ public class AppUserController extends AppBaseController {
         String phone = registerReqVo.getPhone();
         if(StringUtils.isNotBlank(phone)){
             //发送短信验证码
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易】验证码："+VerCode,phone);
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("验证码："+VerCode,phone);
             if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
                 MessageDto messageDto = new MessageDto();
@@ -318,7 +318,7 @@ public class AppUserController extends AppBaseController {
         String phone = registerReqVo.getPhone();
         if(StringUtils.isNotBlank(phone)){
             //发送短信验证码
-            SmsSendResponse smsSendResponse = MessageUtil.setMessage("【进出口产品交易】验证码："+VerCode,phone);
+            SmsSendResponse smsSendResponse = MessageUtil.setMessage("验证码："+VerCode,phone);
             if(smsSendResponse.getCode().equals("0")){
                 //短信发送后，将信息保存在数据库t_message
                 MessageDto messageDto = new MessageDto();
