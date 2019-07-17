@@ -50,15 +50,15 @@ public class AppUserController extends AppBaseController {
         UserVo userVo = new UserVo();
         UserDto userDto = new UserDto();
         Map<String,Object> map = new HashMap<>();
-        if(!(StringUtils.isNotBlank(loginReqVo.getPhone()) || StringUtils.isNotBlank(loginReqVo.getEmail()))){
+        if(!(StringUtils.isNotBlank(loginReqVo.getPhone()) )){
             userVo.setMessage("用户名栏不能为空");
             userVo.setSuccess(false);
             return userVo;
         }
         if(StringUtils.isNotBlank(loginReqVo.getPassword())){
             userDto.setPhone(loginReqVo.getPhone());
-            userDto.setEmail(loginReqVo.getEmail());
-            userDto.setUserName(loginReqVo.getLoginname());
+            userDto.setEmail(loginReqVo.getPhone());
+            userDto.setUserName(loginReqVo.getPhone());
             userDto.setPassWord(loginReqVo.getPassword());
         }
         Result result = appUserFeign.login(userDto);

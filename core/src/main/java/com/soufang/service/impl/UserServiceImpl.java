@@ -159,15 +159,6 @@ public class UserServiceImpl implements UserService {
     public UserDto getOneUser(UserDto userDto){
         User user = new User();
         BeanUtils.copyProperties(userDto,user);
-        if(StringUtils.isBlank(user.getPhone())){
-            user.setPhone("121");
-        }
-        if(StringUtils.isBlank(user.getEmail())){
-            user.setEmail("121");
-        }
-        if(StringUtils.isBlank(user.getUserName())){
-            user.setUserName("...");
-        }
         User temp = userMapper.loginByPhone(user);
         if(temp == null){
             temp = userMapper.loginByEmail(user);
