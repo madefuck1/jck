@@ -239,7 +239,7 @@ public class AppUserController extends AppBaseController {
                 return userVo;
             }else {
                 userVo.setSuccess(false);
-                userVo.setMessage("注册失败");
+                userVo.setMessage("注册失败:"+result.getMessage());
                 userVo.setCode("1");
                 return userVo;
             }
