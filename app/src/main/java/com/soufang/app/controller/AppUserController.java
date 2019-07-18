@@ -183,15 +183,14 @@ public class AppUserController extends AppBaseController {
         }
         if(registerReqVo.getCode().equals(code)){
             Result result = appUserFeign.register(userDto);
-            Result resultLogin = appUserFeign.login(userDto);
-            if(result.isSuccess()&&resultLogin.isSuccess()){
+            if(result.isSuccess()){
                 String token = UUID.randomUUID().toString().replace("-", "");
                 RedisUtils.setString(token, String.valueOf(result.getMessage()),register_time);
                 userVo.setSuccess(true);
                 userVo.setCode("100");
                 userVo.setMessage("注册成功");
                 map.put("token",token);
-                map.put("alias","yhkj_"+resultLogin.getMessage());
+                map.put("alias","yhkj_"+result.getMessage());   //result.getMessage()保存的是注册用户的ID
                 userVo.setData(map);
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getPhone());
                 return userVo;
@@ -235,14 +234,13 @@ public class AppUserController extends AppBaseController {
         if(registerReqVo.getCode().equals(code)){
             //添加用户信息
             Result result = appUserFeign.register(userDto);
-            Result resultLogin = appUserFeign.login(userDto);
-            if(result.isSuccess()&&resultLogin.isSuccess()){
+            if(result.isSuccess()){
                 String token = UUID.randomUUID().toString().replace("-", "");
                 RedisUtils.setString(token, String.valueOf(result.getMessage()),register_time);
                 userVo.setSuccess(true);
                 userVo.setCode("100");
                 map.put("token",token);
-                map.put("alias","yhkj_"+resultLogin.getMessage());
+                map.put("alias","yhkj_"+result.getMessage());//result.getMessage()保存的是注册用户的ID
                 userVo.setData(map);
                 userVo.setMessage("注册成功");//成功后删除键值
                 RedisUtils.delkeyObject(RedisConstants.verfity_code+registerReqVo.getEmail());
