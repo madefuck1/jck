@@ -160,15 +160,6 @@
 
 <script type="text/javascript">
 
-    //GPS坐标
-    var x=116.404;//经度
-    var y=39.915;//纬度
-    var ggPoint=new BMap.Point(x,y);
-
-    //初始化地图
-    var map = new BMap.Map("allmap");
-    map.centerAndZoom(ggPoint,15);
-    map.enableScrollWheelZoom(true);
 
     $(function () {
         initHtmlPage();
@@ -176,7 +167,6 @@
 
     // Initialize the page
     function initHtmlPage() {
-
         $.ajax({
             url: '/shop/getStoreIndexInfo/${shopId!}',
             dataType: 'json',
@@ -186,7 +176,31 @@
                 //设置经度纬度
                 /* x=res.companyDto.longitude;//经度
                  y=res.companyDto.latitude; //纬度  */
-
+                var x=116.404;//经度
+                var y=38.916;//纬度
+                // 初始化百度地图
+                var map = new BMap.Map("allmap");
+                map.centerAndZoom(new BMap.Point(x,y),15);
+                map.enableScrollWheelZoom(true);         //设定滚动放大功能
+                map.addControl(new BMap.NavigationControl());
+                map.addControl(new BMap.ScaleControl());
+                map.addControl(new BMap.OverviewMapControl());
+                map.addControl(new BMap.MapTypeControl());
+                var opts = {
+                    width : 0,     // 信息窗口宽度
+                    height: 0,     // 信息窗口高度
+                    title : res.companyDto.compName  // 信息窗口标题
+                }
+                var infoWindow = new BMap.InfoWindow(res.companyDto.compAddress, opts);  // 创建信息窗口对象
+                if(x != "" && y != ""){
+                    map.clearOverlays();
+                    /*var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);*/
+                    var new_point = new BMap.Point(x,y);
+                    var marker = new BMap.Marker(new_point);  // 创建标注
+                    map.addOverlay(marker);              // 将标注添加到地图中
+                    map.panTo(new_point);                  //将标注移动到定位点
+                    map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+                }
                 var html = '';
                 //------------- Initialize company information-------------------
                 if (res.isCollection) {

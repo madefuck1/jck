@@ -803,11 +803,9 @@
             success: function (data) {
                 console.log(data);
                 if (data==true) {
-                    console.log("1");
                     $('.Collection').empty();
                     $('.Collection').append('<span class="coll2">Favorites</span>')
                 } else {
-                    console.log("2");
                     $('.Collection').empty();
                     $('.Collection').append('<span class="coll1">Collect</span>')
                 }
