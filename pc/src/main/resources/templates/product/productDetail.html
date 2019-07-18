@@ -804,12 +804,12 @@
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                if (data.success=="true") {
+                if (data==true) {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll2">Favorites</span>')
+                    $('.Collection').append('<span class="coll2">已收藏</span>')
                 } else {
                     $('.Collection').empty();
-                    $('.Collection').append('<span class="coll1">Collection</span>')
+                    $('.Collection').append('<span class="coll1">收藏</span>')
                 }
             }
         });
