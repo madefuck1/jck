@@ -18,7 +18,7 @@
 
     <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 <style>
-     .Collection {
+    .Collection {
         width: 90px !important;
         height: 40px;
         border-radius: 20px 0px 0px 20px;
@@ -116,22 +116,33 @@
         <div class="clearfixLeft" id="clearcontent">
             <div class="box">
                 <div class="tb-booth tb-pic tb-s310">
-                    <a href="${images[0]!''}"><img src="${images[0]!''}" alt="细节展示放大镜特效"
-                                                rel="${images[0]!''}" class="jqzoom"/></a>
+                    <video  autoplay="autoplay" id="video" style="z-index: 2;position: absolute;left: 0px;top: 0px;" controlsList="nodownload">
+                        <source src="${video!''}" type="video/ogg" />
+                    </video>
+                    <a  href="${images[0]!''}" >
+                        <img src="${images[0]!''}" alt="细节展示放大镜特效"  style="z-index: 2;position: absolute;left: 0px;top: 0px;" id="firimg" rel="${images[0]!''}" class="jqzoom"/></a>
                 </div>
+                <div id="output"></div>
                 <ul class="tb-thumb" id="thumblist">
+                    <#if video!="">
+                    <li>
+                        <div class="tb-pic tb-s40" id="openVideo">
+                           <img src="../../static/images/sale/playVideo.jpg" >
+                        </div>
+                    </li>
+                    </#if>
                     <#list images as item>
                     <#if item_index==0>
                     <li class="tb-selected">
                         <div class="tb-pic tb-s40">
-                            <a href="#"><img src="${item!''}" mid="${item}"
+                            <a href="javascript:;" onclick="upPhotoUp()"><img src="${item!''}" mid="${item}"
                                              big="${item!''}"></a>
                         </div>
                     </li>
                     <#else>
                     <li>
                         <div class="tb-pic tb-s40">
-                            <a href="#"><img src="${item!''}" mid="${item!''}"
+                            <a href="javascript:;" onclick="upPhotoUp()"><img src="${item!''}" mid="${item!''}"
                                              big="${item!''}"></a>
                         </div>
                     </li>
@@ -526,7 +537,6 @@
     });
 
     $(function () {
-        var productId = ${detail.productId};
         getAssess(1,${detail.productId});
     });
 
@@ -815,5 +825,21 @@
         });
     }
 
+    //播放视频
+    document.getElementById("openVideo").onclick = function () {
+        document.getElementById("video").play();
+        var video = document.getElementById('video');
+        var firimg = document.getElementById('firimg');
+        video.style.zIndex = 2;
+        firimg.style.zIndex = 1;
+    }
+    
+    function upPhotoUp() {
+        var video = document.getElementById('video');
+        var firimg = document.getElementById('firimg');
+        video.style.zIndex = 1;
+        firimg.style.zIndex = 2;
+
+    }
 </script>
 </html>

@@ -450,6 +450,7 @@
     LEFT JOIN t_purchase tp on tep.enquiry_product_id = tp.enquiry_product_id
     LEFT JOIN t_assort ta on tep.product_assort=ta.assort_id
     LEFT JOIN t_shop ts on ts.user_id=te.user_id
+    left join t_dictionary td on td.dict_id=tep.product_unit
     where
     te.enquiry_status!=0 and te.end_time > (select now()) and te.enquiry_status!=5 and te.enquiry_status!=4
     ORDER BY te.create_time desc

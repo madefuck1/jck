@@ -258,8 +258,25 @@
                                     <input type="file" style="display: none"/>
                                 </div>
                             </div>
-                        </span>
                     </div>
+                </div>
+                             <div class="base3-pic">
+                    <div class="base-title">
+                                 <span class="am-u-sm-2">
+                                        <span style="color: red">*</span>
+                                        <span>产品视频：</span>
+                                 </span>
+                                    <span class="am-u-sm-10">
+                                        <p>    宝贝视频大小不能超过100MB
+                                        </p>
+                                        <div class="uploadVedio">
+                                            <img src="${contextPath}/images/sale/video.png"alt="" id="vefirst" width="90px">
+                                            <video style="display: none" controls="controls" id="uploadVedio"></video>
+                                                <input type="file" id="vedioFile" style="display: none" accept="video/*" onchange="changeFile(this)"  multiple/>
+                                            <label id="vedioName" style="display: none" ></label>
+                                        </div>
+                                     </span>
+                             </div>
                 </div>
                 <div class="base3-pic">
                     <div class="base-title">
@@ -288,6 +305,24 @@
 <@override name="js">
 <script>
     $("#loadingdiv").hide();
+    function company(obj){
+        $(obj).parent().find("input[type=file]").click();
+    }
+
+    //视频预览
+   function changeFile(ele) {
+        var video = ele.files[0];
+        console.log(video);
+        console.log("地址");
+       var url = window.URL.createObjectURL(video);
+        console.log(url);
+        document.getElementById("uploadVedio").src=url;
+        document.getElementById("uploadVedio").style.display="block";
+        document.getElementById("vedioName").style.display="block";
+        document.getElementById("vefirst").style.display="none";
+        $("#vedioName").html(video.name);
+    };
+
 </script>
 <script src="${contextPath}/js/createProduct.js"></script>
 <script src="${contextPath}/js/jquery.form.js"></script>

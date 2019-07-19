@@ -163,6 +163,9 @@ function addSpecHtml() {
 $(".Master-pic .mpic-1 img").bind("click", function () {
     $(this).parent().find("input").click();
 })
+$(".uploadVedio img").bind("click", function () {
+    $(this).parent().find("input").click();
+})
 
 //图片预览
 $(".Master-pic .mpic-1 input").bind("change", function () {
@@ -194,6 +197,7 @@ $(".Master-pic .mpic-1 input").bind("change", function () {
 
 
 })
+
 
 function deleteImage(obj) {
     $(obj).parent().find("img").attr("src", "/static/images/sale/01.png");
@@ -299,9 +303,10 @@ function createForm() {
         $(".Master-pic2 input[type=file]").each(function () {
             if ($(this)[0].files[0] != undefined) {
                 formData.append("files2", $(this)[0].files[0]);
-            }
+        }
         })
-
+        var vedio=document.getElementById("vedioFile").files[0];
+        formData.append("files3",vedio);
         $("#createForm").append(html);
 
         $("#createForm").prop("disabled","true");

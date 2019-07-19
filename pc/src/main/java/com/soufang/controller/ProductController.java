@@ -30,6 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 import java.util.*;
 
 @Controller
@@ -129,7 +131,7 @@ public class ProductController extends BaseController {
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "createSecond", method = RequestMethod.POST)
-    public Result createSecond(MultipartFile[] files, MultipartFile[] files2, Long productId) {
+    public Result createSecond(MultipartFile[] files, MultipartFile[] files2,MultipartFile[] files3, Long productId) {
         ProductDto temp = new ProductDto();
         temp.setProductId(productId);
         ProductDto productDto = productFeign.getProductDetail(temp);
@@ -147,7 +149,13 @@ public class ProductController extends BaseController {
                 productDetail.append(map.get("uploadName").toString() + ";");
             }
         }
-        productDto.setProductImage(productImage.toString());
+       StringBuffer productVedio = new StringBuffer();
+        Map<String, Object> map = FtpClient.uploadImage(files3[0], productUrl);
+        if ((boolean) map.get("success")) {
+            productVedio.append("video"+map.get("uploadName").toString() + ";");
+        }
+        //图片/视频地址
+        productDto.setProductImage(productImage.toString()+productVedio.toString());
         productDto.setProductDetail(productDetail.toString());
         Result result = productFeign.updateProduct(productDto);
         return result;
@@ -425,11 +433,18 @@ public class ProductController extends BaseController {
         // 产品图片
         List<String> resultImage = Arrays.asList(productDto.getProductImage().split(";"));
         List<String> productImages = new ArrayList<>();
+        String productVedio=new String();
         for (String temp : resultImage) {
-            productImages.add(temp);
+            //对图片格式做判断区分视频
+            if(temp.contains("video")){
+                productVedio=temp.replace("video","");
+            }else{
+                productImages.add(temp);
+            }
+
         }
         map.put("images", productImages);
-
+        map.put("video", productVedio);
         // 宝贝详情
         List<String> productDetail = Arrays.asList(productDto.getProductDetail().split(";"));
         List<String> productDetailTemp = new ArrayList<>();
