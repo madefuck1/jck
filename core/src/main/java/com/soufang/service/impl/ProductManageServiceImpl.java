@@ -145,12 +145,21 @@ public class ProductManageServiceImpl implements ProductManageService {
         productDto.setProductImage(productImage.toString());
 
         StringBuffer productDetail = new StringBuffer();
-        if(StringUtils.isNotBlank(productDto.getProductDetail())){
-            String[] imageArray = productDto.getProductDetail().split(";");
+        String productUrl = "";
+        if(StringUtils.isNotBlank(productDto.getProductImage())){
+            String[] imageArray = productDto.getProductImage().split(";");
             for (int i = 0; i <imageArray.length ; i++) {
-                productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                if(i == 0){
+                    productUrl = PropertiesParam.file_pre + imageArray[i] ;
+                }
+                productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
             }
+        }else {
+            productUrl = PropertiesParam.file_pre+"/uploadProduct/product.jpg";
+            productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
         }
+        productDto.setProductUrl(productUrl);
+        productDto.setProductImage(productImage.toString());
         productDto.setProductDetail(productDetail.toString());
         return productDto;
     }
