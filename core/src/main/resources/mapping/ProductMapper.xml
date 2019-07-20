@@ -520,7 +520,7 @@
         <if test="productSendCity != null and productSendCity != ''">
             and product_send_city like concat(concat('%',#{productSendCity}),'%')
         </if>
-        limit #{page},#{limit}) as P
+        ) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
         join t_product_statistics St on P.product_id = St.product_id
@@ -565,9 +565,9 @@
                 </choose>
             </when>
             <otherwise>
-            </otherwise>
+        </otherwise>
         </choose>
-
+        limit #{page},#{limit}
     </select>
 
     <select id="getCount" parameterType="com.soufang.base.dto.product.ProductDto"

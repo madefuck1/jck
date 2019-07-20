@@ -49,7 +49,7 @@ public class ProductManageServiceImpl implements ProductManageService {
         // 设置页面其实数量
         int page = dto.getPage();
         if (page != 0) {
-            page = (page - 1) * dto.getLimit();
+            page = page * dto.getLimit();
         }
         dto.setPage(page);
         if (StringUtils.isBlank(dto.getProductName())) {
