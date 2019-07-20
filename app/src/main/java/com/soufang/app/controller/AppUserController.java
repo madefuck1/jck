@@ -528,6 +528,8 @@ public class AppUserController extends AppBaseController {
                 result.setMessage("头像上传失败");
                 result.setSuccess(false);
             }
+        }else {
+            result = appUserFeign.update(userDto);
         }
         vo.setSuccess(result.isSuccess());
         vo.setMessage(result.getMessage());
