@@ -550,6 +550,11 @@ public class AppUserController extends AppBaseController {
             vo.setMessage("请先完善个人信息，填写手机号");
             vo.setSuccess(false);
             return vo;
+        }if(userInfo.getEmail().equals(registerReqVo.getEmail())){
+            //该邮箱已经注册过用户，不能作为绑定邮箱
+            vo.setMessage("该邮箱已经注册过用户，不能作为绑定邮箱");
+            vo.setSuccess(false);
+            return vo;
         }
         String code = null ;
         if(RedisUtils.getString(RedisConstants.verfity_code+registerReqVo.getEmail()) != null){
