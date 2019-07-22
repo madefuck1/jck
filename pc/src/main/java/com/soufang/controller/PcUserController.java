@@ -273,7 +273,7 @@ public class PcUserController extends BaseController {
     @RequestMapping(value = "toSettle", method = RequestMethod.GET)
     public String toSettle(ModelMap map, HttpServletRequest request) {
         map.put("userInfo", getUserInfo(request));
-        if (!isShop(request)) {
+        if (isShop(request)) {
             //已经是商家，不能再入驻
             return "404";
         } else {
