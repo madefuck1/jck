@@ -134,17 +134,15 @@ public class ProductManageServiceImpl implements ProductManageService {
     public ProductDto getDetail(ProductDto dto) {
         ProductDto productDto =  productMapper.getDetail(dto);
         StringBuffer productImage = new StringBuffer();
-        if(StringUtils.isNotBlank(productDto.getProductImage())){
-            String[] imageArray = productDto.getProductImage().split(";");
+        StringBuffer productDetail = new StringBuffer();
+        if(StringUtils.isNotBlank(productDto.getProductDetail())){
+            String[] imageArray = productDto.getProductDetail().split(";");
             for (int i = 0; i <imageArray.length ; i++) {
-                productImage.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
+                productDetail.append(PropertiesParam.file_pre).append(imageArray[i]).append(";");
             }
         }else {
-            productImage.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
+            productDetail.append(PropertiesParam.file_pre+"/uploadProduct/product.jpg");
         }
-        productDto.setProductImage(productImage.toString());
-
-        StringBuffer productDetail = new StringBuffer();
         String productUrl = "";
         if(StringUtils.isNotBlank(productDto.getProductImage())){
             String[] imageArray = productDto.getProductImage().split(";");

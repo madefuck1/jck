@@ -50,10 +50,20 @@ public class BaseController {
 
     }
 
+    //获取商家信息
     public ShopDto getShopInfo(HttpServletRequest request){
         UserDto userInfo = getUserInfo(request);
         ShopDto shopInfo = shopFeign.getByUserId(userInfo.getUserId());
         return shopInfo;
+    }
+
+    //判断是否是商家
+    public boolean isShop(HttpServletRequest request){
+        if(getShopInfo(request).getShopId() == null){
+            return  false;
+        }else {
+            return  true;
+        }
     }
 
     //退出，清除cookie
