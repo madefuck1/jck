@@ -171,7 +171,7 @@ function toDecimal2(x) {
 
 function toDetail(id) {
     //TODO 跳转到产品详情
-    window.location.href="";
+    window.location.href='/product/toDetail?productId=' + id
 }
 
 function toFavorite(obj) {

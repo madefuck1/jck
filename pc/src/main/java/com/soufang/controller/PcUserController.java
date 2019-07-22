@@ -144,6 +144,19 @@ public class PcUserController extends BaseController {
         return baseVo;
     }
 
+    //临时接口，获取验证码
+    @RequestMapping(value = "getCodeTest/{phoneOrEmail}", method = RequestMethod.GET)
+    public String getCodeTest(@PathVariable String phoneOrEmail,ModelMap map ) {
+        String code = null;
+        if (StringUtils.isNotBlank(phoneOrEmail)) {
+              code = RedisUtils.getString(RedisConstants.verfity_code + phoneOrEmail);
+        } else {
+            code= "请输入正确的电话或邮箱";
+        }
+        map.put("code",code);
+        return "testGetCode";
+    }
+
     //仅注册账号和密码
     @ResponseBody
     @RequestMapping(value = "register", method = RequestMethod.POST)
