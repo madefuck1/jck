@@ -142,7 +142,7 @@
             <#list HotProductList as item>
             <li>
                 <div class="i-pic check">
-                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');">
+                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId?c},'_blank');">
                     <img src="${item.productUrl}"/>
                     <p class="check-title">${item.productName}</p>
                     <p class="price fl">
