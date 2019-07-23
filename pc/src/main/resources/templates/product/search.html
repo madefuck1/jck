@@ -29,6 +29,10 @@
         #contain, .list {
             height: auto;
         }
+
+        .sortClass{
+            background-color: #FF7700;
+        }
     </style>
 
 </head>
@@ -87,8 +91,8 @@
             <div class="clear"></div>
         </div>
         <div class="search-content">
-            <div class="sort">
-                <li class="first">
+            <div class="sort" id="sort">
+                <li class="sortClass" >
                     <a href="javascript:void(0);" onclick="searchAssortWithSort(1)" title="综合">综合排序</a>
                 </li>
                 <li>
@@ -170,6 +174,13 @@
 <div class="theme-popover-mask"></div>
 </body>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#sort li').click(function () {
+            $(this).prevAll().removeClass('sortClass');
+            $(this).nextAll().removeClass("sortClass")
+            $(this).addClass('sortClass');
+        })
+    })
 
     $(function () {
         if ("${assortNameA}" != "无") {
