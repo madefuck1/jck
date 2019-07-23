@@ -149,13 +149,19 @@ public class ProductController extends BaseController {
                 productDetail.append(map.get("uploadName").toString() + ";");
             }
         }
-       StringBuffer productVedio = new StringBuffer();
-        Map<String, Object> map = FtpClient.uploadImage(files3[0], productUrl);
-        if ((boolean) map.get("success")) {
-            productVedio.append("video"+map.get("uploadName").toString() + ";");
+        //判断视频是否有值
+        if(files3.length>0){
+            StringBuffer productVedio = new StringBuffer();
+            Map<String, Object> map = FtpClient.uploadImage(files3[0], productUrl);
+            if ((boolean) map.get("success")) {
+                productVedio.append("video"+map.get("uploadName").toString() + ";");
+            }
+            //图片/视频地址
+            productDto.setProductImage(productImage.toString()+productVedio.toString());
+        }else{
+            //只有图片
+            productDto.setProductImage(productImage.toString());
         }
-        //图片/视频地址
-        productDto.setProductImage(productImage.toString()+productVedio.toString());
         productDto.setProductDetail(productDetail.toString());
         Result result = productFeign.updateProduct(productDto);
         return result;
