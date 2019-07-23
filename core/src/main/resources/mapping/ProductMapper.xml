@@ -868,9 +868,7 @@
         <if test="productName != null and productName != '' ">
             and tp.product_name like concat(concat('%',#{productName}),'%')
         </if>
-        <if test="isUpper != null and isUpper !=''">
-            and tp.is_upper = #{isUpper}
-        </if>
+            and tp.is_upper = 1
         <choose>
             <when test="startDate != null and endDate != null and startDate != '' and endDate != ''  ">
                 and tp.create_time between #{startDate} and #{endDate}
