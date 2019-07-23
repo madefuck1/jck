@@ -34,7 +34,9 @@ public class UserServiceImpl implements UserService {
     public UserDto getById(Long id) {
         UserDto userDto = userMapper.getById(id);
         if(userDto!=null){
-            userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+            if(StringUtils.isNotBlank(userDto.getUserAvatar())){
+                userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+            }
         }
         return userDto;
     }
