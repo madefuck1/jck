@@ -355,5 +355,12 @@ public class SellerController extends BaseController {
         return "/sellerCenter/storeProductAssortManage";
     }
 
+    //
+    @MemberAccess
+    @RequestMapping(value = "toVideoCenter", method = RequestMethod.GET)
+    public String toVideoCenter(HttpServletRequest request, ModelMap model) {
+        return "/sellerCenter/videoCenter";
+    }
+
     // end---------------------------------------------------
 }

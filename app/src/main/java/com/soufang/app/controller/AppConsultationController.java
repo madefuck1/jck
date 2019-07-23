@@ -21,7 +21,7 @@ public class AppConsultationController extends AppBaseController{
     AppConsultationFeign consultationFeign;
 
     /**
-     * 纺织资讯查询列表
+     * 新闻资讯查询列表
      * @return
      */
     @ResponseBody
@@ -61,7 +61,7 @@ public class AppConsultationController extends AppBaseController{
     }
 
     /**
-     * 纺织资讯
+     * 新闻资讯
      * @return
      */
     @ResponseBody
@@ -77,12 +77,9 @@ public class AppConsultationController extends AppBaseController{
         return consultionListVo;
     }
 
-    /**
-     * 纺织资讯详情
-    }
 
     /**
-     * 纺织资讯详情
+     * 新闻资讯详情
      * @return
      */
     @ResponseBody

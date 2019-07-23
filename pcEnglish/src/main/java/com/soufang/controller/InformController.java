@@ -42,7 +42,7 @@ public class InformController {
     InformFeign informFeign;
 
     /**
-     * 跳转纺织资讯页面-加载轮播图片
+     * 跳转新闻资讯页面-加载轮播图片
      * @param request
      * @param model
      * @return
