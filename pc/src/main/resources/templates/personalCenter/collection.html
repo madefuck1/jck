@@ -90,12 +90,13 @@
         var productPrice=productStatisticsDto.productPrice;
 		var favoriteTargetName=v.favoriteTargetName;
 		var productImage=productDto.url;
+		var productId=productDto.productId;
 		var dealNumber=productStatisticsDto.dealNumber;
 
         var li = $("<div class ='s-item-wrap'>"
             +"<div class='s-item'>"
             +"<div class='s-pic'>"
-            +"<a href='#' class='s-pic-link'>"
+            +"<a href='javascript:void(0);' onclick='openProductDetail("+productId+")' class='s-pic-link'>"
             +"<img src='"+productImage+"' alt='"+favoriteTargetName+"' title='"+favoriteTargetName+"' class='s-pic-img s-guess-item-img'>"
             +"</a></div>"
             +"<div class='s-info'>"
@@ -128,6 +129,10 @@
 			document.getElementById("noMore").style.display="block";//显示
 		}
     });
+
+	function openProductDetail(value) {
+		window.location.href = "/product/toDetail?productId=" + value;
+	}
 
 </script>
 </@override>
