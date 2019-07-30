@@ -1,4 +1,4 @@
-var maxSize = 2*1024*1024 ;
+var maxSize = 20*1024*1024 ;
 
 //判断文件带下
 function checkFileSize(size){

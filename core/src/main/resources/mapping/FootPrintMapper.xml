@@ -83,6 +83,7 @@
     LEFT JOIN t_shop tof on tf.shop_id=tf.shop_id
     left join t_product_statistics tps on tps.product_id=tp.product_id
     WHERE 1=1 AND  tf.user_id =#{userId}
+    and tp.is_upper=1
     ORDER BY tf.create_time LIMIT #{page},#{limit};
   </select>
 
@@ -95,6 +96,7 @@
     LEFT JOIN t_shop tof on t1.shop_id=tof.shop_id
     left join t_product_statistics tps on tps.product_id=tp.product_id
     WHERE
+    tp.is_upper=1 and
     DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(t1.create_time) ORDER BY t1.create_time desc;
   </select>
 

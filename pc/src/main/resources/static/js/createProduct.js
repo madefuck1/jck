@@ -195,9 +195,45 @@ $(".Master-pic .mpic-1 input").bind("change", function () {
         alert("文件大小超过限制");
     }
 
-
 })
 
+//视频大小验证
+$("#vedioFile").bind("change", function () {
+    var video=document.getElementById("vedioFile").files[0];
+    var a = video.size / Math.pow(1024,2)
+    var size = Math.floor(a * 10) / 10 // 字节转化为
+    if(size>20){
+        alert("文件大小超过限制");
+        noShow(this);
+    }else{
+        console.log("文件正常");
+        $("#uploadVedio")[0].addEventListener("loadedmetadata", function(){
+            if(this.videoWidth!=400){
+                alert("视频宽度不符合标准");
+                console.log("视频宽度不符合标准");
+                noShow(this);
+            }else{
+                console.log("成功添加");
+                $(this).parent().append("<p onclick='deleteVedio(this)'>删除</p>")
+            }
+        });
+    }
+
+});
+
+function deleteVedio(obj) {
+    noShow(obj);
+    $(obj).parent().find("p").remove();
+}
+function noShow(obj) {
+    $(obj).parent().find("img").attr("src", "/static/images/sale/businessLicense.png");
+    $(obj).parent().find("input").val("");
+    //清空file
+    $(obj).parent().find("video").attr("src","");
+    document.getElementById("vefirst").style.display="block";
+    document.getElementById("uploadVedio").style.display="none";
+    $("#vedioName").html("");
+}
 
 function deleteImage(obj) {
     $(obj).parent().find("img").attr("src", "/static/images/sale/01.png");
@@ -305,6 +341,7 @@ function createForm() {
                 formData.append("files2", $(this)[0].files[0]);
         }
         })
+
         var vedio=document.getElementById("vedioFile").files[0];
         formData.append("files3",vedio);
         $("#createForm").append(html);

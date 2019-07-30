@@ -33,9 +33,9 @@ public class PcApplication extends SpringBootServletInitializer {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //文件最大
-        factory.setMaxFileSize("2MB"); //KB,MB
+        factory.setMaxFileSize("20MB"); //KB,MB
         //设置总上传数据总大小
-        factory.setMaxRequestSize("10MB");
+        factory.setMaxRequestSize("20MB");
         return factory.createMultipartConfig();
     }
 }

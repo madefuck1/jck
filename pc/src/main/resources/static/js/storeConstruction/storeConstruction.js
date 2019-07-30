@@ -720,6 +720,18 @@ function btnPublish() {
 
 
 
+//页面跳转判断
+function toUpdate() {
+    console.log("页面跳转");
+   var key = document.getElementById("toUpdate");
+   var value = key.options[key.selectedIndex].value;
+   if(value=="c"){
+       window.open('/sellerCenter/videoCenter');
+   }
+}
+
+
+
 
 
 

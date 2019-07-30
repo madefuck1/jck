@@ -142,14 +142,20 @@ function switchPage(obj, type) {
         case 1:
             $('#shop-product').show();
             $('#shop-chart').show();
-            $('#company').hide()
+            $('#company').hide();
+            $('#video').hide();
             break;
         case 2:
             $('#shop-product').hide();
             $('#shop-chart').hide();
-
-            $('#company').show()
-
+            $('#video').hide();
+            $('#company').show();
+            break;
+        case 3:
+            $('#shop-product').hide();
+            $('#shop-chart').hide();
+            $('#company').hide();
+            $('#video').show();
 
             break;
     }

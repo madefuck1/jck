@@ -809,7 +809,7 @@
     //收藏
     function collection() {
         $.ajax({
-            url: '/product/isCollection?productId=${detail.productId!}&type=1&productName=${detail.productName}',
+            url: '/product/isCollection?productId=${detail.productId?c}&type=1&productName=${detail.productName}',
             dataType: 'json',
             type: 'GET',
             contentType: "application/json; charset=utf-8",

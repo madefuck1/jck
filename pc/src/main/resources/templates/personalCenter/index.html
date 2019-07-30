@@ -188,7 +188,7 @@
                                 <#list footPrintList as item>
                                 <li>
                                     <div style="height: 105px;width: 150px">
-                                        <a herf="javascript:void(0);" onclick="javascript:window.open('/product/toDetail?productId='+ ${item.productDto.productId!''},'_blank');">
+                                        <a herf="javascript:void(0);" onclick="javascript:window.open('/product/toDetail?productId='+${item.productDto.productId?c},'_blank');">
                                             <img class="am-thumbnail" src="${item.productDto.url}"/>
                                         </a>
                                     </div>
