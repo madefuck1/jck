@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/sale/base.css">
     <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
     <link rel="stylesheet" href="/static/css/sale/sale-company.css">
+    <link rel="stylesheet" href="${contextPath}/css/sale/sale-video.css">
     <link rel="stylesheet" href="/static/css/sale/sale_header.css">
 
     <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
@@ -37,7 +38,7 @@
         <ul>
             <li class="cur" onclick="switchPage(this,1);"><a href="#">首页</a></li>
             <li onclick="switchPage(this,2);"><a href="#">公司概况</a></li>
-            <!--            <li><a href="">视频中心</a></li>-->
+             <li onclick="switchPage(this,3);"><a href="#">视频中心</a></li>
         </ul>
     </div>
 
@@ -91,7 +92,7 @@
     </div>
 </div>
 <!--公司概况-->
-<div id="company" hidden>
+<div id="company" >
     <h4>工商注册信息</h4>
     <div class="company-left">
         <!--      <div class="company-cloum1">-->
@@ -148,11 +149,54 @@
         <!--      </div>-->
     </div>
     <div class="company-right">
-        <img id="company_urls" src="" alt="">
+        <img id="company_urls" src="" alt="" style="width: 234px;height: 269px;">
         <p style="color: #999; text-align: center">营业执照</p>
     </div>
 </div>
 
+<!--视频中心-->
+<div id="video" >
+    <h4>视频中心</h4>
+    <div class="vedio-in">
+        <div class="vedio1">
+            <video width="226" height="127" preload="none" controls >
+                <source src="../images/sale/video/1.mp4" type="video/mp4">
+
+            </video>
+            <!--<span id="videoPalse"></span>-->
+            <p>视频标题视频标题视频标题视</p>
+        </div>
+        <div class="vedio1">
+            <video width="226" height="127" preload="none" controls >
+                <source src="../images/sale/video/2.mp4" type="video/mp4">
+
+            </video>
+            <p>视频标题视频标题视频标题视</p>
+        </div>
+        <div class="vedio1">
+            <video width="226" height="127" preload="none" autoplay="autoplay" controls >
+                <source src="../images/sale/video/1.mp4" type="video/mp4">
+
+            </video>
+            <!--<span id="videoPalse"></span>-->
+            <p>视频标题视频标题视频标题视</p>
+        </div>
+        <div class="vedio1">
+            <video width="226" height="127" preload="none" controls >
+                <source src="../images/sale/video/2.mp4" type="video/mp4">
+
+            </video>
+            <p>视频标题视频标题视频标题视</p>
+        </div>
+        <div class="vedio1" style="margin-right: 0px;">
+            <video width="226" height="127" preload="none" controls >
+                <source src="../images/sale/video/2.mp4" type="video/mp4">
+
+            </video>
+            <p>视频标题视频标题视频标题视</p>
+        </div>
+    </div>
+</div>
 <!-- 页尾 -->
 <#include "/sellerCenter/common/foot.html"/>
 

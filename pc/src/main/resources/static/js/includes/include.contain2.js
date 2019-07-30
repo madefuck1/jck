@@ -72,6 +72,13 @@ function clickAssortName(k, v) {
     window.location.href = '/product/search?assortId=' + k + '&assortName=' + v;
 }
 
+$(document).ready(function () {
+    $('#header ul li ').click(function () {
+        $(this).prevAll().removeClass('cur');
+        $(this).nextAll().removeClass("cur")
+        $(this).addClass('cur');
+    })
+})
 
 /*$(document).ready(function() {
     $(".list_up .header ul ").click(function() {

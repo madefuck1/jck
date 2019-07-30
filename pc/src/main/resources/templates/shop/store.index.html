@@ -57,10 +57,10 @@
         </div>
         <div class="right" id="right-company">
             <h4 id="companyName">浙江德聚仁和纺织品有限公司</h4>
-            <div class="Collection" style="cursor: pointer" onclick="collection();">
-                <!--                 <span class="coll1">收藏</span>-->
-                <!--                 <span class="coll2">已收藏</span>-->
-            </div>
+            <!--<div class="Collection" style="cursor: pointer" onclick="collection();">
+                &lt;!&ndash;                 <span class="coll1">收藏</span>&ndash;&gt;
+                &lt;!&ndash;                 <span class="coll2">已收藏</span>&ndash;&gt;
+            </div>-->
             <div>
                 <span class="one">联系电话：</span>
                 <span class="two" id="linkPhone">xxxx</span>
@@ -378,7 +378,8 @@
         }
     }
 
-    function collection() {
+    //店铺收藏
+   /* function collection() {
         $.ajax({
             url: '/shop/isCollection?shopId=${shopId!}&type=2',
             dataType: 'json',
@@ -394,9 +395,7 @@
                 }
             }
         });
-
-
-    }
+    }*/
 </script>
 
 </body>

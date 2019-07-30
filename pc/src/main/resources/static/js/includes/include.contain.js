@@ -77,4 +77,12 @@ function clickAssortName(k, v) {
 }
 
 
+$(document).ready(function () {
+    $('#header ul li ').click(function () {
+        $(this).prevAll().removeClass('cur');
+        $(this).nextAll().removeClass("cur")
+        $(this).addClass('cur');
+    })
+})
+
 
