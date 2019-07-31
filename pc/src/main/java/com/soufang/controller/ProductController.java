@@ -407,7 +407,7 @@ public class ProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = "toDetail", method = RequestMethod.GET)
-    public String introductionHtml(HttpServletRequest request, ModelMap map, Long productId) {
+    public String introductionHtml(HttpServletRequest request, ModelMap map, Long productId,String assortId) {
         // 是否登录
         UserDto userInfo = null;
         try {
@@ -486,6 +486,7 @@ public class ProductController extends BaseController {
 
         // 产品信息
         map.put("detail", productDto);
+        map.put("assortId", assortId);
 
         //获取各种评价的总数量
         AssessSo assessSo = new AssessSo();

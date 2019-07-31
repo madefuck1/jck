@@ -91,7 +91,9 @@
     <ol class="am-breadcrumb am-breadcrumb-slash">
         <li><a href="/index">首页</a></li>
         <!--跳转到搜索页面-->
-        <li><a>${detail.assortName}</a></li>
+        <li><a href="javascript:void(0);" onclick="toSearch()">${detail.assortName}</a></li>
+         <input type="hidden" id="assortId" value="${assortId}">
+         <input type="hidden" id="assortName" value="${detail.assortName}">
         <li class="am-active">${detail.productName}</li>
     </ol>
 <!--    <div class="scoll">-->
@@ -845,6 +847,13 @@
         video.style.zIndex = 1;
         firimg.style.zIndex = 2;
 
+    }
+
+    //通过分类跳转回产品搜索页面
+    function  toSearch() {
+        var oneAssortId= $("#assortId").val();
+        var assortName= $("#assortName").val();
+        window.open("/product/search?assortId="+oneAssortId+"&assortName="+assortName);
     }
 </script>
 </html>

@@ -90,6 +90,7 @@
                     </ul>
             <div class="clear"></div>
         </div>
+            <input type="hidden" id="oneAssortId" value="${oneAssortId!''}">
         <div class="search-content">
             <div class="sort" id="sort">
                 <li class="sortClass" >
@@ -308,11 +309,20 @@
 
     }
 
+    window.onload = function(){
+        var oneAssortId= $("#oneAssortId").val();
+        searchAssortWithSort(0,0,oneAssortId);
+    }
+
     var assortId = '', orderSort = '';
 
-    function searchAssortWithSort(type, obj) {
+    function searchAssortWithSort(type, obj,oneAssortId) {
         // 检索条件分类
-        assortId = getAssortId();
+        if(oneAssortId=="0"||oneAssortId==undefined){
+            assortId = getAssortId();
+        }else {
+            assortId=oneAssortId;
+        }
         // 1:综合排序； 2：销量； 3：价格
         switch (type) {
             case 1:
@@ -337,7 +347,6 @@
 
 
     function Init(pageIndex) {      //这个参数就是点击的那个分页的页数索引值，第一页为0，上面提到了，下面这部分就是AJAX传值了。
-
         $.get("/product/searchAssortWithSort?searchProductName=" + $("#search_productName").val() + "&assortId="
             + assortId + "&orderSort=" + orderSort + "&pageIndex=" + pageIndex, function (result) {
             productListHtml(result);
@@ -440,7 +449,7 @@
     }
 
     function openProductDetail(value) {
-        window.location.href = "/product/toDetail?productId=" + value;
+        window.location.href = "/product/toDetail?productId=" + value+"&assortId="+assortId;
     }
 
     function getAssort(value, dlId) {
