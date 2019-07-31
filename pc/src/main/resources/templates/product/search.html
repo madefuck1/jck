@@ -120,7 +120,7 @@
                 <li>
                     <div class="i-pic limit">
                         <input hidden id="productId" value="${item.productId}">
-                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId},'_blank');">
+                        <a onclick="getProductInfo(${item.productId?c})">
                             <div style="height: 230px;">
                                 <img src="${item.productUrl}"/>
                             </div>
@@ -146,7 +146,7 @@
             <#list HotProductList as item>
             <li>
                 <div class="i-pic check">
-                    <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId?c},'_blank');">
+                    <a onclick="getProductInfo(${item.productId?c})">
                     <img src="${item.productUrl}"/>
                     <p class="check-title">${item.productName}</p>
                     <p class="price fl">
@@ -174,6 +174,10 @@
 <div class="theme-popover-mask"></div>
 </body>
 <script type="text/javascript">
+    function getProductInfo(productId) {
+        window.open('/product/toDetail?productId=' + productId, '_blank');
+    }
+
     $(document).ready(function () {
         $('#sort li').click(function () {
             $(this).prevAll().removeClass('sortClass');

@@ -313,11 +313,11 @@
                 <#list leftList as item>
                 <li class="first" style="border-top: 1px solid #D4D4D4; padding-bottom: 10px">
                     <div class="p-img">
-                        <a onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"
+                        <a onclick="getProductInfo(${item.productId?c})"
                            href="#"><img class="" src="${item.productUrl!''}"> </a>
                     </div>
                     <div class="p-name"><a
-                            onclick="javascript:window.open('/product/toDetail?productId='+${item.productId!''},'_blank');"
+                            onclick="getProductInfo(${item.productId?c})"
                             href="#">${item.productName!''}</a>
                     </div>
                     <div class="p-price"><strong>￥${item.productStatisticsDto.productPrice!''}</strong></div>
@@ -509,6 +509,11 @@
 <#include "/common/includes/include.footer.html"/>
 </body>
 <script type="text/javascript">
+
+    function getProductInfo(productId) {
+        window.open('/product/toDetail?productId=' + productId, '_blank');
+    }
+
     var minNumber = "${detail.specDtoList[0].specDetailDtoList[0].minNumber!'1'}";
     $(function () {
        var isShowNone = ${isShowNone};
