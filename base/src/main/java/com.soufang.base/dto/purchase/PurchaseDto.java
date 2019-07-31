@@ -1,5 +1,7 @@
 package com.soufang.base.dto.purchase;
 
+import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
+import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.utils.DateUtils;
 
@@ -7,32 +9,21 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PurchaseDto {
-
-
     private String purchaseNumber;
-
     private String enquiryNumber;
-
     private Long shopId;
     private Long userId;
-
     private String shopName;
-
     private Long enquiryProductId;
-
     private BigDecimal unitPrice;
-
     private BigDecimal sumPrice;
-
     private Integer offerStatus;
     private String strOfferStatus;
-
     private Date offerTime;
     private String strOfferTime;
-
     private ShopDto shopDto;
-
     private String remark;
+    private EnquiryProductDto enquiryProductDto;
 
     public ShopDto getShopDto() {
         return shopDto;
@@ -51,15 +42,11 @@ public class PurchaseDto {
     }
 
     public String getStrOfferStatus() {
-        if(offerStatus == null){
-            return null;
-        }else if(offerStatus == 1){
-            return "能够提供";
-        }else if(offerStatus == 0){
-            return "不能够提供";
-        }else {
-            return "商家未提供此信息";
-        }
+        return strOfferStatus;
+    }
+
+    public void setStrOfferStatus(String strOfferStatus) {
+        this.strOfferStatus = strOfferStatus;
     }
 
     public String getStrOfferTime() {
@@ -148,5 +135,13 @@ public class PurchaseDto {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public EnquiryProductDto getEnquiryProductDto() {
+        return enquiryProductDto;
+    }
+
+    public void setEnquiryProductDto(EnquiryProductDto enquiryProductDto) {
+        this.enquiryProductDto = enquiryProductDto;
     }
 }

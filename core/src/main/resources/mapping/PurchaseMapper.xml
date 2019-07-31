@@ -81,12 +81,39 @@
     </collection>
   </resultMap>
 
+  <resultMap id="MyPurchaseMap" type="com.soufang.base.dto.purchase.PurchaseDto" >
+    <id column="purchase_number" property="purchaseNumber" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="sum_price" property="sumPrice" jdbcType="DECIMAL" />
+    <result column="offer_status" property="offerStatus" jdbcType="INTEGER" />
+    <result column="offer_time" property="offerTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <collection property="enquiryProductDto" ofType="com.soufang.base.dto.enquiryProduct.EnquiryProductDto">
+      <id column="enquiry_product_id" property="enquiryProductId" jdbcType="BIGINT" />
+      <result column="enquiry_number" property="enquiryNumber" jdbcType="VARCHAR" />
+      <result column="product_name" property="productName" jdbcType="VARCHAR" />
+      <result column="product_assort" property="productAssort" jdbcType="BIGINT" />
+      <result column="assort_name" property="assortName" jdbcType="VARCHAR" />
+      <result column="product_number" property="productNumber" jdbcType="BIGINT" />
+      <result column="product_unit" property="productUnit" jdbcType="VARCHAR" />
+      <result column="product_image" property="productImage" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List" >
-
-
     purchase_number, shop_id, enquiry_product_id, unit_price, sum_price, offer_status, 
     offer_time
   </sql>
+
+  <select id="getMyPurchaseList" resultMap="MyPurchaseMap" parameterType="com.soufang.base.search.purchase.PurchaseSo">
+    	select P.*,EP.*,getAssortNameById (EP.product_assort) as assort_name from t_purchase P LEFT JOIN t_enquiry_product EP on P.enquiry_product_id = EP.enquiry_product_id
+        WHERE P.shop_id = #{shopId} order by offer_time desc LIMIT #{page},#{limit}
+  </select>
+  <select id="getMyPurchasecount" resultType="java.lang.Integer" parameterType="com.soufang.base.search.purchase.PurchaseSo">
+    	select count(1) from t_purchase P LEFT JOIN t_enquiry_product EP on P.enquiry_product_id = EP.enquiry_product_id
+        WHERE P.shop_id = #{shopId}
+  </select>
 
   <select id="getPurchaseListByEnqunum" parameterType="java.lang.String" resultMap="detailResultMap">
     select tp.*,ts.*  from t_purchase tp

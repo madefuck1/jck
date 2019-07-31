@@ -94,14 +94,14 @@
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">身份证照片：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <span ><img class="sale_pic1" src='${(userInfo.idCardUrl)!"没有身份证信息"}'></span>
-                                            <span ><img class="sale_pic2" src='${(userInfo.rIdCardUrl)!"没有身份证信息"}'></span>
+                                            <span ><img class="sale_pic1" src='${(userInfo.idCardUrl)!""}' alt="没有身份证信息"></span>
+                                            <span ><img class="sale_pic2" src='${(userInfo.rIdCardUrl)!""}' alt="没有身份证信息"></span>
                                         </div>
                                     </div>
                                     <div class="sale_cloum1">
                                         <span class="am-u-sm-2 row1">营业执照：</span>
                                         <div class="am-form-group am-u-sm-10 row2" style="width: 50%; float: left">
-                                            <span  ><img class="sale_pic3" src='${(userInfo.companyDto.compUrls)!"没有身份证信息"}'></span>
+                                            <span  ><img class="sale_pic3" src='${(userInfo.companyDto.compUrls)!"没有上传营业执照"}' alt="没有上传营业执照"></span>
                                         </div>
                                     </div>
                                     <a id="buttonUp"><button type="button" onclick="toUpdateCompany()" class="am-btn am-btn-secondary am-btn-lg button-size">修&nbsp;&nbsp;&nbsp;改</button></a>

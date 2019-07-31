@@ -7,10 +7,12 @@ import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.EnquiryFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.Enquiry.EnquiryVo;
+import com.soufang.vo.purchase.PurchaseVo;
 import com.soufang.vo.purchase.UpdateUnitPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,21 +38,22 @@ public class EnquiryController extends BaseController {
     @MemberAccess
     @ResponseBody
     @RequestMapping(value = "getMyQuote", method = RequestMethod.POST)
-    public EnquiryVo getMyQuote(HttpServletRequest request, @RequestBody EnquirySo enquirySo) {
-        EnquiryVo vo = new EnquiryVo();
-        UserDto userInfo = this.getUserInfo(request);
-        ShopDto shopInfo = this.getShopInfo(request);
-        enquirySo.setPage(enquirySo.getPage());
-        enquirySo.setShopId(shopInfo.getShopId());
-        enquirySo.setUserId(userInfo.getUserId());
-        enquirySo.setLimit(5);
-        if(enquirySo.getShopId() == null){
+    public PurchaseVo getMyQuote(HttpServletRequest request, @RequestBody PurchaseSo purchaseSo) {
+        PurchaseVo vo = new PurchaseVo();
+        ShopDto shopDto=this.getShopInfo(request);
+        //卖家要通过ShopId查询报价信息
+        purchaseSo.setShopId(shopDto.getShopId());
+        purchaseSo.setUserId(shopDto.getUserId());
+        purchaseSo.setLimit(5);
+        if(shopDto.getShopId() == null){
             vo.setCount(0);
-             return vo;
+            return vo;
         }
-        PageHelp<EnquiryDto> pageHelp = enquiryFeign.getMyQuoteList(enquirySo);
-        vo.setData(pageHelp.getData());
-        vo.setCount(pageHelp.getCount());
+        PageHelp<PurchaseDto> pageHelps =enquiryFeign.getMyPurchaseList(purchaseSo);
+        vo.setData(pageHelps.getData());
+        vo.setCount(pageHelps.getCount());
+        vo.setSuccess(true);
+        vo.setMessage("获取报价列表成功");
         return vo;
     }
     //报价详情

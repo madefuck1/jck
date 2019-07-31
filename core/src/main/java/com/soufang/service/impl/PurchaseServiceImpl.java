@@ -1,11 +1,13 @@
 package com.soufang.service.impl;
 
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.enums.PurchaseStatusEnum;
+import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
 import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.base.utils.DateUtils;
@@ -174,6 +176,21 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
    public int userPurchaseNumber(PurchaseSo purchaseSo){
        return  purchaseMapper.userPurchaseNumber(purchaseSo);
+    }
+
+    @Override
+    public PageHelp<PurchaseDto> getMyPurchaseList(PurchaseSo purchaseSo) {
+        purchaseSo.setPage((purchaseSo.getPage()-1)*purchaseSo.getLimit());
+        List<PurchaseDto> list = purchaseMapper.getMyPurchaseList(purchaseSo);
+        int count = purchaseMapper.getMyPurchasecount(purchaseSo);
+        PageHelp<PurchaseDto> pageHelp = new PageHelp<>();
+        for (PurchaseDto p:list) {
+            p.getEnquiryProductDto().setProductImage(PropertiesParam.file_pre+p.getEnquiryProductDto().getProductImage());
+            p.setStrOfferStatus( PurchaseStatusEnum.getByKey(p.getOfferStatus()).getMessage());
+        }
+        pageHelp.setData(list);
+        pageHelp.setCount(count);
+        return pageHelp;
     }
 
 }

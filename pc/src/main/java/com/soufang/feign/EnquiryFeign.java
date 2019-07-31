@@ -6,6 +6,7 @@ import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.purchase.PurchaseDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.enquiry.EnquirySo;
+import com.soufang.base.search.purchase.PurchaseSo;
 import com.soufang.vo.Enquiry.EnquiryAddVo;
 import com.soufang.vo.Enquiry.EnquiryDetailsVo;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -62,6 +63,9 @@ public interface EnquiryFeign {
 
     //查询询盘用户信息
     @RequestMapping(value = "core/enquiry/selUserIdByEnquiryNumber",method = RequestMethod.POST)
-    public Long selUserIdByEnquiryNumber(@RequestBody String enquiryNumber);
+    Long selUserIdByEnquiryNumber(@RequestBody String enquiryNumber);
 
+    //获取我的报价列表
+    @RequestMapping(value = "core/purchase/getMyPurchaseList",method = RequestMethod.POST)
+    PageHelp<PurchaseDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo);
 }

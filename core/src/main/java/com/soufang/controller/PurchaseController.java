@@ -41,6 +41,13 @@ public class PurchaseController {
         return purchaseDtos;
     }
 
+    //获取我的报价列表
+    @RequestMapping(value = "getMyPurchaseList",method = RequestMethod.POST)
+    PageHelp<PurchaseDto> getMyPurchaseList(@RequestBody PurchaseSo purchaseSo){
+        PageHelp<PurchaseDto> pageHelp = purchaseService.getMyPurchaseList(purchaseSo);
+        return pageHelp;
+    }
+
     /**
      * 新增报价单
      * @param purchaseDto
