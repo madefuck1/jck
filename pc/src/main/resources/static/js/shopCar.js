@@ -208,23 +208,75 @@ function deleteCheck(){
     });
 }
 
-function deleteProduct(obj){
-    var shopCarProductId = $(obj).parent().find(".shopCarProductId").val();
-    $.ajax({
-        url: '/shopCar/delete',
-        dataType: 'json',
-        type: 'post',
-        contentType: "application/json; charset=utf-8",
-        data:"["+shopCarProductId+"]",
-        success: function (data) {
-            if($(obj).parents(".shopCar").find(".item-content").length == 1){
-                $(obj).parents(".shopCar").remove();
-            }else {
-                $(obj).parents(".item-content").remove();
+function deleteCheck(){
+    var i = 0 , j = 0;
+    var html = "";
+    var htmls="";
+    $(".shopCar").each(function () {
+        var flag = true ;
+        $(this).find(".itemCheck").each(function () {
+            if($(this).is(":checked")){
+                if(flag){
+                    html += '<input type="hidden" name="list['+i+'].shopCarId" value="'+$(this).parents(".shopCar").find(".shopCarId").val()+'">' ;
+                    flag = false;
+                }
+                html += '<input type="hidden" name="list['+i+'].shopCarProductIds['+j+']" value="'+$(this).parents(".item-content").find(".shopCarProductId").val()+'">' ;
+                htmls+=$(this).parents(".item-content").find(".shopCarProductId").val()+",";
+                j++;
             }
-            calculate();
+        })
+        i++;
+    })
+    if(html.length == 0){
+        alert("请选择商品！");
+        return false ;
+    }else{
+        //获取复选框值
+        var shopCarProductId=htmls.split(",");
+        for(var i = 0 ;i<shopCarProductId.length;i++)
+        {
+            if(shopCarProductId[i] == "" || typeof(shopCarProductId[i]) == "undefined")
+            {
+                shopCarProductId.splice(i,1);
+                i= i-1;
+
+            }
         }
-    });
+        console.log(shopCarProductId);
+        $.ajax({
+            url: '/shopCar/delete',
+            dataType: 'json',
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            data:"["+shopCarProductId+"]",
+            success: function (data) {
+                alert(data.message);
+                //刷新页面
+                window.location.reload();
+            }
+        });
+    }
+}
+
+
+function deleteProduct(obj){
+        var shopCarProductId = $(obj).parent().find(".shopCarProductId").val();
+        console.log(shopCarProductId);
+        $.ajax({
+            url: '/shopCar/delete',
+            dataType: 'json',
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            data:"["+shopCarProductId+"]",
+            success: function (data) {
+                if($(obj).parents(".shopCar").find(".item-content").length == 1){
+                    $(obj).parents(".shopCar").remove();
+                }else {
+                    $(obj).parents(".item-content").remove();
+                }
+                calculate();
+            }
+        });
 }
 
 function subOne(obj){
