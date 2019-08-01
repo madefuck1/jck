@@ -92,8 +92,8 @@
         <li><a href="/index">首页</a></li>
         <!--跳转到搜索页面-->
         <li><a href="javascript:void(0);" onclick="toSearch()">${detail.assortName}</a></li>
-         <input type="hidden" id="assortId" value="${assortId}">
-         <input type="hidden" id="assortName" value="${detail.assortName}">
+         <input type="hidden" id="assortId" value="${assortId!''}">
+         <input type="hidden" id="assortName" value="${detail.assortName!''}">
         <li class="am-active">${detail.productName}</li>
     </ol>
 <!--    <div class="scoll">-->
