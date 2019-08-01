@@ -38,8 +38,8 @@
                     <div class="suggestDetail">
                         <p>描述问题：</p>
                         <blockquote class="textArea">
-                            <textarea name="sugContent" id="say_some" cols="60" rows="5" autocomplete="off" placeholder="在此描述您的意见具体内容"></textarea>
-                            <div class="fontTip"><i class="cur">0</i> / <i>200</i></div>
+                            <textarea onpropertychange="checkLength(this)"  oninput="checkLength(this)"  name="sugContent" id="say_some" cols="60" rows="5" autocomplete="off" placeholder="在此描述您的意见具体内容"></textarea>
+                            <div class="fontTip"><i class="cur" id="used">0</i> / <i id="total">200</i></div>
                         </blockquote>
                     </div>
                     <div class="am-btn am-btn-danger anniu submitButton">提交</div>
@@ -56,6 +56,28 @@
 <@override name="js">
 <script src="${contextPath}/js/jquery.form.js"></script>
 <script type="text/javascript">
+
+    function checkLength(obj){
+        var count=0;
+        var inputContent = obj.value;
+        var total = document.getElementById("total").innerHTML;
+        var used = document.getElementById("used");
+        var inputLen = inputContent.length;
+        var lastLen = 0;
+        if(lastLen != inputLen){
+            for(var i=0;i<inputLen;i++){
+                count = (inputContent.charCodeAt(i)<=256)?(count+1):(count+2);
+                if(count > total){
+                    obj.value = inputContent.substring(0,i);
+                    count = total;
+                    break;
+                }
+            }
+            used.innerHTML = count;
+            lastLen = inputLen;
+        }
+    }
+
     $(".submitButton").bind("click",function () {
         //验证意见类型
         var key1 = document.getElementById("typeQuestion");
