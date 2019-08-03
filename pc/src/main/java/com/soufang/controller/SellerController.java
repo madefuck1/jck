@@ -77,9 +77,11 @@ public class SellerController extends BaseController {
         if(shopDto == null || StringUtils.isBlank(shopDto.getShopName())){
             return "defaultPage/noCompanyInfo";
         }else {
-//        String idCard[] = userInfo.getIdCardUrl().split(";");
-//        userInfo.setIdCardUrl(PropertiesParam.file_pre+idCard[0]);
-//        userInfo.setrIdCardUrl(PropertiesParam.file_pre+idCard[1]);
+            if(StringUtils.isNotBlank(userInfo.getIdCardUrl())){
+                String idCard[] = userInfo.getIdCardUrl().split(";");
+                userInfo.setIdCardUrl(PropertiesParam.file_pre+idCard[0]);
+                userInfo.setrIdcardUrl(PropertiesParam.file_pre+idCard[1]);
+            }
             CompanyDto companyDto = pcUserFeign.getCompany(userInfo.getUserId());
             companyDto.setCompUrls(PropertiesParam.file_pre + companyDto.getCompUrls());
             userInfo.setCompanyDto(companyDto);

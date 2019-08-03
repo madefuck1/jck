@@ -181,13 +181,13 @@
 
 
   <update id="reviewYes" parameterType="java.lang.Long">
-    update t_shop set shop_status = 1,refuse_reason = null
+    update t_shop set shop_status = 0,refuse_reason = null
     where shop_id = #{id,jdbcType=BIGINT}
   </update>
 
 
   <update id="reviewNo" parameterType="com.soufang.model.Shop">
-    update t_shop set shop_status = 0,refuse_reason = #{refuseReason,jdbcType=VARCHAR}
+    update t_shop set shop_status = 3,refuse_reason = #{refuseReason,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=BIGINT}
   </update>
 

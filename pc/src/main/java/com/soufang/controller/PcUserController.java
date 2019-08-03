@@ -46,6 +46,13 @@ public class PcUserController extends BaseController {
     @Autowired
     PcUserFeign pcUserFeign;
 
+    //微信登录
+    @RequestMapping(value = "weiXinLogin", method = RequestMethod.GET)
+    public String weiXinLogin(String code,String state) {
+        System.out.println(code+"111"+state);
+        return "/login/login";
+    }
+
     @RequestMapping(value = "signOut", method = RequestMethod.GET)
     public String signOut(HttpServletRequest request) {
         this.deletetoken(request);

@@ -68,9 +68,9 @@
                     templet: function (e) {
                         var html;
                         html = '<a class="layui-btn layui-btn-container layui-btn-xs" onclick="shopDetail('+e.shopId+')">店铺详情</a >';
-                        if(e.strShopStatus == "未审核"){
+                        if(e.strShopStatus == "店铺正在审核中,请耐心等待"){
                             html += '<a class="layui-btn layui-btn-container layui-btn-xs layui-btn-danger" onclick="reviewShop('+e.shopId+')">审核</a >';
-                        }else if(e.strShopStatus == "审核不通过"){
+                        }else if(e.strShopStatus == "店铺审核失败,详情请咨询400-860-0992"){
                             html += '<a class="layui-btn layui-btn-container layui-btn-xs layui-btn-danger" onclick="reviewShop('+e.shopId+')">重新审核</a >';
                         }
                         return html;

@@ -17,6 +17,7 @@ public class UserDto {
     private String userAvatar;
     private String idCard;
     private String idCardUrl;
+    private String rIdcardUrl;
     private Integer userLevel;
     private Integer userStatus;
     private String strStatus;
@@ -137,6 +138,14 @@ public class UserDto {
 
     public void setIdCardUrl(String idCardUrl) {
         this.idCardUrl = idCardUrl;
+    }
+
+    public String getrIdcardUrl() {
+        return rIdcardUrl;
+    }
+
+    public void setrIdcardUrl(String rIdcardUrl) {
+        this.rIdcardUrl = rIdcardUrl;
     }
 
     public Integer getUserLevel() {
