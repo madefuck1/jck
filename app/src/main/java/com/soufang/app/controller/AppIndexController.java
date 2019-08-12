@@ -9,6 +9,7 @@ import com.soufang.app.vo.exhibition.ExhibitionListVo;
 import com.soufang.app.vo.exhibition.ExhibitionVo;
 import com.soufang.app.vo.productManage.ListHotProductReqVo;
 import com.soufang.app.vo.shop.ListShopVo;
+import com.soufang.base.PageBase;
 import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.exhibition.ExhibitionDto;
 import com.soufang.base.dto.product.ProductDto;
@@ -38,16 +39,16 @@ public class AppIndexController extends AppBaseController{
 
     @ResponseBody
     @RequestMapping(value = "getHotProductList",method = RequestMethod.POST)
-    public ListHotProductReqVo getHotProductList( ){
+    public ListHotProductReqVo getHotProductList(@RequestBody PageBase page ){
         ListHotProductReqVo hotProduct = new ListHotProductReqVo();
-        PageHelp<ProductDto> listDto = appProductManageFeign.getHotProductList();
+        PageHelp<ProductDto> listDto = appProductManageFeign.getHotProductList(page);
         hotProduct.setData(listDto.getData());
         return hotProduct;
     }
 
     @ResponseBody
     @RequestMapping(value = "getHotShopList",method = RequestMethod.POST)
-    public ListShopVo getHotShopList( ){
+    public ListShopVo getHotShopList(){
         ListShopVo shopVo = new ListShopVo();
         List<ShopDto> shopDtos = shopFeign.getHotShop();
         shopVo.setData(shopDtos);

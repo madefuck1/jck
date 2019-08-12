@@ -1,11 +1,13 @@
 package com.soufang.app.feign;
 
+import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.shopCar.ShopCarProductDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
+import io.swagger.models.auth.In;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +41,7 @@ public interface AppProductManageFeign {
     Result sellDownProduct(ProductDto dto);
 
     @RequestMapping(value = "core/productManage/getHotProductList", method = RequestMethod.POST)
-    PageHelp<ProductDto> getHotProductList() ;
+    PageHelp<ProductDto> getHotProductList(@RequestBody PageBase page) ;
 
     @RequestMapping(value = "core/productManage/getProductTop6", method = RequestMethod.POST)
     List<ProductDto> getProductTop6(Long shopId);

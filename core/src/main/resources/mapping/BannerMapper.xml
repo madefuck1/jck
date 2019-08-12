@@ -8,6 +8,8 @@
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="target_id" property="target_id" jdbcType="BIGINT" />
+    <result column="target_type" property="target_type" jdbcType="INTEGER" />
   </resultMap>
 
   <resultMap id="BannerDtoMap" type="com.soufang.base.dto.banner.BannerDto" >
@@ -17,6 +19,8 @@
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="target_id" property="target_id" jdbcType="BIGINT" />
+    <result column="target_type" property="target_type" jdbcType="INTEGER" />
   </resultMap>
 
   <insert id="addImg" parameterType="com.soufang.model.Banner" >
@@ -39,103 +43,4 @@
     where banner_id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <select id="getCount" resultType="java.lang.Integer" parameterType="com.soufang.model.News" >
-    select count(1) from t_banner where 1=1
-    <if test="author != null">
-      news_author = #{author}
-    </if>
-    <if test="content != null">
-      news_content = #{content}
-    </if>
-    <if test="title != null">
-      news_title = #{title}
-    </if>
-    order by create_time
-  </select>
-
-  <insert id="insertSelective" parameterType="com.soufang.model.Dictionary" >
-    insert into t_news
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="dictId != null " >
-        dict_id,
-      </if>
-      <if test="dictKey != null" >
-        dict_key,
-      </if>
-      <if test="Description != null" >
-        dict_k_description,
-      </if>
-      <if test="dictValue != null" >
-        dict_value,
-      </if>
-      <if test="dictDescription != null" >
-        dict_v_description,
-      </if>
-      <if test="dictSort != null" >
-        dict_sort,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="dictId != null " >
-        #{dictId,jdbcType=BIGINT},
-      </if>
-      <if test="dictKey != null" >
-        #{dictKey,jdbcType=VARCHAR},
-      </if>
-      <if test="Description != null" >
-        #{Description,jdbcType=VARCHAR},
-      </if>
-      <if test="dictValue != null" >
-        #{dictValue,jdbcType=VARCHAR},
-      </if>
-      <if test="dictDescription != null" >
-        #{dictDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="dictSort != null" >
-        #{dictSort,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP}
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.Dictionary" >
-    update t_news
-    <set >
-      <if test="dictKey != null" >
-        dict_key = #{dictKey,jdbcType=VARCHAR},
-      </if>
-      <if test="Description != null" >
-        dict_k_description = #{Description,jdbcType=VARCHAR},
-      </if>
-      <if test="dictValue != null" >
-        dict_value =  #{dictValue,jdbcType=VARCHAR},
-      </if>
-      <if test="dictDescription != null" >
-        dict_v_description =  #{dictDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="dictSort != null" >
-        dict_sort = #{dictSort,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP}
-      </if>
-    </set>
-    where dict_id = #{dictId,jdbcType=BIGINT}
-  </update>
-
-  <update id="updateByPrimaryKey" parameterType="com.soufang.model.Dictionary" >
-    update t_news
-    set  dict_key = #{dictKey,jdbcType=VARCHAR},
-      dict_k_description = #{Description,jdbcType=VARCHAR},
-      dict_value =  #{dictValue,jdbcType=VARCHAR},
-      dict_v_description =  #{dictDescription,jdbcType=VARCHAR},
-      dict_sort = #{dictSort,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where dict_id = #{dictId,jdbcType=BIGINT}
-  </update>
 </mapper>

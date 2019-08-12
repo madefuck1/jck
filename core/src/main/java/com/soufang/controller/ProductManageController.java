@@ -2,6 +2,7 @@ package com.soufang.controller;
 
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.footprint.FootPrintDto;
 import com.soufang.base.dto.product.*;
@@ -65,8 +66,8 @@ public class ProductManageController {
      * @return PageHelp<ProductDto>   返回产品数组
      */
     @RequestMapping(value = "getHotProductList", method = RequestMethod.POST)
-    public PageHelp<ProductDto> hotList() {
-        PageHelp<ProductDto> pageHelp = productManageService.hotList();
+    public PageHelp<ProductDto> hotList(@RequestBody PageBase page) {
+        PageHelp<ProductDto> pageHelp = productManageService.hotList(page);
         return pageHelp;
     }
 

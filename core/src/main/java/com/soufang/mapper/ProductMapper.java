@@ -1,5 +1,6 @@
 package com.soufang.mapper;
 
+import com.soufang.base.PageBase;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.search.product.ProductManageSo;
@@ -28,7 +29,7 @@ public interface ProductMapper {
 
     List<ProductDto> getAllProduct();
 
-    List<ProductDto> getHotList();
+    List<ProductDto> getHotList(PageBase page);
 
     List<ProductDto> getFootPrintList(ProductDto dto);
 

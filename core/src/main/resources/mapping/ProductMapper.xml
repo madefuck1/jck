@@ -629,7 +629,7 @@
     </select>
 
 
-    <select id="getHotList" resultMap="DtoResultMap">
+    <select id="getHotList" resultMap="DtoResultMap" parameterType="com.soufang.base.PageBase">
         select
         P.*, S.*, St.*, getAssortNameById (P.assort_id) as assortName,
         concat(P.key1, '：', P.key1_value) as kv1,
@@ -639,7 +639,7 @@
         concat(P.key5, '：', P.key5_value) as kv5
         from ( select * from t_product where 1=1
             and is_upper = 1
-        order by product_level limit 10) as P
+        order by product_level limit #{page},#{limit}) as P
         join t_product_color C on P.product_id = C.product_id
         join t_product_spec S on P.product_id = S.product_id
         join t_product_statistics St on P.product_id = St.product_id

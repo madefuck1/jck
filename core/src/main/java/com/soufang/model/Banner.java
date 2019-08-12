@@ -9,6 +9,8 @@ public class Banner {
     private int sort;
     private int isDelete;
     private Date createTime;
+    private long target_id;
+    private int target_type;
 
     public long getBannerId() {
         return bannerId;
@@ -59,6 +61,22 @@ public class Banner {
     }
 
     public Banner() {
+    }
+
+    public long getTarget_id() {
+        return target_id;
+    }
+
+    public void setTarget_id(long target_id) {
+        this.target_id = target_id;
+    }
+
+    public int getTarget_type() {
+        return target_type;
+    }
+
+    public void setTarget_type(int target_type) {
+        this.target_type = target_type;
     }
 
     public Banner(long bannerId, int terminal, String bannerImage, int sort, int isDelete, Date createTime) {

@@ -1,5 +1,6 @@
 package com.soufang.service;
 
+import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
@@ -8,6 +9,7 @@ import com.soufang.base.dto.shopCar.ShopCarProductDto;
 import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.product.ProductManageSo;
+import io.swagger.models.auth.In;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,7 +39,7 @@ public interface ProductManageService {
 
     void registerProduct(ProductDto dto);
 
-    PageHelp<ProductDto> hotList();
+    PageHelp<ProductDto> hotList(PageBase page);
 
     List<ProductDto> getFootPrintList(ProductDto dto);
 

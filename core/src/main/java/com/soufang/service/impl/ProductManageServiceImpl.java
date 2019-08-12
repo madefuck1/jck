@@ -1,6 +1,7 @@
 package com.soufang.service.impl;
 
 import com.soufang.base.BusinessException;
+import com.soufang.base.PageBase;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
@@ -14,6 +15,7 @@ import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.mapper.*;
 import com.soufang.model.*;
 import com.soufang.service.ProductManageService;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -263,8 +265,11 @@ public class ProductManageServiceImpl implements ProductManageService {
     }
 
     @Override
-    public PageHelp<ProductDto> hotList() {
-        List<ProductDto> products = productMapper.getHotList();
+    public PageHelp<ProductDto> hotList(PageBase page) {
+        if(page.getPage() !=0){
+            page.setPage((page.getPage()-1)*page.getLimit());
+        }
+        List<ProductDto> products = productMapper.getHotList(page);
         for (ProductDto p : products) {
             String[] img = new String[10];
             if (StringUtils.isNotBlank(p.getProductImage())) {
