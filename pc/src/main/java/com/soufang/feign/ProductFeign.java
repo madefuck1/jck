@@ -1,5 +1,7 @@
 package com.soufang.feign;
 
+import cn.org.rapid_framework.page.Page;
+import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
@@ -19,7 +21,7 @@ public interface ProductFeign {
     PageHelp<ProductDto> getProductList(ProductDto dto);
 
     @RequestMapping(value = "core/productManage/getHotProductList", method = RequestMethod.POST)
-    PageHelp<ProductDto> getHotProductList();
+    PageHelp<ProductDto> getHotProductList(@RequestBody PageBase page);
 
     @RequestMapping(value = "core/productManage/getProductDetail", method = RequestMethod.POST)
     ProductDto getProductDetail(ProductDto dto);

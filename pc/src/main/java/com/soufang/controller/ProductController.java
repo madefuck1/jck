@@ -1,5 +1,6 @@
 package com.soufang.controller;
 
+import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
@@ -283,7 +284,7 @@ public class ProductController extends BaseController {
         model.put("productList", productList.getData());
 
         // 热门产品
-        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
         model.put("HotProductList", hotProductList.getData());
 
         //  产品数量
@@ -415,13 +416,13 @@ public class ProductController extends BaseController {
                 map.put("leftList", footPrintList);
             } else {
                 // 推荐列表
-                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
                 map.put("leftName", "热门产品");
                 map.put("leftList", hotProductList.getData());
             }
         } catch (NumberFormatException e) {
             // 推荐列表
-            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
             map.put("leftName", "热门产品");
             map.put("leftList", hotProductList.getData());
         }
