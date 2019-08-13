@@ -39,7 +39,8 @@ public interface ProductManageService {
 
     void registerProduct(ProductDto dto);
 
-    PageHelp<ProductDto> hotList(PageBase page);
+    PageHelp<ProductDto> hotList();
+    PageHelp<ProductDto> hotListPage(PageBase page);
 
     List<ProductDto> getFootPrintList(ProductDto dto);
 

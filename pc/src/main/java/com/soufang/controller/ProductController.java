@@ -284,7 +284,7 @@ public class ProductController extends BaseController {
         model.put("productList", productList.getData());
 
         // 热门产品
-        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
+        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
         model.put("HotProductList", hotProductList.getData());
 
         //  产品数量
@@ -416,13 +416,13 @@ public class ProductController extends BaseController {
                 map.put("leftList", footPrintList);
             } else {
                 // 推荐列表
-                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
+                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
                 map.put("leftName", "热门产品");
                 map.put("leftList", hotProductList.getData());
             }
         } catch (NumberFormatException e) {
             // 推荐列表
-            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(new PageBase(1,10));
+            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
             map.put("leftName", "热门产品");
             map.put("leftList", hotProductList.getData());
         }

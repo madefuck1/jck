@@ -2,7 +2,7 @@
 <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{}' style="margin-top: 40px;">
     <ul class="am-slides">
         <#list bannerDtos as banner>
-        <li onclick="jumpShopOrProductDetail(${banner.target_type},${banner.target_id})"><img src="${banner.bannerImage}" alt=""></li>
+        <li><a href="/index/bannerJump?target_type=${banner.target_type}&&target_id=${banner.target_id}"><img src="${banner.bannerImage}" alt="展示失败"></a></li>
         </#list>
     </ul>
 </div>

@@ -265,11 +265,29 @@ public class ProductManageServiceImpl implements ProductManageService {
     }
 
     @Override
-    public PageHelp<ProductDto> hotList(PageBase page) {
+    public PageHelp<ProductDto> hotList() {
+        List<ProductDto> products = productMapper.getHotList();
+        for (ProductDto p : products) {
+            String[] img = new String[10];
+            if (StringUtils.isNotBlank(p.getProductImage())) {
+                img = p.getProductImage().split(";");
+            }
+            if(StringUtils.isNotBlank(img[0])){
+                p.setProductUrl(PropertiesParam.file_pre + img[0]);
+            }else {
+                p.setProductUrl(PropertiesParam.file_pre + "/uploadProduct/product.jpg");
+            }
+        }
+        PageHelp<ProductDto> pageHelp = new PageHelp<>();
+        pageHelp.setData(products);
+        return pageHelp;
+    }
+    @Override
+    public PageHelp<ProductDto> hotListPage(PageBase page) {
         if(page.getPage() !=0){
             page.setPage((page.getPage()-1)*page.getLimit());
         }
-        List<ProductDto> products = productMapper.getHotList(page);
+        List<ProductDto> products = productMapper.getHotListPage(page);
         for (ProductDto p : products) {
             String[] img = new String[10];
             if (StringUtils.isNotBlank(p.getProductImage())) {

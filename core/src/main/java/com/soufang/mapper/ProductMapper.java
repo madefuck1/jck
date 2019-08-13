@@ -29,7 +29,8 @@ public interface ProductMapper {
 
     List<ProductDto> getAllProduct();
 
-    List<ProductDto> getHotList(PageBase page);
+    List<ProductDto> getHotList();
+    List<ProductDto> getHotListPage(PageBase page);
 
     List<ProductDto> getFootPrintList(ProductDto dto);
 
@@ -58,4 +59,5 @@ public interface ProductMapper {
 
     List<ProductDto> getProductByAssortId2(StoreProductAssortDto productAssortDto);
     int getProductByAssortId2Count(StoreProductAssortDto productAssortDto);
+
 }

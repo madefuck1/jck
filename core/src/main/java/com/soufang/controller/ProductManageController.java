@@ -66,11 +66,16 @@ public class ProductManageController {
      * @return PageHelp<ProductDto>   返回产品数组
      */
     @RequestMapping(value = "getHotProductList", method = RequestMethod.POST)
-    public PageHelp<ProductDto> hotList(@RequestBody PageBase page) {
-        PageHelp<ProductDto> pageHelp = productManageService.hotList(page);
+    public PageHelp<ProductDto> hotList() {
+        PageHelp<ProductDto> pageHelp = productManageService.hotList();
         return pageHelp;
     }
 
+    @RequestMapping(value = "getHotProductListPage", method = RequestMethod.POST)
+    public PageHelp<ProductDto> hotListPage(@RequestBody PageBase page) {
+        PageHelp<ProductDto> pageHelp = productManageService.hotListPage(page);
+        return pageHelp;
+    }
 
     /**
      * 产品明细详情(根据规格数量获取明细)

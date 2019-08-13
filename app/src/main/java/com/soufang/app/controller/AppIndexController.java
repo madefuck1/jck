@@ -39,9 +39,18 @@ public class AppIndexController extends AppBaseController{
 
     @ResponseBody
     @RequestMapping(value = "getHotProductList",method = RequestMethod.POST)
-    public ListHotProductReqVo getHotProductList(@RequestBody PageBase page ){
+    public ListHotProductReqVo getHotProductList(){
         ListHotProductReqVo hotProduct = new ListHotProductReqVo();
-        PageHelp<ProductDto> listDto = appProductManageFeign.getHotProductList(page);
+        PageHelp<ProductDto> listDto = appProductManageFeign.getHotProductList();
+        hotProduct.setData(listDto.getData());
+        return hotProduct;
+    }
+    //分页获取热门产品
+    @ResponseBody
+    @RequestMapping(value = "getHotProductListPage",method = RequestMethod.POST)
+    public ListHotProductReqVo getHotProductListPage(@RequestBody PageBase page ){
+        ListHotProductReqVo hotProduct = new ListHotProductReqVo();
+        PageHelp<ProductDto> listDto = appProductManageFeign.getHotProductListPage(page);
         hotProduct.setData(listDto.getData());
         return hotProduct;
     }

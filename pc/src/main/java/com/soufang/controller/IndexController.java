@@ -17,10 +17,7 @@ import com.soufang.vo.banner.BannerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -58,6 +55,20 @@ public class IndexController extends BaseController {
         map.put("productDtos3",list.subList(10,15));
         return "/index";
     }
+
+    @RequestMapping(value = "index/bannerJump", method = RequestMethod.GET)
+    public String BannerJump(@RequestParam("target_type") Integer target_type,@RequestParam("target_id") long target_id){
+        if(target_type == 1){
+            //跳转到某个店铺详情
+            System.out.println(target_id +"店铺");
+        }
+        if(target_type==2){
+            //跳转到某个产品详情
+            System.out.println(target_id +"产品");
+        }
+        return null;
+    }
+
 
     @ResponseBody
     @MemberAccess
