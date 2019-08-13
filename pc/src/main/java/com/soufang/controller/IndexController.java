@@ -4,6 +4,7 @@ import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.product.ProductDto;
+import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.jiguang.JMessageDto;
 import com.soufang.base.jiguang.JMessageUtils;
 import com.soufang.base.page.PageHelp;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -56,17 +58,19 @@ public class IndexController extends BaseController {
         return "/index";
     }
 
-    @RequestMapping(value = "index/bannerJump", method = RequestMethod.GET)
+    @RequestMapping(value = "bannerJump", method = RequestMethod.GET)
     public String BannerJump(@RequestParam("target_type") Integer target_type,@RequestParam("target_id") long target_id){
         if(target_type == 1){
             //跳转到某个店铺详情
-            System.out.println(target_id +"店铺");
+            return "redirect:shop/toStoreIndex?shopId="+target_id;
+           /* shop/toStoreIndex?shopId=217*/
         }
         if(target_type==2){
             //跳转到某个产品详情
-            System.out.println(target_id +"产品");
+            return "redirect:product/toDetail?productId="+target_id;
+        }else {
+            return "redirect:index";
         }
-        return null;
     }
 
 
