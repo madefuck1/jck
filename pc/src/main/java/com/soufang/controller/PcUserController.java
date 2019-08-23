@@ -101,30 +101,26 @@ public class PcUserController extends BaseController {
         }
     }
     //绑定微信号
+    @MemberAccess
     @RequestMapping(value = "BindWeChat", method = RequestMethod.GET)
     public String Bind(HttpServletRequest request,ModelMap map) {
         UserDto userInfo = this.getUserInfo(request);
-        if(StringUtils.isNotBlank(userInfo.getPhone())){
-            String code = request.getParameter("code");
-            String state = request.getParameter("state");
-            if(code==null){
-                //用户未授权,直接返回个人信息首页
-                return "redirect:/personalCenter/toPersonalCenter";//重定向
-            }else {
-                String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
-                //用户同意授权，获取access_token，    需判断改用户是否已经绑定了手机号，若是，则直接登录，否则需注册/绑定手机号
-                String returnStr = SendGet(url) ;
-                JSONObject jsonObject = JSONObject.parseObject(returnStr);
-                String openid = jsonObject.getString("openid");
-                String token = jsonObject.getString("access_token");
-                userInfo.setOauthType(OauthTypeEnum.weChat.getValue());//类型1 表示微信
-                userInfo.setOauthId(openid);//报存 openid
-                Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
-                return "redirect:/personalCenter/toPersonalCenter";//重定向
-            }
+        String code = request.getParameter("code");
+        String state = request.getParameter("state");
+        if(code==null){
+            //用户未授权,直接返回个人信息首页
+            return "redirect:/personalCenter/toPersonalCenter";//重定向
         }else {
-            //请先登录
-            return "redirect:/user/toLogin";
+            String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
+            //用户同意授权，获取access_token，    需判断改用户是否已经绑定了手机号，若是，则直接登录，否则需注册/绑定手机号
+            String returnStr = SendGet(url) ;
+            JSONObject jsonObject = JSONObject.parseObject(returnStr);
+            String openid = jsonObject.getString("openid");
+            String token = jsonObject.getString("access_token");
+            userInfo.setOauthType(OauthTypeEnum.weChat.getValue());//类型1 表示微信
+            userInfo.setOauthId(openid);//保存 openid
+            Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
+            return "redirect:/personalCenter/toPersonalCenter";//重定向
         }
     }
 

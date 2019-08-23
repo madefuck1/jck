@@ -237,11 +237,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByOpenId(Map<Object,Object> map) {
         User user = userMapper.getByOpenId(map);
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user,userDto);
         if(user == null){
             return new UserDto();
         }
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user,userDto);
         return userDto;
     }
 

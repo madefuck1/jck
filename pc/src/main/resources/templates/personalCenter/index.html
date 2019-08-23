@@ -60,11 +60,11 @@
                             </p>
                             <p class="m-wallet">
                                 <#if userInfo.oauthId??>
+                                <span class="m-title">已绑定微信</span>
+                                <#else>
                                 <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxf01a70ce62c5ac8e&redirect_uri=http://www.enterprise-china.com/user/BindWeChat&response_type=code&scope=snsapi_login&state=STATE#eguangtong">
                                     <span class="m-title">绑定微信</span>
                                 </a>
-                                <#else>
-                                <span class="m-title">已绑定微信</span>
                                 </#if>
                             </p>
                         </div>
