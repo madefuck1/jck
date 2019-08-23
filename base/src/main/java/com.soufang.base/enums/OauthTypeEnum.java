@@ -5,20 +5,20 @@ import java.util.Map;
 
 public enum  OauthTypeEnum {
     //微信
-    weiChat(1L,"微信"),
+    weChat(1,"微信"),
     //QQ
-    QQ(2L,"QQ"),
+    QQ(2,"QQ"),
     //微博
-    web(3L,"微博");
+    web(3,"微博");
 
-    private Long value;
+    private int value;
     private String message;
 
-    public Long getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
@@ -30,7 +30,7 @@ public enum  OauthTypeEnum {
         this.message = message;
     }
 
-    OauthTypeEnum(Long value, String message) {
+    OauthTypeEnum(int value, String message) {
         this.value = value;
         this.message = message;
     }
@@ -42,7 +42,7 @@ public enum  OauthTypeEnum {
         return map;
     }
 
-    public static OauthTypeEnum getByKey(Long value){
+    public static OauthTypeEnum getByKey(int value){
         for (OauthTypeEnum oauthTypeEnum : OauthTypeEnum.values()) {
             if(oauthTypeEnum.value == value){
                 return oauthTypeEnum;

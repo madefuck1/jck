@@ -67,4 +67,7 @@ public interface AppUserFeign {
 
     @RequestMapping(value = "/core/user/getUserByOpenId",method = RequestMethod.POST)
     UserDto getUserByOpenId(@RequestBody Map<Object,Object> map);
+
+    @RequestMapping(value = "/core/user/bindThirdInfo",method = RequestMethod.POST)
+    Result bindThirdInfo(@RequestBody UserDto userInfo);
 }

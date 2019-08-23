@@ -65,8 +65,8 @@ public class PcUserController extends BaseController {
     PcUserFeign pcUserFeign;
 
     //微信登录
-    @RequestMapping(value = "weiChatLogin", method = RequestMethod.GET)
-    public String weiChatLogin(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) {
+    @RequestMapping(value = "weChatLogin", method = RequestMethod.GET)
+    public String Login(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) {
         String code = request.getParameter("code");
         Map<Object,Object> map = new HashMap<>();
         /*String state = request.getParameter("state");*/
@@ -85,7 +85,7 @@ public class PcUserController extends BaseController {
             JSONObject userInfo = JSONObject.parseObject(userInfoUrl);
             map.put("userInfo",userInfo);*/
             map.put("openid",openid);
-            map.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+            map.put("oauthType",OauthTypeEnum.weChat.getValue());
             //通过openid拿到用户信息
             UserDto userInfo = pcUserFeign.getUserByOpenId(map);
             if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==1){
@@ -95,14 +95,14 @@ public class PcUserController extends BaseController {
             }else {
                 //用户未绑定微信，现在开始第一次绑定微信
                 modelMap.put("openid",openid);
-                modelMap.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+                modelMap.put("oauthType",OauthTypeEnum.weChat.getValue());
                 return  "register:/register/register";//重定向到注册页面
             }
         }
     }
     //绑定微信号
-    @RequestMapping(value = "BindWeiChat", method = RequestMethod.GET)
-    public String BindWeiChat(HttpServletRequest request,ModelMap map) {
+    @RequestMapping(value = "BindWeChat", method = RequestMethod.GET)
+    public String Bind(HttpServletRequest request,ModelMap map) {
         UserDto userInfo = this.getUserInfo(request);
         if(StringUtils.isNotBlank(userInfo.getPhone())){
             String code = request.getParameter("code");
@@ -117,7 +117,7 @@ public class PcUserController extends BaseController {
                 JSONObject jsonObject = JSONObject.parseObject(returnStr);
                 String openid = jsonObject.getString("openid");
                 String token = jsonObject.getString("access_token");
-                userInfo.setOauthType(1);//类型1 表示微信
+                userInfo.setOauthType(OauthTypeEnum.weChat.getValue());//类型1 表示微信
                 userInfo.setOauthId(openid);//报存 openid
                 Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
                 return "redirect:/personalCenter/toPersonalCenter";//重定向

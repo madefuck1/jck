@@ -48,11 +48,11 @@ public class AppUserController extends AppBaseController {
 
     //微信登录
     @ResponseBody
-    @RequestMapping(value = "weiChatLogin", method = RequestMethod.POST)
-    public UserVo weiChatLogin(@RequestBody String openid) {
+    @RequestMapping(value = "weChatLogin", method = RequestMethod.POST)
+    public UserVo weChatLogin(@RequestBody String openid) {
         Map<Object,Object> map = new HashMap<>();
         map.put("openid",openid);
-        map.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+        map.put("oauthType",OauthTypeEnum.weChat.getValue());
         Map<String,Object> map1 = new HashMap<>();
         UserVo userVo = new UserVo();
         //通过openid拿到用户信息
@@ -75,6 +75,19 @@ public class AppUserController extends AppBaseController {
             userVo.setCode("1");
             return userVo;
         }
+    }
+    //微信登录
+    @ResponseBody
+    @RequestMapping(value = "BindWeChat", method = RequestMethod.POST)
+    public UserVo BindWeChat(@RequestBody String openid,HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+        userInfo.setOauthType(OauthTypeEnum.weChat.getValue());
+        userInfo.setOauthId(openid);
+        Result result = appUserFeign.bindThirdInfo(userInfo);//Result
+        UserVo userVo = new UserVo();
+        userVo.setSuccess(result.isSuccess());
+        userVo.setMessage(result.getMessage());
+        return userVo;
     }
 
     @ResponseBody
