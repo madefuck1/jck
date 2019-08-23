@@ -6,6 +6,8 @@ public class RegisterReqVo {
     private String code;//验证码
     private String password;
     private String passwordRepeat;//再次输入的密码
+    private String openid;
+    private int oauthType;
 
     public String getPhone() {
         return phone;
@@ -45,5 +47,21 @@ public class RegisterReqVo {
 
     public void setPasswordRepeat(String passwordRepeat) {
         this.passwordRepeat = passwordRepeat;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public int getOauthType() {
+        return oauthType;
+    }
+
+    public void setOauthType(int oauthType) {
+        this.oauthType = oauthType;
     }
 }

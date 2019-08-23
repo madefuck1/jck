@@ -27,7 +27,7 @@ public class UserDto {
     private String strCreateTime;
     private Long recommendId;
     private Integer oauthType;
-    private Long oauthId;
+    private String oauthId;
     private CompanyDto companyDto;
 
     private ShopDto shopDto;
@@ -188,11 +188,11 @@ public class UserDto {
         this.oauthType = oauthType;
     }
 
-    public Long getOauthId() {
+    public String getOauthId() {
         return oauthId;
     }
 
-    public void setOauthId(Long oauthId) {
+    public void setOauthId(String oauthId) {
         this.oauthId = oauthId;
     }
 

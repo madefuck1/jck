@@ -13,6 +13,7 @@ import com.soufang.base.dto.message.MessageDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.suggest.SuggestDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.OauthTypeEnum;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -43,6 +45,37 @@ public class AppUserController extends AppBaseController {
     private static int code_time = 60*3 ;//验证码有效时间
     private static int register_time = 60*10;//注册时token有效时间
     private static int login_time = 60*60*24*7 ;//登录有效时间
+
+    //微信登录
+    @ResponseBody
+    @RequestMapping(value = "weiChatLogin", method = RequestMethod.POST)
+    public UserVo weiChatLogin(@RequestBody String openid) {
+        Map<Object,Object> map = new HashMap<>();
+        map.put("openid",openid);
+        map.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+        Map<String,Object> map1 = new HashMap<>();
+        UserVo userVo = new UserVo();
+        //通过openid拿到用户信息
+        UserDto userInfo = appUserFeign.getUserByOpenId(map);
+        if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==1){
+            //用户已绑定微信,直接登录
+            String token = UUID.randomUUID().toString().replace("-", "");
+            RedisUtils.setString(token,String.valueOf(userInfo.getUserId()),login_time);
+            userVo.setSuccess(true);
+            userVo.setMessage("登录成功");
+            userVo.setCode("100");
+            map1.put("token",token);
+            map1.put("alias","yhkj_"+userInfo.getUserId());
+            userVo.setData(map1);
+            return userVo;
+        }else {
+            //用户未绑定微信，现在开始第一次绑定微信
+            userVo.setMessage("微信登录失败:请先绑定微信号！");
+            userVo.setSuccess(false);
+            userVo.setCode("1");
+            return userVo;
+        }
+    }
 
     @ResponseBody
     @RequestMapping(value = "login",method = RequestMethod.POST)

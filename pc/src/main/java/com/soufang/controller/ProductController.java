@@ -151,10 +151,10 @@ public class ProductController extends BaseController {
             }
         }
        StringBuffer productVedio = new StringBuffer();
-        Map<String, Object> map = FtpClient.uploadImage(files3[0], productUrl);
-        if ((boolean) map.get("success")) {
-            productVedio.append("video"+map.get("uploadName").toString() + ";");
-        }
+//        Map<String, Object> map = FtpClient.uploadImage(files3[0], productUrl);
+//        if ((boolean) map.get("success")) {
+//            productVedio.append("video"+map.get("uploadName").toString() + ";");
+//        }
         //图片/视频地址
         productDto.setProductImage(productImage.toString()+productVedio.toString());
         productDto.setProductDetail(productDetail.toString());

@@ -5,6 +5,7 @@ import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.search.user.UserSo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     /**
@@ -102,4 +103,8 @@ public interface UserService {
 
     //修改密码
     Result updatePassword(UserDto userDto);
+
+    int bindThirdInfo(UserDto userDto);
+
+    UserDto getUserByOpenId(Map<Object,Object> map);
 }

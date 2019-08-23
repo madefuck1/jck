@@ -921,7 +921,7 @@
         select  t_product.product_id,t_product.product_name,t_product.product_image,t_product_statistics.*
         from t_product inner join t_product_statistics on t_product.product_id = t_product_statistics.product_id
         where 1 = 1 and is_upper =1
-        order by t_product_statistics.browse_number desc
+        order by t_product.product_level
         limit 0,16;
     </select>
 

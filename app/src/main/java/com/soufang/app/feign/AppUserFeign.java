@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Map;
+
 
 @FeignClient("core")
 public interface AppUserFeign {
@@ -62,4 +64,7 @@ public interface AppUserFeign {
 
     @RequestMapping(value = "/core/suggest/addSuggest",method = RequestMethod.POST)
     Result addSuggest(@RequestBody SuggestDto suggestDto);
+
+    @RequestMapping(value = "/core/user/getUserByOpenId",method = RequestMethod.POST)
+    UserDto getUserByOpenId(@RequestBody Map<Object,Object> map);
 }

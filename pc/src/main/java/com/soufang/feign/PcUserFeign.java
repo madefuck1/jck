@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Map;
+
 @FeignClient("core")
 public interface PcUserFeign {
 
@@ -52,4 +54,10 @@ public interface PcUserFeign {
 
     @RequestMapping(value = "/core/user/settle" , method = RequestMethod.POST)
     Result settleShop(@RequestBody UserDto userDto);
+
+    @RequestMapping(value = "/core/user/bindThirdInfo",method = RequestMethod.POST)
+    Result bindThirdInfo(@RequestBody UserDto userInfo);
+
+    @RequestMapping(value = "/core/user/getUserByOpenId",method = RequestMethod.POST)
+    UserDto getUserByOpenId(@RequestBody Map<Object,Object> map);
 }

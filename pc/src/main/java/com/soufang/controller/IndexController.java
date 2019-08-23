@@ -5,6 +5,7 @@ import com.soufang.base.dto.enquiry.EnquiryDto;
 import com.soufang.base.dto.enquiryProduct.EnquiryProductDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.OauthTypeEnum;
 import com.soufang.base.jiguang.JMessageDto;
 import com.soufang.base.jiguang.JMessageUtils;
 import com.soufang.base.page.PageHelp;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: chen
@@ -55,6 +58,10 @@ public class IndexController extends BaseController {
         map.put("productDtos1",list.subList(0,5));
         map.put("productDtos2",list.subList(5,10));
         map.put("productDtos3",list.subList(10,15));
+        Map<Object,Object> map1 = new HashMap<>();
+       /* map1.put("openid","2");
+        map1.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+        UserDto userInfo = pcUserFeign.getUserByOpenId(map1);*/
         return "/index";
     }
 

@@ -20,7 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {
@@ -223,6 +225,24 @@ public class UserServiceImpl implements UserService {
             result.setSuccess(false);
         }
         return result;
+    }
+
+    @Override
+    public int bindThirdInfo(UserDto userDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userDto,user);
+        return userMapper.bindThirdInfo(user);
+    }
+
+    @Override
+    public UserDto getUserByOpenId(Map<Object,Object> map) {
+        User user = userMapper.getByOpenId(map);
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user,userDto);
+        if(user == null){
+            return new UserDto();
+        }
+        return userDto;
     }
 
 }

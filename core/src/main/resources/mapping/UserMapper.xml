@@ -18,7 +18,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="recommend_id" property="recommendId" jdbcType="BIGINT" />
     <result column="oauth_type" property="oauthType" jdbcType="INTEGER" />
-    <result column="oauth_id" property="oauthId" jdbcType="BIGINT" />
+    <result column="oauth_id" property="oauthId" jdbcType="VARCHAR" />
   </resultMap>
 
   <resultMap id="ResultMap" type="com.soufang.base.dto.user.UserDto" >
@@ -38,7 +38,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="recommend_id" property="recommendId" jdbcType="BIGINT" />
     <result column="oauth_type" property="oauthType" jdbcType="INTEGER" />
-    <result column="oauth_id" property="oauthId" jdbcType="BIGINT" />
+    <result column="oauth_id" property="oauthId" jdbcType="VARCHAR" />
     <collection property="accountDto" ofType="com.soufang.base.dto.account.AccountDto">
       <id column="account_id" property="accountId" jdbcType="BIGINT" />
       <result column="user_id" property="userId" jdbcType="BIGINT" />
@@ -120,7 +120,7 @@
     values (#{userId,jdbcType=BIGINT},#{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{userAvatar,jdbcType=VARCHAR},#{idCard,jdbcType=VARCHAR}, #{idCardUrl,jdbcType=VARCHAR},
        #{userLevel,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}, #{fixedPhone,jdbcType=VARCHAR}, #{faxNumber,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}, #{recommendId,jdbcType=BIGINT},
-     #{oauthType,jdbcType=INTEGER},#{oauthId,jdbcType=BIGINT},)
+     #{oauthType,jdbcType=INTEGER},#{oauthId,jdbcType=VARCHAR},)
   </insert>
 
   <insert id="addUser" parameterType="com.soufang.model.User" useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
@@ -210,7 +210,7 @@
         #{oauthType,jdbcType=INTEGER},
       </if>
       <if test="oauthId != null" >
-        #{oauthId,jdbcType=BIGINT},
+        #{oauthId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -279,7 +279,7 @@
         oauth_type = #{oauthType,jdbcType=INTEGER},
       </if>
       <if test="oauthId != null" >
-        oauth_id = #{oauthId,jdbcType=BIGINT},
+        oauth_id = #{oauthId,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
@@ -322,5 +322,21 @@
     where user_id = (select user_id from t_enquiry where enquiry_number = #{enquiryNumber,jdbcType=VARCHAR})
   </select>
 
+  <update id="bindThirdInfo" parameterType="com.soufang.model.User">
+    update t_user
+    <set >
+      <if test="oauthType != null" >
+        oauth_type = #{oauthType,jdbcType=INTEGER},
+      </if>
+      <if test="oauthId != null" >
+        oauth_id = #{oauthId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
 
+  <select id="getByOpenId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select * from t_user
+    where oauth_id = #{openid,jdbcType=VARCHAR} and oauth_type = #{oauthType,jdbcType=BIGINT}
+  </select>
 </mapper>

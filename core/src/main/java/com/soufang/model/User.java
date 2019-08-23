@@ -19,7 +19,7 @@ public class User {
     private Date createTime;
     private Long recommendId;
     private Integer oauthType;
-    private Long oauthId;
+    private String oauthId;
 
     private Account account;
 
@@ -135,11 +135,11 @@ public class User {
         this.oauthType = oauthType;
     }
 
-    public Long getOauthId() {
+    public String getOauthId() {
         return oauthId;
     }
 
-    public void setOauthId(Long oauthId) {
+    public void setOauthId(String oauthId) {
         this.oauthId = oauthId;
     }
 

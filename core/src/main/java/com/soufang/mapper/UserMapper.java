@@ -4,6 +4,7 @@ import com.soufang.base.dto.user.UserDto;
 import com.soufang.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -101,4 +102,9 @@ public interface UserMapper {
     int updatePasswordByEmail(User user);
 
     int updatePassword(UserDto userDto);
+
+    //绑定第三方账号
+    int bindThirdInfo(User user);
+
+    User getByOpenId(Map<Object,Object> map);
 }

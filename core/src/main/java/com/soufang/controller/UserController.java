@@ -6,6 +6,7 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.OauthTypeEnum;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.user.UserSo;
 import com.soufang.base.utils.DateUtils;
@@ -14,6 +15,7 @@ import com.soufang.model.User;
 import com.soufang.service.CompanyService;
 import com.soufang.service.ShopService;
 import com.soufang.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/core/user")
@@ -72,7 +75,13 @@ public class UserController {
         List<UserDto> list = userService.getUsers(userDto);
         if(list != null && list.size() > 0){
             result.setSuccess(false);
-            result.setMessage("用户已存在");
+            if(StringUtils.isBlank(userDto.getOauthId())&&userDto.getOauthType()==0){
+                result.setMessage("用户已存在");
+            }else if(StringUtils.isNotBlank(userDto.getOauthId())&&userDto.getOauthType()==1){
+                result.setMessage("用户已存在:请登录后绑定微信");
+            }else if(StringUtils.isNotBlank(userDto.getOauthId())&&userDto.getOauthType()==2) {
+                result.setMessage("用户已存在:请登录后绑定QQ");
+            }
         }else {
             Long userId = userService.addUser(userDto);
             result.setSuccess(true);
@@ -186,5 +195,24 @@ public class UserController {
             result.setMessage(e.getMessage());
         }
         return result;
+    }
+
+    //绑定第三方账号
+    @RequestMapping(value = "bindThirdInfo",method = RequestMethod.POST)
+    Result bindThirdInfo (@RequestBody UserDto userDto){
+        Result result = new Result();
+        if(userService.bindThirdInfo(userDto) > 0){
+            result.setMessage("更新成功");
+            result.setSuccess(true);
+        }else {
+            result.setMessage("更新失败");
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "getUserByOpenId",method = RequestMethod.POST)
+    UserDto getUserByOpenId(@RequestBody Map<Object,Object> map){
+        return userService.getUserByOpenId(map);
     }
 }

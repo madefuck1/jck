@@ -1,5 +1,6 @@
 package com.soufang.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.soufang.base.PropertiesParam;
 import com.soufang.base.RedisConstants;
 import com.soufang.base.Result;
@@ -7,6 +8,7 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.message.MessageDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.user.UserDto;
+import com.soufang.base.enums.OauthTypeEnum;
 import com.soufang.base.enums.ShopStatusEnum;
 import com.soufang.base.sms.SmsSendResponse;
 import com.soufang.base.utils.*;
@@ -17,6 +19,8 @@ import com.soufang.vo.User.LoginReqVo;
 import com.soufang.vo.User.RegisterReqVo;
 import com.soufang.vo.User.SettleVo;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.utils.HttpClientUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,7 +30,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.Buffer;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @Auther: chen
@@ -41,21 +55,121 @@ public class PcUserController extends BaseController {
     @Value("${upload.user}")
     private String userUrl;
 
+    private final String appid="wxf01a70ce62c5ac8e";
+    private final String secret = "1edffbeab1166899c06595b21eacea1a";
     private static int code_time = 60 * 3;//验证码有效时间
+
+    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     PcUserFeign pcUserFeign;
 
     //微信登录
-    @RequestMapping(value = "weiXinLogin", method = RequestMethod.GET)
-    public String weiXinLogin(String code,String state) {
-        System.out.println(code+"111"+state);
-        return "/login/login";
+    @RequestMapping(value = "weiChatLogin", method = RequestMethod.GET)
+    public String weiChatLogin(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) {
+        String code = request.getParameter("code");
+        Map<Object,Object> map = new HashMap<>();
+        /*String state = request.getParameter("state");*/
+        if(code==null){
+            //用户未授权,直接返回登录页面
+            return "redirect:/user/toLogin";
+        }else {
+            String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
+            //用户同意授权，获取access_token，
+            String returnStr = SendGet(url) ;
+            JSONObject jsonObject = JSONObject.parseObject(returnStr);
+            String openid = jsonObject.getString("openid");
+            String token = jsonObject.getString("access_token");
+            /*//拿个人信息
+            String userInfoUrl = "https://api.weixin.qq.com/sns/auth?access_token="+token+"&openid="+openid;
+            JSONObject userInfo = JSONObject.parseObject(userInfoUrl);
+            map.put("userInfo",userInfo);*/
+            map.put("openid",openid);
+            map.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+            //通过openid拿到用户信息
+            UserDto userInfo = pcUserFeign.getUserByOpenId(map);
+            if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==1){
+                //用户已绑定微信
+                setToken(userInfo.getUserId(), response);//保存token
+                return "redirect:/index";//跳转到首页
+            }else {
+                //用户未绑定微信，现在开始第一次绑定微信
+                modelMap.put("openid",openid);
+                modelMap.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+                return  "register:/register/register";//重定向到注册页面
+            }
+        }
     }
+    //绑定微信号
+    @RequestMapping(value = "BindWeiChat", method = RequestMethod.GET)
+    public String BindWeiChat(HttpServletRequest request,ModelMap map) {
+        UserDto userInfo = this.getUserInfo(request);
+        if(StringUtils.isNotBlank(userInfo.getPhone())){
+            String code = request.getParameter("code");
+            String state = request.getParameter("state");
+            if(code==null){
+                //用户未授权,直接返回个人信息首页
+                return "redirect:/personalCenter/toPersonalCenter";//重定向
+            }else {
+                String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
+                //用户同意授权，获取access_token，    需判断改用户是否已经绑定了手机号，若是，则直接登录，否则需注册/绑定手机号
+                String returnStr = SendGet(url) ;
+                JSONObject jsonObject = JSONObject.parseObject(returnStr);
+                String openid = jsonObject.getString("openid");
+                String token = jsonObject.getString("access_token");
+                userInfo.setOauthType(1);//类型1 表示微信
+                userInfo.setOauthId(openid);//报存 openid
+                Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
+                return "redirect:/personalCenter/toPersonalCenter";//重定向
+            }
+        }else {
+            //请先登录
+            return "redirect:/user/toLogin";
+        }
+    }
+
+    public static String SendGet(String url){
+        String result = "";
+        BufferedReader in = null;
+        try {
+            URL realUrl = new URL(url);
+            //打开和URL之间的连接
+            URLConnection connection = realUrl.openConnection();
+            //建立实际的连接
+            connection.connect();
+            //获取所有响应的头字段
+            Map<String,List<String>> map = connection.getHeaderFields();
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line ;
+            while ((line = in.readLine()) != null){
+                result += line;
+            }
+        }catch (Exception e) {
+            System.out.println("发送GET请求出现异常"+e);
+            e.printStackTrace();
+        }
+        finally {
+            //关闭输入流
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
+        return result;
+    }
+
 
     @RequestMapping(value = "signOut", method = RequestMethod.GET)
     public String signOut(HttpServletRequest request) {
         this.deletetoken(request);
+        return "/login/login";
+    }
+
+    @RequestMapping(value = "QQLogin", method = RequestMethod.GET)
+    public String QQLogin() {
         return "/login/login";
     }
 
@@ -93,7 +207,9 @@ public class PcUserController extends BaseController {
     }
 
     @RequestMapping(value = "toRegister", method = RequestMethod.GET)
-    public String toRegister() {
+    public String toRegister(ModelMap map) {
+        /*map.put("openid","--");
+        map.put("oauthType","--");*/
         return "/register/register";
     }
 
@@ -183,6 +299,8 @@ public class PcUserController extends BaseController {
         baseVo = verfityCode(code, registerReqVo.getCode());
         if (baseVo.isSuccess()) {
             userDto.setPassWord(registerReqVo.getPassword());
+            userDto.setOauthId(registerReqVo.getOpenid());
+            userDto.setOauthType(registerReqVo.getOauthType());
             result = pcUserFeign.register(userDto);
             if (result.isSuccess()) {
                 this.setToken(Long.valueOf(result.getMessage()), response);
