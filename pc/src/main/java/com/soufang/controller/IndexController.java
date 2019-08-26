@@ -59,8 +59,8 @@ public class IndexController extends BaseController {
         map.put("productDtos2",list.subList(5,10));
         map.put("productDtos3",list.subList(10,15));
         Map<Object,Object> map1 = new HashMap<>();
-       /* map1.put("openid","2");
-        map1.put("oauthType",OauthTypeEnum.getByKey(1L).getValue());
+        /*map1.put("openid","2");
+        map1.put("oauthType",OauthTypeEnum.getByKey(1).getValue());
         UserDto userInfo = pcUserFeign.getUserByOpenId(map1);*/
         return "/index";
     }

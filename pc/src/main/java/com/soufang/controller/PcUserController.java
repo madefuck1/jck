@@ -19,7 +19,6 @@ import com.soufang.vo.User.LoginReqVo;
 import com.soufang.vo.User.RegisterReqVo;
 import com.soufang.vo.User.SettleVo;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.client.utils.HttpClientUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,20 +26,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * @Auther: chen
@@ -66,7 +62,7 @@ public class PcUserController extends BaseController {
 
     //微信登录
     @RequestMapping(value = "weChatLogin", method = RequestMethod.GET)
-    public String Login(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) {
+    public String Login(HttpServletRequest request, HttpServletResponse response,ModelMap modelMap) {
         String code = request.getParameter("code");
         Map<Object,Object> map = new HashMap<>();
         /*String state = request.getParameter("state");*/
@@ -89,14 +85,14 @@ public class PcUserController extends BaseController {
             //通过openid拿到用户信息
             UserDto userInfo = pcUserFeign.getUserByOpenId(map);
             if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==1){
-                //用户已绑定微信
+               //用户已绑定微信
                 setToken(userInfo.getUserId(), response);//保存token
                 return "redirect:/index";//跳转到首页
             }else {
                 //用户未绑定微信，现在开始第一次绑定微信
                 modelMap.put("openid",openid);
                 modelMap.put("oauthType",OauthTypeEnum.weChat.getValue());
-                return  "register:/register/register";//重定向到注册页面
+                return  "/register/register";//重定向到注册页面
             }
         }
     }
@@ -109,10 +105,11 @@ public class PcUserController extends BaseController {
         String state = request.getParameter("state");
         if(code==null){
             //用户未授权,直接返回个人信息首页
-            return "redirect:/personalCenter/toPersonalCenter";//重定向
+            return "redirect:/personalCenter/toPersonalCenter?isBind=false";//重定向
+            /*return "/personalCenter/index";*/
         }else {
             String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
-            //用户同意授权，获取access_token，    需判断改用户是否已经绑定了手机号，若是，则直接登录，否则需注册/绑定手机号
+            //用户同意授权，获取access_token，openid
             String returnStr = SendGet(url) ;
             JSONObject jsonObject = JSONObject.parseObject(returnStr);
             String openid = jsonObject.getString("openid");
@@ -120,7 +117,7 @@ public class PcUserController extends BaseController {
             userInfo.setOauthType(OauthTypeEnum.weChat.getValue());//类型1 表示微信
             userInfo.setOauthId(openid);//保存 openid
             Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
-            return "redirect:/personalCenter/toPersonalCenter";//重定向
+            return "redirect:/personalCenter/toPersonalCenter?isBind=true";//重定向
         }
     }
 

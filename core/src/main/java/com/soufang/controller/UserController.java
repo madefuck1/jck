@@ -202,10 +202,10 @@ public class UserController {
     Result bindThirdInfo (@RequestBody UserDto userDto){
         Result result = new Result();
         if(userService.bindThirdInfo(userDto) > 0){
-            result.setMessage("更新成功");
+            result.setMessage("绑定成功");
             result.setSuccess(true);
         }else {
-            result.setMessage("更新失败");
+            result.setMessage("绑定失败");
             result.setSuccess(false);
         }
         return result;

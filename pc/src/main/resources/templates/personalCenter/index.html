@@ -216,6 +216,7 @@
 </div>
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>
+<input type="hidden" id="isBind" value="${isBind!}">
 </div>
 </@override>
 <@override name="js">
@@ -227,10 +228,17 @@
 
 
 <script type="text/javascript">
+    var isBind= $('#isBind').val();
     // 初始化
     $(function () {
         // 日期
         initDate();
+        if(isBind=="true"){
+            alert("绑定成功");
+        }else if(isBind == "false"){
+            alert("未授权，绑定失败！");
+        }else {
+        }
     });
     var initDate = function () {
         //获取时间
@@ -250,6 +258,8 @@
         // todo 直接跳转页面
         window.location.href = "/pc/personalCenter/toOrder?orderShopId=" + id
     }
+
+
 
 </script>
 </@override>

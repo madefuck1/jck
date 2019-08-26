@@ -133,7 +133,7 @@ public class PersonalCenterController extends BaseController {
      */
     @MemberAccess
     @RequestMapping(value = "/toPersonalCenter", method = RequestMethod.GET)
-    public String personalCenterIndexHtml(HttpServletRequest request, ModelMap modelMap) {
+    public String personalCenterIndexHtml(HttpServletRequest request, ModelMap modelMap,String isBind) {
         UserDto userInfo = getUserInfo(request);
         Map<String, Object> userMap = new HashMap<>();
         // 用户名称
@@ -146,6 +146,7 @@ public class PersonalCenterController extends BaseController {
         }
         // 用户金额
         userMap.put("totalMoney", userInfo.getAccountDto().getTotalMoney());
+        userMap.put("oauthId",userInfo.getOauthId());
         OrderSo orderSo = new OrderSo();
         orderSo.setPage(1);
         orderSo.setLimit(2);
@@ -170,6 +171,7 @@ public class PersonalCenterController extends BaseController {
         footPrintSo.setLimit(12);
         PageHelp<FootPrintDto> footPrintList = footPrintFeign.getFootPrintList(footPrintSo);
         modelMap.put("footPrintList", footPrintList.getData());
+        modelMap.put("isBind",isBind);
         return "personalCenter/index";
     }
 
