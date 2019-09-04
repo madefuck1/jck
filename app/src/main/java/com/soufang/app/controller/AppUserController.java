@@ -51,7 +51,7 @@ public class AppUserController extends AppBaseController {
     private static int code_time = 60*3 ;//验证码有效时间
     private static int register_time = 60*10;//注册时token有效时间
     private static int login_time = 60*60*24*7 ;//登录有效时间
-/*的撒刚刚好根深蒂固发射点发生*/
+
     //微信登录
     @ResponseBody
     @RequestMapping(value = "weChatLogin", method = RequestMethod.POST)
