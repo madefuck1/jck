@@ -12,4 +12,7 @@ import java.util.List;
 public interface BannerFeign {
     @RequestMapping(value = "/core/banner/getList",method = RequestMethod.POST)
     List<BannerDto> getList(@RequestBody Integer terminal);
+
+    @RequestMapping(value = "/core/banner/getAssortPicture",method = RequestMethod.POST)
+    List<BannerDto> getAssortPicture(@RequestBody BannerDto bannerDto);
 }

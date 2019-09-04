@@ -25,4 +25,6 @@ public interface BannerMapper {
      * @return
      */
     int deleteById(Long id);
+
+    List<BannerDto> getAssortPicture(BannerDto bannerDto);
 }

@@ -146,7 +146,10 @@ public class PersonalCenterController extends BaseController {
         }
         // 用户金额
         userMap.put("totalMoney", userInfo.getAccountDto().getTotalMoney());
-        userMap.put("oauthId",userInfo.getOauthId());
+        if(userInfo.getOauthType()==null){
+            userInfo.setOauthType(-1);
+        }
+        userMap.put("oauthType",userInfo.getOauthType());
         OrderSo orderSo = new OrderSo();
         orderSo.setPage(1);
         orderSo.setLimit(2);

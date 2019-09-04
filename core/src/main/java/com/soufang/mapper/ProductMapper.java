@@ -29,7 +29,7 @@ public interface ProductMapper {
 
     List<ProductDto> getAllProduct();
 
-    List<ProductDto> getHotList();
+    List<ProductDto> getHotList(Integer limit);
     List<ProductDto> getHotListPage(PageBase page);
 
     List<ProductDto> getFootPrintList(ProductDto dto);

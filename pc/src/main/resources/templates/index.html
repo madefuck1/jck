@@ -142,7 +142,7 @@
         </div>
  </div>
     <div class="pro" id="pro">
-
+        <!--<div class="pro_left" onclick="getProductInfo('+data.data[0].productId+')" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;">--></div>
     </div>
 </div>
 <div id="middleBanner">
@@ -247,6 +247,81 @@
 </#list>
 </#if>
 </div>
+<div class="Recommend_row1 row2">
+    <#if productDtos4??>
+    <#list productDtos4 as product>
+    <#if product_index < 4 >
+    <div class="rec">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+        </dl>
+    </div>
+</#if>
+<#if product_index == 4>
+<div class="rec last">
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+        <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+        <dd>${product.productName}</dd>
+        <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+    </dl>
+</div>
+<#break>
+</#if>
+</#list>
+</#if>
+</div>
+<div class="Recommend_row1 row2">
+    <#if productDtos5??>
+    <#list productDtos5 as product>
+    <#if product_index < 4 >
+    <div class="rec">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+        </dl>
+    </div>
+</#if>
+<#if product_index == 4>
+<div class="rec last">
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+        <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+        <dd>${product.productName}</dd>
+        <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+    </dl>
+</div>
+<#break>
+</#if>
+</#list>
+</#if>
+</div>
+<div class="Recommend_row1 row2">
+    <#if productDtos6??>
+    <#list productDtos6 as product>
+    <#if product_index < 4 >
+    <div class="rec">
+        <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+            <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+            <dd>${product.productName}</dd>
+            <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+        </dl>
+    </div>
+</#if>
+<#if product_index == 4>
+<div class="rec last">
+    <dl class="rec_pic" onclick="getProductInfo(${product.productId?c})">
+        <dt style="background-size: cover!important;background: url(${product.productImage});"></dt>
+        <dd>${product.productName}</dd>
+        <dd>¥<span>${product.productStatisticsDto.productPrice}</span></dd>
+    </dl>
+</div>
+<#break>
+</#if>
+</#list>
+</#if>
+</div>
 </div>
 
 </@override>
@@ -291,6 +366,10 @@
 
     });
 
+    function toRun(id) {
+        window.location.href = "/product/search?assortId=A"+id+"#";
+
+    }
     //获取某个类别的产品
     function getAssortProduct(assortId,page,limit) {
         var data = {
@@ -310,7 +389,7 @@
                     getAssortProduct(11,1,8);
                 }
                 $("#pro").empty();
-                var pro = '<div class="pro_left" onclick="getProductInfo('+data.data[0].productId+')" style="width: 390px;height: 502px;background: url('+data.data[0].productImage+');float: left;"></div>';
+                var pro = '<div class="pro_left" onclick="toRun('+data.assortpictures[0].target_id+')" style="width: 390px;height: 502px;background: url('+data.assortpictures[0].bannerImage+');float: left;"></div>';
                 pro+='<div class="pro_right">\n' +
             '            <div class="pro_top">\n' +
             '                <dl class="pro_top1 one" onclick="getProductInfo('+data.data[0].productId+')">\n' +

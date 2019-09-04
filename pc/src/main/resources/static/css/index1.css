@@ -28,3 +28,66 @@
 .week{
 	margin-top: 10px;
 }
+
+
+/*绑定第三方账号*/
+.image-toggle{
+	width: 100%;
+	height: 200px;
+	margin-top: 40px;
+}
+.image-toggle .sp{
+	width: 86px;
+	height: 86px;
+	background: url(../images/img/sp.png) no-repeat;
+	display: inline-block;
+	cursor: pointer;
+	
+}
+.image-toggle .QQ{
+	background-size: 261px 231px;
+	background-position: 0px -0px;	
+}
+
+
+.image-toggle .wechat{
+	background-position: -175px 0px;
+	margin-left: 30px;
+	background-size: 261px 231px;
+	
+	
+}
+.image-toggle .sina{
+	background-size: 261px 231px;
+	background-position: -88px 0px;
+	margin-left: 30px;
+	
+}
+
+.image-toggle .QQ:hover{
+	background-size: 261px 231px;
+	background-position: 0px -89px;
+}
+
+.image-toggle .sina:hover{
+	background-size: 261px 231px;
+	background-position: -88px -89px;
+}
+
+.image-toggle .wechat:hover{
+	background-size: 261px 231px;
+	background-position: -175px -89px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

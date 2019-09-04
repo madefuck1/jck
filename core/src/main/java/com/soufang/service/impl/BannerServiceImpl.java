@@ -59,4 +59,14 @@ public class BannerServiceImpl implements BannerService {
         bannerMapper.deleteById(id);
         return 1;
     }
+
+    @Override
+    public List<BannerDto> getAssortPicture(BannerDto bannerDto) {
+        List<BannerDto> list = bannerMapper.getAssortPicture(bannerDto);
+        //设置图片地址
+        for (BannerDto b :list) {
+            b.setBannerImage(PropertiesParam.file_pre+b.getBannerImage());
+        }
+        return list;
+    }
 }

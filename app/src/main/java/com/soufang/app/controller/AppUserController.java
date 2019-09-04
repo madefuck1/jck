@@ -1,6 +1,7 @@
 package com.soufang.app.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.soufang.app.config.interceptor.AppMemberAccess;
 import com.soufang.app.vo.AppVo;
 import com.soufang.app.vo.shop.DetailVo;
@@ -30,7 +31,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,8 +55,10 @@ public class AppUserController extends AppBaseController {
     //微信登录
     @ResponseBody
     @RequestMapping(value = "weChatLogin", method = RequestMethod.POST)
-    public UserVo weChatLogin(@RequestBody String openid) {
+    public UserVo weChatLogin(@RequestBody OauthVo oauthVo) {
         Map<Object,Object> map = new HashMap<>();
+        String openid = OauthUtils.getOauth_openid("weChat","app",oauthVo.getCode());
+        /*String token = jsonObject.getString("access_token");*/
         map.put("openid",openid);
         map.put("oauthType",OauthTypeEnum.weChat.getValue());
         Map<String,Object> map1 = new HashMap<>();
@@ -70,24 +78,97 @@ public class AppUserController extends AppBaseController {
             return userVo;
         }else {
             //用户未绑定微信，现在开始第一次绑定微信
-            userVo.setMessage("微信登录失败:请先绑定微信号！");
+            userVo.setMessage("微信登录失败:请确认是否已绑定微信号！");
             userVo.setSuccess(false);
             userVo.setCode("1");
             return userVo;
         }
     }
-    //微信登录
+    //绑定微信
+    @AppMemberAccess
     @ResponseBody
-    @RequestMapping(value = "BindWeChat", method = RequestMethod.POST)
-    public UserVo BindWeChat(@RequestBody String openid,HttpServletRequest request) {
+    @RequestMapping(value = "bindWeChat", method = RequestMethod.POST)
+    public UserVo BindWeChat(@RequestBody OauthVo oauthVo,HttpServletRequest request) {
         UserDto userInfo = this.getUserInfo(request);
+        UserVo userVo = new UserVo();
+        String openid = OauthUtils.getOauth_openid("weChat","app",oauthVo.getCode());
+        /*String token = jsonObject.getString("access_token");*/
         userInfo.setOauthType(OauthTypeEnum.weChat.getValue());
         userInfo.setOauthId(openid);
+        Map<Object,Object> map = new HashMap<>();
+        map.put("openid",openid);
+        map.put("oauthType",OauthTypeEnum.weChat.getValue());
+        UserDto user = appUserFeign.getUserByOpenId(map);
+        if(StringUtils.isNotBlank(user.getPhone())){
+            //微信号已经绑定过,不能再绑定
+            userVo.setCode("1");
+            userVo.setSuccess(false);
+            userVo.setMessage("微信号已经绑定过");
+            return userVo;
+        }
         Result result = appUserFeign.bindThirdInfo(userInfo);//Result
-        UserVo userVo = new UserVo();
+        if(result.isSuccess()){
+            userVo.setCode("100");
+        }else {
+            userVo.setCode("1");
+        }
         userVo.setSuccess(result.isSuccess());
         userVo.setMessage(result.getMessage());
         return userVo;
+    }
+
+    //绑定QQ
+    @AppMemberAccess
+    @ResponseBody
+    @RequestMapping(value = "bindQQ", method = RequestMethod.POST)
+    public UserVo bindQQ(@RequestBody OauthVo oauthVo,HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+        UserVo userVo = new UserVo();
+        String openid = oauthVo.getOpenid();
+        userInfo.setOauthType(OauthTypeEnum.QQ.getValue());//类型2 表示QQ
+        userInfo.setOauthId(openid);//保存 openid
+        Result result = appUserFeign.bindThirdInfo(userInfo);//Result
+        if(result.isSuccess()){
+            userVo.setCode("100");
+            userVo.setMessage("绑定成功");
+        }else {
+            userVo.setCode("1");
+            userVo.setMessage("绑定失败");
+        }
+        userVo.setSuccess(result.isSuccess());
+        return userVo;
+    }
+
+    //QQ登录
+    @ResponseBody
+    @RequestMapping(value = "QQLogin", method = RequestMethod.POST)
+    public UserVo QQLogin(@RequestBody OauthVo oauthVo) {
+        Map<Object,Object> map = new HashMap<>();
+        String openid = oauthVo.getOpenid();
+        map.put("openid",openid);
+        map.put("oauthType",OauthTypeEnum.QQ.getValue());
+        Map<String,Object> map1 = new HashMap<>();
+        UserVo userVo = new UserVo();
+        //通过openid拿到用户信息
+        UserDto userInfo = appUserFeign.getUserByOpenId(map);
+        if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==2){
+            //用户已绑定QQ,直接登录
+            String token = UUID.randomUUID().toString().replace("-", "");
+            RedisUtils.setString(token,String.valueOf(userInfo.getUserId()),login_time);
+            userVo.setSuccess(true);
+            userVo.setMessage("登录成功");
+            userVo.setCode("100");
+            map1.put("token",token);
+            map1.put("alias","yhkj_"+userInfo.getUserId());
+            userVo.setData(map1);
+            return userVo;
+        }else {
+            //用户未绑定微信，现在开始第一次绑定微信
+            userVo.setMessage("QQ登录失败:请确认是否已绑定QQ号！");
+            userVo.setSuccess(false);
+            userVo.setCode("1");
+            return userVo;
+        }
     }
 
     @ResponseBody

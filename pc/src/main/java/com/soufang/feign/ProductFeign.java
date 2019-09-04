@@ -21,7 +21,7 @@ public interface ProductFeign {
     PageHelp<ProductDto> getProductList(ProductDto dto);
 
     @RequestMapping(value = "core/productManage/getHotProductList", method = RequestMethod.POST)
-    PageHelp<ProductDto> getHotProductList();
+    PageHelp<ProductDto> getHotProductList(@RequestBody Integer limit);
 
     @RequestMapping(value = "core/productManage/getProductDetail", method = RequestMethod.POST)
     ProductDto getProductDetail(ProductDto dto);

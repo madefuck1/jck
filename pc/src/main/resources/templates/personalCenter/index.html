@@ -59,12 +59,26 @@
                                 </a>
                             </p>
                             <p class="m-wallet">
-                                <#if userInfo.oauthId??>
-                                <span class="m-title">已绑定微信</span>
-                                <#else>
-                                <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxf01a70ce62c5ac8e&redirect_uri=http://www.enterprise-china.com/user/BindWeChat&response_type=code&scope=snsapi_login&state=STATE#eguangtong">
-                                    <span class="m-title">绑定微信</span>
-                                </a>
+                                <#if userInfo.oauthType==-1>
+                                    <li>
+                                        <button class="am-btn" data-am-modal="{target: '#doc-modal-1'}" style="color: #999;background: #fff;font-size: 12px;"><strong>绑定第三方账号</strong></button>
+                                        <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+                                            <div class="am-modal-dialog">
+                                                <div class="am-modal-hd" style="padding-top: 50px;">请选择绑定账号类型
+                                                    <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                </div>
+                                                <div class="am-modal-bd image-toggle">
+                                                    <span class="sp QQ" onclick="bindQQ()"></span>
+                                                    <span class="sp wechat" onclick="bindWeChat()"></span>
+                                                    <span class="sp sina" onclick="bindWeiBo()"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <#elseif userInfo.oauthType==1>
+                                    <span class="m-title">已绑定微信</span>
+                                <#elseif userInfo.oauthType==2>
+                                    <span class="m-title">已绑定QQ</span>
                                 </#if>
                             </p>
                         </div>
@@ -225,8 +239,6 @@
 <script type="text/javascript" src="/static/js/includes/include.top.js"></script>
 <script type="text/javascript" src="/static/Pagination/js/jquery.pagination.js"></script>
 
-
-
 <script type="text/javascript">
     var isBind= $('#isBind').val();
     // 初始化
@@ -240,6 +252,14 @@
         }else {
         }
     });
+    function bindWeChat() {
+        window.location.href = "https://open.weixin.qq.com/connect/qrconnect?appid=wxf01a70ce62c5ac8e&redirect_uri=http://www.enterprise-china.com/user/BindWeChat&response_type=code&scope=snsapi_login&state=STATE#eguangtong";
+    }
+    function bindQQ() {
+        /*alert("确定绑定QQ？？"+isBind)*/
+        window.location.href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101762207&redirect_uri=http://www.enterprise-china.com/user/bindQQ&state=QQbindState&scope=get_user_info";
+    }
+
     var initDate = function () {
         //获取时间
         var nowData = new Date();

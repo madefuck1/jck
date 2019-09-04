@@ -58,6 +58,9 @@ public class IndexController extends BaseController {
         map.put("productDtos1",list.subList(0,5));
         map.put("productDtos2",list.subList(5,10));
         map.put("productDtos3",list.subList(10,15));
+        map.put("productDtos4",list.subList(15,20));
+        map.put("productDtos5",list.subList(20,25));
+        map.put("productDtos6",list.subList(25,30));
         Map<Object,Object> map1 = new HashMap<>();
         /*map1.put("openid","2");
         map1.put("oauthType",OauthTypeEnum.getByKey(1).getValue());

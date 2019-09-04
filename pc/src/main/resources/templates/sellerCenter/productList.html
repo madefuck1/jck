@@ -231,6 +231,7 @@
                             '                                            <div class="item-operation">' +
                             '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">产品详情</p>' +
                             '                                                 <p style="line-height: 30px;" onclick="getDownNow(' + data.data[i].productId + ',pageNo,isUp)">立即下架</p>' +
+                               /* '                                             <p onclick="editProduct(' + data.data[i].productId + ')">编辑</p>'+*/
                             '                                            </div>' +
                             '                                        </li>';
                     } else {
@@ -244,6 +245,7 @@
                             '                                            <div class="item-operation">' +
                             '                                                 <p onclick="getProductInfo(' + data.data[i].productId + ')">产品详情</p>' +
                             '                                                 <p style="line-height: 30px;"onclick="putUpNow(' + data.data[i].productId + ',pageNo,isUp)">立即上架</p>' +
+                               /* '                                             <p onclick="editProduct(' + data.data[i].productId + ')">编辑</p>'+*/
                             '                                            </div>' +
                             '                                        </li>';
                     }
@@ -272,6 +274,10 @@
     function getProductInfo(productId) {
         window.open('/product/toDetail?productId=' + productId, '_blank');
         /*window.location.href = "/product/detail?&productId=" + productId;*/
+    }
+    //编辑产品
+    function editProduct(productId) {
+        window.location.href='/product/editProduct?productId=' + productId;
     }
 
     //立即下架

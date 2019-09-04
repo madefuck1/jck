@@ -177,13 +177,14 @@
 
     <!--左边菜单-->
     <#include "/personalCenter/common/include.menu.html"/>
-
 </div>
 
 </@override>
 
 <@override name="js">
+
 <script type="text/javascript">
+
     $(document).ready(function () {
         $(".new-option-r").click(function () {
             $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");

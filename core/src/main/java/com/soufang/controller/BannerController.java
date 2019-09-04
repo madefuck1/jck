@@ -61,4 +61,11 @@ public class BannerController {
         }
         return result;
     }
+
+    //获取首页类别大图
+    @RequestMapping(value = "getAssortPicture",method = RequestMethod.POST)
+    List<BannerDto> getAssortPicture(@RequestBody BannerDto bannerDto){
+        List<BannerDto> assortpictures = bannerService.getAssortPicture(bannerDto);
+        return assortpictures;
+    }
 }

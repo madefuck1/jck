@@ -265,8 +265,8 @@ public class ProductManageServiceImpl implements ProductManageService {
     }
 
     @Override
-    public PageHelp<ProductDto> hotList() {
-        List<ProductDto> products = productMapper.getHotList();
+    public PageHelp<ProductDto> hotList(Integer limit) {
+        List<ProductDto> products = productMapper.getHotList(limit);
         for (ProductDto p : products) {
             String[] img = new String[10];
             if (StringUtils.isNotBlank(p.getProductImage())) {

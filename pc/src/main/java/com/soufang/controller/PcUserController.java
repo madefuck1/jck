@@ -19,23 +19,17 @@ import com.soufang.vo.User.LoginReqVo;
 import com.soufang.vo.User.RegisterReqVo;
 import com.soufang.vo.User.SettleVo;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,11 +45,11 @@ public class PcUserController extends BaseController {
     @Value("${upload.user}")
     private String userUrl;
 
-    private final String appid="wxf01a70ce62c5ac8e";
-    private final String secret = "1edffbeab1166899c06595b21eacea1a";
+    private static String appid="wxf01a70ce62c5ac8e";
+    private static String secret = "1edffbeab1166899c06595b21eacea1a";
     private static int code_time = 60 * 3;//验证码有效时间
-
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static String QQ_pc_appid = "101762207";
+    private static String QQ_pc_appkey = "887b2ac3b14fb75cea4bf7f35438f3ab";
 
     @Autowired
     PcUserFeign pcUserFeign;
@@ -70,13 +64,10 @@ public class PcUserController extends BaseController {
             //用户未授权,直接返回登录页面
             return "redirect:/user/toLogin";
         }else {
-            String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
             //用户同意授权，获取access_token，
-            String returnStr = SendGet(url) ;
-            JSONObject jsonObject = JSONObject.parseObject(returnStr);
-            String openid = jsonObject.getString("openid");
-            String token = jsonObject.getString("access_token");
+            String openid = OauthUtils.getOauth_openid("weChat","pc",code);
             /*//拿个人信息
+             String access_token = jsonObject.getString("access_token");
             String userInfoUrl = "https://api.weixin.qq.com/sns/auth?access_token="+token+"&openid="+openid;
             JSONObject userInfo = JSONObject.parseObject(userInfoUrl);
             map.put("userInfo",userInfo);*/
@@ -99,7 +90,7 @@ public class PcUserController extends BaseController {
     //绑定微信号
     @MemberAccess
     @RequestMapping(value = "BindWeChat", method = RequestMethod.GET)
-    public String Bind(HttpServletRequest request,ModelMap map) {
+    public String BindWeChat(HttpServletRequest request,ModelMap map) {
         UserDto userInfo = this.getUserInfo(request);
         String code = request.getParameter("code");
         String state = request.getParameter("state");
@@ -108,61 +99,84 @@ public class PcUserController extends BaseController {
             return "redirect:/personalCenter/toPersonalCenter?isBind=false";//重定向
             /*return "/personalCenter/index";*/
         }else {
-            String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code";
-            //用户同意授权，获取access_token，openid
-            String returnStr = SendGet(url) ;
-            JSONObject jsonObject = JSONObject.parseObject(returnStr);
-            String openid = jsonObject.getString("openid");
-            String token = jsonObject.getString("access_token");
+            String openid = OauthUtils.getOauth_openid("weChat","pc",code);
+            /*String token = jsonObject.getString("access_token");*/
             userInfo.setOauthType(OauthTypeEnum.weChat.getValue());//类型1 表示微信
             userInfo.setOauthId(openid);//保存 openid
             Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
             return "redirect:/personalCenter/toPersonalCenter?isBind=true";//重定向
         }
     }
+    //QQ登录
+    @RequestMapping(value = "QQLogin", method = RequestMethod.GET)
+    public String QQLogin(HttpServletRequest request, HttpServletResponse response,ModelMap modelMap) {
+        String code = request.getParameter("code");
+        Map<Object,Object> map = new HashMap<>();
+        if(code==null){
+            //用户未授权,返回登录
+            return "redirect:/user/toLogin" ;
+        }
+        //用户同意授权，先获取access_token
+        String url="https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+QQ_pc_appid+"&client_secret="+QQ_pc_appkey+"&code="+code+"&redirect_uri=http://www.enterprise-china.com/user/QQLogin";
+        String resultStr = OauthUtils.SendGet(url);
+        //access_token=29EDD2139957FA22FD0A5A17FC983770&expires_in=7776000&refresh_token=B2401721EFE276873E64BC1C21D1E891
+        //将字符串分割
+        String access_token = StringUtils.substringBefore(resultStr.substring(resultStr.indexOf("access_token")+13),"&");
+        String getOpenidUrl = "https://graph.qq.com/oauth2.0/me?access_token="+access_token;//获取QQ的openid
+        String jsonOpenid = OauthUtils.splitData(OauthUtils.SendGet(getOpenidUrl),"(",")");
+        JSONObject jsonObject = JSONObject.parseObject(jsonOpenid);
+        String openid = jsonObject.getString("openid");
+        map.put("openid",openid);
+        map.put("oauthType",OauthTypeEnum.QQ.getValue());
+        //通过openid拿到用户信息
+        UserDto userInfo = pcUserFeign.getUserByOpenId(map);
+        if(StringUtils.isNotBlank(userInfo.getPhone())&&userInfo.getOauthType()==2){
+            //用户已绑定QQ
+            setToken(userInfo.getUserId(), response);//保存token
+            return "redirect:/index";//跳转到首页
+        }else {
+            //用户未绑定QQ,跳转到注册界面
+            /*modelMap.put("openid",openid);
+            modelMap.put("oauthType",OauthTypeEnum.QQ.getValue());*/
+            return  "/register/register";//重定向到注册页面
+        }
+    }
 
-    public static String SendGet(String url){
-        String result = "";
-        BufferedReader in = null;
-        try {
-            URL realUrl = new URL(url);
-            //打开和URL之间的连接
-            URLConnection connection = realUrl.openConnection();
-            //建立实际的连接
-            connection.connect();
-            //获取所有响应的头字段
-            Map<String,List<String>> map = connection.getHeaderFields();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line ;
-            while ((line = in.readLine()) != null){
-                result += line;
-            }
-        }catch (Exception e) {
-            System.out.println("发送GET请求出现异常"+e);
-            e.printStackTrace();
+    //绑定QQ
+    /**
+     *qq绑定获取code
+     * @param request
+     * @return
+     */
+    @MemberAccess
+    @RequestMapping(value = "bindQQ", method = RequestMethod.GET)
+    public String bindQQGet(HttpServletRequest request ) {
+        UserDto userInfo = this.getUserInfo(request);
+        String code = request.getParameter("code");
+        if(code==null){
+            //用户未授权
+            return "redirect:/personalCenter/toPersonalCenter?isBind=false" ;
         }
-        finally {
-            //关闭输入流
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            }catch (Exception e2){
-                e2.printStackTrace();
-            }
-        }
-        return result;
+        String url="https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id="+QQ_pc_appid+"&client_secret="+QQ_pc_appkey+"&code="+code+"&redirect_uri=http://www.enterprise-china.com/user/bindQQ";
+        String resultStr = OauthUtils.SendGet(url);
+        //access_token=29EDD2139957FA22FD0A5A17FC983770&expires_in=7776000&refresh_token=B2401721EFE276873E64BC1C21D1E891
+        //将字符串分割
+        String access_token = StringUtils.substringBefore(resultStr.substring(resultStr.indexOf("access_token")+13),"&");
+        String getOpenidUrl = "https://graph.qq.com/oauth2.0/me?access_token="+access_token;//获取QQ的openid
+        String openidStr = OauthUtils.SendGet(getOpenidUrl);
+        String jsonOpenid = OauthUtils.splitData(openidStr,"(",")");
+        JSONObject jsonObject = JSONObject.parseObject(jsonOpenid);
+        String openid = jsonObject.getString("openid");
+        userInfo.setOauthType(OauthTypeEnum.QQ.getValue());//类型2 表示QQ
+        userInfo.setOauthId(openid);//保存 openid
+        Result result = pcUserFeign.bindThirdInfo(userInfo);//Result
+        return "redirect:/personalCenter/toPersonalCenter?isBind=true";
     }
 
 
     @RequestMapping(value = "signOut", method = RequestMethod.GET)
     public String signOut(HttpServletRequest request) {
         this.deletetoken(request);
-        return "/login/login";
-    }
-
-    @RequestMapping(value = "QQLogin", method = RequestMethod.GET)
-    public String QQLogin() {
         return "/login/login";
     }
 
@@ -406,6 +420,11 @@ public class PcUserController extends BaseController {
         userDto.setRealName(settleVo.getRealName());
         userDto.setFaxNumber(settleVo.getFaxCountry() + "-" + settleVo.getFaxCity() + "-" + settleVo.getFaxNumber());
         userDto.setFixedPhone(settleVo.getFixedCity() + "-" + settleVo.getFixedCity() + "-" + settleVo.getFixedNumber());
+        if(StringUtils.isNotBlank(userDto.getUserAvatar())){
+            String userAvatar = userDto.getUserAvatar();
+            String url = userAvatar.substring(userAvatar.indexOf("8000")+4);
+            userDto.setUserAvatar(url);
+        }
         Result result = pcUserFeign.updateUserInfo(userDto);
         CompanyDto companyDto = pcUserFeign.getCompany(userDto.getUserId());
         companyDto.setCompUrls(PropertiesParam.file_pre + companyDto.getCompUrls());

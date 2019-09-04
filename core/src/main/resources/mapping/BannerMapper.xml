@@ -43,4 +43,17 @@
     where banner_id = #{id,jdbcType=INTEGER}
   </delete>
 
+  <select id="getAssortPicture" resultMap="BannerDtoMap" parameterType="com.soufang.base.dto.banner.BannerDto" >
+    select * from t_banner where 1=1
+    <if test="terminal != null and terminal != 0">
+      and terminal = #{terminal,jdbcType=INTEGER}
+    </if>
+    <if test="target_id != null and target_id != 0">
+      and target_id = #{target_id,jdbcType=BIGINT}
+    </if>
+    <if test="target_type != null and target_type != 0">
+      and target_type = #{target_type,jdbcType=INTEGER}
+    </if>
+    order by create_time ASC
+  </select>
 </mapper>

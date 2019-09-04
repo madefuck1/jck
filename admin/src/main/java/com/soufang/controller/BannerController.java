@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * banner类别  1 app轮播图  2 pc轮播图   3 pc端类别大图
+ */
 @Controller
 @RequestMapping(value = "admin/banner")
 public class BannerController {

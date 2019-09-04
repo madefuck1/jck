@@ -153,15 +153,15 @@
         if (str == '') {
             return "卡号未填写";
         } else {
-            if (!(str.length > 16 && str.length < 19)) {
+            /*if (!(str.length > 15 && str.length < 20)) {
                 return "请重新核对卡号号码位数是否遗漏";
-            } else {
+            } else {*/
                 for (var i = 0; i < str.length; i++) {
                     if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                         return "输入的卡号必须为数字信息";
                     }
                 }
-            }
+            /*}*/
         }
 
 
@@ -173,15 +173,15 @@
 
     // 验证卡号长度且必须为数字信息
     function validateNum(str) {
-        if (!(str.length > 16 && str.length < 19)) {
+        /*if (!(str.length > 15 && str.length < 20)) {
             return "请重新核对卡号号码位数是否遗漏";
-        } else {
+        } else {*/
             for (var i = 0; i < str.length; i++) {
                 if (str.charAt(i) < '0' || str.charAt(i) > '9') {
                     return "输入的卡号必须为数字信息";
                 }
             }
-        }
+        /*}*/
     }
 
     function submitSettle() {

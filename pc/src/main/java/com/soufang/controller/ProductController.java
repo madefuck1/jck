@@ -3,6 +3,7 @@ package com.soufang.controller;
 import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
+import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
@@ -16,14 +17,13 @@ import com.soufang.base.search.product.ProductManageSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
 import com.soufang.config.interceptor.MemberAccess;
-import com.soufang.feign.AssessFeign;
-import com.soufang.feign.CommonPullDownFeign;
-import com.soufang.feign.FavoriteFeign;
-import com.soufang.feign.ProductFeign;
+import com.soufang.feign.*;
 import com.soufang.vo.product.ListProductVo;
 import com.soufang.vo.product.ListSpecReqVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.net.FileNameMap;
-import java.net.URLConnection;
 import java.util.*;
 
 @Controller
@@ -51,6 +49,8 @@ public class ProductController extends BaseController {
     @Autowired
     FavoriteFeign favoriteFeign;
 
+    @Autowired
+    BannerFeign bannerFeign;
 
     @Value("${upload.product}")
     private String productUrl;
@@ -58,7 +58,6 @@ public class ProductController extends BaseController {
     @MemberAccess
     @RequestMapping(value = "createProduct", method = RequestMethod.GET)
     public String createProduct() {
-
         return "sellerCenter/releaseProduct";
     }
 
@@ -160,6 +159,59 @@ public class ProductController extends BaseController {
         productDto.setProductDetail(productDetail.toString());
         Result result = productFeign.updateProduct(productDto);
         return result;
+    }
+
+    /**
+     * 编辑产品
+     * @return
+     */
+    @MemberAccess
+    @RequestMapping(value = "editProduct", method = RequestMethod.GET)
+    public String editProduct(HttpServletRequest request,Long productId,ModelMap map) {
+        UserDto userInfo = this.getUserInfo(request);
+        ProductDto dto = new ProductDto();
+        dto.setUserId(userInfo.getUserId());
+        dto.setProductId(productId);
+        ProductDto productDto = productFeign.getProductDetail(dto);
+        map = getAssortForEdit(productDto.getAssortId(),map);
+        //将附加的产品属性转化为json
+        StringBuilder str = new StringBuilder();
+        if (productDto.getKv1() != null) {
+            str.append(productDto.getKv1() + ";");
+        }
+        if (productDto.getKv2() != null) {
+            str.append(productDto.getKv2() + ";");
+        }
+        if (productDto.getKv3() != null) {
+            str.append(productDto.getKv3() + ";");
+        }
+        if (productDto.getKv4() != null) {
+            str.append(productDto.getKv4() + ";");
+        }
+        if (productDto.getKv5() != null) {
+            str.append(productDto.getKv5() + ";");
+        }
+        if (!"".equals(productDto.getProductJson()) && productDto.getProductJson() != null) {
+//            str.append(productDto.getProductJson().substring(1, productDto.getProductJson().length() - 1).replace("\"", ""));
+            str.append(productDto.getProductJson() + ";");
+        }
+        String[] productJson = null;
+        productJson = str.toString().split(";");
+        map.put("productJson", productJson);
+
+        map.put("productDto",productDto);
+        return "sellerCenter/editProduct";
+    }
+
+    public ModelMap getAssortForEdit(Long assortId, ModelMap model) {
+        AssortDto assortThree = commonPullDownFeign.detail(assortId);
+        AssortDto assortTwo = commonPullDownFeign.detail(assortThree.getParentId());
+        AssortDto assortOne = commonPullDownFeign.detail(assortTwo.getParentId());
+        model.put("assortOne", assortOne);
+        model.put("assortTwo", assortTwo);
+        model.put("assortThree", assortThree);
+
+        return model;
     }
 
     /**
@@ -284,7 +336,9 @@ public class ProductController extends BaseController {
         model.put("productList", productList.getData());
 
         // 热门产品
-        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+        int co = productList.getData().size();
+        int i = (co / 4 )+1;
+        PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(i);
         model.put("HotProductList", hotProductList.getData());
 
         //  产品数量
@@ -416,13 +470,13 @@ public class ProductController extends BaseController {
                 map.put("leftList", footPrintList);
             } else {
                 // 推荐列表
-                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+                PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(10);
                 map.put("leftName", "热门产品");
                 map.put("leftList", hotProductList.getData());
             }
         } catch (NumberFormatException e) {
             // 推荐列表
-            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList();
+            PageHelp<ProductDto> hotProductList = productFeign.getHotProductList(10);
             map.put("leftName", "热门产品");
             map.put("leftList", hotProductList.getData());
         }
@@ -471,7 +525,7 @@ public class ProductController extends BaseController {
         if (productDto.getKv5() != null) {
             str.append(productDto.getKv5() + ";");
         }
-        if (!"".equals(productDto.getProductJson()) && productDto.getProductJson() != null) {
+        if (StringUtils.isNotBlank(productDto.getProductJson())) {
 //            str.append(productDto.getProductJson().substring(1, productDto.getProductJson().length() - 1).replace("\"", ""));
             str.append(productDto.getProductJson() + ";");
         }
@@ -585,6 +639,13 @@ public class ProductController extends BaseController {
         ListProductVo vo = new ListProductVo();
         vo.setData(pageHelp.getData());
         vo.setCount(pageHelp.getCount());
+        //获取类别大图
+        BannerDto bannerDto = new BannerDto();
+        bannerDto.setTerminal(3000);
+        bannerDto.setTarget_type(3);
+        bannerDto.setTarget_id(so.getAssortId());
+        List<BannerDto> assortpictures = bannerFeign.getAssortPicture(bannerDto);
+        vo.setAssortpictures(assortpictures);
         return vo;
     }
 

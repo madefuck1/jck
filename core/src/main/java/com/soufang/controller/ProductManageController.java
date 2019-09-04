@@ -66,8 +66,8 @@ public class ProductManageController {
      * @return PageHelp<ProductDto>   返回产品数组
      */
     @RequestMapping(value = "getHotProductList", method = RequestMethod.POST)
-    public PageHelp<ProductDto> hotList() {
-        PageHelp<ProductDto> pageHelp = productManageService.hotList();
+    public PageHelp<ProductDto> hotList(@RequestBody Integer limit) {
+        PageHelp<ProductDto> pageHelp = productManageService.hotList(limit);
         return pageHelp;
     }
 
