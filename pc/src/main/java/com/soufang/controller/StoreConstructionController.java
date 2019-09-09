@@ -446,5 +446,12 @@ public class StoreConstructionController extends BaseController {
 
     }
 
+    @RequestMapping(value = "toStoreView", method = RequestMethod.GET)
+    @MemberAccess
+    public String toStoreView(ModelMap map,HttpServletRequest request){
+        ShopDto shopInfo = this.getShopInfo(request);
+        map.put("shopId",shopInfo.getShopId());
+        return "sellerCenter/storeView";
+    }
 
 }

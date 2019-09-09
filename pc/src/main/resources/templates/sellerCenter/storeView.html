@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+    <#include "/common/includes/header.html"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <title>编辑视频</title>
+    <link rel="stylesheet" href="/static/AmazeUI-2.4.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-company.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-video.css">
+    <link rel="stylesheet" href="/static/css/sale/sale_header.css">
+    <script  type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script  type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f5f5;">
+<#include "/common/includes/seller.top.html"/>
+
+<div id="logo">
+    <img src="../images/sale/shop1.png" alt="" >
+</div>
+
+<div id="nav">
+    <div class="nav_in">
+        <ul>
+            <li class="cur"><a href="/shop/toStoreIndex?shopId=${shopId?c}" >首页</a></li>
+            <li class="cur"><a href="/shop/toStoreIndex?shopId=${shopId?c}">公司概况</a></li>
+            <li class="cur"><a href="/shop/toStoreIndex?shopId=${shopId?c}">视频中心</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="video">
+    <h4>视频中心</h4>
+    <div class="vedio1">
+        <video width="226" height="127" preload="none" controls >
+            <source src="../images/sale/video/1.mp4" type="video/mp4">
+        </video>
+        <!--<span id="videoPalse"></span>-->
+        <p>视频标题视频标题视频标题视</p>
+    </div>
+
+    <div class="mask-vedio">
+        <button type="button" class="am-btn am-btn-secondary button8" data-am-modal="{target: '#doc-modal-8', closeViaDimmer: 0, width: 1190, height:500}">编辑</button>
+        <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-8">
+            <div class="am-modal-dialog" style="overflow-y: auto">
+                <div class="am-modal-hd" >添加视频
+                    <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                </div>
+                <div class="am-modal-bd addVedio">
+                    <!--已上传-->
+                    <!--<div class="addVedio-in">
+                        <div class="vedio-left">
+                            <video width="138" height="78">
+                                <source src="../images/sale/video/2.mp4" type="video/mp4">
+                            </video>
+                            <a href="#" class="videoPalse"></a>
+                        </div>
+                        <div class="vedio-right">
+                            <input type="text" placeholder="视频标题“视频标题视频标题”视频标题视频标题视频标题—视频标题">
+                        </div>
+                        <button class="am-btn btn1">编辑</button>
+                        <button class="am-btn btn1">删除</button>
+                    </div>-->
+                    <!--重新上传-->
+                    <!--<div class="addVedio-in">
+                        <div class="vedio-left">
+                            <video width="138" height="78">
+                                <source src="../images/sale/video/2.mp4" type="video/mp4">
+                            </video>
+                            <a href="#" class="again">重新上传</a>
+                        </div>
+                        <div class="vedio-right">
+                            <input type="text" placeholder="视频标题“视频标题视频标题”视频标题视频标题视频标题—视频标题">
+                        </div>
+                        <button class="am-btn am-btn-secondary" style="margin-top:24px;padding:5px 20px; font-size: 12px">保存</button>
+                        <button class="am-btn btn1">删除</button>
+                    </div>-->
+                    <!--上传-->
+                    <div class="addVedio-in">
+                        <div class="vedio-left">
+                            <span></span>
+                            <p>上传视频</p>
+                        </div>
+                        <div class="vedio-right">
+                            <input type="text" placeholder="视频标题“视频标题视频标题”视频标题视频标题视频标题—视频标题">
+                        </div>
+                        <button class="am-btn am-btn-secondary" style="margin-top:24px;padding:5px 20px; font-size: 12px">保存</button>
+                    </div>
+                    <div class="button" style="margin-left:94px ">
+                        <button type="button" class="am-btn am-btn-secondary" style="width: 140px">保存</button>
+                        <button type="button" class="am-btn am-btn-default" style="width: 140px">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<#include "/sellerCenter/common/foot.html"/>
+
+<script>
+    $("#logo").hover(function(){
+        $(".logo-mask").show();
+
+    })
+    $(".logo-mask").mouseout(function(){
+        $(".logo-mask").hide();
+    })
+    $(".button1").hover(function(){
+        $(".logo-mask").off(
+            "mouseout")
+    });
+
+    /*轮播图*/
+    $(".side-left").hover(function(){
+        $(".left-mask").show();
+
+    })
+    $(".left-mask").mouseout(function(){
+        $(".left-mask").hide();
+    })
+    $(".button2").hover(function(){
+        $(".left-mask").off("mouseout")
+    });
+    /*公司信息*/
+    $(".right").hover(function(){
+        $(".right-mask").show();
+
+    })
+    $(".right-mask").mouseout(function(){
+        $(".right-mask").hide();
+    })
+    $(".button3").hover(function(){
+        $(".right-mask").off("mouseout")
+    });
+    /*导航*/
+    $("#nav").hover(function(){
+        $(".mask-productTitle").show();
+
+    })
+    $(".mask-productTitle").mouseout(function(){
+        $(".mask-productTitle").hide();
+    })
+    $(".button4").hover(function(){
+        $(".mask-productTitle").off("mouseout")
+    });
+    /*产品*/
+    $(".product").hover(function(){
+        $(".mask-product").show();
+
+    })
+    $(".mask-product").mouseout(function(){
+        $(".mask-product").hide();
+    })
+    $(".button5").hover(function(){
+        $(".mask-product").off("mouseout")
+    });
+    /*头部导航*/
+    $("#nav").hover(function(){
+        $(".salenav-mask").show();
+
+    })
+    $(".salenav-mask").mouseout(function(){
+        $(".salenav-mask").hide();
+    })
+    $(".button6").hover(function(){
+        $(".salenav-mask").off("mouseout")
+    });
+    /*公司概况*/
+    $(".company-left").hover(function(){
+        $(".company-mask").show();
+
+    })
+    $(".company-mask").mouseout(function(){
+        $(".company-mask").hide();
+    })
+    $(".button7").hover(function(){
+        $(".company-mask").off("mouseout")
+    });
+
+
+    /*产品分类点击切换*/
+
+    $(".Lnav-r01").click(function(){
+        $(this).addClass("cur").siblings().removeClass("cur")
+    })
+
+
+    /*点击更换颜色*/
+
+</script>
+</body>
+</html>
