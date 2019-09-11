@@ -2,20 +2,11 @@ package com.soufang.service.impl;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
-import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
-import com.soufang.base.dto.storeConstruction.StoreCurouselMapDto;
-import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
-import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.utils.DateUtils;
-import com.soufang.mapper.StoreConstructionMapper;
-import com.soufang.mapper.StoreCurouselMapMapper;
-import com.soufang.mapper.StoreExclusiveAssortMapper;
-import com.soufang.mapper.StoreProductAssortMapper;
-import com.soufang.model.StoreConstruction;
-import com.soufang.model.StoreCurouselMap;
-import com.soufang.model.StoreExclusiveAssort;
-import com.soufang.model.StoreProductAssort;
+import com.soufang.mapper.*;
+import com.soufang.model.*;
 import com.soufang.service.StoreConstructionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +28,9 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
     @Autowired
     StoreCurouselMapMapper storeCurouselMapMapper;
 
+    @Autowired
+    StoreViewMapper storeViewMapper;
+
     @Override
     public Boolean isExistStoreInfo(Long shopId) {
         StoreConstructionDto storeCInfo = storeConstructionMapper.getStoreCInfo(shopId);
@@ -45,6 +39,20 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Result saveStoreView(StoreViewDto dto) {
+        Result result = new Result();
+        StoreView storeView = new StoreView();
+        BeanUtils.copyProperties(dto,storeView);
+        int i = storeViewMapper.insertSelective(storeView);
+        if(i>0){
+            result.setSuccess(true);
+        }else {
+            result.setSuccess(false);
+        }
+        return result;
     }
 
     @Override

@@ -2,10 +2,7 @@ package com.soufang.controller;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
-import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
-import com.soufang.base.dto.storeConstruction.StoreCurouselMapList;
-import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
-import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.page.PageHelp;
 import com.soufang.model.StoreConstruction;
 import com.soufang.service.StoreConstructionService;
@@ -196,4 +193,8 @@ public class StoreConstructionController {
         return storeConstructionService.isExistStoreInfo(shopId);
     }
 
+    @RequestMapping(value = "saveView", method = RequestMethod.POST)
+    Result saveView(@RequestBody StoreViewDto dto){
+        return storeConstructionService.saveStoreView(dto);
+    }
 }

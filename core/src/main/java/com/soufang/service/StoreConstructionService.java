@@ -2,10 +2,7 @@ package com.soufang.service;
 
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
-import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
-import com.soufang.base.dto.storeConstruction.StoreCurouselMapDto;
-import com.soufang.base.dto.storeConstruction.StoreExclusiveAssortDto;
-import com.soufang.base.dto.storeConstruction.StoreProductAssortDto;
+import com.soufang.base.dto.storeConstruction.*;
 import com.soufang.base.page.PageHelp;
 import com.soufang.model.StoreConstruction;
 
@@ -44,4 +41,7 @@ public interface StoreConstructionService {
     Result saveProductAssort(StoreProductAssortDto productAssortDto);
 
     Boolean isExistStoreInfo(Long shopId);
+
+    //保存店铺视频
+    Result saveStoreView(StoreViewDto dto);
 }

@@ -36,6 +36,8 @@ import java.util.Map;
 public class StoreConstructionController extends BaseController {
     @Value("${upload.logoPic}")
     private String uploadUrl;//店铺装修logo照片上传地址
+    @Value("${upload.storeView}")
+    private String storeViewUrl;
 
     @Autowired
     StoreConstructionFeign storeConstructionFeign;
@@ -454,4 +456,27 @@ public class StoreConstructionController extends BaseController {
         return "sellerCenter/storeView";
     }
 
+    @RequestMapping(value = "saveView", method = RequestMethod.POST)
+    @MemberAccess
+    @ResponseBody
+    public Result saveView(MultipartFile file,HttpServletRequest request){
+        Result result =new Result();
+        ShopDto shopInfo = this.getShopInfo(request);
+        StoreViewDto dto = new StoreViewDto();
+        dto.setShopId(shopInfo.getShopId());
+        Map<String, Object> map = FtpClient.uploadImage(file, storeViewUrl);
+        if ((boolean) map.get("success")) {
+            dto.setViewurl(String.valueOf(map.get("uploadName")));
+            //保存地址到数据库
+            Result result1 = storeConstructionFeign.saveView(dto);
+            if(!result1.isSuccess()){
+                result.setSuccess(false);
+                result.setMessage("视频地址保存失败");
+            }
+        }else {
+            result.setMessage("视频上传失败");
+            result.setSuccess(false);
+        }
+        return result;
+    }
 }

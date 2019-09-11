@@ -60,4 +60,7 @@ public interface StoreConstructionFeign {
 
     @RequestMapping(value = "/core/store/saveProductAssort", method = RequestMethod.POST)
     Result saveProductAssort(StoreProductAssortDto productAssortDto);
+
+    @RequestMapping(value = "/core/store/saveView", method = RequestMethod.POST)
+    Result saveView(@RequestBody StoreViewDto dto);
 }
