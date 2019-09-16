@@ -4,6 +4,7 @@ import com.soufang.base.dto.company.CompanyDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
 import com.soufang.base.dto.shop.ShopDto;
 import com.soufang.base.dto.storeConstruction.StoreConstructionDto;
+import com.soufang.base.dto.storeConstruction.StoreViewDto;
 import com.soufang.base.dto.user.UserDto;
 import com.soufang.base.page.PageHelp;
 import com.soufang.base.search.shop.ShopSo;
@@ -19,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Auther: chen
@@ -85,8 +87,10 @@ public class ShopController extends BaseController {
         CompanyDto company = pcUserFeign.getCompany(shop.getUserId());
         vo.setCompanyDto(company);
         StoreConstructionDto storeConstructionDto = storeConstructionFeign.getStoreInfo(shop.getShopId());
+        List<StoreViewDto> viewDtos = storeConstructionFeign.getStoreViews(shop.getShopId());
         vo.setIsCollection(isCollect);
         vo.setStoreConstructionDto(storeConstructionDto);
+        vo.setStoreViewDtos(viewDtos);
         return vo;
     }
 

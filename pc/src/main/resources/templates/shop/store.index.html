@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/sale/sale-shop.css">
     <link rel="stylesheet" href="/static/css/sale/sale-company.css">
     <link rel="stylesheet" href="/static/css/sale/sale_header.css">
+    <link rel="stylesheet" href="/static/css/sale/sale-video.css">
 
     <script src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
@@ -39,10 +40,9 @@
         <ul>
             <li class="cur" onclick="switchPage(this,1);"><a href="#">首页</a></li>
             <li onclick="switchPage(this,2);"><a href="#">公司概况</a></li>
-                        <li><a href="#">视频中心</a></li>
+            <li onclick="switchPage(this,3);"><a href="#">视频中心</a></li>
         </ul>
     </div>
-
 </div>
 <div id="shop-chart">
     <div class="chart_in">
@@ -156,7 +156,18 @@
     <div id="allmap"></div>
    <!-- <input type="button" value="查询" onclick="theLocation()" />-->
 </div>
-
+<!--视频中心-->
+<div id="video" hidden>
+    <h4>视频中心</h4>
+    <div class="vedio-in" id="vedio-in">
+        <div class="vedio1">
+            <video width="226" height="127" preload="none" controls="controls"
+                   src="http://121.199.22.218:8000/uploadStoreView/3d7a5d7380d44af69cf554e0956d4323.mp4" type="video/*">
+            </video>
+            <p>视频标题</p>
+        </div>
+    </div>
+</div>
 <!-- 页尾 -->
 <#include "/sellerCenter/common/foot.html"/>
 
@@ -302,16 +313,33 @@
                             '        <input id="searchPName" type="text" placeholder="店内搜索">\n' +
                             '        <button type="button" class="am-btn am-btn-warning" onclick="searchP()">搜索</button>\n' +
                             '    </div>';
-
                         $('#product-title').empty();
                         $('#product-title').append(html);
                     } else {
                         // todo
                     }
                 }
+                //初始化视频中心
+                if(res.storeViewDtos.length > 0){
+                    $("#vedio-in").empty();
+                    var html ='';
+                    for (var i = 0; i < res.storeViewDtos.length; i++){
+                        html+='<div class="vedio1">\n' +
+                    '            <video width="226" height="127" preload="none" controls="controls" \n' +
+                    '                 src="'+res.storeViewDtos[i].viewurl+'" type="video/*">\n' +
+                    '            </video>\n' +
+                    '            <p>'+res.storeViewDtos[i].viewTitle+'</p>\n' +
+                    '           </div>';
+                    }
+                    $("#vedio-in").append(html);
+                }
+                else {
+                    $("#vedio-in").empty();
+                    var html = '<h1>店主暂时没有添加视频</h1>'
+                    $("#vedio-in").append(html);
+                }
             }
         });
-
     }
 
     function clickAssortName(obj) {
@@ -368,12 +396,20 @@
             case 1:
                 $('#shop-product').show();
                 $('#shop-chart').show();
-                $('#company').hide()
+                $('#company').hide();
+                $('#video').hide();
                 break;
             case 2:
                 $('#shop-product').hide();
                 $('#shop-chart').hide();
-                $('#company').show()
+                $('#company').show();
+                $('#video').hide();
+                break;
+            case 3:
+                $('#shop-product').hide();
+                $('#shop-chart').hide();
+                $('#company').hide();
+                $('#video').show();
                 break;
         }
     }

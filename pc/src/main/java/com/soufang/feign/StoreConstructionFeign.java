@@ -63,4 +63,7 @@ public interface StoreConstructionFeign {
 
     @RequestMapping(value = "/core/store/saveView", method = RequestMethod.POST)
     Result saveView(@RequestBody StoreViewDto dto);
+
+    @RequestMapping(value = "/core/store/getStoreViews", method = RequestMethod.POST)
+    List<StoreViewDto> getStoreViews(@RequestBody Long shopId);
 }

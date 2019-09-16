@@ -464,9 +464,11 @@ public class StoreConstructionController extends BaseController {
         ShopDto shopInfo = this.getShopInfo(request);
         StoreViewDto dto = new StoreViewDto();
         dto.setShopId(shopInfo.getShopId());
+        String viewTitle = request.getParameter("viewTitle");
         Map<String, Object> map = FtpClient.uploadImage(file, storeViewUrl);
         if ((boolean) map.get("success")) {
             dto.setViewurl(String.valueOf(map.get("uploadName")));
+            dto.setViewTitle(viewTitle);
             //保存地址到数据库
             Result result1 = storeConstructionFeign.saveView(dto);
             if(!result1.isSuccess()){
