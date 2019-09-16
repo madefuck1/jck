@@ -1,5 +1,6 @@
 package com.soufang.service.impl;
 
+import com.soufang.base.PropertiesParam;
 import com.soufang.base.Result;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.storeConstruction.*;
@@ -53,6 +54,15 @@ public class StoreConstructionServiceImpl implements StoreConstructionService {
             result.setSuccess(false);
         }
         return result;
+    }
+
+    @Override
+    public List<StoreViewDto> getStoreViews(Long shopId) {
+        List<StoreViewDto> viewDtos = storeViewMapper.getStoreViews(shopId);
+        for (StoreViewDto dto:viewDtos) {
+            dto.setViewurl(PropertiesParam.file_pre+dto.getViewurl());
+        }
+        return viewDtos;
     }
 
     @Override

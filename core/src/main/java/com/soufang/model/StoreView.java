@@ -9,6 +9,8 @@ public class StoreView {
 
     private String viewurl;
 
+    private String viewTitle;
+
     public Long getStoreViewId() {
         return storeViewId;
     }
@@ -39,5 +41,13 @@ public class StoreView {
 
     public void setViewurl(String viewurl) {
         this.viewurl = viewurl == null ? null : viewurl.trim();
+    }
+
+    public String getViewTitle() {
+        return viewTitle;
+    }
+
+    public void setViewTitle(String viewTitle) {
+        this.viewTitle = viewTitle;
     }
 }

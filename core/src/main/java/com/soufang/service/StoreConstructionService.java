@@ -44,4 +44,6 @@ public interface StoreConstructionService {
 
     //保存店铺视频
     Result saveStoreView(StoreViewDto dto);
+
+    List<StoreViewDto> getStoreViews(Long shopId);
 }

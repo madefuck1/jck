@@ -6,26 +6,26 @@
     <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="viewUrl" property="viewurl" jdbcType="VARCHAR" />
+    <result column="viewTitle" property="viewTitle" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="DtoResultMap" type="com.soufang.base.dto.storeConstruction.StoreViewDto" >
+    <id column="store_view_id" property="storeViewId" jdbcType="BIGINT" />
+    <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="viewUrl" property="viewurl" jdbcType="VARCHAR" />
+    <result column="viewTitle" property="viewTitle" jdbcType="VARCHAR" />
+  </resultMap>
+
   <sql id="Base_Column_List" >
-    store_view_id, store_construction_id, shop_id, viewUrl
+    store_view_id, store_construction_id, shop_id, viewUrl,viewTitle
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+  <select id="getStoreViews" resultMap="DtoResultMap" parameterType="java.lang.Long" >
+    select
     <include refid="Base_Column_List" />
     from t_store_view
-    where store_view_id = #{storeViewId,jdbcType=BIGINT}
+    where shop_id = #{shopId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_store_view
-    where store_view_id = #{storeViewId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.soufang.model.StoreView" >
-    insert into t_store_view (store_view_id, store_construction_id, shop_id, 
-      viewUrl)
-    values (#{storeViewId,jdbcType=BIGINT}, #{storeConstructionId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, 
-      #{viewurl,jdbcType=VARCHAR})
-  </insert>
+
   <insert id="insertSelective" parameterType="com.soufang.model.StoreView" >
     insert into t_store_view
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -41,6 +41,9 @@
       <if test="viewurl != null" >
         viewUrl,
       </if>
+      <if test="viewTitle != null" >
+        viewTitle,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeViewId != null" >
@@ -55,28 +58,9 @@
       <if test="viewurl != null" >
         #{viewurl,jdbcType=VARCHAR},
       </if>
+      <if test="viewTitle != null" >
+        #{viewTitle,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.soufang.model.StoreView" >
-    update t_store_view
-    <set >
-      <if test="storeConstructionId != null" >
-        store_construction_id = #{storeConstructionId,jdbcType=BIGINT},
-      </if>
-      <if test="shopId != null" >
-        shop_id = #{shopId,jdbcType=BIGINT},
-      </if>
-      <if test="viewurl != null" >
-        viewUrl = #{viewurl,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where store_view_id = #{storeViewId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.soufang.model.StoreView" >
-    update t_store_view
-    set store_construction_id = #{storeConstructionId,jdbcType=BIGINT},
-      shop_id = #{shopId,jdbcType=BIGINT},
-      viewUrl = #{viewurl,jdbcType=VARCHAR}
-    where store_view_id = #{storeViewId,jdbcType=BIGINT}
-  </update>
 </mapper>

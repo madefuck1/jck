@@ -197,4 +197,9 @@ public class StoreConstructionController {
     Result saveView(@RequestBody StoreViewDto dto){
         return storeConstructionService.saveStoreView(dto);
     }
+
+    @RequestMapping(value = "getStoreViews", method = RequestMethod.POST)
+    List<StoreViewDto> getStoreViews(@RequestBody Long shopId){
+        return storeConstructionService.getStoreViews(shopId);
+    }
 }

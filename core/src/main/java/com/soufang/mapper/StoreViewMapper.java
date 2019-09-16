@@ -1,6 +1,9 @@
 package com.soufang.mapper;
 
+import com.soufang.base.dto.storeConstruction.StoreViewDto;
 import com.soufang.model.StoreView;
+
+import java.util.List;
 
 public interface StoreViewMapper {
     int deleteByPrimaryKey(Long storeViewId);
@@ -14,4 +17,6 @@ public interface StoreViewMapper {
     int updateByPrimaryKeySelective(StoreView record);
 
     int updateByPrimaryKey(StoreView record);
+
+    List<StoreViewDto> getStoreViews(Long shopId);
 }
