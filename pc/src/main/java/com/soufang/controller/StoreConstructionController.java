@@ -14,15 +14,21 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.StoreConstruction.*;
+
+import it.sauronsoftware.jave.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -465,7 +471,17 @@ public class StoreConstructionController extends BaseController {
         StoreViewDto dto = new StoreViewDto();
         dto.setShopId(shopInfo.getShopId());
         String viewTitle = request.getParameter("viewTitle");
-        Map<String, Object> map = FtpClient.uploadImage(file, storeViewUrl);
+        File f  =null;
+        if(file.equals("")||file.getSize()<=0){
+            //file =null
+            result.setMessage("未上传视频");
+            result.setSuccess(false);
+            return result;
+        }else {
+            f=new File(file.getOriginalFilename());
+        }
+        File returnFile = compressView(f);
+        Map<String, Object> map = FtpClient.uploadFile(returnFile, storeViewUrl);
         if ((boolean) map.get("success")) {
             dto.setViewurl(String.valueOf(map.get("uploadName")));
             dto.setViewTitle(viewTitle);
@@ -475,10 +491,59 @@ public class StoreConstructionController extends BaseController {
                 result.setSuccess(false);
                 result.setMessage("视频地址保存失败");
             }
+            /*result.setSuccess(true);
+            result.setMessage("视频上传成功");*/
         }else {
             result.setMessage("视频上传失败");
             result.setSuccess(false);
         }
         return result;
     }
+    //压缩视频
+    public File compressView(File file){
+        File target = new File("D:/x2.mp4");
+        // 音频编码设置
+        AudioAttributes audio = new AudioAttributes();
+        audio.setCodec("libmp3lame");
+        audio.setBitRate(new Integer(56000));
+        audio.setChannels(new Integer(1));
+        audio.setSamplingRate(new Integer(22050));
+        // 视频编码设置
+        VideoAttributes video = new VideoAttributes();
+        video.setCodec("mpeg4");
+        video.setBitRate(new Integer(800000));
+        video.setFrameRate(new Integer(15));
+        // 视频转码编码设置
+        EncodingAttributes attrs = new EncodingAttributes();
+        attrs.setFormat("mp4");
+        attrs.setAudioAttributes(audio);
+        attrs.setVideoAttributes(video);
+        // 编码器
+        Encoder encoder = new Encoder();
+        try {
+            encoder.encode(file, target, attrs);
+            //System.out.println("压缩成功");
+            return target;
+        } catch (EncoderException e) {
+            e.printStackTrace();
+            System.out.println("压缩失败");
+            return null;
+        }
+    }
+
+    //将流转换成file
+    /*public void inputStreamToFile(InputStream ins, File file) {
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 }

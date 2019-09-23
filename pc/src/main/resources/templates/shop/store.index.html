@@ -161,8 +161,8 @@
     <h4>视频中心</h4>
     <div class="vedio-in" id="vedio-in">
         <div class="vedio1">
-            <video width="226" height="127" preload="none" controls="controls"
-                   src="http://121.199.22.218:8000/uploadStoreView/3d7a5d7380d44af69cf554e0956d4323.mp4" type="video/*">
+            <video width="226" height="127" preload="preload" controls="controls"
+                   src="/static/images/x2.mp4" type="video/mp4"; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;>
             </video>
             <p>视频标题</p>
         </div>
@@ -320,13 +320,13 @@
                     }
                 }
                 //初始化视频中心
-                if(res.storeViewDtos.length > 0){
+                /*if(res.storeViewDtos.length > 0){
                     $("#vedio-in").empty();
                     var html ='';
                     for (var i = 0; i < res.storeViewDtos.length; i++){
                         html+='<div class="vedio1">\n' +
-                    '            <video width="226" height="127" preload="none" controls="controls" \n' +
-                    '                 src="'+res.storeViewDtos[i].viewurl+'" type="video/*">\n' +
+                    '            <video width="226" height="127" preload="preload" controls="controls" \n' +
+                    '                 src="'+res.storeViewDtos[i].viewurl+'"  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2">\n' +
                     '            </video>\n' +
                     '            <p>'+res.storeViewDtos[i].viewTitle+'</p>\n' +
                     '           </div>';
@@ -337,7 +337,7 @@
                     $("#vedio-in").empty();
                     var html = '<h1>店主暂时没有添加视频</h1>'
                     $("#vedio-in").append(html);
-                }
+                }*/
             }
         });
     }
