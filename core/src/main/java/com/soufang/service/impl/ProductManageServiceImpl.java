@@ -439,6 +439,7 @@ public class ProductManageServiceImpl implements ProductManageService {
             productStatistics.setBrowseNumber(0L);
             productStatistics.setCollectionNumber(0L);
             productStatistics.setDealNumber(0L);
+            productStatistics.setProductStock("999999");
             productStatistics.setProductPrice(price.toString());
             productStatisticsMapper.insert(productStatistics);
             result.setMessage(product.getProductId().toString());

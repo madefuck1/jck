@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soufang.mapper.StoreViewMapper" >
+  <resultMap id="BaseResultMap" type="com.soufang.model.StoreView" >
+    <id column="store_view_id" property="storeViewId" jdbcType="BIGINT" />
+    <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="viewUrl" property="viewurl" jdbcType="VARCHAR" />
+    <result column="viewTitle" property="viewTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="DtoResultMap" type="com.soufang.base.dto.storeConstruction.StoreViewDto" >
+    <id column="store_view_id" property="storeViewId" jdbcType="BIGINT" />
+    <result column="store_construction_id" property="storeConstructionId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="viewUrl" property="viewurl" jdbcType="VARCHAR" />
+    <result column="viewTitle" property="viewTitle" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    store_view_id, store_construction_id, shop_id, viewUrl,viewTitle
+  </sql>
+  <select id="getStoreViews" resultMap="DtoResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_store_view
+    where shop_id = #{shopId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.soufang.model.StoreView" >
+    insert into t_store_view
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeViewId != null" >
+        store_view_id,
+      </if>
+      <if test="storeConstructionId != null" >
+        store_construction_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="viewurl != null" >
+        viewUrl,
+      </if>
+      <if test="viewTitle != null" >
+        viewTitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeViewId != null" >
+        #{storeViewId,jdbcType=BIGINT},
+      </if>
+      <if test="storeConstructionId != null" >
+        #{storeConstructionId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="viewurl != null" >
+        #{viewurl,jdbcType=VARCHAR},
+      </if>
+      <if test="viewTitle != null" >
+        #{viewTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
