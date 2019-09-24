@@ -14,20 +14,15 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.StoreConstruction.*;
-
 import it.sauronsoftware.jave.*;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
