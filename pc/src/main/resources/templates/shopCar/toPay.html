@@ -484,35 +484,38 @@
     }
 
     function submit(){
-        var html = "";
-        var i = 0 ;
-        $(".shopCar").each(function () {
-            var flag = true ;
-            html += '<input type="hidden" name="list['+i+'].shopCarId" value="'+$(this).find(".shopCarId").val()+'">' ;
-            var j = 0 ;
-            $(this).find(".item-content").each(function () {
-                html += '<input type="hidden" name="list['+i+'].shopCarProductIds['+j+']" value="'+$(this).find(".shopCarProductId").val()+'">' ;
-                j++;
+        if(addressHtml == null || addressHtml == ""){
+            alert("请选择收货地址!");
+        }else {
+            var html = "";
+            var i = 0 ;
+            $(".shopCar").each(function () {
+                var flag = true ;
+                html += '<input type="hidden" name="list['+i+'].shopCarId" value="'+$(this).find(".shopCarId").val()+'">' ;
+                var j = 0 ;
+                $(this).find(".item-content").each(function () {
+                    html += '<input type="hidden" name="list['+i+'].shopCarProductIds['+j+']" value="'+$(this).find(".shopCarProductId").val()+'">' ;
+                    j++;
+                })
+                i++;
             })
-            i++;
-        })
-        var type = 0;  //0线下，1线上
-        if ($('#pay_select').val() == "b") {
-            type = 1;
+            var type = 0;  //0线下，1线上
+            if ($('#pay_select').val() == "b") {
+                type = 1;
+            }
+            html += '<input type="hidden" name="addressId" value="' + $(".defaultAddr").find(".addressId").val() + '">';
+            html += '<input type="hidden" name="payType" value="' + type + '">';
+            html += '<input type="hidden" name="remark" value="' + $("#remark").val() + '">';
+            $("#toPay").append(html);
+            $("#toPay").submit();
         }
-        html += '<input type="hidden" name="addressId" value="' + $(".defaultAddr").find(".addressId").val() + '">';
-        html += '<input type="hidden" name="payType" value="' + type + '">';
-        html += '<input type="hidden" name="remark" value="' + $("#remark").val() + '">';
-        $("#toPay").append(html);
-        $("#toPay").submit();
     }
 
     $(function () {
         initAddress();
     });
-
+    var addressHtml = "";
     function initAddress(){
-        var addressHtml = "";
         $("#addressList").html("");
         $.ajax({
             url: '/personalCenter/getAddressList',

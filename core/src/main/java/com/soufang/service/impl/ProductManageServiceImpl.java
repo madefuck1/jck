@@ -336,7 +336,17 @@ public class ProductManageServiceImpl implements ProductManageService {
 
     @Override
     public ProductDto getProductDetailBySpec_Number(ProductDto dto) {
-        return productMapper.getProductDetailBySpec_Number(dto);
+        ProductDto productDto = productMapper.getProductDetailBySpec_Number(dto);
+        String[] img = new String[10];
+        if (StringUtils.isNotBlank(productDto.getProductImage())) {
+            img = productDto.getProductImage().split(";");
+        }
+        if(StringUtils.isNotBlank(img[0])){
+            productDto.setProductUrl(PropertiesParam.file_pre + img[0]);
+        }else {
+            productDto.setProductUrl(PropertiesParam.file_pre + "/uploadProduct/product.jpg");
+        }
+        return productDto;
     }
 
     @Override

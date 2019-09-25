@@ -178,7 +178,7 @@
                                     <li class="td td-item">
                                         <div class="item-pic">
                                             <a href="#" class="J_MakePoint">
-                                                <img src="${productDto.url!''}" class="itempic J_ItemImg"></a>
+                                                <img src="${productDto.productUrl!''}" class="itempic J_ItemImg"></a>
                                         </div>
                                         <div class="item-info">
                                             <div class="item-basic-info">
@@ -188,9 +188,9 @@
                                     </li>
                                     <li class="td td-info">
                                         <div class="item-props">
-                                            <span class="sku-line" name = "productColor">${productColor!''}</span>
+                                            <span class="sku-line" name = "productColor">颜色：${productColor!''}</span>
                                             <span class="sku-line">&nbsp;&nbsp;</span>
-                                            <span class="sku-line" name = "productSpecName">${productDto.productSpecDto.specName!''}</span>
+                                            <span class="sku-line" name = "productSpecName">规格：${productDto.productSpecDto.specName!''}</span>
                                         </div>
                                     </li>
                                     <li class="td td-price">
