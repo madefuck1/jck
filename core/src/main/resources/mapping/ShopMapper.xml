@@ -193,21 +193,17 @@
 
 
   <select id="appGetList" parameterType="com.soufang.base.search.shop.ShopSo" resultMap="AppResultMap">
-    select * from (select * from t_shop LIMIT #{page},#{limit})t_shop
-    left join (
-	    select P.*, getAssortNameById (P.assort_id) as assortName,
-            concat(P.key1, '：', P.key1_value) as kv1,
-            concat(P.key2, '：', P.key2_value) as kv2,
-            concat(P.key3, '：', P.key3_value) as kv3,
-            concat(P.key4, '：', P.key4_value) as kv4,
-            concat(P.key5, '：', P.key5_value) as kv5,
-            GetMinPriceByProductId(P.product_id) as productPrice from t_product P
-    )t_product on t_shop.shop_id = t_product.shop_id
+    select DISTINCT * from t_shop
     where
       t_shop.shop_status = 0
-    <if test="shopName!=null and shopName!=''">
-      and  t_shop.shop_name like concat(concat('%',#{shopName}),'%')
-    </if>
+    <choose>
+      <when test="shopName!=null and shopName!=''">
+          and t_shop.shop_name  like concat(concat('%', #{shopName}), '%')
+      </when>
+      <otherwise>
+          LIMIT #{page},#{limit}
+      </otherwise>
+    </choose>
   </select>
 
     <select id="appGetCount" parameterType="com.soufang.base.search.shop.ShopSo" resultType="java.lang.Integer">

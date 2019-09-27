@@ -5,6 +5,8 @@ import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
+import com.soufang.base.dto.order.OrderDto;
+import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
@@ -605,24 +607,24 @@ public class ProductController extends BaseController {
         ProductDto so = new ProductDto();
         so.setProductId(productId);
         so.setProductNumber(productNum);
-        so.setProductSpec(productSpec);
+        so.setProductSpec(productSpec.trim());
         ProductDto productDto = productFeign.getProductDetailBySpec_Number(so);
 
-//        // order
-//        UserDto userInfo = getUserInfo(request);
-//        OrderDto orderDto = new OrderDto();
-//        orderDto.setUserId(userInfo.getUserId());
-//        orderDto.setBuyerName(userInfo.getUserName());
-//        map.put("orderDto", orderDto);
-//
-//        // orderShop
-//        OrderShopDto orderShopDto = new OrderShopDto();
-//        orderShopDto.setUserId(userInfo.getUserId());
-//        orderShopDto.setShopId(productDto.getShopId());
-//        orderShopDto.setShopName(productDto.getShopName());
-//        orderShopDto.setSumPrice(new BigDecimal(productNum).multiply(productDto.getProductSpecDto().getSpecNumber()));
-//        orderShopDto.setActualPrice(new BigDecimal(productNum).multiply(productDto.getProductSpecDto().getSpecNumber()));
-//        map.put("orderShopDto", orderShopDto);
+        /*// order
+        UserDto userInfo = getUserInfo(request);
+        OrderDto orderDto = new OrderDto();
+        orderDto.setUserId(userInfo.getUserId());
+        orderDto.setBuyerName(userInfo.getUserName());
+        map.put("orderDto", orderDto);
+
+        // orderShop
+        OrderShopDto orderShopDto = new OrderShopDto();
+        orderShopDto.setUserId(userInfo.getUserId());
+        orderShopDto.setShopId(productDto.getShopId());
+        orderShopDto.setShopName(productDto.getShopName());
+        orderShopDto.setSumPrice(new BigDecimal(productNum).multiply(productDto.getProductSpecDto().getSpecNumber()));
+        orderShopDto.setActualPrice(new BigDecimal(productNum).multiply(productDto.getProductSpecDto().getSpecNumber()));
+        map.put("orderShopDto", orderShopDto);*/
 
         // orderProduct
         map.put("productDto", productDto);

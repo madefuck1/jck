@@ -753,8 +753,8 @@
     function toBuy() {
         // todo
         var productId, shopId, productNum, productColor = '', productSpec = '';
-        productId = "${detail.productId}";
-        shopId = "${detail.shopId}";
+        productId = "${detail.productId?c}";
+        shopId = "${detail.shopId?c}";
         productNum = $('#productNum').val().replace(/,/g,"");
         $('#productColor').children('li').each(function () {
             if ($(this).is(".selected")) {
@@ -775,8 +775,8 @@
     // 加入购物车
     function addShopCar() {
         var data = {};
-        data.productId = "${detail.productId}";
-        data.shopId = "${detail.shopId}";
+        data.productId = "${detail.productId?c}";
+        data.shopId = "${detail.shopId?c}";
         data.productNum = $('#productNum').val().replace(/,/g,"");//将字符串中""全部替换成''
         $('#productColor').children('li').each(function () {
             if ($(this).is(".selected")) {

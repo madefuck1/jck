@@ -19,7 +19,7 @@ import javax.servlet.MultipartConfigElement;
 @EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-public class PcApplication extends SpringBootServletInitializer {
+public class PcApplication extends SpringBootServletInitializer{
 
     public static void main(String[] args) {
         SpringApplication.run(PcApplication.class, args);

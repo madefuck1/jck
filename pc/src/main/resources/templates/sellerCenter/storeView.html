@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/static/css/sale/sale_header.css">
     <script  type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script  type="text/javascript" src="/static/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
     <style>
         * {
             margin: 0px;
@@ -107,8 +106,8 @@
                         <button class="am-btn am-btn-secondary" style="margin-top:24px;padding:5px 20px; font-size: 12px" onclick="saveView()">保存</button>
                     </div>
                     <div class="button" style="margin-left:94px ">
-                        <button type="button" class="am-btn am-btn-secondary" style="width: 140px">保存</button>
-                        <button type="button" class="am-btn am-btn-default" style="width: 140px">取消</button>
+                        <button type="button" onclick="saveView()" class="am-btn am-btn-secondary" style="width: 140px" >保存</button>
+                        <button type="button" onclick="history.go(0)" class="am-btn am-btn-default" style="width: 140px">取消</button>
                     </div>
                 </div>
             </div>
@@ -134,15 +133,21 @@
     $('#viewFile').on('change', function () {
         file = this.files[0];
         var fileName = file.name;
+        var fileMax = file.size;
         var fileType = fileName.substr(fileName.length - 4, fileName.length);
         if (fileType == '.mp4' ) {
-            formData = new FormData()
-            formData.append("file", file);
+            if(fileMax < 104857600 ){
+                formData = new FormData()
+                formData.append("file", file);
+            }else {
+                alert('文件须小于100M');
+            }
         } else {
             alert('文件类型不正确,仅支持MP4格式');
         }
     });
-    function saveView(){
+    //商城视频
+    /*function saveView(){
         formData = new FormData()
         formData.append("file", file);
         formData.append("viewTitle", $("#viewTitle").val());
@@ -163,7 +168,7 @@
                 }
             }
         });
-    }
+    }*/
 
     $("#logo").hover(function(){
         $(".logo-mask").show();
