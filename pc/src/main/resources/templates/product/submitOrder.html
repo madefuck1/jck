@@ -174,7 +174,7 @@
                         <div class="bundle-main">
                             <ul class="item-content clearfix">
                                 <div class="pay-phone">
-                                    <input hidden name="productId" value="${productDto.productId}">
+                                    <input hidden name="productId" value="${productDto.productId?c}">
                                     <li class="td td-item">
                                         <div class="item-pic">
                                             <a href="#" class="J_MakePoint">
@@ -188,9 +188,9 @@
                                     </li>
                                     <li class="td td-info">
                                         <div class="item-props">
-                                            <span class="sku-line" name = "productColor">颜色：${productColor!''}</span>
+                                            <span class="sku-line" name = "productColor">颜色:${productColor!''}</span>
                                             <span class="sku-line">&nbsp;&nbsp;</span>
-                                            <span class="sku-line" name = "productSpecName">规格：${productDto.productSpecDto.specName!''}</span>
+                                            <span class="sku-line" name = "productSpecName">规格:${productDto.productSpecDto.specName!''}</span>
                                         </div>
                                     </li>
                                     <li class="td td-price">
@@ -214,7 +214,7 @@
                                 </li>
                                 <li class="td td-sum">
                                     <div class="td-inner">
-                                        <em tabindex="0" class="J_ItemSum number">${(productNumber *
+                                        <em tabindex="0" name="sumPrice" class="J_ItemSum number">${(productNumber *
                                             productDto.productSpecDto.specNumber!0)?string('0.00')}</em>
                                     </div>
                                 </li>
@@ -271,6 +271,7 @@
                     </div>
                 </div>
             </div>
+
             <div>
                 <button type="button" onclick="submitOrder()" class="am-btn am-btn-warning am-btn-xl"
                         name ="submitOrder" style=" margin-left:16.6%">提交订单
@@ -351,10 +352,11 @@
         }
 
         var html = "";
-        html += '<input type="hidden" name="productId" value="' + $("[name=productId]").val() + '">'
-        html += '<input type="hidden" name="productColor" value="' + $("[name=productColor]").text() + '">'
-        html += '<input type="hidden" name="productSpecName" value="' + $("[name=productSpecName]").text() + '">'
-        html += '<input type="hidden" name="productNumber" value="' + $("[name=productNumber]").val() + '">'
+        html += '<input type="hidden" name="productId" value="' + $("[name=productId]").val() + '">';
+        html += '<input type="hidden" name="productColor" value="' + $("[name=productColor]").text() + '">';
+        html += '<input type="hidden" name="productSpecName" value="' + $("[name=productSpecName]").text() + '">';
+        html += '<input type="hidden" name="productNumber" value="' + $("[name=productNumber]").val() + '">';
+        html += '<input type="hidden" name="sumPrice" value="' + $("[name=sumPrice]").text() + '">';
         html += '<input type="hidden" name="addressId" value="' + $(".defaultAddr").parents(".address-detail").find(".addressId").val() + '">';
         html += '<input type="hidden" name="payType" value="' + type + '">';
         html += '<input type="hidden" name="remark" value="' + $("#remark").val() + '">';

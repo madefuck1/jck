@@ -14,6 +14,7 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.StoreConstruction.*;
+import it.sauronsoftware.jave.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -457,7 +458,7 @@ public class StoreConstructionController extends BaseController {
     }
 
     //保存上传的视频兼压缩
-   /* @RequestMapping(value = "saveView", method = RequestMethod.POST)
+    @RequestMapping(value = "saveView", method = RequestMethod.POST)
     @MemberAccess
     @ResponseBody
     public Result saveView(MultipartFile file,HttpServletRequest request){
@@ -475,6 +476,7 @@ public class StoreConstructionController extends BaseController {
         }else {
             f=new File(file.getOriginalFilename());
         }
+        //压缩视频
         File returnFile = compressView(f);
         Map<String, Object> map = FtpClient.uploadFile(returnFile, storeViewUrl);
         if ((boolean) map.get("success")) {
@@ -486,8 +488,8 @@ public class StoreConstructionController extends BaseController {
                 result.setSuccess(false);
                 result.setMessage("视频地址保存失败");
             }
-            *//*result.setSuccess(true);
-            result.setMessage("视频上传成功");*//*
+            result.setSuccess(true);
+            result.setMessage("视频上传成功");
         }else {
             result.setMessage("视频上传失败");
             result.setSuccess(false);
@@ -524,7 +526,7 @@ public class StoreConstructionController extends BaseController {
             System.out.println("压缩失败");
             return null;
         }
-    }*/
+    }
 
     //将流转换成file
     /*public void inputStreamToFile(InputStream ins, File file) {

@@ -183,11 +183,11 @@ public class OrderController extends BaseController {
         orderProductDto.setProductName(productDto.getProductName());
         orderProductDto.setProductNumber(new BigDecimal(reqVo.getProductNumber()));
         orderProductDto.setProductUnit(productDto.getProductUnit());
-        orderProductDto.setProductPrice(productDto.getProductSpecDto().getSpecNumber() == null ? BigDecimal.ZERO : productDto.getProductSpecDto().getSpecNumber());
-        orderProductDto.setProductColor(reqVo.getProductColor());
-        orderProductDto.setProductSpec(reqVo.getProductSpecName());
+        orderProductDto.setProductPrice(new BigDecimal(reqVo.getSumPrice()));
+        orderProductDto.setProductColor(reqVo.getProductColor().substring(reqVo.getProductColor().indexOf(":")+1));
+        orderProductDto.setProductSpec(reqVo.getProductSpecName().substring(reqVo.getProductSpecName().indexOf(":")+1));
         if (orderProductDto.getProductPrice() != null) {
-            sumMoney = sumMoney.add(orderProductDto.getProductNumber().multiply(orderProductDto.getProductPrice()));
+            sumMoney = sumMoney.add(orderProductDto.getProductPrice());
         } else {
             sumMoney = BigDecimal.ZERO;
         }
@@ -217,11 +217,11 @@ public class OrderController extends BaseController {
             //付定金，重新生成订单
             orderFeign.payOrder(orderShopDto);
             orderShopDto = orderFeign.getDetail(orderShopId);
-            //model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.3")));
-            model.put("payMoney", "0.01");
+            model.put("payMoney", orderShopDto.getActualPrice());
+            //model.put("payMoney", "0.01");
         } else if (orderShopDto.getOrderShopStatus() == OrderStatusEnum.to_pay_last.getValue()) {
-            //model.put("payMoney", orderShopDto.getActualPrice().multiply(new BigDecimal("0.7")));
-            model.put("payMoney", "0.01");
+            model.put("payMoney", orderShopDto.getActualPrice());
+            //model.put("payMoney", "0.01");
         } else {
             return "404";
         }

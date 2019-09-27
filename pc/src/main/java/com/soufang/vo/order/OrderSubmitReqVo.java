@@ -3,6 +3,8 @@ package com.soufang.vo.order;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Setter
 @Getter
 public class OrderSubmitReqVo {
@@ -14,6 +16,8 @@ public class OrderSubmitReqVo {
     private String productSpecName;
     // 数量
     private Long productNumber;
+    //总价格
+    private String sumPrice;
     // 买家留言
     private String remark;
     // 地址id
