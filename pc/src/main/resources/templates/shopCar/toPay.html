@@ -193,12 +193,12 @@
                             </ul>
                             <div class="clear"></div>
                         </div>
-                    </#list>
+
                 </div>
             </tr>
             <div class="clear"></div>
             </div>
-            </#list>
+
             <div class="pay-total">
                 <!--留言-->
                 <div class="order-extra">
@@ -378,10 +378,11 @@
                     <span style="font-size:
                     20px; color: #666;">总 价: &nbsp;&nbsp;</span>
         <span style="font-size: 20px;color: red;">￥</span>
-        <span style="font-size: 22px;color: #333;color: red;">999</span>
+        <span style="font-size: 22px;color: #333;color: red;">${(product.productNumber * product.productPrice)?string('0.00')}</span>
     </div>
 
 </div>
+    </#list></#list>
 <div>
     <button type="button" onclick="submit()" class="am-btn am-btn-warning am-btn-xl" style="margin-top: 20px; margin-left:46%;margin-bottom: 20px;">提交订单</button>
 </div>
