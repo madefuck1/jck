@@ -89,9 +89,15 @@ public class ShopCarController extends BaseController {
     private List<ShopCarDto> init(ToPayListReqVo toPayReqVoList){
         List<ShopCarDto> shopCarDtos = new ArrayList<>();
         for(ToPayReqVo toPayReqVo : toPayReqVoList.getList()){
-            ShopCarDto shopCarDto = shopCarFeign.getShopCarDtoById(toPayReqVo.getShopCarId());
+            if(toPayReqVo.getShopCarId() == null){
+                continue;
+            }
+            ShopCarDto shopCarDto  = shopCarFeign.getShopCarDtoById(toPayReqVo.getShopCarId());
             List<ShopCarProductDto> shopCarProductDtos = new ArrayList<>();
             for(Long shopCarProductId : toPayReqVo.getShopCarProductIds()){
+                if(shopCarProductId == null){//如果产品id为空，跳过此次循环
+                    continue;
+                }
                 ShopCarProductDto shopCarProductDto = shopCarFeign.getShopCarProductDtoById(shopCarProductId);
                 shopCarProductDtos.add(shopCarProductDto);
             }

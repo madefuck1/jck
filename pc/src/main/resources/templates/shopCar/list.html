@@ -179,8 +179,8 @@
                                         </li>
                                         <li class="td td-op">
                                             <div class="td-inner">
-                                                <input type="hidden" class="shopCarProductId" value="${product.shopCarProductId}">
-                                                <input type="hidden" class="productId" value="${product.productId}">
+                                                <input type="hidden" class="shopCarProductId" value="${product.shopCarProductId?c}">
+                                                <input type="hidden" class="productId" value="${product.productId?c}">
                                                 <a title="移入收藏夹" class="btn-fav" onclick="toFavorite(this)" style="color: #333;">
                                                     移入收藏夹</a>
                                                 <a class="delete" onclick="deleteProduct(this)">

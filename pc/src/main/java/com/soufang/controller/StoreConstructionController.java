@@ -14,7 +14,7 @@ import com.soufang.feign.PcUserFeign;
 import com.soufang.feign.StoreConstructionFeign;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.StoreConstruction.*;
-import it.sauronsoftware.jave.*;
+/*import it.sauronsoftware.jave.*;*/
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -458,7 +458,7 @@ public class StoreConstructionController extends BaseController {
     }
 
     //保存上传的视频兼压缩
-    @RequestMapping(value = "saveView", method = RequestMethod.POST)
+    /*@RequestMapping(value = "saveView", method = RequestMethod.POST)
     @MemberAccess
     @ResponseBody
     public Result saveView(MultipartFile file,HttpServletRequest request){
@@ -495,9 +495,9 @@ public class StoreConstructionController extends BaseController {
             result.setSuccess(false);
         }
         return result;
-    }
+    }*/
     //压缩视频
-    public File compressView(File file){
+    /*public File compressView(File file){
         File target = new File("D:/x2.mp4");
         // 音频编码设置
         AudioAttributes audio = new AudioAttributes();
@@ -526,7 +526,7 @@ public class StoreConstructionController extends BaseController {
             System.out.println("压缩失败");
             return null;
         }
-    }
+    }*/
 
     //将流转换成file
     /*public void inputStreamToFile(InputStream ins, File file) {
