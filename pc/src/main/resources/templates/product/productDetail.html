@@ -225,14 +225,10 @@
                                             <#list detail.productColorDtoList as item>
                                             <#if item_index==0>
                                             <li onclick="selectColor(this,${item.spock?c},${item.isSpot!''})"
-                                                class="sku-line selected ">
-                                                    ${item.productColor!'--'}
-                                                <i></i></li>
+                                                class="sku-line selected ">${item.productColor!'--'}<i></i></li>
                                             <#else>
                                             <li onclick="selectColor(this,${item.spock?c},${item.isSpot!''})"
-                                                class="sku-line ">
-                                                ${item.productColor!'--'}
-                                                <i></i></li>
+                                                class="sku-line ">${item.productColor!'--'}<i></i></li>
                                                                                     </#if>
                                                                                 </#list>
                                         </ul>
@@ -241,12 +237,9 @@
                                         <div class="cart-title">产品规格:</div>
                                         <ul id="productSpec">
                                             <#list detail.specDtoList as item>
-                                            <#if item_index==0>
-                                            <li onclick="selectSpec(this)" class="sku-line selected ">
-                                                ${item.specName!''}<i></i></li>
+                                            <#if item_index==0><li onclick="selectSpec(this)" class="sku-line selected ">${item.specName!''}<i></i></li>
                                             <#else>
-                                            <li onclick="selectSpec(this)" class="sku-line ">${item.specName!''}<i></i>
-                                            </li>
+                                            <li onclick="selectSpec(this)" class="sku-line ">${item.specName!''}<i></i></li>
                                                                                 </#if>
                                                                                 </#list>
                                         </ul>
