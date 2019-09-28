@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +45,9 @@ public class IndexController extends BaseController {
     BannerFeign bannerFeign;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String toIndex(ModelMap map,HttpServletRequest request,HttpServletResponse response){
+    public String toIndex(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws IOException {
         //服务器的开启
-        //if(!request.getServerName().equals("www.enterprise-china.com"))response.sendRedirect("https://www.enterprise-china.com");
+        if(!request.getServerName().equals("www.enterprise-china.com"))response.sendRedirect("https://www.enterprise-china.com");
         EnquirySo enquirySo = new EnquirySo();
         enquirySo.setPage(1);
         enquirySo.setLimit(4);
