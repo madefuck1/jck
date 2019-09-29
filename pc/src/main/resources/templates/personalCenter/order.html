@@ -89,18 +89,22 @@
     };
 
     $(function () {
-        Init(0);
+        Init(1);
     });
 
     function PageCallback(index) {
-        Init(index);
+        Init(index+1);
     }
 
+    var currentPage ;
+    var sumPage;
     function Init(pageIndex) {
         var data = $(".am-active").find("a").attr("data-status");
         $.get("/orderManager/clickPage?data=" + data + "&pageIndex=" + pageIndex, function (result) {
             loadOrderList(result);
             // pagination 分页插件
+            currentPage = pageIndex-1;
+            sumPage = (result.count % 5 == 0) ? (result.count / 5) : ((parseInt(result.count / 5)) + 1);
             $("#pagination").pagination(result.count, {   //total(一共多少条记录)不能少
                 callback: PageCallback,
                 prev_text: '上一页',
@@ -108,7 +112,7 @@
                 items_per_page: 5,             //每页显示最大条数
                 num_display_entries: 4,        //连续分页主体部分显示的分页条目数
                 num_edge_entries: 1,           //两侧显示的首尾分页的条目数
-                current_page:pageIndex
+                current_page:currentPage        //当前页码
             });
         });
     }
@@ -119,22 +123,17 @@
             title:"",
             message:"确定取消订单吗！",
             callback:function(){
-                var endPage = parseInt($('.endPage').children().text());
-                if(isNaN(endPage)){
-                    endPage= startPage;
-                }
                 var param = {
                     status:0,
                     orderShopId:orderShopId,
-
                     //页面分页参数
                     flag:2,
-                    startPage:parseInt($('.startPage').children().text()),
-                    endPage:endPage,
-                    number:number,
-                    orderStatus:orderStatus,
-                    hitPage: $(".mypage").find('.am-active').text(),
-                    orderType:orderType
+                    startPage:currentPage+1,  //当前页面
+                    endPage:sumPage,        //总页码数
+                    /*number:number,*/
+                    orderStatus:0,
+                    //hitPage: $(".mypage").find('.am-active').text(),
+                    //orderType:orderType
 
                 }
                 $.ajax({
@@ -159,24 +158,15 @@
             title:"",
             message:"确定要删除订单吗！",
             callback:function(){
-                var endPage = parseInt($('.endPage').children().text());
-                if(isNaN(endPage)){
-                    endPage= startPage;
-                }
-
                 var param = {
                     status:-1,
                     orderShopId:orderShopId,
-
-
                     //页面分页参数
                     flag:2,
-                    startPage:parseInt($('.startPage').children().text()),
-                    endPage:endPage,
-                    number:number,
-                    orderStatus:orderStatus,
-                    hitPage: $(".mypage").find('.am-active').text(),
-                    orderType:orderType
+                    startPage:currentPage+1,
+                    endPage:sumPage,
+                    //number:number,
+                    //orderType:orderType
                 }
                 $.ajax({
                     url: '/orderManager/updStatus',
@@ -193,8 +183,6 @@
                 });
             }
         });
-
-
     }
 
     // ajax 请求后，订单列表重新封装
@@ -273,7 +261,7 @@
                 '</div>';
         }
 
-        $('.order-list').html("");
+        $('.order-list').empty();
 
         $('.order-list').append(html);
 

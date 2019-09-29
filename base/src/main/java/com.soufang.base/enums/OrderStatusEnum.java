@@ -20,7 +20,7 @@ public enum OrderStatusEnum {
     access(8,"待评价","blue"),
     success(9, "已完成","blue"),
     fail(10, "审核失败","blue"),
-    cancel(0,"订单取消","blue"),
+    cancel(0,"订单已取消","blue"),
     del(-1, "删除","blue");
 
     private Integer value;

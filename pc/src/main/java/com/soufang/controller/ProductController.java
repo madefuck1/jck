@@ -1,12 +1,9 @@
 package com.soufang.controller;
 
-import com.soufang.base.PageBase;
 import com.soufang.base.Result;
 import com.soufang.base.dto.assort.AssortDto;
 import com.soufang.base.dto.banner.BannerDto;
 import com.soufang.base.dto.favorite.FavoriteDto;
-import com.soufang.base.dto.order.OrderDto;
-import com.soufang.base.dto.order.OrderShopDto;
 import com.soufang.base.dto.product.ProductColorDto;
 import com.soufang.base.dto.product.ProductDto;
 import com.soufang.base.dto.product.ProductSpecDto;
@@ -25,7 +22,6 @@ import com.soufang.vo.product.ListSpecReqVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
