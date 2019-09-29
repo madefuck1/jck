@@ -53,6 +53,10 @@ public class Product {
 
     private String key5Value;
 
+    private String repColorName;
+
+    private String repSpecName;
+
     public Long getProductId() {
         return productId;
     }
@@ -245,11 +249,30 @@ public class Product {
         this.productSendProvince = productSendProvince;
     }
 
+
     public String getProductSendCity() {
         return productSendCity;
     }
 
     public void setProductSendCity(String productSendCity) {
         this.productSendCity = productSendCity;
+    }
+
+
+    public String getRepColorName() {
+        return repColorName;
+    }
+
+    public void setRepColorName(String repColorName) {
+        this.repColorName = repColorName;
+    }
+
+
+    public String getRepSpecName() {
+        return repSpecName;
+    }
+
+    public void setRepSpecName(String repSpecName) {
+        this.repSpecName = repSpecName;
     }
 }

@@ -47,7 +47,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String toIndex(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws IOException {
         //服务器的开启
-        if(!request.getServerName().equals("www.enterprise-china.com"))response.sendRedirect("https://www.enterprise-china.com");
+//        if(!request.getServerName().equals("www.enterprise-china.com"))response.sendRedirect("https://www.enterprise-china.com");
         EnquirySo enquirySo = new EnquirySo();
         enquirySo.setPage(1);
         enquirySo.setLimit(4);

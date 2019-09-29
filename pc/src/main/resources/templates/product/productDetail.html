@@ -220,7 +220,7 @@
                             <form class="theme-signin" name="loginform" action="" method="post">
                                 <div class="theme-signin-left">
                                     <div class="theme-options">
-                                        <div class="cart-title">产品颜色:</div>
+                                        <div class="cart-title"><#if detail.repColorName??>${detail.repColorName}<#else>"产品颜色"</#if>:</div>
                                         <ul id="productColor">
                                             <#list detail.productColorDtoList as item>
                                             <#if item_index==0>
@@ -234,7 +234,7 @@
                                         </ul>
                                     </div>
                                     <div class="theme-options">
-                                        <div class="cart-title">产品规格:</div>
+                                        <div class="cart-title"><#if detail.repSpecName!=''>${detail.repSpecName}<#else>"产品规格"</#if>:</div>
                                         <ul id="productSpec">
                                             <#list detail.specDtoList as item>
                                             <#if item_index==0><li onclick="selectSpec(this)" class="sku-line selected ">${item.specName!''}<i></i></li>
@@ -637,7 +637,7 @@
         }, 200);
 
         var param = {
-            productId: "${detail.productId}",
+            productId: "${detail.productId?c}",
             specName: $(value).text(),
         };
         var html = "";

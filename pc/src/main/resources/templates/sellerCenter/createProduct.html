@@ -94,70 +94,86 @@
                                         </span>
                                     </div>
                                     </#if>
-                                </div>
-                                <div class="attr-cloum1">
-                                    <#if assortThree.key3??>
-                                    <div class="attr-row1 am-u-sm-2">
+                    </div>
+                    <div class="attr-cloum1">
+                        <#if assortThree.key3??>
+                        <div class="attr-row1 am-u-sm-2">
                                         <span class="">
                                             <span style="color: red">*</span>
                                             <span>${assortThree.key3}：</span>
                                         </span>
-                                    </div>
-                                    <div class="attr-row2 am-u-sm-4">
+                        </div>
+                        <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
                                             <input name="key3Value" required type="text" class="" placeholder="请输入">
                                         </span>
-                                    </div>
-                                </#if>
-                                    <#if assortThree.key4??>
-                                    <div class="attr-row1 am-u-sm-2">
+                        </div>
+                    </#if>
+                    <#if assortThree.key4??>
+                    <div class="attr-row1 am-u-sm-2">
                                         <span class="">
                                             <span style="color: red">*</span>
                                             <span>${assortThree.key4}：</span>
                                         </span>
-                                    </div>
-                                    <div class="attr-row2 am-u-sm-4">
+                    </div>
+                    <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
                                             <input name="key4Value" required type="text" class="" placeholder="请输入">
                                         </span>
-                                    </div>
-                                    </#if>
-                                </div>
-                                <div class="attr-cloum1">
-                                    <#if assortThree.key5??>
-                                    <div class="attr-row1 am-u-sm-2">
+                    </div>
+                </#if>
+            </div>
+            <div class="attr-cloum1">
+                <#if assortThree.key5??>
+                <div class="attr-row1 am-u-sm-2">
                                         <span class="">
                                             <span style="color: red">*</span>
                                             <span>${assortThree.key5}：</span>
                                         </span>
-                                    </div>
-                                    <div class="attr-row2 am-u-sm-4">
+                </div>
+                <div class="attr-row2 am-u-sm-4">
                                         <span class="am-form-horizontal">
                                             <input name="key5Value" required type="text" class="" placeholder="请输入">
                                         </span>
-                                    </div>
-                                </#if>
-                                </div>
-                            </div>
-                            <a style="color: #40ADFB; cursor: pointer" onclick="addParamHtml()">+自定义属性</a>
-                        </span>
-                    </div>
                 </div>
-            </div>
-            <div class="specList">
-                <div id="spec0" class="base1">
-                    <h4>产品规格1</h4>
-                    <div class="base1-on">
-                        <div class="base-cloum1">
+            </#if>
+    </div>
+</div>
+<a style="color: #40ADFB; cursor: pointer" onclick="addParamHtml()">+自定义属性</a>
+</span>
+</div>
+</div>
+</div>
+<div class="specList">
+    <div id="spec0" class="base1">
+        <h4>产品规格1</h4>
+        <div class="base1-on">
+            <div class="base-cloum1">
                                     <span class="am-u-sm-2  attr-row1">
                                         <span style="color: red">*</span>
                                         <span>计量单位：</span>
                                     </span>
-                            <span class="am-u-sm-10 am-form">
+                <span class="am-u-sm-10 am-form">
                                 <input type="text" class="" name="productUnit" placeholder="请输入" onchange="changeUnit(this)">
                             </span>
-                        </div>
-                        <span class="base-cloum1">
+
+                <span class="am-u-sm-2  attr-row1">
+                                        <span style="color: red">*</span>
+                                        <span>替换规格：</span>
+                                    </span>
+                <span class="am-u-sm-10 am-form">
+                                <input type="text" size="8" name="repSpecName" id="repSpecName" value="产品规格">
+                            </span>
+
+                <span class="am-u-sm-2  attr-row1">
+                                        <span style="color: red">*</span>
+                                        <span>替换颜色：</span>
+                                    </span>
+                <span class="am-u-sm-10 am-form">
+                               <input type="text" size="8" name="repColorName" id="repColorName" value="产品颜色">
+                            </span>
+            </div>
+            <span class="base-cloum1">
                             <span class="am-u-sm-2">
                                 <span>规格：</span>
                             </span>
@@ -165,7 +181,7 @@
                                  <input type="text" class="specName" placeholder="请输入">
                             </span>
                         </span>
-                        <div class="colorList">
+            <div class="colorList">
                             <span class="base-cloum1">
                                 <span class="am-u-sm-2">
                                     <span>子规格：</span>
@@ -174,70 +190,70 @@
                                      <input type="text" class="productColor" name="productColorDtoList[0].productColor" placeholder="请输入子规格">
                                 </span>
                             </span>
-                        </div>
-                        <a style="color: #40ADFB;padding-left: 45px; cursor: pointer" onclick="addColorHtml(this)">+添加子规格</a>
+            </div>
+            <a style="color: #40ADFB;padding-left: 45px; cursor: pointer" onclick="addColorHtml(this)">+添加子规格</a>
 
-                        <div class="attr-cloum1">
-                            <div class="attr-row1 am-u-sm-2">
+            <div class="attr-cloum1">
+                <div class="attr-row1 am-u-sm-2">
                                     <span class="">
                                         <span>价格：</span>
                                     </span>
+                </div>
+                <div class="attr-row2 am-u-sm-4 am-form-group">
+                    <div class="attr1">
+                        <div class="priceInput attr1-on am-u-sm-6">
+                            <div class="attr1-cloum1">
+                                <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
+                                <span class="am-u-sm-6">产品单价（元）</span>
                             </div>
-                            <div class="attr-row2 am-u-sm-4 am-form-group">
-                                <div class="attr1">
-                                    <div class="priceInput attr1-on am-u-sm-6">
-                                        <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
-                                            <span class="am-u-sm-6">产品单价（元）</span>
-                                        </div>
-                                        <div class="attr1-cloum2">
-                                            <div class="am-u-sm-6">
-                                                <input type="number" class="minNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].minNumber">
-                                                <input type="hidden"  class="maxNumber"  name="productSpecDtoList[0].maxNumber">
-                                                <input type="hidden"  class="specName"  name="productSpecDtoList[0].specName">
-                                            </div>
-                                            <div class="am-u-sm-6">
-                                                <input type="number" class="specNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].specNumber">
-                                                <span class="attr1-pic"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="attr1-on am-u-sm-1 attr-price">
-                                        价格预览
-                                    </div>
-                                    <div class="priceShow attr1-on am-u-sm-5">
-                                        <div class="attr1-cloum1">
-                                            <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
-                                            <span class="am-u-sm-6">产品单价（元）</span>
-                                        </div>
-                                        <div class="attr1-cloum2 attr1-right">
-                                            <div class="am-u-sm-6">
-                                                <p class="numberSection"></p>
-                                            </div>
-                                            <div class="am-u-sm-6">
-                                                <p>￥<span class="numberPrice" style="color:#F58022 "></span>/<span class="productUnit"></span></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="attr1-cloum2">
+                                <div class="am-u-sm-6">
+                                    <input type="number" class="minNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].minNumber">
+                                    <input type="hidden"  class="maxNumber"  name="productSpecDtoList[0].maxNumber">
+                                    <input type="hidden"  class="specName"  name="productSpecDtoList[0].specName">
                                 </div>
-                                <a onclick="addPriceHtml(this)" style="color: #40ADFB; margin-top: 20px;  cursor: pointer ;display: inline-block;">+添加价格区间</a>
+                                <div class="am-u-sm-6">
+                                    <input type="number" class="specNumber" required onchange="writeNumber(this)" name="productSpecDtoList[0].specNumber">
+                                    <span class="attr1-pic"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="attr1-on am-u-sm-1 attr-price">
+                            价格预览
+                        </div>
+                        <div class="priceShow attr1-on am-u-sm-5">
+                            <div class="attr1-cloum1">
+                                <span class="am-u-sm-6">购买数量（<span class="productUnit"></span>）</span>
+                                <span class="am-u-sm-6">产品单价（元）</span>
+                            </div>
+                            <div class="attr1-cloum2 attr1-right">
+                                <div class="am-u-sm-6">
+                                    <p class="numberSection"></p>
+                                </div>
+                                <div class="am-u-sm-6">
+                                    <p>￥<span class="numberPrice" style="color:#F58022 "></span>/<span class="productUnit"></span></p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <a onclick="addPriceHtml(this)" style="color: #40ADFB; margin-top: 20px;  cursor: pointer ;display: inline-block;">+添加价格区间</a>
                 </div>
             </div>
-            <div class="base2">
-                <h4><span style="color:#40ADFB ; cursor: pointer " onclick="addSpecHtml()">+增加</span> 产品规格</h4>
-            </div>
-            <div class="base3">
-                <h4>图文详情</h4>
-                <div class="base3-pic">
-                    <div class="base-title">
+        </div>
+    </div>
+</div>
+<div class="base2">
+    <h4><span style="color:#40ADFB ; cursor: pointer " onclick="addSpecHtml()">+增加</span> 产品规格</h4>
+</div>
+<div class="base3">
+    <h4>图文详情</h4>
+    <div class="base3-pic">
+        <div class="base-title">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
                             <span>产品主图：</span>
                         </span>
-                        <span class="am-u-sm-10">
+            <span class="am-u-sm-10">
                             <p>    宝贝主图大小不能超过3MB；400 以上图片上传后宝贝详情页自动提供放大镜功能。
                             </p>
                             <div class="Master-pic">
@@ -258,15 +274,15 @@
                                     <input type="file" style="display: none"/>
                                 </div>
                             </div>
-                    </div>
-                </div>
-                             <div class="base3-pic">
-                    <div class="base-title">
+        </div>
+    </div>
+    <div class="base3-pic">
+        <div class="base-title">
                                  <span class="am-u-sm-2">
                                         <span style="color: red">*</span>
                                         <span>产品视频：</span>
                                  </span>
-                                    <span class="am-u-sm-10">
+            <span class="am-u-sm-10">
                                         <p>    宝贝视频大小不能超过100MB
                                         </p>
                                         <div class="uploadVedio">
@@ -276,15 +292,15 @@
                                             <label id="vedioName" style="display: none" ></label>
                                         </div>
                                      </span>
-                             </div>
-                </div>
-                <div class="base3-pic">
-                    <div class="base-title">
+        </div>
+    </div>
+    <div class="base3-pic">
+        <div class="base-title">
                         <span class="am-u-sm-2">
                             <span style="color: red">*</span>
                             <span>详情：</span>
                         </span>
-                        <span class="am-u-sm-10">
+            <span class="am-u-sm-10">
                             <p>    图片还可以上传10240KB。这是总容量，随着图片上传而减少。
                             </p>
                             <div class="Master-pic1 Master-pic2">
@@ -292,14 +308,14 @@
                                 <input type="file" onchange="imageDetail(this)" style="display: none">
                             </div>
                         </span>
-                    </div>
-                </div>
-                <div class="base-footer">
-                    <button id="submit-product" type="button" onclick="createForm()" class="am-btn am-btn-secondary am-radius">提交</button>
-                 </div>
-            </div>
-        </form>
+        </div>
     </div>
+    <div class="base-footer">
+        <button id="submit-product" type="button" onclick="createForm()" class="am-btn am-btn-secondary am-radius">提交</button>
+    </div>
+</div>
+</form>
+</div>
 </div>
 </@override>
 <@override name="js">
@@ -310,7 +326,7 @@
     }
 
     //视频预览
-   function changeFile(ele) {
+    function changeFile(ele) {
         var video = ele.files[0];
         console.log(video);
         console.log("地址");

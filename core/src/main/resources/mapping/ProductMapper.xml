@@ -27,6 +27,8 @@
         <result column="key4_value" property="key4Value" jdbcType="VARCHAR"/>
         <result column="key5" property="key5" jdbcType="VARCHAR"/>
         <result column="key5_value" property="key5Value" jdbcType="VARCHAR"/>
+        <result column="rep_color_name" property="repColorName" jdbcType="VARCHAR"/>
+        <result column="rep_spec_name" property="repSpecName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="DtoResultMap" type="com.soufang.base.dto.product.ProductDto">
@@ -62,6 +64,8 @@
         <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
         <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
         <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
+        <result column="rep_color_name" property="repColorName" jdbcType="VARCHAR"/>
+        <result column="rep_spec_name" property="repSpecName" jdbcType="VARCHAR"/>
 
         <collection property="productColorDtoList" ofType="com.soufang.base.dto.product.ProductColorDto">
             <id column="product_color_id" property="productColorId" jdbcType="BIGINT"/>
@@ -126,6 +130,8 @@
         <result column="kv3" property="kv3" jdbcType="VARCHAR"/>
         <result column="kv4" property="kv4" jdbcType="VARCHAR"/>
         <result column="kv5" property="kv5" jdbcType="VARCHAR"/>
+        <result column="rep_color_name" property="repColorName" jdbcType="VARCHAR"/>
+        <result column="rep_spec_name" property="repSpecName" jdbcType="VARCHAR"/>
         <result column="is_scan" property="isScan" jdbcType="INTEGER"/>
 
         <collection property="productSpecDto" ofType="com.soufang.base.dto.product.ProductSpecDto">
@@ -144,7 +150,7 @@
     product_id, shop_id, shop_name, product_name, is_upper, assort_id, product_json, 
     product_unit, product_detail, product_image, product_level, product_send_country,
     product_send_province, product_send_city,create_time, key1, key1_value,
-    key2, key2_value, key3, key3_value, key4, key4_value, key5, key5_value
+    key2, key2_value, key3, key3_value, key4, key4_value, key5, key5_value,rep_color_name,rep_spec_name
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -200,7 +206,7 @@
       key1, key1_value, key2,
       key2_value, key3, key3_value, 
       key4, key4_value, key5, 
-      key5_value)
+      key5_value,rep_color_name,rep_spec_name)
     values (#{productId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{shopName,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{isUpper,jdbcType=INTEGER}, #{assortId,jdbcType=BIGINT}, 
       #{productJson,jdbcType=VARCHAR}, #{productUnit,jdbcType=VARCHAR}, #{productDetail,jdbcType=VARCHAR}, 
@@ -209,7 +215,7 @@
       #{key1,jdbcType=VARCHAR}, #{key1Value,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, 
       #{key2Value,jdbcType=VARCHAR}, #{key3,jdbcType=VARCHAR}, #{key3Value,jdbcType=VARCHAR}, 
       #{key4,jdbcType=VARCHAR}, #{key4Value,jdbcType=VARCHAR}, #{key5,jdbcType=VARCHAR}, 
-      #{key5Value,jdbcType=VARCHAR})
+      #{key5Value,jdbcType=VARCHAR},#{repColorName,jdbcType=VARCHAR},#{repSpecName,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.soufang.model.Product">
         insert into t_product
@@ -289,6 +295,12 @@
             <if test="key5Value != null">
                 key5_value,
             </if>
+            <if test="repColorName != null">
+                rep_color_name,
+            </if>
+            <if test="repSpecName != null">
+                rep_spec_name,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="productId != null">
@@ -365,6 +377,12 @@
             </if>
             <if test="key5Value != null">
                 #{key5Value,jdbcType=VARCHAR},
+            </if>
+            <if test="repColorName != null">
+                #{repColorName,jdbcType=VARCHAR},
+            </if>
+            <if test="repSpecName != null">
+                #{repSpecName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -443,6 +461,12 @@
             <if test="key5Value != null">
                 key5_value = #{key5Value,jdbcType=VARCHAR},
             </if>
+            <if test="repColorName != null">
+                rep_color_name = #{repColorName,jdbcType=VARCHAR},
+            </if>
+            <if test="repSpecName != null">
+                rep_spec_name = #{repSpecName,jdbcType=VARCHAR},
+            </if>
         </set>
         where product_id = #{productId,jdbcType=BIGINT}
     </update>
@@ -471,7 +495,9 @@
       key4 = #{key4,jdbcType=VARCHAR},
       key4_value = #{key4Value,jdbcType=VARCHAR},
       key5 = #{key5,jdbcType=VARCHAR},
-      key5_value = #{key5Value,jdbcType=VARCHAR}
+      key5_value = #{key5Value,jdbcType=VARCHAR},
+      rep_color_name = #{repColorName,jdbcType=VARCHAR},
+      rep_spec_name = #{repSpecName,jdbcType=VARCHAR}
     where product_id = #{productId,jdbcType=BIGINT}
   </update>
 

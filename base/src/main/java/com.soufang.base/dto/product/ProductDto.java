@@ -77,6 +77,10 @@ public class ProductDto extends PageBase implements Serializable {
     private String key5;
     private String key5Value;
 
+    private String repColorName;
+
+    private String repSpecName;
+
     private String createTimeString;
 
     private List<ProductColorDto> productColorDtoList;
