@@ -234,7 +234,7 @@
                                         </ul>
                                     </div>
                                     <div class="theme-options">
-                                        <div class="cart-title"><#if detail.repSpecName!=''>${detail.repSpecName}<#else>"产品规格"</#if>:</div>
+                                        <div class="cart-title"><#if detail.repSpecName??>${detail.repSpecName}<#else>"产品规格"</#if>:</div>
                                         <ul id="productSpec">
                                             <#list detail.specDtoList as item>
                                             <#if item_index==0><li onclick="selectSpec(this)" class="sku-line selected ">${item.specName!''}<i></i></li>

@@ -22,6 +22,17 @@ function btn_search(){
         window.location.href = "/shop/getList?&shopName=" + searchProductName;
     }
 }
+// 按Enter键,执行搜索事件
+$('#search_productName').bind('keypress', function (e) {
+    var keyCode = null;
+    if(e.which)
+        keyCode = e.which;
+    else if(e.keyCode)
+        keyCode = e.keyCode;
+    if (keyCode == "13") {
+        btn_search();
+    }
+});
 
 $(".tog_in").find('li').hover(function () {
     $(this).css("background-color", "#F58022");

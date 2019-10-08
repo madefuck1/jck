@@ -148,7 +148,7 @@
                                        onclick="javascript:window.open('/orderManager/toDetail/'+ ${item.orderShopId!''},'_blank');">
                                         <#list item.orderProducts as temp>
                                         <#if temp_index == 0>
-                                        <img src="${temp.productImage}"/>
+                                        <img src="${temp.url}"/>
                                         </#if>
                                         </#list>
                                     </a>
