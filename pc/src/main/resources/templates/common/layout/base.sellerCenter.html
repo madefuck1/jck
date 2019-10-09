@@ -37,5 +37,19 @@
             var searchProductName = $("#search_productName").val();
             window.location.href = "/product/search?&searchProductName=" + searchProductName;
         });
+
+        // 按Enter键,执行搜索事件
+        $('#search_productName').bind('keypress', function (e) {
+            var keyCode = null;
+            if(e.which)
+                keyCode = e.which;
+            else if(e.keyCode)
+                keyCode = e.keyCode;
+            if (keyCode == "13") {
+
+                var searchProductName = $("#search_productName").val();
+                window.location.href = "/product/search?&searchProductName=" + searchProductName;
+            }
+        });
     </script>
 </html>

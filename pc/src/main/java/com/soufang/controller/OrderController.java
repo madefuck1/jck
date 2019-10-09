@@ -318,17 +318,14 @@ public class OrderController extends BaseController {
     @MemberAccess
     @RequestMapping(value = "updStatus", method = RequestMethod.POST)
     @ResponseBody
-    public OrderListVo updateOrderStatus(HttpServletRequest request, @RequestBody OrderUpdateStatusReqVo reqVo) {
+    public Map<String, Object> updateOrderStatus(HttpServletRequest request, @RequestBody OrderUpdateStatusReqVo reqVo) {
         // 订单店铺 dto 封装
         OrderShopDto orderShopDto = new OrderShopDto();
         orderShopDto.setOrderShopId(reqVo.getOrderShopId());
-
         OrderListVo vo = new OrderListVo();
         // 订单页面传值状态(0:取消订单)
         Integer status = reqVo.getStatus();
-
         switch (status) {
-
             case 0:
                 orderShopDto.setOrderShopStatus(OrderStatusEnum.cancel.getValue());
                 break;
@@ -347,85 +344,20 @@ public class OrderController extends BaseController {
                 break;
             default:
                 break;
-
-
         }
         Result result = orderFeign.updateOrderStatus(orderShopDto);
+        Map<String, Object> map = new HashMap<>();
         if (result.isSuccess()) {
-
-
             UserDto userInfo = this.getUserInfo(request);
             OrderSo so = new OrderSo();
             so.setUserId(userInfo.getUserId());
-            if (reqVo.getOrderStatus() != null && reqVo.getOrderStatus() != 0) {
-                so.setOrderStatus(reqVo.getOrderStatus());
-            }
-            if (reqVo.getOrderType() != null && reqVo.getOrderType() == 3) {
-                so.setOrderType(3);
-            }
-
-            // 设置翻页
-            switch (reqVo.getFlag() == null ? 0 : reqVo.getFlag()) {
-                case 1:
-                    so.setPage(reqVo.getEndPage() + 1);
-                    break;
-                case 2:
-                    if (reqVo.getHitPage() == 0) {
-                        so.setPage(reqVo.getHitPage() + 1);
-                    } else {
-                        so.setPage(reqVo.getHitPage());
-                    }
-
-                    break;
-                case -1:
-                    so.setPage(reqVo.getStartPage() - 1);
-                    break;
-                default:
-                    so.setPage(1);
-                    break;
-            }
             so.setLimit(5);
+            so.setPage(reqVo.getStartPage());
             PageHelp<OrderShopDto> list = orderFeign.getList(so);
-
-            for (OrderShopDto temp : list.getData()) {
-                temp.setStatusMessage(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getMessage());
-                temp.setStatusColor(OrderStatusEnum.getByKey(orderShopDto.getOrderShopStatus()).getButtonColor());
-//                for (OrderProductDto orderProductDto : temp.getOrderProducts()) {
-//                    orderProductDto.setProductImage(orderProductDto.getUrl());
-//                }
-            }
-            // page 翻页
-            if (reqVo.getStartPage() == null) {
-                vo.setStartPage(0);
-            } else {
-                vo.setStartPage(reqVo.getStartPage());
-            }
-            if (reqVo.getEndPage() == null) {
-                vo.setEndPage(0);
-            } else {
-                vo.setEndPage(reqVo.getEndPage());
-            }
-            if (reqVo.getFlag() == null) {
-                vo.setFlag(1);
-            } else {
-                vo.setFlag(reqVo.getFlag());
-            }
-            if (reqVo.getHitPage() == null) {
-                vo.setHitPage(0);
-            } else {
-                vo.setHitPage(reqVo.getHitPage());
-            }
-            vo.setNumber(reqVo.getNumber());
-            vo.setOrderStatus(reqVo.getOrderStatus() == null ? 0 : reqVo.getOrderStatus());
-            vo.setOrderType(reqVo.getOrderType() == null ? 0 : reqVo.getOrderType());
-            double ceil = Math.ceil(new Double(list.getCount()) / 5);
-            vo.setTotalPages((int) ceil);
-            vo.setList(list.getData());
-
+            map.put("list",list.getData());
+            map.put("count",list.getCount());
+            map.put("success",result.isSuccess());
         }
-        return vo;
-
+        return map;
     }
-
-
 }

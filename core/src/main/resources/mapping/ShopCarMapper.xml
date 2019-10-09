@@ -146,7 +146,7 @@
             t_shop_car SC
         join t_shop_car_product SCP on SC.shop_car_id = SCP.shop_car_id
         join t_product_spec PC on PC.product_id = SCP.product_id
-        where SC.user_id = #{userId}
+        where SC.user_id = #{userId} ORDER BY SC.create_time DESC
     </select>
 
     <select id="getShopCarListCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
