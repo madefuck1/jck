@@ -97,6 +97,17 @@
         return false ;
     }
 
+    // 按Enter键,执行登录
+    $('#password').bind('keypress', function (e) {
+        var keyCode = null;
+        if(e.which)
+            keyCode = e.which;
+        else if(e.keyCode)
+            keyCode = e.keyCode;
+        if (keyCode == "13") {
+            submitLogin();
+        }
+    });
 </script>
 </@override>
 
