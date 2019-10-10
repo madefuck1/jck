@@ -38,6 +38,8 @@ public class UserServiceImpl implements UserService {
         if(userDto!=null){
             if(StringUtils.isNotBlank(userDto.getUserAvatar())){
                 userDto.setUserAvatar(PropertiesParam.file_pre+userDto.getUserAvatar());
+            }else {
+                userDto.setUserAvatar(PropertiesParam.file_pre+"/uploadUser/0b26110bc4054f2683c77d9bf8714a53.png");
             }
         }
         return userDto;

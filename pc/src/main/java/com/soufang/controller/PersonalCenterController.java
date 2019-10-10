@@ -20,12 +20,14 @@ import com.soufang.base.search.footPrint.FootPrintSo;
 import com.soufang.base.search.order.OrderSo;
 import com.soufang.base.utils.DateUtils;
 import com.soufang.base.utils.FtpClient;
+import com.soufang.base.utils.MD5Utils;
 import com.soufang.config.interceptor.MemberAccess;
 import com.soufang.feign.*;
 import com.soufang.vo.BaseVo;
 import com.soufang.vo.Enquiry.EnquiryAddVo;
 import com.soufang.vo.Enquiry.EnquiryUpdateVo;
 import com.soufang.vo.Enquiry.EnquiryVo;
+import com.soufang.vo.User.UpdatePassword;
 import com.soufang.vo.address.AddressAddVo;
 import com.soufang.vo.address.AddressVo;
 import com.soufang.vo.address.UpdateAddressVo;
@@ -291,17 +293,44 @@ public class PersonalCenterController extends BaseController {
         return vo;
     }
     /**
-     * 收获地址页面跳转
+     * 个人安全页面跳转
      *
      * @param map
      * @return
      */
-//    @MemberAccess
+    @MemberAccess
     @RequestMapping(value = "/toSafety", method = RequestMethod.GET)
-    public String safetyHtml(ModelMap map) {
+    public String safetyHtml(ModelMap map,HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+        map.put("userInfo",userInfo);
         return "personalCenter/safety";
     }
 
+    @MemberAccess
+    @RequestMapping(value = "/toUpdatePasswordPc", method = RequestMethod.GET)
+    public String toUpdatePasswordPc(HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+        return "personalCenter/updatePassword";
+    }
+    @MemberAccess
+    @ResponseBody
+    @RequestMapping(value = "/updatePasswordPc", method = RequestMethod.POST)
+    public Result updatePasswordPc(@RequestBody UpdatePassword updatePassword, HttpServletRequest request) {
+        UserDto userInfo = this.getUserInfo(request);
+        Result result = new Result();
+        if(!userInfo.getPassWord().equals(MD5Utils.md5(updatePassword.getOldPassword()))){
+            result.setSuccess(false);
+            result.setMessage("原密码输入错误");
+        }else {
+            userInfo.setPassWord(MD5Utils.md5(updatePassword.getNewPassword()));
+            result = pcUserFeign.update(userInfo);
+        }
+        if(result.isSuccess()){
+            //修改密码成功，重新登录
+            this.deletetoken(request);
+        }
+        return result;
+    }
     /**
      * 收获地址页面跳转
      *
